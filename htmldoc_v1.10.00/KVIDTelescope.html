@@ -1,0 +1,779 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 15:44:01 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVIDTelescope</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVIDTelescope','libKVMultiDetexp_events','KVIDTelescope.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVIDTelescope.h.html">header file</a>
+<a class="descrheadentry" href="src/KVIDTelescope.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVIDTelescope.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVIDTelescope.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVIDTelescope:description">class description</a> 
+<a class="descrheadentry" href="#KVIDTelescope:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVIDTelescope:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVIDTelescope:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EXP_EVENTS_Index.html">EXP_EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVIDTelescope</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVIDTelescope:description"></a>class KVIDTelescope: public <a href="./KVBase.html">KVBase</a></h1>
+<div class="classdescr">
+<pre>
+<a href="./KVIDTelescope.html">KVIDTelescope</a>
+
+Charged particle identification is handled by <a href="./KVIDTelescope.html">KVIDTelescope</a> and derived classes.
+A <a href="./KVIDTelescope.html">KVIDTelescope</a> is an association of one or more detectors which is capable of particle
+identification.
+Although initially conceived in terms of DE-E two-stage telescopes, the identification
+method can be quite different (see <a href="./KVIDCsI.html">KVIDCsI</a> for example).
+
+Visualising Identification (ID) Grids &amp; Maps
+
+Identification in such 'telescopes' is often associated with a 'grid' or set of
+graphical cuts permitting to associate the informations measured in the 'telescope'
+with certain types of particles. For any class derived from <a href="./KVIDTelescope.html">KVIDTelescope</a>, the
+identification grid (<a href="./KVIDGraph.html">KVIDGraph</a>), if one exists, can be obtained and visualised using :
+
+      idtelescope-&gt;<a href="./KVIDTelescope.html#KVIDTelescope:GetIDGrid" title="KVIDGraph* KVIDTelescope::GetIDGrid() or overloads">GetIDGrid</a>()-><a href="./KVIDGraph.html#KVIDGraph:Draw" title="void KVIDGraph::Draw(Option_t* opt = &quot;&quot;)">Draw</a>();
+
+Note that if no grid has been defined for the telescope, <a href="./KVIDTelescope.html#KVIDTelescope:GetIDGrid" title="KVIDGraph* KVIDTelescope::GetIDGrid() or overloads">GetIDGrid</a>() returns a null
+pointer, so you should only use the previous method if you are absolutely sure that
+the ID telescope in question has a grid.
+
+Visualising identifications based on fitted functionals
+
+The identification functionals devised by L. Tassan-Got and defined in <a href="./KVTGIDFunctions.html">KVTGIDFunctions</a>
+can be visualised as identification grids for classes having <a href="./KVTGIDManager.html">KVTGIDManager</a> as a base
+class. In this case a grid can be created and drawn using :
+
+      <a href="./KVIDGrid.html">KVIDGrid</a>* g = idtelescope-&gt;GetTGIDGrid(<span class="string">"name_of_functional"</span>, max_X_coord_of_lines);
+      g-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();
+
+You should keep a pointer to the grid because it is the user's responsibility to delete it after
+use.
+
+Particle Identification and Calibration/Coherency
+
+Particles reconstructed from data measured in the detectors of a multidetector array
+(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>) are identified using the <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:Identify" title="void KVReconstructedNucleus::Identify()">Identify</a>()
+method. This takes the list of ID telescopes through whose detectors the particle passed,
+beginning with the telescope in which the particle stopped, and calls the <a href="./KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a>()
+method of each ID telescope in turn. This continues until identification is achieved.
+Thus the identification method, specific to each type of ID telescope, can be defined
+by overriding the <a href="./KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a>() method in child classes.
+
+Similarly, calibration of identified particles is achieved by <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::
+Calibrate() which uses the Calibrate() method of the 'identifying telescope' (i.e. the
+<a href="./KVIDTelescope.html">KVIDTelescope</a> in which identification was achieved). Again, this may be redefined in
+child classes (see <a href="./KVIDCsI.html">KVIDCsI</a> for example), but the default procedure defined here is to
+calculate the energy losses of the particle in all the detectors preceding the ID
+telescope and compare them to the measured energy losses in these detectors, in order
+to check for <a href="./ListOfTypes.html#double">double</a>-hits. The results of this procedure may then be used by some
+coherency algorithm.
+
+Setting identification parameters
+
+The method <a href="./KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a>(const <a href="./KVMultiDetArray.html">KVMultiDetArray</a>*) will be used by the
+<a href="./KVMultiDetArray.html">KVMultiDetArray</a> to which this telescope belongs in order to set the parameters of
+ALL telescopes of this type in the array.
+By default, this method looks for the file with name given by the environment variable
+[dataset name].IdentificationParameterFile.[telescope label]:       [filename]
+which is assumed to contain identification grids. The file will be read in by <a href="./KVIDGridManager.html">gIDGridManager</a>
+and the grids added to its list.
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVIDTelescope:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:_KVIDTelescope">~KVIDTelescope</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:AddDetector">AddDetector</a>(<a href="./KVDetector.html">KVDetector</a>* d)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:AreEqual"><span class="baseclass">KVBase::</span>AreEqual</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Long64_t">Long64_t</a> maxdif = 1)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:ArrContainsValue"><span class="baseclass">KVBase::</span>ArrContainsValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n, <a href="./ListOfTypes.html#Int_t">Int_t</a>* arr, <a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:BackupFileWithDate"><span class="baseclass">KVBase::</span>BackupFileWithDate</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIDGrid.html">KVIDGrid</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CalculateDeltaE_EGrid@1">CalculateDeltaE_EGrid</a>(TH2* haa_zz, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> Zonly, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIDGrid.html">KVIDGrid</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CalculateDeltaE_EGrid">CalculateDeltaE_EGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* Zrange, <a href="./ListOfTypes.html#Int_t">Int_t</a> deltaMasse, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="./ListOfTypes.html#Double_t">Double_t</a> lifetime = -10, <a href="./ListOfTypes.html#UChar_t">UChar_t</a> massformula = 0, <a href="./ListOfTypes.html#Double_t">Double_t</a> xfactor = 1.)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CalculateParticleEnergy">CalculateParticleEnergy</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>* nuc)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CanIdentify">CanIdentify</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CheckTheoreticalIdentificationThreshold">CheckTheoreticalIdentificationThreshold</a>(<a href="./KVNucleus.html">KVNucleus</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a> = 0.)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Clear"><span class="baseclass">KVBase::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Copy"><span class="baseclass">KVBase::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindClassSourceFiles"><span class="baseclass">KVBase::</span>FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="./KVString.html">KVString</a>&amp; imp_file, <a href="./KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir_name = <span class="string">"."</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindExecutable"><span class="baseclass">KVBase::</span>FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindFile"><span class="baseclass">KVBase::</span>FindFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* search, TString&amp; wfil)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetBadIDCode">GetBadIDCode</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetBINDIRFilePath"><span class="baseclass">KVBase::</span>GetBINDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetCalibStatus">GetCalibStatus</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetCoherencyIDCode">GetCoherencyIDCode</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATABASEFilePath"><span class="baseclass">KVBase::</span>GetDATABASEFilePath</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATADIRFilePath"><span class="baseclass">KVBase::</span>GetDATADIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetDefaultIDGridClass">GetDefaultIDGridClass</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDetector.html">KVDetector</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetDetector">GetDetector</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> n) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDetector.html">KVDetector</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetDetector@1">GetDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetDetectorRank">GetDetectorRank</a>(<a href="./KVDetector.html">KVDetector</a>* kvd)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetDetectors">GetDetectors</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#UChar_t">UChar_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetECode">GetECode</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetETCDIRFilePath"><span class="baseclass">KVBase::</span>GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVGroup.html">KVGroup</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetGroup">GetGroup</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetGroupNumber">GetGroupNumber</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetIDCode">GetIDCode</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVIDGraph.html">KVIDGraph</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetIDGrid">GetIDGrid</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVIDGraph.html">KVIDGraph</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetIDGrid@1">GetIDGrid</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVIDGraph.html">KVIDGraph</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetIDGrid@2">GetIDGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetIDMapX">GetIDMapX</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetIDMapY">GetIDMapY</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetINCDIRFilePath"><span class="baseclass">KVBase::</span>GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDate"><span class="baseclass">KVBase::</span>GetKVBuildDate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildType"><span class="baseclass">KVBase::</span>GetKVBuildType</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildUser"><span class="baseclass">KVBase::</span>GetKVBuildUser</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVSourceDir"><span class="baseclass">KVBase::</span>GetKVSourceDir</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVVersion"><span class="baseclass">KVBase::</span>GetKVVersion</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLabel"><span class="baseclass">KVBase::</span>GetLabel</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLIBDIRFilePath"><span class="baseclass">KVBase::</span>GetLIBDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetListOfIDGrids">GetListOfIDGrids</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetListOfPlugins"><span class="baseclass">KVBase::</span>GetListOfPlugins</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetMeanDEFromID">GetMeanDEFromID</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; status, <a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A = -1, <a href="./ListOfTypes.html#Double_t">Double_t</a> Eres = -1.)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetMultiHitFirstStageIDCode">GetMultiHitFirstStageIDCode</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumber"><span class="baseclass">KVBase::</span>GetNumber</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumberOfObjects"><span class="baseclass">KVBase::</span>GetNumberOfObjects</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetObject"><span class="baseclass">KVBase::</span>GetObject</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetPedestalX">GetPedestalX</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetPedestalY">GetPedestalY</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetPluginURI"><span class="baseclass">KVBase::</span>GetPluginURI</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetSize">GetSize</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTempFileName"><span class="baseclass">KVBase::</span>GetTempFileName</a>(TString&amp; base)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetType"><span class="baseclass">KVBase::</span>GetType</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetVarX">GetVarX</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetVarY">GetVarY</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetWORKDIRFilePath"><span class="baseclass">KVBase::</span>GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:GetZminCode">GetZminCode</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitBranch"><span class="baseclass">KVBase::</span>gitBranch</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:HasMassID">HasMassID</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:Identify">Identify</a>(<a href="./KVIdentificationResult.html">KVIdentificationResult</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a> x = -1., <a href="./ListOfTypes.html#Double_t">Double_t</a> y = -1.)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:init">init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:InitEnvironment"><span class="baseclass">KVBase::</span>InitEnvironment</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:Initialize">Initialize</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsCalled"><span class="baseclass">KVBase::</span>IsCalled</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:IsReadyForID">IsReadyForID</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsType"><span class="baseclass">KVBase::</span>IsType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:KVIDTelescope">KVIDTelescope</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:KVIDTelescope@1">KVIDTelescope</a>(<span class="keyword">const</span> <a href="./KVIDTelescope.html">KVIDTelescope</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual TGraph*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:MakeIDLine">MakeIDLine</a>(<a href="./KVNucleus.html">KVNucleus</a>* nuc, <a href="./ListOfTypes.html#Double_t">Double_t</a> Emin, <a href="./ListOfTypes.html#Double_t">Double_t</a> Emax, <a href="./ListOfTypes.html#Double_t">Double_t</a> Estep = 0.)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./KVIDTelescope.html">KVIDTelescope</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:MakeIDTelescope">MakeIDTelescope</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenTempFile"><span class="baseclass">KVBase::</span>OpenTempFile</a>(TString&amp; base, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; fp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIDTelescope.html">KVIDTelescope</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVIDTelescope.html">KVIDTelescope</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:RemoveGrids">RemoveGrids</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:RemoveIdentificationParameters">RemoveIdentificationParameters</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile@1"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchKVFile"><span class="baseclass">KVBase::</span>SearchKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, TString&amp; fullpath, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:SetGroup">SetGroup</a>(<a href="./KVGroup.html">KVGroup</a>* kvg)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:SetHasMassID">SetHasMassID</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:SetIDCode">SetIDCode</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>*, <a href="./ListOfTypes.html#UShort_t">UShort_t</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:SetIdentificationParameters">SetIdentificationParameters</a>(<span class="keyword">const</span> <a href="./KVMultiDetArray.html">KVMultiDetArray</a>*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:SetIDGrid">SetIDGrid</a>(<a href="./KVIDGraph.html">KVIDGraph</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetLabel"><span class="baseclass">KVBase::</span>SetLabel</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* lab)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetNumber"><span class="baseclass">KVBase::</span>SetNumber</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> num)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetType"><span class="baseclass">KVBase::</span>SetType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* str)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:WorkingDirectory"><span class="baseclass">KVBase::</span>WorkingDirectory</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:SetLabelFromURI">SetLabelFromURI</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVIDTelescope:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kCalibStatus_Calculated"></a>kCalibStatus_Calculated</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kCalibStatus_Coherency"></a>kCalibStatus_Coherency</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kCalibStatus_Multihit"></a>kCalibStatus_Multihit</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kCalibStatus_NoCalibrations"></a>kCalibStatus_NoCalibrations</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kCalibStatus_OK"></a>kCalibStatus_OK</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVBase.html">KVBase</a>::EKaliVedaBits</td><td class="dataname"><a href="./KVBase.html#KVBase:kIsKaliVedaObject"><span class="baseclass">KVBase::</span>kIsKaliVedaObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kMeanDE_NoIdentifier"></a>kMeanDE_NoIdentifier</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kMeanDE_OK"></a>kMeanDE_OK</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kMeanDE_XtooLarge"></a>kMeanDE_XtooLarge</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kMeanDE_XtooSmall"></a>kMeanDE_XtooSmall</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVIDTelescope:fCalibStatus"></a>fCalibStatus</td><td class="datadesc">!temporary variable holding status code for last call to Calibrate(KVReconstructedNucleus*)</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVIDTelescope:fDetectors"></a>fDetectors</td><td class="datadesc">-&gt;list of detectors in telescope</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVGroup.html">KVGroup</a>*</td><td class="dataname"><a name="KVIDTelescope:fGroup"></a>fGroup</td><td class="datadesc">group to which telescope belongs</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVIDTelescope:fIDGrids"></a>fIDGrids</td><td class="datadesc">-&gt;identification grid(s)</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVIDTelescope:fVarX"></a>fVarX</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVIDTelescope:fVarY"></a>fVarY</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kMassID"></a>kMassID</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIDTelescope.html">KVIDTelescope</a>::(anonymous)</td><td class="dataname"><a name="KVIDTelescope:kReadyForID"></a>kReadyForID</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVIDTelescope:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVIDTelescope_Inh" id="MapKVIDTelescope_Inh">
+<area shape="rect" id="node2" href="./KVBase.html" title="KVBase" alt="" coords="172,28,229,39"/>
+<area shape="rect" id="node5" href="./KVFAZIAIDTelescope.html" title="KVFAZIAIDTelescope" alt="" coords="366,12,446,22"/>
+<area shape="rect" id="node6" href="./KVINDRAIDTelescope.html" title="KVINDRAIDTelescope" alt="" coords="365,44,447,55"/>
+<area shape="rect" id="node7" href="./KVIDCsI.html" title="KVIDCsI" alt="" coords="481,23,538,33"/>
+<area shape="rect" id="node8" href="./KVIDPhoswich.html" title="KVIDPhoswich" alt="" coords="481,34,538,44"/>
+<area shape="rect" id="node9" href="./KVIDSi75SiLi.html" title="KVIDSi75SiLi" alt="" coords="481,44,538,55"/>
+<area shape="rect" id="node10" href="./KVFAZIAIDSiPSA.html" title="KVFAZIAIDSiPSA" alt="" coords="475,1,544,11"/>
+<area shape="rect" id="node11" href="./KVFAZIAIDSiSi.html" title="KVFAZIAIDSiSi" alt="" coords="479,12,540,22"/>
+<area shape="rect" id="node12" href="./KVIDChIoSi.html" title="KVIDChIoSi" alt="" coords="481,72,538,82"/>
+<area shape="rect" id="node13" href="./KVIDChIoCsI.html" title="KVIDChIoCsI" alt="" coords="481,126,538,137"/>
+<area shape="rect" id="node14" href="./KVIDSiCsI.html" title="KVIDSiCsI" alt="" coords="481,175,538,186"/>
+<area shape="rect" id="node15" href="./KVIDCsI_e475s.html" title="KVIDCsI_e475s" alt="" coords="583,11,640,22"/>
+<area shape="rect" id="node16" href="./KVIDBlocking.html" title="KVIDBlocking" alt="" coords="583,44,640,55"/>
+<area shape="rect" id="node17" href="./KVIDChIoCorrCsI.html" title="KVIDChIoCorrCsI" alt="" coords="579,121,644,131"/>
+<area shape="rect" id="node18" href="./KVIDChIoCsI_camp5.html" title="KVIDChIoCsI_camp5" alt="" coords="573,131,649,142"/>
+<area shape="rect" id="node19" href="./KVIDChIoCsI_e475s.html" title="KVIDChIoCsI_e475s" alt="" coords="575,142,648,153"/>
+<area shape="rect" id="node20" href="./KVIDChIoSi5.html" title="KVIDChIoSi5" alt="" coords="583,55,640,66"/>
+<area shape="rect" id="node21" href="./KVIDChIoSi75.html" title="KVIDChIoSi75" alt="" coords="583,66,640,77"/>
+<area shape="rect" id="node22" href="./KVIDChIoSiCorr.html" title="KVIDChIoSiCorr" alt="" coords="581,77,642,88"/>
+<area shape="rect" id="node23" href="./KVIDChIoSiLi.html" title="KVIDChIoSiLi" alt="" coords="583,88,640,99"/>
+<area shape="rect" id="node24" href="./KVIDChIoSi_e475s.html" title="KVIDChIoSi_e475s" alt="" coords="577,99,646,109"/>
+<area shape="rect" id="node25" href="./KVIDChIoSi_e613.html" title="KVIDChIoSi_e613" alt="" coords="578,110,644,120"/>
+<area shape="rect" id="node26" href="./KVIDSi150CsI_camp5.html" title="KVIDSi150CsI_camp5" alt="" coords="572,153,651,164"/>
+<area shape="rect" id="node27" href="./KVIDSi75SiLi_camp5.html" title="KVIDSi75SiLi_camp5" alt="" coords="573,22,650,33"/>
+<area shape="rect" id="node28" href="./KVIDSi75SiLi_e494s.html" title="KVIDSi75SiLi_e494s" alt="" coords="574,33,649,44"/>
+<area shape="rect" id="node29" href="./KVIDSiCorrCsI.html" title="KVIDSiCorrCsI" alt="" coords="583,164,640,175"/>
+<area shape="rect" id="node30" href="./KVIDSiCsI5.html" title="KVIDSiCsI5" alt="" coords="583,175,640,186"/>
+<area shape="rect" id="node31" href="./KVIDSiCsI_e475s.html" title="KVIDSiCsI_e475s" alt="" coords="579,186,643,197"/>
+<area shape="rect" id="node32" href="./KVIDSiCsI_e613.html" title="KVIDSiCsI_e613" alt="" coords="581,197,642,208"/>
+<area shape="rect" id="node33" href="./KVIDSiLiCsI.html" title="KVIDSiLiCsI" alt="" coords="583,208,640,218"/>
+<area shape="rect" id="node34" href="./KVIDChIoCorrCsI_e494s.html" title="KVIDChIoCorrCsI_e494s" alt="" coords="679,121,767,131"/>
+<area shape="rect" id="node35" href="./KVIDChIoSi75_camp5.html" title="KVIDChIoSi75_camp5" alt="" coords="683,61,763,71"/>
+<area shape="rect" id="node36" href="./KVIDChIoSi75_e494s.html" title="KVIDChIoSi75_e494s" alt="" coords="685,72,762,82"/>
+<area shape="rect" id="node37" href="./KVIDSiLiCsI_camp5.html" title="KVIDSiLiCsI_camp5" alt="" coords="686,202,760,213"/>
+<area shape="rect" id="node38" href="./KVIDSiLiCsI_e494s.html" title="KVIDSiLiCsI_e494s" alt="" coords="688,213,759,224"/>
+</map>
+<map name="MapKVIDTelescope_InhMem" id="MapKVIDTelescope_InhMem">
+<area shape="rect" id="clust12" href="./KVBase.html" alt="" coords="557,47,624,96"/>
+<area shape="rect" id="clust11" href="./KVBase.html" alt="" coords="635,47,701,64"/>
+<area shape="rect" id="clust13" href="./KVBase.html" alt="" coords="480,47,547,96"/>
+<area shape="rect" id="clust14" href="./KVBase.html" alt="" coords="667,80,669,83"/>
+<area shape="rect" id="clust15" href="./KVBase.html" alt="" coords="635,99,701,432"/>
+<area shape="rect" id="clust16" href="./KVBase.html" alt="" coords="557,99,624,432"/>
+<area shape="rect" id="clust17" href="./KVBase.html" alt="" coords="480,99,547,432"/>
+<area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,432"/>
+</map>
+<map name="MapKVIDTelescope_Lib" id="MapKVIDTelescope_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="516,44,631,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVIDTelescope_Inh" class="tabsel" href="inh/KVIDTelescope_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVIDTelescope_Inh.png');">Inheritance</a>
+<a id="imgKVIDTelescope_InhMem" class="tab" href="inhmem/KVIDTelescope_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVIDTelescope_InhMem.png');">Inherited Members</a>
+<a id="imgKVIDTelescope_Incl" class="tab" href="incl/KVIDTelescope_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVIDTelescope_Incl.png');">Includes</a>
+<a id="imgKVIDTelescope_Lib" class="tab" href="lib/KVIDTelescope_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVIDTelescope_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVIDTelescope_Inh" src="inh/KVIDTelescope_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIDTelescope:KVIDTelescope" href="src/KVIDTelescope.cxx.html#s5477B">KVIDTelescope</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:init" href="src/KVIDTelescope.cxx.html#oCvtPB">init</a>()</span><br />
+<div class="funccomm"><pre>default <a href="./KVIDTelescope.html#KVIDTelescope:init" title="void KVIDTelescope::init()">init</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIDTelescope:_KVIDTelescope" href="src/KVIDTelescope.cxx.html#UqEsFC">~KVIDTelescope</a>()</span><br />
+<div class="funccomm"><pre>delete this ID telescope
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:AddDetector" href="src/KVIDTelescope.cxx.html#DnZWpE">AddDetector</a>(<a href="./KVDetector.html">KVDetector</a>* d)</span><br />
+<div class="funccomm"><pre>Add a detector to the telescope.
+The first detector added is the <span class="string">"DeltaE"</span> member, the second the <span class="string">"Eresidual"</span> member.
+Update name of telescope to <span class="string">"ID_[name of DE]_[name of E]"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:Print" href="src/KVIDTelescope.cxx.html#gFfEP">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) const</span><br />
+<div class="funccomm"><pre> print out telescope structure
+if opt=<span class="string">"fired"</span> only fired detectors are printed
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a class="funcname" name="KVIDTelescope:GetDetectorRank" href="src/KVIDTelescope.cxx.html#WuC0LB">GetDetectorRank</a>(<a href="./KVDetector.html">KVDetector</a>* kvd)</span><br />
+<div class="funccomm"><pre>returns position (1=front, 2=next, etc.) detector in the telescope structure
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDetector.html">KVDetector</a> * <a class="funcname" name="KVIDTelescope:GetDetector@1" href="src/KVIDTelescope.cxx.html#lQwra">GetDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+<div class="funccomm"><pre> Return a pointer to the detector in the telescope with the name <span class="string">"name"</span>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVGroup.html">KVGroup</a> * <a class="funcname" name="KVIDTelescope:GetGroup" href="src/KVIDTelescope.cxx.html#DMjKGD">GetGroup</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:SetGroup" href="src/KVIDTelescope.cxx.html#SBYndD">SetGroup</a>(<a href="./KVGroup.html">KVGroup</a>* kvg)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a class="funcname" name="KVIDTelescope:GetGroupNumber" href="src/KVIDTelescope.cxx.html#bUL9s">GetGroupNumber</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TGraph * <a class="funcname" name="KVIDTelescope:MakeIDLine" href="src/KVIDTelescope.cxx.html#v26itD">MakeIDLine</a>(<a href="./KVNucleus.html">KVNucleus</a>* nuc, <a href="./ListOfTypes.html#Double_t">Double_t</a> Emin, <a href="./ListOfTypes.html#Double_t">Double_t</a> Emax, <a href="./ListOfTypes.html#Double_t">Double_t</a> Estep = 0.)</span><br />
+<div class="funccomm"><pre>For a given nucleus, generate a TGraph representing the line in the deltaE-E
+plane of the telescope which can be associated with nuclei of this (A,Z) with total
+incident energies between the two limits.
+NOTE: if there are other absorbers/detectors placed before this telescope,
+the energy losses of the particle in these will be taken into account.
+If the step in energy is not given, it is taken equal to 100 equal steps between min and max.
+The TGraph should be deleted by the user after use.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIDTelescope:Identify" href="src/KVIDTelescope.cxx.html#A0TcFD">Identify</a>(<a href="./KVIdentificationResult.html">KVIdentificationResult</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a> x = -1., <a href="./ListOfTypes.html#Double_t">Double_t</a> y = -1.)</span><br />
+<div class="funccomm"><pre>Default identification method.
+Identification of experimental data needs to be implemented in specific
+child classes. Returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:SetIDGrid" href="src/KVIDTelescope.cxx.html#zsGviE">SetIDGrid</a>(<a href="./KVIDGraph.html">KVIDGraph</a>* )</span><br />
+<div class="funccomm"><pre>Add an identification grid to the list of grids used by this telescope.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDGraph.html">KVIDGraph</a> * <a class="funcname" name="KVIDTelescope:GetIDGrid" href="src/KVIDTelescope.cxx.html#SEmqIB">GetIDGrid</a>()</span><br />
+<div class="funccomm"><pre>Return the first in the list of identification grids used by this telescope
+(this is for backwards compatibility with ID telescopes which had only one grid).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDGraph.html">KVIDGraph</a> * <a class="funcname" name="KVIDTelescope:GetIDGrid@1" href="src/KVIDTelescope.cxx.html#JMg.dB">GetIDGrid</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> )</span><br />
+<div class="funccomm"><pre>Return pointer to grid using position in list. First grid has index = 1.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDGraph.html">KVIDGraph</a> * <a class="funcname" name="KVIDTelescope:GetIDGrid@2" href="src/KVIDTelescope.cxx.html#yX81rE">GetIDGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre>Return pointer to grid using <span class="string">"label"</span> to search in list of grids associated
+to this telescope.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVIDTelescope:GetIDMapX" href="src/KVIDTelescope.cxx.html#G_vCGD">GetIDMapX</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>This method should define how to calculate the X-coordinate in a 2D identification map
+associated with the ID telescope based on the current state of the detectors.
+By default, we assume a dE - E telescope, and so <span class="string">'X'</span> is equal to the energy measured in the
+second detector of the telescope (or zero if there is not a 2nd detector in the telescope)
+
+However, if the detector is not calibrated, GetEnergy will return 0, therefore
+if 'opt' is not an empty string (default) we return the value of the acquisition
+parameter of type 'opt' associated to the detector
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVIDTelescope:GetPedestalX" href="src/KVIDTelescope.cxx.html#Y1wPY">GetPedestalX</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Returns the pedestal associated with the 2nd detector of the telescope,
+ optionally depending on the given option string.
+ By default this returns 0, and should be overridden in specific implementations.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVIDTelescope:GetPedestalY" href="src/KVIDTelescope.cxx.html#AzwPY">GetPedestalY</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Returns the pedestal associated with the 1st detector of the telescope,
+ optionally depending on the given option string.
+ By default this returns 0, and should be overridden in specific implementations.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVIDTelescope:GetIDMapY" href="src/KVIDTelescope.cxx.html#CDrHGD">GetIDMapY</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>This method should define how to calculate the Y-coordinate in a 2D identification map
+associated with the ID telescope based on the current state of the detectors.
+By default, we assume a dE - E telescope, and so <span class="string">'Y'</span> is equal to the energy measured in the
+first detector of the telescope.
+
+However, if the detector is not calibrated, GetEnergy will return 0, therefore
+if 'opt' is not an empty string (default) we return the value of the acquisition
+parameter of type 'opt' associated to the detector
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:RemoveGrids" href="src/KVIDTelescope.cxx.html#AV4SF">RemoveGrids</a>()</span><br />
+<div class="funccomm"><pre>Remove all identification grids for this ID telescope
+Grids are not deleted as this is handled by <a href="./KVIDGridManager.html">gIDGridManager</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDTelescope.html">KVIDTelescope</a> * <a class="funcname" name="KVIDTelescope:MakeIDTelescope" href="src/KVIDTelescope.cxx.html#nKXVKD">MakeIDTelescope</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>Static function which will create an instance of the <a href="./KVIDTelescope.html">KVIDTelescope</a>-derived class
+corresponding to 'name'
+These are defined as 'Plugin' objects in the file $KVROOT/KVFiles/.kvrootrc :
+ # The <a href="./KVMultiDetArray.html">KVMultiDetArray</a>::<a href="./KVMultiDetArray.html#KVMultiDetArray:GetIDTelescopes" title="void KVMultiDetArray::GetIDTelescopes(KVDetector*, KVDetector*, TCollection*)">GetIDTelescopes</a>(<a href="./KVDetector.html">KVDetector</a>*de, <a href="./KVDetector.html">KVDetector</a>*e) method uses these plugins to
+ # create <a href="./KVIDTelescope.html">KVIDTelescope</a> instances adapted to the specific array geometry and detector types.
+ # For each pair of detectors we look for a plugin with one of the following names:
+ #    [name_of_dataset].de_detector_type[de detector thickness]-e_detector_type[de detector thickness]
+ # Each characteristic in [] brackets may or may not be present in the name; first we test for names
+ # with these characteristics, then all combinations where one or other of the characteristics is not present.
+ # In addition, we first test all combinations which begin with [name_of_dataset].
+ # The first plugin found in this order will be used.
+ # In addition, if for one of the two detectors there is a plugin called
+ #    [name_of_dataset].de_detector_type[de detector thickness]
+ #    [name_of_dataset].e_detector_type[e detector thickness]
+ # then we add also an instance of this 1-detector identification telescope.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:SetLabelFromURI" href="src/KVIDTelescope.cxx.html#dI9.i">SetLabelFromURI</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri)</span><br />
+<div class="funccomm"><pre>PRIVATE METHOD
+Sets label of telescope based on URI of plugin describing child class for this telescope
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIDTelescope:SetIdentificationParameters" href="src/KVIDTelescope.cxx.html#k5lnMD">SetIdentificationParameters</a>(<span class="keyword">const</span> <a href="./KVMultiDetArray.html">KVMultiDetArray</a>* )</span><br />
+<div class="funccomm"><pre> Initialise the identification parameters (grids, etc.) of ALL identification telescopes of this
+ kind (label) in the multidetector array. Therefore this method need only be called once, and not
+ called for each telescope. The kind/label (returned by <a href="./KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>) of the telescope corresponds
+ to the URI used to find the plugin class in $KVROOT/KVFiles/.kvrootrc.
+ By default, this method looks for the file with name given by the environment variable
+
+ [dataset name].IdentificationParameterFile.[telescope label]:       [filename]
+
+ which is assumed to contain identification grids. The file will be read in by <a href="./KVIDGridManager.html">gIDGridManager</a>
+ and the grids added to its list.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:RemoveIdentificationParameters" href="src/KVIDTelescope.cxx.html#pqcchD">RemoveIdentificationParameters</a>()</span><br />
+<div class="funccomm"><pre>Remove identification parameters from telescope in such a way that they
+can subsequently be reset e.g. with a new version.
+This is used by <a href="./KVMultiDetArray.html">KVMultiDetArray</a>::<a href="./KVMultiDetArray.html#KVMultiDetArray:UpdateIdentifications" title="void KVMultiDetArray::UpdateIdentifications()">UpdateIdentifications</a>.
+Child classes with specific <a href="./KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a> methods should
+also redefine this method in order to remove (destroy) cleanly the objects
+created in <a href="./KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a>.
+
+This default method takes the list of grids associated to the telescope,
+and for each one: 1) checks if it is still in the <a href="./KVIDGridManager.html">gIDGridManager</a>'s list
+2) if yes, delete the grid and remove it from <a href="./KVIDGridManager.html">gIDGridManager</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:CalculateParticleEnergy" href="src/KVIDTelescope.cxx.html#fD47PE">CalculateParticleEnergy</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>* nuc)</span><br />
+<div class="funccomm"><pre> The energy of each particle is calculated as follows:
+
+      E = dE_1 + dE_2 + ... + dE_N
+
+ dE_1, dE_2, ... = energy losses measured in each detector through which
+                          the particle has passed (or stopped, in the case of dE_N).
+                         These energy losses are corrected for (Z,A)-dependent effects
+                          such as pulse-heigth defect in silicon detectors, losses in
+                          windows of gas detectors, etc.
+
+ Whenever possible, the energy loss for fired detectors which are uncalibrated
+ or not functioning is calculated. In this case the status returned by <a href="./KVIDTelescope.html#KVIDTelescope:GetCalibStatus" title="Int_t KVIDTelescope::GetCalibStatus() const">GetCalibStatus</a>()
+ will be <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>.
+ If none of the detectors is calibrated, the particle's energy cannot be calculated &amp;
+ the status will be <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>.
+ Otherwise, the status code will be <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kCalibStatus_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_OK">kCalibStatus_OK</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVIDTelescope:GetDefaultIDGridClass" href="src/KVIDTelescope.cxx.html#DXQ10E">GetDefaultIDGridClass</a>()</span><br />
+<div class="funccomm"><pre> Returns name of default ID grid class for this ID telescope.
+ This is defined in a .kvrootrc configuration file by one of the following:
+ <a href="./KVIDTelescope.html">KVIDTelescope</a>.DefaultGrid:
+ <a href="./KVIDTelescope.html">KVIDTelescope</a>.DefaultGrid.[type]:
+ where [type] is the type of this identification telescope (which is given
+ by the character string returned by method <a href="./KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>()... sorry :( )
+ If no default grid is defined for the specific type of this telescope,
+ the default defined by <a href="./KVIDTelescope.html">KVIDTelescope</a>.DefaultGrid is used.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDGrid.html">KVIDGrid</a>* <a class="funcname" name="KVIDTelescope:CalculateDeltaE_EGrid" href="src/KVIDTelescope.cxx.html#iTbJDC">CalculateDeltaE_EGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* Zrange, <a href="./ListOfTypes.html#Int_t">Int_t</a> deltaMasse, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="./ListOfTypes.html#Double_t">Double_t</a> lifetime = -10, <a href="./ListOfTypes.html#UChar_t">UChar_t</a> massformula = 0, <a href="./ListOfTypes.html#Double_t">Double_t</a> xfactor = 1.)</span><br />
+<div class="funccomm"><pre>Genere une grille dE-E (perte d'energie - energie residuelle) pour une gamme en Z donnee
+ - Zrange definit l'ensemble des charges pour lequel les lignes vont etre calculees
+ - deltaA permet de definir si a chaque Z n'est associee qu'un seul A (deltaA=0) ou plusieurs
+Exemple :
+		deltaA=1 -&gt; Aref-1, Aref et Aref+1 seront les masses associees a chaque Z et
+		donc trois lignes de A par Z. le Aref pour chaque Z est determine par
+		la formule de masse par defaut (Aref = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>() voir le .kvrootrc)
+		deltaA=0 -&gt; pour chaque ligne de Z le A associe sera celui de <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>()
+ - est le nombre de points par ligne
+
+un noyau de A et Z donne n'est considere que s'il retourne <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z = -1, int a = -1) const">IsKnown</a>() = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDGrid.html">KVIDGrid</a>* <a class="funcname" name="KVIDTelescope:CalculateDeltaE_EGrid@1" href="src/KVIDTelescope.cxx.html#scwETD">CalculateDeltaE_EGrid</a>(TH2* haa_zz, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> Zonly, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints)</span><br />
+<div class="funccomm"><pre>Genere une grille dE-E (perte d'energie - energie residuelle)
+Le calcul est fait pour chaque couple comptant de charge (Z) et masse (A)
+au moins un coup dans l'histogramme haa_zz definit :
+ Axe X -&gt; Z
+ Axe Y -&gt; A
+
+- Si Zonly=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> (<a href="./ListOfTypes.html#Bool_t">kFALSE</a> par defaut), pour un Z donne, le A choisi est la valeur entiere la
+plus proche de la valeur moyenne &lt;A&gt;
+- Si Zonly=<a href="./ListOfTypes.html#Bool_t">kFALSE</a> et que pour un Z donne il n'y a qu'un seul A associe, les lignes correspondants
+a A-1 et A+1 sont ajoutes
+- Si a un Z donne, il n'y a aucun A, pas de ligne tracee
+un noyau de A et Z donne n'est considere que s'il retourne <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z = -1, int a = -1) const">IsKnown</a>() = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+
+ <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a> : the grid is not added to the list of the telescope and MUST BE DELETED by the user !
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVIDTelescope:GetMeanDEFromID" href="src/KVIDTelescope.cxx.html#oW3pHC">GetMeanDEFromID</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; status, <a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A = -1, <a href="./ListOfTypes.html#Double_t">Double_t</a> Eres = -1.)</span><br />
+<div class="funccomm"><pre> Returns the Y-axis value in the 2D identification map containing isotope (Z,A)
+ corresponding to either the given X-axis/Eres value or the current X-axis value given by <a href="./KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>.
+ If no mass information is available, just give Z.
+
+ In this (default) implementation this means scanning the ID grids associated with
+ this telescope until we find an identification line Z or (Z,A), and then interpolating
+ the Y-coordinate for the current X-coordinate value.
+
+ Status variable can take one of following values:
+
+  <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kMeanDE_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_OK">kMeanDE_OK</a>                    all OK
+   <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooSmall" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_XtooSmall">kMeanDE_XtooSmall</a>      X-coordinate is smaller than smallest X-coordinate of ID line
+   <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooLarge" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_XtooLarge">kMeanDE_XtooLarge</a>     X-coordinate is larger than largest X-coordinate of ID line
+   <a href="./KVIDTelescope.html">KVIDTelescope</a>::kMeanDE_NoIdentifie    No identifier found for Z or (Z,A)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:SetIDCode" href="src/KVIDTelescope.cxx.html#JO2yTC">SetIDCode</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>* , <a href="./ListOfTypes.html#UShort_t">UShort_t</a> )</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIDTelescope:CheckTheoreticalIdentificationThreshold" href="src/KVIDTelescope.cxx.html#iGNR_D">CheckTheoreticalIdentificationThreshold</a>(<a href="./KVNucleus.html">KVNucleus</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>  = 0.)</span><br />
+<div class="funccomm"><pre> Return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if energy of ION is &gt; minimum incident energy required for identification
+ This theoretical limit is defined here to be the incident energy for which the
+ dE in the first detector of a dE-E telescope is maximum.
+ If EINC&gt;0 it is assumed to be the energy of the ion just before the first detector
+ (case where ion would have to pass other detectors before reaching this telescope).
+
+ If this is not a dE-E telescope, we return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> by default.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIDTelescope:KVIDTelescope" href="src/KVIDTelescope.h.html#OX183">KVIDTelescope</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a> * <a class="funcname" name="KVIDTelescope:GetDetectors" href="src/KVIDTelescope.h.html#GRzaLC">GetDetectors</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDetector.html">KVDetector</a> * <a class="funcname" name="KVIDTelescope:GetDetector" href="src/KVIDTelescope.h.html#QXCTrD">GetDetector</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> n) const</span><br />
+<div class="funccomm"><pre>returns the nth detector in the telescope structure
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIDTelescope:GetSize" href="src/KVIDTelescope.h.html#LaEHQE">GetSize</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVIDTelescope:GetVarX" href="src/KVIDTelescope.h.html#UTy2mB">GetVarX</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVIDTelescope.html#KVIDTelescope:fVarX" title="KVString KVIDTelescope::fVarX">fVarX</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVIDTelescope:GetVarY" href="src/KVIDTelescope.h.html#AMy2mB">GetVarY</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVIDTelescope.html#KVIDTelescope:fVarY" title="KVString KVIDTelescope::fVarY">fVarY</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:Initialize" href="src/KVIDTelescope.h.html#OdLPGB">Initialize</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Default initialisation for ID telescopes. <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="KVIDTelescope::(anonymous) KVIDTelescope::kReadyForID">kReadyForID</a> is set to <a href="./ListOfTypes.html#Bool_t">kFALSE</a>.
+ To implement identification, make a class derived from <a href="./KVIDTelescope.html">KVIDTelescope</a>
+ and set <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="KVIDTelescope::(anonymous) KVIDTelescope::kReadyForID">kReadyForID</a> to <a href="./ListOfTypes.html#Bool_t">kTRUE</a> in <a href="./KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>() method of derived class.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVIDTelescope:GetCalibStatus" href="src/KVIDTelescope.h.html#YlfhuC">GetCalibStatus</a>() const</span><br />
+<div class="funccomm"><pre> When called just after <a href="./KVIDTelescope.html#KVIDTelescope:CalculateParticleEnergy" title="void KVIDTelescope::CalculateParticleEnergy(KVReconstructedNucleus* nuc)">CalculateParticleEnergy</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>*)
+ this method returns a status code which is one of
+   <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kCalibStatus_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_OK">kCalibStatus_OK</a>,            : fine, OK, all detectors calculated and functioning properly
+   <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>,    : one or more detectors not calibrated/functioning, energy loss calculated
+   <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a> : no calibrations available for any detectors
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a>* <a class="funcname" name="KVIDTelescope:GetListOfIDGrids" href="src/KVIDTelescope.h.html#UwXbwE">GetListOfIDGrids</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:SetHasMassID" href="src/KVIDTelescope.h.html#d1foJE">SetHasMassID</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIDTelescope:HasMassID" href="src/KVIDTelescope.h.html#iYM.KD">HasMassID</a>() const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if this telescope is capable of identifying particles' mass (A)
+ as well as their charge (Z).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIDTelescope:IsReadyForID" href="src/KVIDTelescope.h.html#Eke20C">IsReadyForID</a>()</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if telescope has been correctly initialised for identification.
+ Test after <a href="./KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>() method has been called.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UShort_t">UShort_t</a> <a class="funcname" name="KVIDTelescope:GetBadIDCode" href="src/KVIDTelescope.h.html#kt72AB">GetBadIDCode</a>()</span><br />
+<div class="funccomm"><pre> return a general identification code (can be a bitmask) for particles badly identified
+ with this type of ID telescope
+ redefine in child classes; default returns 14.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UShort_t">UShort_t</a> <a class="funcname" name="KVIDTelescope:GetCoherencyIDCode" href="src/KVIDTelescope.h.html#tKzixB">GetCoherencyIDCode</a>()</span><br />
+<div class="funccomm"><pre> return a general identification code (can be a bitmask) for particles identified
+ with this type of ID telescope after coherency analysis
+ redefine in child classes; default returns 6.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UShort_t">UShort_t</a> <a class="funcname" name="KVIDTelescope:GetMultiHitFirstStageIDCode" href="src/KVIDTelescope.h.html#qnK1K">GetMultiHitFirstStageIDCode</a>()</span><br />
+<div class="funccomm"><pre> return a general identification code (can be a bitmask) for particles which cannot
+ be identified correctly due to pile-up in a delta-E detector
+ redefine in child classes; default returns 8.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UShort_t">UShort_t</a> <a class="funcname" name="KVIDTelescope:GetIDCode" href="src/KVIDTelescope.h.html#K1FwuC">GetIDCode</a>()</span><br />
+<div class="funccomm"><pre> return a general identification code (can be a bitmask) for particles correctly identified
+ with this type of ID telescope
+ redefine in child classes; default returns 4.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UShort_t">UShort_t</a> <a class="funcname" name="KVIDTelescope:GetZminCode" href="src/KVIDTelescope.h.html#M9I0JE">GetZminCode</a>()</span><br />
+<div class="funccomm"><pre> return a general identification code (can be a bitmask) for particles partially identified
+ with an estimated lower-limit for their charge with this type of ID telescope
+ redefine in child classes; default returns 5.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UChar_t">UChar_t</a> <a class="funcname" name="KVIDTelescope:GetECode" href="src/KVIDTelescope.h.html#IqQXEC">GetECode</a>()</span><br />
+<div class="funccomm"><pre> return a general calibration code (can be a bitmask) for particles correctly identified
+ and calibrated with this type of ID telescope
+ redefine in child classes; default returns 1.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIDTelescope:CanIdentify" href="src/KVIDTelescope.h.html#sVKBzC">CanIdentify</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> )</span><br />
+<div class="funccomm"><pre> Used for filtering simulations
+ Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if this telescope is theoretically capable of identifying a given nucleus,
+ without considering thresholds etc.
+ By default this method returns true for Z&gt;0, i.e. all KVIDTelescopes are in principle
+ dE-E telescopes used to identify charged ions.
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 15:44:01 2015 </em><em>&raquo; Last generated: 2015-03-18 15:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

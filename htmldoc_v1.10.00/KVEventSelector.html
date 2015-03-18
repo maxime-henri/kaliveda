@@ -1,0 +1,674 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 15:43:50 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVEventSelector</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVEventSelector','libKVMultiDetanalysis','KVEventSelector.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVEventSelector.h.html">header file</a>
+<a class="descrheadentry" href="src/KVEventSelector.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/analysis/KVEventSelector.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/analysis/KVEventSelector.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVEventSelector:description">class description</a> 
+<a class="descrheadentry" href="#KVEventSelector:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVEventSelector:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVEventSelector:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_ANALYSIS_Index.html">ANALYSIS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVEventSelector</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVEventSelector:description"></a>class KVEventSelector: public TSelector</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVEventSelector</h2>
+<h4>General purpose analysis class for TTrees containing KVEvent objects</h4>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+ Use this <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a> to analyse data in TTrees containing a branch with <a href="./KVEvent.html">KVEvent</a>-derived objects:
+
+    my_tree-&gt;<a href="./KVEventSelector.html#KVEventSelector:Process" title="Bool_t KVEventSelector::Process(Long64_t entry)">Process</a>(<span class="string">"KVEventSelector"</span>, <span class="string">"[options]"</span>);
+
+ where <span class="string">"[options]"</span> is the list of options in the form <span class="string">"BranchName=toto, ..."</span>.
+
+ The following options MUST be given:
+
+    BranchName:                name of branch containing the events
+
+ The following is an optional option:
+
+    EventsReadInterval:     print info on analysis every N events instead of default value
+
+ Any other options can be defined by the user and parsed in her analysis class
+ with methods <a href="./KVEventSelector.html#KVEventSelector:IsOptGiven" title="Bool_t KVEventSelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*) and <a href="./KVEventSelector.html#KVEventSelector:GetOpt" title="const TString&amp; KVEventSelector::GetOpt(const Char_t* option) const">GetOpt</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*)
+
+ If the user needs to define new reference frames for the data which must exist before global variables
+ are automatically calculated in the analysis loop, she can do so by overriding the method
+ <a href="./KVEventSelector.html#KVEventSelector:SetAnalysisFrame" title="void KVEventSelector::SetAnalysisFrame()">SetAnalysisFrame</a>(), like so:
+ MyAnalysis::<a href="./KVEventSelector.html#KVEventSelector:SetAnalysisFrame" title="void KVEventSelector::SetAnalysisFrame()">SetAnalysisFrame</a>()
+ {
+     static TVector3 cmvelocity(0,0,3.0);
+     <a href="./KVEventSelector.html#KVEventSelector:GetEvent" title="KVEvent* KVEventSelector::GetEvent() const">GetEvent</a>()-><a href="./KVEvent.html#KVEvent:SetFrame" title="void KVEvent::SetFrame(const Char_t* frame, const TVector3&amp; boost, Bool_t beta = kFALSE) or overloads">SetFrame</a>(<span class="string">"CM"</span>, cmvelocity);
+ }
+
+ *** USE WITH PROOF ***
+ In order to use a <a href="./KVEventSelector.html">KVEventSelector</a> with PROOF:
+
+ - declare any histograms with method <a href="./KVEventSelector.html#KVEventSelector:AddHisto" title="void KVEventSelector::AddHisto(TH1* histo)">AddHisto</a>(TH1*)
+ e.g. in <a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a>:
+ <a href="./ListOfTypes.html#void">void</a> MySelector::<a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a>()
+ {
+     <a href="./KVEventSelector.html#KVEventSelector:AddHisto" title="void KVEventSelector::AddHisto(TH1* histo)">AddHisto</a>( new TH2F(<span class="string">"toto"</span>, <span class="string">"tata"</span>, 100, 0, 0, 500, 0, 0) );
+ }
+ Histograms can also be declared 'on the fly' in <a href="./KVEventSelector.html#KVEventSelector:Analysis" title="Bool_t KVEventSelector::Analysis()">Analysis</a>() method in
+ the same way;
+
+ - for TTrees, first call <a href="./KVEventSelector.html#KVEventSelector:CreateTreeFile" title="Bool_t KVEventSelector::CreateTreeFile(const Char_t* filename = &quot;&quot;)">CreateTreeFile</a>(<span class="string">"..."</span>) with name of file for TTree(s)
+ (by default, histograms and TTrees are written in different files - but see below),
+ then declare all trees using method <a href="./KVEventSelector.html#KVEventSelector:AddTree" title="void KVEventSelector::AddTree(TTree* tree)">AddTree</a>(TTree*)
+ e.g. in <a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a>:
+ <a href="./ListOfTypes.html#void">void</a> MySelector::<a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a>()
+ {
+     <a href="./KVEventSelector.html#KVEventSelector:CreateTreeFile" title="Bool_t KVEventSelector::CreateTreeFile(const Char_t* filename = &quot;&quot;)">CreateTreeFile</a>(<span class="string">"MyTrees.root"</span>);
+     TTree* aTree = new TTree(<span class="string">"t1"</span>, <span class="string">"Some Tree"</span>);
+     aTree-&gt;Branch(...) etc.
+     <a href="./KVEventSelector.html#KVEventSelector:AddTree" title="void KVEventSelector::AddTree(TTree* tree)">AddTree</a>(aTree);
+ }
+
+ - if you want (not obligatory), you can use methods <a href="./KVEventSelector.html#KVEventSelector:FillHisto" title="void KVEventSelector::FillHisto(const Char_t* sname, Double_t one, Double_t two = 1, Double_t three = 1, Double_t four = 1)">FillHisto</a>(...) and
+  <a href="./KVEventSelector.html#KVEventSelector:FillTree" title="void KVEventSelector::FillTree(const Char_t* sname = &quot;&quot;)">FillTree</a>(...) in your <a href="./KVEventSelector.html#KVEventSelector:Analysis" title="Bool_t KVEventSelector::Analysis()">Analysis</a>() method;
+
+ - to save histograms to file in <a href="./KVEventSelector.html#KVEventSelector:EndAnalysis" title="void KVEventSelector::EndAnalysis()">EndAnalysis</a>(), call method
+  <a href="./KVEventSelector.html#KVEventSelector:SaveHistos" title="void KVEventSelector::SaveHistos(const Char_t* filename = &quot;&quot;, Option_t* option = &quot;recreate&quot;, Bool_t onlyfilled = kFALSE)">SaveHistos</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename) in <a href="./KVEventSelector.html#KVEventSelector:EndAnalysis" title="void KVEventSelector::EndAnalysis()">EndAnalysis</a>()
+
+ -  the file declared with <a href="./KVEventSelector.html#KVEventSelector:CreateTreeFile" title="Bool_t KVEventSelector::CreateTreeFile(const Char_t* filename = &quot;&quot;)">CreateTreeFile</a> will be automatically written
+ to disk at the end of the analysis.
+
+ HISTOS &amp; TREES IN SAME <a href="./ListOfTypes.html#FILE">FILE</a>
+ If you want all results of your analysis to be written in a single file
+ containing both histos and trees, put the following in the list of options:
+      CombinedOutputFile=myResults.root
+ do not call <a href="./KVEventSelector.html#KVEventSelector:SaveHistos" title="void KVEventSelector::SaveHistos(const Char_t* filename = &quot;&quot;, Option_t* option = &quot;recreate&quot;, Bool_t onlyfilled = kFALSE)">SaveHistos</a>() in <a href="./KVEventSelector.html#KVEventSelector:EndAnalysis" title="void KVEventSelector::EndAnalysis()">EndAnalysis</a>(), and make
+ sure you call <a href="./KVEventSelector.html#KVEventSelector:CreateTreeFile" title="Bool_t KVEventSelector::CreateTreeFile(const Char_t* filename = &quot;&quot;)">CreateTreeFile</a>() without giving a name (the
+ resulting intermediate file will have a default name
+ allowing it to be found at the end of the analysis)
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVEventSelector:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVEventSelector:_KVEventSelector">~KVEventSelector</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:Abort"><span class="baseclass">TSelector::</span>Abort</a>(<span class="keyword">const</span> <span class="keyword">char</span>* why, <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>::EAbort what = kAbortProcess)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:AddGV">AddGV</a>(<a href="./KVVarGlob.html">KVVarGlob</a>* vg)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVVarGlob.html">KVVarGlob</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:AddGV@1">AddGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:AddHisto">AddHisto</a>(TH1* histo)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:AddTree">AddTree</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Analysis">Analysis</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:AtEndOfRun">AtEndOfRun</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Begin">Begin</a>(TTree* tree)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clear"><span class="baseclass">TObject::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:CreateTreeFile">CreateTreeFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:EndAnalysis">EndAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:EndRun">EndRun</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillHisto">FillHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> three = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> four = 1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillTree">FillTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>::EAbort</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:GetAbort"><span class="baseclass">TSelector::</span>GetAbort</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetBranchName">GetBranchName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetEntry">GetEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry, <a href="./ListOfTypes.html#Int_t">Int_t</a> getall = 0)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetEvent">GetEvent</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVVarGlob.html">KVVarGlob</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetGV">GetGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVGVList.html">KVGVList</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetGVList">GetGVList</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TH1*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetHisto">GetHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVHashList.html">KVHashList</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetHistoList">GetHistoList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual TList*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:GetInputList"><span class="baseclass">TSelector::</span>GetInputList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> TString&amp;</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetOpt">GetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:GetOption"><span class="baseclass">TSelector::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual TList*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetOutputList">GetOutputList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:GetSelector"><span class="baseclass">TSelector::</span>GetSelector</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:GetStatus"><span class="baseclass">TSelector::</span>GetStatus</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TTree*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetTree">GetTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVHashList.html">KVHashList</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:GetTreeList">GetTreeList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Init">Init</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:InitAnalysis">InitAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:InitRun">InitRun</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:IsOptGiven">IsOptGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:IsStandardDraw"><span class="baseclass">TSelector::</span>IsStandardDraw</a>(<span class="keyword">const</span> <span class="keyword">char</span>* selec)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVEventSelector:KVEventSelector">KVEventSelector</a>(TTree* = 0)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVEventSelector:KVEventSelector@1">KVEventSelector</a>(<span class="keyword">const</span> <a href="./KVEventSelector.html">KVEventSelector</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Notify">Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEventSelector.html">KVEventSelector</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVEventSelector:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVEventSelector.html">KVEventSelector</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:ParseOptions">ParseOptions</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Print"><span class="baseclass">TObject::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Process">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:ProcessCut"><span class="baseclass">TSelector::</span>ProcessCut</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:ProcessFill"><span class="baseclass">TSelector::</span>ProcessFill</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:RecalculateGlobalVariables">RecalculateGlobalVariables</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:ResetAbort"><span class="baseclass">TSelector::</span>ResetAbort</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SaveHistos">SaveHistos</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> onlyfilled = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetAdditionalBranchAddress">SetAdditionalBranchAddress</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetAnalysisFrame">SetAnalysisFrame</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetBranchName">SetBranchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* n)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetEventsReadInterval">SetEventsReadInterval</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> N)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetGVList">SetGVList</a>(<a href="./KVGVList.html">KVGVList</a>* list)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetInputList">SetInputList</a>(TList* input)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetObject">SetObject</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetOpt">SetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:SetOption"><span class="baseclass">TSelector::</span>SetOption</a>(<span class="keyword">const</span> <span class="keyword">char</span>* option)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SetParticleConditions">SetParticleConditions</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TSelector.html#TSelector:SetStatus"><span class="baseclass">TSelector::</span>SetStatus</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> status)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SlaveBegin">SlaveBegin</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:SlaveTerminate">SlaveTerminate</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Terminate">Terminate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:UnsetOpt">UnsetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVEventSelector:Version">Version</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillTH1">FillTH1</a>(TH1* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillTH2">FillTH2</a>(TH2* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillTH3">FillTH3</a>(TH3* h3, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillTProfile">FillTProfile</a>(TProfile* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:FillTProfile2D">FillTProfile2D</a>(TProfile2D* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVEventSelector:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:kAbortFile"><span class="baseclass">TSelector::</span>kAbortFile</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:kAbortProcess"><span class="baseclass">TSelector::</span>kAbortProcess</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:kContinue"><span class="baseclass">TSelector::</span>kContinue</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+<tr class="data"><td class="datatype">TProofOutputFile*</td><td class="dataname"><a name="KVEventSelector:mergeFile"></a>mergeFile</td><td class="datadesc">! for merging with PROOF</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVEventSelector:tree_file_name"></a>tree_file_name</td><td></td></tr>
+<tr class="data"><td class="datatype">TFile*</td><td class="dataname"><a name="KVEventSelector:writeFile"></a>writeFile</td><td class="datadesc">!</td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./KVEvent.html">KVEvent</a>*</td><td class="dataname"><a name="KVEventSelector:Event"></a>Event</td><td></td></tr>
+<tr class="data"><td class="datatype">TBranch*</td><td class="dataname"><a name="KVEventSelector:b_Event"></a>b_Event</td><td class="datadesc">!</td></tr>
+<tr class="datainh"><td class="datatype"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp;) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:fAbort"><span class="baseclass">TSelector::</span>fAbort</a></td><td class="datadesc">Abort status</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVEventSelector:fBranchName"></a>fBranchName</td><td class="datadesc">name of branch which contains events to analyse</td></tr>
+<tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="KVEventSelector:fChain"></a>fChain</td><td class="datadesc">!pointer to the analyzed TTree or TChain</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVEventSelector:fCombinedOutputFile"></a>fCombinedOutputFile</td><td class="datadesc">optional name for single results file with trees and histos</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVEventSelector:fEventsRead"></a>fEventsRead</td><td class="datadesc">number of events read</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVEventSelector:fEventsReadInterval"></a>fEventsReadInterval</td><td class="datadesc">interval at which to print number of events read</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVEventSelector:fFirstEvent"></a>fFirstEvent</td><td class="datadesc">set to kFALSE after first event is read</td></tr>
+<tr class="datainh"><td class="datatype">TList*</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:fInput"><span class="baseclass">TSelector::</span>fInput</a></td><td class="datadesc">List of objects available during processing</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVEventSelector:fNotifyCalled"></a>fNotifyCalled</td><td class="datadesc">avoid multiple calls to Notify/InitRun</td></tr>
+<tr class="datainh"><td class="datatype"><a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:fObject"><span class="baseclass">TSelector::</span>fObject</a></td><td class="datadesc">!Current object if processing object (vs. TTree)</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:fOption"><span class="baseclass">TSelector::</span>fOption</a></td><td class="datadesc">Option given to TTree::Process</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVEventSelector:fOptionList"></a>fOptionList</td><td></td></tr>
+<tr class="datainh"><td class="datatype">TSelectorList*</td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:fOutput"><span class="baseclass">TSelector::</span>fOutput</a></td><td class="datadesc">!List of objects created during processing</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVParticleCondition.html">KVParticleCondition</a>*</td><td class="dataname"><a name="KVEventSelector:fPartCond"></a>fPartCond</td><td class="datadesc">(optional) conditions for selecting particles</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a href="http://root.cern.ch/root/html/TSelector.html#TSelector:fStatus"><span class="baseclass">TSelector::</span>fStatus</a></td><td class="datadesc">Selector status</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVEventSelector:fTreeEntry"></a>fTreeEntry</td><td class="datadesc">current tree entry number</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVGVList.html">KVGVList</a>*</td><td class="dataname"><a name="KVEventSelector:gvlist"></a>gvlist</td><td class="datadesc">!</td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVEventSelector.html">KVEventSelector</a>::(anonymous)</td><td class="dataname"><a name="KVEventSelector:kDeleteGVList"></a>kDeleteGVList</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVEventSelector:lhisto"></a>lhisto</td><td class="datadesc">-&gt;!</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVEventSelector:ltree"></a>ltree</td><td class="datadesc">-&gt;!</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVEventSelector:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVEventSelector_Inh" id="MapKVEventSelector_Inh">
+<area shape="rect" id="node4" href="./KVFAZIASelector.html" title="KVFAZIASelector" alt="" coords="624,2,766,25"/>
+<area shape="rect" id="node5" href="./KVEventFiltering.html" title="KVEventFiltering" alt="" coords="628,26,762,49"/>
+</map>
+<map name="MapKVEventSelector_Lib" id="MapKVEventSelector_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="487,44,602,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVEventSelector_Inh" class="tabsel" href="inh/KVEventSelector_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVEventSelector_Inh.png');">Inheritance</a>
+<a id="imgKVEventSelector_InhMem" class="tab" href="inhmem/KVEventSelector_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVEventSelector_InhMem.png');">Inherited Members</a>
+<a id="imgKVEventSelector_Incl" class="tab" href="incl/KVEventSelector_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVEventSelector_Incl.png');">Includes</a>
+<a id="imgKVEventSelector_Lib" class="tab" href="lib/KVEventSelector_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVEventSelector_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVEventSelector_Inh" src="inh/KVEventSelector_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:Begin" href="src/KVEventSelector.cxx.html#uK9KTB">Begin</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> Need to parse options here for use in <a href="./KVEventSelector.html#KVEventSelector:Terminate" title="void KVEventSelector::Terminate()">Terminate</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SlaveBegin" href="src/KVEventSelector.cxx.html#cI8MjE">SlaveBegin</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> The <a href="./KVEventSelector.html#KVEventSelector:SlaveBegin" title="void KVEventSelector::SlaveBegin(TTree* tree)">SlaveBegin</a>() function is called after the <a href="./KVEventSelector.html#KVEventSelector:Begin" title="void KVEventSelector::Begin(TTree* tree)">Begin</a>() function.
+ When running with PROOF <a href="./KVEventSelector.html#KVEventSelector:SlaveBegin" title="void KVEventSelector::SlaveBegin(TTree* tree)">SlaveBegin</a>() is called on each slave server.
+ The tree argument is deprecated (on PROOF 0 is passed).
+
+ <a href="./KVEventSelector.html#KVEventSelector:ParseOptions" title="void KVEventSelector::ParseOptions()">ParseOptions</a> : Manage options passed as arguments
+
+ Called user method <a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a> where users can create trees or histos
+ using the appropiate methods :
+ CreateTrees and CreateMethods
+
+ Test the presence or not of such histo or tree
+ to manage it properly
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEventSelector:CreateTreeFile" href="src/KVEventSelector.cxx.html#dzxYgC">CreateTreeFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> For PROOF:
+ This method must be called before creating any user TTree in <a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a>().
+ If no filename is given, default name=<span class="string">"TreeFileFrom[name of selector class].root"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEventSelector:Process" href="src/KVEventSelector.cxx.html#B5pNv">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)</span><br />
+<div class="funccomm"><pre> The <a href="./KVEventSelector.html#KVEventSelector:Process" title="Bool_t KVEventSelector::Process(Long64_t entry)">Process</a>() function is called for each entry in the tree (or possibly
+ keyed object in the case of PROOF) to be processed. The entry argument
+ specifies which entry in the currently loaded tree is to be processed.
+ It can be passed to either <a href="./KVEventSelector.html">KVEventSelector</a>::<a href="./KVEventSelector.html#KVEventSelector:GetEntry" title="Int_t KVEventSelector::GetEntry(Long64_t entry, Int_t getall = 0)">GetEntry</a>() or TBranch::<a href="./KVEventSelector.html#KVEventSelector:GetEntry" title="Int_t KVEventSelector::GetEntry(Long64_t entry, Int_t getall = 0)">GetEntry</a>()
+ to read either all or the required parts of the data. When processing
+ keyed objects with PROOF, the object is already loaded and is available
+ via the fObject pointer.
+
+ This function should contain the <span class="string">"body"</span> of the analysis. It can contain
+ simple or elaborate selection criteria, run algorithms on the data
+ of the event and typically fill histograms.
+
+ The processing can be stopped by calling <a href="http://root.cern.ch/root/html/TSelector.html#TSelector:Abort" title="void TSelector::Abort(const char* why, TSelector::EAbort what = kAbortProcess)">Abort</a>().
+
+ Use fStatus to set the return value of TTree::<a href="./KVEventSelector.html#KVEventSelector:Process" title="Bool_t KVEventSelector::Process(Long64_t entry)">Process</a>().
+
+ The return value is currently not used.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SlaveTerminate" href="src/KVEventSelector.cxx.html#KbiZxD">SlaveTerminate</a>()</span><br />
+<div class="funccomm"><pre> The <a href="./KVEventSelector.html#KVEventSelector:SlaveTerminate" title="void KVEventSelector::SlaveTerminate()">SlaveTerminate</a>() function is called after all entries or objects
+ have been processed. When running with PROOF <a href="./KVEventSelector.html#KVEventSelector:SlaveTerminate" title="void KVEventSelector::SlaveTerminate()">SlaveTerminate</a>() is called
+ on each slave server.
+ if tree have been defined in the CreateTrees method
+ manage the merge of them in ProofLite session
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:Terminate" href="src/KVEventSelector.cxx.html#psuHqC">Terminate</a>()</span><br />
+<div class="funccomm"><pre> The <a href="./KVEventSelector.html#KVEventSelector:Terminate" title="void KVEventSelector::Terminate()">Terminate</a>() function is the last function to be called during
+ a query. It always runs on the client, it can be used to present
+ the results graphically or save the results to file.
+
+ This method call the user defined <a href="./KVEventSelector.html#KVEventSelector:EndAnalysis" title="void KVEventSelector::EndAnalysis()">EndAnalysis</a>
+ where user can do what she wants
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVVarGlob.html">KVVarGlob</a> * <a class="funcname" name="KVEventSelector:AddGV@1" href="src/KVEventSelector.cxx.html#dWMYc">AddGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>Add a global variable to the list of variables for the analysis.
+
+<span class="string">"class_name"</span> must be the name of a valid class inheriting from <a href="./KVVarGlob.html">KVVarGlob</a>, e.g. any of the default global
+variable classes defined as part of the standard KaliVeda package (in libKVvVarGlob.so). See
+<span class="string">"Class Reference"</span> page on website for the available classes (listed by category under <span class="string">"Global Variables: ..."</span>).
+
+USER-DEFINED GLOBAL VARIABLES
+The user may use her own global variables in an analysis class, without having to add them to the main libraries.
+If the given class name is not known, it is assumed to be a user-defined class and we attempt to compile and load
+the class from the user's source code. For this to work, the user must:
+
+      (1) add to the ROOT macro path the directory where her class's source code is kept, e.g. in $HOME/.rootrc
+              add the following line:
+
+              +Unix.*.Root.MacroPath:      $(HOME)/myVarGlobs
+
+      (2) for each user-defined class, add a line to $HOME/.kvrootrc to define a <span class="string">"plugin"</span>. E.g. for a class called MyNewVarGlob,
+
+              +Plugin.<a href="./KVVarGlob.html">KVVarGlob</a>:    MyNewVarGlob    MyNewVarGlob     MyNewVarGlob.cpp+   <span class="string">"MyNewVarGlob()"</span>
+
+      It is assumed that MyNewVarGlob.h and MyNewVarGlob.cpp will be found in $HOME/myVarGlobs (in this example).
+
+<span class="string">"name"</span> is a unique name for the new global variable object which will be created and added to the internal
+list of global variables. This name can be used to retrieve the object (see <a href="./KVEventSelector.html#KVEventSelector:GetGV" title="KVVarGlob* KVEventSelector::GetGV(const Char_t* name) const">GetGV</a>) in the user's analysis.
+
+Returns pointer to new global variable object in case more than the usual default initialisation is necessary.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:RecalculateGlobalVariables" href="src/KVEventSelector.cxx.html#PlBoc">RecalculateGlobalVariables</a>()</span><br />
+<div class="funccomm"><pre>Use this method if you change e.g. the particle selection criteria in your
+<a href="./KVEventSelector.html#KVEventSelector:Analysis" title="Bool_t KVEventSelector::Analysis()">Analysis</a>() method and want to recalculate the values of all global variables
+for your new selection.
+
+WARNING: the global variables are calculated automatically for you for each event
+before method <a href="./KVEventSelector.html#KVEventSelector:Analysis" title="Bool_t KVEventSelector::Analysis()">Analysis</a>() is called. In order for the correct particles to be included in
+this calculation, make sure that at the END of <a href="./KVEventSelector.html#KVEventSelector:Analysis" title="Bool_t KVEventSelector::Analysis()">Analysis</a>() you reset the selection
+criteria.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetParticleConditions" href="src/KVEventSelector.cxx.html#M0sQs">SetParticleConditions</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp; )</span><br />
+<div class="funccomm"><pre>Use this method to set criteria for selecting particles to include in analysis.
+The criteria defined in the <a href="./KVParticleCondition.html">KVParticleCondition</a> object will be applied to every
+particle and if they are not satisfied the particle's
+<span class="string">"OK"</span> flag will be set to false, i.e. the particle's IsOK() method will return <a href="./ListOfTypes.html#Bool_t">kFALSE</a>,
+and the particle will not be included in iterations such as <a href="./KVEventSelector.html#KVEventSelector:GetEvent" title="KVEvent* KVEventSelector::GetEvent() const">GetEvent</a>()-><a href="./KVEvent.html#KVEvent:GetNextParticle" title="KVNucleus* KVEvent::GetNextParticle(Option_t* opt = &quot;&quot;)">GetNextParticle</a>(<span class="string">"OK"</span>).
+Neither will the particle be included in the evaluation of any global variables.
+
+This method must be called in the user's <a href="./KVEventSelector.html#KVEventSelector:InitAnalysis" title="void KVEventSelector::InitAnalysis()">InitAnalysis</a>() or <a href="./KVEventSelector.html#KVEventSelector:InitRun" title="void KVEventSelector::InitRun()">InitRun</a>() method.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVHashList.html">KVHashList</a>* <a class="funcname" name="KVEventSelector:GetHistoList" href="src/KVEventSelector.cxx.html#MpQWg">GetHistoList</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TH1* <a class="funcname" name="KVEventSelector:GetHisto" href="src/KVEventSelector.cxx.html#J84ZhE">GetHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:AddHisto" href="src/KVEventSelector.cxx.html#jqMJi">AddHisto</a>(TH1* histo)</span><br />
+<div class="funccomm"><pre> Declare a histogram to be used in analysis.
+ This method must be called when using PROOF.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:AddTree" href="src/KVEventSelector.cxx.html#vGGMaE">AddTree</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> Declare a TTree to be used in analysis.
+ This method must be called when using PROOF.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillHisto" href="src/KVEventSelector.cxx.html#y9iUVE">FillHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> three = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> four = 1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillTH1" href="src/KVEventSelector.cxx.html#cyadBB">FillTH1</a>(TH1* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillTProfile" href="src/KVEventSelector.cxx.html#ig.HpB">FillTProfile</a>(TProfile* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillTH2" href="src/KVEventSelector.cxx.html#i.hniC">FillTH2</a>(TH2* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillTProfile2D" href="src/KVEventSelector.cxx.html#Ty6giD">FillTProfile2D</a>(TProfile2D* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillTH3" href="src/KVEventSelector.cxx.html#KaFS.D">FillTH3</a>(TH3* h3, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SaveHistos" href="src/KVEventSelector.cxx.html#KQcqFE">SaveHistos</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> onlyfilled = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
+<div class="funccomm"><pre> <a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a> in file all histograms declared with <a href="./KVEventSelector.html#KVEventSelector:AddHisto" title="void KVEventSelector::AddHisto(TH1* histo)">AddHisto</a>(TH1*)
+ This method works with PROOF.
+
+ If no filename is specified, set default name : HistoFileFrom[KVEvenSelector::<a href="http://root.cern.ch/root/html/TObject.html#TObject:GetName" title="const char* TObject::GetName() const">GetName</a>()].root
+
+ If a filename is specified, search in gROOT-&gt;GetListOfFiles() if
+ this file has been already opened
+  - if yes write in it
+  - if not, create it with the corresponding option, write in it
+ and close it just after
+
+ onlyfilled flag allow to write all (onlyfilled=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>, default)
+ or only histograms (onlyfilled=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>) those have been filled
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVHashList.html">KVHashList</a>* <a class="funcname" name="KVEventSelector:GetTreeList" href="src/KVEventSelector.cxx.html#zIXfdD">GetTreeList</a>() const</span><br />
+<div class="funccomm"><pre>return the list of created trees
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TTree* <a class="funcname" name="KVEventSelector:GetTree" href="src/KVEventSelector.cxx.html#hjFGdB">GetTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+<div class="funccomm"><pre>return the tree named tree_name
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:FillTree" href="src/KVEventSelector.cxx.html#ZuBnND">FillTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Filltree method, the tree named tree_name
+has to be declared with AddTTree(TTree*) method
+
+if no sname=<span class="string">""</span>, all trees in the list is filled
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetOpt" href="src/KVEventSelector.cxx.html#sA5NpD">SetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</span><br />
+<div class="funccomm"><pre>Set a value for an option
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEventSelector:IsOptGiven" href="src/KVEventSelector.cxx.html#usaW8D">IsOptGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the option 'opt' has been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TString&amp; <a class="funcname" name="KVEventSelector:GetOpt" href="src/KVEventSelector.cxx.html#EUeiYD">GetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) const</span><br />
+<div class="funccomm"><pre> Returns the value of the option
+ Only use after checking existence of option with <a href="./KVEventSelector.html#KVEventSelector:IsOptGiven" title="Bool_t KVEventSelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:UnsetOpt" href="src/KVEventSelector.cxx.html#dIbfuB">UnsetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</span><br />
+<div class="funccomm"><pre> Removes the option 'opt' from the internal lists, as if it had never been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:ParseOptions" href="src/KVEventSelector.cxx.html#QYobNC">ParseOptions</a>()</span><br />
+<div class="funccomm"><pre> Analyse comma-separated list of options given to TTree::<a href="./KVEventSelector.html#KVEventSelector:Process" title="Bool_t KVEventSelector::Process(Long64_t entry)">Process</a>
+ and store all <span class="string">"option=value"</span> pairs in <a href="./KVEventSelector.html#KVEventSelector:fOptionList" title="KVNameValueList KVEventSelector::fOptionList">fOptionList</a>.
+ Options can then be accessed using <a href="./KVEventSelector.html#KVEventSelector:IsOptGiven" title="Bool_t KVEventSelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(), GetOptString(), etc.
+
+     BranchName=xxxx  :  change name of branch in TTree containing data
+     EventsReadInterval=N: print <span class="string">"+++ 12345 events processed +++"</span> every N events
+
+ This method is called by <a href="./KVEventSelector.html#KVEventSelector:SlaveBegin" title="void KVEventSelector::SlaveBegin(TTree* tree)">SlaveBegin</a>
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:Init" href="src/KVEventSelector.h.html#KiYEkC">Init</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> The <a href="./KVEventSelector.html#KVEventSelector:Init" title="void KVEventSelector::Init(TTree* tree)">Init</a>() function is called when the selector needs to initialize
+ a new tree or chain. Typically here the branch addresses and branch
+ pointers of the tree will be set.
+ It is normally not necessary to make changes to the generated
+ code, but the routine can be extended by the user if needed.
+ <a href="./KVEventSelector.html#KVEventSelector:Init" title="void KVEventSelector::Init(TTree* tree)">Init</a>() will be called many times when running on PROOF
+ (once per file to be processed).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEventSelector:Notify" href="src/KVEventSelector.h.html#jS58I">Notify</a>()</span><br />
+<div class="funccomm"><pre> The <a href="./KVEventSelector.html#KVEventSelector:Notify" title="Bool_t KVEventSelector::Notify()">Notify</a>() function is called when a new file is opened. This
+ can be either for a new TTree in a TChain or when when a new TTree
+ is started when using PROOF. It is normally not necessary to make changes
+ to the generated code, but the routine can be extended by the
+ user if needed. The return value is currently not used.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVEventSelector:KVEventSelector" href="src/KVEventSelector.h.html#Zdru2C">KVEventSelector</a>(TTree*  = 0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">virtual</span> <a class="funcname" name="KVEventSelector:_KVEventSelector" href="src/KVEventSelector.h.html#rJUbQC">~KVEventSelector</a>()</span><br />
+<div class="funccomm"><pre>delete global variable list if it belongs to us, i.e. if created by a call to <a href="./KVEventSelector.html#KVEventSelector:GetGVList" title="KVGVList* KVEventSelector::GetGVList() const">GetGVList</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetEventsReadInterval" href="src/KVEventSelector.h.html#sj49sC">SetEventsReadInterval</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> N)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVEventSelector.html#KVEventSelector:fEventsReadInterval" title="Long64_t KVEventSelector::fEventsReadInterval">fEventsReadInterval</a> = N; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVEventSelector:Version" href="src/KVEventSelector.h.html#cAh.4">Version</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVEventSelector:GetEntry" href="src/KVEventSelector.h.html#I_y8i">GetEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry, <a href="./ListOfTypes.html#Int_t">Int_t</a> getall = 0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetObject" href="src/KVEventSelector.h.html#aGjDRE">SetObject</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetInputList" href="src/KVEventSelector.h.html#rf0UcD">SetInputList</a>(TList* input)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TList  * <a class="funcname" name="KVEventSelector:GetOutputList" href="src/KVEventSelector.h.html#w.7Rc">GetOutputList</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetBranchName" href="src/KVEventSelector.h.html#sQ8T0">SetBranchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* n)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVEventSelector:GetBranchName" href="src/KVEventSelector.h.html#Stub1B">GetBranchName</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetAnalysisFrame" href="src/KVEventSelector.h.html#Y9bKsC">SetAnalysisFrame</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVEvent.html">KVEvent</a>* <a class="funcname" name="KVEventSelector:GetEvent" href="src/KVEventSelector.h.html#pLGgd">GetEvent</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:InitAnalysis" href="src/KVEventSelector.h.html#drxIaC">InitAnalysis</a>()</span><br />
+<div class="funccomm"><pre>user entry points
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:InitRun" href="src/KVEventSelector.h.html#iFJnPB">InitRun</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEventSelector:Analysis" href="src/KVEventSelector.h.html#COVGI">Analysis</a>()</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod" title="void TObject::AbstractMethod(const char* method) const">AbstractMethod</a>(<span class="string">"Analysis"</span>);
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:EndRun" href="src/KVEventSelector.h.html#SWzFGB">EndRun</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:EndAnalysis" href="src/KVEventSelector.h.html#hawc8">EndAnalysis</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetGVList" href="src/KVEventSelector.h.html#at0M_">SetGVList</a>(<a href="./KVGVList.html">KVGVList</a>* list)</span><br />
+<div class="funccomm"><pre>handling global variables for analysis
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVGVList.html">KVGVList</a> * <a class="funcname" name="KVEventSelector:GetGVList" href="src/KVEventSelector.h.html#ypDV1">GetGVList</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>Access to the internal list of global variables
+If the list does not exist, it is created.
+In this case it will be automatically deleted with the <a href="./KVSelector.html">KVSelector</a> object.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:AddGV" href="src/KVEventSelector.h.html#hSdEBB">AddGV</a>(<a href="./KVVarGlob.html">KVVarGlob</a>* vg)</span><br />
+<div class="funccomm"><pre>Add the global variable <span class="string">"vg"</span> to the list of variables for the analysis.
+This is equivalent to <a href="./KVEventSelector.html#KVEventSelector:GetGVList" title="KVGVList* KVEventSelector::GetGVList() const">GetGVList</a>()-><a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>( vg ).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVVarGlob.html">KVVarGlob</a> * <a class="funcname" name="KVEventSelector:GetGV" href="src/KVEventSelector.h.html#cw8jeB">GetGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+<div class="funccomm"><pre>Access the global variable with name <span class="string">"name"</span> in the list of variables
+for the analysis.
+This is equivalent to <a href="./KVEventSelector.html#KVEventSelector:GetGVList" title="KVGVList* KVEventSelector::GetGVList() const">GetGVList</a>()-><a href="./KVGVList.html#KVGVList:GetGV" title="KVVarGlob* KVGVList::GetGV(const Char_t* nom)">GetGV</a>( name ).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEventSelector:AtEndOfRun" href="src/KVEventSelector.h.html#XaGkAD">AtEndOfRun</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Check whether the end of run is reached for the current tree
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:SetAdditionalBranchAddress" href="src/KVEventSelector.h.html#B4dkRD">SetAdditionalBranchAddress</a>()</span><br />
+<div class="funccomm"><pre>if user wants to read additional branches of the tree
+
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 15:43:50 2015 </em><em>&raquo; Last generated: 2015-03-18 15:43</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

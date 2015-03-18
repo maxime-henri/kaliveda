@@ -1,0 +1,685 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:42:29 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVDataRepository</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVDataRepository','libKVMultiDetdata_management','KVDataRepository.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVDataRepository.h.html">header file</a>
+<a class="descrheadentry" href="src/KVDataRepository.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/data_management/KVDataRepository.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/data_management/KVDataRepository.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVDataRepository:description">class description</a> 
+<a class="descrheadentry" href="#KVDataRepository:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVDataRepository:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVDataRepository:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_DATA_MANAGEMENT_Index.html">DATA_MANAGEMENT</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVDataRepository</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVDataRepository:description"></a>class KVDataRepository: public <a href="./KVBase.html">KVBase</a></h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVDataRepository</h2>
+<h4>Base class for managing a collection of data files</h4>
+<p>
+Data repositories are defined in the user's $HOME/.kvrootrc; some typical examples are given
+in $KVROOT/KVFiles/.kvrootrc:
+</p>
+<pre>
+DataRepository: home
+home.DataRepository.RootDir: $(HOME)/Data
+</pre>
+<p>
+This is the minimum requirement to define a data repository: give a name ("home") and the
+full path to the top level directory ("...RootDir: $(HOME)/Data"). In this case the top level
+directory must be directly accessible to the user's machine as a locally-mounted disk.
+Note that environment variables can be used, if enclosed between "$(...)".
+</p>
+<pre>
+DataRepository: ccali
+ccali.DataRepository.Type: remote
+ccali.DataRepository.RootDir:       cchpssindra:/hpss/in2p3.fr/group/indra
+ccali.DataRepository.ReadProtocol:     root
+ccali.DataRepository.XRDServer:      ccxroot:1999
+ccali.DataRepository.XRDRootDir:       /hpss/in2p3.fr/group/indra
+ccali.DataRepository.XRDTunnel.host:       ccali.in2p3.fr
+ccali.DataRepository.XRDTunnel.port:          10000
+ccali.DataRepository.XRDTunnel.user:
+ccali.DataRepository.RemoteAvailableRuns.protocol:  curl
+ccali.DataRepository.RemoteAvailableRuns.url:   http://indra.in2p3.fr/KaliVedaDoc
+ccali.DataRepository.FileTransfer.type:    bbftp
+ccali.DataRepository.FileTransfer.server:    ccbbftp.in2p3.fr
+ccali.DataRepository.FileTransfer.user:
+</pre>
+<p>
+This is the definition of a "remote" data repository. It will be handled by an object of the class
+<a href="KVRemoteDataRepository.html">KVRemoteDataRepository</a>.
+</p>
+<p>
+A remote data repository is principally characterised by the fact that access to the data files is
+via some non-local protocol: in this case it is xrootd ("...ReadProtocol: root"). The host name and port of
+the xrootd server are given ("...XRDServer: ccxroot:1999"), as well as the root directory
+to be used ("...XRDRootDir:  /hpss/in2p3.fr/group/indra").
+</p>
+<p>
+In order to use a remote repository, some way to access the database of available
+data files for each run type must be defined. Here it is the curl programme which is used to read
+them via a website ("...RemoteAvailableRuns.protocol: curl"; "...RemoteAvailableRuns.url: http://indra.in2p3.fr/KaliVedaDoc").
+</p>
+<p>
+Another particularity of remote data repositories is that some additional stuff may be needed
+in order to be able to access the data.
+This is handled by <a href="KVRemoteDataRepository.html#KVRemoteDataRepository:IsConnected">KVRemoteDataRepository::IsConnected()</a>.
+In the present example, an SSH tunnel is set up in order to allow secure connection to the
+xrootd server ("...XRDTunnel.*:").
+</p>
+<p>
+Finally, transfer of data between data repositories is handled by <a href="KVDataTransfer.html">KVDataTransfer</a> and child classes.
+In the present example, this is configured to use bbftp ("...FileTransfer.type: bbftp"), for which the required details are given.
+</p>
+<h4>Default data repository</h4>
+<p>If more than one repository is defined, which one will be "active" (gDataRepository)
+after initialisation of the data repository manager ? You can define the default repository
+by setting the variable
+</p>
+<pre>
+DataRepository.Default:   [name]
+</pre>
+<p>in your .kvrootrc file. If you don't, the default repository "by default" will be either:
+the data repository named "default" if there is one; or the last one defined in your .kvrootrc.
+</p>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVDataRepository:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVDataRepository:_KVDataRepository">~KVDataRepository</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:AreEqual"><span class="baseclass">KVBase::</span>AreEqual</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Long64_t">Long64_t</a> maxdif = 1)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:ArrContainsValue"><span class="baseclass">KVBase::</span>ArrContainsValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n, <a href="./ListOfTypes.html#Int_t">Int_t</a>* arr, <a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:BackupFileWithDate"><span class="baseclass">KVBase::</span>BackupFileWithDate</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CanWrite">CanWrite</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:cd">cd</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CheckFileStatus">CheckFileStatus</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CheckSubdirExists">CheckSubdirExists</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* subdir = 0)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Clear"><span class="baseclass">KVBase::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CommitFile">CommitFile</a>(TFile* file)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Copy"><span class="baseclass">KVBase::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">int</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CopyFile">CopyFile</a>(<span class="keyword">const</span> <span class="keyword">char</span>* f, <span class="keyword">const</span> <span class="keyword">char</span>* t, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> overwrite = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CopyFileFromRepository">CopyFileFromRepository</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* destination)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CopyFileToRepository">CopyFileToRepository</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* source, <a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename)</td></tr>
+<tr class="func"><td class="funcret">virtual TFile*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:CreateNewFile">CreateNewFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:DeleteFile">DeleteFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> confirm = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindClassSourceFiles"><span class="baseclass">KVBase::</span>FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="./KVString.html">KVString</a>&amp; imp_file, <a href="./KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir_name = <span class="string">"."</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindExecutable"><span class="baseclass">KVBase::</span>FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindFile"><span class="baseclass">KVBase::</span>FindFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* search, TString&amp; wfil)</td></tr>
+<tr class="func"><td class="funcret">TSystem*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:FindHelper">FindHelper</a>(<span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">void</span>* dirptr = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetBINDIRFilePath"><span class="baseclass">KVBase::</span>GetBINDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATABASEFilePath"><span class="baseclass">KVBase::</span>GetDATABASEFilePath</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATADIRFilePath"><span class="baseclass">KVBase::</span>GetDATADIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSetManager.html">KVDataSetManager</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetDataSetManager">GetDataSetManager</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVUniqueNameList.html">KVUniqueNameList</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetDirectoryListing">GetDirectoryListing</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetETCDIRFilePath"><span class="baseclass">KVBase::</span>GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFileInfo">GetFileInfo</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile, FileStat_t&amp; fs)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFileTransferExec">GetFileTransferExec</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFileTransferServer">GetFileTransferServer</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFileTransferType">GetFileTransferType</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFileTransferUser">GetFileTransferUser</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFullPathToOpenFile">GetFullPathToOpenFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetFullPathToTransferFile">GetFullPathToTransferFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetINCDIRFilePath"><span class="baseclass">KVBase::</span>GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDate"><span class="baseclass">KVBase::</span>GetKVBuildDate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildType"><span class="baseclass">KVBase::</span>GetKVBuildType</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildUser"><span class="baseclass">KVBase::</span>GetKVBuildUser</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVSourceDir"><span class="baseclass">KVBase::</span>GetKVSourceDir</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVVersion"><span class="baseclass">KVBase::</span>GetKVVersion</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLabel"><span class="baseclass">KVBase::</span>GetLabel</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLIBDIRFilePath"><span class="baseclass">KVBase::</span>GetLIBDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetListOfPlugins"><span class="baseclass">KVBase::</span>GetListOfPlugins</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumber"><span class="baseclass">KVBase::</span>GetNumber</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumberOfObjects"><span class="baseclass">KVBase::</span>GetNumberOfObjects</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetObject"><span class="baseclass">KVBase::</span>GetObject</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetPluginURI"><span class="baseclass">KVBase::</span>GetPluginURI</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetRootDirectory">GetRootDirectory</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTempFileName"><span class="baseclass">KVBase::</span>GetTempFileName</a>(TString&amp; base)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetType"><span class="baseclass">KVBase::</span>GetType</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetWORKDIRFilePath"><span class="baseclass">KVBase::</span>GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitBranch"><span class="baseclass">KVBase::</span>gitBranch</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:HelperIsConsistentWith">HelperIsConsistentWith</a>(TSystem* helper, <span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">void</span>* dirptr = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:Init">Init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:InitEnvironment"><span class="baseclass">KVBase::</span>InitEnvironment</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsCalled"><span class="baseclass">KVBase::</span>IsCalled</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:IsConnected">IsConnected</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataRepository:IsRemote">IsRemote</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsType"><span class="baseclass">KVBase::</span>IsType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDataRepository:KVDataRepository">KVDataRepository</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDataRepository:KVDataRepository@1">KVDataRepository</a>(<span class="keyword">const</span> <a href="./KVDataRepository.html">KVDataRepository</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:MakeSubdirectory">MakeSubdirectory</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVAvailableRunsFile.html">KVAvailableRunsFile</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:NewAvailableRunsFile">NewAvailableRunsFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./KVDataSet.html">KVDataSet</a>*)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./KVDataRepository.html">KVDataRepository</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:NewRepository">NewRepository</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenTempFile"><span class="baseclass">KVBase::</span>OpenTempFile</a>(TString&amp; base, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; fp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDataRepository.html">KVDataRepository</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataRepository:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVDataRepository.html">KVDataRepository</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:PrintAvailableDatasetsUpdateWarning">PrintAvailableDatasetsUpdateWarning</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile@1"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchKVFile"><span class="baseclass">KVBase::</span>SearchKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, TString&amp; fullpath, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetLabel"><span class="baseclass">KVBase::</span>SetLabel</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* lab)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetNumber"><span class="baseclass">KVBase::</span>SetNumber</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> num)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetType"><span class="baseclass">KVBase::</span>SetType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* str)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:WorkingDirectory"><span class="baseclass">KVBase::</span>WorkingDirectory</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">virtual <span class="keyword">int</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:Chmod">Chmod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* file, <a href="./ListOfTypes.html#UInt_t">UInt_t</a> mode)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:GetReadProtocol">GetReadProtocol</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSetManager.html">KVDataSetManager</a>*</td><td class="funcname"><a class="funcname" href="#KVDataRepository:NewDataSetManager">NewDataSetManager</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:PrepareXRDTunnel">PrepareXRDTunnel</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:SetFullPath">SetFullPath</a>(TString&amp; path, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* protocol)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVDataRepository:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVBase.html">KVBase</a>::EKaliVedaBits</td><td class="dataname"><a href="./KVBase.html#KVBase:kIsKaliVedaObject"><span class="baseclass">KVBase::</span>kIsKaliVedaObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fAccessprotocol"></a>fAccessprotocol</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fAccessroot"></a>fAccessroot</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataRepository:fCanWrite"></a>fCanWrite</td><td class="datadesc">kTRUE if new files can be created and written directly in the repository; kFALSE if they have to be written locally then copied to repository</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataSet.html">KVDataSet</a>*</td><td class="dataname"><a name="KVDataRepository:fCommitDataSet"></a>fCommitDataSet</td><td class="datadesc">!</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fCommitDataType"></a>fCommitDataType</td><td class="datadesc">!</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fCommitFileName"></a>fCommitFileName</td><td class="datadesc">!</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataSetManager.html">KVDataSetManager</a>*</td><td class="dataname"><a name="KVDataRepository:fDSM"></a>fDSM</td><td class="datadesc">handles datasets in repository</td></tr>
+<tr class="data"><td class="datatype">TSeqCollection*</td><td class="dataname"><a name="KVDataRepository:fHelpers"></a>fHelpers</td><td class="datadesc">List of helper classes for alternative file/directory access</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fLocalrootdir"></a>fLocalrootdir</td><td></td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fReadprotocol"></a>fReadprotocol</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fReadroot"></a>fReadroot</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fRfiorootdir"></a>fRfiorootdir</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fRfioserver"></a>fRfioserver</td><td></td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fTransferExec"></a>fTransferExec</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fTransferserver"></a>fTransferserver</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fTransfertype"></a>fTransfertype</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fTransferuser"></a>fTransferuser</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fXRDtunHost"></a>fXRDtunHost</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVDataRepository:fXRDtunPort"></a>fXRDtunPort</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVDataRepository:fXRDtunRetry"></a>fXRDtunRetry</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fXRDtunSpec"></a>fXRDtunSpec</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fXRDtunUser"></a>fXRDtunUser</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataRepository:fXRDtunnel"></a>fXRDtunnel</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fXrootdrootdir"></a>fXrootdrootdir</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataRepository:fXrootdserver"></a>fXrootdserver</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVDataRepository:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVDataRepository_Inh" id="MapKVDataRepository_Inh">
+<area shape="rect" id="node2" href="./KVBase.html" title="KVBase" alt="" coords="230,8,306,23"/>
+<area shape="rect" id="node5" href="./KVRemoteDataRepository.html" title="KVRemoteDataRepository" alt="" coords="505,1,625,15"/>
+<area shape="rect" id="node6" href="./KVDMSDataRepository.html" title="KVDMSDataRepository" alt="" coords="510,16,620,30"/>
+<area shape="rect" id="node7" href="./IRODSDataRepository.html" title="IRODSDataRepository" alt="" coords="663,8,767,22"/>
+<area shape="rect" id="node8" href="./SRBDataRepository.html" title="SRBDataRepository" alt="" coords="669,23,761,37"/>
+</map>
+<map name="MapKVDataRepository_InhMem" id="MapKVDataRepository_InhMem">
+<area shape="rect" id="clust12" href="./KVBase.html" alt="" coords="557,47,624,96"/>
+<area shape="rect" id="clust11" href="./KVBase.html" alt="" coords="635,47,701,64"/>
+<area shape="rect" id="clust13" href="./KVBase.html" alt="" coords="480,47,547,96"/>
+<area shape="rect" id="clust14" href="./KVBase.html" alt="" coords="667,80,669,83"/>
+<area shape="rect" id="clust15" href="./KVBase.html" alt="" coords="635,99,701,432"/>
+<area shape="rect" id="clust16" href="./KVBase.html" alt="" coords="557,99,624,432"/>
+<area shape="rect" id="clust17" href="./KVBase.html" alt="" coords="480,99,547,432"/>
+<area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,432"/>
+</map>
+<map name="MapKVDataRepository_Lib" id="MapKVDataRepository_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="584,44,699,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVDataRepository_Inh" class="tabsel" href="inh/KVDataRepository_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVDataRepository_Inh.png');">Inheritance</a>
+<a id="imgKVDataRepository_InhMem" class="tab" href="inhmem/KVDataRepository_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVDataRepository_InhMem.png');">Inherited Members</a>
+<a id="imgKVDataRepository_Incl" class="tab" href="incl/KVDataRepository_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVDataRepository_Incl.png');">Includes</a>
+<a id="imgKVDataRepository_Lib" class="tab" href="lib/KVDataRepository_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVDataRepository_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVDataRepository_Inh" src="inh/KVDataRepository_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:cd" href="src/KVDataRepository.cxx.html#Psqu3E">cd</a>()</span><br />
+<div class="funccomm"><pre>Make this the 'active' or 'default' data repository,
+i.e. <a href="./KVDataRepository.html">gDataRepository</a> points to this and <a href="./KVDataSetManager.html">gDataSetManager</a> points to the
+associated data set manager.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:Init" href="src/KVDataRepository.cxx.html#sBJxbB">Init</a>()</span><br />
+<div class="funccomm"><pre>Initialises data repository based on information in .kvrootrc file.
+Each line beginning <span class="string">"name.DataRepository"</span> is used for this data repository,
+where <span class="string">"name"</span> is the name of this repository.
+
+Then we create and initialise the data set manager for this repository.
+
+returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if all goes well.
+returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if not (i.e. data set manager cannot be initialised, no available datasets)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:Print" href="src/KVDataRepository.cxx.html#NsjGz">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) const</span><br />
+<div class="funccomm"><pre><a href="./KVDataRepository.html#KVDataRepository:Print" title="void KVDataRepository::Print(Option_t* opt = &quot;&quot;) const">Print</a> info on repository
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataRepository:KVDataRepository" href="src/KVDataRepository.cxx.html#H9NgL">KVDataRepository</a>()</span><br />
+<div class="funccomm"><pre>Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataRepository:_KVDataRepository" href="src/KVDataRepository.cxx.html#kGtHsD">~KVDataRepository</a>()</span><br />
+<div class="funccomm"><pre>Destructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:CheckSubdirExists" href="src/KVDataRepository.cxx.html#fWMbSD">CheckSubdirExists</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* subdir = 0)</span><br />
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the following path is valid
+      /root_of_data_repository/dir/[subdir]
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:SetFullPath" href="src/KVDataRepository.cxx.html#nl76OC">SetFullPath</a>(TString&amp; path, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* protocol)</span><br />
+<div class="funccomm"><pre>Will replace contents of 'path' with the full base path needed for the given protocol.
+
+protocol = <span class="string">"local"</span> :  path = <a href="./KVDataRepository.html#KVDataRepository:fLocalrootdir" title="TString KVDataRepository::fLocalrootdir">fLocalrootdir</a>
+protocol = <span class="string">"root"</span> :   path = <span class="string">"root://"</span> + <a href="./KVDataRepository.html#KVDataRepository:fXrootdserver" title="TString KVDataRepository::fXrootdserver">fXrootdserver</a> + <span class="string">"/"</span> + <a href="./KVDataRepository.html#KVDataRepository:fXrootdrootdir" title="TString KVDataRepository::fXrootdrootdir">fXrootdrootdir</a>
+protocol = <span class="string">"rfio"</span> :   path = <span class="string">"rfio:"</span> + <a href="./KVDataRepository.html#KVDataRepository:fRfioserver" title="TString KVDataRepository::fRfioserver">fRfioserver</a> + <span class="string">":"</span> + <a href="./KVDataRepository.html#KVDataRepository:fRfiorootdir" title="TString KVDataRepository::fRfiorootdir">fRfiorootdir</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:GetFileInfo" href="src/KVDataRepository.cxx.html#IXJYX">GetFileInfo</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile, FileStat_t&amp; fs)</span><br />
+<div class="funccomm"><pre>Checks if the run file of given type is physically present in dataset subdirectory,
+i.e. (schematically), if
+
+      /root_of_data_repository/[datasetdir]/[datatypedir]/[runfile]
+
+exists. If it does, the returned value is <a href="./ListOfTypes.html#Bool_t">kTRUE</a> (=1), in which case the FileStat_t object
+contains information about the file.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:CheckFileStatus" href="src/KVDataRepository.cxx.html#JLNc.B">CheckFileStatus</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile)</span><br />
+<div class="funccomm"><pre>Checks if the run file of given type is physically present in dataset subdirectory,
+i.e. (schematically), if
+
+      /root_of_data_repository/[datasetdir]/[datatypedir]/[runfile]
+
+exists. If it does, the returned value is <a href="./ListOfTypes.html#Bool_t">kTRUE</a> (=1).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetFullPathToOpenFile" href="src/KVDataRepository.cxx.html#bfz2gD">GetFullPathToOpenFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile)</span><br />
+<div class="funccomm"><pre>Returns the full path (including protocol specification) needed by TFile::Open or TChain::Add
+to open a runfile belonging to the given dataset.
+The protocol depends on the value of <a href="./KVDataRepository.html#KVDataRepository:fReadprotocol" title="TString KVDataRepository::fReadprotocol">fReadprotocol</a>.
+If a special protocol has been defined for the given dataset and/or datatype, as in this example
+for <span class="string">"raw"</span> data:
+
+ccali.DataRepository.ReadProtocol.raw:     rfio
+
+it will be used instead of the default (<a href="./KVDataRepository.html#KVDataRepository:fReadprotocol" title="TString KVDataRepository::fReadprotocol">fReadprotocol</a>).
+If a given data type is not accessible for a repository, use <span class="string">"none"</span>:
+
+ccali.DataRepository.ReadProtocol.raw:     none
+
+If this is the case, an error message will be printed and an empty string returned.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetFullPathToTransferFile" href="src/KVDataRepository.cxx.html#PjC24B">GetFullPathToTransferFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* runfile)</span><br />
+<div class="funccomm"><pre>Used by <a href="./KVDataTransfer.html">KVDataTransfer</a>.
+Returns the full path needed to transfer a runfile belonging to the given dataset
+either from or to the repository, using sftp or bbftp etc.
+This is just a concatenation of the repository root directory with the dataset
+subdirectories and filename.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetReadProtocol" href="src/KVDataRepository.cxx.html#coMP7D">GetReadProtocol</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype)</span><br />
+<div class="funccomm"><pre>Returns string containing protocol for reading files of the given datatype
+belonging to the dataset whose name is given.
+Protocol = <span class="string">"local"</span>, <span class="string">"root"</span>, <span class="string">"rfio"</span> , <span class="string">"none"</span>
+(if <span class="string">"none"</span>, the data can not be read)
+If a specific protocol for the dataset and/or datatype is not defined in $KVROOT/KVFiles/.kvrootrc,
+the default protocol (=<a href="./KVDataRepository.html#KVDataRepository:fReadprotocol" title="TString KVDataRepository::fReadprotocol">fReadprotocol</a>) is returned.
+Format for defining specific protocols:
+      name_of_repository.DataRepository.ReadProtocol.dataset_name.data_type:    protocol
+      name_of_repository.DataRepository.ReadProtocol.dataset_name:    protocol
+      name_of_repository.DataRepository.ReadProtocol.data_type:    protocol
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:CopyFileFromRepository" href="src/KVDataRepository.cxx.html#booMi">CopyFileFromRepository</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* destination)</span><br />
+<div class="funccomm"><pre><a href="./KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp;) const">Copy</a> file [datasetdir]/[datatypedir]/[filename] from the repository to [destination]
+We check if the file to copy exists.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:CopyFileToRepository" href="src/KVDataRepository.cxx.html#g_Y_uE">CopyFileToRepository</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* source, <a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename)</span><br />
+<div class="funccomm"><pre><a href="./KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp;) const">Copy</a> file [source] to [datasetdir]/[datatypedir]/[filename] in the repository
+The file access permissions are set to '664 (u:rw, g:rw, o:r)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:MakeSubdirectory" href="src/KVDataRepository.cxx.html#H7dwRC">MakeSubdirectory</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Create a new subdirectory in the repository:
+      /root_of_data_repository/[datasetdir]
+or with 'datatype' given:
+      /root_of_data_repository/[datasetdir]/[datatypedir]
+Set access permissions to 775 (u:rwx, g:rwx, o:rx)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVUniqueNameList.html">KVUniqueNameList</a> * <a class="funcname" name="KVDataRepository:GetDirectoryListing" href="src/KVDataRepository.cxx.html#i5TskC">GetDirectoryListing</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Use the access protocol defined by DataRepository.AccessProtocol (=local by default)
+in order to open the directory
+
+      /root_of_data_repository/[datasetdir]/[datatype]
+      /root_of_data_repository/[datasetdir]                    (if datatype=<span class="string">""</span>, default value)
+
+and fill a TList with one <a href="./KVBase.html">KVBase</a> object for each entry in the directory,
+excluding <span class="string">"."</span> and <span class="string">".."</span>
+User must delete the TList after use (list will delete its members)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TFile * <a class="funcname" name="KVDataRepository:CreateNewFile" href="src/KVDataRepository.cxx.html#TPt2mD">CreateNewFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename)</span><br />
+<div class="funccomm"><pre>This will create and open a new ROOT runfile for the dataset in the repository,
+ready to be written.
+
+If the subdirectory for 'datatype' does not exist, it will be created.
+
+In fact, if the repository is not one in which files can be created and written
+directly (i.e. if <a href="./KVDataRepository.html#KVDataRepository:CanWrite" title="Bool_t KVDataRepository::CanWrite() const">CanWrite</a>() = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>), the file will be created in the local working
+directory, and only copied into the repository when <a href="./KVDataRepository.html#KVDataRepository:CommitFile" title="void KVDataRepository::CommitFile(TFile* file)">CommitFile</a> is called.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:CommitFile" href="src/KVDataRepository.cxx.html#fCs8oE">CommitFile</a>(TFile* file)</span><br />
+<div class="funccomm"><pre>Add this file (previously created by a call to <a href="./KVDataRepository.html#KVDataRepository:CreateNewFile" title="TFile* KVDataRepository::CreateNewFile(KVDataSet* dataset, const Char_t* datatype, const Char_t* filename)">CreateNewFile</a>) to the repository.
+Any objects should be written to the file before calling this method, either by
+calling the <a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a>() method of each object, or by calling file-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a>().
+No file-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a>() is done here: we only close (delete) the TFile.
+
+For repositories in which files can be created and written directly (i.e. if <a href="./KVDataRepository.html#KVDataRepository:CanWrite" title="Bool_t KVDataRepository::CanWrite() const">CanWrite</a>() = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>),
+we just have to close the file.
+For repositories where <a href="./KVDataRepository.html#KVDataRepository:CanWrite" title="Bool_t KVDataRepository::CanWrite() const">CanWrite</a>() = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>, we close the file, then copy it to the correct place in the repository,
+using the previously recorded values of fCommitDataSetDir, <a href="./KVDataRepository.html#KVDataRepository:fCommitDataType" title="TString KVDataRepository::fCommitDataType">fCommitDataType</a>,
+and <a href="./KVDataRepository.html#KVDataRepository:fCommitFileName" title="TString KVDataRepository::fCommitFileName">fCommitFileName</a>. Then we remove the local copy from disk.
+
+NB: after calling this method, the TFile pointer 'file' must not be used!!!
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:DeleteFile" href="src/KVDataRepository.cxx.html#hLkssE">DeleteFile</a>(<a href="./KVDataSet.html">KVDataSet</a>* dataset, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> confirm = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a> repository file [datasetdir]/[datatype]/[filename]
+
+By default (confirm=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>) we ask for confirmation before deleting.
+Set confirm=<a href="./ListOfTypes.html#Bool_t">kFALSE</a> to delete without confirmation (DANGER!!!)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSetManager.html">KVDataSetManager</a> * <a class="funcname" name="KVDataRepository:GetDataSetManager" href="src/KVDataRepository.cxx.html#egAxVD">GetDataSetManager</a>() const</span><br />
+<div class="funccomm"><pre>Return pointer to data set manager for this repository
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSetManager.html">KVDataSetManager</a> * <a class="funcname" name="KVDataRepository:NewDataSetManager" href="src/KVDataRepository.cxx.html#ljf_fC">NewDataSetManager</a>()</span><br />
+<div class="funccomm"><pre>Create and return pointer to new data set manager
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TSystem * <a class="funcname" name="KVDataRepository:FindHelper" href="src/KVDataRepository.cxx.html#E207ME">FindHelper</a>(<span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">void</span>* dirptr = 0)</span><br />
+<div class="funccomm"><pre> Create helper TSystem to handle file and directory operations that
+ might be special for remote file access, like via rfiod or rootd.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">int</span> <a class="funcname" name="KVDataRepository:Chmod" href="src/KVDataRepository.cxx.html#p1nR0">Chmod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* file, <a href="./ListOfTypes.html#UInt_t">UInt_t</a> mode)</span><br />
+<div class="funccomm"><pre>Used to change file access permissions in the repository
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">int</span> <a class="funcname" name="KVDataRepository:CopyFile" href="src/KVDataRepository.cxx.html#RFsMpD">CopyFile</a>(<span class="keyword">const</span> <span class="keyword">char</span>* f, <span class="keyword">const</span> <span class="keyword">char</span>* t, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> overwrite = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
+<div class="funccomm"><pre>Method to copy any file from anywhere to anywhere
+(if the necessary TFile and TSystem plugins are available).
+ <a href="./KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp;) const">Copy</a> a file. If overwrite is true and file already exists the
+ file will be overwritten. Returns 0 when successful, -1 in case
+ of failure, -2 in case the file already exists and overwrite was false.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:HelperIsConsistentWith" href="src/KVDataRepository.cxx.html#qi7ymC">HelperIsConsistentWith</a>(TSystem* helper, <span class="keyword">const</span> <span class="keyword">char</span>* path, <span class="keyword">void</span>* dirptr = 0)</span><br />
+<div class="funccomm"><pre> <a href="./KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp;) const">Copy</a> of (protected) method TSystem::ConsistentWith
+ Check consistency of this helper with the one required
+ by 'path' or 'dirptr'
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:PrepareXRDTunnel" href="src/KVDataRepository.cxx.html#jtj_oC">PrepareXRDTunnel</a>()</span><br />
+<div class="funccomm"><pre>PRIVATE method, called by constructor.
+Called if an SSH tunnel is to be used to connect to an xrootd server, e.g. if the repository
+configuration includes the following lines (or similar):
+
+ #ccali.DataRepository.XRDTunnel.host:       ccali.in2p3.fr
+ #ccali.DataRepository.XRDTunnel.port:          10000
+ #ccali.DataRepository.XRDTunnel.retry:         5
+ #ccali.DataRepository.XRDTunnel.user:
+
+In this case we need to replace the real name &amp; port of the xrootd server:
+
+#ccali.DataRepository.XRDServer:      ccxrdsn012:1999
+
+with the name &amp; port of the SSH tunnel
+
+#ccali.DataRepository.XRDServer:      localhost:10000
+
+which will be used for path names in e.g. <a href="./KVDataRepository.html#KVDataRepository:GetFullPathToOpenFile" title="const Char_t* KVDataRepository::GetFullPathToOpenFile(KVDataSet* dataset, const Char_t* datatype, const Char_t* runfile)">GetFullPathToOpenFile</a>.
+The tunnel is not created here; it should be opened when needed by calling <a href="./KVDataRepository.html#KVDataRepository:IsConnected" title="Bool_t KVDataRepository::IsConnected()">IsConnected</a>()
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataRepository.html">KVDataRepository</a> * <a class="funcname" name="KVDataRepository:NewRepository" href="src/KVDataRepository.cxx.html#l2m_a">NewRepository</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type)</span><br />
+<div class="funccomm"><pre> Create new instance of class derived from <a href="./KVDataRepository.html">KVDataRepository</a>.
+ Actual class of object depends on 'type' which is used to select one of the
+ Plugin.<a href="./KVDataRepository.html">KVDataRepository</a>'s defined in .kvrootrc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVAvailableRunsFile.html">KVAvailableRunsFile</a> * <a class="funcname" name="KVDataRepository:NewAvailableRunsFile" href="src/KVDataRepository.cxx.html#Xx97IE">NewAvailableRunsFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* , <a href="./KVDataSet.html">KVDataSet</a>* )</span><br />
+<div class="funccomm"><pre> Create new instance of class derived from <a href="./KVAvailableRunsFile.html">KVAvailableRunsFile</a>.
+ Actual class of object depends on the type of the repository,
+ which is used to select one of the
+ Plugin.KVDataAvailableRunsFile's defined in .kvrootrc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataRepository:KVDataRepository" href="src/KVDataRepository.h.html#JxzezC">KVDataRepository</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:IsRemote" href="src/KVDataRepository.h.html#lu.B0E">IsRemote</a>() const</span><br />
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for remote repositories, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> for local repositories
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:IsConnected" href="src/KVDataRepository.h.html#vTgSGD">IsConnected</a>()</span><br />
+<div class="funccomm"><pre>Always returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for local repositories
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataRepository:CanWrite" href="src/KVDataRepository.h.html#Y.7.YE">CanWrite</a>() const</span><br />
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if new files can be created and written directly in the repository,
+returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if they have to be written locally then copied to repository
+This is set by the property [repository name].DataRepository.<a href="./KVDataRepository.html#KVDataRepository:CanWrite" title="Bool_t KVDataRepository::CanWrite() const">CanWrite</a>
+in the repository configuration (see $KVROOT/KVFiles/.kvrootrc)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetFileTransferType" href="src/KVDataRepository.h.html#sEvitE">GetFileTransferType</a>() const</span><br />
+<div class="funccomm"><pre>returns protocol used for remote file transfer
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetFileTransferExec" href="src/KVDataRepository.h.html#UC1daC">GetFileTransferExec</a>() const</span><br />
+<div class="funccomm"><pre>returns full path to executable used for remote file transfer
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetFileTransferServer" href="src/KVDataRepository.h.html#AzjPTB">GetFileTransferServer</a>() const</span><br />
+<div class="funccomm"><pre>returns server url used for remote file transfer
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetFileTransferUser" href="src/KVDataRepository.h.html#NHEKuE">GetFileTransferUser</a>() const</span><br />
+<div class="funccomm"><pre>returns user name used for remote file transfer
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataRepository:GetRootDirectory" href="src/KVDataRepository.h.html#k3lqgC">GetRootDirectory</a>() const</span><br />
+<div class="funccomm"><pre>returns root directory of data repository (<a href="./KVDataRepository.html#KVDataRepository:fLocalrootdir" title="TString KVDataRepository::fLocalrootdir">fLocalrootdir</a>)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:PrintAvailableDatasetsUpdateWarning" href="src/KVDataRepository.h.html#wl4NiB">PrintAvailableDatasetsUpdateWarning</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ ; }</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:42:29 2015 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

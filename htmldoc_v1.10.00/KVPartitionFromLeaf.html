@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:44:06 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVPartitionFromLeaf</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVPartitionFromLeaf','libKVMultiDetbase','KVPartitionFromLeaf.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVPartitionFromLeaf.h.html">header file</a>
+<a class="descrheadentry" href="src/KVPartitionFromLeaf.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVPartitionFromLeaf.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVPartitionFromLeaf.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVPartitionFromLeaf:description">class description</a> 
+<a class="descrheadentry" href="#KVPartitionFromLeaf:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVPartitionFromLeaf:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVPartitionFromLeaf:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_BASE_Index.html">BASE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVPartitionFromLeaf</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVPartitionFromLeaf:description"></a>class KVPartitionFromLeaf: public <a href="./KVPartition.html">KVPartition</a></h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --><h2>KVPartitionFromLeaf</h2>
+<h4>Derived form KVPartition to optimize filling from a tree</h4>
+<!-- TDocHtmlDirective end --><pre>
+- Utilisation avec un arbre (TTree* )contenant des branches de ce type
+avec par evt un tableau de valeur de dimension fixe ou non
+Exemple:
+OBJ: TTree	tree	tree : 0 at: 0x9cfc7a8
+ OBJ: TBranch	mt	mt/I : 0 at: 0x9cfcdc8
+ OBJ: TBranch	tabz	tabz[mt]/I : 0 at: 0x9d00120
+Attention: cette classe n'est pas adapte au TChain
+
+- Methode <a href="./KVPartitionFromLeaf.html#KVPartitionFromLeaf:ConnectToLeaf" title="void KVPartitionFromLeaf::ConnectToLeaf(TLeaf* lf)">ConnectToLeaf</a>(TLeaf* lf) permet de lier la <a href="./KVPartition.html">KVPartition</a> a la branche tableau (tree-&gt;GetLeaf(<span class="string">"tabz"</span>))
+Exemple:
+<a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>* par = new <a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>();
+par-&gt;<a href="./KVPartitionFromLeaf.html#KVPartitionFromLeaf:ConnectToLeaf" title="void KVPartitionFromLeaf::ConnectToLeaf(TLeaf* lf)">ConnectToLeaf</a>(tree-&gt;GetLeaf(<span class="string">"tabz"</span>));
+
+- Methode <a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>::<a href="./KVPartitionFromLeaf.html#KVPartitionFromLeaf:SetZminZmax" title="void KVPartitionFromLeaf::SetZminZmax(Int_t vmin, Int_t vmax)">SetZminZmax</a> permet de definir des limites inf ou sup des tailles des fragments lors du remplissage de la partition, à definir
+avant d'utiliser la methode <a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>();
+
+- Méthode <a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>::<a href="./KVPartitionFromLeaf.html#KVPartitionFromLeaf:ReadEntry" title="void KVPartitionFromLeaf::ReadEntry(Long64_t entry = -1)">ReadEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry), jour le role de remplissage de la partition et aussi du calcul des valeurs associées
+On peut incrementer les entrees de l'arbre en meme temps ou non (defaut)
+Exemple:
+for (<a href="./ListOfTypes.html#Int_t">Int_t</a> ii=0;ii&lt;tt-&gt;GetEntries();ii+=1){
+
+	tree-&gt;GetEntry(ii);
+	...
+	...
+	par-&gt;<a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>();
+
+}
+ou
+for (<a href="./ListOfTypes.html#Int_t">Int_t</a> ii=0;ii&lt;tt-&gt;GetEntries();ii+=1){
+
+	par-&gt;<a href="./KVPartitionFromLeaf.html#KVPartitionFromLeaf:ReadEntry" title="void KVPartitionFromLeaf::ReadEntry(Long64_t entry = -1)">ReadEntry</a>(ii);
+
+}
+
+
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVPartitionFromLeaf:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:_KVPartitionFromLeaf">~KVPartitionFromLeaf</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add"><span class="baseclass">KVIntegerList::</span>Add</a>(TArrayI* tab)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add@3"><span class="baseclass">KVIntegerList::</span>Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add@5"><span class="baseclass">KVIntegerList::</span>Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add@1"><span class="baseclass">KVIntegerList::</span>Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add@2"><span class="baseclass">KVIntegerList::</span>Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add@4"><span class="baseclass">KVIntegerList::</span>Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Add@6"><span class="baseclass">KVIntegerList::</span>Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:AddPopulation"><span class="baseclass">KVIntegerList::</span>AddPopulation</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> pop)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:CheckForUpdate"><span class="baseclass">KVIntegerList::</span>CheckForUpdate</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:Clear"><span class="baseclass">KVPartition::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Compare"><span class="baseclass">KVIntegerList::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:ConnectToLeaf">ConnectToLeaf</a>(TLeaf* lf)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Contains"><span class="baseclass">KVIntegerList::</span>Contains</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:Copy"><span class="baseclass">KVPartition::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:CreateTableOfValues"><span class="baseclass">KVIntegerList::</span>CreateTableOfValues</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">TArrayI*</td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:CreateTArrayI"><span class="baseclass">KVIntegerList::</span>CreateTArrayI</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>*</td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:CreateTNamed"><span class="baseclass">KVIntegerList::</span>CreateTNamed</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Fill"><span class="baseclass">KVIntegerList::</span>Fill</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVValues.html">KVValues</a>*</td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetAddValues"><span class="baseclass">KVPartition::</span>GetAddValues</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetFrequenceAt"><span class="baseclass">KVPartition::</span>GetFrequenceAt</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:GetFrequency"><span class="baseclass">KVIntegerList::</span>GetFrequency</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Ssiz_t">Ssiz_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:GetLengthName"><span class="baseclass">KVIntegerList::</span>GetLengthName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetMoment"><span class="baseclass">KVPartition::</span>GetMoment</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ordre) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetMomentNormalise"><span class="baseclass">KVPartition::</span>GetMomentNormalise</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ordre) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetMtot"><span class="baseclass">KVPartition::</span>GetMtot</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetMult"><span class="baseclass">KVPartition::</span>GetMult</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetMultDiff"><span class="baseclass">KVPartition::</span>GetMultDiff</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:GetNbre"><span class="baseclass">KVIntegerList::</span>GetNbre</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetOrdreMax"><span class="baseclass">KVPartition::</span>GetOrdreMax</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:GetPopulation"><span class="baseclass">KVIntegerList::</span>GetPopulation</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetValeur"><span class="baseclass">KVPartition::</span>GetValeur</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetValeurDiff"><span class="baseclass">KVPartition::</span>GetValeurDiff</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetValeurs"><span class="baseclass">KVPartition::</span>GetValeurs</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetValeursDiff"><span class="baseclass">KVPartition::</span>GetValeursDiff</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetZ1"><span class="baseclass">KVPartition::</span>GetZ1</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetZ2"><span class="baseclass">KVPartition::</span>GetZ2</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetZmax"><span class="baseclass">KVPartition::</span>GetZmax</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang = 0) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetZmean"><span class="baseclass">KVPartition::</span>GetZmean</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetZmin"><span class="baseclass">KVPartition::</span>GetZmin</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang = 0) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:GetZtot"><span class="baseclass">KVPartition::</span>GetZtot</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:KVPartitionFromLeaf">KVPartitionFromLeaf</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:KVPartitionFromLeaf@1">KVPartitionFromLeaf</a>(<span class="keyword">const</span> <a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVPartitionFromLeaf.html">KVPartitionFromLeaf</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:Print"><span class="baseclass">KVPartition::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:ReadEntry">ReadEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry = -1)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Remove@1"><span class="baseclass">KVIntegerList::</span>Remove</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:Remove"><span class="baseclass">KVIntegerList::</span>Remove</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:RemoveAll"><span class="baseclass">KVIntegerList::</span>RemoveAll</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:RemoveAllValuesAt"><span class="baseclass">KVPartition::</span>RemoveAllValuesAt</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:RemoveAt"><span class="baseclass">KVPartition::</span>RemoveAt</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> rang)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:ResetPopulation"><span class="baseclass">KVIntegerList::</span>ResetPopulation</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:SetPopulation"><span class="baseclass">KVIntegerList::</span>SetPopulation</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> pop)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:SetZmax">SetZmax</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:SetZmin">SetZmin</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:SetZminZmax">SetZminZmax</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> vmin, <a href="./ListOfTypes.html#Int_t">Int_t</a> vmax)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionFromLeaf:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:add_values"><span class="baseclass">KVPartition::</span>add_values</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:DeducePartitionFromName"><span class="baseclass">KVIntegerList::</span>DeducePartitionFromName</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:DeducePartitionFromTNamed"><span class="baseclass">KVIntegerList::</span>DeducePartitionFromTNamed</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:DeducePopulationFromTitle"><span class="baseclass">KVIntegerList::</span>DeducePopulationFromTitle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:init"><span class="baseclass">KVPartition::</span>init</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> mommax = 5)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:remove_values"><span class="baseclass">KVPartition::</span>remove_values</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:ResetRegle"><span class="baseclass">KVIntegerList::</span>ResetRegle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:SetPartition"><span class="baseclass">KVIntegerList::</span>SetPartition</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVIntegerList.html#KVIntegerList:ToBeUpdated"><span class="baseclass">KVIntegerList::</span>ToBeUpdated</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPartition.html#KVPartition:Update"><span class="baseclass">KVPartition::</span>Update</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVPartitionFromLeaf:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVIntegerList.html">KVIntegerList</a>::(anonymous)</td><td class="dataname"><a href="./KVIntegerList.html#KVIntegerList:kHastobeComputed"><span class="baseclass">KVIntegerList::</span>kHastobeComputed</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Ssiz_t">Ssiz_t</a></td><td class="dataname"><a href="./KVIntegerList.html#KVIntegerList:fLength"><span class="baseclass">KVIntegerList::</span>fLength</a></td><td class="datadesc">!			Longueur du nom de la liste/partition usilisée dans Compare</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVIntegerList.html#KVIntegerList:fLimiteRegle"><span class="baseclass">KVIntegerList::</span>fLimiteRegle</a></td><td class="datadesc">!-&gt;	taille max de fRegle</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVIntegerList.html#KVIntegerList:fMult"><span class="baseclass">KVIntegerList::</span>fMult</a></td><td class="datadesc">!				Nombre d'éléments dans la liste</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVPartition.html#KVPartition:fMult_diff"><span class="baseclass">KVPartition::</span>fMult_diff</a></td><td class="datadesc">!	Nbre de valeurs differentes</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVIntegerList.html#KVIntegerList:fPop"><span class="baseclass">KVIntegerList::</span>fPop</a></td><td class="datadesc">!				population de la liste/partition consideree, permet le comptage de partitions identiques dansun lot de donée</td></tr>
+<tr class="datainh"><td class="datatype">TArrayI*</td><td class="dataname"><a href="./KVIntegerList.html#KVIntegerList:fRegle"><span class="baseclass">KVIntegerList::</span>fRegle</a></td><td class="datadesc">!		tableau d'entiers où sont stockée l'occurence des valeurs</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./KVValues.html">KVValues</a>*</td><td class="dataname"><a href="./KVPartition.html#KVPartition:fValues"><span class="baseclass">KVPartition::</span>fValues</a></td><td class="datadesc">!-&gt; Object permettant de gerer les moments ou autre</td></tr>
+<tr class="datainh"><td class="datatype">TArrayI*</td><td class="dataname"><a href="./KVPartition.html#KVPartition:ftab"><span class="baseclass">KVPartition::</span>ftab</a></td><td class="datadesc">!-&gt; tableau regroupant tous les entiers de la partition (ordre decroissant)</td></tr>
+<tr class="datainh"><td class="datatype">TArrayI*</td><td class="dataname"><a href="./KVPartition.html#KVPartition:ftab_diff"><span class="baseclass">KVPartition::</span>ftab_diff</a></td><td class="datadesc">!-&gt; tableau regroupant tous les entiers differents de la partition (ordre decroissant)</td></tr>
+<tr class="data"><td class="datatype">TLeaf*</td><td class="dataname"><a name="KVPartitionFromLeaf:linked_leaf"></a>linked_leaf</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVPartitionFromLeaf:select_max"></a>select_max</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVPartitionFromLeaf:select_min"></a>select_min</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionFromLeaf:zmax"></a>zmax</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionFromLeaf:zmin"></a>zmin</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVPartitionFromLeaf:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVPartitionFromLeaf_Inh" id="MapKVPartitionFromLeaf_Inh">
+<area shape="rect" id="node2" href="./KVPartition.html" title="KVPartition" alt="" coords="440,5,538,23"/>
+<area shape="rect" id="node3" href="./KVIntegerList.html" title="KVIntegerList" alt="" coords="294,5,391,23"/>
+</map>
+<map name="MapKVPartitionFromLeaf_InhMem" id="MapKVPartitionFromLeaf_InhMem">
+<area shape="rect" id="clust12" href="./KVPartition.html" alt="" coords="789,47,856,80"/>
+<area shape="rect" id="clust11" href="./KVPartition.html" alt="" coords="867,47,933,64"/>
+<area shape="rect" id="clust13" href="./KVPartition.html" alt="" coords="712,47,779,80"/>
+<area shape="rect" id="clust14" href="./KVPartition.html" alt="" coords="899,72,901,75"/>
+<area shape="rect" id="clust15" href="./KVPartition.html" alt="" coords="867,83,933,304"/>
+<area shape="rect" id="clust16" href="./KVPartition.html" alt="" coords="789,83,856,304"/>
+<area shape="rect" id="clust17" href="./KVPartition.html" alt="" coords="712,83,779,304"/>
+<area shape="rect" id="clust10" href="./KVPartition.html" title="KVPartition" alt="" coords="712,16,933,304"/>
+<area shape="rect" id="clust20" href="./KVIntegerList.html" alt="" coords="635,47,701,64"/>
+<area shape="rect" id="clust21" href="./KVIntegerList.html" alt="" coords="557,47,624,96"/>
+<area shape="rect" id="clust22" href="./KVIntegerList.html" alt="" coords="480,47,547,96"/>
+<area shape="rect" id="clust23" href="./KVIntegerList.html" alt="" coords="667,80,669,83"/>
+<area shape="rect" id="clust24" href="./KVIntegerList.html" alt="" coords="635,99,701,336"/>
+<area shape="rect" id="clust25" href="./KVIntegerList.html" alt="" coords="557,99,624,336"/>
+<area shape="rect" id="clust26" href="./KVIntegerList.html" alt="" coords="480,99,547,336"/>
+<area shape="rect" id="clust19" href="./KVIntegerList.html" title="KVIntegerList" alt="" coords="480,16,701,336"/>
+</map>
+<map name="MapKVPartitionFromLeaf_Lib" id="MapKVPartitionFromLeaf_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="454,44,569,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVPartitionFromLeaf_Inh" class="tabsel" href="inh/KVPartitionFromLeaf_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVPartitionFromLeaf_Inh.png');">Inheritance</a>
+<a id="imgKVPartitionFromLeaf_InhMem" class="tab" href="inhmem/KVPartitionFromLeaf_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVPartitionFromLeaf_InhMem.png');">Inherited Members</a>
+<a id="imgKVPartitionFromLeaf_Incl" class="tab" href="incl/KVPartitionFromLeaf_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVPartitionFromLeaf_Incl.png');">Includes</a>
+<a id="imgKVPartitionFromLeaf_Lib" class="tab" href="lib/KVPartitionFromLeaf_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVPartitionFromLeaf_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVPartitionFromLeaf_Inh" src="inh/KVPartitionFromLeaf_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPartitionFromLeaf:KVPartitionFromLeaf" href="src/KVPartitionFromLeaf.cxx.html#PSaChD">KVPartitionFromLeaf</a>()</span><br />
+<div class="funccomm"><pre> Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPartitionFromLeaf:_KVPartitionFromLeaf" href="src/KVPartitionFromLeaf.cxx.html#ns6Vn">~KVPartitionFromLeaf</a>()</span><br />
+<div class="funccomm"><pre> Destructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionFromLeaf:ConnectToLeaf" href="src/KVPartitionFromLeaf.cxx.html#BAHdXD">ConnectToLeaf</a>(TLeaf* lf)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionFromLeaf:ReadEntry" href="src/KVPartitionFromLeaf.cxx.html#LuUViB">ReadEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry = -1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionFromLeaf:SetZmin" href="src/KVPartitionFromLeaf.cxx.html#mkz6IC">SetZmin</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionFromLeaf:SetZmax" href="src/KVPartitionFromLeaf.cxx.html#azk3IC">SetZmax</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionFromLeaf:SetZminZmax" href="src/KVPartitionFromLeaf.cxx.html#xmnGEE">SetZminZmax</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> vmin, <a href="./ListOfTypes.html#Int_t">Int_t</a> vmax)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPartitionFromLeaf:KVPartitionFromLeaf" href="src/KVPartitionFromLeaf.h.html#CNjnSE">KVPartitionFromLeaf</a>()</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:44:07 2015 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

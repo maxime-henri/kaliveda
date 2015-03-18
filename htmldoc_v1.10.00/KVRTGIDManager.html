@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:44:11 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVRTGIDManager</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVRTGIDManager','libKVMultiDetexp_events','KVRTGIDManager.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVRTGIDManager.h.html">header file</a>
+<a class="descrheadentry" href="src/KVRTGIDManager.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVRTGIDManager.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVRTGIDManager.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVRTGIDManager:description">class description</a> 
+<a class="descrheadentry" href="#KVRTGIDManager:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVRTGIDManager:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVRTGIDManager:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EXP_EVENTS_Index.html">EXP_EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVRTGIDManager</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVRTGIDManager:description"></a>class KVRTGIDManager: public <a href="./KVTGIDManager.html">KVTGIDManager</a></h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVRTGIDManager</h2>
+<h4>Run-dependant KVTGIDManager</h4>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+As <a href="./KVTGIDManager.html">KVTGIDManager</a>, this class handles a set of Tassan-Got functional-based identifications (<a href="./KVTGID.html">KVTGID</a> objects) for use by <a href="./KVIDTelescope.html">KVIDTelescope</a>.
+However, it allows to load the identification functions associated to a given run. To do that, you can remove all identification
+functions loaded in the KVIDTelescopes (which inherits from <a href="./KVRTGIDManager.html">KVRTGIDManager</a>) with the method <a href="./KVRTGIDManager.html#KVRTGIDManager:RemoveAllTGID" title="void KVRTGIDManager::RemoveAllTGID()">RemoveAllTGID</a>(). Then use the static
+function <a href="./KVRTGIDManager.html#KVRTGIDManager:SetIDFuncInTelescopes" title="void KVRTGIDManager::SetIDFuncInTelescopes(UInt_t run)">SetIDFuncInTelescopes</a>(run) to load the functions, which are valid for the given run, in the <a href="./KVIDTelescope.html">KVIDTelescope</a> associated to
+these functions. See the following exemple:
+
+    TIter next_idt(<a href="./KVMultiDetArray.html">gMultiDetArray</a>-><a href="./KVMultiDetArray.html#KVMultiDetArray:GetListOfIDTelescopes" title="KVSeqCollection* KVMultiDetArray::GetListOfIDTelescopes() const">GetListOfIDTelescopes</a>());
+
+    <a href="./KVIDTelescope.html">KVIDTelescope</a>  *idt    = NULL;
+    <a href="./KVRTGIDManager.html">KVRTGIDManager</a> *rtgidm = NULL;
+
+    while ((idt = (<a href="./KVIDTelescope.html">KVIDTelescope</a> *) next_idt()))
+    {
+		if(idt-&gt;InheritsFrom(<span class="string">"KVRTGIDManager"</span>)){
+ 			rtgidm = (<a href="./KVRTGIDManager.html">KVRTGIDManager</a> *)idt-&gt;<a href="./KVRTGIDManager.html#KVRTGIDManager:IsA" title="TClass* KVRTGIDManager::IsA() const">IsA</a>()-&gt;DynamicCast(<a href="./KVRTGIDManager.html">KVRTGIDManager</a>::<a href="./KVRTGIDManager.html#KVRTGIDManager:Class" title="TClass* KVRTGIDManager::Class()">Class</a>(),idt);
+ 			rtgidm-&gt;<a href="./KVRTGIDManager.html#KVRTGIDManager:RemoveAllTGID" title="void KVRTGIDManager::RemoveAllTGID()">RemoveAllTGID</a>();
+		}
+
+    }
+    <a href="./KVRTGIDManager.html">KVRTGIDManager</a>::<a href="./KVRTGIDManager.html#KVRTGIDManager:SetIDFuncInTelescopes" title="void KVRTGIDManager::SetIDFuncInTelescopes(UInt_t run)">SetIDFuncInTelescopes</a>(run);
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVRTGIDManager:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:_KVRTGIDManager">~KVRTGIDManager</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:AddTGID">AddTGID</a>(<a href="./KVTGID.html">KVTGID</a>*)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:AddTGIDToGlobalList">AddTGIDToGlobalList</a>(<a href="./KVTGID.html">KVTGID</a>*)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:BuildGridForAllTGID">BuildGridForAllTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idtype = <span class="string">""</span>, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmin = 0., <a href="./ListOfTypes.html#Double_t">Double_t</a> xmax = 4096., <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_min = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_max = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints = 50, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> logscale = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:Clear">Clear</a>()</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:DeleteTGID">DeleteTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:GetGlobalListOfIDFunctions">GetGlobalListOfIDFunctions</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetIDmax"><span class="baseclass">KVTGIDManager::</span>GetIDmax</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static TCollection*</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:GetIDTelescopesForTGID">GetIDTelescopesForTGID</a>(<a href="./KVTGID.html">KVTGID</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./KVList.html">KVList</a>&amp;</td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions"><span class="baseclass">KVTGIDManager::</span>GetListOfIDFunctions</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetStatus"><span class="baseclass">KVTGIDManager::</span>GetStatus</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetStatusString"><span class="baseclass">KVTGIDManager::</span>GetStatusString</a>(<a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus s = kCurrentStatus) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVTGID.html">KVTGID</a>*</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:GetTGID">GetTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idt_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* id_type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* grid_type)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:GetTGIDfromIDGridManager">GetTGIDfromIDGridManager</a>(TList* tgid_list)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./KVTGIDGrid.html">KVTGIDGrid</a>*</td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetTGIDGrid"><span class="baseclass">KVTGIDManager::</span>GetTGIDGrid</a>(<a href="./KVTGID.html">KVTGID</a>* tgid, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmin = 0., <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_min = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_max = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints = 100, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> logscale = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./KVTGIDGrid.html">KVTGIDGrid</a>*</td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetTGIDGrid@1"><span class="baseclass">KVTGIDManager::</span>GetTGIDGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* tgid_name, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmin = 0., <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_min = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_max = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints = 100, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> logscale = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./KVTGIDGrid.html">KVTGIDGrid</a>*</td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetTGIDGrid@2"><span class="baseclass">KVTGIDManager::</span>GetTGIDGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idt_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* id_type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* grid_type, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmin = 0., <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_min = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_max = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints = 100, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> logscale = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:GetTGIDName"><span class="baseclass">KVTGIDManager::</span>GetTGIDName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idt_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* id_type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* grid_type)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:IdentA"><span class="baseclass">KVTGIDManager::</span>IdentA</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; funLTG, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* grid_type, <a href="./ListOfTypes.html#Int_t">Int_t</a> Z)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:IdentZ"><span class="baseclass">KVTGIDManager::</span>IdentZ</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; funLTG, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* grid_type)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:KVRTGIDManager">KVRTGIDManager</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:KVRTGIDManager@1">KVRTGIDManager</a>(<span class="keyword">const</span> <a href="./KVRTGIDManager.html">KVRTGIDManager</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVRTGIDManager.html">KVRTGIDManager</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVRTGIDManager.html">KVRTGIDManager</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:ReadAsciiFile">ReadAsciiFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:RemoveAllTGID">RemoveAllTGID</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:RemoveTGID">RemoveTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:SetIDFuncInTelescopes">SetIDFuncInTelescopes</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> run)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVTGIDManager.html#KVTGIDManager:SetStatus"><span class="baseclass">KVTGIDManager::</span>SetStatus</a>(<a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus s)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:UpdateListFromIDGridManager">UpdateListFromIDGridManager</a>()</td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:WriteAsciiFile">WriteAsciiFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename, <span class="keyword">const</span> TCollection* selection = 0, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> update = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVRTGIDManager:SetTGID">SetTGID</a>(<a href="./KVTGID.html">KVTGID</a>*)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVRTGIDManager:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus</td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:kCurrentStatus"><span class="baseclass">KVTGIDManager::</span>kCurrentStatus</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus</td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:kStatus_OK"><span class="baseclass">KVTGIDManager::</span>kStatus_OK</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus</td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange"><span class="baseclass">KVTGIDManager::</span>kStatus_OutOfIDRange</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus</td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:kStatus_ZtooLarge"><span class="baseclass">KVTGIDManager::</span>kStatus_ZtooLarge</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus</td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:kStatus_ZtooSmall"><span class="baseclass">KVTGIDManager::</span>kStatus_ZtooSmall</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVTGIDManager.html">KVTGIDManager</a>::ETGIDMStatus</td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:kStatus_noTGID"><span class="baseclass">KVTGIDManager::</span>kStatus_noTGID</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype">static <a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVRTGIDManager:fIDGlobalList"></a>fIDGlobalList</td><td class="datadesc">! Global list of TGID of all the KVRTGIDManager</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./KVList.html">KVList</a></td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:fIDList"><span class="baseclass">KVTGIDManager::</span>fIDList</a></td><td class="datadesc">KVTGID objects for identifications</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:fID_max"><span class="baseclass">KVTGIDManager::</span>fID_max</a></td><td class="datadesc">maximum ID of all TGID objects</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVTGIDManager.html#KVTGIDManager:fStatus"><span class="baseclass">KVTGIDManager::</span>fStatus</a></td><td class="datadesc">! transient member used to hold status of last call to IdentZ/IdentA</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVRTGIDManager:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVRTGIDManager_Inh" id="MapKVRTGIDManager_Inh">
+<area shape="rect" id="node2" href="./KVTGIDManager.html" title="KVTGIDManager" alt="" coords="2,31,166,59"/>
+<area shape="rect" id="node3" href="./KVIDSi75SiLi_e494s.html" title="KVIDSi75SiLi_e494s" alt="" coords="569,2,766,30"/>
+<area shape="rect" id="node4" href="./KVIDSiCorrCsI.html" title="KVIDSiCorrCsI" alt="" coords="592,31,743,59"/>
+<area shape="rect" id="node5" href="./KVIDSiLiCsI_e494s.html" title="KVIDSiLiCsI_e494s" alt="" coords="574,59,761,88"/>
+</map>
+<map name="MapKVRTGIDManager_InhMem" id="MapKVRTGIDManager_InhMem">
+<area shape="rect" id="clust8" href="./KVTGIDManager.html" alt="" coords="171,47,237,80"/>
+<area shape="rect" id="clust9" href="./KVTGIDManager.html" alt="" coords="93,47,160,112"/>
+<area shape="rect" id="clust10" href="./KVTGIDManager.html" alt="" coords="16,47,83,112"/>
+<area shape="rect" id="clust11" href="./KVTGIDManager.html" alt="" coords="203,96,205,99"/>
+<area shape="rect" id="clust12" href="./KVTGIDManager.html" alt="" coords="171,115,237,240"/>
+<area shape="rect" id="clust13" href="./KVTGIDManager.html" alt="" coords="93,115,160,272"/>
+<area shape="rect" id="clust14" href="./KVTGIDManager.html" alt="" coords="16,115,83,272"/>
+<area shape="rect" id="clust7" href="./KVTGIDManager.html" title="KVTGIDManager" alt="" coords="16,16,237,272"/>
+</map>
+<map name="MapKVRTGIDManager_Lib" id="MapKVRTGIDManager_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="516,44,631,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVRTGIDManager_Inh" class="tabsel" href="inh/KVRTGIDManager_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVRTGIDManager_Inh.png');">Inheritance</a>
+<a id="imgKVRTGIDManager_InhMem" class="tab" href="inhmem/KVRTGIDManager_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVRTGIDManager_InhMem.png');">Inherited Members</a>
+<a id="imgKVRTGIDManager_Incl" class="tab" href="incl/KVRTGIDManager_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVRTGIDManager_Incl.png');">Includes</a>
+<a id="imgKVRTGIDManager_Lib" class="tab" href="lib/KVRTGIDManager_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVRTGIDManager_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVRTGIDManager_Inh" src="inh/KVRTGIDManager_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVRTGIDManager:KVRTGIDManager" href="src/KVRTGIDManager.cxx.html#VU05CC">KVRTGIDManager</a>()</span><br />
+<div class="funccomm"><pre> Default constructor
+ The list fIDList is not owner anymore.
+ Now the identification function belong to <a href="./KVRTGIDManager.html#KVRTGIDManager:fIDGlobalList" title="KVList* KVRTGIDManager::fIDGlobalList">fIDGlobalList</a>,
+ the list return by <a href="./KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions() const">GetListOfIDFunctions</a>() is not the owner
+ of identification functions anymore.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVRTGIDManager:_KVRTGIDManager" href="src/KVRTGIDManager.cxx.html#PPBSK">~KVRTGIDManager</a>()</span><br />
+<div class="funccomm"><pre> Destructor
+ Remove the global list of identification functions if
+ it is empty.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:AddTGID" href="src/KVRTGIDManager.cxx.html#U27uVC">AddTGID</a>(<a href="./KVTGID.html">KVTGID</a>* )</span><br />
+<div class="funccomm"><pre> Add an identification object to the global list (<a href="./KVRTGIDManager.html#KVRTGIDManager:fIDGlobalList" title="KVList* KVRTGIDManager::fIDGlobalList">fIDGlobalList</a>).
+ The identification object is not added to the local list (fIDList) in this method anymore. To do that, see SetIDFunctionInTelescopes)
+ This method just calls <a href="./KVRTGIDManager.html#KVRTGIDManager:AddTGIDToGlobalList" title="void KVRTGIDManager::AddTGIDToGlobalList(KVTGID*)">AddTGIDToGlobalList</a>(<a href="./KVTGID.html">KVTGID</a> *);
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVTGID.html">KVTGID</a> * <a class="funcname" name="KVRTGIDManager:GetTGID" href="src/KVRTGIDManager.cxx.html#Oz4L4D">GetTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idt_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* id_type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* grid_type)</span><br />
+<div class="funccomm"><pre>Overrides the same method of <a href="./KVTGIDManager.html">KVTGIDManager</a>. This method
+Retrieve the identification object using:
+      id_type   = type of identification (<span class="string">"Z"</span>, <span class="string">"A"</span>, <span class="string">"A_for_Z=3"</span>, etc.)
+      grid_type = type of identification grid (<span class="string">"GG"</span>, <span class="string">"PG1"</span>, etc.)
+ but the name of ID telescope is not used anymore because identification
+ object can be associated to several ID telescopes.
+ If any object is found then it returns the first:
+      - <a href="./KVTGIDZA.html">KVTGIDZA</a> object if id_type contains <span class="string">"A"</span>
+      - <a href="./KVTGIDZ.html">KVTGIDZ</a>  object else.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:SetTGID" href="src/KVRTGIDManager.cxx.html#MjFlVC">SetTGID</a>(<a href="./KVTGID.html">KVTGID</a>* )</span><br />
+<div class="funccomm"><pre> Add an identification object to the local list (fIDList).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:RemoveTGID" href="src/KVRTGIDManager.cxx.html#Wn7GcB">RemoveTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>Remove the identification object with name from the local list.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:DeleteTGID" href="src/KVRTGIDManager.cxx.html#CSiGi">DeleteTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVRTGIDManager:GetTGIDfromIDGridManager" href="src/KVRTGIDManager.cxx.html#sIeTiC">GetTGIDfromIDGridManager</a>(TList* tgid_list)</span><br />
+<div class="funccomm"><pre> Fill a sublist of TGID found in object inheriting
+ from <a href="./KVTGIDGrid.html">KVTGIDGrid</a> in <a href="./KVIDGridManager.html">gIDGridManager</a>.
+ Return <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if <a href="./KVIDGridManager.html">gIDGridManager</a> is not defined.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVRTGIDManager:ReadAsciiFile" href="src/KVRTGIDManager.cxx.html#puKnVC">ReadAsciiFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:RemoveAllTGID" href="src/KVRTGIDManager.cxx.html#oeWrr">RemoveAllTGID</a>()</span><br />
+<div class="funccomm"><pre>Remove all identification objects of the local list.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:AddTGIDToGlobalList" href="src/KVRTGIDManager.cxx.html#TN.sGD">AddTGIDToGlobalList</a>(<a href="./KVTGID.html">KVTGID</a>* )</span><br />
+<div class="funccomm"><pre> Add an identification object to the global list (<a href="./KVRTGIDManager.html#KVRTGIDManager:fIDGlobalList" title="KVList* KVRTGIDManager::fIDGlobalList">fIDGlobalList</a>).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:BuildGridForAllTGID" href="src/KVRTGIDManager.cxx.html#UdNVbB">BuildGridForAllTGID</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idtype = <span class="string">""</span>, <a href="./ListOfTypes.html#Double_t">Double_t</a> xmin = 0., <a href="./ListOfTypes.html#Double_t">Double_t</a> xmax = 4096., <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_min = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> ID_max = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints = 50, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> logscale = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Build a grid (<a href="./KVTGIDGrid.html">KVTGIDGrid</a>) for all the identification functions
+ of the global list. The new grids are automatically loaded in
+ <a href="./KVIDGridManager.html">gIDGridManager</a> and are visible in the Grid Manager GUI.
+ If a function is already associated to a grid then a new grid
+ is not built. No grid is built for copies of <a href="./KVTGID.html">KVTGID</a>'s made in
+ the method <a href="./KVRTGIDManager.html#KVRTGIDManager:ReadAsciiFile" title="Bool_t KVRTGIDManager::ReadAsciiFile(const Char_t* filename)">ReadAsciiFile</a>(...).
+
+ Inputs:  idtype - type of the identification for which the
+                   grids will be built (CI-SI, SI-CSI, CI-CSI,
+                   SI75-SILI, ...). By default, all grids are
+                   built
+          xmin
+          xmax
+          ID_min
+          ID_max
+          npoints
+          logscale - see <a href="./KVTGIDGrid.html">KVTGIDGrid</a>::<a href="./KVTGIDGrid.html#KVTGIDGrid:Generate" title="void KVTGIDGrid::Generate(Double_t xmax, Double_t xmin, Int_t ID_min = 0, Int_t ID_max = 0, Int_t npoints = 50, Bool_t logscale = kTRUE)">Generate</a>(...)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:Clear" href="src/KVRTGIDManager.cxx.html#Z6xn3">Clear</a>()</span><br />
+<div class="funccomm"><pre>Delete the global list of identification objects. Since this
+list is owner then all listed identification objects are deleted.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVRTGIDManager:SetIDFuncInTelescopes" href="src/KVRTGIDManager.cxx.html#S7njr">SetIDFuncInTelescopes</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> run)</span><br />
+<div class="funccomm"><pre> For each identification function of the global list which is valid for this run, we add it in the associated telescope which
+ have to inherits from <a href="./KVTGIDManager.html">KVTGIDManager</a> and from a <a href="./KVIDTelescope.html">KVIDTelescope</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVRTGIDManager:UpdateListFromIDGridManager" href="src/KVRTGIDManager.cxx.html#wOjiGE">UpdateListFromIDGridManager</a>()</span><br />
+<div class="funccomm"><pre> Returns the number of identification functions found
+ in grids of <a href="./KVIDGridManager.html">gIDGridManager</a> which were missing in the
+ the global list and updates this list.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVRTGIDManager:WriteAsciiFile" href="src/KVRTGIDManager.cxx.html#Oogua">WriteAsciiFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename, <span class="keyword">const</span> TCollection* selection = 0, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> update = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Write identification functions  in file 'filename'.
+ If selection=0 (default), write all grids.
+ If update=true, call <a href="./KVRTGIDManager.html#KVRTGIDManager:UpdateListFromIDGridManager" title="Int_t KVRTGIDManager::UpdateListFromIDGridManager()">UpdateListFromIDGridManager</a>() before writing
+ If selection!=0, write only grids in list.
+ Returns number of functions written in file.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TCollection* <a class="funcname" name="KVRTGIDManager:GetIDTelescopesForTGID" href="src/KVRTGIDManager.cxx.html#OwDLAB">GetIDTelescopesForTGID</a>(<a href="./KVTGID.html">KVTGID</a>* )</span><br />
+<div class="funccomm"><pre> Return TList of all ID telescopes for which fit is valid.
+ Returns 0 if no telescopes are defined, or if <a href="./KVMultiDetArray.html">gMultiDetArray</a> object is not defined
+ (we search for the telescopes using their name and <a href="./KVMultiDetArray.html">gMultiDetArray</a>-><a href="./KVMultiDetArray.html#KVMultiDetArray:GetIDTelescope" title="KVIDTelescope* KVMultiDetArray::GetIDTelescope(const Char_t* name) const">GetIDTelescope</a>()).
+ WARNING: DELETE this list after use !!!
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVRTGIDManager:KVRTGIDManager" href="src/KVRTGIDManager.h.html#Eg0ivD">KVRTGIDManager</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a> * <a class="funcname" name="KVRTGIDManager:GetGlobalListOfIDFunctions" href="src/KVRTGIDManager.h.html#gSzdzC">GetGlobalListOfIDFunctions</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./KVRTGIDManager.html#KVRTGIDManager:fIDGlobalList" title="KVList* KVRTGIDManager::fIDGlobalList">fIDGlobalList</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:44:12 2015 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

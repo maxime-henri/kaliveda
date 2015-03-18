@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:44:34 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVTGIDFunctions</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('namespace KVTGIDFunctions','libKVMultiDetidentification','KVTGIDFunctions.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVTGIDFunctions.h.html">header file</a>
+<a class="descrheadentry" href="src/KVTGIDFunctions.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/identification/KVTGIDFunctions.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/identification/KVTGIDFunctions.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVTGIDFunctions:description">namespace description</a> 
+<a class="descrheadentry" href="#KVTGIDFunctions:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVTGIDFunctions:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVTGIDFunctions:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_IDENTIFICATION_Index.html">IDENTIFICATION</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVTGIDFunctions</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVTGIDFunctions:description"></a>namespace KVTGIDFunctions</h1>
+<div class="classdescr">
+<pre>
+  <a href="./KVTGIDFunctions.html">KVTGIDFunctions</a> namespace
+
+  Contains Tassan-Got functionals for mass and charge
+  identification used for Si-CsI, Si150-CsI and ChIo-CsI, and ChIo-Si matrices.
+
+</pre><!-- TDocHtmlDirective start --> 
+<p>
+For xxx-CsI telescopes:<br>
+tassangot_A and tassangot_Z are the original 10 parameter functionals<br>
+(corresponds to Eq.10 with Eq.12 (E vs. h) from <a href="http://arxiv.org/abs/nucl-ex/0103004">Nucl.Instrum.Meth. B194 (2002) 503-512</a>).<br>
+pawlowski_A and pawlowski_Z are modified functionals with 11 parameters.
+</p>
+In all cases here is the correspondance between par[] and the formulae<br>
+given in <a href="http://arxiv.org/abs/nucl-ex/0103004">Nucl.Instrum.Meth. B194 (2002) 503-512</a> (with initial values and limits used when fitting<br>
+parameters from same publication) :<br>
+</p>
+<!-- TDocHtmlDirective end --><pre>
+
+       par[0] : lambda
+       par[1] : alpha (1: 0.5 - 1.5)
+       par[2] : beta (0.5: 0.2 - 1)
+       par[3] : mu (1: 0.2 - 1.5)
+       par[4] : nu (1: 0.1 - 4)
+       par[5] : xi (&gt;0)
+       par[6] : g
+       par[7] : pedestal of x-coordinate
+       par[8] : pedestal of y-coordinate
+
+</pre><!-- TDocHtmlDirective start --> 
+<br>       
+  In case of xxx-CsI telescopes, the relationship between E and h introduces
+  an additional parameter:
+<!-- TDocHtmlDirective end --><pre>
+
+       par[9] : eta (Eq.11)
+
+
+</pre><!-- TDocHtmlDirective start --> 
+  lambda and g are determined from starting points (E=0) and initial slopes
+  of lines, respectively, and their ranges are given as between 0.25 and 4 times
+  these values.
+  If no A identification is given, beta is fixed at beta=0.5
+<br> 
+  With the Pawlowski modification, we have also:
+<!-- TDocHtmlDirective end --><pre>
+
+       par[10] : Pawlowski correction
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVTGIDFunctions:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:chiosi_Z">chiosi_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:fede">fede</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:pawlowski_A">pawlowski_A</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:pawlowski_Z">pawlowski_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:pichon_Z">pichon_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:starting_points_A">starting_points_A</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:starting_points_Z">starting_points_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:tassangot_A">tassangot_A</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVTGIDFunctions:tassangot_Z">tassangot_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVTGIDFunctions:Class_Charts"></a>Class Charts</h2>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:fede" href="src/KVTGIDFunctions.cxx.html#IIswdE">fede</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre> General Tassan-Got functional used with <a href="./KVTGIDFitter.html">KVTGIDFitter</a>
+ It gives Y as a function of X and Z or A (depending on parameters).
+
+ par[0] = ixt   -----&gt;   type of functional
+  *  ixt  :  =0-&gt;basic functional       &lt;&gt;0-&gt;extended functional
+  *      * For the basic formula :
+  *        yy = ((g*E)**(mu+1)+lambda**(mu+1)*Z**2*A**mu)**(1/(mu+1))-g*E + pdy
+  *      * For the extended formula :
+  *        yy = ((g*E)**(mu+nu+1)+(lambda*Z**alpha*A**beta)**(mu+nu+1)+
+  *                 xi*Z*Z*A**mu*(g*E)**nu)**(1/(mu+nu+1))-g*E + pdy
+
+ par[1] = ih    -----&gt;    treatment of CsI total light output
+  *   ih  :  =0-&gt;no non-linear light response    &lt;&gt;0-&gt;non-linear light response included
+  *      *  If ih=0  no non-linear light response : E=xx-pdx
+  *      *  If ih&lt;&gt;0 non-linear light response included :
+  *          E = sqrt(h**2+2*rho*h*(1+log(1+h/rho)))
+  *         rho=eta*Z**2*A    and   h=xx-pdx
+
+ par[2] = ZorA  -----&gt;    whether x[0]=Z or x[0]=A
+  *    ZorA :  =0-&gt;x[0]=A    &lt;&gt;0-&gt;x[0]=Z
+  *        *  If ZorA=1, we calculate A using the mass formula indicated
+  *           by the value of MassForm=par[3]
+  *        *  If ZorA=0, Z is given by the value of par[3]
+
+ par[3] = mass formula or Z
+  *  If ZorA=1, par[3] = mass formula, for values see <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t, Char_t mt)">GetAFromZ</a>
+  *  If ZorA=0, par[3] = Z
+
+ par[4] = X coordinate
+ par[5] = Y coordinate
+
+ The number &amp; order of remaining parameters depend on ixt and ih.
+  *    ixt=0  ih=0   5 parameters: lambda, mu, g, pdx, pdy
+  *    ixt=0  ih&lt;&gt;0  6 parameters: lambda, mu, g, pdx, pdy, eta
+  *    ixt&lt;&gt;0 ih=0   9 parameters: lambda, alpha, beta, mu, nu,
+  *                               xi, g, pdx, pdy
+  *    ixt&lt;&gt;0 ih&lt;&gt;0 10 parameters: lambda, alpha, beta, mu, nu,
+  *                               xi, g, pdx, pdy, eta
+
+ Therefore:
+
+ ixt=0, ih=0:            <a href="./ListOfTypes.html#Double_t">Double_t</a> par[11];
+
+  par[6] = lambda
+  par[7] = mu
+  par[8] = g
+  par[9] = pdx
+  par[10] = pdy
+
+ ixt=0, ih&lt;&gt;0:            <a href="./ListOfTypes.html#Double_t">Double_t</a> par[12];
+
+  par[6] = lambda
+  par[7] = mu
+  par[8] = g
+  par[9] = pdx
+  par[10] = pdy
+  par[11] = eta
+
+ ixt&lt;&gt;0, ih=0:            <a href="./ListOfTypes.html#Double_t">Double_t</a> par[15];
+
+  par[6] = lambda
+  par[7] = alpha
+  par[8] = beta
+  par[9] = mu
+  par[10] = nu
+  par[11] = xi
+  par[12] = g
+  par[13] = pdx
+  par[14] = pdy
+
+ ixt&lt;&gt;0, ih&lt;&gt;0:            <a href="./ListOfTypes.html#Double_t">Double_t</a> par[16];
+
+  par[6] = lambda
+  par[7] = alpha
+  par[8] = beta
+  par[9] = mu
+  par[10] = nu
+  par[11] = xi
+  par[12] = g
+  par[13] = pdx
+  par[14] = pdy
+  par[15] = eta
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:chiosi_Z" href="src/KVTGIDFunctions.cxx.html#udojME">chiosi_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Tassan-Got formula used for Z identification in ChIo-Si telescopes.
+Charity EAL mass used for Z&gt;5
+
+Returns difference between measured ChIo energy (dE)
+and that calculated for given (Z, Si energy (E)).
+
+Arguments are
+x[0] Z of nucleus considered
+par[0], ..., par[8] 9 parameters of Tassan-Got formula
+par[9] Si energy (in MeV) X-coordinate = dE
+par[10] ChIo energy (in MeV) Y-coordinate = E
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:tassangot_Z" href="src/KVTGIDFunctions.cxx.html#ikETkC">tassangot_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Tassan-Got formula (10 parameters) used for Z identification in Si-CsI or ChIo-CsI
+telescopes - 12 parameters
+Charity EAL mass used for Z&gt;5
+Returns difference between measured ChIo/Si PG/GG channel
+and that calculated for given (Z, CsI light output).
+
+Arguments are
+x[0] Z of nucleus considered
+par[0], ..., par[9] 10 parameters of Tassan-Got formula
+par[10] measured total light output of CsI - X coord
+par[11] measured ChIo/Si PG or GG channel - Y coord
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:pichon_Z" href="src/KVTGIDFunctions.cxx.html#jZ7jMD">pichon_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Tassan-Got formula (10 parameters) used for Z identification in Si-CsI or ChIo-CsI
+5th campaign telescopes - 12 parameters
+As per Matthieu Pichon's these, we use A = 2Z for the mass.
+Returns difference between measured ChIo/Si PG/GG channel
+and that calculated for given (Z, CsI light output).
+
+Corresponds to Eq.11 of NIM B194 (2002) 503 with Eq.13 for the
+light-energy dependence
+
+Arguments are
+x[0] Z of nucleus considered
+       par[0] : lambda
+       par[1] : alpha (1: 0.5 - 1.5)
+       par[2] : beta (0.5: 0.2 - 1)
+       par[3] : mu (1: 0.2 - 1.5)
+       par[4] : nu (1: 0.1 - 4)
+       par[5] : zeta (?? squiggly epsilon thingy ??) (&gt;0)
+       par[6] : g
+       par[7] : pedestal of x-coordinate
+       par[8] : pedestal of y-coordinate
+       par[9] : eta
+par[10] measured total light output of CsI - X coord
+par[11] measured ChIo/Si PG or GG channel - Y coord
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:tassangot_A" href="src/KVTGIDFunctions.cxx.html#mlETkC">tassangot_A</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Tassan-Got formula (13 parameters) for A identification (known Z)
+Returns difference between measured ChIo/Si PG/GG channel and that calculated for given
+(Z, A, CsI light output)
+
+Arguments are
+x[0] A of nucleus considered
+par[0], ..., par[9] 10 parameters of corrected Tassan-Got formula
+par[10] Z of nucleus considered
+par[11] measured total light output of CsI - X coord
+par[12] measured ChIo/Si PG or GG channel - Y coord
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:pawlowski_Z" href="src/KVTGIDFunctions.cxx.html#DQNvwB">pawlowski_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Tassan-Got formula with Pawlowski correction (11th parameter) for Z identification
+A = 2*Z + 1
+13 parameters in all.
+Returns difference between measured Si PG/GG channel
+and that calculated for given (Z, CsI light output).
+
+Arguments are
+x[0] Z of nucleus considered
+par[0], ..., par[10] 11 parameters of corrected Tassan-Got formula
+par[11] measured total light output of CsI - X coord
+par[12] measured ChIo/Si PG or GG channel - Y coord
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:pawlowski_A" href="src/KVTGIDFunctions.cxx.html#nRNvwB">pawlowski_A</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Tassan-Got formula with Pawlowski correction (11th parameter) for A identification (Z known).
+Returns difference between measured ChIo/Si PG/GG channel and that calculated for given
+(Z, A, CsI light output)
+14 parameters in all
+Arguments are
+x[0] A of nucleus considered
+par[0], ..., par[10] 11 parameters of corrected Tassan-Got formula
+par[11] Z of nucleus considered
+par[12] measured total light output of CsI - X coord
+par[13] measured ChIo/Si PG or GG channel - Y coord
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:starting_points_Z" href="src/KVTGIDFunctions.cxx.html#LgJElC">starting_points_Z</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Function used to fit starting points' y-coordinate as a function of Z
+and get initial values for lambda, alpha
+Function is : DE(E=0) = lambda * (Z**alpha) * (A**0.5)
+
+par0 = lambda
+par1 = alpha
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVTGIDFunctions:starting_points_A" href="src/KVTGIDFunctions.cxx.html#vz1XBD">starting_points_A</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</span><br />
+<div class="funccomm"><pre>Function used to fit starting points' y-coordinate as a function of A
+and get initial values for lambda, alpha and beta
+Function is : DE(E=0) = lambda * (Z**alpha) * (A**beta)
+
+par0 = lambda
+par1 = alpha
+par2 = beta
+par3 = Z
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:44:34 2015 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

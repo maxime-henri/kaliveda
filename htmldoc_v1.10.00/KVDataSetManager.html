@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 15:43:50 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVDataSetManager</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVDataSetManager','libKVMultiDetdata_management','KVDataSetManager.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVDataSetManager.h.html">header file</a>
+<a class="descrheadentry" href="src/KVDataSetManager.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/data_management/KVDataSetManager.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/data_management/KVDataSetManager.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVDataSetManager:description">class description</a> 
+<a class="descrheadentry" href="#KVDataSetManager:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVDataSetManager:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVDataSetManager:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_DATA_MANAGEMENT_Index.html">DATA_MANAGEMENT</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVDataSetManager</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVDataSetManager:description"></a>class KVDataSetManager</h1>
+<div class="classdescr">
+<pre>
+<a href="./KVDataSetManager.html">KVDataSetManager</a> handles a collection of  datasets contained in a data repository,
+which may be analysed with KaliVeda.
+The list of all known datasets is defined in $KVROOT/KVFiles/.kvrootrc.
+Some of these datasets may not be physically present in the repository. This is checked
+by method <a href="./KVDataSetManager.html#KVDataSetManager:CheckAvailability" title="void KVDataSetManager::CheckAvailability()">CheckAvailability</a>(). This will search in the data repository for the subdirectories
+corresponding to each dataset, and afterwards <a href="./KVDataSet.html">KVDataSet</a>::<a href="./KVDataSet.html#KVDataSet:IsAvailable" title="Bool_t KVDataSet::IsAvailable() const">IsAvailable</a>() will return <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+or <a href="./ListOfTypes.html#Bool_t">kFALSE</a> for each dataset depending on the result of the search.
+
+ACTIVE DATA REPOSITORY/DATASET MANAGER
+
+Each data repository has a data set manager. At any time, one repository is designated as
+being 'active' or 'current', and it's address is held in the global pointer <a href="./KVDataRepository.html">gDataRepository</a>.
+One can then access the corresponding dataset manager through <a href="./KVDataSetManager.html">gDataSetManager</a>.
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVDataSetManager:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:_KVDataSetManager">~KVDataSetManager</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:CheckAvailability">CheckAvailability</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:CheckUser">CheckUser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* username = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetAvailableDataSet">GetAvailableDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetDataSet">GetDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetDataSet@1">GetDataSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetNavailable">GetNavailable</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetNtotal">GetNtotal</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetTask">GetTask</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./KVNameValueList.html">KVNameValueList</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetUserGroups">GetUserGroups</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:Init">Init</a>(<a href="./KVDataRepository.html">KVDataRepository</a>* = 0)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:KVDataSetManager">KVDataSetManager</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:KVDataSetManager@1">KVDataSetManager</a>(<span class="keyword">const</span> <a href="./KVDataSetManager.html">KVDataSetManager</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDataSetManager.html">KVDataSetManager</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVDataSetManager.html">KVDataSetManager</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:Update">Update</a>()</td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:CheckCacheStatus">CheckCacheStatus</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./KVSeqCollection.html">KVSeqCollection</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetAnalysisTaskList">GetAnalysisTaskList</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:NewDataSet">NewDataSet</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:OpenAvailableDatasetsFile">OpenAvailableDatasetsFile</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:ReadAvailableDatasetsFile">ReadAvailableDatasetsFile</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:ReadDataSetList">ReadDataSetList</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:ReadTaskList">ReadTaskList</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:ReadUserGroups">ReadUserGroups</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVDataSetManager:Data_Members"></a>Data Members</h2>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataSetManager:fCacheAvailable"></a>fCacheAvailable</td><td class="datadesc">kTRUE if caching is activated for parent repository</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataSetManager:fCacheFileName"></a>fCacheFileName</td><td class="datadesc">name of cache file ( = [repository name].available.datasets)</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVUniqueNameList.html">KVUniqueNameList</a></td><td class="dataname"><a name="KVDataSetManager:fDataSets"></a>fDataSets</td><td class="datadesc">list of datasets handled by manager</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#ifstream">ifstream</a></td><td class="dataname"><a name="KVDataSetManager:fDatasets"></a>fDatasets</td><td class="datadesc">for reading cached repository available datasets file</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="dataname"><a name="KVDataSetManager:fIndex"></a>fIndex</td><td class="datadesc">array of indices of available datasets</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="dataname"><a name="KVDataSetManager:fMaxCacheTime"></a>fMaxCacheTime</td><td class="datadesc">maximum allowed age of cache file in seconds</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVDataSetManager:fNavailable"></a>fNavailable</td><td class="datadesc">number of available datasets</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataRepository.html">KVDataRepository</a>*</td><td class="dataname"><a name="KVDataSetManager:fRepository"></a>fRepository</td><td class="datadesc">the repository for which data sets are handled</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVUniqueNameList.html">KVUniqueNameList</a></td><td class="dataname"><a name="KVDataSetManager:fTasks"></a>fTasks</td><td class="datadesc">list of all known analysis tasks</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVDataSetManager:fUserGroups"></a>fUserGroups</td><td class="datadesc">list of user groups</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVDataSetManager:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVDataSetManager_Inh" id="MapKVDataSetManager_Inh">
+<area shape="rect" id="node2" href="./KVRemoteDataSetManager.html" title="KVRemoteDataSetManager" alt="" coords="440,9,765,47"/>
+</map>
+<map name="MapKVDataSetManager_Lib" id="MapKVDataSetManager_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="584,44,699,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVDataSetManager_Inh" class="tabsel" href="inh/KVDataSetManager_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVDataSetManager_Inh.png');">Inheritance</a>
+<a id="imgKVDataSetManager_InhMem" class="tab" href="inhmem/KVDataSetManager_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVDataSetManager_InhMem.png');">Inherited Members</a>
+<a id="imgKVDataSetManager_Incl" class="tab" href="incl/KVDataSetManager_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVDataSetManager_Incl.png');">Includes</a>
+<a id="imgKVDataSetManager_Lib" class="tab" href="lib/KVDataSetManager_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVDataSetManager_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVDataSetManager_Inh" src="inh/KVDataSetManager_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataSetManager:KVDataSetManager" href="src/KVDataSetManager.cxx.html#cKsP7">KVDataSetManager</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataSetManager:_KVDataSetManager" href="src/KVDataSetManager.cxx.html#B3IRLE">~KVDataSetManager</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:Init" href="src/KVDataSetManager.cxx.html#TrkycE">Init</a>(<a href="./KVDataRepository.html">KVDataRepository</a>*  = 0)</span><br />
+<div class="funccomm"><pre>Initialisation of dataset manager for the repository 'dr'.
+If dr=0x0 (default) then all known datasets are 'available', otherwise
+we check availability of datasets based on data present in repository.
+Initialise all possible data analysis tasks,
+then set list of possible tasks for each available dataset.
+
+Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if all goes well.
+For remote data repositories we return <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if no datasets are available
+(as the access to these is read-only)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataSetManager:ReadUserGroups" href="src/KVDataSetManager.cxx.html#fpukAB">ReadUserGroups</a>()</span><br />
+<div class="funccomm"><pre>Sets up list of user groups defining restricted access to certain datasets.
+Definition of different user groups is given in $KVROOT/KVFiles/.kvrootrc
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:ReadDataSetList" href="src/KVDataSetManager.cxx.html#YZskAC">ReadDataSetList</a>()</span><br />
+<div class="funccomm"><pre>Initialise list of all known datasets from informations in $KVROOT/KVFIles/.kvrootrc
+(and user's .kvrootrc)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:ReadTaskList" href="src/KVDataSetManager.cxx.html#R4QtqD">ReadTaskList</a>()</span><br />
+<div class="funccomm"><pre>Initialise list of all known analysis tasks from informations in $KVROOT/KVFIles/.kvrootrc
+(and user's .kvrootrc)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataSetManager:Print" href="src/KVDataSetManager.cxx.html#I23ItB">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) const</span><br />
+<div class="funccomm"><pre><a href="./KVDataSetManager.html#KVDataSetManager:Print" title="void KVDataSetManager::Print(Option_t* opt = &quot;&quot;) const">Print</a> list of datasets
+If opt=<span class="string">""</span> (default) all datasets are shown with full information
+if opt=<span class="string">"available"</span> only available datasets are shown, each with a number which can
+be used with <a href="./KVDataSetManager.html#KVDataSetManager:GetAvailableDataSet" title="KVDataSet* KVDataSetManager::GetAvailableDataSet(Int_t) const">GetAvailableDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) in order to retrieve the corresponding dataset.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataSetManager:CheckAvailability" href="src/KVDataSetManager.cxx.html#lO7FMB">CheckAvailability</a>()</span><br />
+<div class="funccomm"><pre>Check availability of datasets in repository associated to this data set manager
+
+If caching is activated for the parent repository, i.e. if
+
+    [repository name].DataRepository.CacheAvailable:    yes
+
+then instead of directly checking the existence of the directories for each dataset,
+we use the cached information written in the file
+<a href="./KVBase.html">KVBase</a>::WorkingRepository()/[repository name].available.datasets
+unless (1) it doesn't exist, or (2) the file is older than the maximum
+cache time (in seconds) defined by
+
+   [repository name].DataRepository.MaxCacheSeconds:
+
+In either of these 2 cases, we check the existence of the directories and update
+create the cache file.
+
+If the repository appears to be empty (perhaps because we are using a remote access
+protocol to check it, and the protocol has some problems...), then as a last resort we
+we will use the cache if it exists, whatever its age.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSet.html">KVDataSet</a> * <a class="funcname" name="KVDataSetManager:GetDataSet" href="src/KVDataSetManager.cxx.html#l.iPRB">GetDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ) const</span><br />
+<div class="funccomm"><pre>Return pointer to DataSet using index in list of all datasets, index&gt;=0
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSet.html">KVDataSet</a> * <a class="funcname" name="KVDataSetManager:GetDataSet@1" href="src/KVDataSetManager.cxx.html#VUHAjE">GetDataSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre>Return pointer to DataSet using name
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSet.html">KVDataSet</a> * <a class="funcname" name="KVDataSetManager:GetAvailableDataSet" href="src/KVDataSetManager.cxx.html#ymTUw">GetAvailableDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ) const</span><br />
+<div class="funccomm"><pre>Return pointer to available DataSet using index of available datasets
+Note this index begins at 1, and corresponds to the number printed next to the dataset
+when <a href="./KVDataSetManager.html#KVDataSetManager:Print" title="void KVDataSetManager::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<span class="string">"available"</span>) is called
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a> * <a class="funcname" name="KVDataSetManager:GetTask" href="src/KVDataSetManager.cxx.html#WDADLE">GetTask</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>Return pointer to named data analysis task
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:CheckUser" href="src/KVDataSetManager.cxx.html#Osg7iC">CheckUser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* username = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Check in list of groups <a href="./KVDataSetManager.html#KVDataSetManager:fUserGroups" title="KVNameValueList KVDataSetManager::fUserGroups">fUserGroups</a> if the user name 'username' is part of the group 'groupname'.
+If 'username' is not given (default) we use current user info (gSystem-&gt;GetUserInof()-&gt;fUser).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSet.html">KVDataSet</a> * <a class="funcname" name="KVDataSetManager:NewDataSet" href="src/KVDataSetManager.cxx.html#EAwGQB">NewDataSet</a>()</span><br />
+<div class="funccomm"><pre>Creates and returns pointer to new data set object
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataSetManager:Update" href="src/KVDataSetManager.cxx.html#MWdg5B">Update</a>()</span><br />
+<div class="funccomm"><pre>Called when the physical state of the repository has changed i.e. a subdirectory for
+a new dataset or datatype has been added or removed. We update the available datatsets,
+datatypes and analysis tasks.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:OpenAvailableDatasetsFile" href="src/KVDataSetManager.cxx.html#fzK5MC">OpenAvailableDatasetsFile</a>()</span><br />
+<div class="funccomm"><pre>Opens file <a href="./KVBase.html">KVBase</a>::<a href="./KVBase.html#KVBase:WorkingDirectory" title="const Char_t* KVBase::WorkingDirectory()">WorkingDirectory</a>()/[repository name].available.datasets
+containing cached info on available datasets and
+associated subdirectories in data repository.
+Opens file for reading, &amp; if all goes well returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>.
+Returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a> in case of problems.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:ReadAvailableDatasetsFile" href="src/KVDataSetManager.cxx.html#rUjX.B">ReadAvailableDatasetsFile</a>()</span><br />
+<div class="funccomm"><pre>Opens and reads file containing cached info on available datasets, and sets
+the availability of the concerned datasets.
+Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if all goes well.
+Returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if no cache exists or if file cannot be opened.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataSetManager:CheckCacheStatus" href="src/KVDataSetManager.cxx.html#QYAShB">CheckCacheStatus</a>()</span><br />
+<div class="funccomm"><pre>We check the status of the available datasets cache file.
+We return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the file exists &amp; was last modified
+less than <a href="./KVDataSetManager.html#KVDataSetManager:fMaxCacheTime" title="UInt_t KVDataSetManager::fMaxCacheTime">fMaxCacheTime</a> seconds ago.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVSeqCollection.html">KVSeqCollection</a>* <a class="funcname" name="KVDataSetManager:GetAnalysisTaskList" href="src/KVDataSetManager.h.html#tPK0hE">GetAnalysisTaskList</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> &amp;<a href="./KVDataSetManager.html#KVDataSetManager:fTasks" title="KVUniqueNameList KVDataSetManager::fTasks">fTasks</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataSetManager:KVDataSetManager" href="src/KVDataSetManager.h.html#wUmhJB">KVDataSetManager</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVDataSetManager:GetNavailable" href="src/KVDataSetManager.h.html#HvAwpC">GetNavailable</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVDataSetManager:GetNtotal" href="src/KVDataSetManager.h.html#b9z5.C">GetNtotal</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVNameValueList.html">KVNameValueList</a> &amp; <a class="funcname" name="KVDataSetManager:GetUserGroups" href="src/KVDataSetManager.h.html#OBAchB">GetUserGroups</a>()</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 15:43:50 2015 </em><em>&raquo; Last generated: 2015-03-18 15:43</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

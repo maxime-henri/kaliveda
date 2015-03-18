@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:43:54 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVLockfile</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVLockfile','libKVMultiDetbase','KVLockfile.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVLockfile.h.html">header file</a>
+<a class="descrheadentry" href="src/KVLockfile.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVLockfile.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVLockfile.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVLockfile:description">class description</a> 
+<a class="descrheadentry" href="#KVLockfile:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVLockfile:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVLockfile:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_BASE_Index.html">BASE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVLockfile</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVLockfile:description"></a>class KVLockfile</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVLockfile</h2>
+<h4>Interface to (Linux) system lockfile command</h4>
+<p>lockfile  can  be used to create one or more semaphore files.  If lockfile can't create all the specified files (in the
+       specified order), it waits sleeptime (defaults to 8) seconds and retries the last file that didn't  succeed.   You  can
+       specify  the  number  of retries to do until failure is returned.  If the number of retries is -1 (default)
+       lockfile will retry forever.</p>
+<p> If the number of retries expires before all files have been created, lockfile returns failure and removes all the files
+       it created up till that point.</p>
+<p>If you specify a locktimeout then a lockfile will be removed by force after locktimeout seconds have passed  since  the
+       lockfile was last modified/created (most likely by some other program that unexpectedly died a long time ago, and hence
+       could not clean up any leftover lockfiles).  Lockfile is clock skew immune.  After  a  lockfile  has  been  removed  by
+       force,  a  suspension  of  suspend  seconds (defaults to 16) is taken into account, in order to prevent the inadvertent
+       immediate removal of any newly created lockfile by another program (compare SUSPEND in procmail(1)).</p>
+<p>To use a lockfile, create a KVLockfile object either using the constructor without arguments
+or by giving the name of the file to lock:</p>
+<pre>
+KVLockfile lox;
+KVLockfile lox2("important.dat");
+</pre>
+<p>Then set the values you want for the number of retries, the sleeptime etc. Default values are as for
+Linux 'lockfile':</p>
+<pre>
+sleeptime = 8 sec.
+retries = -1 (keep trying for ever)
+suspend = 16 sec. (in case of timeout)
+</pre>
+<p>There is no timeout by default. If you want one, use SetTimeout(timeout) with timeout>0 seconds.</p>
+<p>To lock the file:</p>
+<pre>
+lox.Lock("important.dat"); // filename not given to ctor
+lox2.Lock(); // filename given to ctor
+</pre>
+<p>To unlock the file:</p>
+<pre>
+lox.Release();
+lox2.Release();
+</pre>
+<p>Note that Release() is called automatically in the dtor in case e.g. the KVLockfile goes out of scope.</p>      
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVLockfile:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVLockfile:_KVLockfile">~KVLockfile</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVLockfile:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVLockfile:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVLockfile:IsLocked">IsLocked</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVLockfile:KVLockfile">KVLockfile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVLockfile:KVLockfile@1">KVLockfile</a>(<span class="keyword">const</span> <a href="./KVLockfile.html">KVLockfile</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVLockfile:Lock">Lock</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVLockfile.html">KVLockfile</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVLockfile:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVLockfile.html">KVLockfile</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVLockfile:Release">Release</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:SetRetries">SetRetries</a>(<span class="keyword">int</span> r)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:SetSleeptime">SetSleeptime</a>(<span class="keyword">int</span> s)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:SetSuspend">SetSuspend</a>(<span class="keyword">int</span> s)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:SetTimeout">SetTimeout</a>(<span class="keyword">int</span> t)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVLockfile:FindExecutable">FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:init">init</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">int</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:testlock">testlock</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVLockfile:writecmd">writecmd</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVLockfile:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVLockfile:cmd"></a>cmd</td><td class="datadesc">command to execute</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVLockfile:fFile"></a>fFile</td><td class="datadesc">name of file</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVLockfile:fLockfile"></a>fLockfile</td><td class="datadesc">full path to lockfile executable (if defined)</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">bool</span></td><td class="dataname"><a name="KVLockfile:have_exec"></a>have_exec</td><td class="datadesc">kTRUE if lockfile found on system</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">bool</span></td><td class="dataname"><a name="KVLockfile:locked"></a>locked</td><td class="datadesc">kTRUE when Lock() has been called successfully</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">int</span></td><td class="dataname"><a name="KVLockfile:locktimeout"></a>locktimeout</td><td class="datadesc">time after which lock automatically opens</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">int</span></td><td class="dataname"><a name="KVLockfile:retries"></a>retries</td><td class="datadesc">number of times to retry</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">int</span></td><td class="dataname"><a name="KVLockfile:sleeptime"></a>sleeptime</td><td class="datadesc">time to wait before retrying lock</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">int</span></td><td class="dataname"><a name="KVLockfile:suspend"></a>suspend</td><td class="datadesc">suspend time after timeout</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVLockfile:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVLockfile_Lib" id="MapKVLockfile_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="454,44,569,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVLockfile_Inh" class="tabsel" href="inh/KVLockfile_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVLockfile_Inh.png');">Inheritance</a>
+<a id="imgKVLockfile_InhMem" class="tab" href="inhmem/KVLockfile_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVLockfile_InhMem.png');">Inherited Members</a>
+<a id="imgKVLockfile_Incl" class="tab" href="incl/KVLockfile_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVLockfile_Incl.png');">Includes</a>
+<a id="imgKVLockfile_Lib" class="tab" href="lib/KVLockfile_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVLockfile_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVLockfile_Inh" src="inh/KVLockfile_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVLockfile:KVLockfile" href="src/KVLockfile.cxx.html#cDMwSD">KVLockfile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVLockfile:_KVLockfile" href="src/KVLockfile.cxx.html#Ug_N.D">~KVLockfile</a>()</span><br />
+<div class="funccomm"><pre> Destructor
+ If file is still <a href="./KVLockfile.html#KVLockfile:locked" title="bool KVLockfile::locked">locked</a>, we call <a href="./KVLockfile.html#KVLockfile:Release" title="Bool_t KVLockfile::Release()">Release</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVLockfile:init" href="src/KVLockfile.cxx.html#bnjZ6C">init</a>()</span><br />
+<div class="funccomm"><pre>Initialisation
+Look for 'lockfile' executable and store path if found
+Set value of <a href="./KVLockfile.html#KVLockfile:have_exec" title="bool KVLockfile::have_exec">have_exec</a> accordingly
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVLockfile:FindExecutable" href="src/KVLockfile.cxx.html#XMEQOD">FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</span><br />
+<div class="funccomm"><pre>copied from <a href="./KVBase.html">KVBase</a> to avoid circular dependency
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVLockfile:writecmd" href="src/KVLockfile.cxx.html#a7zjKB">writecmd</a>()</span><br />
+<div class="funccomm"><pre>Writes lockfile command with current values of parameters
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">int</span> <a class="funcname" name="KVLockfile:testlock" href="src/KVLockfile.cxx.html#wmp01E">testlock</a>()</span><br />
+<div class="funccomm"><pre>Executes lockfile command with current values of parameters
+(call <a href="./KVLockfile.html">KVLockfile</a>::<a href="./KVLockfile.html#KVLockfile:writecmd" title="void KVLockfile::writecmd()">writecmd</a>() before)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVLockfile:Lock" href="src/KVLockfile.cxx.html#fihm_B">Lock</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVLockfile:Release" href="src/KVLockfile.cxx.html#nCDtqD">Release</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVLockfile:KVLockfile" href="src/KVLockfile.h.html#xRcNkE">KVLockfile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVLockfile:SetSleeptime" href="src/KVLockfile.h.html#jYzIqB">SetSleeptime</a>(<span class="keyword">int</span> s)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVLockfile.html#KVLockfile:sleeptime" title="int KVLockfile::sleeptime">sleeptime</a> = s; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVLockfile:SetRetries" href="src/KVLockfile.h.html#o7_MmC">SetRetries</a>(<span class="keyword">int</span> r)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVLockfile.html#KVLockfile:retries" title="int KVLockfile::retries">retries</a> = r; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVLockfile:SetTimeout" href="src/KVLockfile.h.html#XV_uBD">SetTimeout</a>(<span class="keyword">int</span> t)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVLockfile.html#KVLockfile:locktimeout" title="int KVLockfile::locktimeout">locktimeout</a> = t; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVLockfile:SetSuspend" href="src/KVLockfile.h.html#Ty1f.C">SetSuspend</a>(<span class="keyword">int</span> s)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVLockfile.html#KVLockfile:suspend" title="int KVLockfile::suspend">suspend</a> = s; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVLockfile:IsLocked" href="src/KVLockfile.h.html#pzjBWE">IsLocked</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVLockfile.html#KVLockfile:locked" title="bool KVLockfile::locked">locked</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:43:54 2015 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

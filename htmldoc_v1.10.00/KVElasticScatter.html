@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:42:35 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVElasticScatter</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVElasticScatter','libKVMultiDetexp_events','KVElasticScatter.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVElasticScatter.h.html">header file</a>
+<a class="descrheadentry" href="src/KVElasticScatter.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVElasticScatter.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVElasticScatter.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVElasticScatter:description">class description</a> 
+<a class="descrheadentry" href="#KVElasticScatter:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVElasticScatter:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVElasticScatter:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EXP_EVENTS_Index.html">EXP_EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVElasticScatter</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVElasticScatter:description"></a>class KVElasticScatter</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVElasticScatter</h2>
+<h4>Calculate elastic scattering spectra in multidetector arrays</h4>
+<p>
+Use this class to calculate the energy losses of elastically scattered nuclei
+in the detectors of a multidetector array. It is assumed that the following
+global pointers have been initialised before using this class:
+</p>
+<ul>
+   <li><pre><a href="KVMultiDetArray.html">gMultiDetArray</a></pre> - points to object describing multidetector array</li>
+   <li><pre><a href="KVDataBase.html">gDataBase</a></pre> - points to database of run-dependent information for experimental dataset</li>
+</ul>
+<p>
+In other words, we assume that the user has chosen a dataset on which she wants
+to work:
+</p>
+<pre><a href="KVDataSetManager.html">gDataSetManager</a>-><a href="KVDataSetManager.html#KVDataSetManager:GetDataSet">GetDataSet</a>("name_of_dataset")-><a href="KVDataSet.html#KVDataSet:cd">cd</a>()</pre>
+<p>
+and then initialised the description of the experimental configuration for the dataset:
+</p>
+<pre><a href="KVDataSet.html">gDataSet</a>-><a href="KVDataSet.html#KVDataSet:BuildMultiDetector">BuildMultiDetector</a>()</pre>
+<h3>Setting up the calculation</h3>
+<p>Create a new elastic scattering object:</p>
+<pre>KVElasticScatter* es = new KVElasticScatter</pre>
+<p>
+Then call any of the following methods in any order in order to set up the calculation:</p>
+<ul>
+   <li><pre>es-><a href="#KVElasticScatter:SetProjectile">SetProjectile</a>(...)</pre></li>
+   <li><pre>es-><a href="#KVElasticScatter:SetEnergy">SetEnergy</a>(...)</pre></li>
+   <li><pre>es-><a href="#KVElasticScatter:SetDetector">SetDetector</a>(...)</pre></li>
+   <li><pre>es-><a href="#KVElasticScatter:SetRun">SetRun</a>(...)</pre></li>
+</ul>
+<p>
+The SetRun(...) method uses the experimental database in order to determine the target
+for the run, detector state (gas pressures etc.).
+</p>
+<h3>Multilayer targets</h3>
+<p>
+When multilayer targets are used, the user can restrict the scattering calculation to one
+specific component of the target, i.e. the scattering takes place between the projectile
+and one of the nuclei of the specified layer. Energy losses before and after the scattering
+in the other layers of the target are of course still taken into account. To set the part of
+the target where scattering takes place use
+</p>
+<pre>es-><a href="#KVElasticScatter:SetTargetScatteringLayer">SetTargetScatteringLayer</a>(...)</pre>
+<p>
+with the name of the layer you require (this is normally the name of the element
+making up the layer - see <a href="KVTarget.html">KVTarget</a> for details).
+</p>
+<h3>Inelastic scattering</h3>
+<p>
+Calculations can also be performed for inelastic scattering i.e. when the target nucleus is left
+in an excited state (N.B. we still use the Rutherford elastic scattering cross-section for
+weighting the energy loss distributions). In order to do this, call
+</p>
+<pre>es-><a href="#KVElasticScatter:SetTargetExcitedState">SetTargetExcitedState</a>(...)</pre>
+<p>
+with the energy of the excited state of the target after scattering.
+</p>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVElasticScatter:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:_KVElasticScatter">~KVElasticScatter</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:CalculateScattering">CalculateScattering</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> N)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetDepth">GetDepth</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetEbinning">GetEbinning</a>()</td></tr>
+<tr class="func"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetEnergy">GetEnergy</a>()</td></tr>
+<tr class="func"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetEnergy@1">GetEnergy</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type)</td></tr>
+<tr class="func"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetEnergy@2">GetEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> index)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetNDets">GetNDets</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:GetTheta">GetTheta</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:KVElasticScatter">KVElasticScatter</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:KVElasticScatter@1">KVElasticScatter</a>(<span class="keyword">const</span> <a href="./KVElasticScatter.html">KVElasticScatter</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVElasticScatter.html">KVElasticScatter</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVElasticScatter:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVElasticScatter.html">KVElasticScatter</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetDetector">SetDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* det)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetEbinning">SetEbinning</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nbins = 500)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetEnergy">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> E)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetProjectile">SetProjectile</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetRun">SetRun</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetTargetExcitedState">SetTargetExcitedState</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:SetTargetScatteringLayer">SetTargetScatteringLayer</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticScatter:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVElasticScatter:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype">TList*</td><td class="dataname"><a name="KVElasticScatter:fAlignedDetectors"></a>fAlignedDetectors</td><td class="datadesc">all aligned detectors</td></tr>
+<tr class="data"><td class="datatype">TVector3</td><td class="dataname"><a name="KVElasticScatter:fBeamDirection"></a>fBeamDirection</td><td class="datadesc">beam direction vector</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVElasticScatter:fBinE"></a>fBinE</td><td class="datadesc">Number of bins of the Energy histogram</td></tr>
+<tr class="data"><td class="datatype">TH1F*</td><td class="dataname"><a name="KVElasticScatter:fDepth"></a>fDepth</td><td class="datadesc">depth of scattering point in target</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a>*</td><td class="dataname"><a name="KVElasticScatter:fDetInd"></a>fDetInd</td><td class="datadesc">detector type-index association</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDetector.html">KVDetector</a>*</td><td class="dataname"><a name="KVElasticScatter:fDetector"></a>fDetector</td><td class="datadesc">detector where particle will be detected</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVElasticScatter:fEnergy"></a>fEnergy</td><td class="datadesc">energy of projectile</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVElasticScatter:fExx"></a>fExx</td><td class="datadesc">excited state of target nucleus</td></tr>
+<tr class="data"><td class="datatype">TObjArray*</td><td class="dataname"><a name="KVElasticScatter:fHistos"></a>fHistos</td><td class="datadesc">energy loss histograms for all hit detectors</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVElasticScatter:fIntLayer"></a>fIntLayer</td><td class="datadesc">index of interaction layer in multilayer target</td></tr>
+<tr class="data"><td class="datatype"><a href="./KV2Body.html">KV2Body</a>*</td><td class="dataname"><a name="KVElasticScatter:fKinematics"></a>fKinematics</td><td class="datadesc">kinematics calculation</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVElasticScatter:fMultiLayer"></a>fMultiLayer</td><td class="datadesc">kTRUE for multilayer target</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVElasticScatter:fNDets"></a>fNDets</td><td class="datadesc">number of aligned detectors</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNucleus.html">KVNucleus</a>*</td><td class="dataname"><a name="KVElasticScatter:fProj"></a>fProj</td><td class="datadesc">scattered nucleus</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNucleus.html">KVNucleus</a>*</td><td class="dataname"><a name="KVElasticScatter:fTarg"></a>fTarg</td><td class="datadesc">target nucleus</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVTarget.html">KVTarget</a>*</td><td class="dataname"><a name="KVElasticScatter:fTarget"></a>fTarget</td><td class="datadesc">target for current run</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVTelescope.html">KVTelescope</a>*</td><td class="dataname"><a name="KVElasticScatter:fTelescope"></a>fTelescope</td><td class="datadesc">telescope where particle will be detected</td></tr>
+<tr class="data"><td class="datatype">TH1F*</td><td class="dataname"><a name="KVElasticScatter:fTheta"></a>fTheta</td><td class="datadesc">angle of scattered particle</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVElasticScatter:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVElasticScatter_Lib" id="MapKVElasticScatter_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="516,44,631,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVElasticScatter_Inh" class="tabsel" href="inh/KVElasticScatter_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVElasticScatter_Inh.png');">Inheritance</a>
+<a id="imgKVElasticScatter_InhMem" class="tab" href="inhmem/KVElasticScatter_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVElasticScatter_InhMem.png');">Inherited Members</a>
+<a id="imgKVElasticScatter_Incl" class="tab" href="incl/KVElasticScatter_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVElasticScatter_Incl.png');">Includes</a>
+<a id="imgKVElasticScatter_Lib" class="tab" href="lib/KVElasticScatter_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVElasticScatter_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVElasticScatter_Inh" src="inh/KVElasticScatter_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVElasticScatter:KVElasticScatter" href="src/KVElasticScatter.cxx.html#E8vrF">KVElasticScatter</a>()</span><br />
+<div class="funccomm"><pre>Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVElasticScatter:_KVElasticScatter" href="src/KVElasticScatter.cxx.html#yH13LE">~KVElasticScatter</a>()</span><br />
+<div class="funccomm"><pre>Destructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetRun" href="src/KVElasticScatter.cxx.html#scTyPE">SetRun</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</span><br />
+<div class="funccomm"><pre>Set detector parameters, target, etc. for run
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetProjectile" href="src/KVElasticScatter.cxx.html#kGom6B">SetProjectile</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</span><br />
+<div class="funccomm"><pre>Set projectile Z and A
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetEnergy" href="src/KVElasticScatter.cxx.html#Gf8T8">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> E)</span><br />
+<div class="funccomm"><pre>Set energy of projectile in MeV
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetDetector" href="src/KVElasticScatter.cxx.html#y2mrU">SetDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* det)</span><br />
+<div class="funccomm"><pre>Set name of detector which will detect particle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetTargetScatteringLayer" href="src/KVElasticScatter.cxx.html#m0T3hE">SetTargetScatteringLayer</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>For multilayer targets, use this method to choose in which
+layer the scattering will take place.
+If name=<span class="string">""</span>, reset any previous choice so that scattering
+can take place in any layer
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetEbinning" href="src/KVElasticScatter.cxx.html#RizpQD">SetEbinning</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nbins = 500)</span><br />
+<div class="funccomm"><pre>Set binning of the <a href="./KVElasticScatter.html#KVElasticScatter:GetEnergy" title="TH1F* KVElasticScatter::GetEnergy() or overloads">GetEnergy</a> histogram
+ Default value is 500
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:CalculateScattering" href="src/KVElasticScatter.cxx.html#eBtsME">CalculateScattering</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> N)</span><br />
+<div class="funccomm"><pre>Perform scattering <span class="string">'N'</span> times for current values
+of particle Z, A and energy, target excited state, and detector.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TH1F * <a class="funcname" name="KVElasticScatter:GetEnergy@1" href="src/KVElasticScatter.cxx.html#sIGJtE">GetEnergy</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type)</span><br />
+<div class="funccomm"><pre>Energy loss in detector of given 'type' through which scattered particle passes.
+Warning: if there are several detectors of the same type in the list of detectors
+through which the particle passes, the first one (as seen by the impinging
+particle) will have type <span class="string">"type"</span>, the second <span class="string">"type_1"</span>, the third <span class="string">"type_2"</span>, etc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TH1F * <a class="funcname" name="KVElasticScatter:GetEnergy@2" href="src/KVElasticScatter.cxx.html#TCFYoE">GetEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> index)</span><br />
+<div class="funccomm"><pre>Energy loss in any detector through which scattered particle passes.
+The index corresponds to the order in which detectors are crossed by the
+particle, beginning with 0 for the first detector, and ending with
+(<a href="./KVElasticScatter.html#KVElasticScatter:GetNDets" title="Int_t KVElasticScatter::GetNDets() const">GetNDets</a>()-1)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVElasticScatter:KVElasticScatter" href="src/KVElasticScatter.h.html#b1Q6lD">KVElasticScatter</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticScatter:SetTargetExcitedState" href="src/KVElasticScatter.h.html#auhlh">SetTargetExcitedState</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</span><br />
+<div class="funccomm"><pre>To simulate inelastic scattering i.e. where the target nucleus is left in
+an excited state, use this method to set the excitation energy (in MeV).
+This value will be used for all subsequent calculations.
+Use <a href="./KVElasticScatter.html#KVElasticScatter:SetTargetExcitedState" title="void KVElasticScatter::SetTargetExcitedState(Double_t ex)">SetTargetExcitedState</a>(0) to return to elastic scattering.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TH1F * <a class="funcname" name="KVElasticScatter:GetDepth" href="src/KVElasticScatter.h.html#wu5ziC">GetDepth</a>()</span><br />
+<div class="funccomm"><pre>Return pointer to histogram of 'depth' of scattering point in target (in mg/cm2)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TH1F * <a class="funcname" name="KVElasticScatter:GetEnergy" href="src/KVElasticScatter.h.html#wne3dC">GetEnergy</a>()</span><br />
+<div class="funccomm"><pre>Return pointer to energy loss histogram for chosen detector (in MeV)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TH1F * <a class="funcname" name="KVElasticScatter:GetTheta" href="src/KVElasticScatter.h.html#Y1UqYD">GetTheta</a>()</span><br />
+<div class="funccomm"><pre>Return pointer to polar angle distribution of scattered particle (in degrees)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVElasticScatter:GetNDets" href="src/KVElasticScatter.h.html#wIBBMD">GetNDets</a>() const</span><br />
+<div class="funccomm"><pre>Returns the number of detectors crossed by the scattered particle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVElasticScatter:GetEbinning" href="src/KVElasticScatter.h.html#AiWIhC">GetEbinning</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>Returns the number of bins of the <a href="./KVElasticScatter.html#KVElasticScatter:GetEnergy" title="TH1F* KVElasticScatter::GetEnergy() or overloads">GetEnergy</a> histogram
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:42:35 2015 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

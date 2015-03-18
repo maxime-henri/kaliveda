@@ -1,0 +1,785 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:44:48 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVVarGlob</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVVarGlob','libKVMultiDetglobvars','KVVarGlob.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVVarGlob.h.html">header file</a>
+<a class="descrheadentry" href="src/KVVarGlob.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/globvars/KVVarGlob.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/globvars/KVVarGlob.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVVarGlob:description">class description</a> 
+<a class="descrheadentry" href="#KVVarGlob:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVVarGlob:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVVarGlob:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_GLOBVARS_Index.html">GLOBVARS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVVarGlob</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVVarGlob:description"></a>class KVVarGlob: public <a href="./KVBase.html">KVBase</a></h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --><h1>Global variables base class</h1>
+<!-- TDocHtmlDirective end --><pre>
+
+This class is a base class for the management of global variables.
+A global variable is an analysis tool for condensing the information in a multibody event into one or a few
+characteristic values. A simple example is the event multiplicity (the number of particles in each event),
+which can be used to characterize heavy-ion collision events in terms of violence or centrality.
+
+In KaliVeda, the base class for a multibody event is <a href="./KVEvent.html">KVEvent</a>, which is basically a collection of
+nuclei (base class <a href="./KVNucleus.html">KVNucleus</a>). Therefore the global variable classes below can be used with any
+event described by a class derived from <a href="./KVEvent.html">KVEvent</a>, containing particles described by a class which
+inherits from <a href="./KVNucleus.html">KVNucleus</a>.
+
+Global variable objects are used in the following schematic way:
+
+creation &amp; initialisation:
+
+      <a href="./KVVarGlob.html">KVVarGlob</a>* VG = new KV...;
+      VG-&gt;<a href="./KVVarGlob.html#KVVarGlob:Init" title="void KVVarGlob::Init()">Init</a>(); // perform any necessary initialisations
+
+treatment of 1 event:
+
+      VG-&gt;<a href="./KVVarGlob.html#KVVarGlob:Reset" title="void KVVarGlob::Reset()">Reset</a>(); // reinitialise prior to analysis
+      while( [loop over particles in event] ){
+
+          VG-&gt;<a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>( [particle] ); // calculate contribution of particle to variable
+      }
+      <a href="./ListOfTypes.html#Double_t">Double_t</a> valueOfVG = VG-&gt;<a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(); // retrieve value of global variable for event
+
+Global variables can be of different types:
+
+     One-body global variable     (type = <a href="./KVVarGlob.html">KVVarGlob</a>::<a href="./KVVarGlob.html#KVVarGlob:kOneBody" title="KVVarGlob::(anonymous) KVVarGlob::kOneBody">kOneBody</a>)
+        - the variable is computed by performing a loop over all particles in an event
+          and calling the overridden <a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>*) method for each particle in turn.
+     Two-body global variable     (type = <a href="./KVVarGlob.html">KVVarGlob</a>::<a href="./KVVarGlob.html#KVVarGlob:kTwoBody" title="KVVarGlob::(anonymous) KVVarGlob::kTwoBody">kTwoBody</a>)
+        - the variable is computed by performing a loop over all pairs of particles in an event
+          and calling the overridden <a href="./KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>*,<a href="./KVNucleus.html">KVNucleus</a>*) method for each pair in turn.
+     N-body global variable     (type = <a href="./KVVarGlob.html">KVVarGlob</a>::<a href="./KVVarGlob.html#KVVarGlob:kNBody" title="KVVarGlob::(anonymous) KVVarGlob::kNBody">kNBody</a>)
+        - the variable is computed from the full list of particles of the event, by defining
+          the overridden <a href="./KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="./KVEvent.html">KVEvent</a>*) method.
+
+Derived global variable classes of 2-body or N-body type must set the <a href="./KVVarGlob.html#KVVarGlob:fType" title="Int_t KVVarGlob::fType">fType</a> member variable
+to the appropriate type (<a href="./KVVarGlob.html#KVVarGlob:kTwoBody" title="KVVarGlob::(anonymous) KVVarGlob::kTwoBody">kTwoBody</a> or <a href="./KVVarGlob.html#KVVarGlob:kNBody" title="KVVarGlob::(anonymous) KVVarGlob::kNBody">kNBody</a>) and define the <a href="./KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>*,<a href="./KVNucleus.html">KVNucleus</a>*)
+method (for 2-body variables) or the <a href="./KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="./KVEvent.html">KVEvent</a>*) method (for N-body variables).
+This is handled semi-automatically when using method
+	<a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a> * classname, const <a href="./ListOfTypes.html#Char_t">Char_t</a> * classdesc, <a href="./ListOfTypes.html#int">int</a> type)
+to generate a skeleton '.h' and '.cpp' file for the implementation of a new global variable class.
+By default, global variables are 1-body and must define the <a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>*) method.
+
+</pre><!-- TDocHtmlDirective start --><h2>Global variable lists</h2>
+<!-- TDocHtmlDirective end --><pre>
+The <a href="./KVGVList.html">KVGVList</a> class handles a list of global variables. A list can be used in the following
+schematic way to calculate several global variables at once:
+
+creation &amp; initialisation:
+
+      KVVGList* VGlist = new <a href="./KVGVList.html">KVGVList</a>;
+      VGlist-&gt;Add( new KV...(<span class="string">"var1"</span>) ); // add variable
+      VGlist-&gt;Add( new KV...(<span class="string">"var2"</span>) ); // add variable
+      VGlist-&gt;Add( new KV...(<span class="string">"var3"</span>) ); // add variable
+      ...
+      VGlist-&gt;<a href="./KVVarGlob.html#KVVarGlob:Init" title="void KVVarGlob::Init()">Init</a>(); // initialise all variables
+
+treatment of 1 event:
+
+      VGlist-&gt;<a href="./KVVarGlob.html#KVVarGlob:Reset" title="void KVVarGlob::Reset()">Reset</a>(); // reinitialise all variables prior to analysis
+      while( [loop over particles in event] ){
+
+          VGlist-&gt;<a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>( [particle] ); // calculate contribution of particle to each variable
+      }
+      <a href="./ListOfTypes.html#Double_t">Double_t</a> valueOfvar1 = VGlist-&gt;GetGV(<span class="string">"var1"</span>)-&gt;<a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(); // retrieve value of <span class="string">"var1"</span> for event
+
+</pre><!-- TDocHtmlDirective start --><h2>Options, parameters, reference frames, particle selection, etc.</h2>
+<h3>Particle selection</h3>
+<!-- TDocHtmlDirective end --><pre>
+The selection of particles which are taken into account can be handled by the variable
+itself. Define a selection using class <a href="./KVParticleCondition.html">KVParticleCondition</a> and then set it by calling
+method <a href="./KVVarGlob.html#KVVarGlob:SetSelection" title="void KVVarGlob::SetSelection(const KVParticleCondition&amp;)">SetSelection</a>(<a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;). Then, in your treatment loop for each event,
+instead of calling the <a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>*) method, call <a href="./KVVarGlob.html#KVVarGlob:FillWithCondition" title="void KVVarGlob::FillWithCondition(KVNucleus* c)">FillWithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>*).
+
+If you have a list of global variable objects (<a href="./KVGVList.html">KVGVList</a>), the <a href="./KVGVList.html">KVGVList</a>::<a href="./KVGVList.html#KVGVList:Fill" title="void KVGVList::Fill(KVNucleus* c)">Fill</a> method
+automatically calls <a href="./KVVarGlob.html#KVVarGlob:FillWithCondition" title="void KVVarGlob::FillWithCondition(KVNucleus* c)">FillWithCondition</a> for each <a href="./KVVarGlob.html">KVVarGlob</a> in the list (variables for which
+no particle selection is defined include all particles).
+
+</pre><!-- TDocHtmlDirective start --><h3>Options and parameters</h3>
+<!-- TDocHtmlDirective end --><pre>
+In order to give greater flexibility to global variable classes without the need to add
+member variables and the associated Get/Set methods, we provide methods to handle
+generic 'options' and 'parameters' for all variables.
+
+An 'option' is a name-value pair, the value is a character string. Methods to use are:
+
+   <a href="./ListOfTypes.html#void">void</a>      <a href="./KVVarGlob.html#KVVarGlob:SetOption" title="void KVVarGlob::SetOption(const Char_t* option, const Char_t* value)">SetOption</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, const <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)
+   <a href="./ListOfTypes.html#Bool_t">Bool_t</a>    <a href="./KVVarGlob.html#KVVarGlob:IsOptionGiven" title="Bool_t KVVarGlob::IsOptionGiven(const Char_t* option)">IsOptionGiven</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)
+   <a href="./KVString.html">KVString</a>&amp; <a href="./KVVarGlob.html#KVVarGlob:GetOptionString" title="const TString&amp; KVVarGlob::GetOptionString(const Char_t* option) const">GetOptionString</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) const
+   <a href="./ListOfTypes.html#void">void</a>      <a href="./KVVarGlob.html#KVVarGlob:UnsetOption" title="void KVVarGlob::UnsetOption(const Char_t* opt)">UnsetOption</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)
+
+A 'parameter' is a name-value pair, the value is a <a href="./ListOfTypes.html#double">double</a>-precision <a href="./ListOfTypes.html#float">float</a> value. Methods to use are:
+
+   <a href="./ListOfTypes.html#void">void</a>     <a href="./KVVarGlob.html#KVVarGlob:SetParameter" title="void KVVarGlob::SetParameter(const Char_t* par, Double_t value)">SetParameter</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* par, <a href="./ListOfTypes.html#Double_t">Double_t</a> value)
+   <a href="./ListOfTypes.html#Bool_t">Bool_t</a>   <a href="./KVVarGlob.html#KVVarGlob:IsParameterSet" title="Bool_t KVVarGlob::IsParameterSet(const Char_t* par)">IsParameterSet</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)
+   <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVVarGlob.html#KVVarGlob:GetParameter" title="Double_t KVVarGlob::GetParameter(const Char_t* par)">GetParameter</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)
+   <a href="./ListOfTypes.html#void">void</a>     <a href="./KVVarGlob.html#KVVarGlob:UnsetParameter" title="void KVVarGlob::UnsetParameter(const Char_t* par)">UnsetParameter</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)
+
+</pre><!-- TDocHtmlDirective start --><h3>Kinematical reference frames</h3>
+<!-- TDocHtmlDirective end --><pre>
+For global variables which use kinematical properties of particles, it can be useful to be
+able to calculate the same variable in different Lorentz reference frames (see <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame, const TVector3&amp; boost, Bool_t beta = kFALSE) or overloads">SetFrame</a>
+and <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent.html#KVEvent:SetFrame" title="void KVEvent::SetFrame(const Char_t* frame, const TVector3&amp; boost, Bool_t beta = kFALSE) or overloads">SetFrame</a> for how to define and access different frames). Therefore we
+provide the methods
+
+   <a href="./ListOfTypes.html#void">void</a>           <a href="./KVVarGlob.html#KVVarGlob:SetFrame" title="void KVVarGlob::SetFrame(const Char_t*)">SetFrame</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*)
+   const <a href="./ListOfTypes.html#Char_t">Char_t</a>*  <a href="./KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame(const Char_t*)">GetFrame</a>()
+
+which allow to change the reference frame used for the calculation of the variable
+(depending on the implementation of the specific class).
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVVarGlob:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVVarGlob:_KVVarGlob">~KVVarGlob</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:AreEqual"><span class="baseclass">KVBase::</span>AreEqual</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Long64_t">Long64_t</a> maxdif = 1)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:ArrContainsValue"><span class="baseclass">KVBase::</span>ArrContainsValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n, <a href="./ListOfTypes.html#Int_t">Int_t</a>* arr, <a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:AsDouble">AsDouble</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:BackupFileWithDate"><span class="baseclass">KVBase::</span>BackupFileWithDate</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVVarGlob:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Clear"><span class="baseclass">KVBase::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Copy"><span class="baseclass">KVBase::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:Fill">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:Fill2">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>* n1, <a href="./KVNucleus.html">KVNucleus</a>* n2)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:Fill2WithCondition">Fill2WithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>* n1, <a href="./KVNucleus.html">KVNucleus</a>* n2)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:FillN">FillN</a>(<a href="./KVEvent.html">KVEvent</a>* e)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:FillWithCondition">FillWithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindClassSourceFiles"><span class="baseclass">KVBase::</span>FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="./KVString.html">KVString</a>&amp; imp_file, <a href="./KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir_name = <span class="string">"."</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindExecutable"><span class="baseclass">KVBase::</span>FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindFile"><span class="baseclass">KVBase::</span>FindFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* search, TString&amp; wfil)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetBINDIRFilePath"><span class="baseclass">KVBase::</span>GetBINDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATABASEFilePath"><span class="baseclass">KVBase::</span>GetDATABASEFilePath</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATADIRFilePath"><span class="baseclass">KVBase::</span>GetDATADIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetETCDIRFilePath"><span class="baseclass">KVBase::</span>GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetFrame">GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetINCDIRFilePath"><span class="baseclass">KVBase::</span>GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDate"><span class="baseclass">KVBase::</span>GetKVBuildDate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildType"><span class="baseclass">KVBase::</span>GetKVBuildType</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildUser"><span class="baseclass">KVBase::</span>GetKVBuildUser</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVSourceDir"><span class="baseclass">KVBase::</span>GetKVSourceDir</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVVersion"><span class="baseclass">KVBase::</span>GetKVVersion</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLabel"><span class="baseclass">KVBase::</span>GetLabel</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLIBDIRFilePath"><span class="baseclass">KVBase::</span>GetLIBDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetListOfPlugins"><span class="baseclass">KVBase::</span>GetListOfPlugins</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetNameIndex">GetNameIndex</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumber"><span class="baseclass">KVBase::</span>GetNumber</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetNumberOfBranches">GetNumberOfBranches</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumberOfObjects"><span class="baseclass">KVBase::</span>GetNumberOfObjects</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetNumberOfValues">GetNumberOfValues</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetObject">GetObject</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> TString&amp;</td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetOptionString">GetOptionString</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetParameter">GetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetPluginURI"><span class="baseclass">KVBase::</span>GetPluginURI</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTempFileName"><span class="baseclass">KVBase::</span>GetTempFileName</a>(TString&amp; base)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetType"><span class="baseclass">KVBase::</span>GetType</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetValue">GetValue</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetValue@1">GetValue</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetValue@2">GetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetValueName">GetValueName</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a>*</td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetValuePtr">GetValuePtr</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Char_t">Char_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:GetValueType">GetValueType</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetWORKDIRFilePath"><span class="baseclass">KVBase::</span>GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitBranch"><span class="baseclass">KVBase::</span>gitBranch</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:Init">Init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:InitEnvironment"><span class="baseclass">KVBase::</span>InitEnvironment</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVVarGlob:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsCalled"><span class="baseclass">KVBase::</span>IsCalled</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:IsNBody">IsNBody</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:IsOneBody">IsOneBody</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:IsOptionGiven">IsOptionGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:IsParameterSet">IsParameterSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:IsTwoBody">IsTwoBody</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsType"><span class="baseclass">KVBase::</span>IsType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVVarGlob:KVVarGlob">KVVarGlob</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVVarGlob:KVVarGlob@1">KVVarGlob</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* nom)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVVarGlob:KVVarGlob@2">KVVarGlob</a>(<span class="keyword">const</span> <a href="./KVVarGlob.html">KVVarGlob</a>&amp; a)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:MakeClass">MakeClass</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classdesc, <span class="keyword">int</span> type = <a href="./KVVarGlob.html#KVVarGlob:kOneBody" title="KVVarGlob::(anonymous) KVVarGlob::kOneBody">kOneBody</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenTempFile"><span class="baseclass">KVBase::</span>OpenTempFile</a>(TString&amp; base, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; fp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">double</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:operator_double">operator double</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:operator()">operator()</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:operator()@1">operator()</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:operator()@2">operator()</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVVarGlob.html">KVVarGlob</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVVarGlob:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVVarGlob.html">KVVarGlob</a>&amp; a)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Print"><span class="baseclass">KVBase::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:Reset">Reset</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile@1"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchKVFile"><span class="baseclass">KVBase::</span>SearchKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, TString&amp; fullpath, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:SetFrame">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetLabel"><span class="baseclass">KVBase::</span>SetLabel</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* lab)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:SetMaxNumBranches">SetMaxNumBranches</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetNumber"><span class="baseclass">KVBase::</span>SetNumber</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> num)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:SetOption">SetOption</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:SetParameter">SetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par, <a href="./ListOfTypes.html#Double_t">Double_t</a> value)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:SetSelection">SetSelection</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetType"><span class="baseclass">KVBase::</span>SetType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* str)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:UnsetOption">UnsetOption</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:UnsetParameter">UnsetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:WorkingDirectory"><span class="baseclass">KVBase::</span>WorkingDirectory</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:AddFillMethod">AddFillMethod</a>(<a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <span class="keyword">int</span> type)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:AddFillMethodBody">AddFillMethodBody</a>(<a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:AddInitMethod">AddInitMethod</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname, <a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:ClearNameIndex">ClearNameIndex</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:FillMethodBody">FillMethodBody</a>(<a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:getvalue_char">getvalue_char</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:getvalue_int">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVarGlob:getvalue_void">getvalue_void</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:init">init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVarGlob:SetNameIndex">SetNameIndex</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#Int_t">Int_t</a> index)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVVarGlob:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVBase.html">KVBase</a>::EKaliVedaBits</td><td class="dataname"><a href="./KVBase.html#KVBase:kIsKaliVedaObject"><span class="baseclass">KVBase::</span>kIsKaliVedaObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVVarGlob.html">KVVarGlob</a>::(anonymous)</td><td class="dataname"><a name="KVVarGlob:kNBody"></a>kNBody</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVVarGlob.html">KVVarGlob</a>::(anonymous)</td><td class="dataname"><a name="KVVarGlob:kOneBody"></a>kOneBody</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVVarGlob.html">KVVarGlob</a>::(anonymous)</td><td class="dataname"><a name="KVVarGlob:kTwoBody"></a>kTwoBody</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVVarGlob:nb"></a>nb</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVVarGlob:nb_crea"></a>nb_crea</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVVarGlob:nb_dest"></a>nb_dest</td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVVarGlob:fFrame"></a>fFrame</td><td class="datadesc">(optional) name of reference frame used for kinematics</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVVarGlob:fMaxNumBranches"></a>fMaxNumBranches</td><td class="datadesc">max number of branches to create for multi-valued variable</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVVarGlob:fOptions"></a>fOptions</td><td class="datadesc">list of options</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVVarGlob:fParameters"></a>fParameters</td><td class="datadesc">list of parameters</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVParticleCondition.html">KVParticleCondition</a>*</td><td class="dataname"><a name="KVVarGlob:fSelection"></a>fSelection</td><td class="datadesc">(optional) condition used to select particles</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVVarGlob:fType"></a>fType</td><td class="datadesc">type of variable global; = kOneBody, kTwoBody or kNBody</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Char_t">Char_t</a></td><td class="dataname"><a name="KVVarGlob:fValueType"></a>fValueType</td><td class="datadesc">type (='I' integer or 'D' double) of global variable value</td></tr>
+
+</table></div>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVVarGlob:nameList"></a>nameList</td><td class="datadesc">correspondence between variable name and index</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVVarGlob:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVVarGlob_Inh" id="MapKVVarGlob_Inh">
+<area shape="rect" id="node2" href="./KVBase.html" title="KVBase" alt="" coords="194,87,259,99"/>
+<area shape="rect" id="node5" href="./KVPtot.html" title="KVPtot" alt="" coords="393,13,458,25"/>
+<area shape="rect" id="node6" href="./KVCaloBase.html" title="KVCaloBase" alt="" coords="393,38,458,50"/>
+<area shape="rect" id="node7" href="./KVVarGlob1.html" title="KVVarGlob1" alt="" coords="393,75,458,87"/>
+<area shape="rect" id="node8" href="./KVQuadMoment.html" title="KVQuadMoment" alt="" coords="392,87,459,99"/>
+<area shape="rect" id="node9" href="./KVRiso.html" title="KVRiso" alt="" coords="393,99,458,111"/>
+<area shape="rect" id="node10" href="./KVSource.html" title="KVSource" alt="" coords="393,112,458,124"/>
+<area shape="rect" id="node11" href="./KVTensP.html" title="KVTensP" alt="" coords="393,149,458,161"/>
+<area shape="rect" id="node12" href="./KVZtot.html" title="KVZtot" alt="" coords="493,26,558,38"/>
+<area shape="rect" id="node13" href="./KVZVtot.html" title="KVZVtot" alt="" coords="493,1,558,13"/>
+<area shape="rect" id="node14" href="./KVZmax.html" title="KVZmax" alt="" coords="493,38,558,50"/>
+<area shape="rect" id="node15" href="./KVCalorimetry.html" title="KVCalorimetry" alt="" coords="493,13,558,25"/>
+<area shape="rect" id="node16" href="./KVZbound.html" title="KVZbound" alt="" coords="493,50,558,62"/>
+<area shape="rect" id="node17" href="./KVMultLeg.html" title="KVMultLeg" alt="" coords="493,62,558,75"/>
+<area shape="rect" id="node18" href="./KVRisoAv.html" title="KVRisoAv" alt="" coords="493,136,558,148"/>
+<area shape="rect" id="node19" href="./KVEkin.html" title="KVEkin" alt="" coords="493,75,558,87"/>
+<area shape="rect" id="node20" href="./KVEtrans.html" title="KVEtrans" alt="" coords="493,87,558,99"/>
+<area shape="rect" id="node21" href="./KVFoxH2.html" title="KVFoxH2" alt="" coords="493,99,558,111"/>
+<area shape="rect" id="node22" href="./KVMultAv.html" title="KVMultAv" alt="" coords="493,112,558,124"/>
+<area shape="rect" id="node23" href="./KVVarGlobMean.html" title="KVVarGlobMean" alt="" coords="491,124,560,136"/>
+<area shape="rect" id="node24" href="./KVTensE.html" title="KVTensE" alt="" coords="493,149,558,161"/>
+<area shape="rect" id="node25" href="./KVTensPCM.html" title="KVTensPCM" alt="" coords="493,161,558,173"/>
+<area shape="rect" id="node26" href="./KVZtotAv.html" title="KVZtotAv" alt="" coords="599,26,663,38"/>
+<area shape="rect" id="node27" href="./KVZmean.html" title="KVZmean" alt="" coords="599,106,663,118"/>
+<area shape="rect" id="node28" href="./KVEtransLCP.html" title="KVEtransLCP" alt="" coords="599,87,663,99"/>
+<area shape="rect" id="node29" href="./KVMultLegAv.html" title="KVMultLegAv" alt="" coords="599,62,663,75"/>
+<area shape="rect" id="node30" href="./KVMultIMF.html" title="KVMultIMF" alt="" coords="599,38,663,50"/>
+<area shape="rect" id="node31" href="./KVRelativeVelocity.html" title="KVRelativeVelocity" alt="" coords="592,118,670,130"/>
+<area shape="rect" id="node32" href="./KVVGSum.html" title="KVVGSum" alt="" coords="599,130,663,142"/>
+<area shape="rect" id="node33" href="./KVZBoundMean.html" title="KVZBoundMean" alt="" coords="598,143,665,155"/>
+<area shape="rect" id="node34" href="./KVZboundAv.html" title="KVZboundAv" alt="" coords="599,50,663,62"/>
+<area shape="rect" id="node35" href="./KVMultIMFAv.html" title="KVMultIMFAv" alt="" coords="703,38,767,50"/>
+</map>
+<map name="MapKVVarGlob_InhMem" id="MapKVVarGlob_InhMem">
+<area shape="rect" id="clust12" href="./KVBase.html" alt="" coords="557,47,624,96"/>
+<area shape="rect" id="clust11" href="./KVBase.html" alt="" coords="635,47,701,64"/>
+<area shape="rect" id="clust13" href="./KVBase.html" alt="" coords="480,47,547,96"/>
+<area shape="rect" id="clust14" href="./KVBase.html" alt="" coords="667,80,669,83"/>
+<area shape="rect" id="clust15" href="./KVBase.html" alt="" coords="635,99,701,432"/>
+<area shape="rect" id="clust16" href="./KVBase.html" alt="" coords="557,99,624,432"/>
+<area shape="rect" id="clust17" href="./KVBase.html" alt="" coords="480,99,547,432"/>
+<area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,432"/>
+</map>
+<map name="MapKVVarGlob_Lib" id="MapKVVarGlob_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="492,44,607,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVVarGlob_Inh" class="tabsel" href="inh/KVVarGlob_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVVarGlob_Inh.png');">Inheritance</a>
+<a id="imgKVVarGlob_InhMem" class="tab" href="inhmem/KVVarGlob_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVVarGlob_InhMem.png');">Inherited Members</a>
+<a id="imgKVVarGlob_Incl" class="tab" href="incl/KVVarGlob_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVVarGlob_Incl.png');">Includes</a>
+<a id="imgKVVarGlob_Lib" class="tab" href="lib/KVVarGlob_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVVarGlob_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVVarGlob_Inh" src="inh/KVVarGlob_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:init" href="src/KVVarGlob.cxx.html#wJIFXB">init</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Initialisation des champs de <a href="./KVVarGlob.html">KVVarGlob</a>
+ Cette methode privee n'est appelee que par les createurs
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVVarGlob:KVVarGlob" href="src/KVVarGlob.cxx.html#ky.OeE">KVVarGlob</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Createur par default
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVVarGlob:KVVarGlob@1" href="src/KVVarGlob.cxx.html#Coqli">KVVarGlob</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* nom)</span><br />
+<div class="funccomm"><pre>
+ Constructeur avec un nom
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVVarGlob:KVVarGlob@2" href="src/KVVarGlob.cxx.html#DYSTyC">KVVarGlob</a>(<span class="keyword">const</span> <a href="./KVVarGlob.html">KVVarGlob</a>&amp; a)</span><br />
+<div class="funccomm"><pre> Contructeur par copie
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVVarGlob:_KVVarGlob" href="src/KVVarGlob.cxx.html#BZiMlE">~KVVarGlob</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Destructeur
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * <a class="funcname" name="KVVarGlob:GetObject" href="src/KVVarGlob.cxx.html#sEBOTD">GetObject</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Retourne un object
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:MakeClass" href="src/KVVarGlob.cxx.html#ktDos">MakeClass</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classdesc, <span class="keyword">int</span> type = <a href="./KVVarGlob.html#KVVarGlob:kOneBody" title="KVVarGlob::(anonymous) KVVarGlob::kOneBody">kOneBody</a>)</span><br />
+<div class="funccomm"><pre> Creates skeleton '.h' and '.cpp' files for a new global variable class which
+ inherits from this class. Give a name for the new class and a <a href="./ListOfTypes.html#short">short</a> description
+ which will be used to document the class.
+
+ By default the new class will be of type 1-body. A <a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>*) method
+ will be generated which the user should complete.
+ For a 2-body variable, call <a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a> with type = <a href="./KVVarGlob.html">KVVarGlob</a>::<a href="./KVVarGlob.html#KVVarGlob:kTwoBody" title="KVVarGlob::(anonymous) KVVarGlob::kTwoBody">kTwoBody</a>.
+ A skeleton <a href="./KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>*,<a href="./KVNucleus.html">KVNucleus</a>*) method will be generated.
+ For a N-body variable, call <a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a> with type = <a href="./KVVarGlob.html">KVVarGlob</a>::<a href="./KVVarGlob.html#KVVarGlob:kNBody" title="KVVarGlob::(anonymous) KVVarGlob::kNBody">kNBody</a>.
+ A skeleton <a href="./KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="./KVEvent.html">KVEvent</a>*) method will be generated.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:FillMethodBody" href="src/KVVarGlob.cxx.html#VyMf.">FillMethodBody</a>(<a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</span><br />
+<div class="funccomm"><pre> PRIVATE method used by <a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a>.
+ body of '<a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="./KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>', or '<a href="./KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:AddInitMethod" href="src/KVVarGlob.cxx.html#iprYiB">AddInitMethod</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname, <a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</span><br />
+<div class="funccomm"><pre> PRIVATE method used by <a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a>.
+ add '<a href="./KVVarGlob.html#KVVarGlob:init" title="void KVVarGlob::init()">init</a>' method
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:AddFillMethod" href="src/KVVarGlob.cxx.html#XZP9jC">AddFillMethod</a>(<a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <span class="keyword">int</span> type)</span><br />
+<div class="funccomm"><pre> PRIVATE method used by <a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a>.
+ add '<a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="./KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>', or '<a href="./KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:AddFillMethodBody" href="src/KVVarGlob.cxx.html#sdzHWE">AddFillMethodBody</a>(<a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</span><br />
+<div class="funccomm"><pre> PRIVATE method used by <a href="./KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = kOneBody)">MakeClass</a>.
+ add body of fill method
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:SetNameIndex" href="src/KVVarGlob.cxx.html#d1ggEB">SetNameIndex</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#Int_t">Int_t</a> index)</span><br />
+<div class="funccomm"><pre> Make the link between a variable name and an index
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVarGlob:GetNameIndex" href="src/KVVarGlob.cxx.html#rg1D7">GetNameIndex</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre> return the index corresponding to name
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:SetFrame" href="src/KVVarGlob.cxx.html#MVgFYB">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre>Sets the reference frame used for kinematical calculations.
+By default, i.e. if this method is not called, we use the default frame of particles
+which (usually) corresponds to the 'laboratory' or 'detector' frame.
+
+The frame 'ref' must be defined before calculating global variables.
+See <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame, const TVector3&amp; boost, Bool_t beta = kFALSE) or overloads">SetFrame</a> and <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent.html#KVEvent:SetFrame" title="void KVEvent::SetFrame(const Char_t* frame, const TVector3&amp; boost, Bool_t beta = kFALSE) or overloads">SetFrame</a> methods for defining new reference frames.
+See <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a> how to access particle kinematics in different frames.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:SetOption" href="src/KVVarGlob.cxx.html#RGqnhE">SetOption</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</span><br />
+<div class="funccomm"><pre>Set a value for an option
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVarGlob:IsOptionGiven" href="src/KVVarGlob.cxx.html#CaZvDD">IsOptionGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</span><br />
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the option 'opt' has been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TString&amp; <a class="funcname" name="KVVarGlob:GetOptionString" href="src/KVVarGlob.cxx.html#oqEzIE">GetOptionString</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) const</span><br />
+<div class="funccomm"><pre>Returns the value of the option
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:UnsetOption" href="src/KVVarGlob.cxx.html#rzCNkB">UnsetOption</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</span><br />
+<div class="funccomm"><pre>Removes the option 'opt' from the internal lists, as if it had never been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:SetParameter" href="src/KVVarGlob.cxx.html#jmlCDE">SetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par, <a href="./ListOfTypes.html#Double_t">Double_t</a> value)</span><br />
+<div class="funccomm"><pre>Set the value for a parameter
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVarGlob:IsParameterSet" href="src/KVVarGlob.cxx.html#Rw1TnC">IsParameterSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</span><br />
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the parameter 'par' has been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:GetParameter" href="src/KVVarGlob.cxx.html#JBUoTE">GetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</span><br />
+<div class="funccomm"><pre>Returns the value of the parameter 'par'
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:UnsetParameter" href="src/KVVarGlob.cxx.html#UqZ5zB">UnsetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</span><br />
+<div class="funccomm"><pre>Removes the parameter 'par' from the internal lists, as if it had never been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:SetSelection" href="src/KVVarGlob.cxx.html#tN4YJ">SetSelection</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp; )</span><br />
+<div class="funccomm"><pre>Use this method to define the conditions which will be applied to select
+particles to contribute to the global variable.
+See <a href="./KVParticleCondition.html">KVParticleCondition</a> class.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:Fill" href="src/KVVarGlob.cxx.html#LdNrJB">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</span><br />
+<div class="funccomm"><pre> virtual method which must be overriden in child classes
+ describing one-body global variables.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:Fill2" href="src/KVVarGlob.cxx.html#F0QfFB">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>* n1, <a href="./KVNucleus.html">KVNucleus</a>* n2)</span><br />
+<div class="funccomm"><pre> virtual method which must be overriden in child classes
+ describing two-body global variables.
+
+ NOTE: this method will be called for EVERY pair of nuclei in the event
+ (i.e. n1-n2 and n2-n1), including pairs of identical nuclei (n1 = n2).
+ If you want to calculate a global variable using only each non-identical pair once,
+ then make sure in your implementation that you check n1!=n2 and divide
+ the result of summing over the pairs by 2 to avoid <a href="./ListOfTypes.html#double">double</a>-counting.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:FillN" href="src/KVVarGlob.cxx.html#SwhmH">FillN</a>(<a href="./KVEvent.html">KVEvent</a>* e)</span><br />
+<div class="funccomm"><pre> virtual method which must be overriden in child classes
+ describing N-body global variables.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:ClearNameIndex" href="src/KVVarGlob.h.html#BXNCuC">ClearNameIndex</a>()</span><br />
+<div class="funccomm"><pre> <a href="http://root.cern.ch/root/html/TObject.html#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a> previously defined associations between variable name and index
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:getvalue_void" href="src/KVVarGlob.h.html#QSx0IB">getvalue_void</a>() const</span><br />
+<div class="funccomm"><pre> protected methods to be overridden in child classes 
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:getvalue_char" href="src/KVVarGlob.h.html#UpRz2B">getvalue_char</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre> By default, this method returns the value of the variable <span class="string">"name"</span>
+ using the name-index table set up with <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*,<a href="./ListOfTypes.html#Int_t">Int_t</a>).
+ Redefine this method in child classes to change the behaviour of
+ <a href="./KVVarGlob.html">KVVarGlob</a>::<a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">return</span> <a class="funcname" name="KVVarGlob:getvalue_int" href="src/KVVarGlob.h.html#MPdDgC">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> )</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVarGlob:IsOneBody" href="src/KVVarGlob.h.html#Z2Ayp">IsOneBody</a>()</span><br />
+<div class="funccomm"><pre> returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for variables of one-body type for which <a href="./KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>*) method must be defined
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:fType" title="Int_t KVVarGlob::fType">fType</a>==<a href="./KVVarGlob.html#KVVarGlob:kOneBody" title="KVVarGlob::(anonymous) KVVarGlob::kOneBody">kOneBody</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVarGlob:IsTwoBody" href="src/KVVarGlob.h.html#utR40">IsTwoBody</a>()</span><br />
+<div class="funccomm"><pre> returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for variables of two-body type for which <a href="./KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>*,<a href="./KVNucleus.html">KVNucleus</a>*) method must be defined
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:fType" title="Int_t KVVarGlob::fType">fType</a>==<a href="./KVVarGlob.html#KVVarGlob:kTwoBody" title="KVVarGlob::(anonymous) KVVarGlob::kTwoBody">kTwoBody</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVarGlob:IsNBody" href="src/KVVarGlob.h.html#OdUD1C">IsNBody</a>()</span><br />
+<div class="funccomm"><pre> returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for variables of N-body type for which <a href="./KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="./KVEvent.html">KVEvent</a>*) method must be defined
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:fType" title="Int_t KVVarGlob::fType">fType</a>==<a href="./KVVarGlob.html#KVVarGlob:kNBody" title="KVVarGlob::(anonymous) KVVarGlob::kNBody">kNBody</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:Init" href="src/KVVarGlob.h.html#gRNHVC">Init</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Initialisation of internal variables, called once before beginning treatment
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:Reset" href="src/KVVarGlob.h.html#hPqaKD">Reset</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> <a href="./KVVarGlob.html#KVVarGlob:Reset" title="void KVVarGlob::Reset()">Reset</a> internal variables, called before treatment of each event
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:FillWithCondition" href="src/KVVarGlob.h.html#Yx_0xD">FillWithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</span><br />
+<div class="funccomm"><pre> Evaluate contribution of particle to variable only if it satisfies
+ the particle selection criteria given with <a href="./KVVarGlob.html#KVVarGlob:SetSelection" title="void KVVarGlob::SetSelection(const KVParticleCondition&amp;)">SetSelection</a>(<a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:Fill2WithCondition" href="src/KVVarGlob.h.html#nhfWbE">Fill2WithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>* n1, <a href="./KVNucleus.html">KVNucleus</a>* n2)</span><br />
+<div class="funccomm"><pre> Evaluate contribution of particles to variable only if both satisfy
+ the particle selection criteria given with <a href="./KVVarGlob.html#KVVarGlob:SetSelection" title="void KVVarGlob::SetSelection(const KVParticleCondition&amp;)">SetSelection</a>(<a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:GetValue" href="src/KVVarGlob.h.html#piummC">GetValue</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> On retourne la valeur de la variable.
+ To override behaviour of this method in child classes,
+ redefine the protected method <a href="./KVVarGlob.html#KVVarGlob:getvalue_void" title="Double_t KVVarGlob::getvalue_void() const">getvalue_void</a>()
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:GetValue@1" href="src/KVVarGlob.h.html#D1CpQD">GetValue</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre> on retourne la valeur de la variable <span class="string">"name"</span>
+ To override behaviour of this method in child classes,
+ redefine the protected method <a href="./KVVarGlob.html#KVVarGlob:getvalue_char" title="Double_t KVVarGlob::getvalue_char(const Char_t* name)">getvalue_char</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:GetValue@2" href="src/KVVarGlob.h.html#ZtK8PD">GetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</span><br />
+<div class="funccomm"><pre> on retourne la ieme valeur du tableau
+ To override behaviour of this method in child classes,
+ redefine the protected method <a href="./KVVarGlob.html#KVVarGlob:getvalue_int" title="Double_t KVVarGlob::getvalue_int(Int_t)">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> * <a class="funcname" name="KVVarGlob:GetValuePtr" href="src/KVVarGlob.h.html#dZg6c">GetValuePtr</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> On retourne un tableau de valeurs
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:operator()" href="src/KVVarGlob.h.html#cqytJB">operator()</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> On retourne la valeur de la variable.
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:operator()@1" href="src/KVVarGlob.h.html#LUx7D">operator()</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre> on retourne la valeur de la variable <span class="string">"name"</span>
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(name); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:operator()@2" href="src/KVVarGlob.h.html#Z6lUwE">operator()</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</span><br />
+<div class="funccomm"><pre> on retourne la ieme valeur du tableau
+</pre></div>
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(i); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVVarGlob:GetFrame" href="src/KVVarGlob.h.html#zOQwtC">GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre>Name of reference frame used for kinematics
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVarGlob:AsDouble" href="src/KVVarGlob.h.html#cCngnB">AsDouble</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVVarGlob:operator_double" href="src/KVVarGlob.h.html#pG_5eC">operator double</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVVarGlob.html#KVVarGlob:AsDouble" title="Double_t KVVarGlob::AsDouble() const">AsDouble</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVarGlob:GetNumberOfValues" href="src/KVVarGlob.h.html#fHjjwE">GetNumberOfValues</a>() const</span><br />
+<div class="funccomm"><pre> Returns number of values associated with this global variable.
+ This is the number of indices defined using <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a> method.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVarGlob:GetNumberOfBranches" href="src/KVVarGlob.h.html#VkeE5B">GetNumberOfBranches</a>() const</span><br />
+<div class="funccomm"><pre> Returns number of branches to create for this global variable (see <a href="./KVGVList.html">KVGVList</a>::<a href="./KVGVList.html#KVGVList:MakeBranches" title="void KVGVList::MakeBranches(TTree*)">MakeBranches</a>).
+ This is the same as <a href="./KVVarGlob.html#KVVarGlob:GetNumberOfValues" title="Int_t KVVarGlob::GetNumberOfValues() const">GetNumberOfValues</a>() unless <a href="./KVVarGlob.html#KVVarGlob:SetMaxNumBranches" title="void KVVarGlob::SetMaxNumBranches(Int_t n)">SetMaxNumBranches</a> has been called with a different
+ (smaller) value.
+ Note that if <a href="./KVVarGlob.html#KVVarGlob:SetMaxNumBranches" title="void KVVarGlob::SetMaxNumBranches(Int_t n)">SetMaxNumBranches</a>(0) is called, no branch will be created for this variable.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVVarGlob:GetValueName" href="src/KVVarGlob.h.html#rPiOKD">GetValueName</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+<div class="funccomm"><pre> Returns name of value associated with index <span class="string">'i'</span>,
+ as defined by using <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a> method.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Char_t">Char_t</a> <a class="funcname" name="KVVarGlob:GetValueType" href="src/KVVarGlob.h.html#RI29lC">GetValueType</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ) const</span><br />
+<div class="funccomm"><pre> Returns type of value associated with index i
+ This can be either <span class="string">'I'</span> (integer values) or <span class="string">'D'</span> (floating-point/<a href="./ListOfTypes.html#double">double</a>).
+ By default, this method returns the same type (value of member variable
+ <a href="./KVVarGlob.html#KVVarGlob:fValueType" title="Char_t KVVarGlob::fValueType">fValueType</a>) for all values of i.
+ This can be overridden in child classes.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVarGlob:SetMaxNumBranches" href="src/KVVarGlob.h.html#dkbvlE">SetMaxNumBranches</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n)</span><br />
+<div class="funccomm"><pre> Used for automatic TTree branch creation for multi-valued variables
+ (see <a href="./KVGVList.html">KVGVList</a>::<a href="./KVGVList.html#KVGVList:MakeBranches" title="void KVGVList::MakeBranches(TTree*)">MakeBranches</a>).
+ Normally a branch will be created for each of the N values declared
+ in the <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a> method, but if this method is called before
+ analysis begins with n&lt;N, only the first n branches will be used.
+ Note that if <a href="./KVVarGlob.html#KVVarGlob:SetMaxNumBranches" title="void KVVarGlob::SetMaxNumBranches(Int_t n)">SetMaxNumBranches</a>(0) is called, no branch will
+ be created for this variable.
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:44:49 2015 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

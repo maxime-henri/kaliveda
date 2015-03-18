@@ -1,0 +1,872 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:42:25 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVDataAnalyser</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVDataAnalyser','libKVMultiDetanalysis','KVDataAnalyser.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVDataAnalyser.h.html">header file</a>
+<a class="descrheadentry" href="src/KVDataAnalyser.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/analysis/KVDataAnalyser.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/analysis/KVDataAnalyser.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVDataAnalyser:description">class description</a> 
+<a class="descrheadentry" href="#KVDataAnalyser:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVDataAnalyser:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVDataAnalyser:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_ANALYSIS_Index.html">ANALYSIS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVDataAnalyser</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVDataAnalyser:description"></a>class KVDataAnalyser: public TObject</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVDataAnalyser</h2>
+<h4>Set up and run data analysis tasks</h4>
+<p>
+This can be used either 'interactively' or in menu-driven mode.
+In both cases, in order to run a data analysis task, the user must
+specify:
+</p>
+<ul>
+<li>the dataset to analyse</li>
+<li>the type of analysis task to perform</li>
+<li>the run or runs to analyse</li>
+<li>whether to use a batch system to execute the analysis</li>
+</ul>
+<p>
+The role of this base class is to set up the environment necessary for the execution of
+a given data analysis task;
+the actual analysis will be performed by a specialised child class of KVDataAnalyser as
+specified by the task. See <a href="KVDataAnalysisTask.html">KVDataAnalysisTask</a>.
+The available data analysers are defined as plugins in the file $KVROOT/KVFiles/.kvrootrc
+as in the following example:
+</p>
+<pre>
+# Plugins for data analysis
+# KVDataAnalyser can be tuned for different datasets/environments
+Plugin.KVDataAnalyser:   INDRA   KVINDRADataAnalyser KVIndra "KVINDRADataAnalyser()"
++Plugin.KVDataAnalyser:   INDRAReconData   KVINDRAReconDataAnalyser KVIndra "KVINDRAReconDataAnalyser()"
++Plugin.KVDataAnalyser:   INDRARawDataRecon   KVINDRARawDataReconstructor KVIndra "KVINDRARawDataReconstructor()"
++Plugin.KVDataAnalyser:   INDRAGeneDataAnalyser   KVINDRAGeneDataAnalyser KVIndra "KVINDRAGeneDataAnalyser()"
+</pre>
+<h4>Perform analysis tasks using text menus to choose data, task, runs, etc.</h4>
+<pre>
+KVDataAnalyser* datan = new KVDataAnalyser;
+datan->RunMenus()
+</pre>
+  --- or ---
+<pre>
+gDataSetManager-><a href="KVDataSetManager.html#KVDataSetManager:RunAnalyser">RunAnalyser(...)</a>
+</pre>
+<h4>Perform analysis tasks "interactively"</h4>
+<p>In an interactive ROOT session, type:</p>
+<pre>
+KVDataAnalyser* datan = new KVDataAnalyser;
+datan->SetDataSet(...)
+datan->SetAnalysisTask(...)
+datan->SetRuns(...)
+etc. etc.
+</pre>
+<p>to set up the analysis task. You can also mix 'interactive' and menus by calling</p>
+<pre>
+datan->ChooseDataSet()
+datan->ChooseAnalysisTask()
+datan->ChooseSystem()
+datan->ChooseRuns(system)
+</pre>
+<p>Note that in this case the order is important: you cannot "ChooseAnalysisTask"
+before choosing or setting a dataset. Note also that in order to use ChooseRuns()
+you must give the pointer to the system (KVDBSystem*) to analyse.</p>
+<p>To set the "running mode", i.e. whether to run in batch or not, you can use</p>
+<pre>
+datan->ChooseRunningMode()
+</pre>
+<p>to be asked to choose interactive or batch, and then (if required) a batch system.</p>
+<p>If you don't use ChooseRunningMode() then use either:</p>
+<pre>
+datan->SetBatchSystem(0); // no batch
+</pre>
+<p>or, if you want to use a batch system, you can get a pointer to the required batch system
+from the <a href="KVBatchSystemManager.html">batch system manager</a>:</p>
+<pre>
+KVBatchSystem *mybatch = gBatchSystemManager->GetBatchSystem(...)
+</pre>
+<p>define the batch properties (see <a href="KVBatchSystem.html">KVBatchSystem</a> and derived classes),</p>
+<pre>
+mybatch->SetJobName(...)
+mybatch->SetMultiJobsMode(); // to run 1 job for each run
+</pre>
+<p>and then do</p>
+<pre>
+datan->SetBatchSystem( mybatch ); // run task in batch
+</pre>
+<p>When ready to perform the analysis, call</p>
+<pre>
+datan->Run()
+</pre>
+<p>You will be asked to supply any missing parameters for the analysis task.</p>
+<h4>Naming user files generated by analysis in batch mode</h4>
+<p>When running an analysis task using a batch system, the working directory where the
+analysis is executed may be different to the one where the job was submitted. The source files
+for any user-supplied analysis class are automatically copied to the working directory when
+execution of the task begins. <b>Any</b> files generated by the user's analysis are copied back to the original directory at the end of
+execution. In case several tasks are launched from the same directory, it is the user's responsibility
+to give unique names to the files generated by her analysis. One simple way to do this is to
+use the name of the batch job as a basis for naming such files (see <a href="KVBatchSystem.html">KVBatchSystem</a>):
+</p>
+<pre>
+#include "KVBatchSystem.h"
+...
+if( gBatchSystem ) {
+running in batch. name results file after job name.
+   new TFile( Form( "%s.root", gBatchSystem->GetJobName() ), "recreate");
+}
+else {
+not running in batch. fixed name.
+   new TFile("Results.root", "recreate");
+}
+</pre>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVDataAnalyser:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:_KVDataAnalyser">~KVDataAnalyser</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:BatchMode">BatchMode</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:CheckStatusUpdateInterval">CheckStatusUpdateInterval</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nevents) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:CheckTaskVariables">CheckTaskVariables</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseAnalysisTask">ChooseAnalysisTask</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseDataSet">ChooseDataSet</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseDataType">ChooseDataType</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseNbEventToRead">ChooseNbEventToRead</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseRunningMode">ChooseRunningMode</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseRuns">ChooseRuns</a>(<a href="./KVDBSystem.html">KVDBSystem</a>* system = 0, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* data_type = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseSystem">ChooseSystem</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* data_type = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ChooseUserClass">ChooseUserClass</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clear"><span class="baseclass">TObject::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ClearRunList">ClearRunList</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:DeleteBatchStatusFile">DeleteBatchStatusFile</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:DoStatusUpdate">DoStatusUpdate</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nevents) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:DoUserClassFilesExist">DoUserClassFilesExist</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ExpandAutoBatchName">ExpandAutoBatchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* format)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <a href="./KVDataAnalyser.html">KVDataAnalyser</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetAnalyser">GetAnalyser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetAnalysisTask">GetAnalysisTask</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetBatchName">GetBatchName</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetBatchStatusFileName">GetBatchStatusFileName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./KVBatchSystem.html">KVBatchSystem</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetBatchSystem">GetBatchSystem</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetDataSet">GetDataSet</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVString.html">KVString</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetDataType">GetDataType</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetLaunchDirectory">GetLaunchDirectory</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetNbEventToRead">GetNbEventToRead</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDataAnalyser.html">KVDataAnalyser</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetParent">GetParent</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVNumberList.html">KVNumberList</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetRunList">GetRunList</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetRunNumberFromFileName">GetRunNumberFromFileName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVDBSystem.html">KVDBSystem</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetSystem">GetSystem</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetTotalEntriesToRead">GetTotalEntriesToRead</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetUserClass">GetUserClass</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./KVString.html">KVString</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetUserClassOptions">GetUserClassOptions</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVString.html">KVString</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetUserIncludes">GetUserIncludes</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVString.html">KVString</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetUserLibraries">GetUserLibraries</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:IsUserClassValid">IsUserClassValid</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:KVDataAnalyser">KVDataAnalyser</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:KVDataAnalyser@1">KVDataAnalyser</a>(<span class="keyword">const</span> <a href="./KVDataAnalyser.html">KVDataAnalyser</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDataAnalyser.html">KVDataAnalyser</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVDataAnalyser.html">KVDataAnalyser</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:postAnalysis">postAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:postEndAnalysis">postEndAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:postEndRun">postEndRun</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:postInitAnalysis">postInitAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:postInitRun">postInitRun</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:preAnalysis">preAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:preEndAnalysis">preEndAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:preEndRun">preEndRun</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:preInitAnalysis">preInitAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:preInitRun">preInitRun</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Print"><span class="baseclass">TObject::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ReadBatchEnvFile">ReadBatchEnvFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:RegisterUserClass">RegisterUserClass</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:Reset">Reset</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:Run">Run</a>()</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:RunAnalyser">RunAnalyser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:RunMenus">RunMenus</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:RunningInLaunchDirectory">RunningInLaunchDirectory</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetAnalysisTask">SetAnalysisTask</a>(<a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>* at)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetBatchMode">SetBatchMode</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> on = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetBatchName">SetBatchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* batchname)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetBatchSystem">SetBatchSystem</a>(<a href="./KVBatchSystem.html">KVBatchSystem</a>* bs)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetDataSet">SetDataSet</a>(<a href="./KVDataSet.html">KVDataSet</a>* ds)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetDataSet@1">SetDataSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetDataType">SetDataType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetNbEventToRead">SetNbEventToRead</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> nb = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetParent">SetParent</a>(<a href="./KVDataAnalyser.html">KVDataAnalyser</a>* da)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetRuns">SetRuns</a>(<a href="./KVNumberList.html">KVNumberList</a>&amp; nl, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> check = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetRuns@1">SetRuns</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> check = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetSystem">SetSystem</a>(<a href="./KVDBSystem.html">KVDBSystem</a>* syst)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetUserClass">SetUserClass</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvs, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> check = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetUserClassOptions">SetUserClassOptions</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* o = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetUserIncludes">SetUserIncludes</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* incDirs = 0)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SetUserLibraries">SetUserLibraries</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a href="./KVString.html">libs</a> = 0)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SubmitTask">SubmitTask</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:SystemBatchName">SystemBatchName</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:UpdateBatchStatusFile">UpdateBatchStatusFile</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> totev, <a href="./ListOfTypes.html#Int_t">Int_t</a> evread, TString disk) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:WriteBatchEnvFile">WriteBatchEnvFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> sav = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:WriteBatchInfo">WriteBatchInfo</a>(TTree*)</td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:CheckIfUserClassIsValid">CheckIfUserClassIsValid</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:CopyAnalysisResultsToLaunchDirectory">CopyAnalysisResultsToLaunchDirectory</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetACliCMode">GetACliCMode</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:GetInstanceOfUserClass">GetInstanceOfUserClass</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVNumberList.html">KVNumberList</a></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:PrintAvailableRuns">PrintAvailableRuns</a>(<a href="./KVString.html">KVString</a>&amp; datatype)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:PrintSplashScreen">PrintSplashScreen</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataAnalyser:ScanWorkingDirectory">ScanWorkingDirectory</a>(TList**)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVDataAnalyser:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fBatch"></a>fBatch</td><td class="datadesc">set to kTRUE when used in a non-interactive environment</td></tr>
+<tr class="data"><td class="datatype">TEnv*</td><td class="dataname"><a name="KVDataAnalyser:fBatchEnv"></a>fBatchEnv</td><td class="datadesc">batch environment file</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fBatchName"></a>fBatchName</td><td class="datadesc">name of batch job when used in a non-interactive environment</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVBatchSystem.html">KVBatchSystem</a>*</td><td class="dataname"><a name="KVDataAnalyser:fBatchSystem"></a>fBatchSystem</td><td class="datadesc">batch system to use for submission of job</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fChoozDataSet"></a>fChoozDataSet</td><td class="datadesc">set to kTRUE when user wants to choose a dataset</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fChoozRuns"></a>fChoozRuns</td><td class="datadesc">set to kTRUE when user wants to choose runs</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fChoozSystem"></a>fChoozSystem</td><td class="datadesc">set to kTRUE when user wants to choose a system</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fChoozTask"></a>fChoozTask</td><td class="datadesc">set to kTRUE when user wants to choose analysis task</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fChoseRunMode"></a>fChoseRunMode</td><td class="datadesc">set to kTRUE once running mode has been set/chosen</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataSet.html">KVDataSet</a>*</td><td class="dataname"><a name="KVDataAnalyser:fDataSet"></a>fDataSet</td><td class="datadesc">dataset chosen by user</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fDataType"></a>fDataType</td><td class="datadesc">datatype chosen by user</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fIncludes"></a>fIncludes</td><td class="datadesc">user's include directories</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fLibraries"></a>fLibraries</td><td class="datadesc">user's libraries</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fMenus"></a>fMenus</td><td class="datadesc">set to kTRUE in menu-driven mode</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataAnalyser.html">KVDataAnalyser</a>*</td><td class="dataname"><a name="KVDataAnalyser:fParent"></a>fParent</td><td class="datadesc">holds address of parent analyser which created this one</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fQuit"></a>fQuit</td><td class="datadesc">set to kTRUE when user wants to quit</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNumberList.html">KVNumberList</a></td><td class="dataname"><a name="KVDataAnalyser:fRunList"></a>fRunList</td><td class="datadesc">list of runs to analyse</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fSubmit"></a>fSubmit</td><td class="datadesc">set to kTRUE when user wants to submit task</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDBSystem.html">KVDBSystem</a>*</td><td class="dataname"><a name="KVDataAnalyser:fSystem"></a>fSystem</td><td class="datadesc">system chosen by user</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>*</td><td class="dataname"><a name="KVDataAnalyser:fTask"></a>fTask</td><td class="datadesc">task chosen by user</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fUserClass"></a>fUserClass</td><td class="datadesc">user's analysis class</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fUserClassDec"></a>fUserClassDec</td><td class="datadesc">user's analysis class header file</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fUserClassImp"></a>fUserClassImp</td><td class="datadesc">user's analysis class implementation file</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDataAnalyser:fUserClassIsOK"></a>fUserClassIsOK</td><td class="datadesc">set once user class has been validated</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVDataAnalyser:fUserClassOptions"></a>fUserClassOptions</td><td class="datadesc">options to be passed to user analysis class</td></tr>
+<tr class="data"><td class="datatype">TList*</td><td class="dataname"><a name="KVDataAnalyser:fWorkDirEnd"></a>fWorkDirEnd</td><td class="datadesc">list of files in working directory after task runs</td></tr>
+<tr class="data"><td class="datatype">TList*</td><td class="dataname"><a name="KVDataAnalyser:fWorkDirInit"></a>fWorkDirInit</td><td class="datadesc">list of files in working directory before task runs</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVDataAnalyser:nbEventToRead"></a>nbEventToRead</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVDataAnalyser:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVDataAnalyser_Inh" id="MapKVDataAnalyser_Inh">
+<area shape="rect" id="node3" href="./KVDataTransfer.html" title="KVDataTransfer" alt="" coords="297,16,373,30"/>
+<area shape="rect" id="node4" href="./KVINDRAGeneDataAnalyser.html" title="KVINDRAGeneDataAnalyser" alt="" coords="267,30,403,44"/>
+<area shape="rect" id="node5" href="./KVINDRADstToRootTransfert.html" title="KVINDRADstToRootTransfert" alt="" coords="265,45,405,59"/>
+<area shape="rect" id="node6" href="./KVINDRAReconDataAnalyser.html" title="KVINDRAReconDataAnalyser" alt="" coords="265,59,405,73"/>
+<area shape="rect" id="node7" href="./KVFAZIARawDataAnalyser.html" title="KVFAZIARawDataAnalyser" alt="" coords="270,74,400,88"/>
+<area shape="rect" id="node8" href="./KVFAZIAReconDataAnalyser.html" title="KVFAZIAReconDataAnalyser" alt="" coords="266,88,404,103"/>
+<area shape="rect" id="node9" href="./KVRawDataAnalyser.html" title="KVRawDataAnalyser" alt="" coords="286,103,384,117"/>
+<area shape="rect" id="node10" href="./KVDataTransferBBFTP.html" title="KVDataTransferBBFTP" alt="" coords="455,1,564,15"/>
+<area shape="rect" id="node11" href="./KVDataTransferXRD.html" title="KVDataTransferXRD" alt="" coords="460,16,559,30"/>
+<area shape="rect" id="node12" href="./KVDataTransferSFTP.html" title="KVDataTransferSFTP" alt="" coords="459,30,560,44"/>
+<area shape="rect" id="node13" href="./KVINDRARawDataAnalyser.html" title="KVINDRARawDataAnalyser" alt="" coords="443,103,575,117"/>
+<area shape="rect" id="node14" href="./KVINDRARawDataReconstructor.html" title="KVINDRARawDataReconstructor" alt="" coords="613,103,767,117"/>
+</map>
+<map name="MapKVDataAnalyser_Lib" id="MapKVDataAnalyser_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="487,44,602,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVDataAnalyser_Inh" class="tabsel" href="inh/KVDataAnalyser_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVDataAnalyser_Inh.png');">Inheritance</a>
+<a id="imgKVDataAnalyser_InhMem" class="tab" href="inhmem/KVDataAnalyser_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVDataAnalyser_InhMem.png');">Inherited Members</a>
+<a id="imgKVDataAnalyser_Incl" class="tab" href="incl/KVDataAnalyser_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVDataAnalyser_Incl.png');">Includes</a>
+<a id="imgKVDataAnalyser_Lib" class="tab" href="lib/KVDataAnalyser_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVDataAnalyser_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVDataAnalyser_Inh" src="inh/KVDataAnalyser_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataAnalyser:KVDataAnalyser" href="src/KVDataAnalyser.cxx.html#FtnACD">KVDataAnalyser</a>()</span><br />
+<div class="funccomm"><pre>Default constructor.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataAnalyser:_KVDataAnalyser" href="src/KVDataAnalyser.cxx.html#reTTX">~KVDataAnalyser</a>()</span><br />
+<div class="funccomm"><pre>Default destructor.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:Reset" href="src/KVDataAnalyser.cxx.html#sDqQr">Reset</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:PrintSplashScreen" href="src/KVDataAnalyser.cxx.html#mENU1E">PrintSplashScreen</a>()</span><br />
+<div class="funccomm"><pre>Prints welcome message
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:Run" href="src/KVDataAnalyser.cxx.html#TNs1OD">Run</a>()</span><br />
+<div class="funccomm"><pre>Check all task variables, then run analyser
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:RunMenus" href="src/KVDataAnalyser.cxx.html#KaaQUD">RunMenus</a>()</span><br />
+<div class="funccomm"><pre><a href="./KVDataAnalyser.html#KVDataAnalyser:Run" title="void KVDataAnalyser::Run()">Run</a> data analyser in menu-driven mode
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:CheckTaskVariables" href="src/KVDataAnalyser.cxx.html#KDVMdD">CheckTaskVariables</a>()</span><br />
+<div class="funccomm"><pre>Checks the task variables
+In batch mode, we first set the task variables by reading the
+batch env file associated with the name set for the batch job
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseDataSet" href="src/KVDataAnalyser.cxx.html#wQsf3B">ChooseDataSet</a>()</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> list of available datasets and get user to choose one
+A pointer to the chosen dataset can be retrieved with <a href="./KVDataAnalyser.html#KVDataAnalyser:GetDataSet" title="KVDataSet* KVDataAnalyser::GetDataSet()">GetDataSet</a>()
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseDataType" href="src/KVDataAnalyser.cxx.html#ZIcIO">ChooseDataType</a>()</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> list of available types of data for the chosen dataset
+and get user to choose one.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseAnalysisTask" href="src/KVDataAnalyser.cxx.html#b4_EhD">ChooseAnalysisTask</a>()</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> list of all possible data analysis tasks for the chosen data set and invite the user
+to choose one of them.
+If only one task available, it is automatically selected
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseSystem" href="src/KVDataAnalyser.cxx.html#Xy1NKC">ChooseSystem</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* data_type = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> out list of all available systems for the given data type of the chosen dataset
+and invite the user to choose one. Return pointer to chosen system.
+If 'data_type' is not given, we assume that <a href="./KVDataAnalyser.html#KVDataAnalyser:ChooseAnalysisTask" title="void KVDataAnalyser::ChooseAnalysisTask()">ChooseAnalysisTask</a> was previously
+called and we use the prerequisite data type for the chosen task (<a href="./KVDataAnalyser.html#KVDataAnalyser:fTask" title="KVDataAnalysisTask* KVDataAnalyser::fTask">fTask</a>-><a href="./KVDataAnalysisTask.html#KVDataAnalysisTask:GetPrereq" title="const Char_t* KVDataAnalysisTask::GetPrereq() const">GetPrereq</a>()).
+The available system list is deduced from the 'availableruns' file corresponding to the
+chosen dataset repository subdirectory and the
+chosen data type (=<span class="string">"raw"</span>, <span class="string">"recon"</span>, <span class="string">"ident"</span>, <span class="string">"root"</span>).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseRuns" href="src/KVDataAnalyser.cxx.html#OVI5lC">ChooseRuns</a>(<a href="./KVDBSystem.html">KVDBSystem</a>* system = 0, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* data_type = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> out list of available runs for chosen dataset, task/data type and system
+and invite user to choose from among them
+If 'data_type' is not given, we assume that <a href="./KVDataAnalyser.html#KVDataAnalyser:ChooseAnalysisTask" title="void KVDataAnalyser::ChooseAnalysisTask()">ChooseAnalysisTask</a> was previously
+called and we use the prerequisite data type for the chosen task (<a href="./KVDataAnalyser.html#KVDataAnalyser:fTask" title="KVDataAnalysisTask* KVDataAnalyser::fTask">fTask</a>-><a href="./KVDataAnalysisTask.html#KVDataAnalysisTask:GetPrereq" title="const Char_t* KVDataAnalysisTask::GetPrereq() const">GetPrereq</a>()).
+If 'system' is not given, we assume <a href="./KVDataAnalyser.html#KVDataAnalyser:ChooseSystem" title="void KVDataAnalyser::ChooseSystem(const Char_t* data_type = &quot;&quot;)">ChooseSystem</a> was previously called and use
+the internally-stored value of that choice (<a href="./KVDataAnalyser.html#KVDataAnalyser:fSystem" title="KVDBSystem* KVDataAnalyser::fSystem">fSystem</a>).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetDataSet" href="src/KVDataAnalyser.cxx.html#UTc8GE">SetDataSet</a>(<a href="./KVDataSet.html">KVDataSet</a>* ds)</span><br />
+<div class="funccomm"><pre>Set dataset to be used for analysis.
+If the chosen dataset is not available, an error message is printed
+Only available datasets can be analysed
+Moreover, only datasets in the currently active data repository,
+<a href="./KVDataRepository.html">gDataRepository</a>, can be analysed. This is also checked.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetDataSet@1" href="src/KVDataAnalyser.cxx.html#unnv9">SetDataSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>Set dataset to be analysed.
+If 'name' is not the name of a valid and available dataset
+in the currently active data repository, <a href="./KVDataRepository.html">gDataRepository</a>,
+an error message is printed.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetAnalysisTask" href="src/KVDataAnalyser.cxx.html#yxU8fC">SetAnalysisTask</a>(<a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>* at)</span><br />
+<div class="funccomm"><pre>Set analysis task and data type
+For ways of obtaining pointers to data analysis tasks for any given dataset,
+see method <a href="./KVDataSet.html">KVDataSet</a>::<a href="./KVDataSet.html#KVDataSet:GetAnalysisTask" title="KVDataAnalysisTask* KVDataSet::GetAnalysisTask(Int_t) const or overloads">GetAnalysisTask</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* keywords) const.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVNumberList.html">KVNumberList</a> <a class="funcname" name="KVDataAnalyser:PrintAvailableRuns" href="src/KVDataAnalyser.cxx.html#NYtIPE">PrintAvailableRuns</a>(<a href="./KVString.html">KVString</a>&amp; datatype)</span><br />
+<div class="funccomm"><pre>Prints list of available runs for selected dataset, data type/analysis task, and system
+Returns list containing all run numbers
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetSystem" href="src/KVDataAnalyser.cxx.html#IMYToB">SetSystem</a>(<a href="./KVDBSystem.html">KVDBSystem</a>* syst)</span><br />
+<div class="funccomm"><pre> Set the System used in the analysis
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetRuns@1" href="src/KVDataAnalyser.cxx.html#HbjcDB">SetRuns</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* , <a href="./ListOfTypes.html#Bool_t">Bool_t</a> check = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre>Sets the run list (string has format of a <a href="./KVNumberList.html">KVNumberList</a>)
+If check=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> (default), we check that the runs are available, and if they belong to different
+systems we print a warning message
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetRuns" href="src/KVDataAnalyser.cxx.html#wD323C">SetRuns</a>(<a href="./KVNumberList.html">KVNumberList</a>&amp; nl, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> check = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Sets the run list
+If check=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> (default), we check that the runs are available, and if they belong to different
+systems we print a warning message
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetUserIncludes" href="src/KVDataAnalyser.cxx.html#SdqLsE">SetUserIncludes</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* incDirs = 0)</span><br />
+<div class="funccomm"><pre> Add to the includes paths the user's includes paths
+ the includes paths have to be separated by a white space
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetUserLibraries" href="src/KVDataAnalyser.cxx.html#f30Ny">SetUserLibraries</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a href="./KVString.html">libs</a> = 0)</span><br />
+<div class="funccomm"><pre> Load the user's libraries
+ the libraries have to be separated by a white space
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseNbEventToRead" href="src/KVDataAnalyser.cxx.html#PdQ2iD">ChooseNbEventToRead</a>()</span><br />
+<div class="funccomm"><pre> Ask user to set number of events to read
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataAnalyser.html">KVDataAnalyser</a>* <a class="funcname" name="KVDataAnalyser:GetAnalyser" href="src/KVDataAnalyser.cxx.html#myTtFB">GetAnalyser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin)</span><br />
+<div class="funccomm"><pre>Creates an instance of a class derived from <a href="./KVDataAnalyser.html">KVDataAnalyser</a> defined as a plugin
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseUserClass" href="src/KVDataAnalyser.cxx.html#ecqsu">ChooseUserClass</a>()</span><br />
+<div class="funccomm"><pre>Choose the user's analysis class
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:DoUserClassFilesExist" href="src/KVDataAnalyser.cxx.html#lhxu6E">DoUserClassFilesExist</a>()</span><br />
+<div class="funccomm"><pre>Check if files containing user's class are present in the working directory.
+The names of the implementation and header files are stored in <a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClassImp" title="KVString KVDataAnalyser::fUserClassImp">fUserClassImp</a> and <a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClassDec" title="KVString KVDataAnalyser::fUserClassDec">fUserClassDec</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:CheckIfUserClassIsValid" href="src/KVDataAnalyser.cxx.html#XN9CeE">CheckIfUserClassIsValid</a>()</span><br />
+<div class="funccomm"><pre>Return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the name of the class given by the user (<a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClass" title="KVString KVDataAnalyser::fUserClass">fUserClass</a>) is valid
+for the analysis task. This is so if one of the following is true:
+  - the class library has already been loaded. In this case the class will exist
+    in the dictionary (gROOT-&gt;GetClass()); we check if it derived from the
+    base class defined for the analysis task
+  - a plugin exists defining this class as an extension of the base class defined
+    for the analysis task (gROOT-&gt;GetPluginManager()-&gt;FindHandler(...): the URI for
+    the plugin must be the same as the name of the class)
+  - source files for the class are present in the working directory. In this case
+    we can add a plugin handler for the class.
+In the latter two cases, the class is valid if compilation succeeds.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVDataAnalyser:GetACliCMode" href="src/KVDataAnalyser.cxx.html#KPEoSE">GetACliCMode</a>()</span><br />
+<div class="funccomm"><pre> Returns string to be appended to name of user class for compilation with ACliC in
+ <a href="./KVDataAnalyser.html#KVDataAnalyser:GetInstanceOfUserClass" title="TObject* KVDataAnalyser::GetInstanceOfUserClass()">GetInstanceOfUserClass</a>. This depends on the boolean resources:
+
+ <a href="./KVDataAnalyser.html">KVDataAnalyser</a>.UserClass.Debug:  ( <span class="string">"yes"</span> =&gt; <span class="string">"g"</span> )
+ <a href="./KVDataAnalyser.html">KVDataAnalyser</a>.UserClass.Optimise:   ( <span class="string">"yes"</span> =&gt;  <span class="string">"O"</span> )
+ <a href="./KVDataAnalyser.html">KVDataAnalyser</a>.UserClass.ForceRecompile:  ( <span class="string">"no"</span> =&gt; <span class="string">"+"</span>; <span class="string">"yes"</span> =&gt; <span class="string">"++"</span> )
+
+ Note that if both Debug and Optimise are set to <span class="string">"yes/true"</span>, we use Debug mode.
+ (can't have BOTH debug &amp; optimisation).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* <a class="funcname" name="KVDataAnalyser:GetInstanceOfUserClass" href="src/KVDataAnalyser.cxx.html#wEKhU">GetInstanceOfUserClass</a>()</span><br />
+<div class="funccomm"><pre>Return an instance of the class given by the user (<a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClass" title="KVString KVDataAnalyser::fUserClass">fUserClass</a>), if it is valid.
+If the user class is given in the form of source code, it will be (re)compiled
+if it has not already been loaded and/or the source has changed since the last
+build, using ACliC. If the resource
+
+  <a href="./KVDataAnalyser.html">KVDataAnalyser</a>.UserClass.Debug:    yes
+
+is set, the user's class will be compiled with extra debugging information
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetUserClass" href="src/KVDataAnalyser.cxx.html#xdtAQB">SetUserClass</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvs, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> check = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre>Set name of user analysis class.
+If check=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> (default), we check the validity of the class
+if check=<a href="./ListOfTypes.html#Bool_t">kFALSE</a> we do not check and assume that the class is valid
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:WriteBatchEnvFile" href="src/KVDataAnalyser.cxx.html#tW6B3D">WriteBatchEnvFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* , <a href="./ListOfTypes.html#Bool_t">Bool_t</a> sav = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre>Save (in the TEnv <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatchEnv" title="TEnv* KVDataAnalyser::fBatchEnv">fBatchEnv</a>) all necessary information on analysis task which can be used to execute it later
+(i.e. when batch processing system executes the job).
+If save=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> (default), write the information in a file whose name is given by <span class="string">".jobname"</span>
+where 'jobname' is the name of the job as given to the batch system.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:ReadBatchEnvFile" href="src/KVDataAnalyser.cxx.html#cHdGaB">ReadBatchEnvFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> the batch env file <span class="string">"filename"</span> and initialise the analysis task using the
+informations in the file
+Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if all goes well
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:RunningInLaunchDirectory" href="src/KVDataAnalyser.cxx.html#FVOpb">RunningInLaunchDirectory</a>()</span><br />
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if current working directory is same as launch directory for batch job
+When not in batch mode, always returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SubmitTask" href="src/KVDataAnalyser.cxx.html#hTK9ZE">SubmitTask</a>()</span><br />
+<div class="funccomm"><pre>In interactive mode, the data analysis task is performed by
+instanciating and initialising the <a href="./KVDataAnalyser.html">KVDataAnalyser</a> child class specified by the task,
+and then calling its <a href="./KVDataAnalyser.html#KVDataAnalyser:Run" title="void KVDataAnalyser::Run()">Run</a>() method.
+In batch mode, the job is submitted to the chosen batch system.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVDataAnalyser:ExpandAutoBatchName" href="src/KVDataAnalyser.cxx.html#VLtJ_D">ExpandAutoBatchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* format)</span><br />
+<div class="funccomm"><pre>Replace any 'special' symbols in <span class="string">"format"</span> with their current values
+
+  $Date   : current date and time
+  $System  :  name of system to be analysed
+  $User  :  name of user
+  $UserClass  :  name of user's analysis class
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVDataAnalyser:SystemBatchName" href="src/KVDataAnalyser.cxx.html#hWKrID">SystemBatchName</a>()</span><br />
+<div class="funccomm"><pre> Private method used by <a href="./KVDataAnalyser.html#KVDataAnalyser:ExpandAutoBatchName" title="const Char_t* KVDataAnalyser::ExpandAutoBatchName(const Char_t* format)">ExpandAutoBatchName</a> to build name for current system
+ to be used in batch job name
+ Also used by <a href="./KVDataAnalysisLauncher.html">KVDataAnalysisLauncher</a>::<a href="./KVDataAnalysisLauncher.html#KVDataAnalysisLauncher:SystemBatchName" title="const Char_t* KVDataAnalysisLauncher::SystemBatchName()">SystemBatchName</a> for batch job names
+ and for writing resources in .KVDataAnalysisGUIrc file
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataAnalyser:GetLaunchDirectory" href="src/KVDataAnalyser.cxx.html#xaWO4B">GetLaunchDirectory</a>() const</span><br />
+<div class="funccomm"><pre> Returns full path to job submission directory for batch jobs.
+ Returns current working directory for non-batch jobs.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataAnalyser:GetBatchStatusFileName" href="src/KVDataAnalyser.cxx.html#ZKNucE">GetBatchStatusFileName</a>() const</span><br />
+<div class="funccomm"><pre> Returns full path to file used to store status of running batch jobs
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:UpdateBatchStatusFile" href="src/KVDataAnalyser.cxx.html#YDerVB">UpdateBatchStatusFile</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> totev, <a href="./ListOfTypes.html#Int_t">Int_t</a> evread, TString disk) const</span><br />
+<div class="funccomm"><pre> Update infos in batch status file
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:DeleteBatchStatusFile" href="src/KVDataAnalyser.cxx.html#L9bOFB">DeleteBatchStatusFile</a>() const</span><br />
+<div class="funccomm"><pre> <a href="http://root.cern.ch/root/html/TObject.html#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a> batch status file (and backup - '.bak') for batch job
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:CheckStatusUpdateInterval" href="src/KVDataAnalyser.cxx.html#GxPa0B">CheckStatusUpdateInterval</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nevents) const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the number of events coincides with the interval
+ set for status updates for the current data analysis task
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:DoStatusUpdate" href="src/KVDataAnalyser.cxx.html#UCEMiD">DoStatusUpdate</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nevents) const</span><br />
+<div class="funccomm"><pre> <a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> infos on events treated, disk usage, memory usage
+ DEACTIVATED ==&gt; Update status file for batch jobs &lt;==
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ChooseRunningMode" href="src/KVDataAnalyser.cxx.html#wmS.0E">ChooseRunningMode</a>()</span><br />
+<div class="funccomm"><pre>Ask user to choose between immediate or batch execution
+If the choice is batch, we ask to choose a batch system and whether or not
+to use the <span class="string">"multijobs"</span> mode
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ScanWorkingDirectory" href="src/KVDataAnalyser.cxx.html#ehplWC">ScanWorkingDirectory</a>(TList** )</span><br />
+<div class="funccomm"><pre>Fill TList with list of files in current working directory.
+If <a href="http://root.cern.ch/root/html/TObject.html#TObject:ls" title="void TObject::ls(Option_t* option = &quot;&quot;) const">ls</a>!=0 it is deleted beforehand
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:CopyAnalysisResultsToLaunchDirectory" href="src/KVDataAnalyser.cxx.html#gijX9C">CopyAnalysisResultsToLaunchDirectory</a>()</span><br />
+<div class="funccomm"><pre><a href="http://root.cern.ch/root/html/TObject.html#TObject:Compare" title="Int_t TObject::Compare(const TObject* obj) const">Compare</a> the two lists of files in the current working directory, before and after analysis;
+and copy any files which were created during the analysis to the launch directory.
+Files with the same names in the launch directory will be overwritten if they exist.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:WriteBatchInfo" href="src/KVDataAnalyser.cxx.html#HgcBzB">WriteBatchInfo</a>(TTree* )</span><br />
+<div class="funccomm"><pre> Store lots of useful information about the current version of KaliVeda,
+ ROOT, etc. etc. in a TEnv object which will be added to the TTree's
+ list of user infos (TTree::GetUserInfo).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVDataAnalyser:GetRunNumberFromFileName" href="src/KVDataAnalyser.cxx.html#xMR2cB">GetRunNumberFromFileName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre> Get the run number from the filename
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:RunAnalyser" href="src/KVDataAnalyser.cxx.html#PupCmE">RunAnalyser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Set up and run data analysis task.
+This allows to choose a dataset and a data analysis task and then execute the task or submit a batch job.
+The behaviour of the data analyser object (base class <a href="./KVDataAnalyser.html">KVDataAnalyser</a>) can be modified by choosing
+a plugin class corresponding to one of the plugins defined in $KVROOT/KVFiles/.kvrootrc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDataAnalyser:KVDataAnalyser" href="src/KVDataAnalyser.h.html#iZ5UDB">KVDataAnalyser</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVDataAnalyser:GetUserClass" href="src/KVDataAnalyser.h.html#EeVt5E">GetUserClass</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:IsUserClassValid" href="src/KVDataAnalyser.h.html#cqJsAC">IsUserClassValid</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClassIsOK" title="Bool_t KVDataAnalyser::fUserClassIsOK">fUserClassIsOK</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetBatchMode" href="src/KVDataAnalyser.h.html#RNklT">SetBatchMode</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> on = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatch" title="Bool_t KVDataAnalyser::fBatch">fBatch</a> = on; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDataAnalyser:BatchMode" href="src/KVDataAnalyser.h.html#RMmBYB">BatchMode</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatch" title="Bool_t KVDataAnalyser::fBatch">fBatch</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetBatchName" href="src/KVDataAnalyser.h.html#DQPITD">SetBatchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* batchname)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatchName" title="KVString KVDataAnalyser::fBatchName">fBatchName</a> = batchname; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVDataAnalyser:GetBatchName" href="src/KVDataAnalyser.h.html#EzXPUE">GetBatchName</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatchName" title="KVString KVDataAnalyser::fBatchName">fBatchName</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetBatchSystem" href="src/KVDataAnalyser.h.html#oOLIEB">SetBatchSystem</a>(<a href="./KVBatchSystem.html">KVBatchSystem</a>* bs)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatchSystem" title="KVBatchSystem* KVDataAnalyser::fBatchSystem">fBatchSystem</a> = bs; <a href="./KVDataAnalyser.html#KVDataAnalyser:fChoseRunMode" title="Bool_t KVDataAnalyser::fChoseRunMode">fChoseRunMode</a> = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>; <span class="keyword">if</span>(bs) <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatchSystem" title="KVBatchSystem* KVDataAnalyser::fBatchSystem">fBatchSystem</a>-><a href="./KVBatchSystem.html#KVBatchSystem:cd" title="void KVBatchSystem::cd()">cd</a>();}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVBatchSystem.html">KVBatchSystem</a>* <a class="funcname" name="KVDataAnalyser:GetBatchSystem" href="src/KVDataAnalyser.h.html#aMkxU">GetBatchSystem</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDataAnalyser.html#KVDataAnalyser:fBatchSystem" title="KVBatchSystem* KVDataAnalyser::fBatchSystem">fBatchSystem</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Long64_t">Long64_t</a> <a class="funcname" name="KVDataAnalyser:GetTotalEntriesToRead" href="src/KVDataAnalyser.h.html#LM_yDE">GetTotalEntriesToRead</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> 0; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a> * <a class="funcname" name="KVDataAnalyser:GetAnalysisTask" href="src/KVDataAnalyser.h.html#pU1SjC">GetAnalysisTask</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVString.html">KVString</a> &amp; <a class="funcname" name="KVDataAnalyser:GetDataType" href="src/KVDataAnalyser.h.html#CNDm7B">GetDataType</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDBSystem.html">KVDBSystem</a> * <a class="funcname" name="KVDataAnalyser:GetSystem" href="src/KVDataAnalyser.h.html#jyPOEB">GetSystem</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVNumberList.html">KVNumberList</a> &amp; <a class="funcname" name="KVDataAnalyser:GetRunList" href="src/KVDataAnalyser.h.html#Bt7biD">GetRunList</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataSet.html">KVDataSet</a> * <a class="funcname" name="KVDataAnalyser:GetDataSet" href="src/KVDataAnalyser.h.html#TJ6UAB">GetDataSet</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVString.html">KVString</a> &amp; <a class="funcname" name="KVDataAnalyser:GetUserIncludes" href="src/KVDataAnalyser.h.html#JEQjpB">GetUserIncludes</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVString.html">KVString</a> &amp; <a class="funcname" name="KVDataAnalyser:GetUserLibraries" href="src/KVDataAnalyser.h.html#HbVVXD">GetUserLibraries</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetNbEventToRead" href="src/KVDataAnalyser.h.html#YPWoI">SetNbEventToRead</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> nb = 0)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Long64_t">Long64_t</a> <a class="funcname" name="KVDataAnalyser:GetNbEventToRead" href="src/KVDataAnalyser.h.html#S2RXXE">GetNbEventToRead</a>(<span class="keyword">void</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetDataType" href="src/KVDataAnalyser.h.html#LLMLhD">SetDataType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:ClearRunList" href="src/KVDataAnalyser.h.html#O3R3n">ClearRunList</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVDataAnalyser.html#KVDataAnalyser:fRunList" title="KVNumberList KVDataAnalyser::fRunList">fRunList</a>.<a href="./KVNumberList.html#KVNumberList:Clear" title="void KVNumberList::Clear(Option_t* = &quot;&quot;)">Clear</a>();}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetParent" href="src/KVDataAnalyser.h.html#BkpUZC">SetParent</a>(<a href="./KVDataAnalyser.html">KVDataAnalyser</a>* da)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVDataAnalyser.html#KVDataAnalyser:fParent" title="KVDataAnalyser* KVDataAnalyser::fParent">fParent</a> = da; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataAnalyser.html">KVDataAnalyser</a>* <a class="funcname" name="KVDataAnalyser:GetParent" href="src/KVDataAnalyser.h.html#ZAZZLE">GetParent</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDataAnalyser.html#KVDataAnalyser:fParent" title="KVDataAnalyser* KVDataAnalyser::fParent">fParent</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:preInitAnalysis" href="src/KVDataAnalyser.h.html#v0ZKIB">preInitAnalysis</a>()</span><br />
+<div class="funccomm"><pre> methods which can be used to customise analysis class behaviour.
+	   they can be called from the analysis class using the global
+pointer to the current data analyser, <a href="./KVDataAnalyser.html">gDataAnalyser</a>  
+</pre></div>
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:postInitAnalysis" href="src/KVDataAnalyser.h.html#FVYfJE">postInitAnalysis</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:preInitRun" href="src/KVDataAnalyser.h.html#SlJ3KD">preInitRun</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:postInitRun" href="src/KVDataAnalyser.h.html#dYQFyC">postInitRun</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:preAnalysis" href="src/KVDataAnalyser.h.html#OEPYOC">preAnalysis</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:postAnalysis" href="src/KVDataAnalyser.h.html#eH9BkE">postAnalysis</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:preEndRun" href="src/KVDataAnalyser.h.html#gbVyEB">preEndRun</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:postEndRun" href="src/KVDataAnalyser.h.html#BVVr8">postEndRun</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:preEndAnalysis" href="src/KVDataAnalyser.h.html#lgnIm">preEndAnalysis</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:postEndAnalysis" href="src/KVDataAnalyser.h.html#pN.DpC">postEndAnalysis</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:RegisterUserClass" href="src/KVDataAnalyser.h.html#bmzOBC">RegisterUserClass</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* )</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataAnalyser:SetUserClassOptions" href="src/KVDataAnalyser.h.html#J_8vb">SetUserClassOptions</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* o = <span class="string">""</span>)</span><br />
+
+<div class="code"><code class="inlinecode">{ <a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClassOptions" title="KVString KVDataAnalyser::fUserClassOptions">fUserClassOptions</a>=o; }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVString.html">KVString</a>&amp; <a class="funcname" name="KVDataAnalyser:GetUserClassOptions" href="src/KVDataAnalyser.h.html#eB_9_C">GetUserClassOptions</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDataAnalyser.html#KVDataAnalyser:fUserClassOptions" title="KVString KVDataAnalyser::fUserClassOptions">fUserClassOptions</a>; }</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:42:26 2015 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

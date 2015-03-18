@@ -1,0 +1,474 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:44:09 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVPosition</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVPosition','libKVMultiDetbase','KVPosition.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVPosition.h.html">header file</a>
+<a class="descrheadentry" href="src/KVPosition.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVPosition.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVPosition.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVPosition:description">class description</a> 
+<a class="descrheadentry" href="#KVPosition:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVPosition:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVPosition:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_BASE_Index.html">BASE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVPosition</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVPosition:description"></a>class KVPosition</h1>
+<div class="classdescr">
+<pre>
+<a href="./KVPosition.html">KVPosition</a>
+
+Base class used for handling geometry in a multidetector array.
+
+Each <a href="./KVPosition.html">KVPosition</a> object represents an element of solid angle, with a domain in
+polar angle (theta) and azimuthal angle (phi). All methods necessary to
+inquire about relative positions of such elements (overlaps, inclusion, etc.)
+are provided.
+
+The coordinate system has the target position for its centre. The beam
+direction defines the positive z axis, with respect to which polar angles are
+measured. The +ve x-axis is taken to be vertical, and azimuthal angles
+increase when going clockwise from the +ve x-axis, looking towards the +ve
+z direction:
+
+               phi=0
+    (x) beam    |
+                |
+                |
+                +------- phi=90
+
+All angles are in degrees.
+
+Polar angles (theta) vary between 0 and 180 degrees
+Azimuthal angles (phi) vary between 0 and 359.999... degrees.
+
+An element is defined by theta-min/max and phi-min/max:
+Theta-min is the polar angle of the edge closest the beam (+ve z) axis
+Theta-max is the polar angle of the edge furthest from the beam (+ve z) axis
+Phi-min is the phi angle of the edge which is the most anticlockwise when
+  looking as in the figure shown above
+Phi-max is the phi angle of the edge which is the most clockwise when
+  looking as in the figure shown above
+
+The above definitions mean that phi-min is not necessarily smaller than
+phi-max: we redefine <span class="string">"smaller"</span> for phi angles to mean <span class="string">"more anticlockwise than"</span>
+or <span class="string">"less clockwise than"</span>. Some examples:
+ an element with phi-min = 20 and phi-max = 40 has an azimuthal width of 20
+ degrees;
+ an element with phi-min = 40 and phi-max = 20 has an azimuthal width of 340
+ degrees;
+ an element with phi-min = 350 and phi-max = 10 has an azimuthal width of
+ 20 degrees.
+
+Examples of use of <a href="./KVPosition.html">KVPosition</a> objects:
+
+
+Generating a random unit vector within a given angular range
+
+  <a href="./KVPosition.html">KVPosition</a> pos;                 |
+  pos.<a href="./KVPosition.html#KVPosition:SetPolarMinMax" title="void KVPosition::SetPolarMinMax(Double_t min, Double_t max)">SetPolarMinMax</a>(20, 30);         |  --  or:  <a href="./KVPosition.html">KVPosition</a> pos(20, 30, 0, 90);
+  pos.<a href="./KVPosition.html#KVPosition:SetAzimuthalMinMax" title="void KVPosition::SetAzimuthalMinMax(Double_t min, Double_t max)">SetAzimuthalMinMax</a>(0, 90);  |
+  TVector3 dir1 = pos.<a href="./KVPosition.html#KVPosition:GetDirection" title="TVector3 KVPosition::GetDirection()">GetDirection</a>();//unit vector in direction theta=25, phi=45
+  TVector3 dir2 = pos.<a href="./KVPosition.html#KVPosition:GetRandomDirection" title="TVector3 KVPosition::GetRandomDirection(Option_t* t = &quot;isotropic&quot;)">GetRandomDirection</a>();//isotropic direction within angular limits of pos
+  TVector3 dir3 = pos.<a href="./KVPosition.html#KVPosition:GetRandomDirection" title="TVector3 KVPosition::GetRandomDirection(Option_t* t = &quot;isotropic&quot;)">GetRandomDirection</a>(<span class="string">"random"</span>);//random direction
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVPosition:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVPosition:_KVPosition">~KVPosition</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVPosition:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetAzimuthalWidth">GetAzimuthalWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> phmin = -1., <a href="./ListOfTypes.html#Double_t">Double_t</a> phimax = -1.) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#KVPosition:GetCentre">GetCentre</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:GetCornerCoordinates">GetCornerCoordinates</a>(TVector3*, <a href="./ListOfTypes.html#Double_t">Double_t</a> = 0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:GetCornerCoordinatesInOwnFrame">GetCornerCoordinatesInOwnFrame</a>(TVector3*, <a href="./ListOfTypes.html#Double_t">Double_t</a> = 0)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetCosTheta">GetCosTheta</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#KVPosition:GetDirection">GetDirection</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetDistance">GetDistance</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TGeoHMatrix*</td><td class="funcname"><a class="funcname" href="#KVPosition:GetMatrix">GetMatrix</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetPhi">GetPhi</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetPhiMax">GetPhiMax</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetPhiMin">GetPhiMin</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:GetRandomAngles">GetRandomAngles</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; th, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; ph, <a href="./ListOfTypes.html#Option_t">Option_t</a>* t = <span class="string">"isotropic"</span>)</td></tr>
+<tr class="func"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#KVPosition:GetRandomDirection">GetRandomDirection</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* t = <span class="string">"isotropic"</span>)</td></tr>
+<tr class="func"><td class="funcret">TRotation</td><td class="funcname"><a class="funcname" href="#KVPosition:GetRandomIsotropicRotation">GetRandomIsotropicRotation</a>()</td></tr>
+<tr class="func"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#KVPosition:GetRandomPoint">GetRandomPoint</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TGeoBBox*</td><td class="funcname"><a class="funcname" href="#KVPosition:GetShape">GetShape</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetSinTheta">GetSinTheta</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetSolidAngle">GetSolidAngle</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetTheta">GetTheta</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetThetaMax">GetThetaMax</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:GetThetaMin">GetThetaMin</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:GetWidthsFromDimension">GetWidthsFromDimension</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> lin_dim)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:init">init</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVPosition:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:IsAlignedWith">IsAlignedWith</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:IsAzimuthallyWiderThan">IsAzimuthallyWiderThan</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:IsInPhiRange">IsInPhiRange</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:IsInPolarRange">IsInPolarRange</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:IsOverlappingWith">IsOverlappingWith</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:IsSmallerThan">IsSmallerThan</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPosition:KVPosition">KVPosition</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPosition:KVPosition@2">KVPosition</a>(<span class="keyword">const</span> <a href="./KVPosition.html">KVPosition</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPosition:KVPosition@1">KVPosition</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> thmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> thmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> dist = 0.)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVPosition.html">KVPosition</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVPosition:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVPosition.html">KVPosition</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPosition:ROOTGeo">ROOTGeo</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetAzimuthalAngle">SetAzimuthalAngle</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ph)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetAzimuthalMinMax">SetAzimuthalMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetAzimuthalWidth">SetAzimuthalWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> aw)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetDistance">SetDistance</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> d)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetMatrix">SetMatrix</a>(<span class="keyword">const</span> TGeoHMatrix*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetPhi">SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> p)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetPhiMinMax">SetPhiMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetPolarAngle">SetPolarAngle</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> th)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetPolarMinMax">SetPolarMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetPolarWidth">SetPolarWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pw)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetShape">SetShape</a>(TGeoBBox*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:SetTheta">SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> t)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPosition:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVPosition:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fDistance"></a>fDistance</td><td class="datadesc">distance in cm from centre of solid angle element to coordinate system origin (target)</td></tr>
+<tr class="data"><td class="datatype">TGeoHMatrix*</td><td class="dataname"><a name="KVPosition:fMatrix"></a>fMatrix</td><td class="datadesc">transform world&lt;-&gt;detector coordinates</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fPhi"></a>fPhi</td><td class="datadesc">azimuthal angle in degrees with respect to 12 o'clock (=0 deg.), corresponds to centre of telescope</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fPhi_max"></a>fPhi_max</td><td class="datadesc">azimuthal angle in degrees corresponding to most clockwise edge of telescope</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fPhi_min"></a>fPhi_min</td><td class="datadesc">azimuthal angle in degrees corresponding to most anticlockwise edge of telescope</td></tr>
+<tr class="data"><td class="datatype">TGeoBBox*</td><td class="dataname"><a name="KVPosition:fShape"></a>fShape</td><td class="datadesc">shape of detector volume</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fSolidAngle"></a>fSolidAngle</td><td class="datadesc">solid angle = area of entrance window / distance**2</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fTheta"></a>fTheta</td><td class="datadesc">polar angle in degrees with respect to beam axis, corresponds to centre of telescope</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fTheta_max"></a>fTheta_max</td><td class="datadesc">polar angle in degrees of the edge furthest from the beam axis</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPosition:fTheta_min"></a>fTheta_min</td><td class="datadesc">polar angle in degrees corresponding to edge of telescope closest to beam axis</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVPosition:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVPosition_Inh" id="MapKVPosition_Inh">
+<area shape="rect" id="node2" href="./KVRing.html" title="KVRing" alt="" coords="160,1,264,21"/>
+<area shape="rect" id="node3" href="./KVTelescope.html" title="KVTelescope" alt="" coords="160,21,264,41"/>
+<area shape="rect" id="node4" href="./KVASGroup.html" title="KVASGroup" alt="" coords="160,41,264,61"/>
+<area shape="rect" id="node5" href="./KVDetector.html" title="KVDetector" alt="" coords="160,61,264,81"/>
+<area shape="rect" id="node6" href="./KVINDRATelescope.html" title="KVINDRATelescope" alt="" coords="316,6,448,26"/>
+<area shape="rect" id="node7" href="./KVINDRADetector.html" title="KVINDRADetector" alt="" coords="320,56,444,75"/>
+<area shape="rect" id="node8" href="./KVFAZIADetector.html" title="KVFAZIADetector" alt="" coords="322,76,442,95"/>
+<area shape="rect" id="node9" href="./KVTelBlocking.html" title="KVTelBlocking" alt="" coords="330,26,434,46"/>
+<area shape="rect" id="node10" href="./KVChIo.html" title="KVChIo" alt="" coords="500,26,604,45"/>
+<area shape="rect" id="node11" href="./KVCsI.html" title="KVCsI" alt="" coords="500,46,604,65"/>
+<area shape="rect" id="node12" href="./KVPhoswich.html" title="KVPhoswich" alt="" coords="500,66,604,85"/>
+<area shape="rect" id="node13" href="./KVSilicon.html" title="KVSilicon" alt="" coords="500,86,604,105"/>
+<area shape="rect" id="node14" href="./KVSiB.html" title="KVSiB" alt="" coords="660,66,763,85"/>
+<area shape="rect" id="node15" href="./KVCsI_e475s.html" title="KVCsI_e475s" alt="" coords="660,46,763,65"/>
+<area shape="rect" id="node16" href="./KVSiLi.html" title="KVSiLi" alt="" coords="660,86,763,105"/>
+<area shape="rect" id="node17" href="./KVChIo_e475s.html" title="KVChIo_e475s" alt="" coords="660,6,763,26"/>
+<area shape="rect" id="node18" href="./KVBIC.html" title="KVBIC" alt="" coords="660,26,763,45"/>
+<area shape="rect" id="node19" href="./KVSi75.html" title="KVSi75" alt="" coords="660,105,763,125"/>
+<area shape="rect" id="node20" href="./KVSilicon_e475s.html" title="KVSilicon_e475s" alt="" coords="656,125,767,145"/>
+</map>
+<map name="MapKVPosition_Lib" id="MapKVPosition_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="454,44,569,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVPosition_Inh" class="tabsel" href="inh/KVPosition_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVPosition_Inh.png');">Inheritance</a>
+<a id="imgKVPosition_InhMem" class="tab" href="inhmem/KVPosition_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVPosition_InhMem.png');">Inherited Members</a>
+<a id="imgKVPosition_Incl" class="tab" href="incl/KVPosition_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVPosition_Incl.png');">Includes</a>
+<a id="imgKVPosition_Lib" class="tab" href="lib/KVPosition_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVPosition_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVPosition_Inh" src="inh/KVPosition_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:init" href="src/KVPosition.cxx.html#Sxs6cD">init</a>()</span><br />
+<div class="funccomm"><pre>default initialiser
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPosition:_KVPosition" href="src/KVPosition.cxx.html#IE_MqB">~KVPosition</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPosition:KVPosition" href="src/KVPosition.cxx.html#GaKBKC">KVPosition</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPosition:KVPosition@1" href="src/KVPosition.cxx.html#GUZrj">KVPosition</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> thmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> thmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> dist = 0.)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetPolarAngle" href="src/KVPosition.cxx.html#i3vIUB">SetPolarAngle</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> th)</span><br />
+<div class="funccomm"><pre>Sets the polar angle corresponding to the centre of this telescope/solid angle element/etc.
+If the polar width has been set already (<a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:SetPolarWidth" title="void KVPosition::SetPolarWidth(Double_t pw)">SetPolarWidth</a>),
+the limits theta-min and theta-max are calculated.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetAzimuthalAngle" href="src/KVPosition.cxx.html#keKE5C">SetAzimuthalAngle</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ph)</span><br />
+<div class="funccomm"><pre>Sets the azimuthal angle corresponding to the centre of this telescope/solid angle element/etc.
+If the azimuthal width has been set already (<a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:SetAzimuthalWidth" title="void KVPosition::SetAzimuthalWidth(Double_t aw)">SetAzimuthalWidth</a>),
+the limits phi-min and phi-max are calculated.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetPolarWidth" href="src/KVPosition.cxx.html#fod3q">SetPolarWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pw)</span><br />
+<div class="funccomm"><pre>Set theta_min and theta_max from width (in degrees).
+If theta is already known, use to set theta_min and theta_max.
+If not, keep relative values (negative) of theta_min and theta_max,
+to be used when theta is set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetPolarMinMax" href="src/KVPosition.cxx.html#xixUG">SetPolarMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</span><br />
+<div class="funccomm"><pre>Set min and max polar angles and calculate (mean) theta
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetAzimuthalWidth" href="src/KVPosition.cxx.html#RL5ToE">SetAzimuthalWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> aw)</span><br />
+<div class="funccomm"><pre>Set phi_min and phi_max from width (in degrees)
+  If phi is already known, use to set phi_min and phi_max
+  If not, keep relative values (negative) of phi_min and phi_max,
+  to be used when phi is set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetAzimuthalMinMax" href="src/KVPosition.cxx.html#LLqw4B">SetAzimuthalMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</span><br />
+<div class="funccomm"><pre>Set min and max azimuthal angles and calculate (mean) phi
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVPosition:GetRandomDirection" href="src/KVPosition.cxx.html#OAsxuB">GetRandomDirection</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* t = <span class="string">"isotropic"</span>)</span><br />
+<div class="funccomm"><pre> Returns a unit vector in a random direction corresponding to this detector.
+ Depending on the optional option string, the direction is either drawn at
+ <span class="string">"random"</span> among the corresponding angles, or <span class="string">"isotropic"</span>.
+ By default, the direction is <span class="string">"isotropic"</span>.
+
+ * ROOT Geometry *
+ Direction corresponds to a random position on the detector's entrance window.
+ The <span class="string">"isotropic"</span> option has no effect.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:GetRandomAngles" href="src/KVPosition.cxx.html#qA0cCC">GetRandomAngles</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; th, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; ph, <a href="./ListOfTypes.html#Option_t">Option_t</a>* t = <span class="string">"isotropic"</span>)</span><br />
+<div class="funccomm"><pre> Set th and ph to random values between the max and min limits defining the
+ solid angle element.
+ Depending on the optional option string, the direction is either drawn at
+ <span class="string">"random"</span> among the corresponding angles, or <span class="string">"isotropic"</span>.
+ By default, the direction is <span class="string">"isotropic"</span>.
+
+ * ROOT Geometry *
+ th and ph correspond to a random position on the detector's entrance window.
+ The <span class="string">"isotropic"</span> option has no effect.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:IsInPhiRange" href="src/KVPosition.cxx.html#JIUvYB">IsInPhiRange</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</span><br />
+<div class="funccomm"><pre><a href="./ListOfTypes.html#Bool_t">kTRUE</a> if given angle phi is within the azimuthal range of this solid
+angle element
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:IsInPolarRange" href="src/KVPosition.cxx.html#xz1yHC">IsInPolarRange</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</span><br />
+<div class="funccomm"><pre><a href="./ListOfTypes.html#Bool_t">kTRUE</a> if given angle theta is within the polar range of this solid angle element
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:IsSmallerThan" href="src/KVPosition.cxx.html#q3sRrD">IsSmallerThan</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</span><br />
+<div class="funccomm"><pre> <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if <span class="string">"this"</span> is entirely contained within <span class="string">"pos"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:IsAlignedWith" href="src/KVPosition.cxx.html#qXdrKB">IsAlignedWith</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</span><br />
+<div class="funccomm"><pre><a href="./ListOfTypes.html#Bool_t">kTRUE</a> if one of the two solid angle elements is completely contained within the other.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:IsOverlappingWith" href="src/KVPosition.cxx.html#oL3lzD">IsOverlappingWith</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</span><br />
+<div class="funccomm"><pre><a href="./ListOfTypes.html#Bool_t">kTRUE</a> if there is at least partial overlap between two solid angle elements
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:IsAzimuthallyWiderThan" href="src/KVPosition.cxx.html#GkfoQC">IsAzimuthallyWiderThan</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</span><br />
+<div class="funccomm"><pre><a href="./ListOfTypes.html#Bool_t">kTRUE</a> if <span class="string">"this"</span> has larger azimuthal width than <span class="string">"pos"</span>.
+Takes care of cases where the solid angle straddles 0 degrees
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVPosition:GetDirection" href="src/KVPosition.cxx.html#pwR9VB">GetDirection</a>()</span><br />
+<div class="funccomm"><pre>Returns a unit vector corresponding to the direction of <a href="./KVPosition.html#KVPosition:fTheta" title="Double_t KVPosition::fTheta">fTheta</a>, <a href="./KVPosition.html#KVPosition:fPhi" title="Double_t KVPosition::fPhi">fPhi</a>
+i.e. the centre of the solid angle element.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:GetCornerCoordinates" href="src/KVPosition.cxx.html#xme2sD">GetCornerCoordinates</a>(TVector3* , <a href="./ListOfTypes.html#Double_t">Double_t</a>  = 0)</span><br />
+<div class="funccomm"><pre> Fill the array (TVector3 corner[4]) with the coordinates of the 4 'corners' of the solid angle element.
+
+ These 'corners' are the points of intersection between the plane defined by the normal
+ to the centre of the solid angle (direction: theta,phi), at a distance <a href="./KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a> [cm] from the
+ origin, and the four lines starting at the origin with directions (thetamin,phimin),
+ (thetamax,phimin), (thetamax,phimax), (thetamin,phimax).
+
+ If optional argument 'depth' [cm] is given, the coordinates are calculated for the plane
+ situated at distance (<a href="./KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a>+depth) from the origin.
+
+ The order of the 4 corners is as follows:
+       corners[3] : theta-min, phi-min
+       corners[2] : theta-max, phi-min
+       corners[1] : theta-max, phi-max
+       corners[0] : theta-min, phi-max
+
+ Coordinates are in CENTIMETRES
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:GetCornerCoordinatesInOwnFrame" href="src/KVPosition.cxx.html#LTFLDC">GetCornerCoordinatesInOwnFrame</a>(TVector3* , <a href="./ListOfTypes.html#Double_t">Double_t</a>  = 0)</span><br />
+<div class="funccomm"><pre> Like <a href="./KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3*, Double_t = 0)">GetCornerCoordinates</a>(), except that the coordinates correspond to a reference frame
+ in which the +ve z-axis goes through the centre of the solid angle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetSolidAngle" href="src/KVPosition.cxx.html#bquFIC">GetSolidAngle</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Return values of the solid angle (in msr) seen by the geometric ensemble
+ For simple geometries defined by theta_min/max etc., this is exact.
+ For ROOT geometries we calculate the area of the entrance window and divide
+ it by the square of the distance to the detector.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPosition:ROOTGeo" href="src/KVPosition.cxx.html#TXl.3C">ROOTGeo</a>() const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if ROOT geometry is used, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if not
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetAzimuthalWidth" href="src/KVPosition.cxx.html#kOF82D">GetAzimuthalWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> phmin = -1., <a href="./ListOfTypes.html#Double_t">Double_t</a> phimax = -1.) const</span><br />
+<div class="funccomm"><pre>Calculate azimuthal width taking phi-min as the most anticlockwise point of the
+element and phi-max the most clockwise.
+If no arguments are given, width calculated for this object
+Otherwise, width calculated for given phi-min and phi-max
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:GetWidthsFromDimension" href="src/KVPosition.cxx.html#BaoRKD">GetWidthsFromDimension</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> lin_dim)</span><br />
+<div class="funccomm"><pre>Calculate azimuthal and polar widths for a square element placed at a
+given distance from the origin with linear dimension 'lin_dim' (in mm).
+<a href="./KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>, <a href="./KVPosition.html#KVPosition:SetTheta" title="void KVPosition::SetTheta(Double_t t)">SetTheta</a> and <a href="./KVPosition.html#KVPosition:SetPhi" title="void KVPosition::SetPhi(Double_t p)">SetPhi</a> must already have been called.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TRotation <a class="funcname" name="KVPosition:GetRandomIsotropicRotation" href="src/KVPosition.cxx.html#Q1Rg0B">GetRandomIsotropicRotation</a>()</span><br />
+<div class="funccomm"><pre> Generates a rotation which, if applied to a unit vector in the Z-direction,
+ will transform it into an isotropically-distributed vector in this
+ angular range.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetMatrix" href="src/KVPosition.cxx.html#dW33ND">SetMatrix</a>(<span class="keyword">const</span> TGeoHMatrix* )</span><br />
+<div class="funccomm"><pre> * ROOT Geometry *
+ Set the global transformation matrix for this detector
+ If shape has been set, we set the (theta,phi) angles
+ corresponding to the centre of the entrance window, and
+ the distance from the target.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetShape" href="src/KVPosition.cxx.html#P5mKNB">SetShape</a>(TGeoBBox* )</span><br />
+<div class="funccomm"><pre> * ROOT Geometry *
+ Set the shape of this detector
+ If matrix has been set, we set the (theta,phi) angles
+ corresponding to the centre of the entrance window, and
+ the distance from the target.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TGeoHMatrix * <a class="funcname" name="KVPosition:GetMatrix" href="src/KVPosition.cxx.html#tcLP1E">GetMatrix</a>() const</span><br />
+<div class="funccomm"><pre> * ROOT Geometry *
+ Return global transformation matrix for this detector
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TGeoBBox * <a class="funcname" name="KVPosition:GetShape" href="src/KVPosition.cxx.html#ObvD4B">GetShape</a>() const</span><br />
+<div class="funccomm"><pre> * ROOT Geometry *
+ Return shape of this detector
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVPosition:GetRandomPoint" href="src/KVPosition.cxx.html#uFFiAE">GetRandomPoint</a>() const</span><br />
+<div class="funccomm"><pre> * ROOT Geometry *
+ Generate a vector in the world (laboratory) frame from the origin
+ to a random point on the entrance window of the detector.
+
+ It is assumed that the detector volume was defined in such a way
+ that the entrance window corresponds to the facet in the X-Y plane
+ placed at -dZ.
+
+ NOTE: we force the use of TGeoBBox::GetPointsOnFacet.
+ For TGeoArb8, the method has been overridden and does nothing.
+ We use the TGeoBBox method, and then use TGeoShape::Contains
+ to check that the point does actually correspond to the TGeoArb8.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVPosition:GetCentre" href="src/KVPosition.cxx.html#KT7cUC">GetCentre</a>() const</span><br />
+<div class="funccomm"><pre> * ROOT Geometry *
+ Generate a vector in the world (laboratory) frame from the origin
+ to the centre of the entrance window of the detector.
+
+ It is assumed that the detector volume was defined in such a way
+ that the entrance window corresponds to the facet in the X-Y plane
+ placed at -dZ.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPosition:KVPosition" href="src/KVPosition.h.html#H.X6SE">KVPosition</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetPhiMinMax" href="src/KVPosition.h.html#vJuVNE">SetPhiMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetPhiMin" href="src/KVPosition.h.html#r4ZHRC">GetPhiMin</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetPhiMax" href="src/KVPosition.h.html#LgeHRC">GetPhiMax</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetThetaMin" href="src/KVPosition.h.html#yQ9ZeE">GetThetaMin</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetThetaMax" href="src/KVPosition.h.html#JMCVjE">GetThetaMax</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetTheta" href="src/KVPosition.h.html#oKLF.D">GetTheta</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetSinTheta" href="src/KVPosition.h.html#rqZccE">GetSinTheta</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetCosTheta" href="src/KVPosition.h.html#nLyDlC">GetCosTheta</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetPhi" href="src/KVPosition.h.html#O6XWyE">GetPhi</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetTheta" href="src/KVPosition.h.html#n8aDaC">SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> t)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetPhi" href="src/KVPosition.h.html#tl8C2C">SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> p)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPosition:SetDistance" href="src/KVPosition.h.html#LIH.cB">SetDistance</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> d)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVPosition:GetDistance" href="src/KVPosition.h.html#vp2vV">GetDistance</a>(<span class="keyword">void</span>)</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:44:09 2015 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

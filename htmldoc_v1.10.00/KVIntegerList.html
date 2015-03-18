@@ -1,0 +1,530 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:43:46 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVIntegerList</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVIntegerList','libKVMultiDetbase','KVIntegerList.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVIntegerList.h.html">header file</a>
+<a class="descrheadentry" href="src/KVIntegerList.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVIntegerList.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVIntegerList.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVIntegerList:description">class description</a> 
+<a class="descrheadentry" href="#KVIntegerList:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVIntegerList:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVIntegerList:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_BASE_Index.html">BASE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVIntegerList</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVIntegerList:description"></a>class KVIntegerList: public TNamed</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --><h2>KVIntegerList</h2>
+<h4>Permet de gerer une liste de nombres entiers positifs</h4>
+La classe dérive de TNamed, le champ TNamed::fName contient le nom formaté de la partition et TNamed::fTitle <br>
+permet de stocker la population <br>
+L'écriture/lecture dans un fichier .root se fait en utilisant le streamer de TNamed <br>
+Les valeurs sont triées par ordre décroissant avec gestion de l'occurence <br>
+Les deux exemples suivants montrent les deux facons de remplir une liste: <br>
+<h5>Exemple 1:</h5> 
+Les methodes de type Fill(), remplissent en une fois la liste et mets à jour les grandeurs reliées<br>
+<br>
+<code>
+KVIntegerList* ilist = new KVIntegerList();<br>
+Int_t tab[10]={1,3,6,4,9,7,3,59,8,160};<br>
+ilist->Fill(tab,10);<br>
+ilist->Print();<br>
+Info in <KVIntegerList::Print>: 160 59 9 8 7 6 4 3(2) 1 : population 1<br>
+</code>
+<h5>Exemple 2:</h5> 
+Les methodes de type Add(), remplit successivement la liste, avant d'utiliser les grandeurs reliées<br>
+l'utilisateur doit appeler la méthode CheckForUpdate(), pour que la mise a jour du nom soit faite<br>
+par contre le nombre d'elements est mis a jour automatiquement<br>
+<br>
+<code>
+KVIntegerList* ilist = new KVIntegerList();<br>
+ilist->Add(23,6);<br>
+ilist->Add(12);<br>
+Int_t tab[3]={1,3,6};<br>
+ilist->Add(tab,3);<br>
+ilist->CheckForUpdate();<br>
+ilist->Print();<br>
+Info in <KVIntegerList::Print>: 23(6) 12 6 3 1 : population 1<br>
+ilist->Remove(23,3);<br>
+ilist->Print();<br>
+Info in <KVIntegerList::Print>: 23(6) 12 6 3 1 : population 1	     &nbsp  &nbsp    !!! pour le nom  RIEN A CHANGER<br>
+<code>ilist->GetNbre();<br>
+(const Int_t)7						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp le nombre, lui est mis à jour<br>
+ilist->CheckForUpdate();<br>
+ilist->Print();<br>
+Info in <KVIntegerList::Print>: 23(3) 12 6 3 1 : population 1	     &nbsp  &nbsp    OK : les modifs ont été prises en compte<br>
+ilist->GetNbre()<br>
+(const Int_t)7
+</code>
+<!-- TDocHtmlDirective end --><pre>
+
+Les methodes de type <a href="./KVIntegerList.html#KVIntegerList:Remove" title="Bool_t KVIntegerList::Remove(Int_t val, Int_t freq) or overloads">Remove</a>(), retirent des valeurs de la liste, là encore l'utilisateur doit appeler
+la méthode <a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>(), pour que la mise a jour soit faite
+Les grandeurs disponibles sont:
+- le nombre d'entiers, ie la multiplicité <a href="./KVIntegerList.html#KVIntegerList:GetNbre" title="Int_t KVIntegerList::GetNbre() const">GetNbre</a>()
+- le nom de la partition definie comme suit : ent1(occ) ent2 ent3(occ3), où entre parenthèses
+sont notées les occurences aupérieures à 1 d'une valeur
+- la population <a href="./KVIntegerList.html#KVIntegerList:GetPopulation" title="Int_t KVIntegerList::GetPopulation() const">GetPopulation</a>(), permet de gérer un ensemble de partitions (KVPartitionManager)
+
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVIntegerList:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVIntegerList:_KVIntegerList">~KVIntegerList</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add">Add</a>(TArrayI* tab)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add@3">Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add@5">Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> val)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add@1">Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add@2">Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add@4">Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Add@6">Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:AddPopulation">AddPopulation</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> pop)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:CheckForUpdate">CheckForUpdate</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVIntegerList:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Clear">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Compare">Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Contains">Contains</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Copy">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; named) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="funcname"><a class="funcname" href="#KVIntegerList:CreateTableOfValues">CreateTableOfValues</a>()</td></tr>
+<tr class="func"><td class="funcret">TArrayI*</td><td class="funcname"><a class="funcname" href="#KVIntegerList:CreateTArrayI">CreateTArrayI</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>*</td><td class="funcname"><a class="funcname" href="#KVIntegerList:CreateTNamed">CreateTNamed</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Fill">Fill</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:GetFrequency">GetFrequency</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Ssiz_t">Ssiz_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:GetLengthName">GetLengthName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:GetNbre">GetNbre</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:GetPopulation">GetPopulation</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVIntegerList:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVIntegerList:KVIntegerList">KVIntegerList</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVIntegerList:KVIntegerList@1">KVIntegerList</a>(<span class="keyword">const</span> <a href="./KVIntegerList.html">KVIntegerList</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIntegerList.html">KVIntegerList</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVIntegerList:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVIntegerList.html">KVIntegerList</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Remove@1">Remove</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Remove">Remove</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:RemoveAll">RemoveAll</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:ResetPopulation">ResetPopulation</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:SetPopulation">SetPopulation</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> pop)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:add_values">add_values</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:DeducePartitionFromName">DeducePartitionFromName</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:DeducePartitionFromTNamed">DeducePartitionFromTNamed</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:DeducePopulationFromTitle">DeducePopulationFromTitle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:init">init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:remove_values">remove_values</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:ResetRegle">ResetRegle</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:SetPartition">SetPartition</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIntegerList:ToBeUpdated">ToBeUpdated</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIntegerList:Update">Update</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVIntegerList:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVIntegerList.html">KVIntegerList</a>::(anonymous)</td><td class="dataname"><a name="KVIntegerList:kHastobeComputed"></a>kHastobeComputed</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Ssiz_t">Ssiz_t</a></td><td class="dataname"><a name="KVIntegerList:fLength"></a>fLength</td><td class="datadesc">!			Longueur du nom de la liste/partition usilisée dans Compare</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVIntegerList:fLimiteRegle"></a>fLimiteRegle</td><td class="datadesc">!-&gt;	taille max de fRegle</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVIntegerList:fMult"></a>fMult</td><td class="datadesc">!				Nombre d'éléments dans la liste</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVIntegerList:fPop"></a>fPop</td><td class="datadesc">!				population de la liste/partition consideree, permet le comptage de partitions identiques dansun lot de donée</td></tr>
+<tr class="data"><td class="datatype">TArrayI*</td><td class="dataname"><a name="KVIntegerList:fRegle"></a>fRegle</td><td class="datadesc">!		tableau d'entiers où sont stockée l'occurence des valeurs</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVIntegerList:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVIntegerList_Inh" id="MapKVIntegerList_Inh">
+<area shape="rect" id="node4" href="./KVPartition.html" title="KVPartition" alt="" coords="482,5,584,24"/>
+<area shape="rect" id="node5" href="./KVPartitionFromLeaf.html" title="KVPartitionFromLeaf" alt="" coords="634,5,767,24"/>
+</map>
+<map name="MapKVIntegerList_Lib" id="MapKVIntegerList_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="454,44,569,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVIntegerList_Inh" class="tabsel" href="inh/KVIntegerList_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVIntegerList_Inh.png');">Inheritance</a>
+<a id="imgKVIntegerList_InhMem" class="tab" href="inhmem/KVIntegerList_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVIntegerList_InhMem.png');">Inherited Members</a>
+<a id="imgKVIntegerList_Incl" class="tab" href="incl/KVIntegerList_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVIntegerList_Incl.png');">Includes</a>
+<a id="imgKVIntegerList_Lib" class="tab" href="lib/KVIntegerList_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVIntegerList_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVIntegerList_Inh" src="inh/KVIntegerList_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:init" href="src/KVIntegerList.cxx.html#tufivD">init</a>()</span><br />
+<div class="funccomm"><pre>Initialisation
+ La population est mise à 1
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIntegerList:KVIntegerList" href="src/KVIntegerList.cxx.html#Qp6bd">KVIntegerList</a>()</span><br />
+<div class="funccomm"><pre> Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIntegerList:_KVIntegerList" href="src/KVIntegerList.cxx.html#zm2.NC">~KVIntegerList</a>()</span><br />
+<div class="funccomm"><pre>Destructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:ResetRegle" href="src/KVIntegerList.cxx.html#IT0SBB">ResetRegle</a>()</span><br />
+<div class="funccomm"><pre>protected method, Mise a zero de l'ensemble des valeurs
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Clear" href="src/KVIntegerList.cxx.html#fg0VuB">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Classe dérivée de <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>, Reinitialisation de l'object
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Copy" href="src/KVIntegerList.cxx.html#bpkotB">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; named) const</span><br />
+<div class="funccomm"><pre>Classe dérivée de <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>, fait une copie vers l'objet obj
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Print" href="src/KVIntegerList.cxx.html#TZGTqB">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) const</span><br />
+<div class="funccomm"><pre>Classe dérivée de <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>, Imprime la liste formattée et la population associée
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:SetPartition" href="src/KVIntegerList.cxx.html#GuPi.B">SetPartition</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</span><br />
+<div class="funccomm"><pre>protected method, utilisée par le <a href="./KVIntegerList.html#KVIntegerList:Streamer" title="void KVIntegerList::Streamer(TBuffer&amp;)">Streamer</a> qui utilise le champ fName de la classe <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
+voir également <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:DeducePartitionFromTNamed" title="void KVIntegerList::DeducePartitionFromTNamed()">DeducePartitionFromTNamed</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIntegerList:ToBeUpdated" href="src/KVIntegerList.cxx.html#VYlnX">ToBeUpdated</a>()</span><br />
+<div class="funccomm"><pre>protected method, test si les grandeurs associées à la liste doivent etre mises a jour
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:CheckForUpdate" href="src/KVIntegerList.cxx.html#J5rOJB">CheckForUpdate</a>()</span><br />
+<div class="funccomm"><pre>Methode permettant de mettre à jour la liste, elle est a appeler si l'utilisateur a appelé précédemment
+une méthode <a href="./KVIntegerList.html#KVIntegerList:Add" title="void KVIntegerList::Add(TArrayI* tab) or overloads">Add</a> ou <a href="./KVIntegerList.html#KVIntegerList:Remove" title="Bool_t KVIntegerList::Remove(Int_t val, Int_t freq) or overloads">Remove</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Update" href="src/KVIntegerList.cxx.html#iaVSbB">Update</a>()</span><br />
+<div class="funccomm"><pre>protected method, Mise a jour du nom de la partition (via <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>()), de sa longueur (<a href="./KVIntegerList.html#KVIntegerList:fLength" title="Ssiz_t KVIntegerList::fLength">fLength</a>)
+Le bit <a href="./KVIntegerList.html#KVIntegerList:kHastobeComputed" title="KVIntegerList::(anonymous) KVIntegerList::kHastobeComputed">kHastobeComputed</a> es mis à 0 pour indiquer que la mise à jour a été faite
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Fill" href="src/KVIntegerList.cxx.html#XCuB5C">Fill</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</span><br />
+<div class="funccomm"><pre> La liste est re initialisée via <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:Clear" title="void KVIntegerList::Clear(Option_t* option = &quot;&quot;)">Clear</a>()
+remplie, puis mise à jour <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:Update" title="void KVIntegerList::Update()">Update</a>()
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:add_values" href="src/KVIntegerList.cxx.html#tOOa5C">add_values</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</span><br />
+<div class="funccomm"><pre>protected method, Ajout de <span class="string">"freq"</span> fois la valeur val
+Verification de la taille du tableau (<a href="./KVIntegerList.html#KVIntegerList:fLimiteRegle" title="Int_t KVIntegerList::fLimiteRegle">fLimiteRegle</a>) et extension si besoin
+
+Routine appelée par toutes les autres routines <a href="./KVIntegerList.html#KVIntegerList:Add" title="void KVIntegerList::Add(TArrayI* tab) or overloads">Add</a>(...), c'est celle-ci qui doit etre derivée
+dans les classes filles
+Le bit <a href="./KVIntegerList.html#KVIntegerList:kHastobeComputed" title="KVIntegerList::(anonymous) KVIntegerList::kHastobeComputed">kHastobeComputed</a> es mis à 1 pour indiquer la nécéssité de mettre a jour la partition
+voir <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>()
+
+Cette methode incremente la multiplicité <a href="./KVIntegerList.html#KVIntegerList:fMult" title="Int_t KVIntegerList::fMult">fMult</a>
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add@4" href="src/KVIntegerList.cxx.html#QPfDtD">Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</span><br />
+<div class="funccomm"><pre>Ajout de <span class="string">"freq"</span> fois la valeur val
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add@1" href="src/KVIntegerList.cxx.html#NkWtyE">Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</span><br />
+<div class="funccomm"><pre>Ajout d'un tableau d'entiers de <span class="string">"mult"</span> valeurs
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add" href="src/KVIntegerList.cxx.html#lUk.oE">Add</a>(TArrayI* tab)</span><br />
+<div class="funccomm"><pre>Ajout de valeurs via un TArrayI
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add@2" href="src/KVIntegerList.cxx.html#MGv2KE">Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* tab, <a href="./ListOfTypes.html#Int_t">Int_t</a> mult)</span><br />
+<div class="funccomm"><pre>Ajout d'un tableau de <span class="string">"mult"</span> valeurs, version <a href="./ListOfTypes.html#Double_t">Double_t</a> (Conversion <a href="./ListOfTypes.html#Double_t">Double_t</a> -&gt; <a href="./ListOfTypes.html#Int_t">Int_t</a> (arrondi, TMath::Nint()))
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add@3" href="src/KVIntegerList.cxx.html#Yram0E">Add</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</span><br />
+<div class="funccomm"><pre>Ajout de la valeur val (<a href="./ListOfTypes.html#Int_t">Int_t</a>)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add@5" href="src/KVIntegerList.cxx.html#voR44E">Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> val)</span><br />
+<div class="funccomm"><pre>Ajout de la valeur val version <a href="./ListOfTypes.html#Double_t">Double_t</a> (Conversion <a href="./ListOfTypes.html#Double_t">Double_t</a> -&gt; <a href="./ListOfTypes.html#Int_t">Int_t</a> (arrondi, TMath::Nint()))
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Add@6" href="src/KVIntegerList.cxx.html#SNKdTE">Add</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</span><br />
+<div class="funccomm"><pre>Ajout de <span class="string">"freq"</span> fois la valeur val
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIntegerList:remove_values" href="src/KVIntegerList.cxx.html#z3Wzh">remove_values</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</span><br />
+<div class="funccomm"><pre>protected method, On retire <span class="string">"freq"</span> fois la valeur val
+la methode retourne <a href="./ListOfTypes.html#Bool_t">kTRUE</a> si cette valeur etait effectivement presente, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> sinon
+Si freq &gt; la frequence initiale ( <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:GetFrequency" title="Int_t KVIntegerList::GetFrequency(Int_t val) const">GetFrequency</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ) )de la valeur, on la retire complétement
+Le bit <a href="./KVIntegerList.html#KVIntegerList:kHastobeComputed" title="KVIntegerList::(anonymous) KVIntegerList::kHastobeComputed">kHastobeComputed</a> es mis à 1 pour indiquer la nécéssité de mettre a jour la partition
+voir <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>()
+Cette methode est appelée par les autres routines de type <a href="./KVIntegerList.html#KVIntegerList:Remove" title="Bool_t KVIntegerList::Remove(Int_t val, Int_t freq) or overloads">Remove</a>...(...), c'est celle-ci qui doit etre derivée
+dans les classes filles
+
+Cette methode décremente la multiplicité <a href="./KVIntegerList.html#KVIntegerList:fMult" title="Int_t KVIntegerList::fMult">fMult</a>
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIntegerList:Remove" href="src/KVIntegerList.cxx.html#wNjxKC">Remove</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val, <a href="./ListOfTypes.html#Int_t">Int_t</a> freq)</span><br />
+<div class="funccomm"><pre>On retire <span class="string">"freq"</span> fois la valeur val
+la methode retourne <a href="./ListOfTypes.html#Bool_t">kTRUE</a> si cette valeur etait effectivement presente, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> sinon
+Si freq &gt; la frequence initiale ( <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:GetFrequency" title="Int_t KVIntegerList::GetFrequency(Int_t val) const">GetFrequency</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> ) )de la valeur, on la retire complétement
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIntegerList:Remove@1" href="src/KVIntegerList.cxx.html#s1s4SB">Remove</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</span><br />
+<div class="funccomm"><pre>On retire 1 fois la valeur val
+la methode retourne <a href="./ListOfTypes.html#Bool_t">kTRUE</a> si cette valeur etait effectivement presente, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> sinon
+Le bit <a href="./KVIntegerList.html#KVIntegerList:kHastobeComputed" title="KVIntegerList::(anonymous) KVIntegerList::kHastobeComputed">kHastobeComputed</a> es mis à 1 pour indiquer la nécéssité de mettre a jour la partition
+voir <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>()
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIntegerList:RemoveAll" href="src/KVIntegerList.cxx.html#ByZ6Q">RemoveAll</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val)</span><br />
+<div class="funccomm"><pre>Reture completement la valeur val
+la methode retourne <a href="./ListOfTypes.html#Bool_t">kTRUE</a> si cette valeur etait effectivement presente, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> sinon
+
+Le bit <a href="./KVIntegerList.html#KVIntegerList:kHastobeComputed" title="KVIntegerList::(anonymous) KVIntegerList::kHastobeComputed">kHastobeComputed</a> es mis à 1 pour indiquer la nécéssité de mettre a jour la partition
+voir <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:CheckForUpdate" title="void KVIntegerList::CheckForUpdate()">CheckForUpdate</a>()
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:ResetPopulation" href="src/KVIntegerList.cxx.html#unIEpC">ResetPopulation</a>()</span><br />
+<div class="funccomm"><pre>Remet à 1 la population (comme dans le ctor)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVIntegerList:GetPopulation" href="src/KVIntegerList.cxx.html#qae4dB">GetPopulation</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:AddPopulation" href="src/KVIntegerList.cxx.html#tvr9pD">AddPopulation</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> pop)</span><br />
+<div class="funccomm"><pre>Incrémente la population de <span class="string">"pop"</span> fois
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:SetPopulation" href="src/KVIntegerList.cxx.html#j_8p9C">SetPopulation</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> pop)</span><br />
+<div class="funccomm"><pre>Initialise la population à <span class="string">"pop"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVIntegerList:GetNbre" href="src/KVIntegerList.cxx.html#k59FGD">GetNbre</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>* <a class="funcname" name="KVIntegerList:CreateTNamed" href="src/KVIntegerList.cxx.html#El91UD">CreateTNamed</a>()</span><br />
+<div class="funccomm"><pre>Cree un objet <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
+le nom de la partition est le champ <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>::fName et la population de la partition dans le champ <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>::fTitle
+voir <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
+L'objet cree doit etre effacé après utilisation par l'utilisateur
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TArrayI* <a class="funcname" name="KVIntegerList:CreateTArrayI" href="src/KVIntegerList.cxx.html#XOpf.C">CreateTArrayI</a>()</span><br />
+<div class="funccomm"><pre>Cree un objet TArrayI de dimension <a href="./KVIntegerList.html#KVIntegerList:fMult" title="Int_t KVIntegerList::fMult">fMult</a> ( <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:GetNbre" title="Int_t KVIntegerList::GetNbre() const">GetNbre</a>() ) et rempli par ordre decroissant toutes les valeurs de la partition
+L'objet cree doit etre effacé après utilisation par l'utilisateur
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a>* <a class="funcname" name="KVIntegerList:CreateTableOfValues" href="src/KVIntegerList.cxx.html#i13r2">CreateTableOfValues</a>()</span><br />
+<div class="funccomm"><pre>Cree un objet tableau d'entier de dimension <a href="./KVIntegerList.html#KVIntegerList:fMult" title="Int_t KVIntegerList::fMult">fMult</a> ( <a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:GetNbre" title="Int_t KVIntegerList::GetNbre() const">GetNbre</a>() )
+et rempli par ordre decroissant toutes les valeurs de la partition
+L'objet cree doit etre effacé après utilisation par l'utilisateur
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVIntegerList:Compare" href="src/KVIntegerList.cxx.html#idZTJ">Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) const</span><br />
+<div class="funccomm"><pre>Classe dérivée de <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
+<a href="./KVIntegerList.html#KVIntegerList:Compare" title="Int_t KVIntegerList::Compare(const TObject* obj) const">Compare</a> deux objets de type <a href="./KVIntegerList.html">KVIntegerList</a>, le premier test concerne la longueur du nom (<a href="./KVIntegerList.html">KVIntegerList</a>::<a href="./KVIntegerList.html#KVIntegerList:GetLengthName" title="Ssiz_t KVIntegerList::GetLengthName() const">GetLengthName</a>())
+Si elle est identique, on test caractere par caractere, les deux noms <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>::<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()
+Retourne 0 si les noms des deux <a href="./KVIntegerList.html">KVIntegerList</a> sont exactement les memes, -1 sinon;
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVIntegerList:GetFrequency" href="src/KVIntegerList.cxx.html#tzS46">GetFrequency</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val) const</span><br />
+<div class="funccomm"><pre>Retourne l'occurence de la valeur <span class="string">"val"</span>, si elle n'est pas présente
+dans la liste retourne -1
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVIntegerList:Contains" href="src/KVIntegerList.cxx.html#yzbJ4">Contains</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> val) const</span><br />
+<div class="funccomm"><pre>Retourne <a href="./ListOfTypes.html#Bool_t">kTRUE</a> si la valeur <span class="string">"val"</span> est dans la liste, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> sinon
+dans la liste retourne -1
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Ssiz_t">Ssiz_t</a> <a class="funcname" name="KVIntegerList:GetLengthName" href="src/KVIntegerList.cxx.html#dFt9zD">GetLengthName</a>() const</span><br />
+<div class="funccomm"><pre>Retourne la longueur du nom de la partition formatée <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()
+	utilisée dans la methode <a href="./KVIntegerList.html#KVIntegerList:Compare" title="Int_t KVIntegerList::Compare(const TObject* obj) const">Compare</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:Streamer" href="src/KVIntegerList.cxx.html#XZiOMD">Streamer</a>(TBuffer&amp; )</span><br />
+<div class="funccomm"><pre><a href="./KVIntegerList.html#KVIntegerList:Streamer" title="void KVIntegerList::Streamer(TBuffer&amp;)">Streamer</a> specifique
+l'écriture dans un fichier root se fait par l'intermédiaire de la classe <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
+seul, le nom et la partition et sa population sont enregistrées dans le fichier
+la lecture utilise aussi le streamer de <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>, puis il y a un appel a la routine
+ protected <a href="./KVIntegerList.html#KVIntegerList:DeducePartitionFromTNamed" title="void KVIntegerList::DeducePartitionFromTNamed()">DeducePartitionFromTNamed</a>() qui permet de recréer complètement l'objet <a href="./KVIntegerList.html">KVIntegerList</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:DeducePartitionFromTNamed" href="src/KVIntegerList.cxx.html#jzZZdE">DeducePartitionFromTNamed</a>()</span><br />
+<div class="funccomm"><pre>protected method, Methode utilisee par le <a href="./KVIntegerList.html#KVIntegerList:Streamer" title="void KVIntegerList::Streamer(TBuffer&amp;)">Streamer</a>
+Récupère les champs de <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>:fName et <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>:fTitle
+et met à jour
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:DeducePopulationFromTitle" href="src/KVIntegerList.cxx.html#D1G5FE">DeducePopulationFromTitle</a>()</span><br />
+<div class="funccomm"><pre>protected method, utilisee par le <a href="./KVIntegerList.html#KVIntegerList:Streamer" title="void KVIntegerList::Streamer(TBuffer&amp;)">Streamer</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIntegerList:DeducePartitionFromName" href="src/KVIntegerList.cxx.html#INtfqB">DeducePartitionFromName</a>()</span><br />
+<div class="funccomm"><pre>protected method, utilisee par le <a href="./KVIntegerList.html#KVIntegerList:Streamer" title="void KVIntegerList::Streamer(TBuffer&amp;)">Streamer</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIntegerList:KVIntegerList" href="src/KVIntegerList.h.html#jCAP4B">KVIntegerList</a>()</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:43:46 2015 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

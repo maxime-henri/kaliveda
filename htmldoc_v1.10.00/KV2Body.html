@@ -1,0 +1,742 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:42:01 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KV2Body</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KV2Body','libKVMultiDetevents','KV2Body.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KV2Body.h.html">header file</a>
+<a class="descrheadentry" href="src/KV2Body.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/events/KV2Body.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/events/KV2Body.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KV2Body:description">class description</a> 
+<a class="descrheadentry" href="#KV2Body:Function_Members">function members</a>
+<a class="descrheadentry" href="#KV2Body:Data_Members">data members</a>
+<a class="descrheadentry" href="#KV2Body:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EVENTS_Index.html">EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KV2Body</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KV2Body:description"></a>class KV2Body: public TObject</h1>
+<div class="classdescr">
+<pre>
+<a href="./KV2Body.html">KV2Body</a>
+
+This class calculates various useful characteristics of binary nuclear reactions.
+It is based on a Fortran programme by Jean-Luc Charvet (cibi.for).
+It allows to calculate:
+      - centre of mass recoil velocity and available energy
+      - laboratory grazing angle of projectile and target
+      - maximum laboratory scattering angles
+      - Q-values
+      - CM and laboratory Rutherford cross-sections for elastic scattering
+      - CM and laboratory angles of ejectiles after elastic or inelastic scattering
+The values are calculated using relativistic kinematics.
+
+
+1. Defining the entrance channel.
+
+Either use the constructor with arguments to specify projectile and target:
+      <a href="./KV2Body.html">KV2Body</a> kin( proj, targ );//'proj' and 'targ' are pointers to <a href="./KVNucleus.html">KVNucleus</a> objects
+or declare them afterwards:
+      <a href="./KV2Body.html">KV2Body</a> kin;
+      kin.<a href="./KV2Body.html#KV2Body:SetProjectile" title="void KV2Body::SetProjectile(KVNucleus*) or overloads">SetProjectile</a>( proj ); kin.<a href="./KV2Body.html#KV2Body:SetTarget" title="void KV2Body::SetTarget(KVNucleus*) or overloads">SetTarget</a>( targ );
+One can also specify the projectile &amp; target using their Z and A:
+      kin.<a href="./KV2Body.html#KV2Body:SetProjectile" title="void KV2Body::SetProjectile(KVNucleus*) or overloads">SetProjectile</a>( z1, a1 );
+      kin.<a href="./KV2Body.html#KV2Body:SetTarget" title="void KV2Body::SetTarget(KVNucleus*) or overloads">SetTarget</a>( z2, a2 );
+(In each case a <a href="./KVNucleus.html">KVNucleus</a> is created which will be deleted with the <a href="./KV2Body.html">KV2Body</a> object).
+If you need to further define the properties of these nuclei, you can get a pointer to
+them using <a href="./KV2Body.html#KV2Body:GetNucleus" title="KVNucleus* KV2Body::GetNucleus(Int_t i) const">GetNucleus</a>(<a href="./ListOfTypes.html#int">int</a> i):
+      kin.<a href="./KV2Body.html#KV2Body:GetNucleus" title="KVNucleus* KV2Body::GetNucleus(Int_t i) const">GetNucleus</a>(1)-><a href="./KVParticle.html#KVParticle:SetMomentum" title="void KVParticle::SetMomentum(const TVector3&amp; v) or overloads">SetMomentum</a>(...);//set momentum of projectile
+
+2. Defining the exit channel
+
+If no exit channel is defined, it is assumed to be identical to the entrance channel,
+i.e. elastic scattering.
+You can define a different exit channel, either using the constructor:
+      <a href="./KV2Body.html">KV2Body</a> kin( proj, targ, QP );// QP is a <a href="./KVNucleus.html">KVNucleus</a>
+      <a href="./KV2Body.html">KV2Body</a> kin( proj, targ, QP, Ediss );// Ediss = energy dissipated in inelastic reaction
+or using the methods:
+      kin.<a href="./KV2Body.html#KV2Body:SetOutgoing" title="void KV2Body::SetOutgoing(KVNucleus* proj_out)">SetOutgoing</a>( QP );
+      kin.<a href="./KV2Body.html#KV2Body:SetEDiss" title="void KV2Body::SetEDiss(Double_t ex)">SetEDiss</a>( Ediss );  OR  kin.<a href="./KV2Body.html#KV2Body:SetExcitEnergy" title="void KV2Body::SetExcitEnergy(Double_t ex)">SetExcitEnergy</a>( Ediss );
+
+3. Calculating and obtaining reaction information
+
+Once the entrance channel (and, if necessary, the exit channel) is(are) defined,
+the kinematical calculation is carried out by:
+      kin.<a href="./KV2Body.html#KV2Body:CalculateKinematics" title="void KV2Body::CalculateKinematics()">CalculateKinematics</a>();
+For a general print-out of the reaction characteristics:
+      kin.<a href="./KV2Body.html#KV2Body:Print" title="void KV2Body::Print(Option_t* opt = &quot;&quot;) const">Print</a>();
+      kin.<a href="./KV2Body.html#KV2Body:Print" title="void KV2Body::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<span class="string">"lab"</span>);//laboratory scattering angles and energies
+      kin.<a href="./KV2Body.html#KV2Body:Print" title="void KV2Body::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<span class="string">"ruth"</span>);//Rutherford scattering angles, energies and cross-sections
+
+4. Extracting information on Quasi-Projectile and/or target
+
+Several methods are defined and calculate energy/velocity/angle in CM or lab frame
+for projectile (3) and/or target (4)
+The two arguments are : the angle and the angular range of which nucleus you are interested in
+
+For example : the <a href="./ListOfTypes.html#Double_t">Double_t</a> GetThetaCMTarget(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab,<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus=3)
+give the polar angle in the CM of reaction of the target
+		depending on the polar angle in the lab of the projectile (OfNucleus=3) or of the target (OfNucleus=4)
+
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KV2Body:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KV2Body:_KV2Body">~KV2Body</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:BassIntBarrier">BassIntBarrier</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:CalculateKinematics">CalculateKinematics</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KV2Body:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clear"><span class="baseclass">TObject::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:EqbmChargeState">EqbmChargeState</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* t, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetBmaxFromReactionXSec">GetBmaxFromReactionXSec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ReacXsec)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetCMEnergy">GetCMEnergy</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetCMEnergy@1">GetCMEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetCMGamma">GetCMGamma</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#KV2Body:GetCMVelocity">GetCMVelocity</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetCMVelocity@1">GetCMVelocity</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetEDiss">GetEDiss</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetELab">GetELab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaCM, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetELab@1">GetELab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> AngleNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e2) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetELabVsThetaCMFunc">GetELabVsThetaCMFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus)</td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetELabVsThetaLabFunc">GetELabVsThetaLabFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus)</td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetEqbmChargeStateFunc">GetEqbmChargeStateFunc</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetExcitEnergy">GetExcitEnergy</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetIntegralPrecision">GetIntegralPrecision</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetIntegratedXsec">GetIntegratedXsec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> b1, <a href="./ListOfTypes.html#Double_t">Double_t</a> b2)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetIntegratedXSecRuthLab">GetIntegratedXSecRuthLab</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> th1, <a href="./ListOfTypes.html#Float_t">Float_t</a> th2, <a href="./ListOfTypes.html#Float_t">Float_t</a> phi1 = -1, <a href="./ListOfTypes.html#Float_t">Float_t</a> phi2 = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3)</td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetKoxReactionXSecFunc">GetKoxReactionXSecFunc</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetLabGrazingAngle">GetLabGrazingAngle</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i = 1) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetMaxAngleLab">GetMaxAngleLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetMinAngleLab">GetMinAngleLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetMinThetaCMFromThetaLab">GetMinThetaCMFromThetaLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta, <a href="./ListOfTypes.html#Int_t">Int_t</a> OtherNucleus) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a>*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetNucleus">GetNucleus</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetQGroundStates">GetQGroundStates</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetQReaction">GetQReaction</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetSphereDureReactionXSec">GetSphereDureReactionXSec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> r0 = 1.05)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetThetaCM@1">GetThetaCM</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta, <a href="./ListOfTypes.html#Int_t">Int_t</a> OtherNucleus) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetThetaCM">GetThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; t1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; t2) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetThetaLab">GetThetaLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaCM, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetThetaLab@1">GetThetaLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> AngleNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e2) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetThetaLabVsThetaCMFunc">GetThetaLabVsThetaCMFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetVelocity">GetVelocity</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mass, <a href="./ListOfTypes.html#Double_t">Double_t</a> E)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetVLab">GetVLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> AngleNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e2) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetXSecRuthCM">GetXSecRuthCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab_Proj, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:GetXSecRuthLab">GetXSecRuthLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab_Proj, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetXSecRuthLabFunc">GetXSecRuthLabFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_min = 1., <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_max = 179.)</td></tr>
+<tr class="func"><td class="funcret">TF1*</td><td class="funcname"><a class="funcname" href="#KV2Body:GetXSecRuthLabIntegralFunc">GetXSecRuthLabIntegralFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_min = 1., <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_max = 179.)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:init">init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KV2Body:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:KoxReactionXSec">KoxReactionXSec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KV2Body:KV2Body">KV2Body</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KV2Body:KV2Body@1">KV2Body</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* systemname)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KV2Body:KV2Body@3">KV2Body</a>(<span class="keyword">const</span> <a href="./KV2Body.html">KV2Body</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KV2Body:KV2Body@2">KV2Body</a>(<a href="./KVNucleus.html">KVNucleus</a>* proj, <a href="./KVNucleus.html">KVNucleus</a>* cib = 0, <a href="./KVNucleus.html">KVNucleus</a>* proj_out = 0, <a href="./ListOfTypes.html#Double_t">Double_t</a> Ediss = 0.)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KV2Body.html">KV2Body</a>&amp;</td><td class="funcname"><a class="funcname" href="#KV2Body:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KV2Body.html">KV2Body</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetEDiss">SetEDiss</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetExcitEnergy">SetExcitEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetIntegralPrecision">SetIntegralPrecision</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> precision)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetOutgoing">SetOutgoing</a>(<a href="./KVNucleus.html">KVNucleus</a>* proj_out)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetProjectile">SetProjectile</a>(<a href="./KVNucleus.html">KVNucleus</a>*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetProjectile@1">SetProjectile</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = 0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetTarget">SetTarget</a>(<a href="./KVNucleus.html">KVNucleus</a>*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:SetTarget@1">SetTarget</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:ELabVsThetaCM">ELabVsThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:ELabVsThetaLab">ELabVsThetaLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:FindRoots">FindRoots</a>(TF1*, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp;, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KV2Body:Set4thNucleus">Set4thNucleus</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:ThetaLabVsThetaCM">ThetaLabVsThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:XSecRuthCM">XSecRuthCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:XSecRuthCMVsThetaCM">XSecRuthCMVsThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:XSecRuthLab">XSecRuthLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KV2Body:XSecRuthLabInt">XSecRuthLabInt</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a>*)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KV2Body:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:BCM"></a>BCM</td><td class="datadesc">beta of centre of mass</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:EC"></a>EC[5]</td><td class="datadesc">cm energies</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:K"></a>K[5]</td><td class="datadesc">ratio of c.m. velocity to velocity of nucleus in c.m. v_cm/v_i_cm</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:TETAMAX"></a>TETAMAX[5]</td><td class="datadesc">defined only for nuclei 3 et 4</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:TETAMIN"></a>TETAMIN[5]</td><td class="datadesc">defined only for nuclei 3 et 4</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:VC"></a>VC[5]</td><td class="datadesc">cm velocities</td></tr>
+<tr class="data"><td class="datatype">TVector3</td><td class="dataname"><a name="KV2Body:VCM"></a>VCM</td><td class="datadesc">velocity of centre of mass</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:WC"></a>WC[5]</td><td class="datadesc">cm energy of each nucleus</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:WCT"></a>WCT</td><td class="datadesc">total cm energy</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:WLT"></a>WLT</td><td class="datadesc">total lab energy</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KV2Body:fDeleteN4"></a>fDeleteN4</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KV2Body:fDeleteProj"></a>fDeleteProj</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KV2Body:fDeleteTarget"></a>fDeleteTarget</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:fEDiss"></a>fEDiss</td><td class="datadesc">dissipated energy, 0 means elastic scattering</td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fELabVsThetaCM"></a>fELabVsThetaCM[5]</td><td></td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fELabVsThetaLab"></a>fELabVsThetaLab[5]</td><td></td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fEqbmChargeState"></a>fEqbmChargeState</td><td class="datadesc">function equilibrium charge state of projectile vs. E/A projectile</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KV2Body:fIntPrec"></a>fIntPrec</td><td class="datadesc">Precision of the TF1::Integral method</td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fKoxReactionXSec"></a>fKoxReactionXSec</td><td class="datadesc">function Kox reaction cross-section [barns] vs. E/A projectile</td></tr>
+<tr class="data"><td class="datatype">TObjArray</td><td class="dataname"><a name="KV2Body:fNuclei"></a>fNuclei</td><td class="datadesc">nuclei involved in calculation</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KV2Body:fSetOutgoing"></a>fSetOutgoing</td><td class="datadesc">= kTRUE if SetOutgoing is called before CalculateKinematics</td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fThetaLabVsThetaCM"></a>fThetaLabVsThetaCM[5]</td><td></td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fXSecRuthLab"></a>fXSecRuthLab[5]</td><td></td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KV2Body:fXSecRuthLabIntegral"></a>fXSecRuthLabIntegral[5]</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KV2Body:Class_Charts"></a>Class Charts</h2>
+<map name="MapKV2Body_Lib" id="MapKV2Body_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="471,44,586,92"/>
+</map>
+<div class="tabs">
+<a id="imgKV2Body_Inh" class="tabsel" href="inh/KV2Body_Inh.png" onclick="javascript:return SetImg('Charts','inh/KV2Body_Inh.png');">Inheritance</a>
+<a id="imgKV2Body_InhMem" class="tab" href="inhmem/KV2Body_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KV2Body_InhMem.png');">Inherited Members</a>
+<a id="imgKV2Body_Incl" class="tab" href="incl/KV2Body_Incl.png" onclick="javascript:return SetImg('Charts','incl/KV2Body_Incl.png');">Includes</a>
+<a id="imgKV2Body_Lib" class="tab" href="lib/KV2Body_Lib.png" onclick="javascript:return SetImg('Charts','lib/KV2Body_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKV2Body_Inh" src="inh/KV2Body_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:init" href="src/KV2Body.cxx.html#c4CVwC">init</a>()</span><br />
+<div class="funccomm"><pre>Default initialisations
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KV2Body:KV2Body" href="src/KV2Body.cxx.html#XIOtCC">KV2Body</a>()</span><br />
+<div class="funccomm"><pre>default ctor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KV2Body:KV2Body@1" href="src/KV2Body.cxx.html#GbHGH">KV2Body</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* systemname)</span><br />
+<div class="funccomm"><pre>Set up calculation defining entrance channel following
+this prescription  :
+[Projectile_Symbol]+[Target_Symbol]@[Incident_Energy]MeV/A
+ Example :
+	129Xe+119Sn@50.0MeV/A
+	U+U@5MeV/A
+ Ta+Zn
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KV2Body:KV2Body@2" href="src/KV2Body.cxx.html#ClRJvE">KV2Body</a>(<a href="./KVNucleus.html">KVNucleus</a>* proj, <a href="./KVNucleus.html">KVNucleus</a>* cib = 0, <a href="./KVNucleus.html">KVNucleus</a>* proj_out = 0, <a href="./ListOfTypes.html#Double_t">Double_t</a> Ediss = 0.)</span><br />
+<div class="funccomm"><pre>Set up calculation defining entrance channel (projectile &amp; target nuclei or
+single decaying nucleus), exit channel (if necessary, the remaining nucleus of the
+exit channel is deduced by conservation of mass, charge, momentum) and energy dissipated in reaction.
+
+By default the dissipated energy is zero (elastic reaction).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetTarget" href="src/KV2Body.cxx.html#c1XWAC">SetTarget</a>(<a href="./KVNucleus.html">KVNucleus</a>* )</span><br />
+<div class="funccomm"><pre>Set target for reaction. The <a href="./KVNucleus.html">KVNucleus</a> will not be deleted by <a href="./KV2Body.html#KV2Body:_KV2Body" title="void KV2Body::~KV2Body()">~KV2Body</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetTarget@1" href="src/KV2Body.cxx.html#Vi8B4C">SetTarget</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = 0)</span><br />
+<div class="funccomm"><pre>Set target for reaction
+Creates a new <a href="./KVNucleus.html">KVNucleus</a> which will be deleted by <a href="./KV2Body.html#KV2Body:_KV2Body" title="void KV2Body::~KV2Body()">~KV2Body</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetProjectile" href="src/KV2Body.cxx.html#T9I89C">SetProjectile</a>(<a href="./KVNucleus.html">KVNucleus</a>* )</span><br />
+<div class="funccomm"><pre>Set projectile for reaction. The <a href="./KVNucleus.html">KVNucleus</a> will not be deleted by <a href="./KV2Body.html#KV2Body:_KV2Body" title="void KV2Body::~KV2Body()">~KV2Body</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetProjectile@1" href="src/KV2Body.cxx.html#zmcixD">SetProjectile</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = 0)</span><br />
+<div class="funccomm"><pre>Set projectile for reaction
+Creates a new <a href="./KVNucleus.html">KVNucleus</a> which will be deleted by <a href="./KV2Body.html#KV2Body:_KV2Body" title="void KV2Body::~KV2Body()">~KV2Body</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KV2Body:_KV2Body" href="src/KV2Body.cxx.html#t2mljB">~KV2Body</a>()</span><br />
+<div class="funccomm"><pre>Any nuclei created by the object are deleted
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetVelocity" href="src/KV2Body.cxx.html#vXcsHB">GetVelocity</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> mass, <a href="./ListOfTypes.html#Double_t">Double_t</a> E)</span><br />
+<div class="funccomm"><pre>Static function, calculates relativistic velocity (in cm/ns) from rest mass and total
+energy (i.e. KE + mass) <span class="string">'E'</span> for any particle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetOutgoing" href="src/KV2Body.cxx.html#Il1d5D">SetOutgoing</a>(<a href="./KVNucleus.html">KVNucleus</a>* proj_out)</span><br />
+<div class="funccomm"><pre> Set outgoing projectile-like nucleus' properties.
+ The properties of the outgoing target-like nucleus
+ will be deduced from mass, charge and momentum/energy conservation.
+ The <a href="./KVNucleus.html">KVNucleus</a> will not be deleted by <a href="./KV2Body.html#KV2Body:_KV2Body" title="void KV2Body::~KV2Body()">~KV2Body</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:Set4thNucleus" href="src/KV2Body.cxx.html#RgKhyC">Set4thNucleus</a>()</span><br />
+<div class="funccomm"><pre> Private method, used to deduce 4th nucleus (target-like) from projectile, target
+ and outgoing projectile using conservation of mass, momentum and energy.
+ This nucleus will be deleted with the object.
+
+ if the exit channel is a the compund nucleus, there is no 4th nucleus defined
+ and the excitation energy of the fusion reaction is set in the fEdiss variable
+ see <a href="./KV2Body.html#KV2Body:GetExcitEnergy" title="Double_t KV2Body::GetExcitEnergy() const">GetExcitEnergy</a>() methode
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVNucleus.html">KVNucleus</a> * <a class="funcname" name="KV2Body:GetNucleus" href="src/KV2Body.cxx.html#iU7ymE">GetNucleus</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+<div class="funccomm"><pre>Return pointer to nucleus i (1 &lt;= i &lt;= 4)
+ Entrance channel nuclei .....  i=1 : projectile  i=2 : target
+ Exit channel nuclei .....  i=3 : projectile-like  i=4 : target-like
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetQReaction" href="src/KV2Body.cxx.html#dwRCtD">GetQReaction</a>() const</span><br />
+<div class="funccomm"><pre>Calculate Q-value for reaction, including dissipated (excitation) energy
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetQGroundStates" href="src/KV2Body.cxx.html#t3z.x">GetQGroundStates</a>() const</span><br />
+<div class="funccomm"><pre>Calculate Q-value for reaction, assuming all nuclei in ground state
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetCMEnergy" href="src/KV2Body.cxx.html#E9T9WB">GetCMEnergy</a>() const</span><br />
+<div class="funccomm"><pre>Return available kinetic energy in centre of mass
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetMaxAngleLab" href="src/KV2Body.cxx.html#PCErmB">GetMaxAngleLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+<div class="funccomm"><pre>Returns maximum scattering angle in lab for nuclei i=3 (quasiproj)
+and i=4 (quasitarget)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetMinAngleLab" href="src/KV2Body.cxx.html#T9I_qB">GetMinAngleLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+<div class="funccomm"><pre>Returns minimum scattering angle in lab for nuclei i=3 (quasiproj)
+and i=4 (quasitarget)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KV2Body:GetCMVelocity" href="src/KV2Body.cxx.html#FzNGy">GetCMVelocity</a>() const</span><br />
+<div class="funccomm"><pre>Return vector velocity of centre of mass of reaction (units: cm/ns)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetCMVelocity@1" href="src/KV2Body.cxx.html#Y1pI6C">GetCMVelocity</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+<div class="funccomm"><pre>Return velocity of nucleus <span class="string">"i"</span> in the centre of mass of the reaction
+ Entrance channel nuclei .....  i=1 : projectile  i=2 : target
+ Exit channel nuclei .....  i=3 : projectile-like  i=4 : target-like
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetLabGrazingAngle" href="src/KV2Body.cxx.html#uNVpDB">GetLabGrazingAngle</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i = 1) const</span><br />
+<div class="funccomm"><pre>Calculate laboratory grazing angle.
+ i = 1 (default) : projectile
+ i = 2           : target
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:CalculateKinematics" href="src/KV2Body.cxx.html#dWhs8B">CalculateKinematics</a>()</span><br />
+<div class="funccomm"><pre> Called to make kinematics calculation for all nuclei, use once properties of
+ entrance-channel (and, if necessary, exit-channel) nuclei have been defined.
+ If no exit-channel nuclei are defined, we assume elastic scattering (i.e. identical
+ outgoing nuclei)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetCMEnergy@1" href="src/KV2Body.cxx.html#Hcp1PD">GetCMEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+<div class="funccomm"><pre>Returns kinetic energy of nucleus <span class="string">"i"</span> in the centre of mass of the reaction
+ Entrance channel nuclei .....  i=1 : projectile  i=2 : target
+ Exit channel nuclei .....  i=3 : projectile-like  i=4 : target-like
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:Print" href="src/KV2Body.cxx.html#v5WCWC">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) const</span><br />
+<div class="funccomm"><pre> <a href="./KV2Body.html#KV2Body:Print" title="void KV2Body::Print(Option_t* opt = &quot;&quot;) const">Print</a> out characteristics of reaction.
+
+ If a two-body exit channel has been defined, you can use the following options:
+    opt = <span class="string">"ruth"</span> :  list Rutherford scattering cross-sections as a function of angle in laboratory frame
+    opt = <span class="string">"lab"</span>  :  list energies and angles in laboratory frame
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KV2Body:GetELab@1" href="src/KV2Body.cxx.html#CRWryC">GetELab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> AngleNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e2) const</span><br />
+<div class="funccomm"><pre> Calculate laboratory kinetic energy of nucleus OfNucleus as a function of the lab angle of
+ nucleus AngleNucleus.
+
+ In general there may be two solutions for a given angle, therefore we return the number
+ of solutions (0 if ThetaLab &gt; max lab angle for nucleus in question).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KV2Body:GetThetaCM" href="src/KV2Body.cxx.html#dsahuC">GetThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; t1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; t2) const</span><br />
+<div class="funccomm"><pre> Calculate CM angle of nucleus OfNucleus as a function of its lab angle.
+ Returns number of solutions (there may be &lt;=2 solutions).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:ELabVsThetaLab" href="src/KV2Body.cxx.html#feGhRC">ELabVsThetaLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre> Function calculating lab energy of nucleus par[0] for any lab angle x[0]
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:ELabVsThetaCM" href="src/KV2Body.cxx.html#KS54t">ELabVsThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre> Function calculating lab energy of nucleus par[0] for any CM angle x[0]
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:ThetaLabVsThetaCM" href="src/KV2Body.cxx.html#dNx0pC">ThetaLabVsThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre> Calculate Lab angle of nucleus as function of CM angle x[0]
+ par[0] = index of nucleus = 1, 2, 3, 4
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetELabVsThetaCMFunc" href="src/KV2Body.cxx.html#dDwqQB">GetELabVsThetaCMFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus)</span><br />
+<div class="funccomm"><pre> Return TF1 giving lab energy of nucleus as function of CM angle
+ OfNucleus = 1 or 2 (entrance channel) or 3 or 4 (exit channel)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetELabVsThetaLabFunc" href="src/KV2Body.cxx.html#LL_OWD">GetELabVsThetaLabFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus)</span><br />
+<div class="funccomm"><pre> Return TF1 giving lab energy of nucleus as function of its lab angle
+ OfNucleus = 1 or 2 (entrance channel) or 3 or 4 (exit channel)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KV2Body:GetVLab" href="src/KV2Body.cxx.html#GiHK4C">GetVLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> AngleNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e2) const</span><br />
+<div class="funccomm"><pre> Calculate laboratory velocity of nucleus OfNucleus as a function of the lab angle of
+ nucleus AngleNucleus.
+
+ In general there may be two solutions for a given angle, therefore we return the number
+ of solutions (0 if ThetaLab &gt; max lab angle for nucleus in question).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KV2Body:GetThetaLab@1" href="src/KV2Body.cxx.html#qksm2E">GetThetaLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> AngleNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; e2) const</span><br />
+<div class="funccomm"><pre> Calculate laboratory angle of nucleus OfNucleus as a function of the laboratory angle of
+ nucleus AngleNucleus.
+
+ In general there may be two solutions for a given angle, therefore we return the number
+ of solutions (0 if ThetaLab &gt; max lab angle for nucleus in question).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetThetaLabVsThetaCMFunc" href="src/KV2Body.cxx.html#OnlVQE">GetThetaLabVsThetaCMFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus)</span><br />
+<div class="funccomm"><pre> Return TF1 giving lab angle of nucleus as function of CM angle
+ OfNucleus = 1 or 2 (entrance channel) or 3 or 4 (exit channel)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetXSecRuthCM" href="src/KV2Body.cxx.html#wCysbD">GetXSecRuthCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab_Proj, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3) const</span><br />
+<div class="funccomm"><pre>Calculate Rutherford cross-section (b/sr) in the CM as a
+function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle
+
+ WARNING: in inverse kinematics, projectile lab angles generally have
+ two corresponding CM angles. We only use the most forward (smallest) CM angle.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:XSecRuthCM" href="src/KV2Body.cxx.html#zOGK4E">XSecRuthCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre>Calculate Rutherford cross-section (b/sr) in the CM as a
+function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle
+
+ WARNING: in inverse kinematics, projectile lab angles generally have
+ two corresponding CM angles. We only use the most forward (smallest) CM angle.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetMinThetaCMFromThetaLab" href="src/KV2Body.cxx.html#F0izAD">GetMinThetaCMFromThetaLab</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta, <a href="./ListOfTypes.html#Int_t">Int_t</a> OtherNucleus) const</span><br />
+<div class="funccomm"><pre> Return the smallest (i.e. most forward) CM angle of nucleus OfNucleus
+ corresponding to laboratory angle theta of nucleus OtherNucleus
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:XSecRuthCMVsThetaCM" href="src/KV2Body.cxx.html#CRayNC">XSecRuthCMVsThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre> Calculate CM Rutherford cross-section (b/sr) in the CM as a function of
+ scattering angle in the CM frame for nucleus par[0]
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetXSecRuthLab" href="src/KV2Body.cxx.html#KyRbwD">GetXSecRuthLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab_Proj, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3) const</span><br />
+<div class="funccomm"><pre>Calculate Rutherford cross-section (b/sr) in the Lab as a
+function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle
+
+ WARNING: in inverse kinematics, projectile lab angles generally have
+ two corresponding CM angles. We only use the most forward (smallest) CM angle.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:XSecRuthLab" href="src/KV2Body.cxx.html#pBcOvD">XSecRuthLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre>Calculate Rutherford cross-section (b/sr) in the Lab as a
+function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle
+
+ WARNING: in inverse kinematics, projectile lab angles generally have
+ two corresponding CM angles. We only use the most forward (smallest) CM angle.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:XSecRuthLabInt" href="src/KV2Body.cxx.html#bZH8uC">XSecRuthLabInt</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre>Rutherford cross-section (b/sr) function in the Lab as a
+function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle x[0]
+including 'sin theta' factor needed for integrating over solid angles.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetIntegratedXSecRuthLab" href="src/KV2Body.cxx.html#CwAw">GetIntegratedXSecRuthLab</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> th1, <a href="./ListOfTypes.html#Float_t">Float_t</a> th2, <a href="./ListOfTypes.html#Float_t">Float_t</a> phi1 = -1, <a href="./ListOfTypes.html#Float_t">Float_t</a> phi2 = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3)</span><br />
+<div class="funccomm"><pre>Calculate Integrated Rutherford cross-section (barns) in the Lab using
+polar and azimuthal angular range expressed in degree
+ if (OfNucleus==3) This angular range is considered to be the scattered projectile one
+ if (OfNucleus==4) This angular range is considered to be the scattered target one
+
+If phi1 ou phi2 ==-1 the azimuthal width is set to 2pi
+Else if phi1=phi2 the azimuthal width is set to 1 ie the integral is only on theta
+
+The returned value is in barns
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:BassIntBarrier" href="src/KV2Body.cxx.html#iDFrsC">BassIntBarrier</a>()</span><br />
+<div class="funccomm"><pre> calculate Bass interaction barrier B_int
+ r0 = 1.07 fm
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:KoxReactionXSec" href="src/KV2Body.cxx.html#SfixAD">KoxReactionXSec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* , <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre> calculate Kox reaction X-section (in barns) for a given lab energy of projectile (in MeV/nucleon)
+
+ r0 = 1.05 fm
+ c = 0.6 @ 30MeV/A, 1.4 @ 83 MeV/A =&gt; linear interpolation:
+   c = 0.8/53*eproj + 0.6 - 30*0.8/53
+ uses Bass interaction barrier Bint in the (1 - B/Ecm) term
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetSphereDureReactionXSec" href="src/KV2Body.cxx.html#nKPhEB">GetSphereDureReactionXSec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> r0 = 1.05)</span><br />
+<div class="funccomm"><pre> calculate Reaction Cross Section with the <span class="string">"Sphere Dure"</span>
+ approximation
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetBmaxFromReactionXSec" href="src/KV2Body.cxx.html#whVX0B">GetBmaxFromReactionXSec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ReacXsec)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetIntegratedXsec" href="src/KV2Body.cxx.html#NTobID">GetIntegratedXsec</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> b1, <a href="./ListOfTypes.html#Double_t">Double_t</a> b2)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetKoxReactionXSecFunc" href="src/KV2Body.cxx.html#CBroQE">GetKoxReactionXSecFunc</a>()</span><br />
+<div class="funccomm"><pre> Return pointer to TF1 with Kox reaction X-section in barns as a
+ function of projectile lab energy (in Mev/nucleon) for this reaction.
+ By default the range of the function is [20,100] MeV/nucleon.
+ Change with TF1::SetRange.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:EqbmChargeState" href="src/KV2Body.cxx.html#RnvVcC">EqbmChargeState</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* t, <a href="./ListOfTypes.html#Double_t">Double_t</a>* )</span><br />
+<div class="funccomm"><pre> Calculate the mean charge state of the projectile after passage through the target,
+ assuming that the equilibrium charge state distribution is achieved*.
+ t[0] = energy of projectile after the target (in MeV/nucleon)
+
+ We use the empirical parameterization of Leon et al., At. Dat. and Nucl. Dat. Tab. 69, 217 (1998)
+ developed for heavy ions in the GANIL energy range (it represents a fit to data measured using
+ GANIL beams).
+
+ *N.B. Concerning equilibrium charge state distributions, it is not easy to know whether, for a given
+ combination of projectile, projectile energy, target, and target thickness, the equilibrium
+ distribution is reached or not. Here are some comments from the paper cited above which
+ may give some guidelines:
+
+ <span class="string">"The energies available at the GANIL accelerator range from 24 to 95 MeV/u. Within this energy range,</span>
+  the equilibrium charge state is reached only for fairly thick targets (~1 mg/cm2 for C foils).<span class="string">"</span>
+
+ <span class="string">"Mean Charge State as a Function of the Target Thickness</span>
+ A typical example of the variation of the mean charge as a function of the foil thickness is shown ... It is seen
+ that the mean charge initially increases due to the ionization process. Then, the equilibrium state is reached at
+ a certain thickness, the so-called equilibrium thickness, due to the equilibration of electron loss and
+ capture processes. Finally, for foils thicker than the equilibrium thickness, the mean charge decreases due to the
+ slowing down of the ions in matter leading to higher capture cross sections.<span class="string">"</span>
+
+ It should be noted that, according to the data published in this and other papers, the equilibrium thickness
+ decreases with increasing atomic number of the target, and increases with increasing energy of the projectile.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetEqbmChargeStateFunc" href="src/KV2Body.cxx.html#BtkD4E">GetEqbmChargeStateFunc</a>()</span><br />
+<div class="funccomm"><pre> Return pointer to TF1 giving mean charge state of the projectile after passage through the target,
+ assuming that the equilibrium charge state distribution is achieved, as a function of projectile
+ energy after the target (in MeV/nucleon).
+ By default the range of the function is [20,100] MeV/nucleon.
+ Change with TF1::SetRange.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetXSecRuthLabFunc" href="src/KV2Body.cxx.html#wHcp2D">GetXSecRuthLabFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_min = 1., <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_max = 179.)</span><br />
+<div class="funccomm"><pre> Return pointer to TF1 giving Rutherford cross-section (b/sr) in the Lab as a
+ function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle
+ By default, theta_min = 1 degree &amp; theta_max = 179 degrees
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TF1* <a class="funcname" name="KV2Body:GetXSecRuthLabIntegralFunc" href="src/KV2Body.cxx.html#JjoMT">GetXSecRuthLabIntegralFunc</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus = 3, <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_min = 1., <a href="./ListOfTypes.html#Double_t">Double_t</a> theta_max = 179.)</span><br />
+<div class="funccomm"><pre> Return pointer to TF1 giving Rutherford cross-section (b/sr) in the Lab as a
+ function of projectile (OfNucleus=3) or target (OfNucleus=4) lab scattering angle
+
+ This function is equal to sin(theta)*dsigma/domega, i.e. it is the integrand
+ needed for calculating total cross-sections integrated over solid angle.
+
+ WARNING: when integrating this function using TF1::Integral, the result must
+ be multiplied by TMath::DegToRad(), because <span class="string">'x'</span> is in degrees rather than radians,
+ e.g. the integrated cross-section in barns is given by
+
+    <a href="./KV2Body.html#KV2Body:GetXSecRuthLabIntegralFunc" title="TF1* KV2Body::GetXSecRuthLabIntegralFunc(Int_t OfNucleus = 3, Double_t theta_min = 1., Double_t theta_max = 179.)">GetXSecRuthLabIntegralFunc</a>(OfNucleus)-&gt;Integral(theta_min, theta_max)*TMath::DegToRad()
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KV2Body:FindRoots" href="src/KV2Body.cxx.html#Jo7ibD">FindRoots</a>(TF1* , <a href="./ListOfTypes.html#Double_t">Double_t</a> , <a href="./ListOfTypes.html#Double_t">Double_t</a> , <a href="./ListOfTypes.html#Double_t">Double_t</a> , <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; , <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; ) const</span><br />
+<div class="funccomm"><pre> Find at most two solutions x1 and x2 between xmin and xmax for which fonc-&gt;Eval(x) = val
+ i.e. we use TF1::GetX for a function which may be (at most) <a href="./ListOfTypes.html#double">double</a>-valued in range (xmin, xmax)
+ This is adapted to the case of the lab angle vs. CM angle of scattered particles.
+ if fonc has a maximum between xmin and xmax, and if val &lt; max, we look for x1 between
+ xmin and the maximum, and x2 between the maximum and xmax.
+ If not (single-valued function) we look for x1 between xmin and xmax.
+ This method returns the number of roots found.
+ If val &gt; maximum of fonc between xmin and xmax, there is no solution: we return 0.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KV2Body:KV2Body" href="src/KV2Body.h.html#S17O0D">KV2Body</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetExcitEnergy" href="src/KV2Body.h.html#bdN_gE">SetExcitEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetExcitEnergy" href="src/KV2Body.h.html#f1olv">GetExcitEnergy</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetEDiss" href="src/KV2Body.h.html#MI_lcE">SetEDiss</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetEDiss" href="src/KV2Body.h.html#e_GbLE">GetEDiss</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetCMGamma" href="src/KV2Body.h.html#kv.MXD">GetCMGamma</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetThetaLab" href="src/KV2Body.h.html#F6JSoB">GetThetaLab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaCM, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus) const</span><br />
+<div class="funccomm"><pre> Calculate lab angle of nucleus OfNucleus (=1,2,3,4) as a function of CM angle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetELab" href="src/KV2Body.h.html#sqbDw">GetELab</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaCM, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus) const</span><br />
+<div class="funccomm"><pre> Calculate lab energy of nucleus OfNucleus (=1,2,3,4) as a function of CM angle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KV2Body:GetThetaCM" href="src/KV2Body.h.html#bSHa9D">GetThetaCM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ThetaLab, <a href="./ListOfTypes.html#Int_t">Int_t</a> OfNucleus, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; t1, <a href="./ListOfTypes.html#Double_t">Double_t</a>&amp; t2) const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KV2Body:GetIntegralPrecision" href="src/KV2Body.h.html#Cc08.B">GetIntegralPrecision</a>()</span><br />
+<div class="funccomm"><pre>Precision of the TF1::Integral() method
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KV2Body:SetIntegralPrecision" href="src/KV2Body.h.html#q9Jxz">SetIntegralPrecision</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> precision)</span><br />
+<div class="funccomm"><pre>Set the precision of the TF1::Integral() method
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:42:01 2015 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

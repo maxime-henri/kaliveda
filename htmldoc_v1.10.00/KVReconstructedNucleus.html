@@ -1,0 +1,936 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 15:44:02 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVReconstructedNucleus</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVReconstructedNucleus','libKVMultiDetexp_events','KVReconstructedNucleus.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVReconstructedNucleus.h.html">header file</a>
+<a class="descrheadentry" href="src/KVReconstructedNucleus.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVReconstructedNucleus.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVReconstructedNucleus.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVReconstructedNucleus:description">class description</a> 
+<a class="descrheadentry" href="#KVReconstructedNucleus:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVReconstructedNucleus:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVReconstructedNucleus:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EXP_EVENTS_Index.html">EXP_EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVReconstructedNucleus</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVReconstructedNucleus:description"></a>class KVReconstructedNucleus: public <a href="./KVNucleus.html">KVNucleus</a></h1>
+<div class="classdescr">
+<pre>
+<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>
+
+Particles reconstructed from data measured in multidetector arrays using identification
+telescopes (see <a href="./KVIDTelescope.html">KVIDTelescope</a> class).
+
+If the particle has been identified (<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:IsIdentified" title="Bool_t KVReconstructedNucleus::IsIdentified() const">IsIdentified</a>()=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>) and calibrated (<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:IsCalibrated" title="Bool_t KVReconstructedNucleus::IsCalibrated() const">IsCalibrated</a>()=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>)
+then information on its nature and kinematics can be obtained using the methods of parent
+classes <a href="./KVNucleus.html">KVNucleus</a> and <a href="./KVParticle.html">KVParticle</a> (<a href="./KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ() const">GetZ</a>(), <a href="./KVParticle.html#KVParticle:GetVelocity" title="TVector3 KVParticle::GetVelocity() const">GetVelocity</a>(), etc.).
+
+Information specific to the detection and identification of the particle:
+
+   <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetDetectorList" title="const KVSeqCollection* KVReconstructedNucleus::GetDetectorList() const">GetDetectorList</a>()         -  list of detectors passed through, in reverse order
+   <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetNumDet" title="Int_t KVReconstructedNucleus::GetNumDet() const">GetNumDet</a>()               -  number of detectors in list = number of detectors passed through
+   <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetDetector" title="KVDetector* KVReconstructedNucleus::GetDetector(int i) const">GetDetector</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)      -  ith detector in list (i=0 is stopping detector)
+   <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetStoppingDetector" title="KVDetector* KVReconstructedNucleus::GetStoppingDetector() const">GetStoppingDetector</a>()     -  detector in which particle stopped (first in list)
+
+   <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetGroup" title="KVGroup* KVReconstructedNucleus::GetGroup() const">GetGroup</a>()                -  group in which particle detected/stopped (see <a href="./KVGroup.html">KVGroup</a>)
+   GetTelescope()            -  telescope to which stopping detector belongs (see <a href="./KVTelescope.html">KVTelescope</a>)
+
+   <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetIdentifyingTelescope" title="KVIDTelescope* KVReconstructedNucleus::GetIdentifyingTelescope() const">GetIdentifyingTelescope</a>() -  ID telescope which identified this particle (see <a href="./KVIDTelescope.html">KVIDTelescope</a>)
+      <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:IsIdentified" title="Bool_t KVReconstructedNucleus::IsIdentified() const">IsIdentified</a>()               - =<a href="./ListOfTypes.html#Bool_t">kTRUE</a> if particle identification has been completed
+      <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:IsCalibrated" title="Bool_t KVReconstructedNucleus::IsCalibrated() const">IsCalibrated</a>()             - =<a href="./ListOfTypes.html#Bool_t">kTRUE</a> if particle's energy has been set
+      <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetIDTelescopes" title="KVSeqCollection* KVReconstructedNucleus::GetIDTelescopes() const">GetIDTelescopes</a>()     - list of ID telescopes through which particle passed.
+                                   this list is used to find an ID telescope which can identify the particle.
+    <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetRealZ" title="Float_t KVReconstructedNucleus::GetRealZ() const">GetRealZ</a>(), <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetRealA" title="Float_t KVReconstructedNucleus::GetRealA() const">GetRealA</a>()  -  return the <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a> and A determined with floating-point precision by the
+                               identification of the particle.
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVReconstructedNucleus:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:_KVReconstructedNucleus">~KVReconstructedNucleus</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:AddDetector">AddDetector</a>(<a href="./KVDetector.html">KVDetector</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:AddGroup"><span class="baseclass">KVParticle::</span>AddGroup</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* from = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:AddGroup@1"><span class="baseclass">KVParticle::</span>AddGroup</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <a href="./KVParticleCondition.html">KVParticleCondition</a>*)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:AnalyseParticlesInGroup">AnalyseParticlesInGroup</a>(<a href="./KVGroup.html">KVGroup</a>* grp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Angle"><span class="baseclass">TLorentzVector::</span>Angle</a>(<span class="keyword">const</span> TVector3&amp; v) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:BelongsToGroup"><span class="baseclass">KVParticle::</span>BelongsToGroup</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Beta"><span class="baseclass">TLorentzVector::</span>Beta</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Boost@1"><span class="baseclass">TLorentzVector::</span>Boost</a>(<span class="keyword">const</span> TVector3&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Boost"><span class="baseclass">TLorentzVector::</span>Boost</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:BoostVector"><span class="baseclass">TLorentzVector::</span>BoostVector</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:C"><span class="baseclass">KVParticle::</span>C</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Calibrate">Calibrate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:CheckZAndA"><span class="baseclass">KVNucleus::</span>CheckZAndA</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; z, <a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; a) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Clear">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:Compare"><span class="baseclass">KVNucleus::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Copy">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:CosTheta"><span class="baseclass">TLorentzVector::</span>CosTheta</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:DeduceEincFromBrho"><span class="baseclass">KVNucleus::</span>DeduceEincFromBrho</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> Brho, <a href="./ListOfTypes.html#Int_t">Int_t</a> ChargeState = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:DeltaPhi"><span class="baseclass">TLorentzVector::</span>DeltaPhi</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:DeltaR"><span class="baseclass">TLorentzVector::</span>DeltaR</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Dot"><span class="baseclass">TLorentzVector::</span>Dot</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:DrEtaPhi"><span class="baseclass">TLorentzVector::</span>DrEtaPhi</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:E"><span class="baseclass">TLorentzVector::</span>E</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Energy"><span class="baseclass">TLorentzVector::</span>Energy</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Et"><span class="baseclass">TLorentzVector::</span>Et</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Et@1"><span class="baseclass">TLorentzVector::</span>Et</a>(<span class="keyword">const</span> TVector3&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Et2"><span class="baseclass">TLorentzVector::</span>Et2</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Et2@1"><span class="baseclass">TLorentzVector::</span>Et2</a>(<span class="keyword">const</span> TVector3&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Eta"><span class="baseclass">TLorentzVector::</span>Eta</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">TVector2</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:EtaPhiVector"><span class="baseclass">TLorentzVector::</span>EtaPhiVector</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Gamma"><span class="baseclass">TLorentzVector::</span>Gamma</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetA"><span class="baseclass">KVNucleus::</span>GetA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAbundance"><span class="baseclass">KVNucleus::</span>GetAbundance</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVAbundance.html">KVAbundance</a>*</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAbundancePtr"><span class="baseclass">KVNucleus::</span>GetAbundancePtr</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAFromZ"><span class="baseclass">KVNucleus::</span>GetAFromZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Char_t">Char_t</a> mt)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAMeV"><span class="baseclass">KVNucleus::</span>GetAMeV</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetAnglesFromStoppingDetector">GetAnglesFromStoppingDetector</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"random"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAsurZ"><span class="baseclass">KVNucleus::</span>GetAsurZ</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAtomicMass"><span class="baseclass">KVNucleus::</span>GetAtomicMass</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetAWithMaxBindingEnergy"><span class="baseclass">KVNucleus::</span>GetAWithMaxBindingEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetBindingEnergy"><span class="baseclass">KVNucleus::</span>GetBindingEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetBindingEnergyPerNucleon"><span class="baseclass">KVNucleus::</span>GetBindingEnergyPerNucleon</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetChargeAsymetry"><span class="baseclass">KVNucleus::</span>GetChargeAsymetry</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetChargeRadius"><span class="baseclass">KVNucleus::</span>GetChargeRadius</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVChargeRadius.html">KVChargeRadius</a>*</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetChargeRadiusPtr"><span class="baseclass">KVNucleus::</span>GetChargeRadiusPtr</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDetector.html">KVDetector</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetDetector">GetDetector</a>(<span class="keyword">int</span> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./KVSeqCollection.html">KVSeqCollection</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetDetectorList">GetDetectorList</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetDetectorNames">GetDetectorNames</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetE"><span class="baseclass">KVParticle::</span>GetE</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetECode">GetECode</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetEnergy"><span class="baseclass">KVParticle::</span>GetEnergy</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetEnergyPerNucleon"><span class="baseclass">KVNucleus::</span>GetEnergyPerNucleon</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetEtran"><span class="baseclass">KVParticle::</span>GetEtran</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetExcitEnergy"><span class="baseclass">KVNucleus::</span>GetExcitEnergy</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetExtraChargeRadius"><span class="baseclass">KVNucleus::</span>GetExtraChargeRadius</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> rct = 2) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetExtraMassExcess"><span class="baseclass">KVNucleus::</span>GetExtraMassExcess</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVParticle.html">KVParticle</a>*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetFrame"><span class="baseclass">KVParticle::</span>GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetFrameName"><span class="baseclass">KVParticle::</span>GetFrameName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVGroup.html">KVGroup</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetGroup">GetGroup</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVUniqueNameList.html">KVUniqueNameList</a>*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetGroups"><span class="baseclass">KVParticle::</span>GetGroups</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIDCode">GetIDCode</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentificationResult">GetIdentificationResult</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentificationResult@1">GetIdentificationResult</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idtype)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentificationResult@2">GetIdentificationResult</a>(<a href="./KVIDTelescope.html">KVIDTelescope</a>* idt)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentificationResult@3">GetIdentificationResult</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentificationResult@4">GetIdentificationResult</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idtype) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentificationResult@5">GetIdentificationResult</a>(<a href="./KVIDTelescope.html">KVIDTelescope</a>* idt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVIDTelescope.html">KVIDTelescope</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIdentifyingTelescope">GetIdentifyingTelescope</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVSeqCollection.html">KVSeqCollection</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIDTelescopes">GetIDTelescopes</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetIDtelNames">GetIDtelNames</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetKE"><span class="baseclass">KVParticle::</span>GetKE</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVNumberList.html">KVNumberList</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetKnownARange"><span class="baseclass">KVNucleus::</span>GetKnownARange</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Double_t">Double_t</a> tmin = 0) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetLifeTime"><span class="baseclass">KVNucleus::</span>GetLifeTime</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVLifeTime.html">KVLifeTime</a>*</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetLifeTimePtr"><span class="baseclass">KVNucleus::</span>GetLifeTimePtr</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetListOfFrames"><span class="baseclass">KVParticle::</span>GetListOfFrames</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetMass"><span class="baseclass">KVParticle::</span>GetMass</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetMassExcess"><span class="baseclass">KVNucleus::</span>GetMassExcess</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVMassExcess.html">KVMassExcess</a>*</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetMassExcessPtr"><span class="baseclass">KVNucleus::</span>GetMassExcessPtr</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetMassFormula"><span class="baseclass">KVNucleus::</span>GetMassFormula</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetMassGS"><span class="baseclass">KVNucleus::</span>GetMassGS</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetMomentum"><span class="baseclass">KVParticle::</span>GetMomentum</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetN"><span class="baseclass">KVNucleus::</span>GetN</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetName"><span class="baseclass">KVParticle::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetNaturalA"><span class="baseclass">KVNucleus::</span>GetNaturalA</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetNFromZ"><span class="baseclass">KVNucleus::</span>GetNFromZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Char_t">Char_t</a> mt)</td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetNIdentifiedInGroup">GetNIdentifiedInGroup</a>(<a href="./KVGroup.html">KVGroup</a>* grp)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetNSegDet">GetNSegDet</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetNsurZ"><span class="baseclass">KVNucleus::</span>GetNsurZ</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetNumberOfDefinedFrames"><span class="baseclass">KVParticle::</span>GetNumberOfDefinedFrames</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetNumberOfDefinedGroups"><span class="baseclass">KVParticle::</span>GetNumberOfDefinedGroups</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetNumDet">GetNumDet</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetNUnidentifiedInGroup">GetNUnidentifiedInGroup</a>(<a href="./KVGroup.html">KVGroup</a>* grp)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVNameValueList.html">KVNameValueList</a>*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetParameters"><span class="baseclass">KVParticle::</span>GetParameters</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetPhi"><span class="baseclass">KVParticle::</span>GetPhi</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetPID">GetPID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">TVector3*</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetPInitial"><span class="baseclass">KVParticle::</span>GetPInitial</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetRealA">GetRealA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetRealAFromZ"><span class="baseclass">KVNucleus::</span>GetRealAFromZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Char_t">Char_t</a> mt)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetRealNFromZ"><span class="baseclass">KVNucleus::</span>GetRealNFromZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Char_t">Char_t</a> mt)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetRealZ">GetRealZ</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetRelativeVelocity"><span class="baseclass">KVNucleus::</span>GetRelativeVelocity</a>(<a href="./KVNucleus.html">KVNucleus</a>* nuc)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetREtran"><span class="baseclass">KVParticle::</span>GetREtran</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetRTransverseEnergy"><span class="baseclass">KVParticle::</span>GetRTransverseEnergy</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetStatus">GetStatus</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDetector.html">KVDetector</a>*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetStoppingDetector">GetStoppingDetector</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetSymbol"><span class="baseclass">KVNucleus::</span>GetSymbol</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:GetTargetEnergyLoss">GetTargetEnergyLoss</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetTheta"><span class="baseclass">KVParticle::</span>GetTheta</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetTransverseEnergy"><span class="baseclass">KVParticle::</span>GetTransverseEnergy</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetV"><span class="baseclass">KVParticle::</span>GetV</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetVelocity"><span class="baseclass">KVParticle::</span>GetVelocity</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetViolaVelocity"><span class="baseclass">KVNucleus::</span>GetViolaVelocity</a>(<a href="./KVNucleus.html">KVNucleus</a>* nuc = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> formula = kDefaultFormula)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetVpar"><span class="baseclass">KVParticle::</span>GetVpar</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:GetVperp"><span class="baseclass">KVParticle::</span>GetVperp</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetWidth"><span class="baseclass">KVNucleus::</span>GetWidth</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:GetXYZT"><span class="baseclass">TLorentzVector::</span>GetXYZT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* carray) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:GetXYZT@1"><span class="baseclass">TLorentzVector::</span>GetXYZT</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a>* carray) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetZ"><span class="baseclass">KVNucleus::</span>GetZ</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:GetZFromSymbol"><span class="baseclass">KVNucleus::</span>GetZFromSymbol</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:HasFrame"><span class="baseclass">KVParticle::</span>HasFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Identify">Identify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:init">init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:IsAMeasured">IsAMeasured</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:IsCalibrated">IsCalibrated</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:IsDetected"><span class="baseclass">KVParticle::</span>IsDetected</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:IsIdentified">IsIdentified</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:IsKnown"><span class="baseclass">KVNucleus::</span>IsKnown</a>(<span class="keyword">int</span> z = -1, <span class="keyword">int</span> a = -1) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:IsMassGiven"><span class="baseclass">KVNucleus::</span>IsMassGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:IsOK"><span class="baseclass">KVParticle::</span>IsOK</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:IsResonance"><span class="baseclass">KVNucleus::</span>IsResonance</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:IsSortable"><span class="baseclass">KVNucleus::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:IsStable"><span class="baseclass">KVNucleus::</span>IsStable</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min_lifetime = 1.0<a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:E" title="Double_t TLorentzVector::E() const">E</a>+15) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:IsZMeasured">IsZMeasured</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:KVReconstructedNucleus">KVReconstructedNucleus</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:KVReconstructedNucleus@1">KVReconstructedNucleus</a>(<span class="keyword">const</span> <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:LiquidDrop_BrackGuet"><span class="baseclass">KVNucleus::</span>LiquidDrop_BrackGuet</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> A, <a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:ListGroups"><span class="baseclass">KVParticle::</span>ListGroups</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:M"><span class="baseclass">TLorentzVector::</span>M</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:M2"><span class="baseclass">TLorentzVector::</span>M2</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Mag"><span class="baseclass">TLorentzVector::</span>Mag</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Mag2"><span class="baseclass">TLorentzVector::</span>Mag2</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Minus"><span class="baseclass">TLorentzVector::</span>Minus</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Mt"><span class="baseclass">TLorentzVector::</span>Mt</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Mt2"><span class="baseclass">TLorentzVector::</span>Mt2</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator!_"><span class="baseclass">TLorentzVector::</span>operator!=</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator()"><span class="baseclass">TLorentzVector::</span>operator()</a>(<span class="keyword">int</span> i) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator()@1"><span class="baseclass">TLorentzVector::</span>operator()</a>(<span class="keyword">int</span> i)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator*"><span class="baseclass">TLorentzVector::</span>operator*</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator*@1"><span class="baseclass">TLorentzVector::</span>operator*</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator*_"><span class="baseclass">TLorentzVector::</span>operator*=</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator*_@1"><span class="baseclass">TLorentzVector::</span>operator*=</a>(<span class="keyword">const</span> TRotation&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator*_@2"><span class="baseclass">TLorentzVector::</span>operator*=</a>(<span class="keyword">const</span> TLorentzRotation&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:operator+"><span class="baseclass">KVNucleus::</span>operator+</a>(<span class="keyword">const</span> <a href="./KVNucleus.html">KVNucleus</a>&amp; rhs)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a>&amp;</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:operator+_"><span class="baseclass">KVNucleus::</span>operator+=</a>(<span class="keyword">const</span> <a href="./KVNucleus.html">KVNucleus</a>&amp; rhs)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:operator-"><span class="baseclass">KVNucleus::</span>operator-</a>(<span class="keyword">const</span> <a href="./KVNucleus.html">KVNucleus</a>&amp; rhs)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a>&amp;</td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:operator-_"><span class="baseclass">KVNucleus::</span>operator-=</a>(<span class="keyword">const</span> <a href="./KVNucleus.html">KVNucleus</a>&amp; rhs)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator__"><span class="baseclass">TLorentzVector::</span>operator==</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator[]"><span class="baseclass">TLorentzVector::</span>operator[]</a>(<span class="keyword">int</span> i) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:operator[]@1"><span class="baseclass">TLorentzVector::</span>operator[]</a>(<span class="keyword">int</span> i)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:P"><span class="baseclass">TLorentzVector::</span>P</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Perp"><span class="baseclass">TLorentzVector::</span>Perp</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Perp@1"><span class="baseclass">TLorentzVector::</span>Perp</a>(<span class="keyword">const</span> TVector3&amp; v) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Perp2"><span class="baseclass">TLorentzVector::</span>Perp2</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Perp2@1"><span class="baseclass">TLorentzVector::</span>Perp2</a>(<span class="keyword">const</span> TVector3&amp; v) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Phi"><span class="baseclass">TLorentzVector::</span>Phi</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Plus"><span class="baseclass">TLorentzVector::</span>Plus</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:PseudoRapidity"><span class="baseclass">TLorentzVector::</span>PseudoRapidity</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Pt"><span class="baseclass">TLorentzVector::</span>Pt</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Pt@1"><span class="baseclass">TLorentzVector::</span>Pt</a>(<span class="keyword">const</span> TVector3&amp; v) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Px"><span class="baseclass">TLorentzVector::</span>Px</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Py"><span class="baseclass">TLorentzVector::</span>Py</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Pz"><span class="baseclass">TLorentzVector::</span>Pz</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Rapidity"><span class="baseclass">TLorentzVector::</span>Rapidity</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Reconstruct">Reconstruct</a>(<a href="./KVDetector.html">KVDetector</a>* kvd)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:RemoveAllGroups"><span class="baseclass">KVParticle::</span>RemoveAllGroups</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:RemoveGroup"><span class="baseclass">KVParticle::</span>RemoveGroup</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:ResetEnergy"><span class="baseclass">KVParticle::</span>ResetEnergy</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:ResetIsOK"><span class="baseclass">KVParticle::</span>ResetIsOK</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:ResetNSegDet">ResetNSegDet</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Rho"><span class="baseclass">TLorentzVector::</span>Rho</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Rotate"><span class="baseclass">TLorentzVector::</span>Rotate</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>, <span class="keyword">const</span> TVector3&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:RotateUz"><span class="baseclass">TLorentzVector::</span>RotateUz</a>(TVector3&amp; newUzVector)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:RotateX"><span class="baseclass">TLorentzVector::</span>RotateX</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> angle)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:RotateY"><span class="baseclass">TLorentzVector::</span>RotateY</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> angle)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:RotateZ"><span class="baseclass">TLorentzVector::</span>RotateZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> angle)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:Set"><span class="baseclass">KVNucleus::</span>Set</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetA"><span class="baseclass">KVNucleus::</span>SetA</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> a)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetAMeasured">SetAMeasured</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetE"><span class="baseclass">KVParticle::</span>SetE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetE0"><span class="baseclass">KVParticle::</span>SetE0</a>(TVector3* e = 0)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetECode">SetECode</a>(<a href="./ListOfTypes.html#UChar_t">UChar_t</a> s)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetEnergy"><span class="baseclass">KVParticle::</span>SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetExcitEnergy"><span class="baseclass">KVNucleus::</span>SetExcitEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@1"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, TLorentzRotation&amp; rot)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@2"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, TRotation&amp; rot)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TVector3&amp; boost, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@5"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, TLorentzRotation&amp; rot)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@6"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, TRotation&amp; rot)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@3"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TVector3&amp; boost, TRotation&amp; rot, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@4"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TVector3&amp; boost, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrame@7"><span class="baseclass">KVParticle::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TVector3&amp; boost, TRotation&amp; rot, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetFrameName"><span class="baseclass">KVParticle::</span>SetFrameName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* framename)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIDCode">SetIDCode</a>(<a href="./ListOfTypes.html#UShort_t">UShort_t</a> s)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIdentification">SetIdentification</a>(<a href="./KVIdentificationResult.html">KVIdentificationResult</a>*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIdentifyingTelescope">SetIdentifyingTelescope</a>(<a href="./KVIDTelescope.html">KVIDTelescope</a>* i)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIsCalibrated">SetIsCalibrated</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetIsDetected"><span class="baseclass">KVParticle::</span>SetIsDetected</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIsIdentified">SetIsIdentified</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetIsOK"><span class="baseclass">KVParticle::</span>SetIsOK</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> flag = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIsUncalibrated">SetIsUncalibrated</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetIsUnidentified">SetIsUnidentified</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetKE"><span class="baseclass">KVParticle::</span>SetKE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ecin)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetMass"><span class="baseclass">KVNucleus::</span>SetMass</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetMassFormula"><span class="baseclass">KVNucleus::</span>SetMassFormula</a>(<a href="./ListOfTypes.html#UChar_t">UChar_t</a> mt)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetMomentum"><span class="baseclass">KVParticle::</span>SetMomentum</a>(<span class="keyword">const</span> TVector3&amp; v)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetMomentum@1"><span class="baseclass">KVParticle::</span>SetMomentum</a>(<span class="keyword">const</span> TVector3* v)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetMomentum@3"><span class="baseclass">KVParticle::</span>SetMomentum</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:T" title="Double_t TLorentzVector::T() const">T</a>, TVector3 dir)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetMomentum@2"><span class="baseclass">KVParticle::</span>SetMomentum</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> px, <a href="./ListOfTypes.html#Double_t">Double_t</a> py, <a href="./ListOfTypes.html#Double_t">Double_t</a> pz, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"cart"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetN"><span class="baseclass">KVNucleus::</span>SetN</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetName"><span class="baseclass">KVParticle::</span>SetName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* nom)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetNSegDet">SetNSegDet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> seg)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPerp"><span class="baseclass">TLorentzVector::</span>SetPerp</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetPhi"><span class="baseclass">KVParticle::</span>SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPtEtaPhiE"><span class="baseclass">TLorentzVector::</span>SetPtEtaPhiE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPtEtaPhiM"><span class="baseclass">TLorentzVector::</span>SetPtEtaPhiM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPx"><span class="baseclass">TLorentzVector::</span>SetPx</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPxPyPzE"><span class="baseclass">TLorentzVector::</span>SetPxPyPzE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> px, <a href="./ListOfTypes.html#Double_t">Double_t</a> py, <a href="./ListOfTypes.html#Double_t">Double_t</a> pz, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPy"><span class="baseclass">TLorentzVector::</span>SetPy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetPz"><span class="baseclass">TLorentzVector::</span>SetPz</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetRandomMomentum"><span class="baseclass">KVParticle::</span>SetRandomMomentum</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:T" title="Double_t TLorentzVector::T() const">T</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a> thmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> thmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmax, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"isotropic"</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetRealA">SetRealA</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> A)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetRealZ">SetRealZ</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> zz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetRho"><span class="baseclass">TLorentzVector::</span>SetRho</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> rho)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetStatus">SetStatus</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetT"><span class="baseclass">TLorentzVector::</span>SetT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetTargetEnergyLoss">SetTargetEnergyLoss</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetTheta"><span class="baseclass">KVParticle::</span>SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetVect"><span class="baseclass">TLorentzVector::</span>SetVect</a>(<span class="keyword">const</span> TVector3&amp; vect3)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetVectM"><span class="baseclass">TLorentzVector::</span>SetVectM</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> mass)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetVectMag"><span class="baseclass">TLorentzVector::</span>SetVectMag</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> magnitude)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetVelocity"><span class="baseclass">KVParticle::</span>SetVelocity</a>(<span class="keyword">const</span> TVector3&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetX"><span class="baseclass">TLorentzVector::</span>SetX</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetXYZM"><span class="baseclass">TLorentzVector::</span>SetXYZM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetXYZT"><span class="baseclass">TLorentzVector::</span>SetXYZT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> t)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetY"><span class="baseclass">TLorentzVector::</span>SetY</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetZ"><span class="baseclass">KVNucleus::</span>SetZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Char_t">Char_t</a> mt = -1)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetZAandE"><span class="baseclass">KVNucleus::</span>SetZAandE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> a, <a href="./ListOfTypes.html#Double_t">Double_t</a> ekin)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetZandA"><span class="baseclass">KVNucleus::</span>SetZandA</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetZandN"><span class="baseclass">KVNucleus::</span>SetZandN</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> z, <a href="./ListOfTypes.html#Int_t">Int_t</a> n)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:SetZFromSymbol"><span class="baseclass">KVNucleus::</span>SetZFromSymbol</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SetZMeasured">SetZMeasured</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:SubtractEnergyFromAllDetectors">SubtractEnergyFromAllDetectors</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:T"><span class="baseclass">TLorentzVector::</span>T</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Theta"><span class="baseclass">TLorentzVector::</span>Theta</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Transform"><span class="baseclass">TLorentzVector::</span>Transform</a>(<span class="keyword">const</span> TRotation&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Transform@1"><span class="baseclass">TLorentzVector::</span>Transform</a>(<span class="keyword">const</span> TLorentzRotation&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:u"><span class="baseclass">KVNucleus::</span>u</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Vect"><span class="baseclass">TLorentzVector::</span>Vect</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:vrelHinde1987"><span class="baseclass">KVNucleus::</span>vrelHinde1987</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> z1, <a href="./ListOfTypes.html#Double_t">Double_t</a> a1, <a href="./ListOfTypes.html#Double_t">Double_t</a> z2, <a href="./ListOfTypes.html#Double_t">Double_t</a> a2)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:vrelViola1966"><span class="baseclass">KVNucleus::</span>vrelViola1966</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:vrelViola1985"><span class="baseclass">KVNucleus::</span>vrelViola1985</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:X"><span class="baseclass">TLorentzVector::</span>X</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Y"><span class="baseclass">TLorentzVector::</span>Y</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z"><span class="baseclass">TLorentzVector::</span>Z</a>() <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:AddGroup_Sanscondition"><span class="baseclass">KVParticle::</span>AddGroup_Sanscondition</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* from = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVNucleus.html#KVNucleus:AddGroup_Withcondition"><span class="baseclass">KVNucleus::</span>AddGroup_Withcondition</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <a href="./KVParticleCondition.html">KVParticleCondition</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:AddGroups"><span class="baseclass">KVParticle::</span>AddGroups</a>(<a href="./KVUniqueNameList.html">KVUniqueNameList</a>* un)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:CreateGroups"><span class="baseclass">KVParticle::</span>CreateGroups</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVReconstructedNucleus:MakeDetectorList">MakeDetectorList</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVParticle.html#KVParticle:SetGroups"><span class="baseclass">KVParticle::</span>SetGroups</a>(<a href="./KVUniqueNameList.html">KVUniqueNameList</a>* un)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVReconstructedNucleus:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:e2"><span class="baseclass">KVNucleus::</span>e2</a></td><td class="datadesc">e^2/(4.pi.epsilon_0) in MeV.fm</td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:hbar"><span class="baseclass">KVNucleus::</span>hbar</a></td><td class="datadesc">hbar*c in MeV.fm</td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kAMU"><span class="baseclass">KVNucleus::</span>kAMU</a></td><td class="datadesc">atomic mass unit in MeV</td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kBetaMass"><span class="baseclass">KVNucleus::</span>kBetaMass</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kDefaultFormula"><span class="baseclass">KVNucleus::</span>kDefaultFormula</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kEALMass"><span class="baseclass">KVNucleus::</span>kEALMass</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kEALResMass"><span class="baseclass">KVNucleus::</span>kEALResMass</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kELTON"><span class="baseclass">KVNucleus::</span>kELTON</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kEMPFunc"><span class="baseclass">KVNucleus::</span>kEMPFunc</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kEPAXMass"><span class="baseclass">KVNucleus::</span>kEPAXMass</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kHinde1987"><span class="baseclass">KVNucleus::</span>kHinde1987</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVParticle.html">KVParticle</a>::(anonymous)</td><td class="dataname"><a href="./KVParticle.html#KVParticle:kIsDetected"><span class="baseclass">KVParticle::</span>kIsDetected</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVParticle.html">KVParticle</a>::(anonymous)</td><td class="dataname"><a href="./KVParticle.html#KVParticle:kIsOK"><span class="baseclass">KVParticle::</span>kIsOK</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVParticle.html">KVParticle</a>::(anonymous)</td><td class="dataname"><a href="./KVParticle.html#KVParticle:kIsOKSet"><span class="baseclass">KVParticle::</span>kIsOKSet</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kLDModel"><span class="baseclass">KVNucleus::</span>kLDModel</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kMe"><span class="baseclass">KVNucleus::</span>kMe</a></td><td class="datadesc">electron mass in MeV/c2</td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:kNUM_COORDINATES"><span class="baseclass">TLorentzVector::</span>kNUM_COORDINATES</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:kSIZE"><span class="baseclass">TLorentzVector::</span>kSIZE</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kStatusOK"></a>kStatusOK</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kStatusOKafterShare"></a>kStatusOKafterShare</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kStatusOKafterSub"></a>kStatusOKafterSub</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kStatusPileupDE"></a>kStatusPileupDE</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kStatusPileupGhost"></a>kStatusPileupGhost</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kStatusStopFirstStage"></a>kStatusStopFirstStage</td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:kT"><span class="baseclass">TLorentzVector::</span>kT</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kVedaMass"><span class="baseclass">KVNucleus::</span>kVedaMass</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kViola1966"><span class="baseclass">KVNucleus::</span>kViola1966</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./KVNucleus.html">KVNucleus</a>::(anonymous)</td><td class="dataname"><a href="./KVNucleus.html#KVNucleus:kViola1985"><span class="baseclass">KVNucleus::</span>kViola1985</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:kX"><span class="baseclass">TLorentzVector::</span>kX</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:kY"><span class="baseclass">TLorentzVector::</span>kY</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:kZ"><span class="baseclass">TLorentzVector::</span>kZ</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVReconstructedNucleus:fAnalStatus"></a>fAnalStatus</td><td class="datadesc">status of particle after analysis of reconstructed event</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a></td><td class="dataname"><a name="KVReconstructedNucleus:fDetList"></a>fDetList</td><td class="datadesc">! non-persistent list of pointers to detectors</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVReconstructedNucleus:fDetNames"></a>fDetNames</td><td class="datadesc">list of names of detectors through which particle passed</td></tr>
+<tr class="datainh"><td class="datatype">TVector3*</td><td class="dataname"><a href="./KVParticle.html#KVParticle:fE0"><span class="baseclass">KVParticle::</span>fE0</a></td><td class="datadesc">the momentum of the particle before it is slowed/stopped by an absorber</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVReconstructedNucleus:fIDTelName"></a>fIDTelName</td><td class="datadesc">name of identification telescope which identified this particle (if any)</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVIDTelescope.html">KVIDTelescope</a>*</td><td class="dataname"><a name="KVReconstructedNucleus:fIDTelescope"></a>fIDTelescope</td><td class="datadesc">! non-persistent pointer to identification telescope</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVIdentificationResult.html">KVIdentificationResult</a></td><td class="dataname"><a name="KVReconstructedNucleus:fIDresults"></a>fIDresults[5]</td><td class="datadesc">[5] results of every identification attempt made for this nucleus, in order of the ID telescopes used</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVReconstructedNucleus:fNSegDet"></a>fNSegDet</td><td class="datadesc">number of segmented/independent detectors hit by particle</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a href="./KVParticle.html#KVParticle:fParameters"><span class="baseclass">KVParticle::</span>fParameters</a></td><td class="datadesc">a general-purpose list of parameters associated with this particle</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="KVReconstructedNucleus:fRealA"></a>fRealA</td><td class="datadesc">A returned by identification routine</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="KVReconstructedNucleus:fRealZ"></a>fRealZ</td><td class="datadesc">Z returned by identification routine</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVReconstructedNucleus:fTargetEnergyLoss"></a>fTargetEnergyLoss</td><td class="datadesc">calculated energy lost in target</td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kAMeasured"></a>kAMeasured</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kCoherency"></a>kCoherency</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kIsCalibrated"></a>kIsCalibrated</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kIsIdentified"></a>kIsIdentified</td><td></td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::(anonymous)</td><td class="dataname"><a name="KVReconstructedNucleus:kZMeasured"></a>kZMeasured</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVReconstructedNucleus:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVReconstructedNucleus_Inh" id="MapKVReconstructedNucleus_Inh">
+<area shape="rect" id="node2" href="./KVNucleus.html" title="KVNucleus" alt="" coords="347,9,424,23"/>
+<area shape="rect" id="node3" href="./KVParticle.html" title="KVParticle" alt="" coords="232,9,309,23"/>
+<area shape="rect" id="node6" href="./KVFAZIAReconNuc.html" title="KVFAZIAReconNuc" alt="" coords="668,1,766,15"/>
+<area shape="rect" id="node7" href="./KVINDRAReconNuc.html" title="KVINDRAReconNuc" alt="" coords="667,16,767,30"/>
+</map>
+<map name="MapKVReconstructedNucleus_InhMem" id="MapKVReconstructedNucleus_InhMem">
+<area shape="rect" id="clust12" href="./KVNucleus.html" alt="" coords="789,47,856,192"/>
+<area shape="rect" id="clust11" href="./KVNucleus.html" alt="" coords="867,47,933,160"/>
+<area shape="rect" id="clust13" href="./KVNucleus.html" alt="" coords="712,47,779,192"/>
+<area shape="rect" id="clust14" href="./KVNucleus.html" alt="" coords="899,176,901,179"/>
+<area shape="rect" id="clust15" href="./KVNucleus.html" alt="" coords="867,195,933,640"/>
+<area shape="rect" id="clust16" href="./KVNucleus.html" alt="" coords="789,195,856,640"/>
+<area shape="rect" id="clust17" href="./KVNucleus.html" alt="" coords="712,195,779,640"/>
+<area shape="rect" id="clust10" href="./KVNucleus.html" title="KVNucleus" alt="" coords="712,16,933,640"/>
+<area shape="rect" id="clust20" href="./KVParticle.html" alt="" coords="635,47,701,96"/>
+<area shape="rect" id="clust21" href="./KVParticle.html" alt="" coords="557,47,624,112"/>
+<area shape="rect" id="clust22" href="./KVParticle.html" alt="" coords="480,47,547,112"/>
+<area shape="rect" id="clust23" href="./KVParticle.html" alt="" coords="667,104,669,107"/>
+<area shape="rect" id="clust24" href="./KVParticle.html" alt="" coords="635,115,701,496"/>
+<area shape="rect" id="clust25" href="./KVParticle.html" alt="" coords="557,115,624,512"/>
+<area shape="rect" id="clust26" href="./KVParticle.html" alt="" coords="480,115,547,512"/>
+<area shape="rect" id="clust19" href="./KVParticle.html" title="KVParticle" alt="" coords="480,16,701,512"/>
+</map>
+<map name="MapKVReconstructedNucleus_Lib" id="MapKVReconstructedNucleus_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="516,44,631,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVReconstructedNucleus_Inh" class="tabsel" href="inh/KVReconstructedNucleus_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVReconstructedNucleus_Inh.png');">Inheritance</a>
+<a id="imgKVReconstructedNucleus_InhMem" class="tab" href="inhmem/KVReconstructedNucleus_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVReconstructedNucleus_InhMem.png');">Inherited Members</a>
+<a id="imgKVReconstructedNucleus_Incl" class="tab" href="incl/KVReconstructedNucleus_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVReconstructedNucleus_Incl.png');">Includes</a>
+<a id="imgKVReconstructedNucleus_Lib" class="tab" href="lib/KVReconstructedNucleus_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVReconstructedNucleus_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVReconstructedNucleus_Inh" src="inh/KVReconstructedNucleus_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:init" href="src/KVReconstructedNucleus.cxx.html#QXkLvB">init</a>()</span><br />
+<div class="funccomm"><pre>default initialisation
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVReconstructedNucleus:KVReconstructedNucleus" href="src/KVReconstructedNucleus.cxx.html#vS1.0E">KVReconstructedNucleus</a>()</span><br />
+<div class="funccomm"><pre>default ctor.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVReconstructedNucleus:KVReconstructedNucleus@1" href="src/KVReconstructedNucleus.cxx.html#ZfYE.D">KVReconstructedNucleus</a>(<span class="keyword">const</span> <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>&amp; )</span><br />
+<div class="funccomm"><pre>copy ctor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVReconstructedNucleus:_KVReconstructedNucleus" href="src/KVReconstructedNucleus.cxx.html#dmxfTE">~KVReconstructedNucleus</a>()</span><br />
+<div class="funccomm"><pre>dtor
+ calls <a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:Reset" title="void KVGroup::Reset()">Reset</a>() of the group in which this particle was detected
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Streamer" href="src/KVReconstructedNucleus.cxx.html#j5MwfC">Streamer</a>(TBuffer&amp; )</span><br />
+<div class="funccomm"><pre> Stream an object of class <a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>.
+Customized streamer.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Print" href="src/KVReconstructedNucleus.cxx.html#SHdFsB">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Copy" href="src/KVReconstructedNucleus.cxx.html#wGI3O">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; ) const</span><br />
+<div class="funccomm"><pre>
+<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:Copy" title="void KVReconstructedNucleus::Copy(TObject&amp;) const">Copy</a> this to obj
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Clear" href="src/KVReconstructedNucleus.cxx.html#wqqCbB">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Reset nucleus. Calls <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:Clear" title="void KVNucleus::Clear(Option_t* opt = &quot;&quot;)">Clear</a>.
+Calls <a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:Reset" title="void KVGroup::Reset()">Reset</a> for the group where it was reconstructed.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:AddDetector" href="src/KVReconstructedNucleus.cxx.html#a5XdtC">AddDetector</a>(<a href="./KVDetector.html">KVDetector</a>* )</span><br />
+<div class="funccomm"><pre>Add a detector to the list of those through which the particle passed.
+Put reference to detector into fDetectors array, increase number of detectors by one.
+As this is only used in initial particle reconstruction, we add 1 unidentified particle to the detector.
+ Creates <a href="./KVHashList.html">KVHashList</a> <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fDetList" title="KVHashList KVReconstructedNucleus::fDetList">fDetList</a> in case it does not exist.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Reconstruct" href="src/KVReconstructedNucleus.cxx.html#IzCI.">Reconstruct</a>(<a href="./KVDetector.html">KVDetector</a>* kvd)</span><br />
+<div class="funccomm"><pre>Reconstruction of a detected nucleus from the successive energy losses
+measured in a series of detectors/telescopes.
+
+Starting from detector *kvd, collect information from all detectors placed directly
+in front of *kvd (kvd-&gt;GetAlignedDetectors()),
+these are the detectors the particle has passed through.
+
+Each one is added to the particle's list (<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:AddDetector" title="void KVReconstructedNucleus::AddDetector(KVDetector*)">AddDetector</a>), and,
+if it is not an unsegmented detector, it is marked as having been <span class="string">"analysed"</span>
+(<a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:SetAnalysed" title="void KVDetector::SetAnalysed(Bool_t b = kTRUE)">SetAnalysed</a>) in order to stop it being considered as a starting point for another
+particle reconstruction.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Identify" href="src/KVReconstructedNucleus.cxx.html#SHOUHD">Identify</a>()</span><br />
+<div class="funccomm"><pre> Try to identify this nucleus by calling the <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:Identify" title="void KVReconstructedNucleus::Identify()">Identify</a>() function of each
+ ID telescope crossed by it, starting with the telescope where the particle stopped, in order
+      -  only attempt identification in ID telescopes containing the stopping detector.
+      -  only telescopes which have been correctly initialised for the current run are used,
+         i.e. those for which <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:IsReadyForID" title="Bool_t KVIDTelescope::IsReadyForID()">IsReadyForID</a>() returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>.
+ This continues until a successful identification is achieved or there are no more ID telescopes to try.
+ The identification code corresponding to the identifying telescope is set as the identification code of the particle.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:AnalyseParticlesInGroup" href="src/KVReconstructedNucleus.cxx.html#X_qGP">AnalyseParticlesInGroup</a>(<a href="./KVGroup.html">KVGroup</a>* grp)</span><br />
+<div class="funccomm"><pre>The <a href="./ListOfTypes.html#short">short</a> description of this method is:
+
+      Here we analyse all the particles stopping in this group in order to
+      determine '<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>::<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetStatus" title="Int_t KVReconstructedNucleus::GetStatus() const">GetStatus</a>()' for each one.
+      This is a sort of 'first-order' coherency analysis necessary prior to
+      attempting particle identification.
+
+The <a href="./ListOfTypes.html#long">long</a> description of this method is:
+
+Analyse the different particles reconstructed in this group in order to
+establish the strategy necessary to fully reconstruct each one
+In a group with &gt;=3-member telescopes, the maximum number of particles which may be
+reconstructed correctly is equal to the number of telescopes constituting the
+last layer of the group if all particles stop in the last detector of the last
+layer.
+i.e. in rings 4-9 (ChIo-Si-CsI telescopes) any group can detect up to 4 particles
+all going through to the CsI i.e. either light particles identified from CsI R-L
+matrices or fragments identified from Si-CsI matrices.
+
+Any particle detected in a group on its own is perfectly fine (<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fAnalStatus" title="Int_t KVReconstructedNucleus::fAnalStatus">fAnalStatus</a>=0).
+
+Any particle detected in the final layer of a <span class="string">"3-detector layer"</span> group
+(i.e. ChIo-Si-CsI) is perfectly fine (<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fAnalStatus" title="Int_t KVReconstructedNucleus::fAnalStatus">fAnalStatus</a>=0).
+
+A particle stopping in the 2nd layer of a <span class="string">"3-detector layer"</span> group (i.e. in Si)
+can be reconstructed if all the other particles in its group stop in the 3rd
+layer (i.e. CsI), once the other particles have been reconstructed and their
+calculated energy loss in the ChIo has been subtracted from the measured value
+(<a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fAnalStatus" title="Int_t KVReconstructedNucleus::fAnalStatus">fAnalStatus</a>=1).
+
+It's a question of <span class="string">"segmented"</span> or <span class="string">"independent"</span> detectors. The ChIo's are not
+<span class="string">"independent"</span> because a particle passing the ChIo can hit several detectors behind
+it, whereas any particle passing a given Si can only hit the CsI directly behind
+that Si, because the Si (and CsI) are more <span class="string">"segmented"</span> than the ChIo's.
+Soooo...any particle crossing at least 2 <span class="string">"independent"</span> detectors can be identified
+sans probleme. In fact CsI count for 2 independent detectors themselves, because
+light particles can be identified just from CsI information i.e. no need for
+<span class="string">"delta-E"</span> signal. Unless of course the R-L attempt fails, at which moment the
+particle's AnalStatus may be changed and it may be up for reassessment in
+subsequent rounds of analysis.
+Particles hitting 0 independent detectors (I.e. stopped in ChIo)
+can not be reconstructed. Any particle hitting only 1 independent detector can
+be reconstructed if alone in the group i.e. no other particles or all others have
+hit &gt;=2 independent detectors. If more than one particle in the same group only
+hit 1 independent detector, then one can only make a rough estimation of their
+nature.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:GetAnglesFromStoppingDetector" href="src/KVReconstructedNucleus.cxx.html#jejsi">GetAnglesFromStoppingDetector</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"random"</span>)</span><br />
+<div class="funccomm"><pre> Calculate angles theta and phi for reconstructed nucleus based
+ on detector in which it stopped*. The nucleus'
+ momentum is set using these angles, its mass and its kinetic energy.
+ The (optional) option string can be <span class="string">"random"</span> or <span class="string">"mean"</span>.
+ If <span class="string">"random"</span> (default) the angles are drawn at random between the
+ over the surface of the detector.
+ If <span class="string">"mean"</span> the (theta,phi) position of the centre of the detector
+ is used to fix the nucleus' direction.
+
+ *unless the detector directly in front of the stopping detector has
+  a smaller solid angle, in which case we use that one (because the
+  particle had to pass through the smaller angular range defined by
+  the DE-detector)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:Calibrate" href="src/KVReconstructedNucleus.cxx.html#b.mVdC">Calibrate</a>()</span><br />
+<div class="funccomm"><pre>Calculate and set the energy of a (previously identified) reconstructed particle,
+including an estimate of the energy loss in the target.
+
+Starting from the detector in which the particle stopped, we add up the
+'corrected' energy losses in all of the detectors through which it passed.
+Whenever possible, for detectors which are not calibrated or not working,
+we calculate the energy loss. Measured &amp; calculated energy losses are also
+compared for each detector, and may lead to new particles being seeded for
+subsequent identification. This is done by <a href="./KVIDTelescope.html">KVIDTelescope</a>::<a href="./KVIDTelescope.html#KVIDTelescope:CalculateParticleEnergy" title="void KVIDTelescope::CalculateParticleEnergy(KVReconstructedNucleus* nuc)">CalculateParticleEnergy</a>().
+
+For particles whose energy before hitting the first detector in their path has been
+calculated after this step we then add the calculated energy loss in the target,
+using <a href="./KVMultiDetArray.html">gMultiDetArray</a>-><a href="./KVMultiDetArray.html#KVMultiDetArray:GetTargetEnergyLossCorrection" title="Double_t KVMultiDetArray::GetTargetEnergyLossCorrection(KVReconstructedNucleus*)">GetTargetEnergyLossCorrection</a>().
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:MakeDetectorList" href="src/KVReconstructedNucleus.cxx.html#Wxi9WB">MakeDetectorList</a>()</span><br />
+<div class="funccomm"><pre> Protected method, called when required to fill <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fDetList" title="KVHashList KVReconstructedNucleus::fDetList">fDetList</a> with pointers to
+ the detectors whose names are stored in <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fDetNames" title="KVString KVReconstructedNucleus::fDetNames">fDetNames</a>.
+ If <a href="./KVMultiDetArray.html">gMultiDetArray</a>=0x0, <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fDetList" title="KVHashList KVReconstructedNucleus::fDetList">fDetList</a> list will be empty.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIdentification" href="src/KVReconstructedNucleus.cxx.html#odt4H">SetIdentification</a>(<a href="./KVIdentificationResult.html">KVIdentificationResult</a>* )</span><br />
+<div class="funccomm"><pre> <a href="./KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t*)">Set</a> identification of nucleus from informations in identification result object
+ The mass (A) information in <a href="./KVIdentificationResult.html">KVIdentificationResult</a> is only used if the mass
+ was measured as part of the identification. Otherwise the nucleus' mass formula
+ will be used to calculate A from the measured <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SubtractEnergyFromAllDetectors" href="src/KVReconstructedNucleus.cxx.html#QiehHC">SubtractEnergyFromAllDetectors</a>()</span><br />
+<div class="funccomm"><pre> Subtract the calculated energy loss of this particle from the measured energy
+ loss of all detectors it passed through.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a class="funcname" name="KVReconstructedNucleus:GetNIdentifiedInGroup" href="src/KVReconstructedNucleus.h.html#lWGNXD">GetNIdentifiedInGroup</a>(<a href="./KVGroup.html">KVGroup</a>* grp)</span><br />
+<div class="funccomm"><pre>number of identified particles reconstructed in group
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a class="funcname" name="KVReconstructedNucleus:GetNUnidentifiedInGroup" href="src/KVReconstructedNucleus.h.html#K9CkqC">GetNUnidentifiedInGroup</a>(<a href="./KVGroup.html">KVGroup</a>* grp)</span><br />
+<div class="funccomm"><pre>number of unidentified particles reconstructed in group
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVSeqCollection.html">KVSeqCollection</a> * <a class="funcname" name="KVReconstructedNucleus:GetDetectorList" href="src/KVReconstructedNucleus.h.html#bDv4bD">GetDetectorList</a>() const</span><br />
+<div class="funccomm"><pre> Return pointer to list of detectors through which particle passed,
+ in reverse order (i.e. first detector in list is the one in which particle stopped).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDetector.html">KVDetector</a> * <a class="funcname" name="KVReconstructedNucleus:GetDetector" href="src/KVReconstructedNucleus.h.html#P3e5X">GetDetector</a>(<span class="keyword">int</span> i) const</span><br />
+<div class="funccomm"><pre>Returns the detector referenced by fDetectors.At(i)
+If i=0, this is the detector in which the particle stopped.
+For i&gt;0 one obtains the names of the detectors through which the particle
+must have passed before stopping, in inverse order (i.e. i=0 is the last
+detector, as i increases we get the detectors closer to the target).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVReconstructedNucleus:GetDetectorNames" href="src/KVReconstructedNucleus.h.html#FxWzTD">GetDetectorNames</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fDetNames" title="KVString KVReconstructedNucleus::fDetNames">fDetNames</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVReconstructedNucleus:GetIDtelNames" href="src/KVReconstructedNucleus.h.html#NrGEQC">GetIDtelNames</a>() const</span><br />
+
+<div class="code"><code class="inlinecode">{<span class="keyword">return</span> <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:fIDTelName" title="KVString KVReconstructedNucleus::fIDTelName">fIDTelName</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDetector.html">KVDetector</a> * <a class="funcname" name="KVReconstructedNucleus:GetStoppingDetector" href="src/KVReconstructedNucleus.h.html#uiMi3E">GetStoppingDetector</a>() const</span><br />
+<div class="funccomm"><pre><a href="./ListOfTypes.html#void">void</a> SetDetector(<a href="./ListOfTypes.html#int">int</a> i, <a href="./KVDetector.html">KVDetector</a> *);
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVReconstructedNucleus:GetNumDet" href="src/KVReconstructedNucleus.h.html#W4fweE">GetNumDet</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVReconstructedNucleus:GetNSegDet" href="src/KVReconstructedNucleus.h.html#l2XItE">GetNSegDet</a>() const</span><br />
+<div class="funccomm"><pre> return segmentation index of particle used by <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:Identify" title="void KVReconstructedNucleus::Identify()">Identify</a>() and
+ <a href="./KVGroup.html">KVGroup</a>::AnalyseParticles
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetNSegDet" href="src/KVReconstructedNucleus.h.html#uB15NE">SetNSegDet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> seg)</span><br />
+<div class="funccomm"><pre> set segmentation index of particle used by <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:Identify" title="void KVReconstructedNucleus::Identify()">Identify</a>() and
+ <a href="./KVGroup.html">KVGroup</a>::AnalyseParticles
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:ResetNSegDet" href="src/KVReconstructedNucleus.h.html#YJhOfE">ResetNSegDet</a>()</span><br />
+<div class="funccomm"><pre> recalculate segmentation index of particle used by <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:Identify" title="void KVReconstructedNucleus::Identify()">Identify</a>() and
+ <a href="./KVGroup.html">KVGroup</a>::AnalyseParticles
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVReconstructedNucleus:GetStatus" href="src/KVReconstructedNucleus.h.html#BQ6IHD">GetStatus</a>() const</span><br />
+<div class="funccomm"><pre> Returns status of reconstructed particle as decided by analysis of the group (<a href="./KVGroup.html">KVGroup</a>) in
+ which the particle is reconstructed (see <a href="./KVGroup.html">KVGroup</a>::AnalyseParticles).
+ This status is used to decide whether identification of the particle can be attempted
+ straight away or if we need to wait until other particles in the same group have been
+ identified and calibrated (case of &gt;1 particle crossing shared detector in a group).
+
+  <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:kStatusOK" title="KVReconstructedNucleus::(anonymous) KVReconstructedNucleus::kStatusOK">kStatusOK</a> (0) :   identification is, in principle at least, possible straight away
+  <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:kStatusOKafterSub" title="KVReconstructedNucleus::(anonymous) KVReconstructedNucleus::kStatusOKafterSub">kStatusOKafterSub</a> (1) :   identification is, in principle, possible after identification and subtraction
+                                           of energy losses of other particles in the same group which have Status=0
+  <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:kStatusOKafterShare" title="KVReconstructedNucleus::(anonymous) KVReconstructedNucleus::kStatusOKafterShare">kStatusOKafterShare</a> (2)  :   the energy loss in the shared detector of the group must be shared
+                                                (arbitrarily) between this and the other particle(s) with Status=2
+  <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:kStatusStopFirstStage" title="KVReconstructedNucleus::(anonymous) KVReconstructedNucleus::kStatusStopFirstStage">kStatusStopFirstStage</a> (3) :   the particle has stopped in the first member of an identification
+                         telescope; a minimum <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a> could be estimated from the measured energy loss.
+                         (see <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:FindZmin" title="Int_t KVDetector::FindZmin(Double_t ELOSS = -1., Char_t mass_formula = -1)">FindZmin</a>)
+ <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:kStatusPileupDE" title="KVReconstructedNucleus::(anonymous) KVReconstructedNucleus::kStatusPileupDE">kStatusPileupDE</a>,     (4) :   only for filtered simulations: undetectable pile-up in DE detector
+ <a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:kStatusPileupGhost" title="KVReconstructedNucleus::(anonymous) KVReconstructedNucleus::kStatusPileupGhost">kStatusPileupGhost</a>   (5) :   only for filtered simulations: undetectable particle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetStatus" href="src/KVReconstructedNucleus.h.html#y8dEKB">SetStatus</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVGroup.html">KVGroup</a> * <a class="funcname" name="KVReconstructedNucleus:GetGroup" href="src/KVReconstructedNucleus.h.html#pI0R">GetGroup</a>() const</span><br />
+<div class="funccomm"><pre>Return pointer to group in which the particle is detected
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVSeqCollection.html">KVSeqCollection</a> * <a class="funcname" name="KVReconstructedNucleus:GetIDTelescopes" href="src/KVReconstructedNucleus.h.html#CIEz3D">GetIDTelescopes</a>() const</span><br />
+<div class="funccomm"><pre>Gets from detector in which particle stopped the list of all ID telescopes
+made from the stopping detector and all those aligned in front of it.
+The first ID telescope in the list is that in which the particle stopped.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIDTelescope.html">KVIDTelescope</a> * <a class="funcname" name="KVReconstructedNucleus:GetIdentifyingTelescope" href="src/KVReconstructedNucleus.h.html#Dyc0aD">GetIdentifyingTelescope</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIdentifyingTelescope" href="src/KVReconstructedNucleus.h.html#X6iXBB">SetIdentifyingTelescope</a>(<a href="./KVIDTelescope.html">KVIDTelescope</a>* i)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIDCode" href="src/KVReconstructedNucleus.h.html#QymFc">SetIDCode</a>(<a href="./ListOfTypes.html#UShort_t">UShort_t</a> s)</span><br />
+<div class="funccomm"><pre> <a href="./KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t*)">Set</a> value of parameter <span class="string">"IDCODE"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVReconstructedNucleus:GetIDCode" href="src/KVReconstructedNucleus.h.html#OP4dr">GetIDCode</a>() const</span><br />
+<div class="funccomm"><pre> Return value of parameter <span class="string">"IDCODE"</span>
+ If no value set, returns -1
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetECode" href="src/KVReconstructedNucleus.h.html#TCUvmE">SetECode</a>(<a href="./ListOfTypes.html#UChar_t">UChar_t</a> s)</span><br />
+<div class="funccomm"><pre> <a href="./KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t*)">Set</a> value of parameter <span class="string">"ECODE"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVReconstructedNucleus:GetECode" href="src/KVReconstructedNucleus.h.html#gjieZD">GetECode</a>() const</span><br />
+<div class="funccomm"><pre> Return value of parameter <span class="string">"ECODE"</span>
+ If no value set, returns -1
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIsIdentified" href="src/KVReconstructedNucleus.h.html#e.XilD">SetIsIdentified</a>()</span><br />
+<div class="funccomm"><pre>When the <span class="string">"identification"</span> state of the particle is set, we add 1 identified particle and
+subtract 1 unidentified particle from each detector in its list
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIsCalibrated" href="src/KVReconstructedNucleus.h.html#d1_Ef">SetIsCalibrated</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIsUnidentified" href="src/KVReconstructedNucleus.h.html#eOyJwE">SetIsUnidentified</a>()</span><br />
+<div class="funccomm"><pre>When the <span class="string">"identification"</span> state of the particle is reset, i.e. it becomes an <span class="string">"unidentified particle"</span>,
+we add 1 unidentified particle and subtract 1 identified particle from each detector in its list
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetIsUncalibrated" href="src/KVReconstructedNucleus.h.html#pjW7ZC">SetIsUncalibrated</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVReconstructedNucleus:IsIdentified" href="src/KVReconstructedNucleus.h.html#F3x8GD">IsIdentified</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVReconstructedNucleus:IsCalibrated" href="src/KVReconstructedNucleus.h.html#QlcguD">IsCalibrated</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetRealZ" href="src/KVReconstructedNucleus.h.html#rxIeH">SetRealZ</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> zz)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetRealA" href="src/KVReconstructedNucleus.h.html#dA6y3B">SetRealA</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a> A)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="KVReconstructedNucleus:GetRealZ" href="src/KVReconstructedNucleus.h.html#CZwGg">GetRealZ</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="KVReconstructedNucleus:GetRealA" href="src/KVReconstructedNucleus.h.html#OqwGg">GetRealA</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Float_t">Float_t</a> <a class="funcname" name="KVReconstructedNucleus:GetPID" href="src/KVReconstructedNucleus.h.html#gR889D">GetPID</a>() const</span><br />
+<div class="funccomm"><pre>Return particle identification PID for this particle.
+If particle <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a> &amp; A have been identified, this is <span class="string">"real Z"</span> + 0.1*(<span class="string">"real A"</span>-2*<span class="string">"real Z"</span>)
+If only <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a> identification has been performed, it is the <span class="string">"real Z"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetTargetEnergyLoss" href="src/KVReconstructedNucleus.h.html#uxx3XE">SetTargetEnergyLoss</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</span><br />
+<div class="funccomm"><pre> <a href="./KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t*)">Set</a> energy loss in target (in MeV) of reconstructed nucleus
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVReconstructedNucleus:GetTargetEnergyLoss" href="src/KVReconstructedNucleus.h.html#M65nrE">GetTargetEnergyLoss</a>() const</span><br />
+<div class="funccomm"><pre> Return calculated energy loss in target of reconstructed nucleus (in MeV)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetZMeasured" href="src/KVReconstructedNucleus.h.html#s8E6.B">SetZMeasured</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Call with yes=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> for reconstructed nuclei whose
+ atomic number, <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a>, was measured, not calculated
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVReconstructedNucleus:SetAMeasured" href="src/KVReconstructedNucleus.h.html#CuTrOD">SetAMeasured</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Call with yes=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> for reconstructed nuclei whose
+ mass number, A, was measured, not calculated
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVReconstructedNucleus:IsZMeasured" href="src/KVReconstructedNucleus.h.html#HEoXv">IsZMeasured</a>() const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for reconstructed nuclei whose
+ atomic number, <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a>, was measured, not calculated
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVReconstructedNucleus:IsAMeasured" href="src/KVReconstructedNucleus.h.html#O6xN5C">IsAMeasured</a>() const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> for reconstructed nuclei whose
+ mass number, A, was measured, not calculated
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>* <a class="funcname" name="KVReconstructedNucleus:GetIdentificationResult" href="src/KVReconstructedNucleus.h.html#rukicD">GetIdentificationResult</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</span><br />
+<div class="funccomm"><pre> Returns the result of the i-th identification attempted for this nucleus.
+ i=1 : identification telescope in which particle stopped
+ i=2 : identification telescope immediately in front of the first
+ etc. etc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>* <a class="funcname" name="KVReconstructedNucleus:GetIdentificationResult@1" href="src/KVReconstructedNucleus.h.html#Jhq46D">GetIdentificationResult</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idtype)</span><br />
+<div class="funccomm"><pre> Return pointer to result of attempted identification of given type.
+ This type is the type of the KVIdentificationTelescope which was used
+ (i.e. the string returned by KVIdentificationTelescope::GetType()).
+ Returns NULL if no identification of given type found.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>* <a class="funcname" name="KVReconstructedNucleus:GetIdentificationResult@2" href="src/KVReconstructedNucleus.h.html#APOw_C">GetIdentificationResult</a>(<a href="./KVIDTelescope.html">KVIDTelescope</a>* idt)</span><br />
+<div class="funccomm"><pre> Return pointer to result of identification attempted with a
+ KVIdentificationTelescope of the given type.
+ Returns NULL if no identification of given type found.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">return</span> <a class="funcname" name="KVReconstructedNucleus:GetIdentificationResult" href="src/KVReconstructedNucleus.h.html#Lo_SOB">GetIdentificationResult</a>(idt-&gt;GetType())</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>* <a class="funcname" name="KVReconstructedNucleus:GetIdentificationResult@3" href="src/KVReconstructedNucleus.h.html#pvQhP">GetIdentificationResult</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>*&gt;(<span class="keyword">this</span>)-><a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetIdentificationResult" title="KVIdentificationResult* KVReconstructedNucleus::GetIdentificationResult(Int_t i) or overloads">GetIdentificationResult</a>(i); }</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVIdentificationResult.html">KVIdentificationResult</a>* <a class="funcname" name="KVReconstructedNucleus:GetIdentificationResult@4" href="src/KVReconstructedNucleus.h.html#v_465C">GetIdentificationResult</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* idtype) const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>*&gt;(<span class="keyword">this</span>)-><a href="./KVReconstructedNucleus.html#KVReconstructedNucleus:GetIdentificationResult" title="KVIdentificationResult* KVReconstructedNucleus::GetIdentificationResult(Int_t i) or overloads">GetIdentificationResult</a>(idtype); }</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 15:44:03 2015 </em><em>&raquo; Last generated: 2015-03-18 15:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

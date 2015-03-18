@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:44:07 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVPartitionGenerator</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVPartitionGenerator','libKVMultiDetbase','KVPartitionGenerator.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVPartitionGenerator.h.html">header file</a>
+<a class="descrheadentry" href="src/KVPartitionGenerator.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVPartitionGenerator.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/base/KVPartitionGenerator.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVPartitionGenerator:description">class description</a> 
+<a class="descrheadentry" href="#KVPartitionGenerator:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVPartitionGenerator:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVPartitionGenerator:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_BASE_Index.html">BASE</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVPartitionGenerator</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVPartitionGenerator:description"></a>class KVPartitionGenerator</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --><h2>KVPartitionGenerator</h2>
+<h4>Permet de determiner numeriquement et exactement un ensemble de partitions d'entrees
+remplissante certaines conditions</h4>
+<!-- TDocHtmlDirective end --><pre>
+
+Les differentes recontrees grandeurs sont :
+- Ztot (Zt) -&gt; Charge/Taille totale a repartir au sein de la partition
+- Mtot (Mt) -&gt; Nombre de total d'element (fragment, cluster) de la partition (Zi) i=1,Mtot
+- Zmax (Zm) -&gt; Charge/Taille du plus gros element de la partition
+- Zinf (Zi) -&gt; Charge minimale des elements de la partition (Zi) Zi&gt;=Zinf quelque soit i (tous les calculs necessitent cet argument)
+
+Plusieurs methodes correspondant conditions initiales possibles :
+- <a href="./KVPartitionGenerator.html#KVPartitionGenerator:BreakUsing_Ztot_Zinf_Criterion" title="void KVPartitionGenerator::BreakUsing_Ztot_Zinf_Criterion(Int_t Ztot, Int_t Zinf, KVString chain_name = &quot;&quot;, Int_t min = -1, Int_t max = -1)">BreakUsing_Ztot_Zinf_Criterion</a> (la methode la plus generale), donnant toutes les partitions pour une taille initiale donnee
+- <a href="./KVPartitionGenerator.html#KVPartitionGenerator:BreakUsing_Ztot_Zinf_Criterion" title="void KVPartitionGenerator::BreakUsing_Ztot_Zinf_Criterion(Int_t Ztot, Int_t Zinf, KVString chain_name = &quot;&quot;, Int_t min = -1, Int_t max = -1)">BreakUsing_Ztot_Zinf_Criterion</a>, donnant toutes les partitions pour une taille initiale donnee
+- <a href="./KVPartitionGenerator.html#KVPartitionGenerator:BreakUsing_Ztot_Zmax_Zinf_Criterion" title="void KVPartitionGenerator::BreakUsing_Ztot_Zmax_Zinf_Criterion(Int_t Ztot, Int_t Zmax, Int_t Zinf, KVString chain_name = &quot;&quot;)">BreakUsing_Ztot_Zmax_Zinf_Criterion</a>, donnant toutes les partitions pour une taille initiale donnee, avec une contrainte sur Zmax
+- <a href="./KVPartitionGenerator.html#KVPartitionGenerator:BreakUsing_Mtot_Zmax_Zinf_Criterion" title="void KVPartitionGenerator::BreakUsing_Mtot_Zmax_Zinf_Criterion(Int_t Mtot, Int_t Zmax, Int_t Zinf, KVString chain_name = &quot;&quot;)">BreakUsing_Mtot_Zmax_Zinf_Criterion</a>, donnant toutes les partitions remplissant les contraintes sur le Zmax et sur le Mtot
+
+Toutes ces methodes utilisent la protected methode <a href="./KVPartitionGenerator.html#KVPartitionGenerator:MakePartitions" title="void KVPartitionGenerator::MakePartitions(Int_t Ztot, Int_t Mtot, Int_t Zinf)">MakePartitions</a>() qui calcule les partitions
+pour un couple (Ztot,Mtot) donné qui sauvegarde ces partitions dans un fichier ROOT via un arbre, contenant
+l'information minimum :
+- branche zt
+- branche mt
+- branche <a href="./KVPartitionGenerator.html#KVPartitionGenerator:tabz" title="Int_t* KVPartitionGenerator::tabz">tabz</a> [mt], tableau d'entier comprenant les differentes charges (Zi), trie par ordre decroissant
+Le chemin ou les arbres sont ecrits peut etre definis via la methode <a href="./KVPartitionGenerator.html#KVPartitionGenerator:SetPathForFile" title="void KVPartitionGenerator::SetPathForFile(KVString path)">SetPathForFile</a>, par defaut les arbres seront
+ecrits dans le repertoire courant, attention car pour des nombres importants (Ztot&gt;100) la place necessaire devient
+non negligeable (ex : toutes les partition de Ztot=200 et Zinf=5 -&gt; 20GB <a href="./ListOfTypes.html#char">environ</a>)
+
+A chaque fois que la methode <a href="./KVPartitionGenerator.html#KVPartitionGenerator:MakePartitions" title="void KVPartitionGenerator::MakePartitions(Int_t Ztot, Int_t Mtot, Int_t Zinf)">MakePartitions</a>() est appelle par les methodes BreakUsing...(), on garde
+en memoire l'ensemble des fichiers contenant chacun un arbre, pour a la fin du processus
+ecrire dans un fichier ROOT, une TChain permettant de travailler rapidement et facilement sur les partitions generees
+
+
+Un petit exemple de routine simple :
+Cette routine produit en sortie un fichier root Partitions_Zf60_Zi1.root
+contenant la TChain de tous les arbres ...
+
+<a href="./ListOfTypes.html#void">void</a> test{
+
+	<a href="./KVPartitionGenerator.html">KVPartitionGenerator</a>* pg = new <a href="./KVPartitionGenerator.html">KVPartitionGenerator</a>();
+	pg-&gt;<a href="./KVPartitionGenerator.html#KVPartitionGenerator:SetPathForFile" title="void KVPartitionGenerator::SetPathForFile(KVString path)">SetPathForFile</a>(<span class="string">"/space/bonnet/"</span>);
+	pg-&gt;<a href="./KVPartitionGenerator.html#KVPartitionGenerator:BreakUsing_Ztot_Zinf_Criterion" title="void KVPartitionGenerator::BreakUsing_Ztot_Zinf_Criterion(Int_t Ztot, Int_t Zinf, KVString chain_name = &quot;&quot;, Int_t min = -1, Int_t max = -1)">BreakUsing_Ztot_Zinf_Criterion</a>(60,1);
+
+	Info in &lt;<a href="./KVPartitionGenerator.html#KVPartitionGenerator:BreakUsing_Ztot_Zinf_Criterion" title="void KVPartitionGenerator::BreakUsing_Ztot_Zinf_Criterion(Int_t Ztot, Int_t Zinf, KVString chain_name = &quot;&quot;, Int_t min = -1, Int_t max = -1)">BreakUsing_Ztot_Zinf_Criterion</a>&gt;: 966467.000000 partitions crees en 5 seconds
+	delete pg;
+
+}
+
+
+root Partitions_Zf60_Zi1.root
+Attaching file Partitions_Zf60_Zi1.root as _file0...
+root [2] .ls
+TFile**		Partitions_Zf60_Zi1.root	
+ TFile*		Partitions_Zf60_Zi1.root	
+  KEY: TChain	PartitionTree;1	
+root [3] PartitionTree-&gt;Draw(<span class="string">"tabz"</span>)
+
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVPartitionGenerator:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:_KVPartitionGenerator">~KVPartitionGenerator</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:BreakUsing_Mtot_Zmax_Zinf_Criterion">BreakUsing_Mtot_Zmax_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zmax, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:BreakUsing_Ztot_Mtot_Zinf_Criterion">BreakUsing_Ztot_Mtot_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:BreakUsing_Ztot_Zinf_Criterion">BreakUsing_Ztot_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>, <a href="./ListOfTypes.html#Int_t">Int_t</a> min = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> max = -1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:BreakUsing_Ztot_Zmax_Zinf_Criterion">BreakUsing_Ztot_Zmax_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zmax, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:KVPartitionGenerator">KVPartitionGenerator</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:KVPartitionGenerator@1">KVPartitionGenerator</a>(<span class="keyword">const</span> <a href="./KVPartitionGenerator.html">KVPartitionGenerator</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVPartitionGenerator.html">KVPartitionGenerator</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVPartitionGenerator.html">KVPartitionGenerator</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:SetPathForFile">SetPathForFile</a>(<a href="./KVString.html">KVString</a> path)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:TreatePartition">TreatePartition</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:WriteTreeAndCloseFile">WriteTreeAndCloseFile</a>()</td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:AfterBreak">AfterBreak</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:BeforeBreak">BeforeBreak</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:GetDeltaTime">GetDeltaTime</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:init">init</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:MakePartitions">MakePartitions</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:PreparTree">PreparTree</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:Process">Process</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:SetConditions">SetConditions</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:Start">Start</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPartitionGenerator:Stop">Stop</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVPartitionGenerator:Data_Members"></a>Data Members</h2>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVPartitionGenerator:cname"></a>cname</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVUniqueNameList.html">KVUniqueNameList</a>*</td><td class="dataname"><a name="KVPartitionGenerator:flist"></a>flist</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="dataname"><a name="KVPartitionGenerator:kcurrent"></a>kcurrent</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:kmt"></a>kmt</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVPartitionGenerator:kwriting_path"></a>kwriting_path</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:kzinf"></a>kzinf</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:kzt"></a>kzt</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:mshift"></a>mshift</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:mtot"></a>mtot</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPartitionGenerator:npar"></a>npar</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVPartitionGenerator:npar_zt_mt"></a>npar_zt_mt</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="dataname"><a name="KVPartitionGenerator:tabz"></a>tabz</td><td class="datadesc">[ndim]</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:tellapsed"></a>tellapsed</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVPartitionGenerator:tname"></a>tname</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVPartitionGenerator:to_be_checked"></a>to_be_checked</td><td></td></tr>
+<tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="KVPartitionGenerator:tree"></a>tree</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:tstart"></a>tstart</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:tstop"></a>tstop</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:zshift"></a>zshift</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVPartitionGenerator:ztot"></a>ztot</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVPartitionGenerator:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVPartitionGenerator_Lib" id="MapKVPartitionGenerator_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="454,44,569,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVPartitionGenerator_Inh" class="tabsel" href="inh/KVPartitionGenerator_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVPartitionGenerator_Inh.png');">Inheritance</a>
+<a id="imgKVPartitionGenerator_InhMem" class="tab" href="inhmem/KVPartitionGenerator_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVPartitionGenerator_InhMem.png');">Inherited Members</a>
+<a id="imgKVPartitionGenerator_Incl" class="tab" href="incl/KVPartitionGenerator_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVPartitionGenerator_Incl.png');">Includes</a>
+<a id="imgKVPartitionGenerator_Lib" class="tab" href="lib/KVPartitionGenerator_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVPartitionGenerator_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVPartitionGenerator_Inh" src="inh/KVPartitionGenerator_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPartitionGenerator:KVPartitionGenerator" href="src/KVPartitionGenerator.cxx.html#u2qH2">KVPartitionGenerator</a>()</span><br />
+<div class="funccomm"><pre> Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:init" href="src/KVPartitionGenerator.cxx.html#oUUtOE">init</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Initisalisation des variables
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPartitionGenerator:_KVPartitionGenerator" href="src/KVPartitionGenerator.cxx.html#y6WyzD">~KVPartitionGenerator</a>()</span><br />
+<div class="funccomm"><pre> Destructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:SetPathForFile" href="src/KVPartitionGenerator.cxx.html#Ext2RE">SetPathForFile</a>(<a href="./KVString.html">KVString</a> path)</span><br />
+<div class="funccomm"><pre> Defini le chemin ou les arbres seront ecris
+prevoir des zones pouvant recevoir de gros volumes de données
+si les calculs de partitions se fait a partir de grosse taille initiale
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:MakePartitions" href="src/KVPartitionGenerator.cxx.html#qIGQI">MakePartitions</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf)</span><br />
+<div class="funccomm"><pre>protected method
+Cree un fichier avec nom formate :
+ 	From_[ClassName]_Zt[Ztot]_Mt[Mtot]_Zm[Zinf].root
+
+Defini l'arbre ou seront enregistrees les partitions
+
+Determine toute les partitions pour un
+couple donné de parametres : (Ztot, Mtot, Zinf)
+avec :
+	-	Ztot -&gt; taille totale de la partition
+	-	Mtot -&gt; multiplicité de partition
+	-	Zinf -&gt; taille minimale pour les fragments de la partition
+
+Enregistre l arbre et ferme le fichier
+
+Routine centrale de la classe appelée par toutes les methodes de type Break_Using...Criterion()
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:SetConditions" href="src/KVPartitionGenerator.cxx.html#wkKyBE">SetConditions</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf)</span><br />
+<div class="funccomm"><pre>protected method
+Repercute les parametres passes via la methode <a href="./KVPartitionGenerator.html#KVPartitionGenerator:SetConditions" title="void KVPartitionGenerator::SetConditions(Int_t Ztot, Int_t Mtot, Int_t Zinf)">SetConditions</a>
+Prepare les tableaux necessaires
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:PreparTree" href="src/KVPartitionGenerator.cxx.html#u.x1sD">PreparTree</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Creation du fichier formate suivant les parametres passes via la methode <a href="./KVPartitionGenerator.html#KVPartitionGenerator:SetConditions" title="void KVPartitionGenerator::SetConditions(Int_t Ztot, Int_t Mtot, Int_t Zinf)">SetConditions</a>
+Creation de l'arbre
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:Process" href="src/KVPartitionGenerator.cxx.html#eM_19D">Process</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>protected method
+Determine toute les partitions pour un
+couple donné de parametres : (Ztot, Mtot, Zinf)
+avec :
+	-	Ztot -&gt; taille totale de la partition
+	-	Mtot -&gt; multiplicité de partition
+	-	Zinf -&gt; taille minimale pour les fragments de la partition
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:BeforeBreak" href="src/KVPartitionGenerator.cxx.html#KZ4d3C">BeforeBreak</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Creation de la liste pour creation de la TChain
+stop du chrono
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:AfterBreak" href="src/KVPartitionGenerator.cxx.html#StGAc">AfterBreak</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Permet de creer une TChain recapitulant tout les arbres
+crees et suvegardes lors de la determination de toutes les
+partitions par une des methodes BreakUsing_[Critere]_Criterion()
+stop du chrono
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:BreakUsing_Ztot_Zinf_Criterion" href="src/KVPartitionGenerator.cxx.html#REk9g">BreakUsing_Ztot_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>, <a href="./ListOfTypes.html#Int_t">Int_t</a> min = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> max = -1)</span><br />
+<div class="funccomm"><pre>Determine toutes les partitions pour :
+	-	une taille totale de la partition donnée (Ztot)
+	-	une taille minimale pour les fragments de la partition (Zinf)
+ - le nom du fichier ou la TChain recapitulant tous les arbres crees va etre enregistree
+ (par defaut, si chain_name==<span class="string">""</span>, le nom de fichier est formate en fonction des arguments
+Les arguments min et max permettent de restreindre le calcul a une plage en multiplicité
+	si min==-1 (defaut) -&gt; mfmin=1
+	si max==-1 (defaut) -&gt; mfmax=Ztot/Zinf
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:BreakUsing_Ztot_Mtot_Zinf_Criterion" href="src/KVPartitionGenerator.cxx.html#Zr8bkD">BreakUsing_Ztot_Mtot_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Determine toutes les partitions pour :
+	-	une taille totale de la partition donnée (Ztot)
+	-	une multiplicité de partition donnée (Mtot)
+	-	une taille minimale pour les fragments de la partition (Zinf)
+ - le nom du fichier ou la TChain recapitulant tous les arbres crees va etre enregistree
+ (par defaut, si chain_name==<span class="string">""</span>, le nom de fichier est formate en fonction des arguments
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:BreakUsing_Ztot_Zmax_Zinf_Criterion" href="src/KVPartitionGenerator.cxx.html#YQ7.PC">BreakUsing_Ztot_Zmax_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Ztot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zmax, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Determine toutes les partitions pour :
+	-	une taille totale de la partition donnée (Ztot)
+	-	une taille donnée du plus gros fragment de la partition (Zmax)
+	-	une taille minimale pour les fragments de la partition (Zinf)
+ - le nom du fichier ou la TChain recapitulant tous les arbres crees va etre enregistree
+ (par defaut, si chain_name==<span class="string">""</span>, le nom de fichier est formate en fonction des arguments
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:BreakUsing_Mtot_Zmax_Zinf_Criterion" href="src/KVPartitionGenerator.cxx.html#PV2etE">BreakUsing_Mtot_Zmax_Zinf_Criterion</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Mtot, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zmax, <a href="./ListOfTypes.html#Int_t">Int_t</a> Zinf, <a href="./KVString.html">KVString</a> chain_name = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Determine toutes les partitions pour :
+	-	une multiplicité de partition donnée (Mtot)
+	-	une taille donnée du plus gros fragment de la partition (Zmax)
+	-	une taille minimale pour les fragments de la partition (Zinf)
+ - le nom du fichier ou la TChain recapitulant tous les arbres crees va etre enregistree
+ (par defaut, si chain_name==<span class="string">""</span>, le nom de fichier est formate en fonction des arguments
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:TreatePartition" href="src/KVPartitionGenerator.cxx.html#uo0H.D">TreatePartition</a>()</span><br />
+<div class="funccomm"><pre>Rempli l arbre avec la partition courante
+Incremente les compteurs sur le nombre de particules creees
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:WriteTreeAndCloseFile" href="src/KVPartitionGenerator.cxx.html#Hg.nxD">WriteTreeAndCloseFile</a>()</span><br />
+<div class="funccomm"><pre>Test le fichier courant (pointeur gFile)
+Si tout va bien
+Ecriture de l arbre dans le fichier (tout deux definis dans <a href="./KVPartitionGenerator.html#KVPartitionGenerator:PreparTree" title="void KVPartitionGenerator::PreparTree()">PreparTree</a>)
+et ajout du nom de fichier
+dans une liste permettant de generer la TChain en fin de processus
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:Start" href="src/KVPartitionGenerator.cxx.html#H5YPwB">Start</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Signal start
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPartitionGenerator:Stop" href="src/KVPartitionGenerator.cxx.html#w4AGOE">Stop</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Signal stop
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVPartitionGenerator:GetDeltaTime" href="src/KVPartitionGenerator.cxx.html#R5OhxE">GetDeltaTime</a>()</span><br />
+<div class="funccomm"><pre>protected method
+Retoune le temps ecoules (en seconde)
+entre un appel <a href="./KVPartitionGenerator.html#KVPartitionGenerator:Start" title="void KVPartitionGenerator::Start()">Start</a>() et un appel <a href="./KVPartitionGenerator.html#KVPartitionGenerator:Stop" title="void KVPartitionGenerator::Stop()">Stop</a>()
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVPartitionGenerator:KVPartitionGenerator" href="src/KVPartitionGenerator.h.html#Jfr14E">KVPartitionGenerator</a>()</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:44:08 2015 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>

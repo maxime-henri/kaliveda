@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Wed Mar 18 13:43:41 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVINDRARunSheetReader</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVINDRARunSheetReader','libKVIndradb','KVINDRARunSheetReader.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVINDRARunSheetReader.h.html">header file</a>
+<a class="descrheadentry" href="src/KVINDRARunSheetReader.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVIndra/db/KVINDRARunSheetReader.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVIndra/db/KVINDRARunSheetReader.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVINDRARunSheetReader:description">class description</a> 
+<a class="descrheadentry" href="#KVINDRARunSheetReader:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVINDRARunSheetReader:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVINDRARunSheetReader:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+ &#187; <a class="locationlevel" href="./KVINDRA_Index.html">KVINDRA</a>
+ &#187; <a class="locationlevel" href="./KVINDRA_DB_Index.html">DB</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVINDRARunSheetReader</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVINDRARunSheetReader:description"></a>class KVINDRARunSheetReader</h1>
+<div class="classdescr">
+<pre>
+Read the run sheets produced by the standard INDRA acquisition control program.
+
+For each run, an entry is made in a new database of INDRA runs (<a href="./KVINDRADB.html">KVINDRADB</a>, global
+pointer <a href="./KVINDRADB.html">gIndraDB</a>).
+If required, a TTree can be created and filled with the informations read from the run sheets,
+for drawing histograms etc.
+
+Examples of use:
+
+<a href="./KVINDRARunSheetReader.html">KVINDRARunSheetReader</a> r;
+<a href="./KVINDRARunSheetReader.html">KVINDRARunSheetReader</a> s(<a href="./ListOfTypes.html#Bool_t">kTRUE</a>);// will create and fill a TTree with info from runsheets
+
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetRunSheetDir" title="void KVINDRARunSheetReader::SetRunSheetDir(const Char_t* dir)">SetRunSheetDir</a>(<span class="string">"/space/eindra/e475s/acquisition/run"</span>);// directory containing runsheets
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetFileFormat" title="void KVINDRARunSheetReader::SetFileFormat(const Char_t* fmt)">SetFileFormat</a>(<span class="string">"RUN_%04d.TXT"</span>);// format for file name, including run number. This example works for e.g. RUN_0100.TXT
+
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes = kTRUE)">SetMakeTree</a>(<a href="./ListOfTypes.html#Bool_t">kTRUE</a>);// in case you change your mind about the TTree ;-)
+s.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes = kTRUE)">SetMakeTree</a>(<a href="./ListOfTypes.html#Bool_t">kFALSE</a>);
+
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadRunSheet" title="Bool_t KVINDRARunSheetReader::ReadRunSheet(Int_t run)">ReadRunSheet</a>( 100 );// read run sheet for run number 100
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first = 1, Int_t last = 9999)">ReadAllRunSheets</a>();// read all run sheets in the directory (default: from run 1 to 9999)
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first = 1, Int_t last = 9999)">ReadAllRunSheets</a>(100, 199);// read all run sheets in the directory from 100 to 199
+
+r.<a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetTree" title="TTree* KVINDRARunSheetReader::GetTree() const">GetTree</a>()-&gt;StartViewer();// draw histograms of info stored in the TTree
+
+<a href="./KVINDRADB.html">gIndraDB</a>-><a href="./KVINDRADB.html#KVINDRADB:GetRuns" title="TList* KVINDRADB::GetRuns() const">GetRuns</a>()-&gt;ls();// view runs stored in database
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVINDRARunSheetReader:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:_KVINDRARunSheetReader">~KVINDRARunSheetReader</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:CreateTree">CreateTree</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetDateField">GetDateField</a>(TString&amp;, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* delim = <span class="string">":"</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetFileFormat">GetFileFormat</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetNumberField">GetNumberField</a>(TString&amp;, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* delim = <span class="string">":"</span>, <span class="keyword">int</span> index = 1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetRunSheetDir">GetRunSheetDir</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetRunSheetFileName">GetRunSheetFileName</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetStringField">GetStringField</a>(TString&amp;, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* delim = <span class="string">":"</span>, <span class="keyword">int</span> index = 1)</td></tr>
+<tr class="func"><td class="funcret">TTree*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:GetTree">GetTree</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:IsMakeTree">IsMakeTree</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:KVINDRARunSheetReader">KVINDRARunSheetReader</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> make_tree = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:KVINDRARunSheetReader@1">KVINDRARunSheetReader</a>(<span class="keyword">const</span> <a href="./KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:ReadAllRunSheets">ReadAllRunSheets</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> first = 1, <a href="./ListOfTypes.html#Int_t">Int_t</a> last = 9999)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:ReadRunSheet">ReadRunSheet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:SetFileFormat">SetFileFormat</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* fmt)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:SetMakeTree">SetMakeTree</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:SetRunSheetDir">SetRunSheetDir</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:StartTreeViewer">StartTreeViewer</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVINDRARunSheetReader:init_vars">init_vars</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVINDRARunSheetReader:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:acq_rate"></a>acq_rate</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:buf_ctrl"></a>buf_ctrl</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:buf_sav"></a>buf_sav</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:ctrl_rate"></a>ctrl_rate</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:data_rate"></a>data_rate</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDatime.html">KVDatime</a></td><td class="dataname"><a name="KVINDRARunSheetReader:endrun"></a>endrun</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:eve_ctrl"></a>eve_ctrl</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:eve_lus"></a>eve_lus</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:eve_sav"></a>eve_sav</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVINDRARunSheetReader:fFileFormat"></a>fFileFormat</td><td class="datadesc">format string for run sheet file names</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVINDRARunSheetReader:fFilePath"></a>fFilePath</td><td class="datadesc">temporary string holding full filename of current runsheet</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:fMakeTree"></a>fMakeTree</td><td class="datadesc">set to kTRUE if TTree is to be filled</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVINDRARunSheetReader:fRunSheetDir"></a>fRunSheetDir</td><td class="datadesc">full path to directory holding run sheets</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:fScalers"></a>fScalers[1024]</td><td class="datadesc">scalers for tree</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:fTIME_START"></a>fTIME_START</td><td class="datadesc">zero-time for all run start/stop times</td></tr>
+<tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="KVINDRARunSheetReader:fTree"></a>fTree</td><td class="datadesc">TTree can be made and filled from info</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:iend"></a>iend</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:istart"></a>istart</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:len_run"></a>len_run</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:rempli_dlt_blocs"></a>rempli_dlt_blocs</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:rempli_dlt_pc"></a>rempli_dlt_pc</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:run_num"></a>run_num</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:size"></a>size</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDatime.html">KVDatime</a></td><td class="dataname"><a name="KVINDRARunSheetReader:start_run"></a>start_run</td><td></td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVINDRARunSheetReader:stat_eve"></a>stat_eve</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:temps_mort"></a>temps_mort</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVINDRARunSheetReader:trait_rate"></a>trait_rate</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVINDRARunSheetReader:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVINDRARunSheetReader_Lib" id="MapKVINDRARunSheetReader_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="397,44,512,92"/>
+</map>
+<div class="tabs">
+<a id="imgKVINDRARunSheetReader_Inh" class="tabsel" href="inh/KVINDRARunSheetReader_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVINDRARunSheetReader_Inh.png');">Inheritance</a>
+<a id="imgKVINDRARunSheetReader_InhMem" class="tab" href="inhmem/KVINDRARunSheetReader_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVINDRARunSheetReader_InhMem.png');">Inherited Members</a>
+<a id="imgKVINDRARunSheetReader_Incl" class="tab" href="incl/KVINDRARunSheetReader_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVINDRARunSheetReader_Incl.png');">Includes</a>
+<a id="imgKVINDRARunSheetReader_Lib" class="tab" href="lib/KVINDRARunSheetReader_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVINDRARunSheetReader_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVINDRARunSheetReader_Inh" src="inh/KVINDRARunSheetReader_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVINDRARunSheetReader:KVINDRARunSheetReader" href="src/KVINDRARunSheetReader.cxx.html#CwH7o">KVINDRARunSheetReader</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> make_tree = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
+<div class="funccomm"><pre>Default ctor. If make_tree = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>, a TTree will be created and filled with
+data from runsheets.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVINDRARunSheetReader:init_vars" href="src/KVINDRARunSheetReader.cxx.html#F8YHZD">init_vars</a>()</span><br />
+<div class="funccomm"><pre>Set values of all runsheet/TTree variables to 0
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVINDRARunSheetReader:GetRunSheetFileName" href="src/KVINDRARunSheetReader.cxx.html#Uwo9DB">GetRunSheetFileName</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</span><br />
+<div class="funccomm"><pre>Uses directory path and file format to create full path to runsheet
+file for run number 'run'.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVINDRARunSheetReader:CreateTree" href="src/KVINDRARunSheetReader.cxx.html#xjxcYD">CreateTree</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVINDRARunSheetReader:ReadRunSheet" href="src/KVINDRARunSheetReader.cxx.html#FqFFVD">ReadRunSheet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</span><br />
+<div class="funccomm"><pre>Read runsheet corresponding to run number 'run'
+Store the informations we read in the runsheet in the run database.
+Create TTree if required and if not already done
+Return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if all goes well.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVINDRARunSheetReader:GetNumberField" href="src/KVINDRARunSheetReader.cxx.html#e42Cl">GetNumberField</a>(TString&amp; , <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* delim = <span class="string">":"</span>, <span class="keyword">int</span> index = 1)</span><br />
+<div class="funccomm"><pre>Split line according to delimiter.
+Return the index-th element (index = 0, 1, 2, ...) as a <a href="./ListOfTypes.html#Double_t">Double_t</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVINDRARunSheetReader:GetStringField" href="src/KVINDRARunSheetReader.cxx.html#i6K7rE">GetStringField</a>(TString&amp; , <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* delim = <span class="string">":"</span>, <span class="keyword">int</span> index = 1)</span><br />
+<div class="funccomm"><pre>Split line according to delimiter.
+Return the index-th element (index = 0, 1, 2, ...) as a string
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVINDRARunSheetReader:GetDateField" href="src/KVINDRARunSheetReader.cxx.html#dTUtBB">GetDateField</a>(TString&amp; , <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* delim = <span class="string">":"</span>)</span><br />
+<div class="funccomm"><pre>Special case of <a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a> for date-strings with <span class="string">':'</span> used in between hours, minutes, seconds.
+If <span class="string">':'</span> is also the delimiter of the string, we need to stick the time back together.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVINDRARunSheetReader:ReadAllRunSheets" href="src/KVINDRARunSheetReader.cxx.html#HkQ2SE">ReadAllRunSheets</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> first = 1, <a href="./ListOfTypes.html#Int_t">Int_t</a> last = 9999)</span><br />
+<div class="funccomm"><pre>Read all run sheets in the directory <a href="./KVINDRARunSheetReader.html#KVINDRARunSheetReader:fRunSheetDir" title="TString KVINDRARunSheetReader::fRunSheetDir">fRunSheetDir</a> from run number 'first' to 'last'
+(default values are 1 and 9999).
+Returns the number of run sheets actually read.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVINDRARunSheetReader:KVINDRARunSheetReader" href="src/KVINDRARunSheetReader.h.html#Rd3QHE">KVINDRARunSheetReader</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> make_tree = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVINDRARunSheetReader:GetRunSheetDir" href="src/KVINDRARunSheetReader.h.html#RqMYhE">GetRunSheetDir</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVINDRARunSheetReader:SetRunSheetDir" href="src/KVINDRARunSheetReader.h.html#oLQqGB">SetRunSheetDir</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a> * <a class="funcname" name="KVINDRARunSheetReader:GetFileFormat" href="src/KVINDRARunSheetReader.h.html#TIDroE">GetFileFormat</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVINDRARunSheetReader:SetFileFormat" href="src/KVINDRARunSheetReader.h.html#VhYD1E">SetFileFormat</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* fmt)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVINDRARunSheetReader:IsMakeTree" href="src/KVINDRARunSheetReader.h.html#ocKpV">IsMakeTree</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVINDRARunSheetReader:SetMakeTree" href="src/KVINDRARunSheetReader.h.html#MlZ1gE">SetMakeTree</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TTree * <a class="funcname" name="KVINDRARunSheetReader:GetTree" href="src/KVINDRARunSheetReader.h.html#sEXaiC">GetTree</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVINDRARunSheetReader:StartTreeViewer" href="src/KVINDRARunSheetReader.h.html#qh.6KB">StartTreeViewer</a>() const</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Wed Mar 18 13:43:41 2015 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>
