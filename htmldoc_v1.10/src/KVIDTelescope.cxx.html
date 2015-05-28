@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 15:44:01 2015            -->
+<!--   Date: Thu May 28 11:10:13 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVIDTelescope.html">KVIDTelescope</a>.cpp,v 1.52 2009/05/05 15:54:04 franklan Exp $
@@ -76,7 +76,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <span class="comment">//with certain types of particles. For any class derived from <a href="../KVIDTelescope.html">KVIDTelescope</a>, the</span>
 <span class="comment">//identification grid (<a href="../KVIDGraph.html">KVIDGraph</a>), if one exists, can be obtained and visualised using :</span>
 <span class="comment">//</span>
-<span class="comment">//      idtelescope-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:GetIDGrid" title="KVIDGraph* KVIDTelescope::GetIDGrid() or overloads">GetIDGrid</a>()-><a href="../KVIDGraph.html#KVIDGraph:Draw" title="void KVIDGraph::Draw(Option_t* opt = &quot;&quot;)">Draw</a>();</span>
+<span class="comment">//      idtelescope-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:GetIDGrid" title="KVIDGraph* KVIDTelescope::GetIDGrid() or overloads">GetIDGrid</a>()-><a href="../KVIDGraph.html#KVIDGraph:Draw" title="void KVIDGraph::Draw(Option_t* opt=&quot;&quot;)">Draw</a>();</span>
 <span class="comment">//</span>
 <span class="comment">//Note that if no grid has been defined for the telescope, <a href="../KVIDTelescope.html#KVIDTelescope:GetIDGrid" title="KVIDGraph* KVIDTelescope::GetIDGrid() or overloads">GetIDGrid</a>() returns a null</span>
 <span class="comment">//pointer, so you should only use the previous method if you are absolutely sure that</span>
@@ -89,7 +89,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <span class="comment">//class. In this case a grid can be created and drawn using :</span>
 <span class="comment">//</span>
 <span class="comment">//      <a href="../KVIDGrid.html">KVIDGrid</a>* g = idtelescope-&gt;GetTGIDGrid(<span class="string">"name_of_functional"</span>, max_X_coord_of_lines);</span>
-<span class="comment">//      g-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();</span>
+<span class="comment">//      g-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();</span>
 <span class="comment">//</span>
 <span class="comment">//You should keep a pointer to the grid because it is the user's responsibility to delete it after</span>
 <span class="comment">//use.</span>
@@ -99,10 +99,10 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <span class="comment">//Particles reconstructed from data measured in the detectors of a multidetector array</span>
 <span class="comment">//(<a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a>) are identified using the <a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a>::<a href="../KVReconstructedNucleus.html#KVReconstructedNucleus:Identify" title="void KVReconstructedNucleus::Identify()">Identify</a>()</span>
 <span class="comment">//method. This takes the list of ID telescopes through whose detectors the particle passed,</span>
-<span class="comment">//beginning with the telescope in which the particle stopped, and calls the <a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a>()</span>
+<span class="comment">//beginning with the telescope in which the particle stopped, and calls the <a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult* ,Double_t x=-1.,Double_t y=-1.)">Identify</a>()</span>
 <span class="comment">//method of each ID telescope in turn. This continues until identification is achieved.</span>
 <span class="comment">//Thus the identification method, specific to each type of ID telescope, can be defined</span>
-<span class="comment">//by overriding the <a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a>() method in child classes.</span>
+<span class="comment">//by overriding the <a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult* ,Double_t x=-1.,Double_t y=-1.)">Identify</a>() method in child classes.</span>
 <span class="comment">//</span>
 <span class="comment">//Similarly, calibration of identified particles is achieved by <a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a>::</span>
 <span class="comment">//Calibrate() which uses the Calibrate() method of the 'identifying telescope' (i.e. the</span>
@@ -115,7 +115,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <span class="comment">//</span>
 <span class="comment">//Setting identification parameters</span>
 <span class="comment">//---------------------------------------------</span>
-<span class="comment">//The method <a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a>(const <a href="../KVMultiDetArray.html">KVMultiDetArray</a>*) will be used by the</span>
+<span class="comment">//The method <a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray* )">SetIdentificationParameters</a>(const <a href="../KVMultiDetArray.html">KVMultiDetArray</a>*) will be used by the</span>
 <span class="comment">//<a href="../KVMultiDetArray.html">KVMultiDetArray</a> to which this telescope belongs in order to set the parameters of</span>
 <span class="comment">//ALL telescopes of this type in the array.</span>
 <span class="comment">//By default, this method looks for the file with name given by the environment variable</span>
@@ -132,23 +132,23 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 {
     <span class="comment">//default <a href="../KVIDTelescope.html#KVIDTelescope:init" title="void KVIDTelescope::init()">init</a></span>
     <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a> = <span class="keyword">new</span> <a href="../KVList.html">KVList</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
-    <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetCleanup" title="void KVSeqCollection::SetCleanup(Bool_t enable = kTRUE)">SetCleanup</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
+    <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetCleanup" title="void KVSeqCollection::SetCleanup(Bool_t enable=kTRUE)">SetCleanup</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
     <a href="../KVIDTelescope.html#KVIDTelescope:fGroup" title="KVGroup* KVIDTelescope::fGroup">fGroup</a> = 0;
     <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a> = <span class="keyword">new</span> <a href="../KVList.html">KVList</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
-    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetCleanup" title="void KVSeqCollection::SetCleanup(Bool_t enable = kTRUE)">SetCleanup</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
+    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetCleanup" title="void KVSeqCollection::SetCleanup(Bool_t enable=kTRUE)">SetCleanup</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
 	 <a href="../KVIDTelescope.html#KVIDTelescope:fVarX" title="KVString KVIDTelescope::fVarX">fVarX</a>=<a href="../KVIDTelescope.html#KVIDTelescope:fVarY" title="KVString KVIDTelescope::fVarY">fVarY</a>=<span class="string">""</span>;
 }
 
 <a name="UqEsFC"></a><a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:_KVIDTelescope" title="void KVIDTelescope::~KVIDTelescope()">~KVIDTelescope</a>()
 {
     <span class="comment">//delete this ID telescope</span>
-    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a> &amp;&amp; <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit" title="Bool_t TObject::TestBit(UInt_t f) const">TestBit</a>(kNotDeleted)) {
-        <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a> &amp;&amp; <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../#TObject:TestBit" title="Bool_t TObject::TestBit(UInt_t f)">TestBit</a>(kNotDeleted)) {
+        <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
         <span class="keyword">delete</span> <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>;
     }
     <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a> = 0;
     <a href="../KVIDTelescope.html#KVIDTelescope:fGroup" title="KVGroup* KVIDTelescope::fGroup">fGroup</a> = 0;
-    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
     SafeDelete(<a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>);
 }
 
@@ -162,17 +162,17 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="keyword">if</span> (d) {
         <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(d);
         d-&gt;AddIDTelescope(<span class="keyword">this</span>);
-        <span class="keyword">if</span>(<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>()&gt;1)
-            <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"ID_%s_%s"</span>, <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1)-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2)-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()) );
-        <span class="keyword">else</span> <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"ID_%s"</span>, <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1)-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()) );
+        <span class="keyword">if</span>(<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>()&gt;1)
+            <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"ID_%s_%s"</span>, <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1)-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2)-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()) );
+        <span class="keyword">else</span> <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"ID_%s"</span>, <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1)-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()) );
     }
     <span class="keyword">else</span> {
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"AddDetector"</span>, <span class="string">"Called with null pointer"</span>);
+        <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"AddDetector"</span>, <span class="string">"Called with null pointer"</span>);
     }
 }
 
 <span class="comment">//___________________________________________________________________________________________</span>
-<a name="gFfEP"></a><span class="keyword">void</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:Print" title="void KVIDTelescope::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt) <span class="keyword">const</span>
+<a name="gFfEP"></a><span class="keyword">void</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:Print" title="void KVIDTelescope::Print(Option_t* opt=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt) <span class="keyword">const</span>
 {
     <span class="comment">// print out telescope structure</span>
     <span class="comment">//if opt=<span class="string">"fired"</span> only fired detectors are printed</span>
@@ -184,16 +184,16 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
         <span class="keyword">while</span> ((obj = (<a href="../KVDetector.html">KVDetector</a> *) next())) {
 
             <span class="keyword">if</span> (obj-&gt;Fired() || obj-&gt;GetEnergy())
-                obj-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:Print" title="void KVIDTelescope::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<span class="string">"data"</span>);
+                obj-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:Print" title="void KVIDTelescope::Print(Option_t* opt=&quot;&quot;)">Print</a>(<span class="string">"data"</span>);
         }
     } <span class="keyword">else</span> {
-        cout &lt;&lt; <span class="string">"\n"</span> &lt;&lt; opt &lt;&lt; <span class="string">"Structure of KVIDTelescope object: "</span> &lt;&lt;
-                <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; <span class="string">" "</span> &lt;&lt; <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>() &lt;&lt; endl;
-        cout &lt;&lt; opt &lt;&lt;
+        <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\n"</span> &lt;&lt; opt &lt;&lt; <span class="string">"Structure of KVIDTelescope object: "</span> &lt;&lt;
+                <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" "</span> &lt;&lt; <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>() &lt;&lt; endl;
+        <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; opt &lt;&lt;
                 <span class="string">"--------------------------------------------------------"</span> &lt;&lt;
                 endl;
         <span class="keyword">while</span> ((obj = (<a href="../KVDetector.html">KVDetector</a> *) next())) {
-            cout &lt;&lt; opt &lt;&lt; <span class="string">"Detector: "</span> &lt;&lt; obj-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl;
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; opt &lt;&lt; <span class="string">"Detector: "</span> &lt;&lt; obj-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
         }
     }
 }
@@ -215,20 +215,20 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="lQwra"></a><a href="../KVDetector.html">KVDetector</a> *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name) <span class="keyword">const</span>
+<a name="lQwra"></a><a href="../KVDetector.html">KVDetector</a> *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name) <span class="keyword">const</span>
 {
     <span class="comment">// Return a pointer to the detector in the telescope with the name <span class="string">"name"</span>.</span>
 
-    <a href="../KVDetector.html">KVDetector</a> *tmp = (<a href="../KVDetector.html">KVDetector</a> *) <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) const or overloads">FindObject</a>(name);
+    <a href="../KVDetector.html">KVDetector</a> *tmp = (<a href="../KVDetector.html">KVDetector</a> *) <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(name);
     <span class="keyword">if</span> (!tmp)
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"GetDetector(const Char_t *name)"</span>,
-                <span class="string">"Detector %s not found in telescope %s"</span>, name, <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+        <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetDetector(const Char_t *name)"</span>,
+                <span class="string">"Detector %s not found in telescope %s"</span>, name, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
     <span class="keyword">return</span> tmp;
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="DMjKGD"></a><a href="../KVGroup.html">KVGroup</a> *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetGroup" title="KVGroup* KVIDTelescope::GetGroup() const">GetGroup</a>() <span class="keyword">const</span>
+<a name="DMjKGD"></a><a href="../KVGroup.html">KVGroup</a> *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetGroup" title="KVGroup* KVIDTelescope::GetGroup()">GetGroup</a>() <span class="keyword">const</span>
 {
     <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:fGroup" title="KVGroup* KVIDTelescope::fGroup">fGroup</a>;
 }
@@ -243,12 +243,12 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <span class="comment">//____________________________________________________________________________________</span>
 <a name="bUL9s"></a><a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetGroupNumber" title="UInt_t KVIDTelescope::GetGroupNumber()">GetGroupNumber</a>()
 {
-    <span class="keyword">return</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetGroup" title="KVGroup* KVIDTelescope::GetGroup() const">GetGroup</a>()? GetGroup()-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>() : 0);
+    <span class="keyword">return</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetGroup" title="KVGroup* KVIDTelescope::GetGroup()">GetGroup</a>()? GetGroup()-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() : 0);
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="v26itD"></a>TGraph *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:MakeIDLine" title="TGraph* KVIDTelescope::MakeIDLine(KVNucleus* nuc, Double_t Emin, Double_t Emax, Double_t Estep = 0.)">MakeIDLine</a>(<a href="../KVNucleus.html">KVNucleus</a> * nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> Emin,
+<a name="v26itD"></a>TGraph *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:MakeIDLine" title="TGraph* KVIDTelescope::MakeIDLine(KVNucleus* nuc,Double_t Emin,Double_t Emax,Double_t Estep=0.0)">MakeIDLine</a>(<a href="../KVNucleus.html">KVNucleus</a> * nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> Emin,
                                   <a href="../ListOfTypes.html#Double_t">Double_t</a> Emax, <a href="../ListOfTypes.html#Double_t">Double_t</a> Estep)
 {
     <span class="comment">//For a given nucleus, generate a TGraph representing the line in the deltaE-E</span>
@@ -275,35 +275,35 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//get list of all detectors through which particle must pass in order to reach</span>
     <span class="comment">//2nd member of ID Telescope</span>
     TList *detectors =
-            <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2)-><a href="../KVDetector.html#KVDetector:GetAlignedDetectors" title="TList* KVDetector::GetAlignedDetectors(UInt_t direction = 1)">GetAlignedDetectors</a>(<a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:kForwards" title="KVGroup::(anonymous) KVGroup::kForwards">kForwards</a>);
-    <span class="comment">//detectors-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls" title="void TNamed::ls(Option_t* option = &quot;&quot;) const">ls</a>();</span>
+            <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2)-><a href="../KVDetector.html#KVDetector:GetAlignedDetectors" title="TList* KVDetector::GetAlignedDetectors(UInt_t direction=1)">GetAlignedDetectors</a>(<a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:kForwards" title="const enum KVGroup:: KVGroup::kForwards">kForwards</a>);
+    <span class="comment">//detectors-&gt;<a href="../#TNamed:ls" title="void TNamed::ls(Option_t* option=&quot;&quot;)">ls</a>();</span>
     TIter next_det(detectors);
-    <span class="comment">//cout &lt;&lt; <span class="string">"nsteps ="</span> &lt;&lt; nsteps &lt;&lt; endl;</span>
+    <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"nsteps ="</span> &lt;&lt; nsteps &lt;&lt; endl;</span>
 
     <span class="keyword">for</span> (<a href="../ListOfTypes.html#Double_t">Double_t</a> E = Emin; E &lt;= Emax; E += Estep) {
         <span class="comment">//Set energy of nucleus</span>
         nuc-&gt;SetEnergy(E);
-        <span class="comment">//cout &lt;&lt; <span class="string">"Einc="</span> &lt;&lt; E &lt;&lt; endl;</span>
+        <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Einc="</span> &lt;&lt; E &lt;&lt; endl;</span>
 
         <span class="comment">//Calculate energy loss in each member and stock in arrays x &amp; y</span>
         <span class="comment">//first member</span>
         <a href="../KVDetector.html">KVDetector</a> *det = 0;
         x[step]=y[step]=-1;
         <span class="keyword">while</span> ((det = (<a href="../KVDetector.html">KVDetector</a> *) next_det())) {
-            <span class="comment">//det-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:Print" title="void KVIDTelescope::Print(Option_t* opt = &quot;&quot;) const">Print</a>();</span>
+            <span class="comment">//det-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:Print" title="void KVIDTelescope::Print(Option_t* opt=&quot;&quot;)">Print</a>();</span>
             <a href="../ListOfTypes.html#Double_t">Double_t</a> eloss = det-&gt;GetELostByParticle(nuc);
-            <span class="keyword">if</span> (det == <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1))
+            <span class="keyword">if</span> (det == <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1))
                 y[step] = eloss;
-            <span class="keyword">else</span> <span class="keyword">if</span> (det == <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2))
+            <span class="keyword">else</span> <span class="keyword">if</span> (det == <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2))
                 x[step] = eloss;
             <a href="../ListOfTypes.html#Double_t">Double_t</a> E1 = nuc-&gt;GetEnergy() - eloss;
             nuc-&gt;SetEnergy(E1);
-            <span class="comment">//cout &lt;&lt; <span class="string">"Eloss="</span> &lt;&lt; eloss &lt;&lt; endl;</span>
-            <span class="comment">//cout &lt;&lt; <span class="string">"Enuc="</span> &lt;&lt; nuc-&gt;GetEnergy() &lt;&lt; endl;</span>
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Eloss="</span> &lt;&lt; eloss &lt;&lt; endl;</span>
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Enuc="</span> &lt;&lt; nuc-&gt;GetEnergy() &lt;&lt; endl;</span>
             <span class="keyword">if</span>(E1&lt;1.e-3) <span class="keyword">break</span>;
         }
 
-        <span class="comment">//cout &lt;&lt; <span class="string">"step = "</span> &lt;&lt; step &lt;&lt; <span class="string">" x = "</span> &lt;&lt; x[step] &lt;&lt; <span class="string">" y = "</span> &lt;&lt; y[step] &lt;&lt; endl;</span>
+        <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"step = "</span> &lt;&lt; step &lt;&lt; <span class="string">" x = "</span> &lt;&lt; x[step] &lt;&lt; <span class="string">" y = "</span> &lt;&lt; y[step] &lt;&lt; endl;</span>
 
         <span class="comment">//make sure that some energy is lost in each member</span>
         <span class="comment">//otherwise miss a step and reduce number of points in graph</span>
@@ -313,7 +313,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
             nsteps--;
         }
 
-        <span class="comment">//cout &lt;&lt; <span class="string">"nsteps ="</span> &lt;&lt; nsteps &lt;&lt; endl;</span>
+        <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"nsteps ="</span> &lt;&lt; nsteps &lt;&lt; endl;</span>
         <span class="comment">//reset iterator ready for next loop on detectors</span>
         next_det.Reset();
     }
@@ -327,7 +327,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="A0TcFD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a>(<a href="../KVIdentificationResult.html">KVIdentificationResult</a>*, <a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Double_t">Double_t</a>)
+<a name="A0TcFD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult* ,Double_t x=-1.,Double_t y=-1.)">Identify</a>(<a href="../KVIdentificationResult.html">KVIdentificationResult</a>*, <a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Double_t">Double_t</a>)
 {
     <span class="comment">//Default identification method.</span>
     <span class="comment">//Identification of experimental data needs to be implemented in specific</span>
@@ -338,7 +338,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="zsGviE"></a><span class="keyword">void</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:SetIDGrid" title="void KVIDTelescope::SetIDGrid(KVIDGraph*)">SetIDGrid</a>(<a href="../KVIDGraph.html">KVIDGraph</a> * grid)
+<a name="zsGviE"></a><span class="keyword">void</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:SetIDGrid" title="void KVIDTelescope::SetIDGrid(KVIDGraph* )">SetIDGrid</a>(<a href="../KVIDGraph.html">KVIDGraph</a> * grid)
 {
     <span class="comment">//Add an identification grid to the list of grids used by this telescope.</span>
     <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(grid);
@@ -358,7 +358,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <a name="JMg.dB"></a><a href="../KVIDGraph.html">KVIDGraph</a> *<a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetIDGrid" title="KVIDGraph* KVIDTelescope::GetIDGrid() or overloads">GetIDGrid</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> index)
 {
     <span class="comment">//Return pointer to grid using position in list. First grid has index = 1.</span>
-    <span class="keyword">return</span> (<a href="../KVIDGraph.html">KVIDGraph</a>*)<a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx) const">At</a>(index-1);
+    <span class="keyword">return</span> (<a href="../KVIDGraph.html">KVIDGraph</a>*)<a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx)">At</a>(index-1);
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
@@ -367,12 +367,12 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 {
     <span class="comment">//Return pointer to grid using <span class="string">"label"</span> to search in list of grids associated</span>
     <span class="comment">//to this telescope.</span>
-    <span class="keyword">return</span> (<a href="../KVIDGraph.html">KVIDGraph</a>*)<a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:FindObjectByLabel" title="TObject* KVSeqCollection::FindObjectByLabel(const Char_t*) const">FindObjectByLabel</a>(label);
+    <span class="keyword">return</span> (<a href="../KVIDGraph.html">KVIDGraph</a>*)<a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:FindObjectByLabel" title="TObject* KVSeqCollection::FindObjectByLabel(const Char_t* )">FindObjectByLabel</a>(label);
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="G_vCGD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
+<a name="G_vCGD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
 {
     <span class="comment">//This method should define how to calculate the X-coordinate in a 2D identification map</span>
     <span class="comment">//associated with the ID telescope based on the current state of the detectors.</span>
@@ -383,16 +383,16 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//if 'opt' is not an empty string (default) we return the value of the acquisition</span>
     <span class="comment">//parameter of type 'opt' associated to the detector</span>
 
-    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>() &lt; 2)
+    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>() &lt; 2)
         <span class="keyword">return</span> 0.0;
 
     <span class="keyword">if</span> (strcmp(opt, <span class="string">""</span>)) {
-        <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2)-><a href="../KVDetector.html#KVDetector:GetACQData" title="Float_t KVDetector::GetACQData(const Char_t*)">GetACQData</a>(opt);
+        <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2)-><a href="../KVDetector.html#KVDetector:GetACQData" title="Float_t KVDetector::GetACQData(const Char_t* )">GetACQData</a>(opt);
     }
-    <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2)-><a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();
+    <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2)-><a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();
 }
 
-<a name="Y1wPY"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetPedestalX" title="Double_t KVIDTelescope::GetPedestalX(Option_t* opt = &quot;&quot;)">GetPedestalX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
+<a name="Y1wPY"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetPedestalX" title="Double_t KVIDTelescope::GetPedestalX(Option_t* opt=&quot;&quot;)">GetPedestalX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
 {
     <span class="comment">// Returns the pedestal associated with the 2nd detector of the telescope,</span>
     <span class="comment">// optionally depending on the given option string.</span>
@@ -401,7 +401,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="keyword">return</span> 0.;
 }
 
-<a name="AzwPY"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetPedestalY" title="Double_t KVIDTelescope::GetPedestalY(Option_t* opt = &quot;&quot;)">GetPedestalY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
+<a name="AzwPY"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetPedestalY" title="Double_t KVIDTelescope::GetPedestalY(Option_t* opt=&quot;&quot;)">GetPedestalY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
 {
     <span class="comment">// Returns the pedestal associated with the 1st detector of the telescope,</span>
     <span class="comment">// optionally depending on the given option string.</span>
@@ -412,7 +412,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="CDrHGD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapY" title="Double_t KVIDTelescope::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
+<a name="CDrHGD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapY" title="Double_t KVIDTelescope::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
 {
     <span class="comment">//This method should define how to calculate the Y-coordinate in a 2D identification map</span>
     <span class="comment">//associated with the ID telescope based on the current state of the detectors.</span>
@@ -423,9 +423,9 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//if 'opt' is not an empty string (default) we return the value of the acquisition</span>
     <span class="comment">//parameter of type 'opt' associated to the detector</span>
     <span class="keyword">if</span> (strcmp(opt, <span class="string">""</span>)) {
-        <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetACQData" title="Float_t KVDetector::GetACQData(const Char_t*)">GetACQData</a>(opt);
+        <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetACQData" title="Float_t KVDetector::GetACQData(const Char_t* )">GetACQData</a>(opt);
     }
-    <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();
+    <span class="keyword">return</span> <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
@@ -434,7 +434,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 {
     <span class="comment">//Remove all identification grids for this ID telescope</span>
     <span class="comment">//Grids are not deleted as this is handled by <a href="../KVIDGridManager.html">gIDGridManager</a></span>
-    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
@@ -444,7 +444,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//Static function which will create an instance of the <a href="../KVIDTelescope.html">KVIDTelescope</a>-derived class</span>
     <span class="comment">//corresponding to 'name'</span>
     <span class="comment">//These are defined as 'Plugin' objects in the file $KVROOT/KVFiles/.kvrootrc :</span>
-    <span class="comment">// # The <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:GetIDTelescopes" title="void KVMultiDetArray::GetIDTelescopes(KVDetector*, KVDetector*, TCollection*)">GetIDTelescopes</a>(<a href="../KVDetector.html">KVDetector</a>*de, <a href="../KVDetector.html">KVDetector</a>*e) method uses these plugins to</span>
+    <span class="comment">// # The <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:GetIDTelescopes" title="void KVMultiDetArray::GetIDTelescopes(KVDetector* ,KVDetector* ,TCollection* )">GetIDTelescopes</a>(<a href="../KVDetector.html">KVDetector</a>*de, <a href="../KVDetector.html">KVDetector</a>*e) method uses these plugins to</span>
     <span class="comment">// # create <a href="../KVIDTelescope.html">KVIDTelescope</a> instances adapted to the specific array geometry and detector types.</span>
     <span class="comment">// # For each pair of detectors we look for a plugin with one of the following names:</span>
     <span class="comment">// #    [name_of_dataset].de_detector_type[de detector thickness]-e_detector_type[de detector thickness]</span>
@@ -459,7 +459,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 
     <span class="comment">//check and load plugin library</span>
     TPluginHandler *ph;
-    <span class="keyword">if</span> (!(ph = <a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base, const Char_t* uri = &quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVIDTelescope"</span>, uri)))
+    <span class="keyword">if</span> (!(ph = <a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVIDTelescope"</span>, uri)))
         <span class="keyword">return</span> 0;
 
     <span class="comment">//execute constructor/macro for identification telescope</span>
@@ -480,17 +480,17 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//Sets label of telescope based on URI of plugin describing child class for this telescope</span>
 
     TString _uri(uri);
-    <span class="keyword">if</span>(<a href="../KVDataSet.html">gDataSet</a> &amp;&amp; _uri.BeginsWith( <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() )) _uri.Remove(0, strlen(<a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>())+1);
+    <span class="keyword">if</span>(<a href="../KVDataSet.html">gDataSet</a> &amp;&amp; _uri.BeginsWith( <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() )) _uri.Remove(0, strlen(<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())+1);
     <a href="../KVBase.html#KVBase:SetLabel" title="void KVBase::SetLabel(const Char_t* lab)">SetLabel</a>(_uri.Data());
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="k5lnMD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a>(<span class="keyword">const</span> <a href="../KVMultiDetArray.html">KVMultiDetArray</a>*)
+<a name="k5lnMD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray* )">SetIdentificationParameters</a>(<span class="keyword">const</span> <a href="../KVMultiDetArray.html">KVMultiDetArray</a>*)
 {
     <span class="comment">// Initialise the identification parameters (grids, etc.) of ALL identification telescopes of this</span>
     <span class="comment">// kind (label) in the multidetector array. Therefore this method need only be called once, and not</span>
-    <span class="comment">// called for each telescope. The kind/label (returned by <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>) of the telescope corresponds</span>
+    <span class="comment">// called for each telescope. The kind/label (returned by <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>) of the telescope corresponds</span>
     <span class="comment">// to the URI used to find the plugin class in $KVROOT/KVFiles/.kvrootrc.</span>
     <span class="comment">// By default, this method looks for the file with name given by the environment variable</span>
     <span class="comment">//</span>
@@ -499,22 +499,22 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">// which is assumed to contain identification grids. The file will be read in by <a href="../KVIDGridManager.html">gIDGridManager</a></span>
     <span class="comment">// and the grids added to its list.</span>
 
-    TString filename = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>( Form(<span class="string">"IdentificationParameterFile.%s"</span>,<a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>()) );
+    TString filename = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>( Form(<span class="string">"IdentificationParameterFile.%s"</span>,<a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>()) );
     <span class="keyword">if</span>( filename == <span class="string">""</span> ){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"SetIdentificationParameters"</span>,
+        <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"SetIdentificationParameters"</span>,
                 <span class="string">"No filename defined. Should be given by %s.IdentificationParameterFile.%s"</span>,
-                <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>());
+                <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>());
         <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
     }
     TString path;
-    <span class="keyword">if</span> (!<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name, TString&amp; fullpath, const Char_t* kvsubdir = &quot;&quot;)">SearchKVFile</a>(filename.Data(), path, <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>())){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"SetIdentificationParameters"</span>,
+    <span class="keyword">if</span> (!<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(filename.Data(), path, <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())){
+        <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"SetIdentificationParameters"</span>,
               <span class="string">"File %s not found. Should be in $KVROOT/KVFiles/%s"</span>,
-              filename.Data(), <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+              filename.Data(), <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
         <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
     }
     <span class="comment">//read grids from file</span>
-    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"SetIdentificationParameters"</span>, <span class="string">"Using file %s"</span>, path.Data());
+    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SetIdentificationParameters"</span>, <span class="string">"Using file %s"</span>, path.Data());
     <a href="../KVIDGridManager.html">gIDGridManager</a>-><a href="../KVIDGridManager.html#KVIDGridManager:ReadAsciiFile" title="Bool_t KVIDGridManager::ReadAsciiFile(const Char_t* filename)">ReadAsciiFile</a>(path.Data());
     <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
@@ -525,9 +525,9 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//Remove identification parameters from telescope in such a way that they</span>
     <span class="comment">//can subsequently be reset e.g. with a new version.</span>
     <span class="comment">//This is used by <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:UpdateIdentifications" title="void KVMultiDetArray::UpdateIdentifications()">UpdateIdentifications</a>.</span>
-    <span class="comment">//Child classes with specific <a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a> methods should</span>
+    <span class="comment">//Child classes with specific <a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray* )">SetIdentificationParameters</a> methods should</span>
     <span class="comment">//also redefine this method in order to remove (destroy) cleanly the objects</span>
-    <span class="comment">//created in <a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a>.</span>
+    <span class="comment">//created in <a href="../KVIDTelescope.html#KVIDTelescope:SetIdentificationParameters" title="Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray* )">SetIdentificationParameters</a>.</span>
     <span class="comment">//</span>
     <span class="comment">//This default method takes the list of grids associated to the telescope,</span>
     <span class="comment">//and for each one: 1) checks if it is still in the <a href="../KVIDGridManager.html">gIDGridManager</a>'s list</span>
@@ -537,15 +537,15 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <a href="../KVIDGrid.html">KVIDGrid</a>* grid;
     <span class="keyword">while</span>( (grid = (<a href="../KVIDGrid.html">KVIDGrid</a>*)next_grid()) ){
 
-        <span class="keyword">if</span> ( <a href="../KVIDGridManager.html">gIDGridManager</a>-><a href="../KVIDGridManager.html#KVIDGridManager:GetGrids" title="KVList* KVIDGridManager::GetGrids()">GetGrids</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) const or overloads">FindObject</a>( grid ) ){<span class="comment">//this only works if <a href="../KVIDTelescope.html">KVIDTelescope</a> uses <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>:<a href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual" title="Bool_t TObject::IsEqual(const TObject* obj) const">IsEqual</a> method (i.e. compares pointers)</span>
+        <span class="keyword">if</span> ( <a href="../KVIDGridManager.html">gIDGridManager</a>-><a href="../KVIDGridManager.html#KVIDGridManager:GetGrids" title="KVList* KVIDGridManager::GetGrids()">GetGrids</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>( grid ) ){<span class="comment">//this only works if <a href="../KVIDTelescope.html">KVIDTelescope</a> uses <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>:<a href="../#TObject:IsEqual" title="Bool_t TObject::IsEqual(const TObject* obj)">IsEqual</a> method (i.e. compares pointers)</span>
 
-            <a href="../KVIDGridManager.html">gIDGridManager</a>-><a href="../KVIDGridManager.html#KVIDGridManager:DeleteGrid" title="void KVIDGridManager::DeleteGrid(KVIDGraph*, Bool_t update = kTRUE)">DeleteGrid</a>( grid );
+            <a href="../KVIDGridManager.html">gIDGridManager</a>-><a href="../KVIDGridManager.html#KVIDGridManager:DeleteGrid" title="void KVIDGridManager::DeleteGrid(KVIDGraph* ,Bool_t update=kTRUE)">DeleteGrid</a>( grid );
 
         }
     }
     <span class="comment">//clear list of grids</span>
-    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
-    <a href="../KVIDTelescope.html#KVIDTelescope:SetHasMassID" title="void KVIDTelescope::SetHasMassID(Bool_t yes = kTRUE)">SetHasMassID</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+    <a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
+    <a href="../KVIDTelescope.html#KVIDTelescope:SetHasMassID" title="void KVIDTelescope::SetHasMassID(Bool_t yes=kTRUE)">SetHasMassID</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
 }
 
 <span class="comment">//____________________________________________________________________________________</span>
@@ -563,21 +563,21 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//                          windows of gas detectors, etc.</span>
     <span class="comment">//</span>
     <span class="comment">// Whenever possible, the energy loss for fired detectors which are uncalibrated</span>
-    <span class="comment">// or not functioning is calculated. In this case the status returned by <a href="../KVIDTelescope.html#KVIDTelescope:GetCalibStatus" title="Int_t KVIDTelescope::GetCalibStatus() const">GetCalibStatus</a>()</span>
-    <span class="comment">// will be <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>.</span>
+    <span class="comment">// or not functioning is calculated. In this case the status returned by <a href="../KVIDTelescope.html#KVIDTelescope:GetCalibStatus" title="Int_t KVIDTelescope::GetCalibStatus()">GetCalibStatus</a>()</span>
+    <span class="comment">// will be <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>.</span>
     <span class="comment">// If none of the detectors is calibrated, the particle's energy cannot be calculated &amp;</span>
-    <span class="comment">// the status will be <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>.</span>
-    <span class="comment">// Otherwise, the status code will be <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_OK">kCalibStatus_OK</a>.</span>
+    <span class="comment">// the status will be <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>.</span>
+    <span class="comment">// Otherwise, the status code will be <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_OK" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_OK">kCalibStatus_OK</a>.</span>
 
     <span class="comment">//status code</span>
-    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>;
+    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>;
 
     <a href="../ListOfTypes.html#UInt_t">UInt_t</a> z = nuc-&gt;GetZ();
     <span class="comment">//uncharged particles</span>
     <span class="keyword">if</span>(z==0) <span class="keyword">return</span>;
 
-    <a href="../KVDetector.html">KVDetector</a>* d1 = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1);
-    <a href="../KVDetector.html">KVDetector</a>* d2 = (<a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize() const">GetSize</a>()&gt;1 ? <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2) : 0);
+    <a href="../KVDetector.html">KVDetector</a>* d1 = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1);
+    <a href="../KVDetector.html">KVDetector</a>* d2 = (<a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>()&gt;1 ? <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2) : 0);
     <a href="../ListOfTypes.html#Bool_t">Bool_t</a> d1_cal = d1-&gt;IsCalibrated();
     <a href="../ListOfTypes.html#Bool_t">Bool_t</a> d2_cal = (d2 ? d2-&gt;IsCalibrated() : <a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
 
@@ -588,7 +588,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
         <span class="keyword">return</span>;
 
     <span class="comment">//status code</span>
-    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_OK">kCalibStatus_OK</a>;
+    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_OK" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_OK">kCalibStatus_OK</a>;
 
     <a href="../ListOfTypes.html#UInt_t">UInt_t</a> a = nuc-&gt;GetA();
 
@@ -609,13 +609,13 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
         <span class="keyword">if</span>(d2 &amp;&amp; d2-&gt;Fired(<span class="string">"Pall"</span>)) e2 = d2-&gt;GetCorrectedEnergy(nuc, -1, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>);<span class="comment">//N.B.: transmission=<a href="../ListOfTypes.html#Bool_t">kFALSE</a> because particle stop in d2</span>
         <span class="keyword">if</span>( e2 &lt;= 0.0 ){
             <span class="comment">// zero energy loss in 2nd detector ? can't do anything...</span>
-            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>;
+            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>;
             <span class="keyword">return</span>;
         }
         <span class="comment">//calculate &amp; set energy loss in dE detector</span>
         <span class="comment">//N.B. using e2 for the residual energy after detector 1 means</span>
         <span class="comment">//that we are assuming the particle stops in detector 2.</span>
-        <span class="comment">//if this is not true, we will underestimate the energy of the particle.</span>
+        <span class="comment">//if this is not <a href="../ListOfTypes.html#bool">true</a>, we will underestimate the energy of the particle.</span>
         e1 = d1-&gt;GetDeltaEFromERes(z,a,e2);
         <span class="keyword">if</span>( e1&lt; 0.0 ) e1 = 0.0;
         <span class="keyword">else</span>{
@@ -623,7 +623,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
             d1-&gt;SetEResAfterDetector(e2);
             e1 = d1-&gt;GetCorrectedEnergy(nuc);
             <span class="comment">//status code</span>
-            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>;
+            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>;
         }
     } <span class="keyword">else</span> {<span class="comment">//1st detector is calibrated too: get corrected energy loss</span>
 
@@ -636,7 +636,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
         e1 = d1-&gt;GetCorrectedEnergy(nuc);
         <span class="keyword">if</span>( e1 &lt;= 0.0 ){
             <span class="comment">// zero energy loss in 1st detector ? can't do anything...</span>
-            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>;
+            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_NoCalibrations" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_NoCalibrations">kCalibStatus_NoCalibrations</a>;
             <span class="keyword">return</span>;
         }
         <span class="comment">//calculate &amp; set energy loss in 2nd detector</span>
@@ -647,7 +647,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
             d2-&gt;SetEnergyLoss(e2);
             e2 = d2-&gt;GetCorrectedEnergy(nuc);
             <span class="comment">//status code</span>
-            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>;
+            <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>;
         }
     }
     <span class="keyword">else</span> <span class="keyword">if</span>(d2){<span class="comment">//2nd detector is calibrated too: get corrected energy loss</span>
@@ -671,12 +671,12 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//more than one particle has passed, we calculate the corrected energy loss and add it</span>
     <span class="comment">//to the particle.</span>
     <span class="keyword">int</span> ndets = nuc-&gt;GetNumDet();
-    <span class="keyword">if</span> (ndets &gt; (<span class="keyword">int</span>)<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>()) { <span class="comment">//particle passed through other detectors before this idtelesocpe</span>
+    <span class="keyword">if</span> (ndets &gt; (<span class="keyword">int</span>)<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>()) { <span class="comment">//particle passed through other detectors before this idtelesocpe</span>
         <span class="comment">//look at detectors not in this id telescope</span>
-        <span class="keyword">int</span> idet = <a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>();<span class="comment">//next detector after delta-e member of IDTelescope (stopping detector = 0)</span>
+        <span class="keyword">int</span> idet = <a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>();<span class="comment">//next detector after delta-e member of IDTelescope (stopping detector = 0)</span>
         <span class="keyword">while</span> (idet &lt; ndets) {
 
-            <a href="../KVDetector.html">KVDetector</a> *det = nuc-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(idet);
+            <a href="../KVDetector.html">KVDetector</a> *det = nuc-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(idet);
             <span class="keyword">if</span>( det-&gt;Fired() &amp;&amp; det-&gt;IsCalibrated() &amp;&amp; det-&gt;GetNHits() == 1 ){
                 <a href="../ListOfTypes.html#Double_t">Double_t</a> dE = det-&gt;GetEnergy();
                 <span class="comment">//in order to check if particle was really the only one to</span>
@@ -695,23 +695,23 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                 e1 = det-&gt;GetDeltaEFromERes(z,a,einc);
                 <span class="keyword">if</span>( e1&lt; 0.0 ) e1 = 0.0;
                 <span class="keyword">if</span>( det-&gt;GetNHits() &gt; 1 ){
-                    <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"CalculateParticleEnergy"</span>,</span>
+                    <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"CalculateParticleEnergy"</span>,</span>
                     <span class="comment">//    <span class="string">"Detector %s was hit by %d particles. Calculated energy loss for particle %f MeV"</span>,</span>
-                    <span class="comment">//    det-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), det-&gt;GetNHits(), e1);</span>
+                    <span class="comment">//    det-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), det-&gt;GetNHits(), e1);</span>
                     <span class="keyword">if</span>(!( det-&gt;Fired() &amp;&amp; det-&gt;IsCalibrated()) )
                     {
                         det-&gt;SetEnergyLoss(e1 + det-&gt;GetEnergy());<span class="comment">// sum up calculated energy losses in uncalibrated detector</span>
                     }
                     <span class="comment">//status code</span>
-                    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Multihit" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Multihit">kCalibStatus_Multihit</a>;
+                    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Multihit" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_Multihit">kCalibStatus_Multihit</a>;
                 }
                 <span class="keyword">else</span> <span class="keyword">if</span>( !det-&gt;Fired() || !det-&gt;IsCalibrated() ){
-                    <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"CalculateParticleEnergy"</span>,</span>
+                    <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"CalculateParticleEnergy"</span>,</span>
                     <span class="comment">//    <span class="string">"Detector %s uncalibrated/not fired. Calculated energy loss for particle %f MeV"</span>,</span>
-                    <span class="comment">//    det-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), e1);</span>
+                    <span class="comment">//    det-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), e1);</span>
                     det-&gt;SetEnergyLoss(e1);
                     <span class="comment">//status code</span>
-                    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="KVIDTelescope::(anonymous) KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>;
+                    <a href="../KVIDTelescope.html#KVIDTelescope:fCalibStatus" title="Int_t KVIDTelescope::fCalibStatus">fCalibStatus</a> = <a href="../KVIDTelescope.html#KVIDTelescope:kCalibStatus_Calculated" title="const enum KVIDTelescope:: KVIDTelescope::kCalibStatus_Calculated">kCalibStatus_Calculated</a>;
                 }
                 det-&gt;SetEResAfterDetector(einc);
                 e1 = det-&gt;GetCorrectedEnergy(nuc,e1);
@@ -733,17 +733,17 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">// <a href="../KVIDTelescope.html">KVIDTelescope</a>.DefaultGrid:</span>
     <span class="comment">// <a href="../KVIDTelescope.html">KVIDTelescope</a>.DefaultGrid.[type]:</span>
     <span class="comment">// where [type] is the type of this identification telescope (which is given</span>
-    <span class="comment">// by the character string returned by method <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>()... sorry :( )</span>
+    <span class="comment">// by the character string returned by method <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>()... sorry :( )</span>
     <span class="comment">// If no default grid is defined for the specific type of this telescope,</span>
     <span class="comment">// the default defined by <a href="../KVIDTelescope.html">KVIDTelescope</a>.DefaultGrid is used.</span>
 
     TString general = gEnv-&gt;GetValue(<span class="string">"KVIDTelescope.DefaultGrid"</span>, <span class="string">"KVIDGraph"</span>);
-    TString specific; specific.Form(<span class="string">"KVIDTelescope.DefaultGrid.%s"</span>, <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>());
+    TString specific; specific.Form(<span class="string">"KVIDTelescope.DefaultGrid.%s"</span>, <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>());
     <span class="keyword">return</span> gEnv-&gt;GetValue(specific.Data(), general.Data());
 }
 
 <span class="comment">//_____________________________________________________________________________________________________//</span>
-<a name="iTbJDC"></a><a href="../KVIDGrid.html">KVIDGrid</a>* <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:CalculateDeltaE_EGrid" title="KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange, Int_t deltaMasse, Int_t npoints, Double_t lifetime = -10, UChar_t massformula = 0, Double_t xfactor = 1.) or overloads">CalculateDeltaE_EGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* Zrange, <a href="../ListOfTypes.html#Int_t">Int_t</a> deltaA, <a href="../ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="../ListOfTypes.html#Double_t">Double_t</a> lifetime, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> massformula, <a href="../ListOfTypes.html#Double_t">Double_t</a> xfactor)
+<a name="iTbJDC"></a><a href="../KVIDGrid.html">KVIDGrid</a>* <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:CalculateDeltaE_EGrid" title="KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange,Int_t deltaMasse,Int_t npoints,Double_t lifetime=-10,UChar_t massformula=0,Double_t xfactor=1.) or overloads">CalculateDeltaE_EGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* Zrange, <a href="../ListOfTypes.html#Int_t">Int_t</a> deltaA, <a href="../ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="../ListOfTypes.html#Double_t">Double_t</a> lifetime, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> massformula, <a href="../ListOfTypes.html#Double_t">Double_t</a> xfactor)
 {
     <span class="comment">//Genere une grille dE-E (perte d'energie - energie residuelle) pour une gamme en Z donnee</span>
     <span class="comment">// - Zrange definit l'ensemble des charges pour lequel les lignes vont etre calculees</span>
@@ -751,34 +751,34 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//Exemple :</span>
     <span class="comment">//		deltaA=1 -&gt; Aref-1, Aref et Aref+1 seront les masses associees a chaque Z et</span>
     <span class="comment">//		donc trois lignes de A par Z. le Aref pour chaque Z est determine par</span>
-    <span class="comment">//		la formule de masse par defaut (Aref = <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>() voir le .kvrootrc)</span>
-    <span class="comment">//		deltaA=0 -&gt; pour chaque ligne de Z le A associe sera celui de <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>()</span>
+    <span class="comment">//		la formule de masse par defaut (Aref = <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA()">GetA</a>() voir le .kvrootrc)</span>
+    <span class="comment">//		deltaA=0 -&gt; pour chaque ligne de Z le A associe sera celui de <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA()">GetA</a>()</span>
     <span class="comment">// - est le nombre de points par ligne</span>
     <span class="comment">//</span>
-    <span class="comment">//un noyau de A et Z donne n'est considere que s'il retourne <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z = -1, int a = -1) const">IsKnown</a>() = <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
+    <span class="comment">//un noyau de A et Z donne n'est considere que s'il retourne <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z=-1,int a=-1)">IsKnown</a>() = <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
     <span class="comment">//</span>
-    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>()&lt;=1) <span class="keyword">return</span> 0;
+    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>()&lt;=1) <span class="keyword">return</span> 0;
 
     <a href="../KVNumberList.html">KVNumberList</a> nlz(Zrange);
 
     TClass* cl = TClass::GetClass(<a href="../KVIDTelescope.html#KVIDTelescope:GetDefaultIDGridClass" title="const Char_t* KVIDTelescope::GetDefaultIDGridClass()">GetDefaultIDGridClass</a>());
-    <span class="keyword">if</span>(!cl || !cl-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVIDZAGrid"</span>)) cl = TClass::GetClass(<span class="string">"KVIDZAGrid"</span>);
+    <span class="keyword">if</span>(!cl || !cl-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVIDZAGrid"</span>)) cl = TClass::GetClass(<span class="string">"KVIDZAGrid"</span>);
     <a href="../KVIDGrid.html">KVIDGrid</a>* idgrid = (<a href="../KVIDGrid.html">KVIDGrid</a>* )cl-&gt;New();
 
     idgrid-&gt;AddIDTelescope(<span class="keyword">this</span>);
     idgrid-&gt;SetOnlyZId((deltaA==0));
 
-    <a href="../KVDetector.html">KVDetector</a>* det_de = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1);	<span class="keyword">if</span> (!det_de)		<span class="keyword">return</span> 0;
-    <a href="../KVDetector.html">KVDetector</a>* det_eres = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2);	<span class="keyword">if</span> (!det_eres) 	<span class="keyword">return</span> 0;
+    <a href="../KVDetector.html">KVDetector</a>* det_de = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1);	<span class="keyword">if</span> (!det_de)		<span class="keyword">return</span> 0;
+    <a href="../KVDetector.html">KVDetector</a>* det_eres = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2);	<span class="keyword">if</span> (!det_eres) 	<span class="keyword">return</span> 0;
 
     <a href="../KVNucleus.html">KVNucleus</a> part;
-    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"CalculateDeltaE_EGrid"</span>,
+    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"CalculateDeltaE_EGrid"</span>,
          <span class="string">"Calculating dE-E grid: dE detector = %s, E detector = %s"</span>,
-         det_de-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), det_eres-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+         det_de-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), det_eres-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 
     <a href="../KVIDCutLine.html">KVIDCutLine</a> *B_line = (<a href="../KVIDCutLine.html">KVIDCutLine</a> *)idgrid-&gt;Add(<span class="string">"OK"</span>, <span class="string">"KVIDCutLine"</span>);
     <a href="../ListOfTypes.html#Int_t">Int_t</a> npoi_bragg = 0;
-    B_line-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Bragg_line"</span>);
+    B_line-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Bragg_line"</span>);
     B_line-&gt;SetAcceptedDirection(<span class="string">"right"</span>);
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> SeuilE=0.1;
@@ -809,8 +809,8 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                 <span class="keyword">while</span> ((E1max - E1min) &gt; SeuilE) {
 
                     part.SetEnergy(E1);
-                    det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
-                    det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+                    det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
+                    det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 
                     det_de-&gt;DetectParticle(&amp;part);
                     det_eres-&gt;DetectParticle(&amp;part);
@@ -839,8 +839,8 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
       		<span class="keyword">while</span> ((E2max - E2min &gt; SeuilE)) {
 
                     part.SetEnergy(E2);
-                    det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
-                    det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+                    det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
+                    det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 
                     det_de-&gt;DetectParticle(&amp;part);
                     det_eres-&gt;DetectParticle(&amp;part);
@@ -855,7 +855,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                     }
       		}
             E2 *= xfactor;
-                <span class="keyword">if</span>((!strcmp(det_eres-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>(),<span class="string">"CSI"</span>))&amp;&amp;(E2&gt;5000)) E2=5000;
+                <span class="keyword">if</span>((!strcmp(det_eres-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>(),<span class="string">"CSI"</span>))&amp;&amp;(E2&gt;5000)) E2=5000;
 <span class="comment">//                printf(<span class="string">"z=%d a=%d E1=%lf E2=%lf\n"</span>,zz,aa,E1,E2);</span>
                 <a href="../KVIDZALine.html">KVIDZALine</a> *line = (<a href="../KVIDZALine.html">KVIDZALine</a> *)idgrid-&gt;Add(<span class="string">"ID"</span>, <span class="string">"KVIDZALine"</span>);
       		<span class="keyword">if</span> (TMath::Even(zz)) line-&gt;SetLineColor(4);
@@ -873,8 +873,8 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                     <a href="../ListOfTypes.html#Double_t">Double_t</a> Eres = 0.;
                     <a href="../ListOfTypes.html#Int_t">Int_t</a> niter=0;
                     <span class="keyword">while</span> (Eres &lt; SeuilE &amp;&amp; niter&lt;=20) {
-            		det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
-            		det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+            		det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
+            		det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 
                         part.SetEnergy(E);
 
@@ -903,7 +903,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 }
 
 <span class="comment">//_____________________________________________________________________________________________________//</span>
-<a name="scwETD"></a><a href="../KVIDGrid.html">KVIDGrid</a>* <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:CalculateDeltaE_EGrid" title="KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange, Int_t deltaMasse, Int_t npoints, Double_t lifetime = -10, UChar_t massformula = 0, Double_t xfactor = 1.) or overloads">CalculateDeltaE_EGrid</a>(TH2* haa_zz,<a href="../ListOfTypes.html#Bool_t">Bool_t</a> Zonly,<a href="../ListOfTypes.html#Int_t">Int_t</a> npoints)
+<a name="scwETD"></a><a href="../KVIDGrid.html">KVIDGrid</a>* <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:CalculateDeltaE_EGrid" title="KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange,Int_t deltaMasse,Int_t npoints,Double_t lifetime=-10,UChar_t massformula=0,Double_t xfactor=1.) or overloads">CalculateDeltaE_EGrid</a>(TH2* haa_zz,<a href="../ListOfTypes.html#Bool_t">Bool_t</a> Zonly,<a href="../ListOfTypes.html#Int_t">Int_t</a> npoints)
 {
     <span class="comment">//Genere une grille dE-E (perte d'energie - energie residuelle)</span>
     <span class="comment">//Le calcul est fait pour chaque couple comptant de charge (Z) et masse (A)</span>
@@ -916,11 +916,11 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//- Si Zonly=<a href="../ListOfTypes.html#Bool_t">kFALSE</a> et que pour un Z donne il n'y a qu'un seul A associe, les lignes correspondants</span>
     <span class="comment">//a A-1 et A+1 sont ajoutes</span>
     <span class="comment">//- Si a un Z donne, il n'y a aucun A, pas de ligne tracee</span>
-    <span class="comment">//un noyau de A et Z donne n'est considere que s'il retourne <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z = -1, int a = -1) const">IsKnown</a>() = <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
+    <span class="comment">//un noyau de A et Z donne n'est considere que s'il retourne <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z=-1,int a=-1)">IsKnown</a>() = <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
     <span class="comment">//</span>
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a> : the grid is not added to the list of the telescope and MUST BE DELETED by the user !</span>
+    <span class="comment">// <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a> : the grid is not added to the list of the telescope and MUST BE DELETED by the user !</span>
 
-    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>()&lt;=1) <span class="keyword">return</span> 0;
+    <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>()&lt;=1) <span class="keyword">return</span> 0;
 
     TClass* cl = <span class="keyword">new</span> TClass(<a href="../KVIDTelescope.html#KVIDTelescope:GetDefaultIDGridClass" title="const Char_t* KVIDTelescope::GetDefaultIDGridClass()">GetDefaultIDGridClass</a>());
     <a href="../KVIDGrid.html">KVIDGrid</a>* idgrid = (<a href="../KVIDGrid.html">KVIDGrid</a>* )cl-&gt;New();
@@ -929,17 +929,17 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     idgrid-&gt;AddIDTelescope(<span class="keyword">this</span>);
     idgrid-&gt;SetOnlyZId(Zonly);
 
-    <a href="../KVDetector.html">KVDetector</a>* det_de = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1);	<span class="keyword">if</span> (!det_de)		<span class="keyword">return</span> 0;
-    <a href="../KVDetector.html">KVDetector</a>* det_eres = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(2);	<span class="keyword">if</span> (!det_eres) 	<span class="keyword">return</span> 0;
+    <a href="../KVDetector.html">KVDetector</a>* det_de = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1);	<span class="keyword">if</span> (!det_de)		<span class="keyword">return</span> 0;
+    <a href="../KVDetector.html">KVDetector</a>* det_eres = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(2);	<span class="keyword">if</span> (!det_eres) 	<span class="keyword">return</span> 0;
 
     <a href="../KVNucleus.html">KVNucleus</a> part;
-    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"CalculateDeltaE_EGrid"</span>,
+    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"CalculateDeltaE_EGrid"</span>,
          <span class="string">"Calculating dE-E grid: dE detector = %s, E detector = %s"</span>,
-         det_de-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), det_eres-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+         det_de-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), det_eres-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 
     <a href="../KVIDCutLine.html">KVIDCutLine</a> *B_line = (<a href="../KVIDCutLine.html">KVIDCutLine</a> *)idgrid-&gt;Add(<span class="string">"OK"</span>, <span class="string">"KVIDCutLine"</span>);
     <a href="../ListOfTypes.html#Int_t">Int_t</a> npoi_bragg = 0;
-    B_line-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Bragg_line"</span>);
+    B_line-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Bragg_line"</span>);
     B_line-&gt;SetAcceptedDirection(<span class="string">"right"</span>);
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> SeuilE=0.1;
@@ -961,11 +961,11 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
         sumA /= sum;
         <a href="../ListOfTypes.html#Int_t">Int_t</a> nA = nlA.GetNValues();
         <span class="keyword">if</span> (nA==0){
-            <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"CalculateDeltaE_EGrid"</span>,<span class="string">"no count for Z=%d"</span>,zz);
+            <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"CalculateDeltaE_EGrid"</span>,<span class="string">"no count for Z=%d"</span>,zz);
         }
         <span class="keyword">else</span> {
             <span class="keyword">if</span> (Zonly){
-                nlA.<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+                nlA.<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
                 nlA.Add(TMath::Nint(sumA));
             }
             <span class="keyword">else</span> {
@@ -1000,8 +1000,8 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                     <span class="keyword">while</span> ((E1max - E1min) &gt; SeuilE) {
 
                         part.SetEnergy(E1);
-         		det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
-                        det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+         		det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
+                        det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 
          		det_de-&gt;DetectParticle(&amp;part);
          		det_eres-&gt;DetectParticle(&amp;part);
@@ -1030,8 +1030,8 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                     <span class="keyword">while</span> ((E2max - E2min &gt; SeuilE)) {
 
                         part.SetEnergy(E2);
-         		det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
-                        det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+         		det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
+                        det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 
                         det_de-&gt;DetectParticle(&amp;part);
          		det_eres-&gt;DetectParticle(&amp;part);
@@ -1060,8 +1060,8 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
                         <a href="../ListOfTypes.html#Double_t">Double_t</a> Eres = 0.;
          		<a href="../ListOfTypes.html#Int_t">Int_t</a> niter=0;
                         <span class="keyword">while</span> (Eres &lt; SeuilE &amp;&amp; niter&lt;=20) {
-                            det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
-                            det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+                            det_de-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
+                            det_eres-&gt;<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 
                             part.SetEnergy(E);
 
@@ -1093,10 +1093,10 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 }
 <span class="comment">//_________________________________________________________________________________________</span>
 
-<a name="oW3pHC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetMeanDEFromID" title="Double_t KVIDTelescope::GetMeanDEFromID(Int_t&amp; status, Int_t Z, Int_t A = -1, Double_t Eres = -1.)">GetMeanDEFromID</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;status, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> Eres)
+<a name="oW3pHC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetMeanDEFromID" title="Double_t KVIDTelescope::GetMeanDEFromID(Int_t&amp; status,Int_t Z,Int_t A=-1,Double_t Eres=-1.0)">GetMeanDEFromID</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;status, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> Eres)
 {
     <span class="comment">// Returns the Y-axis value in the 2D identification map containing isotope (Z,A)</span>
-    <span class="comment">// corresponding to either the given X-axis/Eres value or the current X-axis value given by <a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>.</span>
+    <span class="comment">// corresponding to either the given X-axis/Eres value or the current X-axis value given by <a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>.</span>
     <span class="comment">// If no mass information is available, just give Z.</span>
     <span class="comment">//</span>
     <span class="comment">// In this (default) implementation this means scanning the ID grids associated with</span>
@@ -1105,12 +1105,12 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//</span>
     <span class="comment">// Status variable can take one of following values:</span>
     <span class="comment">//</span>
-    <span class="comment">//  <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_OK">kMeanDE_OK</a>                    all OK</span>
-    <span class="comment">//   <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooSmall" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_XtooSmall">kMeanDE_XtooSmall</a>      X-coordinate is smaller than smallest X-coordinate of ID line</span>
-    <span class="comment">//   <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooLarge" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_XtooLarge">kMeanDE_XtooLarge</a>     X-coordinate is larger than largest X-coordinate of ID line</span>
+    <span class="comment">//  <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_OK" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_OK">kMeanDE_OK</a>                    all OK</span>
+    <span class="comment">//   <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooSmall" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_XtooSmall">kMeanDE_XtooSmall</a>      X-coordinate is smaller than smallest X-coordinate of ID line</span>
+    <span class="comment">//   <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooLarge" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_XtooLarge">kMeanDE_XtooLarge</a>     X-coordinate is larger than largest X-coordinate of ID line</span>
     <span class="comment">//   <a href="../KVIDTelescope.html">KVIDTelescope</a>::kMeanDE_NoIdentifie    No identifier found for Z or (Z,A)</span>
 
-    status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_OK" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_OK">kMeanDE_OK</a>;
+    status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_OK" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_OK">kMeanDE_OK</a>;
     <span class="comment">// loop over grids</span>
     TIter next(<a href="../KVIDTelescope.html#KVIDTelescope:fIDGrids" title="KVList* KVIDTelescope::fIDGrids">fIDGrids</a>);
     <a href="../KVIDGrid.html">KVIDGrid</a>* grid;
@@ -1121,32 +1121,32 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
         <span class="keyword">if</span>(idline) <span class="keyword">break</span>;
     }
     <span class="keyword">if</span>(!idline) {
-        status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_NoIdentifier" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_NoIdentifier">kMeanDE_NoIdentifier</a>;
+        status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_NoIdentifier" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_NoIdentifier">kMeanDE_NoIdentifier</a>;
         <span class="keyword">return</span> -1.;
     }
     <a href="../ListOfTypes.html#Double_t">Double_t</a> x,x1,y1,x2,y2;
-    x = (Eres &lt; 0 ? <a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>() : Eres);
+    x = (Eres &lt; 0 ? <a href="../KVIDTelescope.html#KVIDTelescope:GetIDMapX" title="Double_t KVIDTelescope::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>() : Eres);
     idline-&gt;GetEndPoint(x2,y2);
     <span class="keyword">if</span>(x&gt;x2){
-        status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooLarge" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_XtooLarge">kMeanDE_XtooLarge</a>;
+        status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooLarge" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_XtooLarge">kMeanDE_XtooLarge</a>;
         <span class="keyword">return</span> -1;
     }
     idline-&gt;GetStartPoint(x1,y1);
     <span class="keyword">if</span>(x&lt;x1){
-        status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooSmall" title="KVIDTelescope::(anonymous) KVIDTelescope::kMeanDE_XtooSmall">kMeanDE_XtooSmall</a>;
+        status = <a href="../KVIDTelescope.html#KVIDTelescope:kMeanDE_XtooSmall" title="const enum KVIDTelescope:: KVIDTelescope::kMeanDE_XtooSmall">kMeanDE_XtooSmall</a>;
         <span class="keyword">return</span> -1.;
     }
     <span class="keyword">return</span> idline-&gt;Eval(x);
 }
 
-<a name="JO2yTC"></a><span class="keyword">void</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:SetIDCode" title="void KVIDTelescope::SetIDCode(KVReconstructedNucleus*, UShort_t)">SetIDCode</a>(<a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a> *n, <a href="../ListOfTypes.html#UShort_t">UShort_t</a> c)
+<a name="JO2yTC"></a><span class="keyword">void</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:SetIDCode" title="void KVIDTelescope::SetIDCode(KVReconstructedNucleus* ,UShort_t )">SetIDCode</a>(<a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a> *n, <a href="../ListOfTypes.html#UShort_t">UShort_t</a> c)
 {
-    n-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:SetIDCode" title="void KVIDTelescope::SetIDCode(KVReconstructedNucleus*, UShort_t)">SetIDCode</a>(c);
+    n-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:SetIDCode" title="void KVIDTelescope::SetIDCode(KVReconstructedNucleus* ,UShort_t )">SetIDCode</a>(c);
 }
 
 <span class="comment">//_________________________________________________________________________________________</span>
 
-<a name="iGNR_D"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:CheckTheoreticalIdentificationThreshold" title="Bool_t KVIDTelescope::CheckTheoreticalIdentificationThreshold(KVNucleus*, Double_t = 0.)">CheckTheoreticalIdentificationThreshold</a>(<a href="../KVNucleus.html">KVNucleus</a>*ION, <a href="../ListOfTypes.html#Double_t">Double_t</a> EINC)
+<a name="iGNR_D"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:CheckTheoreticalIdentificationThreshold" title="Bool_t KVIDTelescope::CheckTheoreticalIdentificationThreshold(KVNucleus* ,Double_t =0.0)">CheckTheoreticalIdentificationThreshold</a>(<a href="../KVNucleus.html">KVNucleus</a>*ION, <a href="../ListOfTypes.html#Double_t">Double_t</a> EINC)
 {
     <span class="comment">// Return <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if energy of ION is &gt; minimum incident energy required for identification</span>
     <span class="comment">// This theoretical limit is defined here to be the incident energy for which the</span>
@@ -1156,9 +1156,9 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
     <span class="comment">//</span>
     <span class="comment">// If this is not a dE-E telescope, we return <a href="../ListOfTypes.html#Bool_t">kTRUE</a> by default.</span>
 
-    <span class="keyword">if</span>(<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize() const">GetSize</a>()&lt;2) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+    <span class="keyword">if</span>(<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>()&lt;2) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 
-    <a href="../KVDetector.html">KVDetector</a>* dEdet = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1);
+    <a href="../KVDetector.html">KVDetector</a>* dEdet = <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1);
     <a href="../ListOfTypes.html#Double_t">Double_t</a> emin = dEdet-&gt;GetEIncOfMaxDeltaE(ION-&gt;GetZ(),ION-&gt;GetA());
     <span class="keyword">if</span>(EINC&gt;0.0) <span class="keyword">return</span> (EINC&gt;emin);
     <span class="keyword">return</span> (ION-&gt;GetEnergy()&gt;emin);
@@ -1171,7 +1171,7 @@ ClassImp(<a href="../KVIDTelescope.html">KVIDTelescope</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 15:44 </em><em>&raquo; Last generated: 2015-03-18 15:44</em><br />
+<em>&raquo; Last changed: 2015-05-28 11:10 </em><em>&raquo; Last generated: 2015-05-28 11:10</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

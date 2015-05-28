@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:57 2015            -->
+<!--   Date: Thu May 28 11:10:27 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Wed Feb  9 11:06:42 2011</span>
 <span class="comment">//Author: bonnet</span>
@@ -67,7 +67,7 @@ Specific implementations must define the methods:
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:KVNuclDataTable" title="KVNuclDataTable KVNuclDataTable::KVNuclDataTable() or overloads">KVNuclDataTable</a>():<a href="../KVNuclDataTable.html#KVNuclDataTable:kclassname" title="KVString KVNuclDataTable::kclassname">kclassname</a>(<span class="string">"KVNuclData"</span>)
+<a href="../KVNuclDataTable.html">KVNuclDataTable</a>::KVNuclDataTable():kclassname(<span class="string">"KVNuclData"</span>)
 {
    <span class="comment">// Default constructor</span>
 	init();
@@ -75,7 +75,7 @@ Specific implementations must define the methods:
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:KVNuclDataTable" title="KVNuclDataTable KVNuclDataTable::KVNuclDataTable() or overloads">KVNuclDataTable</a>(<a href="../KVString.html">KVString</a> classname):<a href="../KVNuclDataTable.html#KVNuclDataTable:kclassname" title="KVString KVNuclDataTable::kclassname">kclassname</a>(classname)
+<a href="../KVNuclDataTable.html">KVNuclDataTable</a>::KVNuclDataTable(<a href="../KVString.html">KVString</a> classname):kclassname(classname)
 {
 	<span class="comment">// Constructor with class name of the store objects</span>
 	init();
@@ -109,7 +109,7 @@ Specific implementations must define the methods:
 }
 
 <span class="comment">//_____________________________________________</span>
-<span class="keyword">void</span> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GiveIndexToNucleus" title="void KVNuclDataTable::GiveIndexToNucleus(Int_t zz, Int_t aa, Int_t ntot)">GiveIndexToNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz,<a href="../ListOfTypes.html#Int_t">Int_t</a> aa,<a href="../ListOfTypes.html#Int_t">Int_t</a> ntot){
+<span class="keyword">void</span> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GiveIndexToNucleus" title="void KVNuclDataTable::GiveIndexToNucleus(Int_t zz,Int_t aa,Int_t ntot)">GiveIndexToNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz,<a href="../ListOfTypes.html#Int_t">Int_t</a> aa,<a href="../ListOfTypes.html#Int_t">Int_t</a> ntot){
 
 	<span class="comment">//Add a new entry in the table</span>
 	nucMap-&gt;Add(<span class="keyword">new</span> NDT::key(zz,aa), <span class="keyword">new</span> NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a>(ntot));
@@ -118,14 +118,14 @@ Specific implementations must define the methods:
 }
 
 <span class="comment">//_____________________________________________</span>
-NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a>* <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:getNDTvalue" title="NDT::value* KVNuclDataTable::getNDTvalue(Int_t zz, Int_t aa) const">getNDTvalue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
+NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a>* <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:getNDTvalue" title="NDT::value* KVNuclDataTable::getNDTvalue(Int_t zz,Int_t aa)">getNDTvalue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
 {
 	<span class="comment">// Return NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a> object pointer stored at map position (Z,A).</span>
 	<span class="keyword">return</span> (NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a>*)nucMap-&gt;GetValue(Form(<span class="string">"%d:%d"</span>,zz,aa));
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:IsInTable" title="Bool_t KVNuclDataTable::IsInTable(Int_t zz, Int_t aa) const">IsInTable</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:IsInTable" title="Bool_t KVNuclDataTable::IsInTable(Int_t zz,Int_t aa)">IsInTable</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
 {
 	<span class="comment">// Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if there is a couple (Z,A) in the table.</span>
 	
@@ -133,20 +133,20 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../KVNuclData.html">KVNuclData</a>* <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetData" title="KVNuclData* KVNuclDataTable::GetData(Int_t zz, Int_t aa) const">GetData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
+<a href="../KVNuclData.html">KVNuclData</a>* <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetData" title="KVNuclData* KVNuclDataTable::GetData(Int_t zz,Int_t aa)">GetData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
 {
 	<span class="comment">// Returns the registered <a href="../KVNuclData.html">KVNuclData</a> object associated to the couple (Z,A).	</span>
 	<span class="comment">// Don't need to test its presence</span>
 	<span class="comment">//returns 0 if no such object is present</span>
 		
 	NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a>* val = getNDTvalue(zz,aa);
-	<span class="keyword">if</span> (val) <span class="keyword">return</span> (<a href="../KVNuclData.html">KVNuclData</a>* )tobj-&gt;At(val-&gt;<a href="../NDT__value.html#NDT__value:Index" title="int NDT::value::Index() const">Index</a>());
+	<span class="keyword">if</span> (val) <span class="keyword">return</span> (<a href="../KVNuclData.html">KVNuclData</a>* )tobj-&gt;At(val-&gt;<a href="../NDT__value.html#NDT__value:Index" title="int NDT::value::Index()">Index</a>());
 	<span class="keyword">return</span> 0;
 
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetValue" title="Double_t KVNuclDataTable::GetValue(Int_t zz, Int_t aa) const">GetValue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetValue" title="Double_t KVNuclDataTable::GetValue(Int_t zz,Int_t aa)">GetValue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
 {
 	
 	<span class="comment">// Returns the <a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value::value(int i) or overloads">value</a> of the registered <a href="../KVNuclData.html">KVNuclData</a> object associated to the couple (Z,A).	</span>
@@ -162,7 +162,7 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 }
 
 <span class="comment">//_____________________________________________</span>
-<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*  <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetUnit" title="const Char_t* KVNuclDataTable::GetUnit(Int_t zz, Int_t aa) const">GetUnit</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
+<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*  <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetUnit" title="const Char_t* KVNuclDataTable::GetUnit(Int_t zz,Int_t aa)">GetUnit</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
 {
 	
 	<span class="comment">// Returns the unit of the registered <a href="../KVNuclData.html">KVNuclData</a> object associated to the couple (Z,A).	</span>
@@ -178,7 +178,7 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:IsMeasured" title="Bool_t KVNuclDataTable::IsMeasured(Int_t zz, Int_t aa) const">IsMeasured</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:IsMeasured" title="Bool_t KVNuclDataTable::IsMeasured(Int_t zz,Int_t aa)">IsMeasured</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>
 {
 	
 	<span class="comment">// Returns bit of the registered <a href="../KVNuclData.html">KVNuclData</a> object associated to the couple (Z,A).	</span>
@@ -195,7 +195,7 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetNumberOfNuclei" title="Int_t KVNuclDataTable::GetNumberOfNuclei() const">GetNumberOfNuclei</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetNumberOfNuclei" title="Int_t KVNuclDataTable::GetNumberOfNuclei()">GetNumberOfNuclei</a>() <span class="keyword">const</span>
 {
 
 	<span class="keyword">return</span> NbNuc;
@@ -203,15 +203,15 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 }
 
 <span class="comment">//_____________________________________________</span>
-<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*  <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetReadFileName" title="const Char_t* KVNuclDataTable::GetReadFileName() const">GetReadFileName</a>() <span class="keyword">const</span>
+<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*  <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetReadFileName" title="const Char_t* KVNuclDataTable::GetReadFileName()">GetReadFileName</a>() <span class="keyword">const</span>
 {
 
-	<span class="keyword">return</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:GetTitle" title="const char* TObject::GetTitle() const">GetTitle</a>();
+	<span class="keyword">return</span> <a href="../#TObject:GetTitle" title="const char* TObject::GetTitle()">GetTitle</a>();
 
 }
 
 <span class="comment">//_____________________________________________</span>
-<a href="../KVString.html">KVString</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetCommentsFromFile" title="KVString KVNuclDataTable::GetCommentsFromFile() const">GetCommentsFromFile</a>() <span class="keyword">const</span>
+<a href="../KVString.html">KVString</a> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:GetCommentsFromFile" title="KVString KVNuclDataTable::GetCommentsFromFile()">GetCommentsFromFile</a>() <span class="keyword">const</span>
 {
 
 	<span class="keyword">return</span> kcomments;
@@ -237,14 +237,14 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 }
 
 <span class="comment">//_____________________________________________</span>
-<span class="keyword">void</span> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:InfoOnMeasured" title="void KVNuclDataTable::InfoOnMeasured() const">InfoOnMeasured</a>() <span class="keyword">const</span>
+<span class="keyword">void</span> <a href="../KVNuclDataTable.html">KVNuclDataTable</a>::<a href="../KVNuclDataTable.html#KVNuclDataTable:InfoOnMeasured" title="void KVNuclDataTable::InfoOnMeasured()">InfoOnMeasured</a>() <span class="keyword">const</span>
 {
 	TString line=<span class="string">""</span>;
 	line += <span class="string">"Information concerning value status (measured or deduced)"</span>;
 	line += <span class="string">" IS NOT available, Methodes KVNuclDataTable::IsMeasured and"</span>;
 	line += <span class="string">" KVNuclData::IsMeasured will always return kFALSE"</span>;
 	
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"InfoOnMeasured"</span>,<span class="string">"%s"</span>,line.Data());
+	<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"InfoOnMeasured"</span>,<span class="string">"%s"</span>,line.Data());
 	
 
 }
@@ -256,7 +256,7 @@ NDT::<a href="../NDT__value.html#NDT__value:value" title="NDT::value NDT::value:
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-05-28 11:10 </em><em>&raquo; Last generated: 2015-05-28 11:10</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

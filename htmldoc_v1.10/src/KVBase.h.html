@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 15:43:47 2015            -->
+<!--   Date: Thu May 28 11:10:02 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
                           kvbase.h  -  description
@@ -44,7 +44,7 @@ $Id: <a href="../KVBase.html">KVBase</a>.h,v 1.42 2009/03/12 13:59:40 franklan E
 <span class="keyword">class</span> <a href="../KVString.html">KVString</a>;
 <span class="keyword">class</span> TPluginHandler;
 
-<span class="keyword">class</span> <a href="../KVBase.html">KVBase</a>:<span class="keyword">public</span> <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> {
+<span class="keyword">class</span> <a href="../KVBase.html">KVBase</a>:<span class="keyword">public</span> <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> {
  <span class="keyword">private</span>:
    <span class="keyword">static</span> <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVBase.html#KVBase:fNbObj" title="UInt_t KVBase::fNbObj">fNbObj</a>;        <span class="comment">//! Total number of KaliVeda objects (actually counts number of calls to default ctor)</span>
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVBase.html#KVBase:fNumber" title="UInt_t KVBase::fNumber">fNumber</a>;              <span class="comment">// for numbering objects</span>
@@ -60,7 +60,7 @@ $Id: <a href="../KVBase.html">KVBase</a>.h,v 1.42 2009/03/12 13:59:40 franklan E
  <span class="keyword">public</span>:
 
     <span class="keyword">enum</span> EKaliVedaBits {
-       <a href="../KVBase.html#KVBase:kIsKaliVedaObject" title="KVBase::EKaliVedaBits KVBase::kIsKaliVedaObject">kIsKaliVedaObject</a> = BIT(23)   <span class="comment">//all <a href="../KVBase.html">KVBase</a>-derived objects have this bit set in <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::fBits</span>
+       <a href="../KVBase.html#KVBase:kIsKaliVedaObject" title="const KVBase::EKaliVedaBits KVBase::kIsKaliVedaObject">kIsKaliVedaObject</a> = BIT(23)   <span class="comment">//all <a href="../KVBase.html">KVBase</a>-derived objects have this bit set in <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::fBits</span>
    };
 
    <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:InitEnvironment" title="void KVBase::InitEnvironment()">InitEnvironment</a>();
@@ -70,56 +70,56 @@ $Id: <a href="../KVBase.html">KVBase</a>.h,v 1.42 2009/03/12 13:59:40 franklan E
     <span class="keyword">virtual</span> ~ <a href="../KVBase.html">KVBase</a>();
 
 <a name="p2kmBE"></a>   <span class="keyword">inline</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * str) {
-      <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title = &quot;&quot;)">SetTitle</a>(str);
+      <a href="../#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(str);
    };
-<a name="BG51gC"></a>   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>() <span class="keyword">const</span> {
-      <span class="keyword">return</span> <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle" title="const char* TNamed::GetTitle() const">GetTitle</a>();
+<a name="BG51gC"></a>   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>() <span class="keyword">const</span> {
+      <span class="keyword">return</span> <a href="../#TNamed:GetTitle" title="const char* TNamed::GetTitle()">GetTitle</a>();
    };
 <a name="pEqdnB"></a>   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:WorkingDirectory" title="const Char_t* KVBase::WorkingDirectory()">WorkingDirectory</a>() { <span class="keyword">return</span> <a href="../KVBase.html#KVBase:fWorkingDirectory" title="TString KVBase::fWorkingDirectory">fWorkingDirectory</a>.Data(); }
-<a name="s.GULD"></a>   <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ) const">IsType</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span>
+<a name="s.GULD"></a>   <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ)">IsType</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span>
    {
-      <span class="comment">// Returns true if <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>() returns the given type name</span>
+      <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>() returns the given type name</span>
       <span class="keyword">return</span> (fTitle==typ);
    };
-<a name="nn4ZlC"></a>   <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:IsCalled" title="Bool_t KVBase::IsCalled(const Char_t* name) const">IsCalled</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span>
+<a name="nn4ZlC"></a>   <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:IsCalled" title="Bool_t KVBase::IsCalled(const Char_t* name)">IsCalled</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span>
    {
-       <span class="comment">// Returns true if object has given name (test value returned by <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>())</span>
-       <span class="keyword">return</span> !strcmp(<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),name);
+       <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if object has given name (test value returned by <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())</span>
+       <span class="keyword">return</span> !strcmp(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),name);
    }
    <span class="keyword">void</span> <a href="../KVBase.html#KVBase:SetLabel" title="void KVBase::SetLabel(const Char_t* lab)">SetLabel</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * lab);
-   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>() <span class="keyword">const</span>;
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * option = <span class="string">""</span>) <span class="keyword">const</span>;
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>() <span class="keyword">const</span>;
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * option = <span class="string">""</span>) <span class="keyword">const</span>;
 <a name="f2kyTD"></a>   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:List" title="void KVBase::List()">List</a>() {
    };
 <a name="LMgVvD"></a>   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:SetNumber" title="void KVBase::SetNumber(UInt_t num)">SetNumber</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> num) {
       <a href="../KVBase.html#KVBase:fNumber" title="UInt_t KVBase::fNumber">fNumber</a> = num;
    };
-<a name="BI6Sg"></a>   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>() <span class="keyword">const</span> {
+<a name="BI6Sg"></a>   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() <span class="keyword">const</span> {
       <span class="keyword">return</span> <a href="../KVBase.html#KVBase:fNumber" title="UInt_t KVBase::fNumber">fNumber</a>;
    };
-<a name="BAWj.D"></a>   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVBase.html#KVBase:GetNumberOfObjects" title="UInt_t KVBase::GetNumberOfObjects() const">GetNumberOfObjects</a>() <span class="keyword">const</span> {
+<a name="BAWj.D"></a>   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVBase.html#KVBase:GetNumberOfObjects" title="UInt_t KVBase::GetNumberOfObjects()">GetNumberOfObjects</a>() <span class="keyword">const</span> {
       <span class="keyword">return</span> <a href="../KVBase.html#KVBase:fNbObj" title="UInt_t KVBase::fNbObj">fNbObj</a>;
    };
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt = <span class="string">""</span>);
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt = <span class="string">""</span>);
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp;) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;) <span class="keyword">const</span>;
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;) <span class="keyword">const</span>;
 <span class="cpp">#else</span>
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp;) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;);
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;);
 <span class="cpp">#endif</span>
 
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:ArrContainsValue" title="Bool_t KVBase::ArrContainsValue(Int_t n, Int_t* arr, Int_t val)">ArrContainsValue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> n, <a href="../ListOfTypes.html#Int_t">Int_t</a> * arr, <a href="../ListOfTypes.html#Int_t">Int_t</a> val);
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name, TString&amp; fullpath, const Char_t* kvsubdir = &quot;&quot;)">SearchKVFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, TString &amp; fullpath,
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:ArrContainsValue" title="Bool_t KVBase::ArrContainsValue(Int_t n,Int_t* arr,Int_t val)">ArrContainsValue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> n, <a href="../ListOfTypes.html#Int_t">Int_t</a> * arr, <a href="../ListOfTypes.html#Int_t">Int_t</a> val);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, TString &amp; fullpath,
                               <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * kvsubdir = <span class="string">""</span>);
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:SearchAndOpenKVFile" title="Bool_t KVBase::SearchAndOpenKVFile(const Char_t* name, ifstream&amp; file, const Char_t* kvsubdir = &quot;&quot;, KVLockfile* locks = 0) or overloads">SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, std::<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; file,
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:SearchAndOpenKVFile" title="Bool_t KVBase::SearchAndOpenKVFile(const Char_t* name,ifstream&amp; file,const Char_t* kvsubdir=&quot;&quot;,KVLockfile* locks=0) or overloads">SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, std::<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; file,
                                      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * kvsubdir = <span class="string">""</span>, <a href="../KVLockfile.html">KVLockfile</a>* locks = 0);
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:SearchAndOpenKVFile" title="Bool_t KVBase::SearchAndOpenKVFile(const Char_t* name, ifstream&amp; file, const Char_t* kvsubdir = &quot;&quot;, KVLockfile* locks = 0) or overloads">SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, std::<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; file,
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:SearchAndOpenKVFile" title="Bool_t KVBase::SearchAndOpenKVFile(const Char_t* name,ifstream&amp; file,const Char_t* kvsubdir=&quot;&quot;,KVLockfile* locks=0) or overloads">SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, std::<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; file,
                                      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * kvsubdir = <span class="string">""</span>, <a href="../KVLockfile.html">KVLockfile</a>* locks = 0);
    <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:BackupFileWithDate" title="void KVBase::BackupFileWithDate(const Char_t* path)">BackupFileWithDate</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * path);
-   <span class="keyword">static</span> TPluginHandler *<a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base, const Char_t* uri = &quot;0&quot;)">LoadPlugin</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * base,
+   <span class="keyword">static</span> TPluginHandler *<a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * base,
                                      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * uri = <span class="string">"0"</span>);
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetPluginURI" title="const Char_t* KVBase::GetPluginURI(const Char_t* base, const Char_t* plugin)">GetPluginURI</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* plugin);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetPluginURI" title="const Char_t* KVBase::GetPluginURI(const Char_t* base,const Char_t* plugin)">GetPluginURI</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* plugin);
 	<span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetListOfPlugins" title="const Char_t* KVBase::GetListOfPlugins(const Char_t* base)">GetListOfPlugins</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* base);
-   <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:OpenTempFile" title="void KVBase::OpenTempFile(TString&amp; base, ofstream&amp; fp)">OpenTempFile</a>(TString &amp; base, std::<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; fp);     <span class="comment">/* open temp file with basename 'base' */</span>
+   <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:OpenTempFile" title="void KVBase::OpenTempFile(TString&amp; base,ofstream&amp; fp)">OpenTempFile</a>(TString &amp; base, std::<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; fp);     <span class="comment">/* open temp file with basename 'base' */</span>
    <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:GetTempFileName" title="void KVBase::GetTempFileName(TString&amp; base)">GetTempFileName</a>(TString &amp; base);
 
    <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:GetKVVersion" title="const Char_t* KVBase::GetKVVersion()">GetKVVersion</a>();
@@ -140,31 +140,31 @@ $Id: <a href="../KVBase.html">KVBase</a>.h,v 1.42 2009/03/12 13:59:40 franklan E
    <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:gitCommit" title="const Char_t* KVBase::gitCommit()">gitCommit</a>();
 <span class="cpp">#endif</span>
 
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetETCDIRFilePath" title="const Char_t* KVBase::GetETCDIRFilePath(const Char_t* namefile = &quot;&quot;)">GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetDATADIRFilePath" title="const Char_t* KVBase::GetDATADIRFilePath(const Char_t* namefile = &quot;&quot;)">GetDATADIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetETCDIRFilePath" title="const Char_t* KVBase::GetETCDIRFilePath(const Char_t* namefile=&quot;&quot;)">GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetDATADIRFilePath" title="const Char_t* KVBase::GetDATADIRFilePath(const Char_t* namefile=&quot;&quot;)">GetDATADIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
    <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetDATABASEFilePath" title="const Char_t* KVBase::GetDATABASEFilePath()">GetDATABASEFilePath</a>();
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetLIBDIRFilePath" title="const Char_t* KVBase::GetLIBDIRFilePath(const Char_t* namefile = &quot;&quot;)">GetLIBDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetINCDIRFilePath" title="const Char_t* KVBase::GetINCDIRFilePath(const Char_t* namefile = &quot;&quot;)">GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetBINDIRFilePath" title="const Char_t* KVBase::GetBINDIRFilePath(const Char_t* namefile = &quot;&quot;)">GetBINDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetWORKDIRFilePath" title="const Char_t* KVBase::GetWORKDIRFilePath(const Char_t* namefile = &quot;&quot;)">GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetLIBDIRFilePath" title="const Char_t* KVBase::GetLIBDIRFilePath(const Char_t* namefile=&quot;&quot;)">GetLIBDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetINCDIRFilePath" title="const Char_t* KVBase::GetINCDIRFilePath(const Char_t* namefile=&quot;&quot;)">GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetBINDIRFilePath" title="const Char_t* KVBase::GetBINDIRFilePath(const Char_t* namefile=&quot;&quot;)">GetBINDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBase.html#KVBase:GetWORKDIRFilePath" title="const Char_t* KVBase::GetWORKDIRFilePath(const Char_t* namefile=&quot;&quot;)">GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* namefile=<span class="string">""</span>);
 
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:FindExecutable" title="Bool_t KVBase::FindExecutable(TString&amp; exec, const Char_t* path = &quot;$(PATH)&quot;)">FindExecutable</a>(TString &amp; exec, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * path =
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:FindExecutable" title="Bool_t KVBase::FindExecutable(TString&amp; exec,const Char_t* path=&quot;$(PATH)&quot;)">FindExecutable</a>(TString &amp; exec, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * path =
                                 <span class="string">"$(PATH)"</span>);
 
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:FindFile" title="const Char_t* KVBase::FindFile(const Char_t* search, TString&amp; wfil)">FindFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * search, TString &amp; wfil);
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name, KVString&amp; imp_file, KVString&amp; dec_file, const Char_t* dir_name = &quot;.&quot;)">FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="../KVString.html">KVString</a>&amp; imp_file,
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBase.html#KVBase:FindFile" title="const Char_t* KVBase::FindFile(const Char_t* search,TString&amp; wfil)">FindFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * search, TString &amp; wfil);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name,KVString&amp; imp_file,KVString&amp; dec_file,const Char_t* dir_name=&quot;.&quot;)">FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="../KVString.html">KVString</a>&amp; imp_file,
          <a href="../KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* dir_name=<span class="string">"."</span>);
 <span class="cpp">#ifdef WITH_GRULIB   </span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> TestPorts(<a href="../ListOfTypes.html#Int_t">Int_t</a> port);
 <span class="cpp">#endif</span>
    
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:AreEqual" title="Bool_t KVBase::AreEqual(Double_t x, Double_t y, Long64_t maxdif = 1)">AreEqual</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Long64_t">Long64_t</a> maxdif=1);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:AreEqual" title="Bool_t KVBase::AreEqual(Double_t x,Double_t y,Long64_t maxdif=1)">AreEqual</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Long64_t">Long64_t</a> maxdif=1);
    
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:OpenContextMenu" title="Bool_t KVBase::OpenContextMenu(const char* method, TObject* obj, const char* alt_method_name = &quot;&quot;)">OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBase.html#KVBase:OpenContextMenu" title="Bool_t KVBase::OpenContextMenu(const char* method,TObject* obj,const char* alt_method_name=&quot;&quot;)">OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>);
 
-   <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:CombineFiles" title="void KVBase::CombineFiles(const Char_t* file1, const Char_t* file2, const Char_t* newfilename, Bool_t keep = kTRUE)">CombineFiles</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> keep=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
+   <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVBase.html#KVBase:CombineFiles" title="void KVBase::CombineFiles(const Char_t* file1,const Char_t* file2,const Char_t* newfilename,Bool_t keep=kTRUE)">CombineFiles</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> keep=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
 
-   <span class="keyword">virtual</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* <a href="../KVBase.html#KVBase:GetObject" title="TObject* KVBase::GetObject() const">GetObject</a>() <span class="keyword">const</span>;
+   <span class="keyword">virtual</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* <a href="../KVBase.html#KVBase:GetObject" title="TObject* KVBase::GetObject()">GetObject</a>() <span class="keyword">const</span>;
 
    ClassDef(<a href="../KVBase.html">KVBase</a>, 3)          <span class="comment">//Base class for all KaliVeda objects</span>
 };
@@ -183,7 +183,7 @@ $Id: <a href="../KVBase.html">KVBase</a>.h,v 1.42 2009/03/12 13:59:40 franklan E
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 15:43 </em><em>&raquo; Last generated: 2015-03-18 15:43</em><br />
+<em>&raquo; Last changed: 2015-05-28 11:10 </em><em>&raquo; Last generated: 2015-05-28 11:10</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

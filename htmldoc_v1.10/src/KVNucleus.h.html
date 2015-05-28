@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:03 2015            -->
+<!--   Date: Thu May 28 11:10:19 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVNucleus.html">KVNucleus</a>.h,v 1.40 2009/04/02 09:32:55 ebonnet Exp $
@@ -48,42 +48,40 @@ $Id: <a href="../KVNucleus.html">KVNucleus</a>.h,v 1.40 2009/04/02 09:32:55 ebon
 <span class="keyword">class</span> <a href="../KVNucleus.html">KVNucleus</a>:<span class="keyword">public</span> <a href="../KVParticle.html">KVParticle</a> {
 
 
- <span class="keyword">private</span>:
+   <span class="keyword">private</span>:
    <a href="../ListOfTypes.html#UChar_t">UChar_t</a> <a href="../KVNucleus.html#KVNucleus:fA" title="UChar_t KVNucleus::fA">fA</a>;                  <span class="comment">//nuclear mass number</span>
    <a href="../ListOfTypes.html#UChar_t">UChar_t</a> <a href="../KVNucleus.html#KVNucleus:fZ" title="UChar_t KVNucleus::fZ">fZ</a>;                  <span class="comment">//nuclear charge number (atomic number)</span>
-   <a href="../ListOfTypes.html#UChar_t">UChar_t</a> <a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a>;        <span class="comment">//mass formula for calculating A from <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a></span>
-	<span class="keyword">static</span> <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVNucleus.html#KVNucleus:fNb_nuc" title="UInt_t KVNucleus::fNb_nuc">fNb_nuc</a>;       <span class="comment">//!counts number of existing <a href="../KVNucleus.html">KVNucleus</a> objects</span>
+   <a href="../ListOfTypes.html#UChar_t">UChar_t</a> <a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a>;        <span class="comment">//mass formula for calculating A from <a href="../#TLorentzVector:Z" title="Double_t TLorentzVector::Z()">Z</a></span>
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVNucleus.html#KVNucleus:fNb_nuc" title="UInt_t KVNucleus::fNb_nuc">fNb_nuc</a>;       <span class="comment">//!counts number of existing <a href="../KVNucleus.html">KVNucleus</a> objects</span>
    <span class="keyword">static</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> <a href="../KVNucleus.html#KVNucleus:fElements" title="Char_t KVNucleus::fElements">fElements</a>[][3];        <span class="comment">//!symbols of chemical elements</span>
    TString <a href="../KVNucleus.html#KVNucleus:fSymbolName" title="TString KVNucleus::fSymbolName">fSymbolName</a>;        <span class="comment">//!</span>
    
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:fExx" title="Double_t KVNucleus::fExx">fExx</a>;               <span class="comment">//excitation energy in MeV</span>
-
    <span class="keyword">enum</span> {
-      <a href="../KVNucleus.html#KVNucleus:kIsHeavy" title="KVNucleus::(anonymous) KVNucleus::kIsHeavy">kIsHeavy</a> = BIT(17)        <span class="comment">//flag when mass of nucleus is &gt; 255</span>
+      <a href="../KVNucleus.html#KVNucleus:kIsHeavy" title="const enum KVNucleus:: KVNucleus::kIsHeavy">kIsHeavy</a> = BIT(17)        <span class="comment">//flag when mass of nucleus is &gt; 255</span>
    };
 
- <span class="keyword">protected</span>:
-	<span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:AddGroup_Withcondition" title="void KVNucleus::AddGroup_Withcondition(const Char_t* groupname, KVParticleCondition*)">AddGroup_Withcondition</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* groupname, <a href="../KVParticleCondition.html">KVParticleCondition</a>*);
+   <span class="keyword">protected</span>:
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:AddGroup_Withcondition" title="void KVNucleus::AddGroup_Withcondition(const Char_t* groupname,KVParticleCondition* )">AddGroup_Withcondition</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* groupname, <a href="../KVParticleCondition.html">KVParticleCondition</a>*);
 
- <span class="keyword">public</span>:
-   <span class="keyword">enum</span> {                       <span class="comment">//determines how to calculate mass from <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a></span>
-      <a href="../KVNucleus.html#KVNucleus:kBetaMass" title="KVNucleus::(anonymous) KVNucleus::kBetaMass">kBetaMass</a>,
-      <a href="../KVNucleus.html#KVNucleus:kVedaMass" title="KVNucleus::(anonymous) KVNucleus::kVedaMass">kVedaMass</a>,
-      <a href="../KVNucleus.html#KVNucleus:kEALMass" title="KVNucleus::(anonymous) KVNucleus::kEALMass">kEALMass</a>,
-		<a href="../KVNucleus.html#KVNucleus:kEALResMass" title="KVNucleus::(anonymous) KVNucleus::kEALResMass">kEALResMass</a>,
-		<a href="../KVNucleus.html#KVNucleus:kEPAXMass" title="KVNucleus::(anonymous) KVNucleus::kEPAXMass">kEPAXMass</a>
+   <span class="keyword">public</span>:
+   <span class="keyword">enum</span> {                       <span class="comment">//determines how to calculate mass from <a href="../#TLorentzVector:Z" title="Double_t TLorentzVector::Z()">Z</a></span>
+      <a href="../KVNucleus.html#KVNucleus:kBetaMass" title="const enum KVNucleus:: KVNucleus::kBetaMass">kBetaMass</a>,
+      <a href="../KVNucleus.html#KVNucleus:kVedaMass" title="const enum KVNucleus:: KVNucleus::kVedaMass">kVedaMass</a>,
+      <a href="../KVNucleus.html#KVNucleus:kEALMass" title="const enum KVNucleus:: KVNucleus::kEALMass">kEALMass</a>,
+      <a href="../KVNucleus.html#KVNucleus:kEALResMass" title="const enum KVNucleus:: KVNucleus::kEALResMass">kEALResMass</a>,
+      <a href="../KVNucleus.html#KVNucleus:kEPAXMass" title="const enum KVNucleus:: KVNucleus::kEPAXMass">kEPAXMass</a>
    };
    <span class="keyword">enum</span> {                       <span class="comment">//determines how to calculate radius from Mass</span>
-      <a href="../KVNucleus.html#KVNucleus:kLDModel" title="KVNucleus::(anonymous) KVNucleus::kLDModel">kLDModel</a>,
-      <a href="../KVNucleus.html#KVNucleus:kEMPFunc" title="KVNucleus::(anonymous) KVNucleus::kEMPFunc">kEMPFunc</a>,
-      <a href="../KVNucleus.html#KVNucleus:kELTON" title="KVNucleus::(anonymous) KVNucleus::kELTON">kELTON</a>
+      <a href="../KVNucleus.html#KVNucleus:kLDModel" title="const enum KVNucleus:: KVNucleus::kLDModel">kLDModel</a>,
+      <a href="../KVNucleus.html#KVNucleus:kEMPFunc" title="const enum KVNucleus:: KVNucleus::kEMPFunc">kEMPFunc</a>,
+      <a href="../KVNucleus.html#KVNucleus:kELTON" title="const enum KVNucleus:: KVNucleus::kELTON">kELTON</a>
    };
 
    <span class="keyword">enum</span> {
-      <a href="../KVNucleus.html#KVNucleus:kDefaultFormula" title="KVNucleus::(anonymous) KVNucleus::kDefaultFormula">kDefaultFormula</a>,
-      <a href="../KVNucleus.html#KVNucleus:kHinde1987" title="KVNucleus::(anonymous) KVNucleus::kHinde1987">kHinde1987</a>,
-      <a href="../KVNucleus.html#KVNucleus:kViola1985" title="KVNucleus::(anonymous) KVNucleus::kViola1985">kViola1985</a>,
-      <a href="../KVNucleus.html#KVNucleus:kViola1966" title="KVNucleus::(anonymous) KVNucleus::kViola1966">kViola1966</a>
+      <a href="../KVNucleus.html#KVNucleus:kDefaultFormula" title="const enum KVNucleus:: KVNucleus::kDefaultFormula">kDefaultFormula</a>,
+      <a href="../KVNucleus.html#KVNucleus:kHinde1987" title="const enum KVNucleus:: KVNucleus::kHinde1987">kHinde1987</a>,
+      <a href="../KVNucleus.html#KVNucleus:kViola1985" title="const enum KVNucleus:: KVNucleus::kViola1985">kViola1985</a>,
+      <a href="../KVNucleus.html#KVNucleus:kViola1966" title="const enum KVNucleus:: KVNucleus::kViola1966">kViola1966</a>
    };
 
 
@@ -94,130 +92,132 @@ $Id: <a href="../KVNucleus.html">KVNucleus</a>.h,v 1.40 2009/04/02 09:32:55 ebon
    <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:e2" title="Double_t KVNucleus::e2">e2</a>;    <span class="comment">// e^2/(4.pi.epsilon_0) in MeV.fm</span>
 
    <span class="keyword">inline</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetMassFormula" title="void KVNucleus::SetMassFormula(UChar_t mt)">SetMassFormula</a>(<a href="../ListOfTypes.html#UChar_t">UChar_t</a> mt);
-<a name="xWun4E"></a>   <span class="keyword">inline</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetMassFormula" title="Int_t KVNucleus::GetMassFormula() const">GetMassFormula</a>() <span class="keyword">const</span> { <span class="keyword">return</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a>;}
+<a name="xWun4E"></a>   <span class="keyword">inline</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetMassFormula" title="Int_t KVNucleus::GetMassFormula()">GetMassFormula</a>() <span class="keyword">const</span> { <span class="keyword">return</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a>;}
    
    <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:init" title="void KVNucleus::init()">init</a>();
-    <a href="../KVNucleus.html">KVNucleus</a>();
-    <a href="../KVNucleus.html">KVNucleus</a>(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp;);
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Clear" title="void KVNucleus::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt = <span class="string">""</span>);
-    <a href="../KVNucleus.html">KVNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = 0, <a href="../ListOfTypes.html#Double_t">Double_t</a> ekin = 0);
-    <a href="../KVNucleus.html">KVNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Double_t">Double_t</a> t, TVector3 &amp; p);
-    <a href="../KVNucleus.html">KVNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a, TVector3 p);
-    <span class="comment">//<a href="../KVNucleus.html">KVNucleus</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *);</span>
-    <a href="../KVNucleus.html">KVNucleus</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *,<a href="../ListOfTypes.html#Double_t">Double_t</a> EperA=0);
+   <a href="../KVNucleus.html">KVNucleus</a>();
+   <a href="../KVNucleus.html">KVNucleus</a>(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp;);
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Clear" title="void KVNucleus::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt = <span class="string">""</span>);
+   <a href="../KVNucleus.html">KVNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = 0, <a href="../ListOfTypes.html#Double_t">Double_t</a> ekin = 0);
+   <a href="../KVNucleus.html">KVNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Double_t">Double_t</a> t, TVector3 &amp; p);
+   <a href="../KVNucleus.html">KVNucleus</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a, TVector3 p);
+   <span class="comment">//<a href="../KVNucleus.html">KVNucleus</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *);</span>
+   <a href="../KVNucleus.html">KVNucleus</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *,<a href="../ListOfTypes.html#Double_t">Double_t</a> EperA=0);
 
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Copy" title="void KVNucleus::Copy(TObject&amp;) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;) <span class="keyword">const</span>;
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Copy" title="void KVNucleus::Copy(TObject&amp; )">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;) <span class="keyword">const</span>;
 <span class="cpp">#else</span>
-   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Copy" title="void KVNucleus::Copy(TObject&amp;) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;);
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Copy" title="void KVNucleus::Copy(TObject&amp; )">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;);
 <span class="cpp">#endif</span>
 
-<a name="d5oXhE"></a>   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsSortable" title="Bool_t KVNucleus::IsSortable() const">IsSortable</a>() <span class="keyword">const</span> {
+<a name="d5oXhE"></a>   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsSortable" title="Bool_t KVNucleus::IsSortable()">IsSortable</a>() <span class="keyword">const</span> {
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    };
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:Compare" title="Int_t KVNucleus::Compare(const TObject* obj) const">Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * obj) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:Compare" title="Int_t KVNucleus::Compare(const TObject* obj)">Compare</a>(<span class="keyword">const</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * obj) <span class="keyword">const</span>;
 
-	<span class="keyword">virtual</span> ~ <a href="../KVNucleus.html">KVNucleus</a>();
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t, Char_t mt)">GetAFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetNFromZ" title="Int_t KVNucleus::GetNFromZ(Double_t, Char_t mt)">GetNFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
-	<span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetRealAFromZ" title="Double_t KVNucleus::GetRealAFromZ(Double_t, Char_t mt)">GetRealAFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
-	<span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetRealNFromZ" title="Double_t KVNucleus::GetRealNFromZ(Double_t, Char_t mt)">GetRealNFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
-   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVNucleus.html#KVNucleus:GetSymbol" title="const Char_t* KVNucleus::GetSymbol(Option_t* opt = &quot;&quot;) const">GetSymbol</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* opt=<span class="string">""</span>) <span class="keyword">const</span>;
+   <span class="keyword">virtual</span> ~ <a href="../KVNucleus.html">KVNucleus</a>();
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t ,Char_t mt)">GetAFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetNFromZ" title="Int_t KVNucleus::GetNFromZ(Double_t ,Char_t mt)">GetNFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetRealAFromZ" title="Double_t KVNucleus::GetRealAFromZ(Double_t ,Char_t mt)">GetRealAFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetRealNFromZ" title="Double_t KVNucleus::GetRealNFromZ(Double_t ,Char_t mt)">GetRealNFromZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt);
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVNucleus.html#KVNucleus:GetSymbol" title="const Char_t* KVNucleus::GetSymbol(Option_t* opt=&quot;&quot;)">GetSymbol</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* opt=<span class="string">""</span>) <span class="keyword">const</span>;
 
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetZFromSymbol" title="Int_t KVNucleus::GetZFromSymbol(const Char_t*)">GetZFromSymbol</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
-   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZFromSymbol" title="void KVNucleus::SetZFromSymbol(const Char_t*)">SetZFromSymbol</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
-   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t*)">Set</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
-   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:IsMassGiven" title="Int_t KVNucleus::IsMassGiven(const Char_t*)">IsMassGiven</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetZFromSymbol" title="Int_t KVNucleus::GetZFromSymbol(const Char_t* )">GetZFromSymbol</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZFromSymbol" title="void KVNucleus::SetZFromSymbol(const Char_t* )">SetZFromSymbol</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t* )">Set</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:IsMassGiven" title="Int_t KVNucleus::IsMassGiven(const Char_t* )">IsMassGiven</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *);
 
-   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZ" title="void KVNucleus::SetZ(Int_t z, Char_t mt = -1)">SetZ</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt = -1);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZ" title="void KVNucleus::SetZ(Int_t z,Char_t mt=-1)">SetZ</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Char_t">Char_t</a> mt = -1);
    <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetA" title="void KVNucleus::SetA(Int_t a)">SetA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> a);
-	<span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetN" title="void KVNucleus::SetN(Int_t n)">SetN</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> n);
-   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZandA" title="void KVNucleus::SetZandA(Int_t z, Int_t a)">SetZandA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a);
-   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZandN" title="void KVNucleus::SetZandN(Int_t z, Int_t n)">SetZandN</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z,<a href="../ListOfTypes.html#Int_t">Int_t</a> n);
-	<span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZAandE" title="void KVNucleus::SetZAandE(Int_t z, Int_t a, Double_t ekin)">SetZAandE</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a, <a href="../ListOfTypes.html#Double_t">Double_t</a> ekin);
-  
-	<span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Print" title="void KVNucleus::Print(Option_t* t = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * t = <span class="string">""</span>) <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ() const">GetZ</a>() <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>() <span class="keyword">const</span>;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetN" title="Int_t KVNucleus::GetN() const">GetN</a>() <span class="keyword">const</span>;
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetN" title="void KVNucleus::SetN(Int_t n)">SetN</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> n);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZandA" title="void KVNucleus::SetZandA(Int_t z,Int_t a)">SetZandA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZandN" title="void KVNucleus::SetZandN(Int_t z,Int_t n)">SetZandN</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z,<a href="../ListOfTypes.html#Int_t">Int_t</a> n);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetZAandE" title="void KVNucleus::SetZAandE(Int_t z,Int_t a,Double_t ekin)">SetZAandE</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z, <a href="../ListOfTypes.html#Int_t">Int_t</a> a, <a href="../ListOfTypes.html#Double_t">Double_t</a> ekin);
+
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:Print" title="void KVNucleus::Print(Option_t* t=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * t = <span class="string">""</span>) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ()">GetZ</a>() <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA()">GetA</a>() <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetN" title="Int_t KVNucleus::GetN()">GetN</a>() <span class="keyword">const</span>;
    
-<a name="bu7KW"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAsurZ" title="Double_t KVNucleus::GetAsurZ() const">GetAsurZ</a>() <span class="keyword">const</span> {<span class="keyword">return</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>(<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>())/<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ() const">GetZ</a>(); }
-<a name="kkFB4C"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetNsurZ" title="Double_t KVNucleus::GetNsurZ() const">GetNsurZ</a>() <span class="keyword">const</span> {<span class="keyword">return</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>(<a href="../KVNucleus.html#KVNucleus:GetN" title="Int_t KVNucleus::GetN() const">GetN</a>())/<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ() const">GetZ</a>(); }
-<a name="Dd51mD"></a>	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetChargeAsymetry" title="Double_t KVNucleus::GetChargeAsymetry() const">GetChargeAsymetry</a>() <span class="keyword">const</span> {
-		<span class="comment">//The charge asymertry  = (neutrons-protons)/nucleons </span>
-		<span class="comment">//</span>
-		<span class="keyword">return</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>(<a href="../KVNucleus.html#KVNucleus:GetN" title="Int_t KVNucleus::GetN() const">GetN</a>()-<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ() const">GetZ</a>())/<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA() const">GetA</a>();
-	}
+<a name="bu7KW"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAsurZ" title="Double_t KVNucleus::GetAsurZ()">GetAsurZ</a>() <span class="keyword">const</span> {<span class="keyword">return</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>(<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA()">GetA</a>())/<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ()">GetZ</a>(); }
+<a name="kkFB4C"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetNsurZ" title="Double_t KVNucleus::GetNsurZ()">GetNsurZ</a>() <span class="keyword">const</span> {<span class="keyword">return</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>(<a href="../KVNucleus.html#KVNucleus:GetN" title="Int_t KVNucleus::GetN()">GetN</a>())/<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ()">GetZ</a>(); }
+<a name="Dd51mD"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetChargeAsymetry" title="Double_t KVNucleus::GetChargeAsymetry()">GetChargeAsymetry</a>() <span class="keyword">const</span> {
+      <span class="comment">//The charge asymertry  = (neutrons-protons)/nucleons</span>
+      <span class="comment">//</span>
+      <span class="keyword">return</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>(<a href="../KVNucleus.html#KVNucleus:GetN" title="Int_t KVNucleus::GetN()">GetN</a>()-<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ()">GetZ</a>())/<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA()">GetA</a>();
+   }
    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetEnergyPerNucleon" title="Double_t KVNucleus::GetEnergyPerNucleon()">GetEnergyPerNucleon</a>();
    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAMeV" title="Double_t KVNucleus::GetAMeV()">GetAMeV</a>();
-	
-	<span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:CheckZAndA" title="void KVNucleus::CheckZAndA(Int_t&amp; z, Int_t&amp; a) const">CheckZAndA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;z, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp;a) <span class="keyword">const</span>;
 
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetMassExcess" title="Double_t KVNucleus::GetMassExcess(Int_t z = -1, Int_t a = -1) const">GetMassExcess</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetExtraMassExcess" title="Double_t KVNucleus::GetExtraMassExcess(Int_t z = -1, Int_t a = -1) const">GetExtraMassExcess</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-   <a href="../KVMassExcess.html">KVMassExcess</a>* <a href="../KVNucleus.html#KVNucleus:GetMassExcessPtr" title="KVMassExcess* KVNucleus::GetMassExcessPtr(Int_t z = -1, Int_t a = -1) const">GetMassExcessPtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAtomicMass" title="Double_t KVNucleus::GetAtomicMass(Int_t zz = -1, Int_t aa = -1) const">GetAtomicMass</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa = -1) <span class="keyword">const</span> ;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetNaturalA" title="Double_t KVNucleus::GetNaturalA(Int_t zz = -1) const">GetNaturalA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz = -1) <span class="keyword">const</span> ;
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:CheckZAndA" title="void KVNucleus::CheckZAndA(Int_t&amp; z,Int_t&amp; a)">CheckZAndA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;z, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp;a) <span class="keyword">const</span>;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetMassExcess" title="Double_t KVNucleus::GetMassExcess(Int_t z=-1,Int_t a=-1)">GetMassExcess</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetExtraMassExcess" title="Double_t KVNucleus::GetExtraMassExcess(Int_t z=-1,Int_t a=-1)">GetExtraMassExcess</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../KVMassExcess.html">KVMassExcess</a>* <a href="../KVNucleus.html#KVNucleus:GetMassExcessPtr" title="KVMassExcess* KVNucleus::GetMassExcessPtr(Int_t z=-1,Int_t a=-1)">GetMassExcessPtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAtomicMass" title="Double_t KVNucleus::GetAtomicMass(Int_t zz=-1,Int_t aa=-1)">GetAtomicMass</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa = -1) <span class="keyword">const</span> ;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetNaturalA" title="Double_t KVNucleus::GetNaturalA(Int_t zz=-1)">GetNaturalA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz = -1) <span class="keyword">const</span> ;
    
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetBindingEnergy" title="Double_t KVNucleus::GetBindingEnergy(Int_t z = -1, Int_t a = -1) const">GetBindingEnergy</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetBindingEnergyPerNucleon" title="Double_t KVNucleus::GetBindingEnergyPerNucleon(Int_t z = -1, Int_t a = -1) const">GetBindingEnergyPerNucleon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetBindingEnergy" title="Double_t KVNucleus::GetBindingEnergy(Int_t z=-1,Int_t a=-1)">GetBindingEnergy</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetBindingEnergyPerNucleon" title="Double_t KVNucleus::GetBindingEnergyPerNucleon(Int_t z=-1,Int_t a=-1)">GetBindingEnergyPerNucleon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
    
-        <a href="../KVNumberList.html">KVNumberList</a> <a href="../KVNucleus.html#KVNucleus:GetKnownARange" title="KVNumberList KVNucleus::GetKnownARange(Int_t z = -1, Double_t tmin = 0) const">GetKnownARange</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z=-1, <a href="../ListOfTypes.html#Double_t">Double_t</a> tmin=0) <span class="keyword">const</span>;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetAWithMaxBindingEnergy" title="Int_t KVNucleus::GetAWithMaxBindingEnergy(Int_t z = -1)">GetAWithMaxBindingEnergy</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z=-1);
+	<a href="../KVNumberList.html">KVNumberList</a> <a href="../KVNucleus.html#KVNucleus:GetKnownARange" title="KVNumberList KVNucleus::GetKnownARange(Int_t z=-1,Double_t tmin=0)">GetKnownARange</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z=-1, <a href="../ListOfTypes.html#Double_t">Double_t</a> tmin=0) <span class="keyword">const</span>;
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVNucleus.html#KVNucleus:GetIsotopesList" title="const Char_t* KVNucleus::GetIsotopesList(Int_t zmin,Int_t zmax,Double_t tmin=0)">GetIsotopesList</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zmin, <a href="../ListOfTypes.html#Int_t">Int_t</a> zmax, <a href="../ListOfTypes.html#Double_t">Double_t</a> tmin=0) <span class="keyword">const</span>;
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetAWithMaxBindingEnergy" title="Int_t KVNucleus::GetAWithMaxBindingEnergy(Int_t z=-1)">GetAWithMaxBindingEnergy</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z=-1);
 	
-	<span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:LiquidDrop_BrackGuet" title="Double_t KVNucleus::LiquidDrop_BrackGuet(UInt_t A, UInt_t Z)">LiquidDrop_BrackGuet</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> A, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a>);
+	<span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:LiquidDrop_BrackGuet" title="Double_t KVNucleus::LiquidDrop_BrackGuet(UInt_t A,UInt_t Z)">LiquidDrop_BrackGuet</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> A, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../#TLorentzVector:Z" title="Double_t TLorentzVector::Z()">Z</a>);
 		
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z = -1, int a = -1) const">IsKnown</a>(<span class="keyword">int</span> z = -1, <span class="keyword">int</span> a = -1) <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsStable" title="Bool_t KVNucleus::IsStable(Double_t min_lifetime = 1.0E+15) const">IsStable</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> min_lifetime=1.0e+15<span class="comment">/*seconds*/</span>) <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsResonance" title="Bool_t KVNucleus::IsResonance() const">IsResonance</a>() <span class="keyword">const</span>;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetWidth" title="Double_t KVNucleus::GetWidth() const">GetWidth</a>() <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z=-1,int a=-1)">IsKnown</a>(<span class="keyword">int</span> z = -1, <span class="keyword">int</span> a = -1) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsStable" title="Bool_t KVNucleus::IsStable(Double_t min_lifetime=1.0e+15)">IsStable</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> min_lifetime=1.0e+15<span class="comment">/*seconds*/</span>) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVNucleus.html#KVNucleus:IsResonance" title="Bool_t KVNucleus::IsResonance()">IsResonance</a>() <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetWidth" title="Double_t KVNucleus::GetWidth()">GetWidth</a>() <span class="keyword">const</span>;
    
-<a name="Q5ngMD"></a>	<span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetMass" title="void KVNucleus::SetMass(Double_t m)">SetMass</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> m) {
-      <a href="../KVNucleus.html#KVNucleus:fExx" title="Double_t KVNucleus::fExx">fExx</a> = 0;
-		<a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:SetXYZM" title="void TLorentzVector::SetXYZM(Double_t x, Double_t y, Double_t z, Double_t m)">SetXYZM</a>(<a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Px" title="Double_t TLorentzVector::Px() const">Px</a>(), <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Py" title="Double_t TLorentzVector::Py() const">Py</a>(), <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Pz" title="Double_t TLorentzVector::Pz() const">Pz</a>(), m);
-   };
-	<span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetExcitEnergy" title="void KVNucleus::SetExcitEnergy(Double_t e)">SetExcitEnergy</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e);
-	
-<a name="f1olv"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetExcitEnergy" title="Double_t KVNucleus::GetExcitEnergy() const">GetExcitEnergy</a>() <span class="keyword">const</span> {
-      <span class="keyword">return</span> <a href="../KVNucleus.html#KVNucleus:fExx" title="Double_t KVNucleus::fExx">fExx</a>;
-   };
-<a name="ccVQa"></a>	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetMassGS" title="Double_t KVNucleus::GetMassGS() const">GetMassGS</a>() <span class="keyword">const</span> {
-      <span class="keyword">return</span> <a href="../KVParticle.html#KVParticle:GetMass" title="Double_t KVParticle::GetMass() const">GetMass</a>()-<a href="../KVNucleus.html#KVNucleus:fExx" title="Double_t KVNucleus::fExx">fExx</a>;
-   };
-	
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetLifeTime" title="Double_t KVNucleus::GetLifeTime(Int_t z = -1, Int_t a = -1) const">GetLifeTime</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	<a href="../KVLifeTime.html">KVLifeTime</a>* <a href="../KVNucleus.html#KVNucleus:GetLifeTimePtr" title="KVLifeTime* KVNucleus::GetLifeTimePtr(Int_t z = -1, Int_t a = -1) const">GetLifeTimePtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAbundance" title="Double_t KVNucleus::GetAbundance(Int_t z = -1, Int_t a = -1) const">GetAbundance</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	<a href="../KVAbundance.html">KVAbundance</a>* <a href="../KVNucleus.html#KVNucleus:GetAbundancePtr" title="KVAbundance* KVNucleus::GetAbundancePtr(Int_t z = -1, Int_t a = -1) const">GetAbundancePtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetChargeRadius" title="Double_t KVNucleus::GetChargeRadius(Int_t z = -1, Int_t a = -1) const">GetChargeRadius</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	<a href="../KVChargeRadius.html">KVChargeRadius</a>* <a href="../KVNucleus.html#KVNucleus:GetChargeRadiusPtr" title="KVChargeRadius* KVNucleus::GetChargeRadiusPtr(Int_t z = -1, Int_t a = -1) const">GetChargeRadiusPtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetExtraChargeRadius" title="Double_t KVNucleus::GetExtraChargeRadius(Int_t z = -1, Int_t a = -1, Int_t rct = 2) const">GetExtraChargeRadius</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1,<a href="../ListOfTypes.html#Int_t">Int_t</a> rct=2) <span class="keyword">const</span>;
-	
-	<a href="../KVNucleus.html">KVNucleus</a> &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
-	<a href="../KVNucleus.html">KVNucleus</a> <span class="keyword">operator</span>+(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
-	<a href="../KVNucleus.html">KVNucleus</a> <span class="keyword">operator</span>-(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
-	<a href="../KVNucleus.html">KVNucleus</a> &amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
-	<a href="../KVNucleus.html">KVNucleus</a> &amp; <span class="keyword">operator</span>-=(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
-	
-<span class="comment">//	TH2F* GetKnownNucleiChart(<a href="../KVString.html">KVString</a> method=<span class="string">"GetBindingEnergyPerNucleon"</span>);</span>
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:DeduceEincFromBrho" title="Double_t KVNucleus::DeduceEincFromBrho(Double_t Brho, Int_t ChargeState = 0)">DeduceEincFromBrho</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Brho,<a href="../ListOfTypes.html#Int_t">Int_t</a> ChargeState=0);
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetRelativeVelocity" title="Double_t KVNucleus::GetRelativeVelocity(KVNucleus* nuc)">GetRelativeVelocity</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc);
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetViolaVelocity" title="Double_t KVNucleus::GetViolaVelocity(KVNucleus* nuc = 0, Int_t formula = kDefaultFormula)">GetViolaVelocity</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc=0, <a href="../ListOfTypes.html#Int_t">Int_t</a> formula=<a href="../KVNucleus.html#KVNucleus:kDefaultFormula" title="KVNucleus::(anonymous) KVNucleus::kDefaultFormula">kDefaultFormula</a> <span class="comment">/* <a href="../KVNucleus.html#KVNucleus:kHinde1987" title="KVNucleus::(anonymous) KVNucleus::kHinde1987">kHinde1987</a> <a href="../KVNucleus.html#KVNucleus:kViola1985" title="KVNucleus::(anonymous) KVNucleus::kViola1985">kViola1985</a> <a href="../KVNucleus.html#KVNucleus:kViola1966" title="KVNucleus::(anonymous) KVNucleus::kViola1966">kViola1966</a> */</span>);
+   <span class="keyword">void</span> <a href="../KVNucleus.html#KVNucleus:SetExcitEnergy" title="void KVNucleus::SetExcitEnergy(Double_t e)">SetExcitEnergy</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e);
 
-    <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:vrelHinde1987" title="Double_t KVNucleus::vrelHinde1987(Double_t z1, Double_t a1, Double_t z2, Double_t a2)">vrelHinde1987</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> z1, <a href="../ListOfTypes.html#Double_t">Double_t</a> a1, <a href="../ListOfTypes.html#Double_t">Double_t</a> z2, <a href="../ListOfTypes.html#Double_t">Double_t</a> a2);
-    <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:vrelViola1985" title="Double_t KVNucleus::vrelViola1985(Double_t z, Double_t a)">vrelViola1985</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> z, <a href="../ListOfTypes.html#Double_t">Double_t</a> a);
-    <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:vrelViola1966" title="Double_t KVNucleus::vrelViola1966(Double_t z, Double_t a)">vrelViola1966</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> z, <a href="../ListOfTypes.html#Double_t">Double_t</a> a);
+<a name="f1olv"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetExcitEnergy" title="Double_t KVNucleus::GetExcitEnergy()">GetExcitEnergy</a>() <span class="keyword">const</span> {
+      <span class="comment">// Return the excitation energy of the nucleus in MeV.</span>
+      <span class="comment">// This is the difference between the (relativistic) rest mass</span>
+      <span class="comment">// and the ground state mass of the nucleus</span>
+      <span class="keyword">return</span> <a href="../KVParticle.html#KVParticle:GetMass" title="Double_t KVParticle::GetMass()">GetMass</a>()-<a href="../KVNucleus.html#KVNucleus:GetMassGS" title="Double_t KVNucleus::GetMassGS()">GetMassGS</a>();
+   }
+<a name="ccVQa"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetMassGS" title="Double_t KVNucleus::GetMassGS()">GetMassGS</a>() <span class="keyword">const</span> {
+      <span class="comment">// Return the ground state mass of the nucleus in MeV.</span>
+      <span class="keyword">return</span> (<a href="../KVNucleus.html#KVNucleus:kAMU" title="Double_t KVNucleus::kAMU">kAMU</a>*<a href="../KVNucleus.html#KVNucleus:GetA" title="Int_t KVNucleus::GetA()">GetA</a>() + <a href="../KVNucleus.html#KVNucleus:GetMassExcess" title="Double_t KVNucleus::GetMassExcess(Int_t z=-1,Int_t a=-1)">GetMassExcess</a>());
+   }
 
-    ClassDef(<a href="../KVNucleus.html">KVNucleus</a>, 5)      <span class="comment">//<a href="../KVNucleus.html#KVNucleus:Class" title="TClass* KVNucleus::Class()">Class</a> describing atomic nuclei</span>
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetLifeTime" title="Double_t KVNucleus::GetLifeTime(Int_t z=-1,Int_t a=-1)">GetLifeTime</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../KVLifeTime.html">KVLifeTime</a>* <a href="../KVNucleus.html#KVNucleus:GetLifeTimePtr" title="KVLifeTime* KVNucleus::GetLifeTimePtr(Int_t z=-1,Int_t a=-1)">GetLifeTimePtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetAbundance" title="Double_t KVNucleus::GetAbundance(Int_t z=-1,Int_t a=-1)">GetAbundance</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+	<a href="../KVAbundance.html">KVAbundance</a>* <a href="../KVNucleus.html#KVNucleus:GetAbundancePtr" title="KVAbundance* KVNucleus::GetAbundancePtr(Int_t z=-1,Int_t a=-1)">GetAbundancePtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVNucleus.html#KVNucleus:GetMostAbundantA" title="Int_t KVNucleus::GetMostAbundantA(Int_t z=-1)">GetMostAbundantA</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1) <span class="keyword">const</span>;
+	
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetChargeRadius" title="Double_t KVNucleus::GetChargeRadius(Int_t z=-1,Int_t a=-1)">GetChargeRadius</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../KVChargeRadius.html">KVChargeRadius</a>* <a href="../KVNucleus.html#KVNucleus:GetChargeRadiusPtr" title="KVChargeRadius* KVNucleus::GetChargeRadiusPtr(Int_t z=-1,Int_t a=-1)">GetChargeRadiusPtr</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetExtraChargeRadius" title="Double_t KVNucleus::GetExtraChargeRadius(Int_t z=-1,Int_t a=-1,Int_t rct=2)">GetExtraChargeRadius</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> z = -1, <a href="../ListOfTypes.html#Int_t">Int_t</a> a = -1,<a href="../ListOfTypes.html#Int_t">Int_t</a> rct=2) <span class="keyword">const</span>;
+
+   <a href="../KVNucleus.html">KVNucleus</a> &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
+   <a href="../KVNucleus.html">KVNucleus</a> <span class="keyword">operator</span>+(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
+   <a href="../KVNucleus.html">KVNucleus</a> <span class="keyword">operator</span>-(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
+   <a href="../KVNucleus.html">KVNucleus</a> &amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
+   <a href="../KVNucleus.html">KVNucleus</a> &amp; <span class="keyword">operator</span>-=(<span class="keyword">const</span> <a href="../KVNucleus.html">KVNucleus</a> &amp; rhs);
+
+   <span class="comment">//	TH2F* GetKnownNucleiChart(<a href="../KVString.html">KVString</a> method=<span class="string">"GetBindingEnergyPerNucleon"</span>);</span>
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:DeduceEincFromBrho" title="Double_t KVNucleus::DeduceEincFromBrho(Double_t Brho,Int_t ChargeState=0)">DeduceEincFromBrho</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Brho,<a href="../ListOfTypes.html#Int_t">Int_t</a> ChargeState=0);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetRelativeVelocity" title="Double_t KVNucleus::GetRelativeVelocity(KVNucleus* nuc)">GetRelativeVelocity</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:GetViolaVelocity" title="Double_t KVNucleus::GetViolaVelocity(KVNucleus* nuc=0,Int_t formula=kDefaultFormula)">GetViolaVelocity</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc=0, <a href="../ListOfTypes.html#Int_t">Int_t</a> formula=<a href="../KVNucleus.html#KVNucleus:kDefaultFormula" title="const enum KVNucleus:: KVNucleus::kDefaultFormula">kDefaultFormula</a> <span class="comment">/* <a href="../KVNucleus.html#KVNucleus:kHinde1987" title="const enum KVNucleus:: KVNucleus::kHinde1987">kHinde1987</a> <a href="../KVNucleus.html#KVNucleus:kViola1985" title="const enum KVNucleus:: KVNucleus::kViola1985">kViola1985</a> <a href="../KVNucleus.html#KVNucleus:kViola1966" title="const enum KVNucleus:: KVNucleus::kViola1966">kViola1966</a> */</span>);
+
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:vrelHinde1987" title="Double_t KVNucleus::vrelHinde1987(Double_t z1,Double_t a1,Double_t z2,Double_t a2)">vrelHinde1987</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> z1, <a href="../ListOfTypes.html#Double_t">Double_t</a> a1, <a href="../ListOfTypes.html#Double_t">Double_t</a> z2, <a href="../ListOfTypes.html#Double_t">Double_t</a> a2);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:vrelViola1985" title="Double_t KVNucleus::vrelViola1985(Double_t z,Double_t a)">vrelViola1985</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> z, <a href="../ListOfTypes.html#Double_t">Double_t</a> a);
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVNucleus.html#KVNucleus:vrelViola1966" title="Double_t KVNucleus::vrelViola1966(Double_t z,Double_t a)">vrelViola1966</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> z, <a href="../ListOfTypes.html#Double_t">Double_t</a> a);
+
+   ClassDef(<a href="../KVNucleus.html">KVNucleus</a>, 6)      <span class="comment">//<a href="../KVNucleus.html#KVNucleus:Class" title="TClass* KVNucleus::Class()">Class</a> describing atomic nuclei</span>
 };
 
 <a name="YIQnO"></a><span class="keyword">inline</span> <span class="keyword">void</span> <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:SetMassFormula" title="void KVNucleus::SetMassFormula(UChar_t mt)">SetMassFormula</a>(<a href="../ListOfTypes.html#UChar_t">UChar_t</a> mt)
 {
-   <span class="comment">//<a href="../KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t*)">Set</a> mass formula used for calculating A from <a href="http://root.cern.ch/root/html/TLorentzVector.html#TLorentzVector:Z" title="Double_t TLorentzVector::Z() const">Z</a> for this nucleus</span>
-	<a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a> = mt;
-	<a href="../KVNucleus.html#KVNucleus:SetA" title="void KVNucleus::SetA(Int_t a)">SetA</a>(<a href="../KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t, Char_t mt)">GetAFromZ</a>(<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ() const">GetZ</a>(), <a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a>));       <span class="comment">//recalculate A and mass</span>
+   <span class="comment">//<a href="../KVNucleus.html#KVNucleus:Set" title="void KVNucleus::Set(const Char_t* )">Set</a> mass formula used for calculating A from <a href="../#TLorentzVector:Z" title="Double_t TLorentzVector::Z()">Z</a> for this nucleus</span>
+   <a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a> = mt;
+   <a href="../KVNucleus.html#KVNucleus:SetA" title="void KVNucleus::SetA(Int_t a)">SetA</a>(<a href="../KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t ,Char_t mt)">GetAFromZ</a>(<a href="../KVNucleus.html#KVNucleus:GetZ" title="Int_t KVNucleus::GetZ()">GetZ</a>(), <a href="../KVNucleus.html#KVNucleus:fMassFormula" title="UChar_t KVNucleus::fMassFormula">fMassFormula</a>));       <span class="comment">//recalculate A and mass</span>
 }
 
 <span class="cpp">#endif</span>
@@ -229,7 +229,7 @@ $Id: <a href="../KVNucleus.html">KVNucleus</a>.h,v 1.40 2009/04/02 09:32:55 ebon
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-05-28 11:10 </em><em>&raquo; Last generated: 2015-05-28 11:10</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>
