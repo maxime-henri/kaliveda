@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Thu May 28 11:10:09 2015            -->
+<!--   Date: Fri Jul 17 16:52:26 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -132,8 +132,8 @@ ClassImp(<a href="../KVFAZIASelector.html">KVFAZIASelector</a>)
 <a name="Xeed."></a><span class="keyword">void</span> <a href="../KVFAZIASelector.html">KVFAZIASelector</a>::<a href="../KVFAZIASelector.html#KVFAZIASelector:LinkRawData" title="void KVFAZIASelector::LinkRawData()">LinkRawData</a>()
 {
 	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"LinkRawData"</span>,<span class="string">"Enable reading of raw data : %s\n"</span>,<a href="../KVFAZIASelector.html#KVFAZIASelector:rawdatabranchname" title="TString KVFAZIASelector::rawdatabranchname">rawdatabranchname</a>.Data());
-   <a href="../KVFAZIASelector.html#KVFAZIASelector:cl" title="TClonesArray* KVFAZIASelector::cl">cl</a>=0;
-   fChain-&gt;SetBranchAddress(<a href="../KVFAZIASelector.html#KVFAZIASelector:rawdatabranchname" title="TString KVFAZIASelector::rawdatabranchname">rawdatabranchname</a>.Data(),&amp;<a href="../KVFAZIASelector.html#KVFAZIASelector:cl" title="TClonesArray* KVFAZIASelector::cl">cl</a>);
+   <a href="../KVFAZIASelector.html#KVFAZIASelector:RawEvent" title="KVFAZIARawEvent* KVFAZIASelector::RawEvent">RawEvent</a>=0;
+   fChain-&gt;SetBranchAddress(<a href="../KVFAZIASelector.html#KVFAZIASelector:rawdatabranchname" title="TString KVFAZIASelector::rawdatabranchname">rawdatabranchname</a>.Data(),&amp;<a href="../KVFAZIASelector.html#KVFAZIASelector:RawEvent" title="KVFAZIARawEvent* KVFAZIASelector::RawEvent">RawEvent</a>);
 }
 
 <span class="comment">//_____________________________________</span>
@@ -142,7 +142,7 @@ ClassImp(<a href="../KVFAZIASelector.html">KVFAZIASelector</a>)
 	<a href="../KVFAZIADetector.html">KVFAZIADetector</a>* det=0;
    <a href="../KVSignal.html">KVSignal</a>* sig=0;
    
-   TIter next_s(<a href="../KVFAZIASelector.html#KVFAZIASelector:cl" title="TClonesArray* KVFAZIASelector::cl">cl</a>);
+   TIter next_s(<a href="../KVFAZIASelector.html#KVFAZIASelector:RawEvent" title="KVFAZIARawEvent* KVFAZIASelector::RawEvent">RawEvent</a>-><a href="../KVFAZIARawEvent.html#KVFAZIARawEvent:GetSignals" title="TClonesArray* KVFAZIARawEvent::GetSignals()">GetSignals</a>());
 	<span class="keyword">while</span> ( (sig = (<a href="../KVSignal.html">KVSignal</a>* )next_s()) )
    {
    	sig-&gt;DeduceFromName();
@@ -182,7 +182,7 @@ ClassImp(<a href="../KVFAZIASelector.html">KVFAZIASelector</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-05-28 11:10 </em><em>&raquo; Last generated: 2015-05-28 11:10</em><br />
+<em>&raquo; Last changed: 2015-07-17 16:52 </em><em>&raquo; Last generated: 2015-07-17 16:52</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

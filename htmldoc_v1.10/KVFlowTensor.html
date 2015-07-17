@@ -1,0 +1,549 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!--                                             -->
+<!--   Date: Fri Jul 17 16:52:26 2015            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVFlowTensor</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
+<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVFlowTensor','libKVMultiDetglobvars','KVFlowTensor.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVFlowTensor.h.html">header file</a>
+<a class="descrheadentry" href="src/KVFlowTensor.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/globvars/KVFlowTensor.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/globvars/KVFlowTensor.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVFlowTensor:description">class description</a> 
+<a class="descrheadentry" href="#KVFlowTensor:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVFlowTensor:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVFlowTensor:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/02</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_GLOBVARS_Index.html">GLOBVARS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVFlowTensor</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVFlowTensor:description"></a>class KVFlowTensor: public <a href="./KVVarGlob.html">KVVarGlob</a></h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVFlowTensor</h2>
+<h4>Kinetic energy flow tensor of Gyulassy et al</h4>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+ This global variable class implements the kinetic energy flow tensor of
+ M. Gyulassy et al., Phys. Lett. 110B(1982)185:
+
+<span class="latex"><img class="latex" alt="$F_{ij}=\sum_{\nu=1}^{N}w_{\nu}p_{i}(\nu)p_{j}(\nu)$" title="LATEX" src="LATEX_KVFlowTensor_1_F_ijsum_nuNw_nup_inup_jnu.gif" /></span>
+ which is built from the components of the momenta of all (or a selection of)
+ reaction products in each event.
+ With the <a href="./KVFlowTensor.html#KVFlowTensor:weight" title="enum KVFlowTensor:: KVFlowTensor::weight">weight</a> w=1, this expression gives the sphericity tensor. Such a
+ tensor is not appropriate for analysing collisions in which composite
+ fragments are produced. To correctly <a href="./KVFlowTensor.html#KVFlowTensor:weight" title="enum KVFlowTensor:: KVFlowTensor::weight">weight</a> composite fragments, Gyulassy
+ et al. proposed to use the <a href="./KVFlowTensor.html#KVFlowTensor:weight" title="enum KVFlowTensor:: KVFlowTensor::weight">weight</a>
+
+<span class="latex"><img class="latex" alt="$w_{\nu}=(2m_{\nu})^{-1}$" title="LATEX" src="LATEX_KVFlowTensor_2_w_num_nu.gif" /></span>
+ in which case F becomes the (non-relativistic) kinetic energy flow tensor
+ (the trace of F is the total non-relativistic kinetic energy of the products).
+
+ Gyulassy et al.: <span class="string">"We emphasize that event shape analysis makes sense only in the</span>
+ nucleus-nucleus center of mass system since the eigenvalues of F specify
+ an ellipsoid centered at the origin.<span class="string">"</span>
+    =&gt; default frame is <span class="string">"CM"</span>
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVFlowTensor:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:KVFlowTensor">KVFlowTensor</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:KVFlowTensor@1">KVFlowTensor</a>(<a href="./ListOfTypes.html#Char_t">Char_t</a>* nom)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:KVFlowTensor@2">KVFlowTensor</a>(<span class="keyword">const</span> <a href="./KVFlowTensor.html">KVFlowTensor</a>&amp; a)</td></tr>
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:_KVFlowTensor">~KVFlowTensor</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:AreEqual"><span class="baseclass">KVBase::</span>AreEqual</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Long64_t">Long64_t</a> maxdif = 1)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:ArrContainsValue"><span class="baseclass">KVBase::</span>ArrContainsValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n, <a href="./ListOfTypes.html#Int_t">Int_t</a>* arr, <a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:AsDouble"><span class="baseclass">KVVarGlob::</span>AsDouble</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:BackupFileWithDate"><span class="baseclass">KVBase::</span>BackupFileWithDate</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Clear"><span class="baseclass">KVBase::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Copy">Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Fill">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>* n)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:Fill2"><span class="baseclass">KVVarGlob::</span>Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>* n1, <a href="./KVNucleus.html">KVNucleus</a>* n2)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:Fill2WithCondition"><span class="baseclass">KVVarGlob::</span>Fill2WithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>* n1, <a href="./KVNucleus.html">KVNucleus</a>* n2)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:FillN"><span class="baseclass">KVVarGlob::</span>FillN</a>(<a href="./KVEvent.html">KVEvent</a>* <a href="./KVFlowTensor.html#KVFlowTensor:e" title="const TVector3&amp; KVFlowTensor::e(int i)">e</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:FillWithCondition"><span class="baseclass">KVVarGlob::</span>FillWithCondition</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindClassSourceFiles"><span class="baseclass">KVBase::</span>FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="./KVString.html">KVString</a>&amp; imp_file, <a href="./KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir_name = <span class="string">"."</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindExecutable"><span class="baseclass">KVBase::</span>FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindFile"><span class="baseclass">KVBase::</span>FindFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* search, TString&amp; wfil)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> TRotation&amp;</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:GetAziReacPlaneRotation">GetAziReacPlaneRotation</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetBINDIRFilePath"><span class="baseclass">KVBase::</span>GetBINDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATABASEFilePath"><span class="baseclass">KVBase::</span>GetDATABASEFilePath</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetDATADIRFilePath"><span class="baseclass">KVBase::</span>GetDATADIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetETCDIRFilePath"><span class="baseclass">KVBase::</span>GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> TRotation&amp;</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:GetFlowReacPlaneRotation">GetFlowReacPlaneRotation</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetFrame"><span class="baseclass">KVVarGlob::</span>GetFrame</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetINCDIRFilePath"><span class="baseclass">KVBase::</span>GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDate"><span class="baseclass">KVBase::</span>GetKVBuildDate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDir"><span class="baseclass">KVBase::</span>GetKVBuildDir</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildType"><span class="baseclass">KVBase::</span>GetKVBuildType</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildUser"><span class="baseclass">KVBase::</span>GetKVBuildUser</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVSourceDir"><span class="baseclass">KVBase::</span>GetKVSourceDir</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVVersion"><span class="baseclass">KVBase::</span>GetKVVersion</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLabel"><span class="baseclass">KVBase::</span>GetLabel</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetLIBDIRFilePath"><span class="baseclass">KVBase::</span>GetLIBDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetListOfPlugins"><span class="baseclass">KVBase::</span>GetListOfPlugins</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetNameIndex"><span class="baseclass">KVVarGlob::</span>GetNameIndex</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumber"><span class="baseclass">KVBase::</span>GetNumber</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetNumberOfBranches"><span class="baseclass">KVVarGlob::</span>GetNumberOfBranches</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumberOfObjects"><span class="baseclass">KVBase::</span>GetNumberOfObjects</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetNumberOfValues"><span class="baseclass">KVVarGlob::</span>GetNumberOfValues</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:GetObject">GetObject</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> TString&amp;</td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetOptionString"><span class="baseclass">KVVarGlob::</span>GetOptionString</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetParameter"><span class="baseclass">KVVarGlob::</span>GetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetPluginURI"><span class="baseclass">KVBase::</span>GetPluginURI</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* plugin)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTempFileName"><span class="baseclass">KVBase::</span>GetTempFileName</a>(TString&amp; base)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTEMPLATEDIRFilePath"><span class="baseclass">KVBase::</span>GetTEMPLATEDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetType"><span class="baseclass">KVBase::</span>GetType</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetValue"><span class="baseclass">KVVarGlob::</span>GetValue</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetValue@1"><span class="baseclass">KVVarGlob::</span>GetValue</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetValue@2"><span class="baseclass">KVVarGlob::</span>GetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetValueName"><span class="baseclass">KVVarGlob::</span>GetValueName</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a>*</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:GetValuePtr">GetValuePtr</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Char_t">Char_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:GetValueType"><span class="baseclass">KVVarGlob::</span>GetValueType</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetWORKDIRFilePath"><span class="baseclass">KVBase::</span>GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitBranch"><span class="baseclass">KVBase::</span>gitBranch</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:HasLabel"><span class="baseclass">KVBase::</span>HasLabel</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Init">Init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:InitEnvironment"><span class="baseclass">KVBase::</span>InitEnvironment</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="./KVFlowTensor.html#KVFlowTensor:f" title="Double_t KVFlowTensor::f(int i)">f</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsCalled"><span class="baseclass">KVBase::</span>IsCalled</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:IsNBody"><span class="baseclass">KVVarGlob::</span>IsNBody</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:IsOneBody"><span class="baseclass">KVVarGlob::</span>IsOneBody</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:IsOptionGiven"><span class="baseclass">KVVarGlob::</span>IsOptionGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:IsParameterSet"><span class="baseclass">KVVarGlob::</span>IsParameterSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:IsTwoBody"><span class="baseclass">KVVarGlob::</span>IsTwoBody</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsType"><span class="baseclass">KVBase::</span>IsType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:MakeClass"><span class="baseclass">KVVarGlob::</span>MakeClass</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classdesc, <span class="keyword">int</span> type = kOneBody)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenTempFile"><span class="baseclass">KVBase::</span>OpenTempFile</a>(TString&amp; base, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; fp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">double</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:operator_double"><span class="baseclass">KVVarGlob::</span>operator double</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:operator()"><span class="baseclass">KVVarGlob::</span>operator()</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:operator()@1"><span class="baseclass">KVVarGlob::</span>operator()</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:operator()@2"><span class="baseclass">KVVarGlob::</span>operator()</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVFlowTensor.html">KVFlowTensor</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVFlowTensor.html">KVFlowTensor</a>&amp; a)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Print"><span class="baseclass">KVBase::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Reset">Reset</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="./KVFlowTensor.html#KVFlowTensor:f" title="Double_t KVFlowTensor::f(int i)">f</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile@1"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchKVFile"><span class="baseclass">KVBase::</span>SearchKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, TString&amp; fullpath, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="./KVFlowTensor.html#KVFlowTensor:f" title="Double_t KVFlowTensor::f(int i)">f</a>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="./KVFlowTensor.html#KVFlowTensor:f" title="Double_t KVFlowTensor::f(int i)">f</a>, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:SetFrame"><span class="baseclass">KVVarGlob::</span>SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetLabel"><span class="baseclass">KVBase::</span>SetLabel</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* lab)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:SetMaxNumBranches"><span class="baseclass">KVVarGlob::</span>SetMaxNumBranches</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetNumber"><span class="baseclass">KVBase::</span>SetNumber</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> num)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:SetOption"><span class="baseclass">KVVarGlob::</span>SetOption</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:SetParameter"><span class="baseclass">KVVarGlob::</span>SetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par, <a href="./ListOfTypes.html#Double_t">Double_t</a> value)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:SetSelection"><span class="baseclass">KVVarGlob::</span>SetSelection</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetType"><span class="baseclass">KVBase::</span>SetType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* str)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="./KVFlowTensor.html#KVFlowTensor:f" title="Double_t KVFlowTensor::f(int i)">f</a>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> <a href="./KVFlowTensor.html#KVFlowTensor:f" title="Double_t KVFlowTensor::f(int i)">f</a>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:UnsetOption"><span class="baseclass">KVVarGlob::</span>UnsetOption</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:UnsetParameter"><span class="baseclass">KVVarGlob::</span>UnsetParameter</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:WorkingDirectory"><span class="baseclass">KVBase::</span>WorkingDirectory</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:AddFillMethod"><span class="baseclass">KVVarGlob::</span>AddFillMethod</a>(<a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <span class="keyword">int</span> type)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:AddFillMethodBody"><span class="baseclass">KVVarGlob::</span>AddFillMethodBody</a>(<a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:AddInitMethod"><span class="baseclass">KVVarGlob::</span>AddInitMethod</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname, <a href="./KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:Calculate">Calculate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:ClearNameIndex"><span class="baseclass">KVVarGlob::</span>ClearNameIndex</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:FillMethodBody"><span class="baseclass">KVVarGlob::</span>FillMethodBody</a>(<a href="./KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:getvalue_char"><span class="baseclass">KVVarGlob::</span>getvalue_char</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:getvalue_int">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:getvalue_void">getvalue_void</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:init"><span class="baseclass">KVVarGlob::</span>init</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVVarGlob.html#KVVarGlob:SetNameIndex"><span class="baseclass">KVVarGlob::</span>SetNameIndex</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#Int_t">Int_t</a> index)</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><span class="keyword">const</span> TVector3&amp;</td><td class="funcname"><a class="funcname" href="#KVFlowTensor:e">e</a>(<span class="keyword">int</span> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:f">f</a>(<span class="keyword">int</span> i) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFlowTensor:init_KVFlowTensor">init_KVFlowTensor</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVFlowTensor:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="data"><td class="datatype">enum  { </td><td class="dataname"><a name="KVFlowTensor:kONE"></a>kONE</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kNRKE"></a>kNRKE</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kRKE"></a>kRKE</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kFlowAngle"></a>kFlowAngle</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kKinFlowRatio13"></a>kKinFlowRatio13</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kKinFlowRatio23"></a>kKinFlowRatio23</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kPhiReacPlane"></a>kPhiReacPlane</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kSqueezeAngle"></a>kSqueezeAngle</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kSqueezeRatio"></a>kSqueezeRatio</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVFlowTensor:kNumberParts"></a>kNumberParts</td><td></td></tr>
+<tr class="data"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">KVVarGlob::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:kOneBody">kOneBody</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:kTwoBody">kTwoBody</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:kNBody">kNBody</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">KVBase::</span>EKaliVedaBits { </td><td class="dataname"><a href="./KVBase.html#KVBase:kIsKaliVedaObject">kIsKaliVedaObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:nb"><span class="baseclass">KVVarGlob::</span>nb</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:nb_crea"><span class="baseclass">KVVarGlob::</span>nb_crea</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:nb_dest"><span class="baseclass">KVVarGlob::</span>nb_dest</a></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fFrame"><span class="baseclass">KVVarGlob::</span>fFrame</a></td><td class="datadesc">(optional) name of reference frame used for kinematics</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="./KVBase.html#KVBase:fLabel"><span class="baseclass">KVBase::</span>fLabel</a></td><td class="datadesc">label for the object</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fMaxNumBranches"><span class="baseclass">KVVarGlob::</span>fMaxNumBranches</a></td><td class="datadesc">max number of branches to create for multi-valued variable</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fOptions"><span class="baseclass">KVVarGlob::</span>fOptions</a></td><td class="datadesc">list of options</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fParameters"><span class="baseclass">KVVarGlob::</span>fParameters</a></td><td class="datadesc">list of parameters</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./KVParticleCondition.html">KVParticleCondition</a>*</td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fSelection"><span class="baseclass">KVVarGlob::</span>fSelection</a></td><td class="datadesc">(optional) condition used to select particles</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fType"><span class="baseclass">KVVarGlob::</span>fType</a></td><td class="datadesc">type of variable global; = kOneBody, kTwoBody or kNBody</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Char_t">Char_t</a></td><td class="dataname"><a href="./KVVarGlob.html#KVVarGlob:fValueType"><span class="baseclass">KVVarGlob::</span>fValueType</a></td><td class="datadesc">type (='I' integer or 'D' double) of global variable value</td></tr>
+
+</table></div>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype">TRotation</td><td class="dataname"><a name="KVFlowTensor:fAziReacPlane"></a>fAziReacPlane</td><td class="datadesc">!azimuthal rotation around beam axis to reaction plane</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVFlowTensor:fCalculated"></a>fCalculated</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#TVectorD">TVectorD</a></td><td class="dataname"><a name="KVFlowTensor:fEVal"></a>fEVal</td><td class="datadesc">! the 3 eigenvalues</td></tr>
+<tr class="data"><td class="datatype">TVector3</td><td class="dataname"><a name="KVFlowTensor:fEVec"></a>fEVec[3]</td><td class="datadesc">! the 3 eigenvectors</td></tr>
+<tr class="data"><td class="datatype">TRotation</td><td class="dataname"><a name="KVFlowTensor:fFlowReacPlane"></a>fFlowReacPlane</td><td class="datadesc">!rotate XZ to reaction plane, then align Z with flow axis</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVFlowTensor:fNParts"></a>fNParts</td><td class="datadesc">! number of particles included in tensor</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVFlowTensor:fSqOutRatio"></a>fSqOutRatio</td><td class="datadesc">!Gutbrod squeeze-out ratio</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVFlowTensor:fSqueezeAngle"></a>fSqueezeAngle</td><td class="datadesc">!Gutbrod squeeze angle</td></tr>
+<tr class="data"><td class="datatype">TMatrixTSym&lt;<span class="keyword">double</span>&gt;</td><td class="dataname"><a name="KVFlowTensor:fTensor"></a>fTensor</td><td class="datadesc">! the tensor</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">enum</span> <a href="./KVFlowTensor.html">KVFlowTensor</a>::</td><td class="dataname"><a name="KVFlowTensor:weight"></a>weight</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVFlowTensor:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVFlowTensor_Inh" id="MapKVFlowTensor_Inh">
+<area shape="rect" id="node2" href="./KVVarGlob.html" title="KVVarGlob" alt="" coords="471,5,575,25"/>
+<area shape="rect" id="node3" href="./KVBase.html" title="KVBase" alt="" coords="315,5,419,25"/>
+</map>
+<map name="MapKVFlowTensor_InhMem" id="MapKVFlowTensor_InhMem">
+<area shape="rect" id="clust12" href="./KVVarGlob.html" alt="" coords="789,47,856,128"/>
+<area shape="rect" id="clust11" href="./KVVarGlob.html" alt="" coords="867,47,933,128"/>
+<area shape="rect" id="clust13" href="./KVVarGlob.html" alt="" coords="712,47,779,128"/>
+<area shape="rect" id="clust14" href="./KVVarGlob.html" alt="" coords="899,129,901,132"/>
+<area shape="rect" id="clust15" href="./KVVarGlob.html" alt="" coords="867,133,933,435"/>
+<area shape="rect" id="clust16" href="./KVVarGlob.html" alt="" coords="789,131,856,448"/>
+<area shape="rect" id="clust17" href="./KVVarGlob.html" alt="" coords="712,131,779,448"/>
+<area shape="rect" id="clust10" href="./KVVarGlob.html" title="KVVarGlob" alt="" coords="712,16,933,448"/>
+<area shape="rect" id="clust20" href="./KVBase.html" alt="" coords="635,47,701,64"/>
+<area shape="rect" id="clust21" href="./KVBase.html" alt="" coords="557,47,624,96"/>
+<area shape="rect" id="clust22" href="./KVBase.html" alt="" coords="480,47,547,96"/>
+<area shape="rect" id="clust23" href="./KVBase.html" alt="" coords="667,80,669,83"/>
+<area shape="rect" id="clust24" href="./KVBase.html" alt="" coords="635,99,701,448"/>
+<area shape="rect" id="clust25" href="./KVBase.html" alt="" coords="557,99,624,448"/>
+<area shape="rect" id="clust26" href="./KVBase.html" alt="" coords="480,99,547,448"/>
+<area shape="rect" id="clust19" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,448"/>
+</map>
+<map name="MapKVFlowTensor_Lib" id="MapKVFlowTensor_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="282,374,332,394"/>
+</map>
+<div class="tabs">
+<a id="imgKVFlowTensor_Inh" class="tabsel" href="inh/KVFlowTensor_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVFlowTensor_Inh.png');">Inheritance</a>
+<a id="imgKVFlowTensor_InhMem" class="tab" href="inhmem/KVFlowTensor_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVFlowTensor_InhMem.png');">Inherited Members</a>
+<a id="imgKVFlowTensor_Incl" class="tab" href="incl/KVFlowTensor_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVFlowTensor_Incl.png');">Includes</a>
+<a id="imgKVFlowTensor_Lib" class="tab" href="lib/KVFlowTensor_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVFlowTensor_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVFlowTensor_Inh" src="inh/KVFlowTensor_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVFlowTensor:KVFlowTensor" href="src/KVFlowTensor.cxx.html#l9oAIB">KVFlowTensor</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Default constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVFlowTensor:KVFlowTensor@1" href="src/KVFlowTensor.cxx.html#WEuIq">KVFlowTensor</a>(<a href="./ListOfTypes.html#Char_t">Char_t</a>* nom)</span><br />
+<div class="funccomm"><pre> Constructor with a name for the global variable
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVFlowTensor:KVFlowTensor@2" href="src/KVFlowTensor.cxx.html#jMnNe">KVFlowTensor</a>(<span class="keyword">const</span> <a href="./KVFlowTensor.html">KVFlowTensor</a>&amp; a)</span><br />
+<div class="funccomm"><pre> <a href="./KVFlowTensor.html#KVFlowTensor:Copy" title="void KVFlowTensor::Copy(TObject&amp; obj)">Copy</a> constructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVFlowTensor:_KVFlowTensor" href="src/KVFlowTensor.cxx.html#asysS">~KVFlowTensor</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Destructor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFlowTensor:Copy" href="src/KVFlowTensor.cxx.html#kZzfmC">Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) const</span><br />
+<div class="funccomm"><pre> <a href="./KVFlowTensor.html#KVFlowTensor:Copy" title="void KVFlowTensor::Copy(TObject&amp; obj)">Copy</a> properties of 'this' object into the <a href="./KVVarGlob.html">KVVarGlob</a> object referenced by <span class="string">'a'</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFlowTensor:Init" href="src/KVFlowTensor.cxx.html#CaCefB">Init</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Initialisation of internal variables, called once before beginning treatment
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFlowTensor:Reset" href="src/KVFlowTensor.cxx.html#b4ISQD">Reset</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> <a href="./KVFlowTensor.html#KVFlowTensor:Reset" title="void KVFlowTensor::Reset()">Reset</a> internal variables, called before treatment of each event
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> * <a class="funcname" name="KVFlowTensor:GetValuePtr" href="src/KVFlowTensor.cxx.html#So30BE">GetValuePtr</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> You can use this method to return an array of values calculated by your global variable.
+ The order of the array should correspond to the index set for each value
+ using the method <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./ListOfTypes.html#Int_t">Int_t</a>) (see comments in method
+ <a href="./KVFlowTensor.html#KVFlowTensor:getvalue_int" title="Double_t KVFlowTensor::getvalue_int(Int_t )">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>))
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * <a class="funcname" name="KVFlowTensor:GetObject" href="src/KVFlowTensor.cxx.html#yDGjeD">GetObject</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> You can use this method to return the address of an object associated with your global variable.
+ This may be a list of particles, an intermediate object used to compute values, etc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVFlowTensor:getvalue_void" href="src/KVFlowTensor.cxx.html#slaQUB">getvalue_void</a>() const</span><br />
+<div class="funccomm"><pre> Protected method, called by <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>()
+ This method should return the 'principal' or 'default' value associated with this global variable.
+
+ For historical reasons, this method is 'const', which means that you cannot change the values
+ of any internal variables in this method (trying to do so will lead to your class not compiling).
+ If you need to get around this restriction, then you can use the following workaround:
+
+    const_cast&lt;<a href="./KVFlowTensor.html">KVFlowTensor</a>*&gt;(this)->MemberVariable = NewValue;
+
+ The restriction also applies to calling other methods of the class which are not 'const'.
+ If you need to do this, you can use the same workaround:
+
+   const_cast&lt;<a href="./KVFlowTensor.html">KVFlowTensor</a>*&gt;(this)->NotAConstMethod(someArguments);
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVFlowTensor:getvalue_int" href="src/KVFlowTensor.cxx.html#t1IltE">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> )</span><br />
+<div class="funccomm"><pre> Protected method, called by <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) and <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*)
+ If your variable calculates several different values, this method allows to access each value
+ based on a unique index number.
+
+ You should implement something like the following:
+
+   switch(index){
+         case 0:
+            return val0;
+            break;
+         case 1:
+            return val1;
+            break;
+   }
+
+ where 'val0' and 'val1' are the internal variables of your class corresponding to the
+ required values.
+
+ In order for <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*) to work, you need to associate each named value
+ with an index corresponding to the above 'switch' statement, <a href="./KVFlowTensor.html#KVFlowTensor:e" title="const TVector3&amp; KVFlowTensor::e(int i)">e</a>.g.
+
+     <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"val0"</span>, 0);
+     <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"val1"</span>, 1);
+
+ This should be done in the <a href="./KVFlowTensor.html#KVFlowTensor:init_KVFlowTensor" title="void KVFlowTensor::init_KVFlowTensor()">init_KVFlowTensor</a>() method.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFlowTensor:Calculate" href="src/KVFlowTensor.cxx.html#ukot9">Calculate</a>()</span><br />
+<div class="funccomm"><pre> <a href="./KVFlowTensor.html#KVFlowTensor:Calculate" title="void KVFlowTensor::Calculate()">Calculate</a> eigenvalues &amp; eigenvectors of tensor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFlowTensor:init_KVFlowTensor" href="src/KVFlowTensor.cxx.html#ryTS0D">init_KVFlowTensor</a>()</span><br />
+<div class="funccomm"><pre> PRIVATE method
+ Private initialisation method called by all constructors.
+ All member initialisations should be done here.
+
+ You should also (if your variable calculates several different quantities)
+ set up a correspondance between named values and index number
+ using method <a href="./KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*,<a href="./ListOfTypes.html#Int_t">Int_t</a>)
+ in order for <a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*) to work correctly.
+ The index numbers should be the same as in your <a href="./KVFlowTensor.html#KVFlowTensor:getvalue_int" title="Double_t KVFlowTensor::getvalue_int(Int_t )">getvalue_int</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) method.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFlowTensor:Fill" href="src/KVFlowTensor.cxx.html#UIelOE">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>* n)</span><br />
+<div class="funccomm"><pre> <a href="./KVFlowTensor.html#KVFlowTensor:Fill" title="void KVFlowTensor::Fill(KVNucleus* n)">Fill</a> tensor components with nucleus' momentum components in required
+ frame, using the required <a href="./KVFlowTensor.html#KVFlowTensor:weight" title="enum KVFlowTensor:: KVFlowTensor::weight">weight</a>
+ If option <span class="string">"DOUBLE"</span> is set, the chosen <a href="./KVFlowTensor.html#KVFlowTensor:weight" title="enum KVFlowTensor:: KVFlowTensor::weight">weight</a> will be doubled
+ (this is for the case where <a href="./KVFlowTensor.html#KVFlowTensor:e" title="const TVector3&amp; KVFlowTensor::e(int i)">e</a>.g. only forward hemisphere particles are included)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TRotation&amp; <a class="funcname" name="KVFlowTensor:GetAziReacPlaneRotation" href="src/KVFlowTensor.cxx.html#PciDxE">GetAziReacPlaneRotation</a>()</span><br />
+<div class="funccomm"><pre> Returns the azimuthal rotation around the beam axis required
+ to put the X-axis in the reaction plane defined by the beam axis
+ and the major axis (largest eignevalue) of the ellipsoid.
+ The azimuthal angle of the rotation is that of the major axis
+ in the forward direction.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TRotation&amp; <a class="funcname" name="KVFlowTensor:GetFlowReacPlaneRotation" href="src/KVFlowTensor.cxx.html#xQBpJB">GetFlowReacPlaneRotation</a>()</span><br />
+<div class="funccomm"><pre> Returns composition of two rotations:
+   - around Z-axis to put X-axis in reaction plane (see <a href="./KVFlowTensor.html#KVFlowTensor:GetAziReacPlaneRotation" title="const TRotation&amp; KVFlowTensor::GetAziReacPlaneRotation()">GetAziReacPlaneRotation</a>)
+   - around Y-axis to align Z-axis with flow (major) axis
+ In this rotated frame, theta is polar angle with respect to flow axis
+ and phi is azimuthal angle around flow axis (phi=0,180 =&gt; in-plane)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVFlowTensor:f" href="src/KVFlowTensor.h.html#aZYYj">f</a>(<span class="keyword">int</span> i) const</span><br />
+
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVFlowTensor.html#KVFlowTensor:fEVal" title="TVectorD KVFlowTensor::fEVal">fEVal</a>[i-1]; }</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Fri Jul 17 16:52:27 2015 </em><em>&raquo; Last generated: 2015-07-17 16:52</em><br />
+<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+</div>
+</div>
+</body>
+</html>
