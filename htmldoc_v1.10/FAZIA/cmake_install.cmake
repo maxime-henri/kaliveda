@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34")
+  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.2_x86_64_root-6.04")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -49,7 +49,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/LNS_2014" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/LNS_2014_Makefile")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/LNS_2014" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/LNS_2014_Makefile")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -57,7 +57,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/INDRAFAZIA" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/INDRAFAZIA_Makefile")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/INDRAFAZIA" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/INDRAFAZIA_Makefile")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -65,16 +65,16 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/ISOFAZIA" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/ISOFAZIA_Makefile")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/ISOFAZIA" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/ISOFAZIA_Makefile")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/geometry/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/particles/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/analysis/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/db/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/identification/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/geometry/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/particles/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/analysis/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/db/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R6/FAZIA/identification/cmake_install.cmake")
 
 endif()
 

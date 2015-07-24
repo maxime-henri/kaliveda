@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/base/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/base/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,36 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+VAMOS/base/CMakeFiles/G__VAMOSbase.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/CMakeFiles/G__VAMOSbase.dir/rule
+.PHONY : VAMOS/base/CMakeFiles/G__VAMOSbase.dir/rule
+
+# Convenience name for target.
+G__VAMOSbase: VAMOS/base/CMakeFiles/G__VAMOSbase.dir/rule
+.PHONY : G__VAMOSbase
+
+# fast build rule for target.
+G__VAMOSbase/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/G__VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/G__VAMOSbase.dir/build
+.PHONY : G__VAMOSbase/fast
+
+# Convenience name for target.
 VAMOS/base/CMakeFiles/VAMOSbase.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/CMakeFiles/VAMOSbase.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/CMakeFiles/VAMOSbase.dir/rule
 .PHONY : VAMOS/base/CMakeFiles/VAMOSbase.dir/rule
 
 # Convenience name for target.
@@ -154,29 +168,15 @@ VAMOSbase: VAMOS/base/CMakeFiles/VAMOSbase.dir/rule
 
 # fast build rule for target.
 VAMOSbase/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/build
 .PHONY : VAMOSbase/fast
-
-# Convenience name for target.
-VAMOS/base/CMakeFiles/libVAMOSbase.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/base/CMakeFiles/libVAMOSbase.rootmap.dir/rule
-.PHONY : VAMOS/base/CMakeFiles/libVAMOSbase.rootmap.dir/rule
-
-# Convenience name for target.
-libVAMOSbase.rootmap: VAMOS/base/CMakeFiles/libVAMOSbase.rootmap.dir/rule
-.PHONY : libVAMOSbase.rootmap
-
-# fast build rule for target.
-libVAMOSbase.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/libVAMOSbase.rootmap.dir/build.make VAMOS/base/CMakeFiles/libVAMOSbase.rootmap.dir/build
-.PHONY : libVAMOSbase.rootmap/fast
 
 G__VAMOSbase.o: G__VAMOSbase.cxx.o
 .PHONY : G__VAMOSbase.o
 
 # target to build an object file
 G__VAMOSbase.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/G__VAMOSbase.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/G__VAMOSbase.cxx.o
 .PHONY : G__VAMOSbase.cxx.o
 
 G__VAMOSbase.i: G__VAMOSbase.cxx.i
@@ -184,7 +184,7 @@ G__VAMOSbase.i: G__VAMOSbase.cxx.i
 
 # target to preprocess a source file
 G__VAMOSbase.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/G__VAMOSbase.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/G__VAMOSbase.cxx.i
 .PHONY : G__VAMOSbase.cxx.i
 
 G__VAMOSbase.s: G__VAMOSbase.cxx.s
@@ -192,7 +192,7 @@ G__VAMOSbase.s: G__VAMOSbase.cxx.s
 
 # target to generate assembly for a file
 G__VAMOSbase.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/G__VAMOSbase.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/G__VAMOSbase.cxx.s
 .PHONY : G__VAMOSbase.cxx.s
 
 LogFile.o: LogFile.cpp.o
@@ -200,7 +200,7 @@ LogFile.o: LogFile.cpp.o
 
 # target to build an object file
 LogFile.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/LogFile.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/LogFile.cpp.o
 .PHONY : LogFile.cpp.o
 
 LogFile.i: LogFile.cpp.i
@@ -208,7 +208,7 @@ LogFile.i: LogFile.cpp.i
 
 # target to preprocess a source file
 LogFile.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/LogFile.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/LogFile.cpp.i
 .PHONY : LogFile.cpp.i
 
 LogFile.s: LogFile.cpp.s
@@ -216,7 +216,7 @@ LogFile.s: LogFile.cpp.s
 
 # target to generate assembly for a file
 LogFile.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/LogFile.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/LogFile.cpp.s
 .PHONY : LogFile.cpp.s
 
 Random.o: Random.cpp.o
@@ -224,7 +224,7 @@ Random.o: Random.cpp.o
 
 # target to build an object file
 Random.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/Random.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/Random.cpp.o
 .PHONY : Random.cpp.o
 
 Random.i: Random.cpp.i
@@ -232,7 +232,7 @@ Random.i: Random.cpp.i
 
 # target to preprocess a source file
 Random.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/Random.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/Random.cpp.i
 .PHONY : Random.cpp.i
 
 Random.s: Random.cpp.s
@@ -240,7 +240,7 @@ Random.s: Random.cpp.s
 
 # target to generate assembly for a file
 Random.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/Random.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/base/CMakeFiles/VAMOSbase.dir/build.make VAMOS/base/CMakeFiles/VAMOSbase.dir/Random.cpp.s
 .PHONY : Random.cpp.s
 
 # Help Target
@@ -249,12 +249,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... G__VAMOSbase"
 	@echo "... VAMOSbase"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libVAMOSbase.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__VAMOSbase.o"
@@ -277,6 +277,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

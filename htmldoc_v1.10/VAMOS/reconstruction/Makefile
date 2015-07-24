@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/reconstruction/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/reconstruction/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,36 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+VAMOS/reconstruction/CMakeFiles/G__VAMOSreconstruction.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/CMakeFiles/G__VAMOSreconstruction.dir/rule
+.PHONY : VAMOS/reconstruction/CMakeFiles/G__VAMOSreconstruction.dir/rule
+
+# Convenience name for target.
+G__VAMOSreconstruction: VAMOS/reconstruction/CMakeFiles/G__VAMOSreconstruction.dir/rule
+.PHONY : G__VAMOSreconstruction
+
+# fast build rule for target.
+G__VAMOSreconstruction/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/G__VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/G__VAMOSreconstruction.dir/build
+.PHONY : G__VAMOSreconstruction/fast
+
+# Convenience name for target.
 VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/rule
 .PHONY : VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/rule
 
 # Convenience name for target.
@@ -154,29 +168,15 @@ VAMOSreconstruction: VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/rul
 
 # fast build rule for target.
 VAMOSreconstruction/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build
 .PHONY : VAMOSreconstruction/fast
-
-# Convenience name for target.
-VAMOS/reconstruction/CMakeFiles/libVAMOSreconstruction.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/reconstruction/CMakeFiles/libVAMOSreconstruction.rootmap.dir/rule
-.PHONY : VAMOS/reconstruction/CMakeFiles/libVAMOSreconstruction.rootmap.dir/rule
-
-# Convenience name for target.
-libVAMOSreconstruction.rootmap: VAMOS/reconstruction/CMakeFiles/libVAMOSreconstruction.rootmap.dir/rule
-.PHONY : libVAMOSreconstruction.rootmap
-
-# fast build rule for target.
-libVAMOSreconstruction.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/libVAMOSreconstruction.rootmap.dir/build.make VAMOS/reconstruction/CMakeFiles/libVAMOSreconstruction.rootmap.dir/build
-.PHONY : libVAMOSreconstruction.rootmap/fast
 
 G__VAMOSreconstruction.o: G__VAMOSreconstruction.cxx.o
 .PHONY : G__VAMOSreconstruction.o
 
 # target to build an object file
 G__VAMOSreconstruction.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/G__VAMOSreconstruction.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/G__VAMOSreconstruction.cxx.o
 .PHONY : G__VAMOSreconstruction.cxx.o
 
 G__VAMOSreconstruction.i: G__VAMOSreconstruction.cxx.i
@@ -184,7 +184,7 @@ G__VAMOSreconstruction.i: G__VAMOSreconstruction.cxx.i
 
 # target to preprocess a source file
 G__VAMOSreconstruction.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/G__VAMOSreconstruction.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/G__VAMOSreconstruction.cxx.i
 .PHONY : G__VAMOSreconstruction.cxx.i
 
 G__VAMOSreconstruction.s: G__VAMOSreconstruction.cxx.s
@@ -192,7 +192,7 @@ G__VAMOSreconstruction.s: G__VAMOSreconstruction.cxx.s
 
 # target to generate assembly for a file
 G__VAMOSreconstruction.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/G__VAMOSreconstruction.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/G__VAMOSreconstruction.cxx.s
 .PHONY : G__VAMOSreconstruction.cxx.s
 
 KVVAMOSReconTrajectory.o: KVVAMOSReconTrajectory.cpp.o
@@ -200,7 +200,7 @@ KVVAMOSReconTrajectory.o: KVVAMOSReconTrajectory.cpp.o
 
 # target to build an object file
 KVVAMOSReconTrajectory.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/KVVAMOSReconTrajectory.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/KVVAMOSReconTrajectory.cpp.o
 .PHONY : KVVAMOSReconTrajectory.cpp.o
 
 KVVAMOSReconTrajectory.i: KVVAMOSReconTrajectory.cpp.i
@@ -208,7 +208,7 @@ KVVAMOSReconTrajectory.i: KVVAMOSReconTrajectory.cpp.i
 
 # target to preprocess a source file
 KVVAMOSReconTrajectory.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/KVVAMOSReconTrajectory.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/KVVAMOSReconTrajectory.cpp.i
 .PHONY : KVVAMOSReconTrajectory.cpp.i
 
 KVVAMOSReconTrajectory.s: KVVAMOSReconTrajectory.cpp.s
@@ -216,7 +216,7 @@ KVVAMOSReconTrajectory.s: KVVAMOSReconTrajectory.cpp.s
 
 # target to generate assembly for a file
 KVVAMOSReconTrajectory.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/KVVAMOSReconTrajectory.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/KVVAMOSReconTrajectory.cpp.s
 .PHONY : KVVAMOSReconTrajectory.cpp.s
 
 ReconstructionSeDv.o: ReconstructionSeDv.cpp.o
@@ -224,7 +224,7 @@ ReconstructionSeDv.o: ReconstructionSeDv.cpp.o
 
 # target to build an object file
 ReconstructionSeDv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/ReconstructionSeDv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/ReconstructionSeDv.cpp.o
 .PHONY : ReconstructionSeDv.cpp.o
 
 ReconstructionSeDv.i: ReconstructionSeDv.cpp.i
@@ -232,7 +232,7 @@ ReconstructionSeDv.i: ReconstructionSeDv.cpp.i
 
 # target to preprocess a source file
 ReconstructionSeDv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/ReconstructionSeDv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/ReconstructionSeDv.cpp.i
 .PHONY : ReconstructionSeDv.cpp.i
 
 ReconstructionSeDv.s: ReconstructionSeDv.cpp.s
@@ -240,7 +240,7 @@ ReconstructionSeDv.s: ReconstructionSeDv.cpp.s
 
 # target to generate assembly for a file
 ReconstructionSeDv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/ReconstructionSeDv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/ReconstructionSeDv.cpp.s
 .PHONY : ReconstructionSeDv.cpp.s
 
 Reconstructionv.o: Reconstructionv.cpp.o
@@ -248,7 +248,7 @@ Reconstructionv.o: Reconstructionv.cpp.o
 
 # target to build an object file
 Reconstructionv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/Reconstructionv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/Reconstructionv.cpp.o
 .PHONY : Reconstructionv.cpp.o
 
 Reconstructionv.i: Reconstructionv.cpp.i
@@ -256,7 +256,7 @@ Reconstructionv.i: Reconstructionv.cpp.i
 
 # target to preprocess a source file
 Reconstructionv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/Reconstructionv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/Reconstructionv.cpp.i
 .PHONY : Reconstructionv.cpp.i
 
 Reconstructionv.s: Reconstructionv.cpp.s
@@ -264,7 +264,7 @@ Reconstructionv.s: Reconstructionv.cpp.s
 
 # target to generate assembly for a file
 Reconstructionv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/Reconstructionv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/build.make VAMOS/reconstruction/CMakeFiles/VAMOSreconstruction.dir/Reconstructionv.cpp.s
 .PHONY : Reconstructionv.cpp.s
 
 # Help Target
@@ -273,12 +273,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... G__VAMOSreconstruction"
 	@echo "... VAMOSreconstruction"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libVAMOSreconstruction.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__VAMOSreconstruction.o"
@@ -304,6 +304,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

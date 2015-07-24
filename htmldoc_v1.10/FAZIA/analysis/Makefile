@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/FAZIA/analysis/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/FAZIA/analysis/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/rule
 .PHONY : FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/rule
 
 # Convenience name for target.
@@ -154,29 +154,29 @@ FAZIAanalysis: FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/rule
 
 # fast build rule for target.
 FAZIAanalysis/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build
 .PHONY : FAZIAanalysis/fast
 
 # Convenience name for target.
-FAZIA/analysis/CMakeFiles/libFAZIAanalysis.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/CMakeFiles/libFAZIAanalysis.rootmap.dir/rule
-.PHONY : FAZIA/analysis/CMakeFiles/libFAZIAanalysis.rootmap.dir/rule
+FAZIA/analysis/CMakeFiles/G__FAZIAanalysis.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/analysis/CMakeFiles/G__FAZIAanalysis.dir/rule
+.PHONY : FAZIA/analysis/CMakeFiles/G__FAZIAanalysis.dir/rule
 
 # Convenience name for target.
-libFAZIAanalysis.rootmap: FAZIA/analysis/CMakeFiles/libFAZIAanalysis.rootmap.dir/rule
-.PHONY : libFAZIAanalysis.rootmap
+G__FAZIAanalysis: FAZIA/analysis/CMakeFiles/G__FAZIAanalysis.dir/rule
+.PHONY : G__FAZIAanalysis
 
 # fast build rule for target.
-libFAZIAanalysis.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/libFAZIAanalysis.rootmap.dir/build.make FAZIA/analysis/CMakeFiles/libFAZIAanalysis.rootmap.dir/build
-.PHONY : libFAZIAanalysis.rootmap/fast
+G__FAZIAanalysis/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/G__FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/G__FAZIAanalysis.dir/build
+.PHONY : G__FAZIAanalysis/fast
 
 G__FAZIAanalysis.o: G__FAZIAanalysis.cxx.o
 .PHONY : G__FAZIAanalysis.o
 
 # target to build an object file
 G__FAZIAanalysis.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/G__FAZIAanalysis.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/G__FAZIAanalysis.cxx.o
 .PHONY : G__FAZIAanalysis.cxx.o
 
 G__FAZIAanalysis.i: G__FAZIAanalysis.cxx.i
@@ -184,7 +184,7 @@ G__FAZIAanalysis.i: G__FAZIAanalysis.cxx.i
 
 # target to preprocess a source file
 G__FAZIAanalysis.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/G__FAZIAanalysis.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/G__FAZIAanalysis.cxx.i
 .PHONY : G__FAZIAanalysis.cxx.i
 
 G__FAZIAanalysis.s: G__FAZIAanalysis.cxx.s
@@ -192,7 +192,7 @@ G__FAZIAanalysis.s: G__FAZIAanalysis.cxx.s
 
 # target to generate assembly for a file
 G__FAZIAanalysis.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/G__FAZIAanalysis.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/G__FAZIAanalysis.cxx.s
 .PHONY : G__FAZIAanalysis.cxx.s
 
 KVFAZIARawDataAnalyser.o: KVFAZIARawDataAnalyser.cpp.o
@@ -200,7 +200,7 @@ KVFAZIARawDataAnalyser.o: KVFAZIARawDataAnalyser.cpp.o
 
 # target to build an object file
 KVFAZIARawDataAnalyser.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataAnalyser.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataAnalyser.cpp.o
 .PHONY : KVFAZIARawDataAnalyser.cpp.o
 
 KVFAZIARawDataAnalyser.i: KVFAZIARawDataAnalyser.cpp.i
@@ -208,7 +208,7 @@ KVFAZIARawDataAnalyser.i: KVFAZIARawDataAnalyser.cpp.i
 
 # target to preprocess a source file
 KVFAZIARawDataAnalyser.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataAnalyser.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataAnalyser.cpp.i
 .PHONY : KVFAZIARawDataAnalyser.cpp.i
 
 KVFAZIARawDataAnalyser.s: KVFAZIARawDataAnalyser.cpp.s
@@ -216,7 +216,7 @@ KVFAZIARawDataAnalyser.s: KVFAZIARawDataAnalyser.cpp.s
 
 # target to generate assembly for a file
 KVFAZIARawDataAnalyser.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataAnalyser.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataAnalyser.cpp.s
 .PHONY : KVFAZIARawDataAnalyser.cpp.s
 
 KVFAZIARawDataReader.o: KVFAZIARawDataReader.cpp.o
@@ -224,7 +224,7 @@ KVFAZIARawDataReader.o: KVFAZIARawDataReader.cpp.o
 
 # target to build an object file
 KVFAZIARawDataReader.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReader.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReader.cpp.o
 .PHONY : KVFAZIARawDataReader.cpp.o
 
 KVFAZIARawDataReader.i: KVFAZIARawDataReader.cpp.i
@@ -232,7 +232,7 @@ KVFAZIARawDataReader.i: KVFAZIARawDataReader.cpp.i
 
 # target to preprocess a source file
 KVFAZIARawDataReader.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReader.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReader.cpp.i
 .PHONY : KVFAZIARawDataReader.cpp.i
 
 KVFAZIARawDataReader.s: KVFAZIARawDataReader.cpp.s
@@ -240,7 +240,7 @@ KVFAZIARawDataReader.s: KVFAZIARawDataReader.cpp.s
 
 # target to generate assembly for a file
 KVFAZIARawDataReader.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReader.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReader.cpp.s
 .PHONY : KVFAZIARawDataReader.cpp.s
 
 KVFAZIARawDataReconstructor.o: KVFAZIARawDataReconstructor.cpp.o
@@ -248,7 +248,7 @@ KVFAZIARawDataReconstructor.o: KVFAZIARawDataReconstructor.cpp.o
 
 # target to build an object file
 KVFAZIARawDataReconstructor.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReconstructor.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReconstructor.cpp.o
 .PHONY : KVFAZIARawDataReconstructor.cpp.o
 
 KVFAZIARawDataReconstructor.i: KVFAZIARawDataReconstructor.cpp.i
@@ -256,7 +256,7 @@ KVFAZIARawDataReconstructor.i: KVFAZIARawDataReconstructor.cpp.i
 
 # target to preprocess a source file
 KVFAZIARawDataReconstructor.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReconstructor.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReconstructor.cpp.i
 .PHONY : KVFAZIARawDataReconstructor.cpp.i
 
 KVFAZIARawDataReconstructor.s: KVFAZIARawDataReconstructor.cpp.s
@@ -264,7 +264,7 @@ KVFAZIARawDataReconstructor.s: KVFAZIARawDataReconstructor.cpp.s
 
 # target to generate assembly for a file
 KVFAZIARawDataReconstructor.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReconstructor.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIARawDataReconstructor.cpp.s
 .PHONY : KVFAZIARawDataReconstructor.cpp.s
 
 KVFAZIAReader.o: KVFAZIAReader.cpp.o
@@ -272,7 +272,7 @@ KVFAZIAReader.o: KVFAZIAReader.cpp.o
 
 # target to build an object file
 KVFAZIAReader.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReader.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReader.cpp.o
 .PHONY : KVFAZIAReader.cpp.o
 
 KVFAZIAReader.i: KVFAZIAReader.cpp.i
@@ -280,7 +280,7 @@ KVFAZIAReader.i: KVFAZIAReader.cpp.i
 
 # target to preprocess a source file
 KVFAZIAReader.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReader.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReader.cpp.i
 .PHONY : KVFAZIAReader.cpp.i
 
 KVFAZIAReader.s: KVFAZIAReader.cpp.s
@@ -288,7 +288,7 @@ KVFAZIAReader.s: KVFAZIAReader.cpp.s
 
 # target to generate assembly for a file
 KVFAZIAReader.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReader.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReader.cpp.s
 .PHONY : KVFAZIAReader.cpp.s
 
 KVFAZIAReconDataAnalyser.o: KVFAZIAReconDataAnalyser.cpp.o
@@ -296,7 +296,7 @@ KVFAZIAReconDataAnalyser.o: KVFAZIAReconDataAnalyser.cpp.o
 
 # target to build an object file
 KVFAZIAReconDataAnalyser.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReconDataAnalyser.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReconDataAnalyser.cpp.o
 .PHONY : KVFAZIAReconDataAnalyser.cpp.o
 
 KVFAZIAReconDataAnalyser.i: KVFAZIAReconDataAnalyser.cpp.i
@@ -304,7 +304,7 @@ KVFAZIAReconDataAnalyser.i: KVFAZIAReconDataAnalyser.cpp.i
 
 # target to preprocess a source file
 KVFAZIAReconDataAnalyser.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReconDataAnalyser.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReconDataAnalyser.cpp.i
 .PHONY : KVFAZIAReconDataAnalyser.cpp.i
 
 KVFAZIAReconDataAnalyser.s: KVFAZIAReconDataAnalyser.cpp.s
@@ -312,7 +312,7 @@ KVFAZIAReconDataAnalyser.s: KVFAZIAReconDataAnalyser.cpp.s
 
 # target to generate assembly for a file
 KVFAZIAReconDataAnalyser.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReconDataAnalyser.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIAReconDataAnalyser.cpp.s
 .PHONY : KVFAZIAReconDataAnalyser.cpp.s
 
 KVFAZIASelector.o: KVFAZIASelector.cpp.o
@@ -320,7 +320,7 @@ KVFAZIASelector.o: KVFAZIASelector.cpp.o
 
 # target to build an object file
 KVFAZIASelector.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIASelector.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIASelector.cpp.o
 .PHONY : KVFAZIASelector.cpp.o
 
 KVFAZIASelector.i: KVFAZIASelector.cpp.i
@@ -328,7 +328,7 @@ KVFAZIASelector.i: KVFAZIASelector.cpp.i
 
 # target to preprocess a source file
 KVFAZIASelector.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIASelector.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIASelector.cpp.i
 .PHONY : KVFAZIASelector.cpp.i
 
 KVFAZIASelector.s: KVFAZIASelector.cpp.s
@@ -336,7 +336,7 @@ KVFAZIASelector.s: KVFAZIASelector.cpp.s
 
 # target to generate assembly for a file
 KVFAZIASelector.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIASelector.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/build.make FAZIA/analysis/CMakeFiles/FAZIAanalysis.dir/KVFAZIASelector.cpp.s
 .PHONY : KVFAZIASelector.cpp.s
 
 # Help Target
@@ -346,11 +346,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... FAZIAanalysis"
+	@echo "... G__FAZIAanalysis"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libFAZIAanalysis.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__FAZIAanalysis.o"
@@ -385,6 +385,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

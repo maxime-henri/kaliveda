@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVIndra/calibration/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVIndra/calibration/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,36 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+KVIndra/calibration/CMakeFiles/G__KVIndracalibration.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/CMakeFiles/G__KVIndracalibration.dir/rule
+.PHONY : KVIndra/calibration/CMakeFiles/G__KVIndracalibration.dir/rule
+
+# Convenience name for target.
+G__KVIndracalibration: KVIndra/calibration/CMakeFiles/G__KVIndracalibration.dir/rule
+.PHONY : G__KVIndracalibration
+
+# fast build rule for target.
+G__KVIndracalibration/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/G__KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/G__KVIndracalibration.dir/build
+.PHONY : G__KVIndracalibration/fast
+
+# Convenience name for target.
 KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/rule
 .PHONY : KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/rule
 
 # Convenience name for target.
@@ -154,29 +168,15 @@ KVIndracalibration: KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/rule
 
 # fast build rule for target.
 KVIndracalibration/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build
 .PHONY : KVIndracalibration/fast
-
-# Convenience name for target.
-KVIndra/calibration/CMakeFiles/libKVIndracalibration.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/calibration/CMakeFiles/libKVIndracalibration.rootmap.dir/rule
-.PHONY : KVIndra/calibration/CMakeFiles/libKVIndracalibration.rootmap.dir/rule
-
-# Convenience name for target.
-libKVIndracalibration.rootmap: KVIndra/calibration/CMakeFiles/libKVIndracalibration.rootmap.dir/rule
-.PHONY : libKVIndracalibration.rootmap
-
-# fast build rule for target.
-libKVIndracalibration.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/libKVIndracalibration.rootmap.dir/build.make KVIndra/calibration/CMakeFiles/libKVIndracalibration.rootmap.dir/build
-.PHONY : libKVIndracalibration.rootmap/fast
 
 G__KVIndracalibration.o: G__KVIndracalibration.cxx.o
 .PHONY : G__KVIndracalibration.o
 
 # target to build an object file
 G__KVIndracalibration.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/G__KVIndracalibration.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/G__KVIndracalibration.cxx.o
 .PHONY : G__KVIndracalibration.cxx.o
 
 G__KVIndracalibration.i: G__KVIndracalibration.cxx.i
@@ -184,7 +184,7 @@ G__KVIndracalibration.i: G__KVIndracalibration.cxx.i
 
 # target to preprocess a source file
 G__KVIndracalibration.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/G__KVIndracalibration.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/G__KVIndracalibration.cxx.i
 .PHONY : G__KVIndracalibration.cxx.i
 
 G__KVIndracalibration.s: G__KVIndracalibration.cxx.s
@@ -192,7 +192,7 @@ G__KVIndracalibration.s: G__KVIndracalibration.cxx.s
 
 # target to generate assembly for a file
 G__KVIndracalibration.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/G__KVIndracalibration.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/G__KVIndracalibration.cxx.s
 .PHONY : G__KVIndracalibration.cxx.s
 
 KVChannelEnergyAlpha.o: KVChannelEnergyAlpha.cpp.o
@@ -200,7 +200,7 @@ KVChannelEnergyAlpha.o: KVChannelEnergyAlpha.cpp.o
 
 # target to build an object file
 KVChannelEnergyAlpha.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelEnergyAlpha.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelEnergyAlpha.cpp.o
 .PHONY : KVChannelEnergyAlpha.cpp.o
 
 KVChannelEnergyAlpha.i: KVChannelEnergyAlpha.cpp.i
@@ -208,7 +208,7 @@ KVChannelEnergyAlpha.i: KVChannelEnergyAlpha.cpp.i
 
 # target to preprocess a source file
 KVChannelEnergyAlpha.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelEnergyAlpha.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelEnergyAlpha.cpp.i
 .PHONY : KVChannelEnergyAlpha.cpp.i
 
 KVChannelEnergyAlpha.s: KVChannelEnergyAlpha.cpp.s
@@ -216,7 +216,7 @@ KVChannelEnergyAlpha.s: KVChannelEnergyAlpha.cpp.s
 
 # target to generate assembly for a file
 KVChannelEnergyAlpha.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelEnergyAlpha.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelEnergyAlpha.cpp.s
 .PHONY : KVChannelEnergyAlpha.cpp.s
 
 KVChannelVolt.o: KVChannelVolt.cpp.o
@@ -224,7 +224,7 @@ KVChannelVolt.o: KVChannelVolt.cpp.o
 
 # target to build an object file
 KVChannelVolt.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelVolt.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelVolt.cpp.o
 .PHONY : KVChannelVolt.cpp.o
 
 KVChannelVolt.i: KVChannelVolt.cpp.i
@@ -232,7 +232,7 @@ KVChannelVolt.i: KVChannelVolt.cpp.i
 
 # target to preprocess a source file
 KVChannelVolt.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelVolt.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelVolt.cpp.i
 .PHONY : KVChannelVolt.cpp.i
 
 KVChannelVolt.s: KVChannelVolt.cpp.s
@@ -240,7 +240,7 @@ KVChannelVolt.s: KVChannelVolt.cpp.s
 
 # target to generate assembly for a file
 KVChannelVolt.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelVolt.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVChannelVolt.cpp.s
 .PHONY : KVChannelVolt.cpp.s
 
 KVFunctionCal.o: KVFunctionCal.cpp.o
@@ -248,7 +248,7 @@ KVFunctionCal.o: KVFunctionCal.cpp.o
 
 # target to build an object file
 KVFunctionCal.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVFunctionCal.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVFunctionCal.cpp.o
 .PHONY : KVFunctionCal.cpp.o
 
 KVFunctionCal.i: KVFunctionCal.cpp.i
@@ -256,7 +256,7 @@ KVFunctionCal.i: KVFunctionCal.cpp.i
 
 # target to preprocess a source file
 KVFunctionCal.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVFunctionCal.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVFunctionCal.cpp.i
 .PHONY : KVFunctionCal.cpp.i
 
 KVFunctionCal.s: KVFunctionCal.cpp.s
@@ -264,7 +264,7 @@ KVFunctionCal.s: KVFunctionCal.cpp.s
 
 # target to generate assembly for a file
 KVFunctionCal.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVFunctionCal.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVFunctionCal.cpp.s
 .PHONY : KVFunctionCal.cpp.s
 
 KVLightEnergyCsIFull.o: KVLightEnergyCsIFull.cpp.o
@@ -272,7 +272,7 @@ KVLightEnergyCsIFull.o: KVLightEnergyCsIFull.cpp.o
 
 # target to build an object file
 KVLightEnergyCsIFull.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVLightEnergyCsIFull.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVLightEnergyCsIFull.cpp.o
 .PHONY : KVLightEnergyCsIFull.cpp.o
 
 KVLightEnergyCsIFull.i: KVLightEnergyCsIFull.cpp.i
@@ -280,7 +280,7 @@ KVLightEnergyCsIFull.i: KVLightEnergyCsIFull.cpp.i
 
 # target to preprocess a source file
 KVLightEnergyCsIFull.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVLightEnergyCsIFull.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVLightEnergyCsIFull.cpp.i
 .PHONY : KVLightEnergyCsIFull.cpp.i
 
 KVLightEnergyCsIFull.s: KVLightEnergyCsIFull.cpp.s
@@ -288,7 +288,7 @@ KVLightEnergyCsIFull.s: KVLightEnergyCsIFull.cpp.s
 
 # target to generate assembly for a file
 KVLightEnergyCsIFull.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVLightEnergyCsIFull.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVLightEnergyCsIFull.cpp.s
 .PHONY : KVLightEnergyCsIFull.cpp.s
 
 KVVoltEnergy.o: KVVoltEnergy.cpp.o
@@ -296,7 +296,7 @@ KVVoltEnergy.o: KVVoltEnergy.cpp.o
 
 # target to build an object file
 KVVoltEnergy.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVVoltEnergy.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVVoltEnergy.cpp.o
 .PHONY : KVVoltEnergy.cpp.o
 
 KVVoltEnergy.i: KVVoltEnergy.cpp.i
@@ -304,7 +304,7 @@ KVVoltEnergy.i: KVVoltEnergy.cpp.i
 
 # target to preprocess a source file
 KVVoltEnergy.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVVoltEnergy.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVVoltEnergy.cpp.i
 .PHONY : KVVoltEnergy.cpp.i
 
 KVVoltEnergy.s: KVVoltEnergy.cpp.s
@@ -312,7 +312,7 @@ KVVoltEnergy.s: KVVoltEnergy.cpp.s
 
 # target to generate assembly for a file
 KVVoltEnergy.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVVoltEnergy.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/build.make KVIndra/calibration/CMakeFiles/KVIndracalibration.dir/KVVoltEnergy.cpp.s
 .PHONY : KVVoltEnergy.cpp.s
 
 # Help Target
@@ -321,12 +321,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... G__KVIndracalibration"
 	@echo "... KVIndracalibration"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libKVIndracalibration.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVIndracalibration.o"
@@ -358,6 +358,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

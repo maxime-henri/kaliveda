@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Fri Jul 17 16:52:33 2015            -->
+<!--   Date: Fri Jul 24 18:06:07 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
+<div id="root_header"></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//$Id: <a href="../KVString.html">KVString</a>.cpp,v 1.15 2008/04/04 13:08:00 franklan Exp $</span>
 
@@ -48,43 +48,43 @@ ClassImp(<a href="../KVString.html">KVString</a>)
 <span class="comment">// <a href="../KVString.html">KVString</a></span>
 <span class="comment">//</span>
 <span class="comment">// Allows backwards compatibility with ROOT v3.10/02 onwards.</span>
-<span class="comment">// <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) or overloads">Tokenize</a> and <a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a> methods are added here if they don't exist</span>
+<span class="comment">// <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) const or overloads">Tokenize</a> and <a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a> methods are added here if they don't exist</span>
 <span class="comment">// in the version of ROOT being used.</span>
 <span class="comment">//</span>
-<span class="comment">// <a href="../#TString:IsFloat" title="Bool_t TString::IsFloat()">IsFloat</a>() method is added: returns <a href="../ListOfTypes.html#bool">true</a> if string is a floating-point number, i.e. if it</span>
-<span class="comment">//              has any of following formats (only first one returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> with <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>()):</span>
+<span class="comment">// <a href="../#TString:IsFloat" title="Bool_t TString::IsFloat() const">IsFloat</a>() method is added: returns true if string is a floating-point number, i.e. if it</span>
+<span class="comment">//              has any of following formats (only first one returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> with <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>()):</span>
 <span class="comment">//      64320</span>
 <span class="comment">//      6.4320  6,4320</span>
 <span class="comment">//      6.43e20   6.43E20 6,43e20</span>
 <span class="comment">//      6.43e-20  6.43E-20 6,43e-20</span>
 <span class="comment">//              </span>
-<span class="comment">// Also <a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>() and <a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>() are extended to include the following possibilities:</span>
+<span class="comment">// Also <a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>() and <a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>() are extended to include the following possibilities:</span>
 <span class="comment">//</span>
-<span class="comment">// <a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>(): with string=<span class="string">"123 456"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>() gives value=123</span>
-<span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>() gives value=123456</span>
-<span class="comment">// <a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>(): with string=<span class="string">"12,34"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>() gives value=12</span>
-<span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>() gives value=12.34</span>
+<span class="comment">// <a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>(): with string=<span class="string">"123 456"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>() gives value=123</span>
+<span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>() gives value=123456</span>
+<span class="comment">// <a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>(): with string=<span class="string">"12,34"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>() gives value=12</span>
+<span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>() gives value=12.34</span>
 <span class="comment">//</span>
-<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() can be used to loop over items in</span>
+<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() can be used to loop over items in</span>
 <span class="comment">// a string separated by the delimiter character given as argument</span>
-<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>().</span>
+<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>().</span>
 <span class="comment">//</span>
 <span class="comment">// Example:</span>
 <span class="comment">//   <a href="../KVString.html">KVString</a> str(<span class="string">"First | Second | Third"</span>);</span>
-<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">"|"</span>);</span>
-<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() ){</span>
-<span class="comment">//     <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>().<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;</span>
+<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">"|"</span>);</span>
+<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() ){</span>
+<span class="comment">//     cout &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>().<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;</span>
 <span class="comment">//   }</span>
 <span class="comment">//</span>
 <span class="comment">// This will give the following output:</span>
 <span class="comment">//</span>
-<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a></span>
+<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a></span>
 <span class="comment">//  Second</span>
 <span class="comment">//  Third</span>
 <span class="comment">//</span>
-<span class="comment">// or, if <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a> is called with argument strip_whitespace=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>,</span>
+<span class="comment">// or, if <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a> is called with argument strip_whitespace=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>,</span>
 <span class="comment">//</span>
-<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a></span>
+<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a></span>
 <span class="comment">// Second</span>
 <span class="comment">// Third</span>
 <span class="comment">//</span>
@@ -96,9 +96,9 @@ ClassImp(<a href="../KVString.html">KVString</a>)
 }
 
 <span class="cpp">#ifdef __WITHOUT_TSTRING_TOKENIZE</span>
-TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) or overloads">Tokenize</a>(<span class="keyword">const</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> &amp; delim) <span class="keyword">const</span>
+TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) const or overloads">Tokenize</a>(<span class="keyword">const</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> &amp; delim) <span class="keyword">const</span>
 {
-   <span class="comment">// This function is used to isolate sequential tokens in a <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>.</span>
+   <span class="comment">// This function is used to isolate sequential tokens in a <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>.</span>
    <span class="comment">// These tokens are separated in the string by at least one of the</span>
    <span class="comment">// characters in delim. The returned array contains the tokens</span>
    <span class="comment">// as TObjString's. The returned array is the owner of the objects,</span>
@@ -107,10 +107,10 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    std::list &lt; <a href="../ListOfTypes.html#Int_t">Int_t</a> &gt; splitIndex;
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i, start, nrDiff = 0;
-   <span class="keyword">for</span> (i = 0; i &lt; delim.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>(); i++) {
+   <span class="keyword">for</span> (i = 0; i &lt; delim.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>(); i++) {
       start = 0;
-      <span class="keyword">while</span> (start &lt; <a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>()) {
-         <a href="../ListOfTypes.html#Int_t">Int_t</a> pos = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(delim(i), start);
+      <span class="keyword">while</span> (start &lt; <a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>()) {
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> pos = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>(delim(i), start);
          <span class="keyword">if</span> (pos == <a href="../ListOfTypes.html#Ssiz_t">kNPOS</a>)
             <span class="keyword">break</span>;
          splitIndex.push_back(pos);
@@ -119,7 +119,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
       <span class="keyword">if</span> (start &gt; 0)
          nrDiff++;
    }
-   splitIndex.push_back(<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>());
+   splitIndex.push_back(<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>());
 
    <span class="keyword">if</span> (nrDiff &gt; 1)
       splitIndex.sort();
@@ -138,7 +138,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 <span class="cpp">#endif</span>
       <a href="../ListOfTypes.html#Int_t">Int_t</a> stop = *it;
       <span class="keyword">if</span> (stop - 1 &gt;= start + 1) {
-         <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> tok = (*<span class="keyword">this</span>) (start + 1, stop - start - 1);
+         <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> tok = (*<span class="keyword">this</span>) (start + 1, stop - start - 1);
          TObjString *objstr = <span class="keyword">new</span> TObjString(tok);
          arr-&gt;Add(objstr);
       }
@@ -150,15 +150,15 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 <span class="cpp">#endif</span>
 
 <span class="cpp">#ifdef __WITH_KVSTRING_ISDIGIT</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>() <span class="keyword">const</span>
 {
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if all characters in string are digits (0-9) or whitespaces,</span>
+   <span class="comment">// Returns true if all characters in string are digits (0-9) or whitespaces,</span>
    <span class="comment">// i.e. <span class="string">"123456"</span> and <span class="string">"123 456"</span> are both valid integer strings.</span>
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">false</a> in case string length is 0 or string contains other</span>
+   <span class="comment">// Returns false in case string length is 0 or string contains other</span>
    <span class="comment">// characters or only whitespace.</span>
 
-   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data()">Data</a>();
-   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>();
+   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data() const">Data</a>();
+   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>();
    <span class="keyword">if</span> (len == 0) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> b = 0, d = 0;
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> i = 0; i &lt; len; ++i) {
@@ -173,77 +173,77 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 <span class="cpp">#endif</span>
 
 <span class="cpp">#ifdef __WITH_KVSTRING_REMOVE</span>
-<a href="../KVString.html">KVString</a> &amp; <a href="../KVString.html">KVString</a>::<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::EStripType st, <span class="keyword">char</span> c)
+<a href="../KVString.html">KVString</a> &amp; <a href="../KVString.html">KVString</a>::<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::EStripType st, <span class="keyword">char</span> c)
 {
-   <span class="comment">// <a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a> <a href="../ListOfTypes.html#char">char</a> c at begin and/or end of string (like <a href="../#TString:Strip" title="TSubString TString::Strip(TString::EStripType s=kTrailing,char c=' ')">Strip</a>() but</span>
+   <span class="comment">// <a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a> <a href="../ListOfTypes.html#char">char</a> c at begin and/or end of string (like <a href="../#TString:Strip" title="TSubString TString::Strip(TString::EStripType s = kTrailing, char c = ' ') const">Strip</a>() but</span>
    <span class="comment">// modifies directly the string.</span>
-   *<span class="keyword">this</span> = <a href="../#TString:Strip" title="TSubString TString::Strip(TString::EStripType s=kTrailing,char c=' ')">Strip</a>(st, c);
+   *<span class="keyword">this</span> = <a href="../#TString:Strip" title="TSubString TString::Strip(TString::EStripType s = kTrailing, char c = ' ') const">Strip</a>(st, c);
    <span class="keyword">return</span> *<span class="keyword">this</span>;
 }
 <span class="cpp">#endif</span>
 
 <span class="cpp">#ifdef __WITH_KVSTRING_ATOI</span>
-<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>() <span class="keyword">const</span>
 {
-   <span class="comment">//Enhanced version of <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>().</span>
-   <span class="comment">//<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>(): with string=<span class="string">"123 456"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>() gives value=123</span>
-   <span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>() gives value=123456</span>
+   <span class="comment">//Enhanced version of <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>().</span>
+   <span class="comment">//<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>(): with string=<span class="string">"123 456"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>() gives value=123</span>
+   <span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>() gives value=123456</span>
 
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> end = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(<span class="string">" "</span>);
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> end = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>(<span class="string">" "</span>);
    <span class="comment">//if no whitespaces in string, just use atoi()</span>
    <span class="keyword">if</span> (end == -1)
-      <span class="keyword">return</span> atoi(<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+      <span class="keyword">return</span> atoi(<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>());
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> start = 0;
-   <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> tmp;
+   <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> tmp;
    <span class="keyword">while</span> (end &gt; -1) {
       tmp += (*<span class="keyword">this</span>) (start, end - start);
       start = end + 1;
-      end = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(<span class="string">" "</span>, start);
+      end = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>(<span class="string">" "</span>, start);
    }
-   end = <a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>();
+   end = <a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>();
    tmp += (*<span class="keyword">this</span>) (start, end - start);
-   <span class="keyword">return</span> atoi(tmp.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+   <span class="keyword">return</span> atoi(tmp.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>());
 }
 <span class="cpp">#endif</span>
 
 <span class="cpp">#ifdef __WITH_KVSTRING_ATOF</span>
-<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>() <span class="keyword">const</span>
 {
-   <span class="comment">//Enhanced version of <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>().</span>
-   <span class="comment">//<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>(): with string=<span class="string">"12,34"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>() gives value=12</span>
-   <span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>() gives value=12.34</span>
+   <span class="comment">//Enhanced version of <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>().</span>
+   <span class="comment">//<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>(): with string=<span class="string">"12,34"</span>, <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>() gives value=12</span>
+   <span class="comment">//              <a href="../KVString.html">KVString</a>::<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>() gives value=12.34</span>
 
    <span class="comment">//look for a comma and some whitespace</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> comma = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(<span class="string">","</span>);
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> end = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(<span class="string">" "</span>);
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> comma = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>(<span class="string">","</span>);
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> end = <a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>(<span class="string">" "</span>);
    <span class="comment">//if no commas &amp; no whitespace in string, just use atof()</span>
    <span class="keyword">if</span> (comma == -1 &amp;&amp; end == -1)
-      <span class="keyword">return</span> atof(<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
-   <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> tmp = *<span class="keyword">this</span>;
+      <span class="keyword">return</span> atof(<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>());
+   <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> tmp = *<span class="keyword">this</span>;
    <span class="keyword">if</span> (comma &gt; -1) {
       <span class="comment">//replace comma with full stop</span>
-      tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(comma, 1, <span class="string">"."</span>);
+      tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(comma, 1, <span class="string">"."</span>);
    }
    <span class="comment">//no whitespace ?</span>
    <span class="keyword">if</span> (end == -1)
-      <span class="keyword">return</span> atof(tmp.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+      <span class="keyword">return</span> atof(tmp.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>());
    <span class="comment">//remove whitespace</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> start = 0;
-   <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> tmp2;
+   <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> tmp2;
    <span class="keyword">while</span> (end &gt; -1) {
       tmp2 += tmp(start, end - start);
       start = end + 1;
-      end = tmp.<a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(<span class="string">" "</span>, start);
+      end = tmp.<a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>(<span class="string">" "</span>, start);
    }
-   end = tmp.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>();
+   end = tmp.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>();
    tmp2 += tmp(start, end - start);
-   <span class="keyword">return</span> atof(tmp2.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+   <span class="keyword">return</span> atof(tmp2.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>());
 }
 <span class="cpp">#endif</span>
 
 <span class="cpp">#ifdef __WITH_KVSTRING_ISFLOAT</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsFloat" title="Bool_t TString::IsFloat()">IsFloat</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsFloat" title="Bool_t TString::IsFloat() const">IsFloat</a>() <span class="keyword">const</span>
 {
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if string contains a floating point or integer number</span>
    <span class="comment">// Examples of valid formats are:</span>
@@ -254,49 +254,49 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    <span class="comment">//    6.43e20   6.43E20    6,43e20</span>
    <span class="comment">//    6.43e-20  6.43E-20   6,43e-20</span>
 
-   <span class="comment">//we first check if we have an integer, in this case, <a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>() will be <a href="../ListOfTypes.html#bool">true</a> straight away</span>
-   <span class="keyword">if</span> (<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>()) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   <span class="comment">//we first check if we have an integer, in this case, <a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>() will be true straight away</span>
+   <span class="keyword">if</span> (<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>()) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 
-   <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> tmp = *<span class="keyword">this</span>;
+   <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> tmp = *<span class="keyword">this</span>;
    <span class="comment">//now we look for occurrences of <span class="string">'.'</span>, <span class="string">','</span>, e', <span class="string">'E'</span>, <span class="string">'+'</span>, <span class="string">'-'</span> and replace each</span>
-   <span class="comment">//with <span class="string">' '</span>. if it is a floating point, <a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>() will then return <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
+   <span class="comment">//with <span class="string">' '</span>. if it is a floating point, <a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>() will then return <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i_dot, i_e, i_plus, i_minus, i_comma;
    i_dot = i_e = i_plus = i_minus = i_comma = -1;
 
-   i_dot = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>(<span class="string">'.'</span>);
-   <span class="keyword">if</span> (i_dot &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(i_dot, 1, <span class="string">" "</span>, 1);
-   i_comma = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>(<span class="string">','</span>);
-   <span class="keyword">if</span> (i_comma &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(i_comma, 1, <span class="string">" "</span>, 1);
-   i_e = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>(<span class="string">'e'</span>);
+   i_dot = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>(<span class="string">'.'</span>);
+   <span class="keyword">if</span> (i_dot &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(i_dot, 1, <span class="string">" "</span>, 1);
+   i_comma = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>(<span class="string">','</span>);
+   <span class="keyword">if</span> (i_comma &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(i_comma, 1, <span class="string">" "</span>, 1);
+   i_e = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>(<span class="string">'e'</span>);
    <span class="keyword">if</span> (i_e &gt; -1)
-      tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(i_e, 1, <span class="string">" "</span>, 1);
+      tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(i_e, 1, <span class="string">" "</span>, 1);
    <span class="keyword">else</span> {
       <span class="comment">//try for a capital <span class="string">"E"</span></span>
-      i_e = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>(<span class="string">'E'</span>);
-      <span class="keyword">if</span> (i_e &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(i_e, 1, <span class="string">" "</span>, 1);
+      i_e = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>(<span class="string">'E'</span>);
+      <span class="keyword">if</span> (i_e &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(i_e, 1, <span class="string">" "</span>, 1);
    }
-   i_plus = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>(<span class="string">'+'</span>);
-   <span class="keyword">if</span> (i_plus &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(i_plus, 1, <span class="string">" "</span>, 1);
-   i_minus = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>(<span class="string">'-'</span>);
-   <span class="keyword">if</span> (i_minus &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a>(i_minus, 1, <span class="string">" "</span>, 1);
+   i_plus = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>(<span class="string">'+'</span>);
+   <span class="keyword">if</span> (i_plus &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(i_plus, 1, <span class="string">" "</span>, 1);
+   i_minus = tmp.<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>(<span class="string">'-'</span>);
+   <span class="keyword">if</span> (i_minus &gt; -1) tmp.<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a>(i_minus, 1, <span class="string">" "</span>, 1);
 
    <span class="comment">//test if it is now uniquely composed of numbers</span>
-   <span class="keyword">return</span> tmp.<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>();
+   <span class="keyword">return</span> tmp.<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>();
 }
 <span class="cpp">#endif</span>
 
-<a name="O7nP8D"></a><a href="../KVString.html">KVString</a> &amp; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Substitute" title="KVString&amp; KVString::Substitute(const Char_t c1,const Char_t c2)">Substitute</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> c1, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> c2)
+<a name="O7nP8D"></a><a href="../KVString.html">KVString</a> &amp; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Substitute" title="KVString&amp; KVString::Substitute(const Char_t c1, const Char_t c2)">Substitute</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> c1, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> c2)
 {
-   <span class="comment">//<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos,Ssiz_t n,const char* cs) or overloads">Replace</a> every occurence of 'c1' with 'c2'</span>
-   <a href="../#TString:ReplaceAll" title="TString&amp; TString::ReplaceAll(const TString&amp; s1,const TString&amp; s2) or overloads">ReplaceAll</a>(&amp;c1, 1, &amp;c2, 1);
+   <span class="comment">//<a href="../#TString:Replace" title="TString&amp; TString::Replace(Ssiz_t pos, Ssiz_t n, const char* s) or overloads">Replace</a> every occurence of 'c1' with 'c2'</span>
+   <a href="../#TString:ReplaceAll" title="TString&amp; TString::ReplaceAll(const TString&amp; s1, const TString&amp; s2) or overloads">ReplaceAll</a>(&amp;c1, 1, &amp;c2, 1);
    <span class="keyword">return</span> (*<span class="keyword">this</span>);
 }
 
 <span class="cpp">#ifdef __WITH_KVSTRING_ISWHITESPACE</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsWhitespace" title="Bool_t TString::IsWhitespace()">IsWhitespace</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsWhitespace" title="Bool_t TString::IsWhitespace() const">IsWhitespace</a>() <span class="keyword">const</span>
 {
-   <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if string is empty (<a href="../#TString:IsNull" title="Bool_t TString::IsNull()">IsNull</a>()) or if every character = <span class="string">' '</span></span>
-   <span class="keyword">return</span> (<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>() == <a href="../#TString:CountChar" title="Int_t TString::CountChar(Int_t c)">CountChar</a>(<span class="string">' '</span>));
+   <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if string is empty (<a href="../#TString:IsNull" title="Bool_t TString::IsNull() const">IsNull</a>()) or if every character = <span class="string">' '</span></span>
+   <span class="keyword">return</span> (<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>() == <a href="../#TString:CountChar" title="Int_t TString::CountChar(Int_t c) const">CountChar</a>(<span class="string">' '</span>));
 }
 <span class="cpp">#endif</span>
 
@@ -324,13 +324,13 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    <span class="comment">//                      and the rest of the format. this is not counted as a field to be read. i.e. <a href="../KVString.html#KVString:Sscanf" title="Int_t KVString::Sscanf(const Char_t* fmt)">Sscanf</a>(<span class="string">"%*"</span>)</span>
    <span class="comment">//                      gives 0 for any string, not because it doesn't match, but because there is nothing to read.</span>
 
-   va_list args;
+   <a href="../ListOfTypes.html#va_list">va_list</a> args;
    va_start(args, fmt);
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> str_index = 0;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> read_items = 0;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> fmt_index = 0;
-   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data()">Data</a>();
+   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data() const">Data</a>();
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> int_format_length_descriptor = 0;
 	<a href="../ListOfTypes.html#Bool_t">Bool_t</a> zero_padding = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 
@@ -348,7 +348,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 				<span class="keyword">while</span>( fmt[fmt_index] &gt;= <span class="string">'0'</span> &amp;&amp; fmt[fmt_index] &lt;= <span class="string">'9'</span>){
 					length_of_number+=fmt[fmt_index++];
 				}
-				int_format_length_descriptor = length_of_number.<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>();
+				int_format_length_descriptor = length_of_number.<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>();
 			}
          <span class="keyword">if</span> (fmt[fmt_index] == <span class="string">'d'</span>) {
             <span class="comment">//read an integer</span>
@@ -371,7 +371,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 						<span class="keyword">else</span>
 						{
 							<span class="comment">// good</span>
-            			*(va_arg(args, <span class="keyword">int</span> *)) = dummy.<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>();
+            			*(va_arg(args, <span class="keyword">int</span> *)) = dummy.<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>();
             			fmt_index++;
             			read_items++;
 						}
@@ -419,7 +419,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
             			<span class="keyword">return</span> 0;
 						}
 						<span class="comment">// good</span>
-            		*(va_arg(args, <span class="keyword">int</span> *)) = dummy.<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>();
+            		*(va_arg(args, <span class="keyword">int</span> *)) = dummy.<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>();
             		fmt_index++;
             		read_items++;
 						
@@ -430,7 +430,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 					<span class="comment">// any length of integer i.e. '%d'</span>
             	<span class="keyword">while</span> (cp[str_index] &gt;= <span class="string">'0'</span> &amp;&amp; cp[str_index] &lt;= <span class="string">'9'</span>)
                	dummy += cp[str_index++];
-            	*(va_arg(args, <span class="keyword">int</span> *)) = dummy.<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>();
+            	*(va_arg(args, <span class="keyword">int</span> *)) = dummy.<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>();
             	fmt_index++;
             	read_items++;
 				}
@@ -462,36 +462,36 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 }
 
 
-<a name="jHn1wE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Match" title="Bool_t KVString::Match(TString pattern)">Match</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> pattern)
+<a name="jHn1wE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Match" title="Bool_t KVString::Match(TString pattern)">Match</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> pattern)
 {
 	<span class="comment">// Check if pattern fit the considered string</span>
 	<span class="comment">// As in ls shell command the * symbol represents the non discriminant part</span>
 	<span class="comment">// of the pattern</span>
-	<span class="comment">// if no * is present in the pattern, the result correspond to <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a> method</span>
+	<span class="comment">// if no * is present in the pattern, the result correspond to <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a> method</span>
 	<span class="comment">// Example <a href="../KVString.html">KVString</a> st(file_R45.dat);</span>
 	<span class="comment">// st.<a href="../KVString.html#KVString:Match" title="Bool_t KVString::Match(TString pattern)">Match</a>(<span class="string">"*"</span>) -&gt; <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
 	<span class="comment">// st.<a href="../KVString.html#KVString:Match" title="Bool_t KVString::Match(TString pattern)">Match</a>(<span class="string">"file"</span>) -&gt;<a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
 	<span class="comment">// st.<a href="../KVString.html#KVString:Match" title="Bool_t KVString::Match(TString pattern)">Match</a>(<span class="string">"*file*R*"</span>) -&gt;<a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
 	<span class="comment">// etc ....  </span>
-	<span class="keyword">if</span> (!pattern.<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"*"</span>)) <span class="keyword">return</span> <span class="keyword">this</span>-&gt;<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(pattern);
+	<span class="keyword">if</span> (!pattern.<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"*"</span>)) <span class="keyword">return</span> <span class="keyword">this</span>-&gt;<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(pattern);
 	<span class="keyword">else</span> <span class="keyword">if</span> (pattern==<span class="string">"*"</span>) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 	<span class="keyword">else</span> {
-		TObjArray *tok = pattern.<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) or overloads">Tokenize</a>(<span class="string">"*"</span>);
+		TObjArray *tok = pattern.<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) const or overloads">Tokenize</a>(<span class="string">"*"</span>);
 		<a href="../ListOfTypes.html#Int_t">Int_t</a> n_tok = tok-&gt;GetEntries();
-		<span class="keyword">if</span> (!pattern.<a href="../#TString:BeginsWith" title="Bool_t TString::BeginsWith(const char* s,TString::ECaseCompare cmp=kExact) or overloads">BeginsWith</a>(<span class="string">"*"</span>))
-			<span class="keyword">if</span> ( !<span class="keyword">this</span>-&gt;<a href="../#TString:BeginsWith" title="Bool_t TString::BeginsWith(const char* s,TString::ECaseCompare cmp=kExact) or overloads">BeginsWith</a>(((TObjString* )tok-&gt;<a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a>())-&gt;GetString()) ){
+		<span class="keyword">if</span> (!pattern.<a href="../#TString:BeginsWith" title="Bool_t TString::BeginsWith(const char* s, TString::ECaseCompare cmp = kExact) const or overloads">BeginsWith</a>(<span class="string">"*"</span>))
+			<span class="keyword">if</span> ( !<span class="keyword">this</span>-&gt;<a href="../#TString:BeginsWith" title="Bool_t TString::BeginsWith(const char* s, TString::ECaseCompare cmp = kExact) const or overloads">BeginsWith</a>(((TObjString* )tok-&gt;<a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a>())-&gt;GetString()) ){
 				<span class="keyword">delete</span> tok;
 				<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 			}
-		<span class="keyword">if</span> (!pattern.<a href="../#TString:EndsWith" title="Bool_t TString::EndsWith(const char* pat,TString::ECaseCompare cmp=kExact)">EndsWith</a>(<span class="string">"*"</span>))
-			<span class="keyword">if</span> ( !<span class="keyword">this</span>-&gt;<a href="../#TString:EndsWith" title="Bool_t TString::EndsWith(const char* pat,TString::ECaseCompare cmp=kExact)">EndsWith</a>(((TObjString* )tok-&gt;<a href="../#TString:Last" title="Ssiz_t TString::Last(char c)">Last</a>())-&gt;GetString()) ) {
+		<span class="keyword">if</span> (!pattern.<a href="../#TString:EndsWith" title="Bool_t TString::EndsWith(const char* pat, TString::ECaseCompare cmp = kExact) const">EndsWith</a>(<span class="string">"*"</span>))
+			<span class="keyword">if</span> ( !<span class="keyword">this</span>-&gt;<a href="../#TString:EndsWith" title="Bool_t TString::EndsWith(const char* pat, TString::ECaseCompare cmp = kExact) const">EndsWith</a>(((TObjString* )tok-&gt;<a href="../#TString:Last" title="Ssiz_t TString::Last(char c) const">Last</a>())-&gt;GetString()) ) {
 				<span class="keyword">delete</span> tok;
 				<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 			}
 		
 		<a href="../ListOfTypes.html#Int_t">Int_t</a> idx=0,num=0;
 		<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii=0;ii&lt;n_tok;ii+=1){
-			idx = <span class="keyword">this</span>-&gt;<a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>( ((TObjString* )tok-&gt;At(ii))-&gt;GetString() ,idx);
+			idx = <span class="keyword">this</span>-&gt;<a href="../#TString:Index" title="Ssiz_t TString::Index(const char* pat, Ssiz_t i = 0, TString::ECaseCompare cmp = kExact) const or overloads">Index</a>( ((TObjString* )tok-&gt;At(ii))-&gt;GetString() ,idx);
 			<span class="keyword">if</span> (idx!=-1){
 				num+=1;
 				idx++;
@@ -504,28 +504,28 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 	}
 }
 
-<a name="obeZ5E"></a><span class="keyword">void</span> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> delim) <span class="keyword">const</span>
+<a name="obeZ5E"></a><span class="keyword">void</span> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> delim) <span class="keyword">const</span>
 {
-	<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() can be used to loop over items in</span>
+	<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() can be used to loop over items in</span>
 	<span class="comment">// a string separated by the delimiter character given as argument</span>
-	<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>().</span>
+	<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>().</span>
 	<span class="comment">//</span>
 	<span class="comment">// Example:</span>
 	<span class="comment">//   <a href="../KVString.html">KVString</a> str(<span class="string">"First | Second | Third"</span>);</span>
-	<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">"|"</span>);</span>
-	<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() ){</span>
-	<span class="comment">//     <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>().<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;</span>
+	<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">"|"</span>);</span>
+	<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() ){</span>
+	<span class="comment">//     cout &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>().<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;</span>
 	<span class="comment">//   }</span>
 	<span class="comment">//</span>
 	<span class="comment">// This will give the following output:</span>
 	<span class="comment">//</span>
-	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a></span>
+	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a></span>
 	<span class="comment">//  Second</span>
 	<span class="comment">//  Third</span>
    <span class="comment">//</span>
    <span class="comment">// WARNING: If the delimiter character is not contained in the string,</span>
-   <span class="comment">// calling <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>() will return the entire contents of the string, after</span>
-   <span class="comment">// which <a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() will return <a href="../ListOfTypes.html#Bool_t">kTRUE</a>. This allows to parse strings containing</span>
+   <span class="comment">// calling <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>() will return the entire contents of the string, after</span>
+   <span class="comment">// which <a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() will return <a href="../ListOfTypes.html#Bool_t">kTRUE</a>. This allows to parse strings containing</span>
    <span class="comment">// variable numbers of parameters separated by a delimiter which is only</span>
    <span class="comment">// used with 2 or more parameters, i.e.:</span>
    <span class="comment">//</span>
@@ -534,61 +534,61 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
         <a href="../KVString.html">KVString</a>* THIS = <span class="keyword">const_cast</span>&lt;<a href="../KVString.html">KVString</a>*&gt;(<span class="keyword">this</span>);
         THIS-&gt;<a href="../KVString.html#KVString:fEndList" title="Bool_t KVString::fEndList">fEndList</a>=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
         THIS-&gt;<a href="../KVString.html#KVString:fIterIndex" title="Int_t KVString::fIterIndex">fIterIndex</a>=0;
-        <span class="keyword">if</span> (<a href="../#TString:IsNull" title="Bool_t TString::IsNull()">IsNull</a>()) { THIS-&gt;<a href="../KVString.html#KVString:fEndList" title="Bool_t KVString::fEndList">fEndList</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;}
+        <span class="keyword">if</span> (<a href="../#TString:IsNull" title="Bool_t TString::IsNull() const">IsNull</a>()) { THIS-&gt;<a href="../KVString.html#KVString:fEndList" title="Bool_t KVString::fEndList">fEndList</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;}
 	<span class="keyword">else</span> {
 		<span class="keyword">if</span> (<a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a>) <span class="keyword">delete</span> <a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a>;
-                THIS-&gt;<a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a> = <a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) or overloads">Tokenize</a>(delim);
+                THIS-&gt;<a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a> = <a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) const or overloads">Tokenize</a>(delim);
            <span class="keyword">if</span> (!<a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a>) { THIS-&gt;<a href="../KVString.html#KVString:fEndList" title="Bool_t KVString::fEndList">fEndList</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;}
            <span class="keyword">else</span> <span class="keyword">if</span> (!<a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a>-&gt;GetEntries()) { THIS-&gt;<a href="../KVString.html#KVString:fEndList" title="Bool_t KVString::fEndList">fEndList</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>; <span class="keyword">delete</span> <a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a>; THIS-&gt;<a href="../KVString.html#KVString:kObjArr" title="TObjArray* KVString::kObjArr">kObjArr</a>=0;}
 	}
 }
 
-<a name="QfxIS"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() <span class="keyword">const</span>
+<a name="QfxIS"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() <span class="keyword">const</span>
 {
-	<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() can be used to loop over items in</span>
+	<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() can be used to loop over items in</span>
 	<span class="comment">// a string separated by the delimiter character given as argument</span>
-	<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>().</span>
+	<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>().</span>
 	<span class="comment">//</span>
 	<span class="comment">// Example:</span>
 	<span class="comment">//   <a href="../KVString.html">KVString</a> str(<span class="string">"First | Second | Third"</span>);</span>
-	<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">"|"</span>);</span>
-	<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() ){</span>
-	<span class="comment">//     <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>().<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;</span>
+	<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">"|"</span>);</span>
+	<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() ){</span>
+	<span class="comment">//     cout &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>().<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;</span>
 	<span class="comment">//   }</span>
 	<span class="comment">//</span>
 	<span class="comment">// This will give the following output:</span>
 	<span class="comment">//</span>
-	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a></span>
+	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a></span>
 	<span class="comment">//  Second</span>
 	<span class="comment">//  Third</span>
 	<span class="keyword">return</span> <a href="../KVString.html#KVString:fEndList" title="Bool_t KVString::fEndList">fEndList</a>;
 }
 
-<a name="ECVZFC"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> strip_whitespace) <span class="keyword">const</span>
+<a name="ECVZFC"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> strip_whitespace) <span class="keyword">const</span>
 {
-	<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() can be used to loop over items in</span>
+	<span class="comment">// <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(), <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>() and <a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() can be used to loop over items in</span>
 	<span class="comment">// a string separated by the delimiter character given as argument</span>
-	<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>().</span>
+	<span class="comment">// to <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>().</span>
 	<span class="comment">// If strip_whitespace=<a href="../ListOfTypes.html#Bool_t">kTRUE</a> (default is <a href="../ListOfTypes.html#Bool_t">kFALSE</a>), any leading or</span>
 	<span class="comment">// trailing whitespace is removed from each item.</span>
 	<span class="comment">//</span>
 	<span class="comment">// Example:</span>
 	<span class="comment">//   <a href="../KVString.html">KVString</a> str(<span class="string">"First | Second | Third"</span>);</span>
-	<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">"|"</span>);</span>
-	<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() ){</span>
-	<span class="comment">//     <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>).<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;</span>
+	<span class="comment">//   str.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">"|"</span>);</span>
+	<span class="comment">//   while( !str.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() ){</span>
+	<span class="comment">//     cout &lt;&lt; str.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>).<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;</span>
 	<span class="comment">//   }</span>
 	<span class="comment">//</span>
 	<span class="comment">// This will give the following output:</span>
 	<span class="comment">//</span>
-	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a></span>
+	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a></span>
 	<span class="comment">// Second</span>
 	<span class="comment">// Third</span>
 	<span class="comment">//</span>
-	<span class="comment">// whereas if <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>() is used (i.e. strip_whitespace=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>),</span>
+	<span class="comment">// whereas if <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>() is used (i.e. strip_whitespace=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>),</span>
 	<span class="comment">// this gives:</span>
 	<span class="comment">//</span>
-	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) or overloads">First</a></span>
+	<span class="comment">// <a href="../#TString:First" title="Ssiz_t TString::First(char c) const or overloads">First</a></span>
 	<span class="comment">//  Second</span>
 	<span class="comment">//  Third</span>
 	
@@ -603,22 +603,22 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 	<span class="keyword">return</span> st;
 }
 
-<a name="dDRHCB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:GetNValues" title="Int_t KVString::GetNValues(TString delim)">GetNValues</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> delim)
+<a name="dDRHCB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:GetNValues" title="Int_t KVString::GetNValues(TString delim)">GetNValues</a>(<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> delim)
 {
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;
-	<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(delim); <span class="keyword">while</span> (!<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>()) {<a href="../KVString.html">KVString</a> dummy=<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>(); nn+=1;}
+	<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(delim); <span class="keyword">while</span> (!<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>()) {<a href="../KVString.html">KVString</a> dummy=<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>(); nn+=1;}
 	<span class="keyword">return</span> nn;
 }
 <span class="cpp">#ifdef __WITH_KVSTRING_ITOA</span>
 <span class="comment">//______________________________________________________________________________</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsBin" title="Bool_t TString::IsBin()">IsBin</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsBin" title="Bool_t TString::IsBin() const">IsBin</a>() <span class="keyword">const</span>
 {
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if all characters in string are binary digits (0,1).</span>
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">false</a> in case string length is 0 or string contains other</span>
+   <span class="comment">// Returns true if all characters in string are binary digits (0,1).</span>
+   <span class="comment">// Returns false in case string length is 0 or string contains other</span>
    <span class="comment">// characters.</span>
 
-   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data()">Data</a>();
-   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>();
+   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data() const">Data</a>();
+   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>();
    <span class="keyword">if</span> (len == 0) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> i = 0; i &lt; len; ++i)
       <span class="keyword">if</span> (cp[i] != <span class="string">'0'</span> &amp;&amp; cp[i] != <span class="string">'1'</span>)
@@ -627,14 +627,14 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsOct" title="Bool_t TString::IsOct()">IsOct</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsOct" title="Bool_t TString::IsOct() const">IsOct</a>() <span class="keyword">const</span>
 {
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if all characters in string are octal digits (0-7).</span>
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">false</a> in case string length is 0 or string contains other</span>
+   <span class="comment">// Returns true if all characters in string are octal digits (0-7).</span>
+   <span class="comment">// Returns false in case string length is 0 or string contains other</span>
    <span class="comment">// characters.</span>
 
-   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data()">Data</a>();
-   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>();
+   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data() const">Data</a>();
+   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>();
    <span class="keyword">if</span> (len == 0) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> i = 0; i &lt; len; ++i)
       <span class="keyword">if</span> (!isdigit(cp[i]) || cp[i]==<span class="string">'8'</span> || cp[i]==<span class="string">'9'</span>)
@@ -643,14 +643,14 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsDec" title="Bool_t TString::IsDec()">IsDec</a>() <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsDec" title="Bool_t TString::IsDec() const">IsDec</a>() <span class="keyword">const</span>
 {
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if all characters in string are decimal digits (0-9).</span>
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">false</a> in case string length is 0 or string contains other</span>
+   <span class="comment">// Returns true if all characters in string are decimal digits (0-9).</span>
+   <span class="comment">// Returns false in case string length is 0 or string contains other</span>
    <span class="comment">// characters.</span>
 
-   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data()">Data</a>();
-   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>();
+   <span class="keyword">const</span> <span class="keyword">char</span> *cp = <a href="../#TString:Data" title="const char* TString::Data() const">Data</a>();
+   <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> len = <a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>();
    <span class="keyword">if</span> (len == 0) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> i = 0; i &lt; len; ++i)
       <span class="keyword">if</span> (!isdigit(cp[i]))
@@ -659,29 +659,29 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsInBaseN" title="Bool_t TString::IsInBaseN(Int_t base)">IsInBaseN</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> base) <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVString.html">KVString</a>::<a href="../#TString:IsInBaseN" title="Bool_t TString::IsInBaseN(Int_t base) const">IsInBaseN</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> base) <span class="keyword">const</span>
 {
-   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if all characters in string are expressed in the base</span>
+   <span class="comment">// Returns true if all characters in string are expressed in the base</span>
    <span class="comment">// specified (range=2-36), i.e. {0,1} for base 2, {0-9,a-f,A-F} for base 16,</span>
-   <span class="comment">// {0-9,a-z,A-Z} for base 36. Returns <a href="../ListOfTypes.html#bool">false</a> in case string length is 0 or</span>
+   <span class="comment">// {0-9,a-z,A-Z} for base 36. Returns false in case string length is 0 or</span>
    <span class="comment">// string contains other characters.</span>
 
    <span class="keyword">if</span> (base &lt; 2 || base &gt; 36) {
       Error(<span class="string">"KVString::IsInBaseN"</span>, <span class="string">"base %d is not supported. Suppported bases are {2,3,...,36}."</span>, base);
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
-   <span class="keyword">if</span> (<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>() == 0) {
+   <span class="keyword">if</span> (<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>() == 0) {
       Error(<span class="string">"KVString::IsInBaseN"</span>, <span class="string">"input string is empty."</span>) ;
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
-   <a href="../KVString.html">KVString</a> str = <a href="../KVString.html">KVString</a>(<a href="../#TString:Data" title="const char* TString::Data()">Data</a>()) ;
+   <a href="../KVString.html">KVString</a> str = <a href="../KVString.html">KVString</a>(<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>()) ;
    str.<a href="../#TString:ToUpper" title="void TString::ToUpper()">ToUpper</a>() ;
    <a href="../KVString.html">KVString</a> str_ref0 = <span class="string">"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span> ;
    <a href="../KVString.html">KVString</a> str_ref = str_ref0 ;
    str_ref.<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(base) ;
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> isInBase = <a href="../ListOfTypes.html#Bool_t">kTRUE</a> ;
-   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> k = 0; k &lt; str.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>(); k++) {
-      <span class="keyword">if</span> (! str_ref.<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(str[k])) {
+   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> k = 0; k &lt; str.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>(); k++) {
+      <span class="keyword">if</span> (! str_ref.<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(str[k])) {
          isInBase = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
          <span class="keyword">break</span> ;
       }
@@ -690,15 +690,15 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 }
 <span class="cpp">#endif</span>
 <span class="comment">//______________________________________________________________________________</span>
-<a name="iAa67C"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value,Int_t base)">Itoa</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
+<a name="iAa67C"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value, Int_t base)">Itoa</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
 {
    <span class="comment">// Converts an <a href="../ListOfTypes.html#Int_t">Int_t</a> to a <a href="../KVString.html">KVString</a> with respect to the base specified (2-36).</span>
    <span class="comment">// Thus it is an enhanced version of sprintf (adapted from versions 0.4 of</span>
    <span class="comment">// http://www.jb.man.ac.uk/~slowe/cpp/itoa.html).</span>
    <span class="comment">// Usage: the following statement produce the same output, namely <span class="string">"1111"</span></span>
-   <span class="comment">//   std::<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value,Int_t base)">Itoa</a>(15,2) ;</span>
-   <span class="comment">//   std::<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value,Int_t base)">Itoa</a>(0xF,2) ; /// 0x prefix to handle hex</span>
-   <span class="comment">//   std::<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value,Int_t base)">Itoa</a>(017,2) ; /// 0  prefix to handle oct</span>
+   <span class="comment">//   std::cout &lt;&lt; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value, Int_t base)">Itoa</a>(15,2) ;</span>
+   <span class="comment">//   std::cout &lt;&lt; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value, Int_t base)">Itoa</a>(0xF,2) ; /// 0x prefix to handle hex</span>
+   <span class="comment">//   std::cout &lt;&lt; <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value, Int_t base)">Itoa</a>(017,2) ; /// 0  prefix to handle oct</span>
    <span class="comment">// In case of error returns the <span class="string">"!"</span> string.</span>
 
 <span class="cpp">#ifdef __WITH_KVSTRING_ITOA</span>
@@ -720,12 +720,12 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    std::reverse(buf.begin(), buf.end());
    <span class="keyword">return</span> (<a href="../KVString.html">KVString</a>(buf.data()));
 <span class="cpp">#else</span>
-   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value,Int_t base)">Itoa</a>(value, base);
+   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:Itoa" title="KVString KVString::Itoa(Int_t value, Int_t base)">Itoa</a>(value, base);
 <span class="cpp">#endif</span>
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="Gd32RE"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:UItoa" title="KVString KVString::UItoa(UInt_t value,Int_t base)">UItoa</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
+<a name="Gd32RE"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:UItoa" title="KVString KVString::UItoa(UInt_t value, Int_t base)">UItoa</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
 {
    <span class="comment">// Converts a <a href="../ListOfTypes.html#UInt_t">UInt_t</a> (twice the range of an <a href="../ListOfTypes.html#Int_t">Int_t</a>) to a <a href="../KVString.html">KVString</a> with respect</span>
    <span class="comment">// to the base specified (2-36). Thus it is an enhanced version of sprintf</span>
@@ -749,12 +749,12 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    std::reverse(buf.begin(), buf.end());
    <span class="keyword">return</span> (<a href="../KVString.html">KVString</a>(buf.data()));
 <span class="cpp">#else</span>
-   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:UItoa" title="KVString KVString::UItoa(UInt_t value,Int_t base)">UItoa</a>(value, base);
+   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:UItoa" title="KVString KVString::UItoa(UInt_t value, Int_t base)">UItoa</a>(value, base);
 <span class="cpp">#endif</span>
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="h6dPfC"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:LLtoa" title="KVString KVString::LLtoa(Long64_t value,Int_t base)">LLtoa</a>(<a href="../ListOfTypes.html#Long64_t">Long64_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
+<a name="h6dPfC"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:LLtoa" title="KVString KVString::LLtoa(Long64_t value, Int_t base)">LLtoa</a>(<a href="../ListOfTypes.html#Long64_t">Long64_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
 {
    <span class="comment">// Converts a <a href="../ListOfTypes.html#Long64_t">Long64_t</a> to a <a href="../KVString.html">KVString</a> with respect to the base specified (2-36).</span>
    <span class="comment">// Thus it is an enhanced version of sprintf (adapted from versions 0.4 of</span>
@@ -780,12 +780,12 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    std::reverse(buf.begin(), buf.end());
    <span class="keyword">return</span> (<a href="../KVString.html">KVString</a>(buf.data()));
 <span class="cpp">#else</span>
-   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:LLtoa" title="KVString KVString::LLtoa(Long64_t value,Int_t base)">LLtoa</a>(value, base);
+   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:LLtoa" title="KVString KVString::LLtoa(Long64_t value, Int_t base)">LLtoa</a>(value, base);
 <span class="cpp">#endif</span>
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="molsOC"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value,Int_t base)">ULLtoa</a>(<a href="../ListOfTypes.html#ULong64_t">ULong64_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
+<a name="molsOC"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value, Int_t base)">ULLtoa</a>(<a href="../ListOfTypes.html#ULong64_t">ULong64_t</a> value, <a href="../ListOfTypes.html#Int_t">Int_t</a> base)
 {
    <span class="comment">// Converts a <a href="../ListOfTypes.html#ULong64_t">ULong64_t</a> (twice the range of an <a href="../ListOfTypes.html#Long64_t">Long64_t</a>) to a <a href="../KVString.html">KVString</a> with</span>
    <span class="comment">// respect to the base specified (2-36). Thus it is an enhanced version of</span>
@@ -809,12 +809,12 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    std::reverse(buf.begin(), buf.end());
    <span class="keyword">return</span> (<a href="../KVString.html">KVString</a>(buf.data()));
 <span class="cpp">#else</span>
-   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value,Int_t base)">ULLtoa</a>(value, base);
+   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value, Int_t base)">ULLtoa</a>(value, base);
 <span class="cpp">#endif</span>
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="JCEz2E"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:BaseConvert" title="KVString KVString::BaseConvert(const KVString&amp; s_in,Int_t base_in,Int_t base_out)">BaseConvert</a>(<span class="keyword">const</span> <a href="../KVString.html">KVString</a>&amp; s_in, <a href="../ListOfTypes.html#Int_t">Int_t</a> base_in, <a href="../ListOfTypes.html#Int_t">Int_t</a> base_out)
+<a name="JCEz2E"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:BaseConvert" title="KVString KVString::BaseConvert(const KVString&amp; s_in, Int_t base_in, Int_t base_out)">BaseConvert</a>(<span class="keyword">const</span> <a href="../KVString.html">KVString</a>&amp; s_in, <a href="../ListOfTypes.html#Int_t">Int_t</a> base_in, <a href="../ListOfTypes.html#Int_t">Int_t</a> base_out)
 {
    <span class="comment">// Converts string from base base_in to base base_out. Supported bases</span>
    <span class="comment">// are 2-36. At most 64 bit data can be converted.</span>
@@ -834,36 +834,36 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
       s_in_.<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(0, 1);
    }
    <span class="keyword">if</span> (!isSigned &amp;&amp; s_in_[0] == <span class="string">'+'</span>) s_in_.<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(0, 1);  <span class="comment">// !isSigned to avoid strings beginning with <span class="string">"-+"</span></span>
-   <span class="keyword">if</span> (base_in == 16 &amp;&amp; s_in_.<a href="../#TString:BeginsWith" title="Bool_t TString::BeginsWith(const char* s,TString::ECaseCompare cmp=kExact) or overloads">BeginsWith</a>(<span class="string">"0x"</span>)) s_in_.<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(0, 2);  <span class="comment">// removing hex prefix if any</span>
-   s_in_ = <a href="../KVString.html">KVString</a>(s_in_.<a href="../#TString:Strip" title="TSubString TString::Strip(TString::EStripType s=kTrailing,char c=' ')">Strip</a>(<a href="../KVString.html">KVString</a>::kLeading, <span class="string">'0'</span>));  <span class="comment">// removing leading zeros (necessary for length comparison below)</span>
+   <span class="keyword">if</span> (base_in == 16 &amp;&amp; s_in_.<a href="../#TString:BeginsWith" title="Bool_t TString::BeginsWith(const char* s, TString::ECaseCompare cmp = kExact) const or overloads">BeginsWith</a>(<span class="string">"0x"</span>)) s_in_.<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(0, 2);  <span class="comment">// removing hex prefix if any</span>
+   s_in_ = <a href="../KVString.html">KVString</a>(s_in_.<a href="../#TString:Strip" title="TSubString TString::Strip(TString::EStripType s = kTrailing, char c = ' ') const">Strip</a>(<a href="../KVString.html">KVString</a>::kLeading, <span class="string">'0'</span>));  <span class="comment">// removing leading zeros (necessary for length comparison below)</span>
    <span class="comment">// checking s_in_ is expressed in the mentionned base</span>
-   <span class="keyword">if</span> (!s_in_.<a href="../#TString:IsInBaseN" title="Bool_t TString::IsInBaseN(Int_t base)">IsInBaseN</a>(base_in)) {
-      Error(<span class="string">"KVString::BaseConvert"</span>, <span class="string">"s_in=\"%s\" is not in base %d"</span>, s_in.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), base_in);
+   <span class="keyword">if</span> (!s_in_.<a href="../#TString:IsInBaseN" title="Bool_t TString::IsInBaseN(Int_t base) const">IsInBaseN</a>(base_in)) {
+      Error(<span class="string">"KVString::BaseConvert"</span>, <span class="string">"s_in=\"%s\" is not in base %d"</span>, s_in.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>(), base_in);
       <span class="keyword">return</span> (s_out);
    }
    <span class="comment">// checking s_in &lt;= 64 bits</span>
-   <a href="../KVString.html">KVString</a> s_max = <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value,Int_t base)">ULLtoa</a>(18446744073709551615ULL, base_in);
-   <span class="keyword">if</span> (s_in_.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>() &gt; s_max.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>()) {
+   <a href="../KVString.html">KVString</a> s_max = <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value, Int_t base)">ULLtoa</a>(18446744073709551615ULL, base_in);
+   <span class="keyword">if</span> (s_in_.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>() &gt; s_max.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>()) {
       <span class="comment">// string comparison (s_in_&gt;s_max) does not take care of length</span>
-      Error(<span class="string">"KVString::BaseConvert"</span>, <span class="string">"s_in=\"%s\" &gt; %s = 2^64-1 in base %d."</span>, s_in.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), s_max.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), base_in);
+      Error(<span class="string">"KVString::BaseConvert"</span>, <span class="string">"s_in=\"%s\" &gt; %s = 2^64-1 in base %d."</span>, s_in.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>(), s_max.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>(), base_in);
       <span class="keyword">return</span> (s_out);
-   } <span class="keyword">else</span> <span class="keyword">if</span> (s_in_.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>() == s_max.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>()) {
-      <span class="comment">// if ( s_in_.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>() &lt; s_max.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>() ) everything's fine</span>
+   } <span class="keyword">else</span> <span class="keyword">if</span> (s_in_.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>() == s_max.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>()) {
+      <span class="comment">// if ( s_in_.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>() &lt; s_max.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>() ) everything's fine</span>
       s_in_.<a href="../#TString:ToLower" title="void TString::ToLower()">ToLower</a>();  <span class="comment">// s_max is lower case</span>
       <span class="keyword">if</span> (s_in_ &gt; s_max) {
          <span class="comment">// string comparison</span>
-         Error(<span class="string">"KVString::BaseConvert"</span>, <span class="string">"s_in=\"%s\" &gt; %s = 2^64-1 in base %d."</span>, s_in.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), s_max.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), base_in);
+         Error(<span class="string">"KVString::BaseConvert"</span>, <span class="string">"s_in=\"%s\" &gt; %s = 2^64-1 in base %d."</span>, s_in.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>(), s_max.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>(), base_in);
          <span class="keyword">return</span> (s_out);
       }
    }
 
    <span class="comment">// computing s_out</span>
-   <a href="../ListOfTypes.html#ULong64_t">ULong64_t</a> i = <a href="../ListOfTypes.html#ULong64_t">ULong64_t</a>(strtoull(s_in.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), 0, base_in));
-   s_out = <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value,Int_t base)">ULLtoa</a>(i, base_out);
+   <a href="../ListOfTypes.html#ULong64_t">ULong64_t</a> i = <a href="../ListOfTypes.html#ULong64_t">ULong64_t</a>(strtoull(s_in.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>(), 0, base_in));
+   s_out = <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:ULLtoa" title="KVString KVString::ULLtoa(ULong64_t value, Int_t base)">ULLtoa</a>(i, base_out);
    <span class="keyword">if</span> (isSigned) s_out.<a href="../#TString:Prepend" title="TString&amp; TString::Prepend(const char* cs) or overloads">Prepend</a>(<span class="string">"-"</span>);
    <span class="keyword">return</span> (s_out);
 <span class="cpp">#else</span>
-   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:BaseConvert" title="KVString KVString::BaseConvert(const KVString&amp; s_in,Int_t base_in,Int_t base_out)">BaseConvert</a>(s_in, base_in, base_out);
+   <span class="keyword">return</span> <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>::<a href="../KVString.html#KVString:BaseConvert" title="KVString KVString::BaseConvert(const KVString&amp; s_in, Int_t base_in, Int_t base_out)">BaseConvert</a>(s_in, base_in, base_out);
 <span class="cpp">#endif</span>
 }
 
@@ -873,16 +873,16 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
    <span class="comment">// i.e. transform <span class="string">"   Mary               Had\tA   Little \n          Laaaaaaaaaaaaaaaaaamb"</span></span>
    <span class="comment">// into <span class="string">"Mary Had A Little Lamb"</span></span>
 
-   <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">" \n\t"</span>);
+   <a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">" \n\t"</span>);
    <a href="../KVString.html">KVString</a> tmp;
-   <span class="keyword">while</span>( !<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() ){
-      <span class="keyword">if</span>(tmp.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>()) tmp+=<span class="string">" "</span>;
-      tmp += <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>();
+   <span class="keyword">while</span>( !<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() ){
+      <span class="keyword">if</span>(tmp.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>()) tmp+=<span class="string">" "</span>;
+      tmp += <a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>();
    }
    *<span class="keyword">this</span> = tmp;
 }
 
-<a name="zyCEGE"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:StripAllExtraWhiteSpace" title="KVString KVString::StripAllExtraWhiteSpace()">StripAllExtraWhiteSpace</a>() <span class="keyword">const</span>
+<a name="zyCEGE"></a><a href="../KVString.html">KVString</a> <a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:StripAllExtraWhiteSpace" title="KVString KVString::StripAllExtraWhiteSpace() const">StripAllExtraWhiteSpace</a>() <span class="keyword">const</span>
 {
    <span class="comment">// <a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a> any superfluous whitespace (or tabs or newlines) from string (does not modify string)</span>
    <span class="comment">// i.e. transform <span class="string">"   Mary               Had\tA   Little \n          Laaaaaaaaaaaaaaaaaamb"</span></span>
@@ -890,31 +890,31 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 
    <a href="../KVString.html">KVString</a> tmp = *<span class="keyword">this</span>;
    <a href="../KVString.html">KVString</a> tmp2;
-   tmp.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">" \n\t"</span>);
-   <span class="keyword">while</span>( !tmp.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>() ){
-      <span class="keyword">if</span>(tmp2.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>()) tmp2+=<span class="string">" "</span>;
-      tmp2 += tmp.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>();
+   tmp.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">" \n\t"</span>);
+   <span class="keyword">while</span>( !tmp.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>() ){
+      <span class="keyword">if</span>(tmp2.<a href="../#TString:Length" title="Ssiz_t TString::Length() const">Length</a>()) tmp2+=<span class="string">" "</span>;
+      tmp2 += tmp.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>();
    }
    <span class="keyword">return</span> tmp2;
 }
 
 
-<a name="yV_hAE"></a><a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:KVString" title="KVString KVString::KVString() or overloads">KVString</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> value, <a href="../ListOfTypes.html#Double_t">Double_t</a> error):<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>(<span class="string">""</span>)
+<a name="yV_hAE"></a><a href="../KVString.html">KVString</a>::<a href="../KVString.html#KVString:KVString" title="KVString KVString::KVString() or overloads">KVString</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> value, <a href="../ListOfTypes.html#Double_t">Double_t</a> error):<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>(<span class="string">""</span>)
 {
     <a href="../ListOfTypes.html#Double_t">Double_t</a> y  = value;
     <a href="../ListOfTypes.html#Double_t">Double_t</a> ey = error;
 
-    <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> sy = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2e"</span>,y);
-    <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> sey = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1e"</span>,ey);
+    <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> sy = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2e"</span>,y);
+    <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> sey = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1e"</span>,ey);
 
-    <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> sy_dec,sy_exp,sey_dec,sey_exp;
+    <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> sy_dec,sy_exp,sey_dec,sey_exp;
     <a href="../ListOfTypes.html#Double_t">Double_t</a> y_dec,ey_dec;
     <a href="../ListOfTypes.html#Int_t">Int_t</a> y_exp,ey_exp;
 
     <span class="comment">//Recup de la valeur y</span>
     TObjArray *loa_y;
 
-    loa_y=sy.<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) or overloads">Tokenize</a>(<span class="string">"e"</span>);
+    loa_y=sy.<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) const or overloads">Tokenize</a>(<span class="string">"e"</span>);
 
     TIter next_y(loa_y);
     TObjString *os_y=0;
@@ -923,13 +923,13 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
     os_y=(TObjString *)next_y();
     sy_exp = os_y-&gt;GetString();
 
-    y_dec = sy_dec.<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>();
-    y_exp = sy_exp.<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>();
+    y_dec = sy_dec.<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>();
+    y_exp = sy_exp.<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>();
 
     <span class="comment">//Recup de la valeur ey</span>
     TObjArray *loa_ey;
 
-    loa_ey=sey.<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) or overloads">Tokenize</a>(<span class="string">"e"</span>);
+    loa_ey=sey.<a href="../#TString:Tokenize" title="TObjArray* TString::Tokenize(const TString&amp; delim) const or overloads">Tokenize</a>(<span class="string">"e"</span>);
 
     TIter next_ey(loa_ey);
     TObjString *os_ey=0;
@@ -940,21 +940,21 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
     os_ey=(TObjString *)next_ey();
     sey_exp = os_ey-&gt;GetString();
 
-    ey_dec = sey_dec.<a href="../#TString:Atof" title="Double_t TString::Atof()">Atof</a>();
-    ey_exp = sey_exp.<a href="../#TString:Atoi" title="Int_t TString::Atoi()">Atoi</a>();
+    ey_dec = sey_dec.<a href="../#TString:Atof" title="Double_t TString::Atof() const">Atof</a>();
+    ey_exp = sey_exp.<a href="../#TString:Atoi" title="Int_t TString::Atoi() const">Atoi</a>();
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> err = ey_dec*TMath::Power(10.,ey_exp-y_exp);
-    <a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a> s;
+    <a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a> s;
 
-    <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,y_dec)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>)&amp;&amp;err&gt;=1)
+    <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,y_dec)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>)&amp;&amp;err&gt;=1)
     {
 
-        <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>))
+        <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>))
         {
             <span class="keyword">if</span>(y_exp==ey_exp) s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g.0(%g.0).10$^{%d}$"</span>,y_dec,ey_dec,y_exp);
             <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g.0(%g.0).10$^{%d}$"</span>,y_dec,err,y_exp);
         }
-        <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1g"</span>,err))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>))
+        <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1g"</span>,err))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>))
         {
             <span class="keyword">if</span>(y_exp==ey_exp) s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g.0(%g0).10$^{%d}$"</span>,y_dec,ey_dec,y_exp);
             <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g.0(%g0).10$^{%d}$"</span>,y_dec,err,y_exp);
@@ -965,15 +965,15 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
             <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g.0(%g).10$^{%d}$"</span>,y_dec,err,y_exp);
         }
     }
-    <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g"</span>,y_dec))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,y_dec))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,y_dec)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>)&amp;&amp;err&lt;1)
+    <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g"</span>,y_dec))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,y_dec))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,y_dec)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>)&amp;&amp;err&lt;1)
     {
 
-        <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>))
+        <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>))
         {
             <span class="keyword">if</span>(y_exp==ey_exp) s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g0(%g.0).10$^{%d}$"</span>,y_dec,ey_dec,y_exp);
             <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g0(%g.0).10$^{%d}$"</span>,y_dec,err,y_exp);
         }
-        <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1g"</span>,err))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>))
+        <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1g"</span>,err))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>))
         {
             <span class="keyword">if</span>(y_exp==ey_exp) s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g0(%g0).10$^{%d}$"</span>,y_dec,ey_dec,y_exp);
             <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g0(%g0).10$^{%d}$"</span>,y_dec,err,y_exp);
@@ -984,12 +984,12 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
             <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g0(%g).10$^{%d}$"</span>,y_dec,err,y_exp);
         }
     }
-    <span class="keyword">else</span> <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>))
+    <span class="keyword">else</span> <span class="keyword">if</span>(!((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>))
     {
         <span class="keyword">if</span>(y_exp==ey_exp) s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g(%g.0).10$^{%d}$"</span>,y_dec,ey_dec,y_exp);
         <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g(%g.0).10$^{%d}$"</span>,y_dec,err,y_exp);
     }
-    <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1g"</span>,err))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1,Ssiz_t n1,const char* a2,Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* s,TString::ECaseCompare cmp=kExact) or overloads">Contains</a>(<span class="string">"."</span>))
+    <span class="keyword">else</span> <span class="keyword">if</span>(((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err))==((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.1g"</span>,err))&amp;&amp;((<a href="../#TString:TString" title="TString TString::TString(const char* a1, Ssiz_t n1, const char* a2, Ssiz_t n2) or overloads">TString</a>)<a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g"</span>,err)).<a href="../#TString:Contains" title="Bool_t TString::Contains(const char* pat, TString::ECaseCompare cmp = kExact) const or overloads">Contains</a>(<span class="string">"."</span>))
     {
         <span class="keyword">if</span>(y_exp==ey_exp) s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.2g(%g0).10$^{%d}$"</span>,y_dec,ey_dec,y_exp);
         <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g(%g0).10$^{%d}$"</span>,y_dec,err,y_exp);
@@ -1000,10 +1000,10 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
         <span class="keyword">else</span> s = <a href="../#TString:Format" title="TString TString::Format(const char* fmt)">Format</a>(<span class="string">"%1.3g(%g).10$^{%d}$"</span>,y_dec,err,y_exp);;
     }
 
-    s.<a href="../#TString:ReplaceAll" title="TString&amp; TString::ReplaceAll(const TString&amp; s1,const TString&amp; s2) or overloads">ReplaceAll</a>(<span class="string">".10$^{0}$"</span>,<span class="string">""</span>);
-    s.<a href="../#TString:ReplaceAll" title="TString&amp; TString::ReplaceAll(const TString&amp; s1,const TString&amp; s2) or overloads">ReplaceAll</a>(<span class="string">"0)"</span>,<span class="string">")"</span>);
+    s.<a href="../#TString:ReplaceAll" title="TString&amp; TString::ReplaceAll(const TString&amp; s1, const TString&amp; s2) or overloads">ReplaceAll</a>(<span class="string">".10$^{0}$"</span>,<span class="string">""</span>);
+    s.<a href="../#TString:ReplaceAll" title="TString&amp; TString::ReplaceAll(const TString&amp; s1, const TString&amp; s2) or overloads">ReplaceAll</a>(<span class="string">"0)"</span>,<span class="string">")"</span>);
 
-    <a href="../#TString:Form" title="void TString::Form(const char* fmt)">Form</a>(<span class="string">"%s"</span>,s.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+    <a href="../#TString:Form" title="void TString::Form(const char* fmt)">Form</a>(<span class="string">"%s"</span>,s.<a href="../#TString:Data" title="const char* TString::Data() const">Data</a>());
 
 }
 </pre>
@@ -1014,7 +1014,7 @@ TObjArray *<a href="../KVString.html">KVString</a>::<a href="../#TString:Tokeniz
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-07-17 16:52 </em><em>&raquo; Last generated: 2015-07-17 16:52</em><br />
+<em>&raquo; Last changed: 2015-07-24 18:06 </em><em>&raquo; Last generated: 2015-07-24 18:06</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

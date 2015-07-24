@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/geometry/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/geometry/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,36 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+VAMOS/geometry/CMakeFiles/G__VAMOSgeometry.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/CMakeFiles/G__VAMOSgeometry.dir/rule
+.PHONY : VAMOS/geometry/CMakeFiles/G__VAMOSgeometry.dir/rule
+
+# Convenience name for target.
+G__VAMOSgeometry: VAMOS/geometry/CMakeFiles/G__VAMOSgeometry.dir/rule
+.PHONY : G__VAMOSgeometry
+
+# fast build rule for target.
+G__VAMOSgeometry/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/G__VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/G__VAMOSgeometry.dir/build
+.PHONY : G__VAMOSgeometry/fast
+
+# Convenience name for target.
 VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/rule
 .PHONY : VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/rule
 
 # Convenience name for target.
@@ -154,29 +168,15 @@ VAMOSgeometry: VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/rule
 
 # fast build rule for target.
 VAMOSgeometry/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build
 .PHONY : VAMOSgeometry/fast
-
-# Convenience name for target.
-VAMOS/geometry/CMakeFiles/libVAMOSgeometry.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/geometry/CMakeFiles/libVAMOSgeometry.rootmap.dir/rule
-.PHONY : VAMOS/geometry/CMakeFiles/libVAMOSgeometry.rootmap.dir/rule
-
-# Convenience name for target.
-libVAMOSgeometry.rootmap: VAMOS/geometry/CMakeFiles/libVAMOSgeometry.rootmap.dir/rule
-.PHONY : libVAMOSgeometry.rootmap
-
-# fast build rule for target.
-libVAMOSgeometry.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/libVAMOSgeometry.rootmap.dir/build.make VAMOS/geometry/CMakeFiles/libVAMOSgeometry.rootmap.dir/build
-.PHONY : libVAMOSgeometry.rootmap/fast
 
 CsIv.o: CsIv.cpp.o
 .PHONY : CsIv.o
 
 # target to build an object file
 CsIv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/CsIv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/CsIv.cpp.o
 .PHONY : CsIv.cpp.o
 
 CsIv.i: CsIv.cpp.i
@@ -184,7 +184,7 @@ CsIv.i: CsIv.cpp.i
 
 # target to preprocess a source file
 CsIv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/CsIv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/CsIv.cpp.i
 .PHONY : CsIv.cpp.i
 
 CsIv.s: CsIv.cpp.s
@@ -192,7 +192,7 @@ CsIv.s: CsIv.cpp.s
 
 # target to generate assembly for a file
 CsIv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/CsIv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/CsIv.cpp.s
 .PHONY : CsIv.cpp.s
 
 DriftChamber.o: DriftChamber.cpp.o
@@ -200,7 +200,7 @@ DriftChamber.o: DriftChamber.cpp.o
 
 # target to build an object file
 DriftChamber.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamber.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamber.cpp.o
 .PHONY : DriftChamber.cpp.o
 
 DriftChamber.i: DriftChamber.cpp.i
@@ -208,7 +208,7 @@ DriftChamber.i: DriftChamber.cpp.i
 
 # target to preprocess a source file
 DriftChamber.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamber.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamber.cpp.i
 .PHONY : DriftChamber.cpp.i
 
 DriftChamber.s: DriftChamber.cpp.s
@@ -216,7 +216,7 @@ DriftChamber.s: DriftChamber.cpp.s
 
 # target to generate assembly for a file
 DriftChamber.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamber.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamber.cpp.s
 .PHONY : DriftChamber.cpp.s
 
 DriftChamberv.o: DriftChamberv.cpp.o
@@ -224,7 +224,7 @@ DriftChamberv.o: DriftChamberv.cpp.o
 
 # target to build an object file
 DriftChamberv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamberv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamberv.cpp.o
 .PHONY : DriftChamberv.cpp.o
 
 DriftChamberv.i: DriftChamberv.cpp.i
@@ -232,7 +232,7 @@ DriftChamberv.i: DriftChamberv.cpp.i
 
 # target to preprocess a source file
 DriftChamberv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamberv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamberv.cpp.i
 .PHONY : DriftChamberv.cpp.i
 
 DriftChamberv.s: DriftChamberv.cpp.s
@@ -240,7 +240,7 @@ DriftChamberv.s: DriftChamberv.cpp.s
 
 # target to generate assembly for a file
 DriftChamberv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamberv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/DriftChamberv.cpp.s
 .PHONY : DriftChamberv.cpp.s
 
 G__VAMOSgeometry.o: G__VAMOSgeometry.cxx.o
@@ -248,7 +248,7 @@ G__VAMOSgeometry.o: G__VAMOSgeometry.cxx.o
 
 # target to build an object file
 G__VAMOSgeometry.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/G__VAMOSgeometry.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/G__VAMOSgeometry.cxx.o
 .PHONY : G__VAMOSgeometry.cxx.o
 
 G__VAMOSgeometry.i: G__VAMOSgeometry.cxx.i
@@ -256,7 +256,7 @@ G__VAMOSgeometry.i: G__VAMOSgeometry.cxx.i
 
 # target to preprocess a source file
 G__VAMOSgeometry.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/G__VAMOSgeometry.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/G__VAMOSgeometry.cxx.i
 .PHONY : G__VAMOSgeometry.cxx.i
 
 G__VAMOSgeometry.s: G__VAMOSgeometry.cxx.s
@@ -264,7 +264,7 @@ G__VAMOSgeometry.s: G__VAMOSgeometry.cxx.s
 
 # target to generate assembly for a file
 G__VAMOSgeometry.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/G__VAMOSgeometry.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/G__VAMOSgeometry.cxx.s
 .PHONY : G__VAMOSgeometry.cxx.s
 
 IonisationChamber.o: IonisationChamber.cpp.o
@@ -272,7 +272,7 @@ IonisationChamber.o: IonisationChamber.cpp.o
 
 # target to build an object file
 IonisationChamber.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamber.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamber.cpp.o
 .PHONY : IonisationChamber.cpp.o
 
 IonisationChamber.i: IonisationChamber.cpp.i
@@ -280,7 +280,7 @@ IonisationChamber.i: IonisationChamber.cpp.i
 
 # target to preprocess a source file
 IonisationChamber.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamber.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamber.cpp.i
 .PHONY : IonisationChamber.cpp.i
 
 IonisationChamber.s: IonisationChamber.cpp.s
@@ -288,7 +288,7 @@ IonisationChamber.s: IonisationChamber.cpp.s
 
 # target to generate assembly for a file
 IonisationChamber.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamber.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamber.cpp.s
 .PHONY : IonisationChamber.cpp.s
 
 IonisationChamberv.o: IonisationChamberv.cpp.o
@@ -296,7 +296,7 @@ IonisationChamberv.o: IonisationChamberv.cpp.o
 
 # target to build an object file
 IonisationChamberv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamberv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamberv.cpp.o
 .PHONY : IonisationChamberv.cpp.o
 
 IonisationChamberv.i: IonisationChamberv.cpp.i
@@ -304,7 +304,7 @@ IonisationChamberv.i: IonisationChamberv.cpp.i
 
 # target to preprocess a source file
 IonisationChamberv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamberv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamberv.cpp.i
 .PHONY : IonisationChamberv.cpp.i
 
 IonisationChamberv.s: IonisationChamberv.cpp.s
@@ -312,7 +312,7 @@ IonisationChamberv.s: IonisationChamberv.cpp.s
 
 # target to generate assembly for a file
 IonisationChamberv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamberv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/IonisationChamberv.cpp.s
 .PHONY : IonisationChamberv.cpp.s
 
 KVCsIVamos.o: KVCsIVamos.cpp.o
@@ -320,7 +320,7 @@ KVCsIVamos.o: KVCsIVamos.cpp.o
 
 # target to build an object file
 KVCsIVamos.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVCsIVamos.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVCsIVamos.cpp.o
 .PHONY : KVCsIVamos.cpp.o
 
 KVCsIVamos.i: KVCsIVamos.cpp.i
@@ -328,7 +328,7 @@ KVCsIVamos.i: KVCsIVamos.cpp.i
 
 # target to preprocess a source file
 KVCsIVamos.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVCsIVamos.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVCsIVamos.cpp.i
 .PHONY : KVCsIVamos.cpp.i
 
 KVCsIVamos.s: KVCsIVamos.cpp.s
@@ -336,7 +336,7 @@ KVCsIVamos.s: KVCsIVamos.cpp.s
 
 # target to generate assembly for a file
 KVCsIVamos.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVCsIVamos.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVCsIVamos.cpp.s
 .PHONY : KVCsIVamos.cpp.s
 
 KVSiliconVamos.o: KVSiliconVamos.cpp.o
@@ -344,7 +344,7 @@ KVSiliconVamos.o: KVSiliconVamos.cpp.o
 
 # target to build an object file
 KVSiliconVamos.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSiliconVamos.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSiliconVamos.cpp.o
 .PHONY : KVSiliconVamos.cpp.o
 
 KVSiliconVamos.i: KVSiliconVamos.cpp.i
@@ -352,7 +352,7 @@ KVSiliconVamos.i: KVSiliconVamos.cpp.i
 
 # target to preprocess a source file
 KVSiliconVamos.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSiliconVamos.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSiliconVamos.cpp.i
 .PHONY : KVSiliconVamos.cpp.i
 
 KVSiliconVamos.s: KVSiliconVamos.cpp.s
@@ -360,7 +360,7 @@ KVSiliconVamos.s: KVSiliconVamos.cpp.s
 
 # target to generate assembly for a file
 KVSiliconVamos.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSiliconVamos.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSiliconVamos.cpp.s
 .PHONY : KVSiliconVamos.cpp.s
 
 KVSpectroDetector.o: KVSpectroDetector.cpp.o
@@ -368,7 +368,7 @@ KVSpectroDetector.o: KVSpectroDetector.cpp.o
 
 # target to build an object file
 KVSpectroDetector.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSpectroDetector.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSpectroDetector.cpp.o
 .PHONY : KVSpectroDetector.cpp.o
 
 KVSpectroDetector.i: KVSpectroDetector.cpp.i
@@ -376,7 +376,7 @@ KVSpectroDetector.i: KVSpectroDetector.cpp.i
 
 # target to preprocess a source file
 KVSpectroDetector.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSpectroDetector.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSpectroDetector.cpp.i
 .PHONY : KVSpectroDetector.cpp.i
 
 KVSpectroDetector.s: KVSpectroDetector.cpp.s
@@ -384,7 +384,7 @@ KVSpectroDetector.s: KVSpectroDetector.cpp.s
 
 # target to generate assembly for a file
 KVSpectroDetector.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSpectroDetector.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/KVSpectroDetector.cpp.s
 .PHONY : KVSpectroDetector.cpp.s
 
 PlaneAbsorber.o: PlaneAbsorber.cpp.o
@@ -392,7 +392,7 @@ PlaneAbsorber.o: PlaneAbsorber.cpp.o
 
 # target to build an object file
 PlaneAbsorber.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/PlaneAbsorber.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/PlaneAbsorber.cpp.o
 .PHONY : PlaneAbsorber.cpp.o
 
 PlaneAbsorber.i: PlaneAbsorber.cpp.i
@@ -400,7 +400,7 @@ PlaneAbsorber.i: PlaneAbsorber.cpp.i
 
 # target to preprocess a source file
 PlaneAbsorber.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/PlaneAbsorber.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/PlaneAbsorber.cpp.i
 .PHONY : PlaneAbsorber.cpp.i
 
 PlaneAbsorber.s: PlaneAbsorber.cpp.s
@@ -408,7 +408,7 @@ PlaneAbsorber.s: PlaneAbsorber.cpp.s
 
 # target to generate assembly for a file
 PlaneAbsorber.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/PlaneAbsorber.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/PlaneAbsorber.cpp.s
 .PHONY : PlaneAbsorber.cpp.s
 
 SeD12v.o: SeD12v.cpp.o
@@ -416,7 +416,7 @@ SeD12v.o: SeD12v.cpp.o
 
 # target to build an object file
 SeD12v.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeD12v.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeD12v.cpp.o
 .PHONY : SeD12v.cpp.o
 
 SeD12v.i: SeD12v.cpp.i
@@ -424,7 +424,7 @@ SeD12v.i: SeD12v.cpp.i
 
 # target to preprocess a source file
 SeD12v.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeD12v.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeD12v.cpp.i
 .PHONY : SeD12v.cpp.i
 
 SeD12v.s: SeD12v.cpp.s
@@ -432,7 +432,7 @@ SeD12v.s: SeD12v.cpp.s
 
 # target to generate assembly for a file
 SeD12v.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeD12v.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeD12v.cpp.s
 .PHONY : SeD12v.cpp.s
 
 SeDv.o: SeDv.cpp.o
@@ -440,7 +440,7 @@ SeDv.o: SeDv.cpp.o
 
 # target to build an object file
 SeDv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeDv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeDv.cpp.o
 .PHONY : SeDv.cpp.o
 
 SeDv.i: SeDv.cpp.i
@@ -448,7 +448,7 @@ SeDv.i: SeDv.cpp.i
 
 # target to preprocess a source file
 SeDv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeDv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeDv.cpp.i
 .PHONY : SeDv.cpp.i
 
 SeDv.s: SeDv.cpp.s
@@ -456,7 +456,7 @@ SeDv.s: SeDv.cpp.s
 
 # target to generate assembly for a file
 SeDv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeDv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/SeDv.cpp.s
 .PHONY : SeDv.cpp.s
 
 Siv.o: Siv.cpp.o
@@ -464,7 +464,7 @@ Siv.o: Siv.cpp.o
 
 # target to build an object file
 Siv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Siv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Siv.cpp.o
 .PHONY : Siv.cpp.o
 
 Siv.i: Siv.cpp.i
@@ -472,7 +472,7 @@ Siv.i: Siv.cpp.i
 
 # target to preprocess a source file
 Siv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Siv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Siv.cpp.i
 .PHONY : Siv.cpp.i
 
 Siv.s: Siv.cpp.s
@@ -480,7 +480,7 @@ Siv.s: Siv.cpp.s
 
 # target to generate assembly for a file
 Siv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Siv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Siv.cpp.s
 .PHONY : Siv.cpp.s
 
 Sive503.o: Sive503.cpp.o
@@ -488,7 +488,7 @@ Sive503.o: Sive503.cpp.o
 
 # target to build an object file
 Sive503.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Sive503.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Sive503.cpp.o
 .PHONY : Sive503.cpp.o
 
 Sive503.i: Sive503.cpp.i
@@ -496,7 +496,7 @@ Sive503.i: Sive503.cpp.i
 
 # target to preprocess a source file
 Sive503.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Sive503.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Sive503.cpp.i
 .PHONY : Sive503.cpp.i
 
 Sive503.s: Sive503.cpp.s
@@ -504,7 +504,7 @@ Sive503.s: Sive503.cpp.s
 
 # target to generate assembly for a file
 Sive503.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Sive503.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/build.make VAMOS/geometry/CMakeFiles/VAMOSgeometry.dir/Sive503.cpp.s
 .PHONY : Sive503.cpp.s
 
 # Help Target
@@ -513,12 +513,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... G__VAMOSgeometry"
 	@echo "... VAMOSgeometry"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libVAMOSgeometry.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... CsIv.o"
@@ -574,6 +574,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

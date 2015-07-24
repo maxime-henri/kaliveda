@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/rule
 .PHONY : KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/rule
 
 # Convenience name for target.
@@ -154,12 +154,12 @@ KVMultiDetClassTraj: KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/rule
 
 # fast build rule for target.
 KVMultiDetClassTraj/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build
 .PHONY : KVMultiDetClassTraj/fast
 
 # Convenience name for target.
 KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/rule
 .PHONY : KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/rule
 
 # Convenience name for target.
@@ -168,12 +168,12 @@ KVMultiDetKVGenPhaseSpace_example: KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpa
 
 # fast build rule for target.
 KVMultiDetKVGenPhaseSpace_example/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build
 .PHONY : KVMultiDetKVGenPhaseSpace_example/fast
 
 # Convenience name for target.
 KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/rule
 .PHONY : KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/rule
 
 # Convenience name for target.
@@ -182,12 +182,12 @@ KVMultiDetKVGenPhaseSpace_example2: KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSp
 
 # fast build rule for target.
 KVMultiDetKVGenPhaseSpace_example2/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build
 .PHONY : KVMultiDetKVGenPhaseSpace_example2/fast
 
 # Convenience name for target.
 KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/rule
 .PHONY : KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/rule
 
 # Convenience name for target.
@@ -196,7 +196,7 @@ KVMultiDetbase_kvbase: KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/rule
 
 # fast build rule for target.
 KVMultiDetbase_kvbase/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build
 .PHONY : KVMultiDetbase_kvbase/fast
 
 G__ClassTraj.o: G__ClassTraj.cxx.o
@@ -204,7 +204,7 @@ G__ClassTraj.o: G__ClassTraj.cxx.o
 
 # target to build an object file
 G__ClassTraj.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/G__ClassTraj.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/G__ClassTraj.cxx.o
 .PHONY : G__ClassTraj.cxx.o
 
 G__ClassTraj.i: G__ClassTraj.cxx.i
@@ -212,7 +212,7 @@ G__ClassTraj.i: G__ClassTraj.cxx.i
 
 # target to preprocess a source file
 G__ClassTraj.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/G__ClassTraj.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/G__ClassTraj.cxx.i
 .PHONY : G__ClassTraj.cxx.i
 
 G__ClassTraj.s: G__ClassTraj.cxx.s
@@ -220,7 +220,7 @@ G__ClassTraj.s: G__ClassTraj.cxx.s
 
 # target to generate assembly for a file
 G__ClassTraj.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/G__ClassTraj.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/G__ClassTraj.cxx.s
 .PHONY : G__ClassTraj.cxx.s
 
 examples/ClassTraj.o: examples/ClassTraj.cpp.o
@@ -228,7 +228,7 @@ examples/ClassTraj.o: examples/ClassTraj.cpp.o
 
 # target to build an object file
 examples/ClassTraj.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/examples/ClassTraj.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/examples/ClassTraj.cpp.o
 .PHONY : examples/ClassTraj.cpp.o
 
 examples/ClassTraj.i: examples/ClassTraj.cpp.i
@@ -236,7 +236,7 @@ examples/ClassTraj.i: examples/ClassTraj.cpp.i
 
 # target to preprocess a source file
 examples/ClassTraj.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/examples/ClassTraj.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/examples/ClassTraj.cpp.i
 .PHONY : examples/ClassTraj.cpp.i
 
 examples/ClassTraj.s: examples/ClassTraj.cpp.s
@@ -244,7 +244,7 @@ examples/ClassTraj.s: examples/ClassTraj.cpp.s
 
 # target to generate assembly for a file
 examples/ClassTraj.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/examples/ClassTraj.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetClassTraj.dir/examples/ClassTraj.cpp.s
 .PHONY : examples/ClassTraj.cpp.s
 
 examples/KVGenPhaseSpace_example.o: examples/KVGenPhaseSpace_example.C.o
@@ -252,7 +252,7 @@ examples/KVGenPhaseSpace_example.o: examples/KVGenPhaseSpace_example.C.o
 
 # target to build an object file
 examples/KVGenPhaseSpace_example.C.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/examples/KVGenPhaseSpace_example.C.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/examples/KVGenPhaseSpace_example.C.o
 .PHONY : examples/KVGenPhaseSpace_example.C.o
 
 examples/KVGenPhaseSpace_example.i: examples/KVGenPhaseSpace_example.C.i
@@ -260,7 +260,7 @@ examples/KVGenPhaseSpace_example.i: examples/KVGenPhaseSpace_example.C.i
 
 # target to preprocess a source file
 examples/KVGenPhaseSpace_example.C.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/examples/KVGenPhaseSpace_example.C.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/examples/KVGenPhaseSpace_example.C.i
 .PHONY : examples/KVGenPhaseSpace_example.C.i
 
 examples/KVGenPhaseSpace_example.s: examples/KVGenPhaseSpace_example.C.s
@@ -268,7 +268,7 @@ examples/KVGenPhaseSpace_example.s: examples/KVGenPhaseSpace_example.C.s
 
 # target to generate assembly for a file
 examples/KVGenPhaseSpace_example.C.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/examples/KVGenPhaseSpace_example.C.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example.dir/examples/KVGenPhaseSpace_example.C.s
 .PHONY : examples/KVGenPhaseSpace_example.C.s
 
 examples/KVGenPhaseSpace_example2.o: examples/KVGenPhaseSpace_example2.C.o
@@ -276,7 +276,7 @@ examples/KVGenPhaseSpace_example2.o: examples/KVGenPhaseSpace_example2.C.o
 
 # target to build an object file
 examples/KVGenPhaseSpace_example2.C.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/examples/KVGenPhaseSpace_example2.C.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/examples/KVGenPhaseSpace_example2.C.o
 .PHONY : examples/KVGenPhaseSpace_example2.C.o
 
 examples/KVGenPhaseSpace_example2.i: examples/KVGenPhaseSpace_example2.C.i
@@ -284,7 +284,7 @@ examples/KVGenPhaseSpace_example2.i: examples/KVGenPhaseSpace_example2.C.i
 
 # target to preprocess a source file
 examples/KVGenPhaseSpace_example2.C.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/examples/KVGenPhaseSpace_example2.C.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/examples/KVGenPhaseSpace_example2.C.i
 .PHONY : examples/KVGenPhaseSpace_example2.C.i
 
 examples/KVGenPhaseSpace_example2.s: examples/KVGenPhaseSpace_example2.C.s
@@ -292,7 +292,7 @@ examples/KVGenPhaseSpace_example2.s: examples/KVGenPhaseSpace_example2.C.s
 
 # target to generate assembly for a file
 examples/KVGenPhaseSpace_example2.C.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/examples/KVGenPhaseSpace_example2.C.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetKVGenPhaseSpace_example2.dir/examples/KVGenPhaseSpace_example2.C.s
 .PHONY : examples/KVGenPhaseSpace_example2.C.s
 
 examples/base_kvbase.o: examples/base_kvbase.C.o
@@ -300,7 +300,7 @@ examples/base_kvbase.o: examples/base_kvbase.C.o
 
 # target to build an object file
 examples/base_kvbase.C.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/examples/base_kvbase.C.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/examples/base_kvbase.C.o
 .PHONY : examples/base_kvbase.C.o
 
 examples/base_kvbase.i: examples/base_kvbase.C.i
@@ -308,7 +308,7 @@ examples/base_kvbase.i: examples/base_kvbase.C.i
 
 # target to preprocess a source file
 examples/base_kvbase.C.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/examples/base_kvbase.C.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/examples/base_kvbase.C.i
 .PHONY : examples/base_kvbase.C.i
 
 examples/base_kvbase.s: examples/base_kvbase.C.s
@@ -316,7 +316,7 @@ examples/base_kvbase.s: examples/base_kvbase.C.s
 
 # target to generate assembly for a file
 examples/base_kvbase.C.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/examples/base_kvbase.C.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/build.make KVMultiDet/CMakeFiles/KVMultiDetbase_kvbase.dir/examples/base_kvbase.C.s
 .PHONY : examples/base_kvbase.C.s
 
 # Help Target
@@ -361,6 +361,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

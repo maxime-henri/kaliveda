@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/trieur/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/trieur/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,36 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+KVMultiDet/trieur/CMakeFiles/G__KVMultiDettrieur.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/CMakeFiles/G__KVMultiDettrieur.dir/rule
+.PHONY : KVMultiDet/trieur/CMakeFiles/G__KVMultiDettrieur.dir/rule
+
+# Convenience name for target.
+G__KVMultiDettrieur: KVMultiDet/trieur/CMakeFiles/G__KVMultiDettrieur.dir/rule
+.PHONY : G__KVMultiDettrieur
+
+# fast build rule for target.
+G__KVMultiDettrieur/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/G__KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/G__KVMultiDettrieur.dir/build
+.PHONY : G__KVMultiDettrieur/fast
+
+# Convenience name for target.
 KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/rule
 .PHONY : KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/rule
 
 # Convenience name for target.
@@ -154,29 +168,15 @@ KVMultiDettrieur: KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/rule
 
 # fast build rule for target.
 KVMultiDettrieur/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build
 .PHONY : KVMultiDettrieur/fast
-
-# Convenience name for target.
-KVMultiDet/trieur/CMakeFiles/libKVMultiDettrieur.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/trieur/CMakeFiles/libKVMultiDettrieur.rootmap.dir/rule
-.PHONY : KVMultiDet/trieur/CMakeFiles/libKVMultiDettrieur.rootmap.dir/rule
-
-# Convenience name for target.
-libKVMultiDettrieur.rootmap: KVMultiDet/trieur/CMakeFiles/libKVMultiDettrieur.rootmap.dir/rule
-.PHONY : libKVMultiDettrieur.rootmap
-
-# fast build rule for target.
-libKVMultiDettrieur.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/libKVMultiDettrieur.rootmap.dir/build.make KVMultiDet/trieur/CMakeFiles/libKVMultiDettrieur.rootmap.dir/build
-.PHONY : libKVMultiDettrieur.rootmap/fast
 
 G__KVMultiDettrieur.o: G__KVMultiDettrieur.cxx.o
 .PHONY : G__KVMultiDettrieur.o
 
 # target to build an object file
 G__KVMultiDettrieur.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/G__KVMultiDettrieur.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/G__KVMultiDettrieur.cxx.o
 .PHONY : G__KVMultiDettrieur.cxx.o
 
 G__KVMultiDettrieur.i: G__KVMultiDettrieur.cxx.i
@@ -184,7 +184,7 @@ G__KVMultiDettrieur.i: G__KVMultiDettrieur.cxx.i
 
 # target to preprocess a source file
 G__KVMultiDettrieur.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/G__KVMultiDettrieur.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/G__KVMultiDettrieur.cxx.i
 .PHONY : G__KVMultiDettrieur.cxx.i
 
 G__KVMultiDettrieur.s: G__KVMultiDettrieur.cxx.s
@@ -192,7 +192,7 @@ G__KVMultiDettrieur.s: G__KVMultiDettrieur.cxx.s
 
 # target to generate assembly for a file
 G__KVMultiDettrieur.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/G__KVMultiDettrieur.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/G__KVMultiDettrieur.cxx.s
 .PHONY : G__KVMultiDettrieur.cxx.s
 
 KVTrieur.o: KVTrieur.cpp.o
@@ -200,7 +200,7 @@ KVTrieur.o: KVTrieur.cpp.o
 
 # target to build an object file
 KVTrieur.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieur.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieur.cpp.o
 .PHONY : KVTrieur.cpp.o
 
 KVTrieur.i: KVTrieur.cpp.i
@@ -208,7 +208,7 @@ KVTrieur.i: KVTrieur.cpp.i
 
 # target to preprocess a source file
 KVTrieur.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieur.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieur.cpp.i
 .PHONY : KVTrieur.cpp.i
 
 KVTrieur.s: KVTrieur.cpp.s
@@ -216,7 +216,7 @@ KVTrieur.s: KVTrieur.cpp.s
 
 # target to generate assembly for a file
 KVTrieur.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieur.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieur.cpp.s
 .PHONY : KVTrieur.cpp.s
 
 KVTrieurBloc.o: KVTrieurBloc.cpp.o
@@ -224,7 +224,7 @@ KVTrieurBloc.o: KVTrieurBloc.cpp.o
 
 # target to build an object file
 KVTrieurBloc.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurBloc.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurBloc.cpp.o
 .PHONY : KVTrieurBloc.cpp.o
 
 KVTrieurBloc.i: KVTrieurBloc.cpp.i
@@ -232,7 +232,7 @@ KVTrieurBloc.i: KVTrieurBloc.cpp.i
 
 # target to preprocess a source file
 KVTrieurBloc.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurBloc.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurBloc.cpp.i
 .PHONY : KVTrieurBloc.cpp.i
 
 KVTrieurBloc.s: KVTrieurBloc.cpp.s
@@ -240,7 +240,7 @@ KVTrieurBloc.s: KVTrieurBloc.cpp.s
 
 # target to generate assembly for a file
 KVTrieurBloc.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurBloc.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurBloc.cpp.s
 .PHONY : KVTrieurBloc.cpp.s
 
 KVTrieurLin.o: KVTrieurLin.cpp.o
@@ -248,7 +248,7 @@ KVTrieurLin.o: KVTrieurLin.cpp.o
 
 # target to build an object file
 KVTrieurLin.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurLin.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurLin.cpp.o
 .PHONY : KVTrieurLin.cpp.o
 
 KVTrieurLin.i: KVTrieurLin.cpp.i
@@ -256,7 +256,7 @@ KVTrieurLin.i: KVTrieurLin.cpp.i
 
 # target to preprocess a source file
 KVTrieurLin.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurLin.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurLin.cpp.i
 .PHONY : KVTrieurLin.cpp.i
 
 KVTrieurLin.s: KVTrieurLin.cpp.s
@@ -264,7 +264,7 @@ KVTrieurLin.s: KVTrieurLin.cpp.s
 
 # target to generate assembly for a file
 KVTrieurLin.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurLin.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurLin.cpp.s
 .PHONY : KVTrieurLin.cpp.s
 
 KVTrieurTranche.o: KVTrieurTranche.cpp.o
@@ -272,7 +272,7 @@ KVTrieurTranche.o: KVTrieurTranche.cpp.o
 
 # target to build an object file
 KVTrieurTranche.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurTranche.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurTranche.cpp.o
 .PHONY : KVTrieurTranche.cpp.o
 
 KVTrieurTranche.i: KVTrieurTranche.cpp.i
@@ -280,7 +280,7 @@ KVTrieurTranche.i: KVTrieurTranche.cpp.i
 
 # target to preprocess a source file
 KVTrieurTranche.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurTranche.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurTranche.cpp.i
 .PHONY : KVTrieurTranche.cpp.i
 
 KVTrieurTranche.s: KVTrieurTranche.cpp.s
@@ -288,7 +288,7 @@ KVTrieurTranche.s: KVTrieurTranche.cpp.s
 
 # target to generate assembly for a file
 KVTrieurTranche.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurTranche.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/build.make KVMultiDet/trieur/CMakeFiles/KVMultiDettrieur.dir/KVTrieurTranche.cpp.s
 .PHONY : KVTrieurTranche.cpp.s
 
 # Help Target
@@ -297,12 +297,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... G__KVMultiDettrieur"
 	@echo "... KVMultiDettrieur"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libKVMultiDettrieur.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVMultiDettrieur.o"
@@ -331,6 +331,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

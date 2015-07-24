@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/FAZIA/db/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/FAZIA/db/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 FAZIA/db/CMakeFiles/FAZIAdb.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/CMakeFiles/FAZIAdb.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/CMakeFiles/FAZIAdb.dir/rule
 .PHONY : FAZIA/db/CMakeFiles/FAZIAdb.dir/rule
 
 # Convenience name for target.
@@ -154,29 +154,29 @@ FAZIAdb: FAZIA/db/CMakeFiles/FAZIAdb.dir/rule
 
 # fast build rule for target.
 FAZIAdb/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/build
 .PHONY : FAZIAdb/fast
 
 # Convenience name for target.
-FAZIA/db/CMakeFiles/libFAZIAdb.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/CMakeFiles/libFAZIAdb.rootmap.dir/rule
-.PHONY : FAZIA/db/CMakeFiles/libFAZIAdb.rootmap.dir/rule
+FAZIA/db/CMakeFiles/G__FAZIAdb.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/db/CMakeFiles/G__FAZIAdb.dir/rule
+.PHONY : FAZIA/db/CMakeFiles/G__FAZIAdb.dir/rule
 
 # Convenience name for target.
-libFAZIAdb.rootmap: FAZIA/db/CMakeFiles/libFAZIAdb.rootmap.dir/rule
-.PHONY : libFAZIAdb.rootmap
+G__FAZIAdb: FAZIA/db/CMakeFiles/G__FAZIAdb.dir/rule
+.PHONY : G__FAZIAdb
 
 # fast build rule for target.
-libFAZIAdb.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/libFAZIAdb.rootmap.dir/build.make FAZIA/db/CMakeFiles/libFAZIAdb.rootmap.dir/build
-.PHONY : libFAZIAdb.rootmap/fast
+G__FAZIAdb/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/G__FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/G__FAZIAdb.dir/build
+.PHONY : G__FAZIAdb/fast
 
 G__FAZIAdb.o: G__FAZIAdb.cxx.o
 .PHONY : G__FAZIAdb.o
 
 # target to build an object file
 G__FAZIAdb.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/G__FAZIAdb.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/G__FAZIAdb.cxx.o
 .PHONY : G__FAZIAdb.cxx.o
 
 G__FAZIAdb.i: G__FAZIAdb.cxx.i
@@ -184,7 +184,7 @@ G__FAZIAdb.i: G__FAZIAdb.cxx.i
 
 # target to preprocess a source file
 G__FAZIAdb.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/G__FAZIAdb.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/G__FAZIAdb.cxx.i
 .PHONY : G__FAZIAdb.cxx.i
 
 G__FAZIAdb.s: G__FAZIAdb.cxx.s
@@ -192,7 +192,7 @@ G__FAZIAdb.s: G__FAZIAdb.cxx.s
 
 # target to generate assembly for a file
 G__FAZIAdb.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/G__FAZIAdb.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/G__FAZIAdb.cxx.s
 .PHONY : G__FAZIAdb.cxx.s
 
 KVFAZIADB.o: KVFAZIADB.cpp.o
@@ -200,7 +200,7 @@ KVFAZIADB.o: KVFAZIADB.cpp.o
 
 # target to build an object file
 KVFAZIADB.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADB.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADB.cpp.o
 .PHONY : KVFAZIADB.cpp.o
 
 KVFAZIADB.i: KVFAZIADB.cpp.i
@@ -208,7 +208,7 @@ KVFAZIADB.i: KVFAZIADB.cpp.i
 
 # target to preprocess a source file
 KVFAZIADB.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADB.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADB.cpp.i
 .PHONY : KVFAZIADB.cpp.i
 
 KVFAZIADB.s: KVFAZIADB.cpp.s
@@ -216,7 +216,7 @@ KVFAZIADB.s: KVFAZIADB.cpp.s
 
 # target to generate assembly for a file
 KVFAZIADB.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADB.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADB.cpp.s
 .PHONY : KVFAZIADB.cpp.s
 
 KVFAZIADBRun.o: KVFAZIADBRun.cpp.o
@@ -224,7 +224,7 @@ KVFAZIADBRun.o: KVFAZIADBRun.cpp.o
 
 # target to build an object file
 KVFAZIADBRun.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADBRun.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADBRun.cpp.o
 .PHONY : KVFAZIADBRun.cpp.o
 
 KVFAZIADBRun.i: KVFAZIADBRun.cpp.i
@@ -232,7 +232,7 @@ KVFAZIADBRun.i: KVFAZIADBRun.cpp.i
 
 # target to preprocess a source file
 KVFAZIADBRun.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADBRun.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADBRun.cpp.i
 .PHONY : KVFAZIADBRun.cpp.i
 
 KVFAZIADBRun.s: KVFAZIADBRun.cpp.s
@@ -240,7 +240,7 @@ KVFAZIADBRun.s: KVFAZIADBRun.cpp.s
 
 # target to generate assembly for a file
 KVFAZIADBRun.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADBRun.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/db/CMakeFiles/FAZIAdb.dir/build.make FAZIA/db/CMakeFiles/FAZIAdb.dir/KVFAZIADBRun.cpp.s
 .PHONY : KVFAZIADBRun.cpp.s
 
 # Help Target
@@ -250,11 +250,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... FAZIAdb"
+	@echo "... G__FAZIAdb"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libFAZIAdb.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__FAZIAdb.o"
@@ -277,6 +277,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

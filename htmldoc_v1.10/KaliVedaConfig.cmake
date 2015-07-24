@@ -38,12 +38,12 @@ set_and_check(KALIVEDA_CMAKEPKG_DIR "${PACKAGE_PREFIX_DIR}/lib/kaliveda")
 
 #---set list of all installed libraries using exported targets
 include(${KALIVEDA_CMAKEPKG_DIR}/KaliVeda-targets.cmake)
-set(KALIVEDA_LIBRARIES "FAZIAidentification;FAZIAdb;FAZIAanalysis;FAZIAparticles;FAZIAgeometry;VAMOSidentification;VAMOSdb;VAMOSbase;VAMOSanalysis;VAMOSexp_events;VAMOSdaq_cec;VAMOSreconstruction;VAMOScalibration;VAMOSgeometry;KVIndraidentification;KVIndragui;KVIndradb;KVIndraanalysis;KVIndraexp_events;KVIndradaq_cec;KVIndracalibration;KVIndrageometry;BackTrackbase;BackTrackmodels;KVMultiDetidentification;KVMultiDetdata_management;KVMultiDetgui;KVMultiDetdb;KVMultiDetbase;KVMultiDetanalysis;KVMultiDettrieur;KVMultiDetparticles;KVMultiDetexp_events;KVMultiDetdaq_cec;KVMultiDetglobvars;KVMultiDetstopping;KVMultiDetcalibration;KVMultiDetgeometry;KVMultiDetevents")
+set(KALIVEDA_LIBRARIES "BackTrackbase;BackTrackmodels;KVMultiDetidentification;KVMultiDetdata_management;KVMultiDetgui;KVMultiDetdb;KVMultiDetbase;KVMultiDetanalysis;KVMultiDettrieur;KVMultiDetparticles;KVMultiDetexp_events;KVMultiDetdaq_cec;KVMultiDetglobvars;KVMultiDetstopping;KVMultiDetcalibration;KVMultiDetgeometry;KVMultiDetevents")
 
 #---set installed components
-set(KALIVEDA_INDRA_FOUND ON)
-set(KALIVEDA_INDRAVAMOS_FOUND ON)
-set(KALIVEDA_FAZIA_FOUND ON)
+set(KALIVEDA_INDRA_FOUND OFF)
+set(KALIVEDA_INDRAVAMOS_FOUND OFF)
+set(KALIVEDA_FAZIA_FOUND OFF)
 
 #---set path to 'use file'
 set(KALIVEDA_USE_FILE ${KALIVEDA_CMAKEPKG_DIR}/KaliVedaUseFile.cmake)

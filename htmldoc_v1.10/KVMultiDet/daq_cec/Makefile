@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/daq_cec/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/daq_cec/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,36 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
+KVMultiDet/daq_cec/CMakeFiles/G__KVMultiDetdaq_cec.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/CMakeFiles/G__KVMultiDetdaq_cec.dir/rule
+.PHONY : KVMultiDet/daq_cec/CMakeFiles/G__KVMultiDetdaq_cec.dir/rule
+
+# Convenience name for target.
+G__KVMultiDetdaq_cec: KVMultiDet/daq_cec/CMakeFiles/G__KVMultiDetdaq_cec.dir/rule
+.PHONY : G__KVMultiDetdaq_cec
+
+# fast build rule for target.
+G__KVMultiDetdaq_cec/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/G__KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/G__KVMultiDetdaq_cec.dir/build
+.PHONY : G__KVMultiDetdaq_cec/fast
+
+# Convenience name for target.
 KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/rule
 .PHONY : KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/rule
 
 # Convenience name for target.
@@ -154,29 +168,15 @@ KVMultiDetdaq_cec: KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/rule
 
 # fast build rule for target.
 KVMultiDetdaq_cec/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build
 .PHONY : KVMultiDetdaq_cec/fast
-
-# Convenience name for target.
-KVMultiDet/daq_cec/CMakeFiles/libKVMultiDetdaq_cec.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/daq_cec/CMakeFiles/libKVMultiDetdaq_cec.rootmap.dir/rule
-.PHONY : KVMultiDet/daq_cec/CMakeFiles/libKVMultiDetdaq_cec.rootmap.dir/rule
-
-# Convenience name for target.
-libKVMultiDetdaq_cec.rootmap: KVMultiDet/daq_cec/CMakeFiles/libKVMultiDetdaq_cec.rootmap.dir/rule
-.PHONY : libKVMultiDetdaq_cec.rootmap
-
-# fast build rule for target.
-libKVMultiDetdaq_cec.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/libKVMultiDetdaq_cec.rootmap.dir/build.make KVMultiDet/daq_cec/CMakeFiles/libKVMultiDetdaq_cec.rootmap.dir/build
-.PHONY : libKVMultiDetdaq_cec.rootmap/fast
 
 GTDataParameters.o: GTDataParameters.cpp.o
 .PHONY : GTDataParameters.o
 
 # target to build an object file
 GTDataParameters.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTDataParameters.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTDataParameters.cpp.o
 .PHONY : GTDataParameters.cpp.o
 
 GTDataParameters.i: GTDataParameters.cpp.i
@@ -184,7 +184,7 @@ GTDataParameters.i: GTDataParameters.cpp.i
 
 # target to preprocess a source file
 GTDataParameters.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTDataParameters.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTDataParameters.cpp.i
 .PHONY : GTDataParameters.cpp.i
 
 GTDataParameters.s: GTDataParameters.cpp.s
@@ -192,7 +192,7 @@ GTDataParameters.s: GTDataParameters.cpp.s
 
 # target to generate assembly for a file
 GTDataParameters.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTDataParameters.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTDataParameters.cpp.s
 .PHONY : GTDataParameters.cpp.s
 
 GTGanilData.o: GTGanilData.cpp.o
@@ -200,7 +200,7 @@ GTGanilData.o: GTGanilData.cpp.o
 
 # target to build an object file
 GTGanilData.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTGanilData.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTGanilData.cpp.o
 .PHONY : GTGanilData.cpp.o
 
 GTGanilData.i: GTGanilData.cpp.i
@@ -208,7 +208,7 @@ GTGanilData.i: GTGanilData.cpp.i
 
 # target to preprocess a source file
 GTGanilData.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTGanilData.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTGanilData.cpp.i
 .PHONY : GTGanilData.cpp.i
 
 GTGanilData.s: GTGanilData.cpp.s
@@ -216,7 +216,7 @@ GTGanilData.s: GTGanilData.cpp.s
 
 # target to generate assembly for a file
 GTGanilData.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTGanilData.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTGanilData.cpp.s
 .PHONY : GTGanilData.cpp.s
 
 GTOneScaler.o: GTOneScaler.cpp.o
@@ -224,7 +224,7 @@ GTOneScaler.o: GTOneScaler.cpp.o
 
 # target to build an object file
 GTOneScaler.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTOneScaler.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTOneScaler.cpp.o
 .PHONY : GTOneScaler.cpp.o
 
 GTOneScaler.i: GTOneScaler.cpp.i
@@ -232,7 +232,7 @@ GTOneScaler.i: GTOneScaler.cpp.i
 
 # target to preprocess a source file
 GTOneScaler.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTOneScaler.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTOneScaler.cpp.i
 .PHONY : GTOneScaler.cpp.i
 
 GTOneScaler.s: GTOneScaler.cpp.s
@@ -240,7 +240,7 @@ GTOneScaler.s: GTOneScaler.cpp.s
 
 # target to generate assembly for a file
 GTOneScaler.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTOneScaler.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTOneScaler.cpp.s
 .PHONY : GTOneScaler.cpp.s
 
 GTScalers.o: GTScalers.cpp.o
@@ -248,7 +248,7 @@ GTScalers.o: GTScalers.cpp.o
 
 # target to build an object file
 GTScalers.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTScalers.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTScalers.cpp.o
 .PHONY : GTScalers.cpp.o
 
 GTScalers.i: GTScalers.cpp.i
@@ -256,7 +256,7 @@ GTScalers.i: GTScalers.cpp.i
 
 # target to preprocess a source file
 GTScalers.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTScalers.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTScalers.cpp.i
 .PHONY : GTScalers.cpp.i
 
 GTScalers.s: GTScalers.cpp.s
@@ -264,7 +264,7 @@ GTScalers.s: GTScalers.cpp.s
 
 # target to generate assembly for a file
 GTScalers.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTScalers.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/GTScalers.cpp.s
 .PHONY : GTScalers.cpp.s
 
 G__KVMultiDetdaq_cec.o: G__KVMultiDetdaq_cec.cxx.o
@@ -272,7 +272,7 @@ G__KVMultiDetdaq_cec.o: G__KVMultiDetdaq_cec.cxx.o
 
 # target to build an object file
 G__KVMultiDetdaq_cec.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/G__KVMultiDetdaq_cec.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/G__KVMultiDetdaq_cec.cxx.o
 .PHONY : G__KVMultiDetdaq_cec.cxx.o
 
 G__KVMultiDetdaq_cec.i: G__KVMultiDetdaq_cec.cxx.i
@@ -280,7 +280,7 @@ G__KVMultiDetdaq_cec.i: G__KVMultiDetdaq_cec.cxx.i
 
 # target to preprocess a source file
 G__KVMultiDetdaq_cec.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/G__KVMultiDetdaq_cec.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/G__KVMultiDetdaq_cec.cxx.i
 .PHONY : G__KVMultiDetdaq_cec.cxx.i
 
 G__KVMultiDetdaq_cec.s: G__KVMultiDetdaq_cec.cxx.s
@@ -288,7 +288,7 @@ G__KVMultiDetdaq_cec.s: G__KVMultiDetdaq_cec.cxx.s
 
 # target to generate assembly for a file
 G__KVMultiDetdaq_cec.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/G__KVMultiDetdaq_cec.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/G__KVMultiDetdaq_cec.cxx.s
 .PHONY : G__KVMultiDetdaq_cec.cxx.s
 
 KVRawDataReader.o: KVRawDataReader.cpp.o
@@ -296,7 +296,7 @@ KVRawDataReader.o: KVRawDataReader.cpp.o
 
 # target to build an object file
 KVRawDataReader.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/KVRawDataReader.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/KVRawDataReader.cpp.o
 .PHONY : KVRawDataReader.cpp.o
 
 KVRawDataReader.i: KVRawDataReader.cpp.i
@@ -304,7 +304,7 @@ KVRawDataReader.i: KVRawDataReader.cpp.i
 
 # target to preprocess a source file
 KVRawDataReader.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/KVRawDataReader.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/KVRawDataReader.cpp.i
 .PHONY : KVRawDataReader.cpp.i
 
 KVRawDataReader.s: KVRawDataReader.cpp.s
@@ -312,7 +312,7 @@ KVRawDataReader.s: KVRawDataReader.cpp.s
 
 # target to generate assembly for a file
 KVRawDataReader.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/KVRawDataReader.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/build.make KVMultiDet/daq_cec/CMakeFiles/KVMultiDetdaq_cec.dir/KVRawDataReader.cpp.s
 .PHONY : KVRawDataReader.cpp.s
 
 # Help Target
@@ -321,12 +321,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... G__KVMultiDetdaq_cec"
 	@echo "... KVMultiDetdaq_cec"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libKVMultiDetdaq_cec.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... GTDataParameters.o"
@@ -358,6 +358,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

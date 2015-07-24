@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/FAZIA/identification/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/FAZIA/identification/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 FAZIA/identification/CMakeFiles/FAZIAidentification.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/CMakeFiles/FAZIAidentification.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/CMakeFiles/FAZIAidentification.dir/rule
 .PHONY : FAZIA/identification/CMakeFiles/FAZIAidentification.dir/rule
 
 # Convenience name for target.
@@ -154,29 +154,29 @@ FAZIAidentification: FAZIA/identification/CMakeFiles/FAZIAidentification.dir/rul
 
 # fast build rule for target.
 FAZIAidentification/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build
 .PHONY : FAZIAidentification/fast
 
 # Convenience name for target.
-FAZIA/identification/CMakeFiles/libFAZIAidentification.rootmap.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/CMakeFiles/libFAZIAidentification.rootmap.dir/rule
-.PHONY : FAZIA/identification/CMakeFiles/libFAZIAidentification.rootmap.dir/rule
+FAZIA/identification/CMakeFiles/G__FAZIAidentification.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/identification/CMakeFiles/G__FAZIAidentification.dir/rule
+.PHONY : FAZIA/identification/CMakeFiles/G__FAZIAidentification.dir/rule
 
 # Convenience name for target.
-libFAZIAidentification.rootmap: FAZIA/identification/CMakeFiles/libFAZIAidentification.rootmap.dir/rule
-.PHONY : libFAZIAidentification.rootmap
+G__FAZIAidentification: FAZIA/identification/CMakeFiles/G__FAZIAidentification.dir/rule
+.PHONY : G__FAZIAidentification
 
 # fast build rule for target.
-libFAZIAidentification.rootmap/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/libFAZIAidentification.rootmap.dir/build.make FAZIA/identification/CMakeFiles/libFAZIAidentification.rootmap.dir/build
-.PHONY : libFAZIAidentification.rootmap/fast
+G__FAZIAidentification/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/G__FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/G__FAZIAidentification.dir/build
+.PHONY : G__FAZIAidentification/fast
 
 G__FAZIAidentification.o: G__FAZIAidentification.cxx.o
 .PHONY : G__FAZIAidentification.o
 
 # target to build an object file
 G__FAZIAidentification.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/G__FAZIAidentification.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/G__FAZIAidentification.cxx.o
 .PHONY : G__FAZIAidentification.cxx.o
 
 G__FAZIAidentification.i: G__FAZIAidentification.cxx.i
@@ -184,7 +184,7 @@ G__FAZIAidentification.i: G__FAZIAidentification.cxx.i
 
 # target to preprocess a source file
 G__FAZIAidentification.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/G__FAZIAidentification.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/G__FAZIAidentification.cxx.i
 .PHONY : G__FAZIAidentification.cxx.i
 
 G__FAZIAidentification.s: G__FAZIAidentification.cxx.s
@@ -192,7 +192,7 @@ G__FAZIAidentification.s: G__FAZIAidentification.cxx.s
 
 # target to generate assembly for a file
 G__FAZIAidentification.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/G__FAZIAidentification.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/G__FAZIAidentification.cxx.s
 .PHONY : G__FAZIAidentification.cxx.s
 
 KVFAZIAIDSiPSA.o: KVFAZIAIDSiPSA.cpp.o
@@ -200,7 +200,7 @@ KVFAZIAIDSiPSA.o: KVFAZIAIDSiPSA.cpp.o
 
 # target to build an object file
 KVFAZIAIDSiPSA.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiPSA.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiPSA.cpp.o
 .PHONY : KVFAZIAIDSiPSA.cpp.o
 
 KVFAZIAIDSiPSA.i: KVFAZIAIDSiPSA.cpp.i
@@ -208,7 +208,7 @@ KVFAZIAIDSiPSA.i: KVFAZIAIDSiPSA.cpp.i
 
 # target to preprocess a source file
 KVFAZIAIDSiPSA.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiPSA.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiPSA.cpp.i
 .PHONY : KVFAZIAIDSiPSA.cpp.i
 
 KVFAZIAIDSiPSA.s: KVFAZIAIDSiPSA.cpp.s
@@ -216,7 +216,7 @@ KVFAZIAIDSiPSA.s: KVFAZIAIDSiPSA.cpp.s
 
 # target to generate assembly for a file
 KVFAZIAIDSiPSA.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiPSA.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiPSA.cpp.s
 .PHONY : KVFAZIAIDSiPSA.cpp.s
 
 KVFAZIAIDSiSi.o: KVFAZIAIDSiSi.cpp.o
@@ -224,7 +224,7 @@ KVFAZIAIDSiSi.o: KVFAZIAIDSiSi.cpp.o
 
 # target to build an object file
 KVFAZIAIDSiSi.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiSi.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiSi.cpp.o
 .PHONY : KVFAZIAIDSiSi.cpp.o
 
 KVFAZIAIDSiSi.i: KVFAZIAIDSiSi.cpp.i
@@ -232,7 +232,7 @@ KVFAZIAIDSiSi.i: KVFAZIAIDSiSi.cpp.i
 
 # target to preprocess a source file
 KVFAZIAIDSiSi.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiSi.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiSi.cpp.i
 .PHONY : KVFAZIAIDSiSi.cpp.i
 
 KVFAZIAIDSiSi.s: KVFAZIAIDSiSi.cpp.s
@@ -240,7 +240,7 @@ KVFAZIAIDSiSi.s: KVFAZIAIDSiSi.cpp.s
 
 # target to generate assembly for a file
 KVFAZIAIDSiSi.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiSi.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDSiSi.cpp.s
 .PHONY : KVFAZIAIDSiSi.cpp.s
 
 KVFAZIAIDTelescope.o: KVFAZIAIDTelescope.cpp.o
@@ -248,7 +248,7 @@ KVFAZIAIDTelescope.o: KVFAZIAIDTelescope.cpp.o
 
 # target to build an object file
 KVFAZIAIDTelescope.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDTelescope.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDTelescope.cpp.o
 .PHONY : KVFAZIAIDTelescope.cpp.o
 
 KVFAZIAIDTelescope.i: KVFAZIAIDTelescope.cpp.i
@@ -256,7 +256,7 @@ KVFAZIAIDTelescope.i: KVFAZIAIDTelescope.cpp.i
 
 # target to preprocess a source file
 KVFAZIAIDTelescope.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDTelescope.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDTelescope.cpp.i
 .PHONY : KVFAZIAIDTelescope.cpp.i
 
 KVFAZIAIDTelescope.s: KVFAZIAIDTelescope.cpp.s
@@ -264,7 +264,7 @@ KVFAZIAIDTelescope.s: KVFAZIAIDTelescope.cpp.s
 
 # target to generate assembly for a file
 KVFAZIAIDTelescope.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDTelescope.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/identification/CMakeFiles/FAZIAidentification.dir/build.make FAZIA/identification/CMakeFiles/FAZIAidentification.dir/KVFAZIAIDTelescope.cpp.s
 .PHONY : KVFAZIAIDTelescope.cpp.s
 
 # Help Target
@@ -274,11 +274,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... FAZIAidentification"
+	@echo "... G__FAZIAidentification"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... libFAZIAidentification.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__FAZIAidentification.o"
@@ -304,6 +304,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
