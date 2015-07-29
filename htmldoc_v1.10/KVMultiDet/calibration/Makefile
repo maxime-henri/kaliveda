@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/calibration/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/calibration/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-KVMultiDet/calibration/CMakeFiles/G__KVMultiDetcalibration.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/CMakeFiles/G__KVMultiDetcalibration.dir/rule
-.PHONY : KVMultiDet/calibration/CMakeFiles/G__KVMultiDetcalibration.dir/rule
-
-# Convenience name for target.
-G__KVMultiDetcalibration: KVMultiDet/calibration/CMakeFiles/G__KVMultiDetcalibration.dir/rule
-.PHONY : G__KVMultiDetcalibration
-
-# fast build rule for target.
-G__KVMultiDetcalibration/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/G__KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/G__KVMultiDetcalibration.dir/build
-.PHONY : G__KVMultiDetcalibration/fast
-
-# Convenience name for target.
 KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/rule
 .PHONY : KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ KVMultiDetcalibration: KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.d
 
 # fast build rule for target.
 KVMultiDetcalibration/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build
 .PHONY : KVMultiDetcalibration/fast
+
+# Convenience name for target.
+KVMultiDet/calibration/CMakeFiles/libKVMultiDetcalibration.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/calibration/CMakeFiles/libKVMultiDetcalibration.rootmap.dir/rule
+.PHONY : KVMultiDet/calibration/CMakeFiles/libKVMultiDetcalibration.rootmap.dir/rule
+
+# Convenience name for target.
+libKVMultiDetcalibration.rootmap: KVMultiDet/calibration/CMakeFiles/libKVMultiDetcalibration.rootmap.dir/rule
+.PHONY : libKVMultiDetcalibration.rootmap
+
+# fast build rule for target.
+libKVMultiDetcalibration.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/libKVMultiDetcalibration.rootmap.dir/build.make KVMultiDet/calibration/CMakeFiles/libKVMultiDetcalibration.rootmap.dir/build
+.PHONY : libKVMultiDetcalibration.rootmap/fast
 
 G__KVMultiDetcalibration.o: G__KVMultiDetcalibration.cxx.o
 .PHONY : G__KVMultiDetcalibration.o
 
 # target to build an object file
 G__KVMultiDetcalibration.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/G__KVMultiDetcalibration.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/G__KVMultiDetcalibration.cxx.o
 .PHONY : G__KVMultiDetcalibration.cxx.o
 
 G__KVMultiDetcalibration.i: G__KVMultiDetcalibration.cxx.i
@@ -184,7 +184,7 @@ G__KVMultiDetcalibration.i: G__KVMultiDetcalibration.cxx.i
 
 # target to preprocess a source file
 G__KVMultiDetcalibration.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/G__KVMultiDetcalibration.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/G__KVMultiDetcalibration.cxx.i
 .PHONY : G__KVMultiDetcalibration.cxx.i
 
 G__KVMultiDetcalibration.s: G__KVMultiDetcalibration.cxx.s
@@ -192,7 +192,7 @@ G__KVMultiDetcalibration.s: G__KVMultiDetcalibration.cxx.s
 
 # target to generate assembly for a file
 G__KVMultiDetcalibration.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/G__KVMultiDetcalibration.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/G__KVMultiDetcalibration.cxx.s
 .PHONY : G__KVMultiDetcalibration.cxx.s
 
 KVLinCal.o: KVLinCal.cpp.o
@@ -200,7 +200,7 @@ KVLinCal.o: KVLinCal.cpp.o
 
 # target to build an object file
 KVLinCal.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVLinCal.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVLinCal.cpp.o
 .PHONY : KVLinCal.cpp.o
 
 KVLinCal.i: KVLinCal.cpp.i
@@ -208,7 +208,7 @@ KVLinCal.i: KVLinCal.cpp.i
 
 # target to preprocess a source file
 KVLinCal.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVLinCal.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVLinCal.cpp.i
 .PHONY : KVLinCal.cpp.i
 
 KVLinCal.s: KVLinCal.cpp.s
@@ -216,7 +216,7 @@ KVLinCal.s: KVLinCal.cpp.s
 
 # target to generate assembly for a file
 KVLinCal.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVLinCal.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVLinCal.cpp.s
 .PHONY : KVLinCal.cpp.s
 
 KVPulseHeightDefect.o: KVPulseHeightDefect.cpp.o
@@ -224,7 +224,7 @@ KVPulseHeightDefect.o: KVPulseHeightDefect.cpp.o
 
 # target to build an object file
 KVPulseHeightDefect.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVPulseHeightDefect.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVPulseHeightDefect.cpp.o
 .PHONY : KVPulseHeightDefect.cpp.o
 
 KVPulseHeightDefect.i: KVPulseHeightDefect.cpp.i
@@ -232,7 +232,7 @@ KVPulseHeightDefect.i: KVPulseHeightDefect.cpp.i
 
 # target to preprocess a source file
 KVPulseHeightDefect.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVPulseHeightDefect.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVPulseHeightDefect.cpp.i
 .PHONY : KVPulseHeightDefect.cpp.i
 
 KVPulseHeightDefect.s: KVPulseHeightDefect.cpp.s
@@ -240,7 +240,7 @@ KVPulseHeightDefect.s: KVPulseHeightDefect.cpp.s
 
 # target to generate assembly for a file
 KVPulseHeightDefect.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVPulseHeightDefect.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVPulseHeightDefect.cpp.s
 .PHONY : KVPulseHeightDefect.cpp.s
 
 KVRecombination.o: KVRecombination.cpp.o
@@ -248,7 +248,7 @@ KVRecombination.o: KVRecombination.cpp.o
 
 # target to build an object file
 KVRecombination.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVRecombination.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVRecombination.cpp.o
 .PHONY : KVRecombination.cpp.o
 
 KVRecombination.i: KVRecombination.cpp.i
@@ -256,7 +256,7 @@ KVRecombination.i: KVRecombination.cpp.i
 
 # target to preprocess a source file
 KVRecombination.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVRecombination.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVRecombination.cpp.i
 .PHONY : KVRecombination.cpp.i
 
 KVRecombination.s: KVRecombination.cpp.s
@@ -264,7 +264,7 @@ KVRecombination.s: KVRecombination.cpp.s
 
 # target to generate assembly for a file
 KVRecombination.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVRecombination.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/build.make KVMultiDet/calibration/CMakeFiles/KVMultiDetcalibration.dir/KVRecombination.cpp.s
 .PHONY : KVRecombination.cpp.s
 
 # Help Target
@@ -273,12 +273,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__KVMultiDetcalibration"
 	@echo "... KVMultiDetcalibration"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libKVMultiDetcalibration.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVMultiDetcalibration.o"
@@ -304,6 +304,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

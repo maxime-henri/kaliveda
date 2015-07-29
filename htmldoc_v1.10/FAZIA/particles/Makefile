@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/FAZIA/particles/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/FAZIA/particles/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 FAZIA/particles/CMakeFiles/FAZIAparticles.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/CMakeFiles/FAZIAparticles.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/CMakeFiles/FAZIAparticles.dir/rule
 .PHONY : FAZIA/particles/CMakeFiles/FAZIAparticles.dir/rule
 
 # Convenience name for target.
@@ -154,29 +154,29 @@ FAZIAparticles: FAZIA/particles/CMakeFiles/FAZIAparticles.dir/rule
 
 # fast build rule for target.
 FAZIAparticles/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build
 .PHONY : FAZIAparticles/fast
 
 # Convenience name for target.
-FAZIA/particles/CMakeFiles/G__FAZIAparticles.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/CMakeFiles/G__FAZIAparticles.dir/rule
-.PHONY : FAZIA/particles/CMakeFiles/G__FAZIAparticles.dir/rule
+FAZIA/particles/CMakeFiles/libFAZIAparticles.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/particles/CMakeFiles/libFAZIAparticles.rootmap.dir/rule
+.PHONY : FAZIA/particles/CMakeFiles/libFAZIAparticles.rootmap.dir/rule
 
 # Convenience name for target.
-G__FAZIAparticles: FAZIA/particles/CMakeFiles/G__FAZIAparticles.dir/rule
-.PHONY : G__FAZIAparticles
+libFAZIAparticles.rootmap: FAZIA/particles/CMakeFiles/libFAZIAparticles.rootmap.dir/rule
+.PHONY : libFAZIAparticles.rootmap
 
 # fast build rule for target.
-G__FAZIAparticles/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/G__FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/G__FAZIAparticles.dir/build
-.PHONY : G__FAZIAparticles/fast
+libFAZIAparticles.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/libFAZIAparticles.rootmap.dir/build.make FAZIA/particles/CMakeFiles/libFAZIAparticles.rootmap.dir/build
+.PHONY : libFAZIAparticles.rootmap/fast
 
 G__FAZIAparticles.o: G__FAZIAparticles.cxx.o
 .PHONY : G__FAZIAparticles.o
 
 # target to build an object file
 G__FAZIAparticles.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/G__FAZIAparticles.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/G__FAZIAparticles.cxx.o
 .PHONY : G__FAZIAparticles.cxx.o
 
 G__FAZIAparticles.i: G__FAZIAparticles.cxx.i
@@ -184,7 +184,7 @@ G__FAZIAparticles.i: G__FAZIAparticles.cxx.i
 
 # target to preprocess a source file
 G__FAZIAparticles.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/G__FAZIAparticles.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/G__FAZIAparticles.cxx.i
 .PHONY : G__FAZIAparticles.cxx.i
 
 G__FAZIAparticles.s: G__FAZIAparticles.cxx.s
@@ -192,7 +192,7 @@ G__FAZIAparticles.s: G__FAZIAparticles.cxx.s
 
 # target to generate assembly for a file
 G__FAZIAparticles.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/G__FAZIAparticles.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/G__FAZIAparticles.cxx.s
 .PHONY : G__FAZIAparticles.cxx.s
 
 KVFAZIAReconNuc.o: KVFAZIAReconNuc.cpp.o
@@ -200,7 +200,7 @@ KVFAZIAReconNuc.o: KVFAZIAReconNuc.cpp.o
 
 # target to build an object file
 KVFAZIAReconNuc.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/KVFAZIAReconNuc.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/KVFAZIAReconNuc.cpp.o
 .PHONY : KVFAZIAReconNuc.cpp.o
 
 KVFAZIAReconNuc.i: KVFAZIAReconNuc.cpp.i
@@ -208,7 +208,7 @@ KVFAZIAReconNuc.i: KVFAZIAReconNuc.cpp.i
 
 # target to preprocess a source file
 KVFAZIAReconNuc.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/KVFAZIAReconNuc.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/KVFAZIAReconNuc.cpp.i
 .PHONY : KVFAZIAReconNuc.cpp.i
 
 KVFAZIAReconNuc.s: KVFAZIAReconNuc.cpp.s
@@ -216,7 +216,7 @@ KVFAZIAReconNuc.s: KVFAZIAReconNuc.cpp.s
 
 # target to generate assembly for a file
 KVFAZIAReconNuc.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/KVFAZIAReconNuc.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/particles/CMakeFiles/FAZIAparticles.dir/build.make FAZIA/particles/CMakeFiles/FAZIAparticles.dir/KVFAZIAReconNuc.cpp.s
 .PHONY : KVFAZIAReconNuc.cpp.s
 
 # Help Target
@@ -226,11 +226,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... FAZIAparticles"
-	@echo "... G__FAZIAparticles"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libFAZIAparticles.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__FAZIAparticles.o"
@@ -250,6 +250,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

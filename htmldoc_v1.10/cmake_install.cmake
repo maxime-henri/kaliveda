@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.2_x86_64_root-6.04")
+  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,11 +33,11 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R6/KVVersion.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R5/KVVersion.h")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "headers")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R6/KVConfig.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R5/KVConfig.h")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -45,11 +45,11 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/etc" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R6/etc/config.files")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/etc" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R5/etc/config.files")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE PROGRAM FILES "/home/john/software/build/kaliveda-build/1.10_R6/kaliveda-config")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE PROGRAM FILES "/home/john/software/build/kaliveda-build/1.10_R5/kaliveda-config")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -79,7 +79,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/kaliveda/KaliVeda-targets.cmake")
     file(DIFFERENT EXPORT_FILE_CHANGED FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/kaliveda/KaliVeda-targets.cmake"
-         "/home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles/Export/lib/kaliveda/KaliVeda-targets.cmake")
+         "/home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles/Export/lib/kaliveda/KaliVeda-targets.cmake")
     if(EXPORT_FILE_CHANGED)
       file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/kaliveda/KaliVeda-targets-*.cmake")
       if(OLD_CONFIG_FILES)
@@ -88,16 +88,16 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
       endif()
     endif()
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles/Export/lib/kaliveda/KaliVeda-targets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles/Export/lib/kaliveda/KaliVeda-targets.cmake")
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles/Export/lib/kaliveda/KaliVeda-targets-relwithdebinfo.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/kaliveda" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles/Export/lib/kaliveda/KaliVeda-targets-relwithdebinfo.cmake")
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/kaliveda" TYPE FILE FILES
-    "/home/john/software/build/kaliveda-build/1.10_R6/KaliVedaConfig.cmake"
-    "/home/john/software/build/kaliveda-build/1.10_R6/KaliVedaConfigVersion.cmake"
+    "/home/john/software/build/kaliveda-build/1.10_R5/KaliVedaConfig.cmake"
+    "/home/john/software/build/kaliveda-build/1.10_R5/KaliVedaConfigVersion.cmake"
     "/home/john/software/sources/kaliveda.git/cmake/KaliVedaUseFile.cmake"
     )
 endif()
@@ -108,12 +108,15 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/john/software/build/kaliveda-build/1.10_R6/GanTape/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/fitltg-0.1/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/BackTrack/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/execs/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/etc/proof/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/GanTape/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/fitltg-0.1/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/BackTrack/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/KVIndra/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/FAZIA/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/execs/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/etc/proof/cmake_install.cmake")
 
 endif()
 
@@ -123,7 +126,7 @@ else()
   set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 endif()
 
-file(WRITE "/home/john/software/build/kaliveda-build/1.10_R6/${CMAKE_INSTALL_MANIFEST}" "")
+file(WRITE "/home/john/software/build/kaliveda-build/1.10_R5/${CMAKE_INSTALL_MANIFEST}" "")
 foreach(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  file(APPEND "/home/john/software/build/kaliveda-build/1.10_R6/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  file(APPEND "/home/john/software/build/kaliveda-build/1.10_R5/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 endforeach()

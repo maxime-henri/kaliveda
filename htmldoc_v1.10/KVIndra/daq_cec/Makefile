@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVIndra/daq_cec/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVIndra/daq_cec/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-KVIndra/daq_cec/CMakeFiles/G__KVIndradaq_cec.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/CMakeFiles/G__KVIndradaq_cec.dir/rule
-.PHONY : KVIndra/daq_cec/CMakeFiles/G__KVIndradaq_cec.dir/rule
-
-# Convenience name for target.
-G__KVIndradaq_cec: KVIndra/daq_cec/CMakeFiles/G__KVIndradaq_cec.dir/rule
-.PHONY : G__KVIndradaq_cec
-
-# fast build rule for target.
-G__KVIndradaq_cec/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/G__KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/G__KVIndradaq_cec.dir/build
-.PHONY : G__KVIndradaq_cec/fast
-
-# Convenience name for target.
 KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/rule
 .PHONY : KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ KVIndradaq_cec: KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/rule
 
 # fast build rule for target.
 KVIndradaq_cec/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build
 .PHONY : KVIndradaq_cec/fast
+
+# Convenience name for target.
+KVIndra/daq_cec/CMakeFiles/libKVIndradaq_cec.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/daq_cec/CMakeFiles/libKVIndradaq_cec.rootmap.dir/rule
+.PHONY : KVIndra/daq_cec/CMakeFiles/libKVIndradaq_cec.rootmap.dir/rule
+
+# Convenience name for target.
+libKVIndradaq_cec.rootmap: KVIndra/daq_cec/CMakeFiles/libKVIndradaq_cec.rootmap.dir/rule
+.PHONY : libKVIndradaq_cec.rootmap
+
+# fast build rule for target.
+libKVIndradaq_cec.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/libKVIndradaq_cec.rootmap.dir/build.make KVIndra/daq_cec/CMakeFiles/libKVIndradaq_cec.rootmap.dir/build
+.PHONY : libKVIndradaq_cec.rootmap/fast
 
 G__KVIndradaq_cec.o: G__KVIndradaq_cec.cxx.o
 .PHONY : G__KVIndradaq_cec.o
 
 # target to build an object file
 G__KVIndradaq_cec.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/G__KVIndradaq_cec.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/G__KVIndradaq_cec.cxx.o
 .PHONY : G__KVIndradaq_cec.cxx.o
 
 G__KVIndradaq_cec.i: G__KVIndradaq_cec.cxx.i
@@ -184,7 +184,7 @@ G__KVIndradaq_cec.i: G__KVIndradaq_cec.cxx.i
 
 # target to preprocess a source file
 G__KVIndradaq_cec.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/G__KVIndradaq_cec.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/G__KVIndradaq_cec.cxx.i
 .PHONY : G__KVIndradaq_cec.cxx.i
 
 G__KVIndradaq_cec.s: G__KVIndradaq_cec.cxx.s
@@ -192,7 +192,7 @@ G__KVIndradaq_cec.s: G__KVIndradaq_cec.cxx.s
 
 # target to generate assembly for a file
 G__KVIndradaq_cec.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/G__KVIndradaq_cec.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/G__KVIndradaq_cec.cxx.s
 .PHONY : G__KVIndradaq_cec.cxx.s
 
 KVINDRATriggerInfo.o: KVINDRATriggerInfo.cpp.o
@@ -200,7 +200,7 @@ KVINDRATriggerInfo.o: KVINDRATriggerInfo.cpp.o
 
 # target to build an object file
 KVINDRATriggerInfo.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/KVINDRATriggerInfo.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/KVINDRATriggerInfo.cpp.o
 .PHONY : KVINDRATriggerInfo.cpp.o
 
 KVINDRATriggerInfo.i: KVINDRATriggerInfo.cpp.i
@@ -208,7 +208,7 @@ KVINDRATriggerInfo.i: KVINDRATriggerInfo.cpp.i
 
 # target to preprocess a source file
 KVINDRATriggerInfo.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/KVINDRATriggerInfo.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/KVINDRATriggerInfo.cpp.i
 .PHONY : KVINDRATriggerInfo.cpp.i
 
 KVINDRATriggerInfo.s: KVINDRATriggerInfo.cpp.s
@@ -216,7 +216,7 @@ KVINDRATriggerInfo.s: KVINDRATriggerInfo.cpp.s
 
 # target to generate assembly for a file
 KVINDRATriggerInfo.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/KVINDRATriggerInfo.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/build.make KVIndra/daq_cec/CMakeFiles/KVIndradaq_cec.dir/KVINDRATriggerInfo.cpp.s
 .PHONY : KVINDRATriggerInfo.cpp.s
 
 # Help Target
@@ -225,12 +225,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__KVIndradaq_cec"
 	@echo "... KVIndradaq_cec"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libKVIndradaq_cec.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVIndradaq_cec.o"
@@ -250,6 +250,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

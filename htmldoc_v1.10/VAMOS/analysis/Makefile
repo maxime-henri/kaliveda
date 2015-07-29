@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/analysis/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/analysis/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-VAMOS/analysis/CMakeFiles/G__VAMOSanalysis.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/CMakeFiles/G__VAMOSanalysis.dir/rule
-.PHONY : VAMOS/analysis/CMakeFiles/G__VAMOSanalysis.dir/rule
-
-# Convenience name for target.
-G__VAMOSanalysis: VAMOS/analysis/CMakeFiles/G__VAMOSanalysis.dir/rule
-.PHONY : G__VAMOSanalysis
-
-# fast build rule for target.
-G__VAMOSanalysis/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/G__VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/G__VAMOSanalysis.dir/build
-.PHONY : G__VAMOSanalysis/fast
-
-# Convenience name for target.
 VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/rule
 .PHONY : VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ VAMOSanalysis: VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/rule
 
 # fast build rule for target.
 VAMOSanalysis/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build
 .PHONY : VAMOSanalysis/fast
+
+# Convenience name for target.
+VAMOS/analysis/CMakeFiles/libVAMOSanalysis.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/analysis/CMakeFiles/libVAMOSanalysis.rootmap.dir/rule
+.PHONY : VAMOS/analysis/CMakeFiles/libVAMOSanalysis.rootmap.dir/rule
+
+# Convenience name for target.
+libVAMOSanalysis.rootmap: VAMOS/analysis/CMakeFiles/libVAMOSanalysis.rootmap.dir/rule
+.PHONY : libVAMOSanalysis.rootmap
+
+# fast build rule for target.
+libVAMOSanalysis.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/libVAMOSanalysis.rootmap.dir/build.make VAMOS/analysis/CMakeFiles/libVAMOSanalysis.rootmap.dir/build
+.PHONY : libVAMOSanalysis.rootmap/fast
 
 Analysisv.o: Analysisv.cpp.o
 .PHONY : Analysisv.o
 
 # target to build an object file
 Analysisv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv.cpp.o
 .PHONY : Analysisv.cpp.o
 
 Analysisv.i: Analysisv.cpp.i
@@ -184,7 +184,7 @@ Analysisv.i: Analysisv.cpp.i
 
 # target to preprocess a source file
 Analysisv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv.cpp.i
 .PHONY : Analysisv.cpp.i
 
 Analysisv.s: Analysisv.cpp.s
@@ -192,7 +192,7 @@ Analysisv.s: Analysisv.cpp.s
 
 # target to generate assembly for a file
 Analysisv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv.cpp.s
 .PHONY : Analysisv.cpp.s
 
 Analysisv_e494s.o: Analysisv_e494s.cpp.o
@@ -200,7 +200,7 @@ Analysisv_e494s.o: Analysisv_e494s.cpp.o
 
 # target to build an object file
 Analysisv_e494s.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e494s.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e494s.cpp.o
 .PHONY : Analysisv_e494s.cpp.o
 
 Analysisv_e494s.i: Analysisv_e494s.cpp.i
@@ -208,7 +208,7 @@ Analysisv_e494s.i: Analysisv_e494s.cpp.i
 
 # target to preprocess a source file
 Analysisv_e494s.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e494s.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e494s.cpp.i
 .PHONY : Analysisv_e494s.cpp.i
 
 Analysisv_e494s.s: Analysisv_e494s.cpp.s
@@ -216,7 +216,7 @@ Analysisv_e494s.s: Analysisv_e494s.cpp.s
 
 # target to generate assembly for a file
 Analysisv_e494s.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e494s.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e494s.cpp.s
 .PHONY : Analysisv_e494s.cpp.s
 
 Analysisv_e503.o: Analysisv_e503.cpp.o
@@ -224,7 +224,7 @@ Analysisv_e503.o: Analysisv_e503.cpp.o
 
 # target to build an object file
 Analysisv_e503.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e503.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e503.cpp.o
 .PHONY : Analysisv_e503.cpp.o
 
 Analysisv_e503.i: Analysisv_e503.cpp.i
@@ -232,7 +232,7 @@ Analysisv_e503.i: Analysisv_e503.cpp.i
 
 # target to preprocess a source file
 Analysisv_e503.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e503.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e503.cpp.i
 .PHONY : Analysisv_e503.cpp.i
 
 Analysisv_e503.s: Analysisv_e503.cpp.s
@@ -240,7 +240,7 @@ Analysisv_e503.s: Analysisv_e503.cpp.s
 
 # target to generate assembly for a file
 Analysisv_e503.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e503.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/Analysisv_e503.cpp.s
 .PHONY : Analysisv_e503.cpp.s
 
 G__VAMOSanalysis.o: G__VAMOSanalysis.cxx.o
@@ -248,7 +248,7 @@ G__VAMOSanalysis.o: G__VAMOSanalysis.cxx.o
 
 # target to build an object file
 G__VAMOSanalysis.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/G__VAMOSanalysis.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/G__VAMOSanalysis.cxx.o
 .PHONY : G__VAMOSanalysis.cxx.o
 
 G__VAMOSanalysis.i: G__VAMOSanalysis.cxx.i
@@ -256,7 +256,7 @@ G__VAMOSanalysis.i: G__VAMOSanalysis.cxx.i
 
 # target to preprocess a source file
 G__VAMOSanalysis.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/G__VAMOSanalysis.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/G__VAMOSanalysis.cxx.i
 .PHONY : G__VAMOSanalysis.cxx.i
 
 G__VAMOSanalysis.s: G__VAMOSanalysis.cxx.s
@@ -264,7 +264,7 @@ G__VAMOSanalysis.s: G__VAMOSanalysis.cxx.s
 
 # target to generate assembly for a file
 G__VAMOSanalysis.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/G__VAMOSanalysis.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/G__VAMOSanalysis.cxx.s
 .PHONY : G__VAMOSanalysis.cxx.s
 
 KVIVRawDataAnalyser.o: KVIVRawDataAnalyser.cpp.o
@@ -272,7 +272,7 @@ KVIVRawDataAnalyser.o: KVIVRawDataAnalyser.cpp.o
 
 # target to build an object file
 KVIVRawDataAnalyser.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataAnalyser.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataAnalyser.cpp.o
 .PHONY : KVIVRawDataAnalyser.cpp.o
 
 KVIVRawDataAnalyser.i: KVIVRawDataAnalyser.cpp.i
@@ -280,7 +280,7 @@ KVIVRawDataAnalyser.i: KVIVRawDataAnalyser.cpp.i
 
 # target to preprocess a source file
 KVIVRawDataAnalyser.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataAnalyser.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataAnalyser.cpp.i
 .PHONY : KVIVRawDataAnalyser.cpp.i
 
 KVIVRawDataAnalyser.s: KVIVRawDataAnalyser.cpp.s
@@ -288,7 +288,7 @@ KVIVRawDataAnalyser.s: KVIVRawDataAnalyser.cpp.s
 
 # target to generate assembly for a file
 KVIVRawDataAnalyser.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataAnalyser.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataAnalyser.cpp.s
 .PHONY : KVIVRawDataAnalyser.cpp.s
 
 KVIVRawDataReconstructor.o: KVIVRawDataReconstructor.cpp.o
@@ -296,7 +296,7 @@ KVIVRawDataReconstructor.o: KVIVRawDataReconstructor.cpp.o
 
 # target to build an object file
 KVIVRawDataReconstructor.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataReconstructor.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataReconstructor.cpp.o
 .PHONY : KVIVRawDataReconstructor.cpp.o
 
 KVIVRawDataReconstructor.i: KVIVRawDataReconstructor.cpp.i
@@ -304,7 +304,7 @@ KVIVRawDataReconstructor.i: KVIVRawDataReconstructor.cpp.i
 
 # target to preprocess a source file
 KVIVRawDataReconstructor.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataReconstructor.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataReconstructor.cpp.i
 .PHONY : KVIVRawDataReconstructor.cpp.i
 
 KVIVRawDataReconstructor.s: KVIVRawDataReconstructor.cpp.s
@@ -312,7 +312,7 @@ KVIVRawDataReconstructor.s: KVIVRawDataReconstructor.cpp.s
 
 # target to generate assembly for a file
 KVIVRawDataReconstructor.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataReconstructor.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVRawDataReconstructor.cpp.s
 .PHONY : KVIVRawDataReconstructor.cpp.s
 
 KVIVReconDataAnalyser.o: KVIVReconDataAnalyser.cpp.o
@@ -320,7 +320,7 @@ KVIVReconDataAnalyser.o: KVIVReconDataAnalyser.cpp.o
 
 # target to build an object file
 KVIVReconDataAnalyser.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconDataAnalyser.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconDataAnalyser.cpp.o
 .PHONY : KVIVReconDataAnalyser.cpp.o
 
 KVIVReconDataAnalyser.i: KVIVReconDataAnalyser.cpp.i
@@ -328,7 +328,7 @@ KVIVReconDataAnalyser.i: KVIVReconDataAnalyser.cpp.i
 
 # target to preprocess a source file
 KVIVReconDataAnalyser.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconDataAnalyser.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconDataAnalyser.cpp.i
 .PHONY : KVIVReconDataAnalyser.cpp.i
 
 KVIVReconDataAnalyser.s: KVIVReconDataAnalyser.cpp.s
@@ -336,7 +336,7 @@ KVIVReconDataAnalyser.s: KVIVReconDataAnalyser.cpp.s
 
 # target to generate assembly for a file
 KVIVReconDataAnalyser.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconDataAnalyser.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconDataAnalyser.cpp.s
 .PHONY : KVIVReconDataAnalyser.cpp.s
 
 KVIVReconIdent.o: KVIVReconIdent.cpp.o
@@ -344,7 +344,7 @@ KVIVReconIdent.o: KVIVReconIdent.cpp.o
 
 # target to build an object file
 KVIVReconIdent.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconIdent.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconIdent.cpp.o
 .PHONY : KVIVReconIdent.cpp.o
 
 KVIVReconIdent.i: KVIVReconIdent.cpp.i
@@ -352,7 +352,7 @@ KVIVReconIdent.i: KVIVReconIdent.cpp.i
 
 # target to preprocess a source file
 KVIVReconIdent.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconIdent.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconIdent.cpp.i
 .PHONY : KVIVReconIdent.cpp.i
 
 KVIVReconIdent.s: KVIVReconIdent.cpp.s
@@ -360,7 +360,7 @@ KVIVReconIdent.s: KVIVReconIdent.cpp.s
 
 # target to generate assembly for a file
 KVIVReconIdent.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconIdent.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVReconIdent.cpp.s
 .PHONY : KVIVReconIdent.cpp.s
 
 KVIVSelector.o: KVIVSelector.cpp.o
@@ -368,7 +368,7 @@ KVIVSelector.o: KVIVSelector.cpp.o
 
 # target to build an object file
 KVIVSelector.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVSelector.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVSelector.cpp.o
 .PHONY : KVIVSelector.cpp.o
 
 KVIVSelector.i: KVIVSelector.cpp.i
@@ -376,7 +376,7 @@ KVIVSelector.i: KVIVSelector.cpp.i
 
 # target to preprocess a source file
 KVIVSelector.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVSelector.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVSelector.cpp.i
 .PHONY : KVIVSelector.cpp.i
 
 KVIVSelector.s: KVIVSelector.cpp.s
@@ -384,7 +384,7 @@ KVIVSelector.s: KVIVSelector.cpp.s
 
 # target to generate assembly for a file
 KVIVSelector.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVSelector.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/build.make VAMOS/analysis/CMakeFiles/VAMOSanalysis.dir/KVIVSelector.cpp.s
 .PHONY : KVIVSelector.cpp.s
 
 # Help Target
@@ -393,12 +393,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__VAMOSanalysis"
 	@echo "... VAMOSanalysis"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libVAMOSanalysis.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... Analysisv.o"
@@ -439,6 +439,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

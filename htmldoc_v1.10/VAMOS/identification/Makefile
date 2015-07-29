@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/identification/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/identification/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-VAMOS/identification/CMakeFiles/G__VAMOSidentification.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/CMakeFiles/G__VAMOSidentification.dir/rule
-.PHONY : VAMOS/identification/CMakeFiles/G__VAMOSidentification.dir/rule
-
-# Convenience name for target.
-G__VAMOSidentification: VAMOS/identification/CMakeFiles/G__VAMOSidentification.dir/rule
-.PHONY : G__VAMOSidentification
-
-# fast build rule for target.
-G__VAMOSidentification/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/G__VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/G__VAMOSidentification.dir/build
-.PHONY : G__VAMOSidentification/fast
-
-# Convenience name for target.
 VAMOS/identification/CMakeFiles/VAMOSidentification.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/CMakeFiles/VAMOSidentification.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/CMakeFiles/VAMOSidentification.dir/rule
 .PHONY : VAMOS/identification/CMakeFiles/VAMOSidentification.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ VAMOSidentification: VAMOS/identification/CMakeFiles/VAMOSidentification.dir/rul
 
 # fast build rule for target.
 VAMOSidentification/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build
 .PHONY : VAMOSidentification/fast
+
+# Convenience name for target.
+VAMOS/identification/CMakeFiles/libVAMOSidentification.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/identification/CMakeFiles/libVAMOSidentification.rootmap.dir/rule
+.PHONY : VAMOS/identification/CMakeFiles/libVAMOSidentification.rootmap.dir/rule
+
+# Convenience name for target.
+libVAMOSidentification.rootmap: VAMOS/identification/CMakeFiles/libVAMOSidentification.rootmap.dir/rule
+.PHONY : libVAMOSidentification.rootmap
+
+# fast build rule for target.
+libVAMOSidentification.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/libVAMOSidentification.rootmap.dir/build.make VAMOS/identification/CMakeFiles/libVAMOSidentification.rootmap.dir/build
+.PHONY : libVAMOSidentification.rootmap/fast
 
 CsICalib.o: CsICalib.cpp.o
 .PHONY : CsICalib.o
 
 # target to build an object file
 CsICalib.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/CsICalib.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/CsICalib.cpp.o
 .PHONY : CsICalib.cpp.o
 
 CsICalib.i: CsICalib.cpp.i
@@ -184,7 +184,7 @@ CsICalib.i: CsICalib.cpp.i
 
 # target to preprocess a source file
 CsICalib.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/CsICalib.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/CsICalib.cpp.i
 .PHONY : CsICalib.cpp.i
 
 CsICalib.s: CsICalib.cpp.s
@@ -192,7 +192,7 @@ CsICalib.s: CsICalib.cpp.s
 
 # target to generate assembly for a file
 CsICalib.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/CsICalib.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/CsICalib.cpp.s
 .PHONY : CsICalib.cpp.s
 
 G__VAMOSidentification.o: G__VAMOSidentification.cxx.o
@@ -200,7 +200,7 @@ G__VAMOSidentification.o: G__VAMOSidentification.cxx.o
 
 # target to build an object file
 G__VAMOSidentification.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/G__VAMOSidentification.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/G__VAMOSidentification.cxx.o
 .PHONY : G__VAMOSidentification.cxx.o
 
 G__VAMOSidentification.i: G__VAMOSidentification.cxx.i
@@ -208,7 +208,7 @@ G__VAMOSidentification.i: G__VAMOSidentification.cxx.i
 
 # target to preprocess a source file
 G__VAMOSidentification.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/G__VAMOSidentification.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/G__VAMOSidentification.cxx.i
 .PHONY : G__VAMOSidentification.cxx.i
 
 G__VAMOSidentification.s: G__VAMOSidentification.cxx.s
@@ -216,7 +216,7 @@ G__VAMOSidentification.s: G__VAMOSidentification.cxx.s
 
 # target to generate assembly for a file
 G__VAMOSidentification.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/G__VAMOSidentification.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/G__VAMOSidentification.cxx.s
 .PHONY : G__VAMOSidentification.cxx.s
 
 Identificationv.o: Identificationv.cpp.o
@@ -224,7 +224,7 @@ Identificationv.o: Identificationv.cpp.o
 
 # target to build an object file
 Identificationv.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/Identificationv.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/Identificationv.cpp.o
 .PHONY : Identificationv.cpp.o
 
 Identificationv.i: Identificationv.cpp.i
@@ -232,7 +232,7 @@ Identificationv.i: Identificationv.cpp.i
 
 # target to preprocess a source file
 Identificationv.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/Identificationv.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/Identificationv.cpp.i
 .PHONY : Identificationv.cpp.i
 
 Identificationv.s: Identificationv.cpp.s
@@ -240,7 +240,7 @@ Identificationv.s: Identificationv.cpp.s
 
 # target to generate assembly for a file
 Identificationv.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/Identificationv.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/Identificationv.cpp.s
 .PHONY : Identificationv.cpp.s
 
 KVIDSiCsIVamos.o: KVIDSiCsIVamos.cpp.o
@@ -248,7 +248,7 @@ KVIDSiCsIVamos.o: KVIDSiCsIVamos.cpp.o
 
 # target to build an object file
 KVIDSiCsIVamos.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVIDSiCsIVamos.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVIDSiCsIVamos.cpp.o
 .PHONY : KVIDSiCsIVamos.cpp.o
 
 KVIDSiCsIVamos.i: KVIDSiCsIVamos.cpp.i
@@ -256,7 +256,7 @@ KVIDSiCsIVamos.i: KVIDSiCsIVamos.cpp.i
 
 # target to preprocess a source file
 KVIDSiCsIVamos.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVIDSiCsIVamos.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVIDSiCsIVamos.cpp.i
 .PHONY : KVIDSiCsIVamos.cpp.i
 
 KVIDSiCsIVamos.s: KVIDSiCsIVamos.cpp.s
@@ -264,7 +264,7 @@ KVIDSiCsIVamos.s: KVIDSiCsIVamos.cpp.s
 
 # target to generate assembly for a file
 KVIDSiCsIVamos.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVIDSiCsIVamos.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVIDSiCsIVamos.cpp.s
 .PHONY : KVIDSiCsIVamos.cpp.s
 
 KVVAMOSCodes.o: KVVAMOSCodes.cpp.o
@@ -272,7 +272,7 @@ KVVAMOSCodes.o: KVVAMOSCodes.cpp.o
 
 # target to build an object file
 KVVAMOSCodes.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSCodes.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSCodes.cpp.o
 .PHONY : KVVAMOSCodes.cpp.o
 
 KVVAMOSCodes.i: KVVAMOSCodes.cpp.i
@@ -280,7 +280,7 @@ KVVAMOSCodes.i: KVVAMOSCodes.cpp.i
 
 # target to preprocess a source file
 KVVAMOSCodes.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSCodes.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSCodes.cpp.i
 .PHONY : KVVAMOSCodes.cpp.i
 
 KVVAMOSCodes.s: KVVAMOSCodes.cpp.s
@@ -288,7 +288,7 @@ KVVAMOSCodes.s: KVVAMOSCodes.cpp.s
 
 # target to generate assembly for a file
 KVVAMOSCodes.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSCodes.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSCodes.cpp.s
 .PHONY : KVVAMOSCodes.cpp.s
 
 KVVAMOSIDTelescope.o: KVVAMOSIDTelescope.cpp.o
@@ -296,7 +296,7 @@ KVVAMOSIDTelescope.o: KVVAMOSIDTelescope.cpp.o
 
 # target to build an object file
 KVVAMOSIDTelescope.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSIDTelescope.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSIDTelescope.cpp.o
 .PHONY : KVVAMOSIDTelescope.cpp.o
 
 KVVAMOSIDTelescope.i: KVVAMOSIDTelescope.cpp.i
@@ -304,7 +304,7 @@ KVVAMOSIDTelescope.i: KVVAMOSIDTelescope.cpp.i
 
 # target to preprocess a source file
 KVVAMOSIDTelescope.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSIDTelescope.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSIDTelescope.cpp.i
 .PHONY : KVVAMOSIDTelescope.cpp.i
 
 KVVAMOSIDTelescope.s: KVVAMOSIDTelescope.cpp.s
@@ -312,7 +312,7 @@ KVVAMOSIDTelescope.s: KVVAMOSIDTelescope.cpp.s
 
 # target to generate assembly for a file
 KVVAMOSIDTelescope.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSIDTelescope.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/identification/CMakeFiles/VAMOSidentification.dir/build.make VAMOS/identification/CMakeFiles/VAMOSidentification.dir/KVVAMOSIDTelescope.cpp.s
 .PHONY : KVVAMOSIDTelescope.cpp.s
 
 # Help Target
@@ -321,12 +321,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__VAMOSidentification"
 	@echo "... VAMOSidentification"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libVAMOSidentification.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... CsICalib.o"
@@ -358,6 +358,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

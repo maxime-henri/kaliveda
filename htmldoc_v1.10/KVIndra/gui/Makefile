@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVIndra/gui/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVIndra/gui/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-KVIndra/gui/CMakeFiles/G__KVIndragui.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/CMakeFiles/G__KVIndragui.dir/rule
-.PHONY : KVIndra/gui/CMakeFiles/G__KVIndragui.dir/rule
-
-# Convenience name for target.
-G__KVIndragui: KVIndra/gui/CMakeFiles/G__KVIndragui.dir/rule
-.PHONY : G__KVIndragui
-
-# fast build rule for target.
-G__KVIndragui/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/G__KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/G__KVIndragui.dir/build
-.PHONY : G__KVIndragui/fast
-
-# Convenience name for target.
 KVIndra/gui/CMakeFiles/KVIndragui.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/CMakeFiles/KVIndragui.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/CMakeFiles/KVIndragui.dir/rule
 .PHONY : KVIndra/gui/CMakeFiles/KVIndragui.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ KVIndragui: KVIndra/gui/CMakeFiles/KVIndragui.dir/rule
 
 # fast build rule for target.
 KVIndragui/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/build
 .PHONY : KVIndragui/fast
+
+# Convenience name for target.
+KVIndra/gui/CMakeFiles/libKVIndragui.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVIndra/gui/CMakeFiles/libKVIndragui.rootmap.dir/rule
+.PHONY : KVIndra/gui/CMakeFiles/libKVIndragui.rootmap.dir/rule
+
+# Convenience name for target.
+libKVIndragui.rootmap: KVIndra/gui/CMakeFiles/libKVIndragui.rootmap.dir/rule
+.PHONY : libKVIndragui.rootmap
+
+# fast build rule for target.
+libKVIndragui.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/libKVIndragui.rootmap.dir/build.make KVIndra/gui/CMakeFiles/libKVIndragui.rootmap.dir/build
+.PHONY : libKVIndragui.rootmap/fast
 
 G__KVIndragui.o: G__KVIndragui.cxx.o
 .PHONY : G__KVIndragui.o
 
 # target to build an object file
 G__KVIndragui.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/G__KVIndragui.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/G__KVIndragui.cxx.o
 .PHONY : G__KVIndragui.cxx.o
 
 G__KVIndragui.i: G__KVIndragui.cxx.i
@@ -184,7 +184,7 @@ G__KVIndragui.i: G__KVIndragui.cxx.i
 
 # target to preprocess a source file
 G__KVIndragui.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/G__KVIndragui.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/G__KVIndragui.cxx.i
 .PHONY : G__KVIndragui.cxx.i
 
 G__KVIndragui.s: G__KVIndragui.cxx.s
@@ -192,7 +192,7 @@ G__KVIndragui.s: G__KVIndragui.cxx.s
 
 # target to generate assembly for a file
 G__KVIndragui.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/G__KVIndragui.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/G__KVIndragui.cxx.s
 .PHONY : G__KVIndragui.cxx.s
 
 KVDataAnalysisLauncher.o: KVDataAnalysisLauncher.cpp.o
@@ -200,7 +200,7 @@ KVDataAnalysisLauncher.o: KVDataAnalysisLauncher.cpp.o
 
 # target to build an object file
 KVDataAnalysisLauncher.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVDataAnalysisLauncher.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVDataAnalysisLauncher.cpp.o
 .PHONY : KVDataAnalysisLauncher.cpp.o
 
 KVDataAnalysisLauncher.i: KVDataAnalysisLauncher.cpp.i
@@ -208,7 +208,7 @@ KVDataAnalysisLauncher.i: KVDataAnalysisLauncher.cpp.i
 
 # target to preprocess a source file
 KVDataAnalysisLauncher.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVDataAnalysisLauncher.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVDataAnalysisLauncher.cpp.i
 .PHONY : KVDataAnalysisLauncher.cpp.i
 
 KVDataAnalysisLauncher.s: KVDataAnalysisLauncher.cpp.s
@@ -216,7 +216,7 @@ KVDataAnalysisLauncher.s: KVDataAnalysisLauncher.cpp.s
 
 # target to generate assembly for a file
 KVDataAnalysisLauncher.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVDataAnalysisLauncher.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVDataAnalysisLauncher.cpp.s
 .PHONY : KVDataAnalysisLauncher.cpp.s
 
 KVINDRARunSheetGUI.o: KVINDRARunSheetGUI.cpp.o
@@ -224,7 +224,7 @@ KVINDRARunSheetGUI.o: KVINDRARunSheetGUI.cpp.o
 
 # target to build an object file
 KVINDRARunSheetGUI.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVINDRARunSheetGUI.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVINDRARunSheetGUI.cpp.o
 .PHONY : KVINDRARunSheetGUI.cpp.o
 
 KVINDRARunSheetGUI.i: KVINDRARunSheetGUI.cpp.i
@@ -232,7 +232,7 @@ KVINDRARunSheetGUI.i: KVINDRARunSheetGUI.cpp.i
 
 # target to preprocess a source file
 KVINDRARunSheetGUI.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVINDRARunSheetGUI.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVINDRARunSheetGUI.cpp.i
 .PHONY : KVINDRARunSheetGUI.cpp.i
 
 KVINDRARunSheetGUI.s: KVINDRARunSheetGUI.cpp.s
@@ -240,7 +240,7 @@ KVINDRARunSheetGUI.s: KVINDRARunSheetGUI.cpp.s
 
 # target to generate assembly for a file
 KVINDRARunSheetGUI.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVINDRARunSheetGUI.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVINDRARunSheetGUI.cpp.s
 .PHONY : KVINDRARunSheetGUI.cpp.s
 
 KVNewGridRRMDialog.o: KVNewGridRRMDialog.cpp.o
@@ -248,7 +248,7 @@ KVNewGridRRMDialog.o: KVNewGridRRMDialog.cpp.o
 
 # target to build an object file
 KVNewGridRRMDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVNewGridRRMDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVNewGridRRMDialog.cpp.o
 .PHONY : KVNewGridRRMDialog.cpp.o
 
 KVNewGridRRMDialog.i: KVNewGridRRMDialog.cpp.i
@@ -256,7 +256,7 @@ KVNewGridRRMDialog.i: KVNewGridRRMDialog.cpp.i
 
 # target to preprocess a source file
 KVNewGridRRMDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVNewGridRRMDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVNewGridRRMDialog.cpp.i
 .PHONY : KVNewGridRRMDialog.cpp.i
 
 KVNewGridRRMDialog.s: KVNewGridRRMDialog.cpp.s
@@ -264,7 +264,7 @@ KVNewGridRRMDialog.s: KVNewGridRRMDialog.cpp.s
 
 # target to generate assembly for a file
 KVNewGridRRMDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVNewGridRRMDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVNewGridRRMDialog.cpp.s
 .PHONY : KVNewGridRRMDialog.cpp.s
 
 KVTimeEntry.o: KVTimeEntry.cpp.o
@@ -272,7 +272,7 @@ KVTimeEntry.o: KVTimeEntry.cpp.o
 
 # target to build an object file
 KVTimeEntry.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVTimeEntry.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVTimeEntry.cpp.o
 .PHONY : KVTimeEntry.cpp.o
 
 KVTimeEntry.i: KVTimeEntry.cpp.i
@@ -280,7 +280,7 @@ KVTimeEntry.i: KVTimeEntry.cpp.i
 
 # target to preprocess a source file
 KVTimeEntry.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVTimeEntry.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVTimeEntry.cpp.i
 .PHONY : KVTimeEntry.cpp.i
 
 KVTimeEntry.s: KVTimeEntry.cpp.s
@@ -288,7 +288,7 @@ KVTimeEntry.s: KVTimeEntry.cpp.s
 
 # target to generate assembly for a file
 KVTimeEntry.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVTimeEntry.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVIndra/gui/CMakeFiles/KVIndragui.dir/build.make KVIndra/gui/CMakeFiles/KVIndragui.dir/KVTimeEntry.cpp.s
 .PHONY : KVTimeEntry.cpp.s
 
 # Help Target
@@ -297,12 +297,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__KVIndragui"
 	@echo "... KVIndragui"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libKVIndragui.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVIndragui.o"
@@ -331,6 +331,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

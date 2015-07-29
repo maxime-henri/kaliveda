@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/gui/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/gui/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-KVMultiDet/gui/CMakeFiles/G__KVMultiDetgui.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/CMakeFiles/G__KVMultiDetgui.dir/rule
-.PHONY : KVMultiDet/gui/CMakeFiles/G__KVMultiDetgui.dir/rule
-
-# Convenience name for target.
-G__KVMultiDetgui: KVMultiDet/gui/CMakeFiles/G__KVMultiDetgui.dir/rule
-.PHONY : G__KVMultiDetgui
-
-# fast build rule for target.
-G__KVMultiDetgui/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/G__KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/G__KVMultiDetgui.dir/build
-.PHONY : G__KVMultiDetgui/fast
-
-# Convenience name for target.
 KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/rule
 .PHONY : KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ KVMultiDetgui: KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/rule
 
 # fast build rule for target.
 KVMultiDetgui/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build
 .PHONY : KVMultiDetgui/fast
+
+# Convenience name for target.
+KVMultiDet/gui/CMakeFiles/libKVMultiDetgui.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/gui/CMakeFiles/libKVMultiDetgui.rootmap.dir/rule
+.PHONY : KVMultiDet/gui/CMakeFiles/libKVMultiDetgui.rootmap.dir/rule
+
+# Convenience name for target.
+libKVMultiDetgui.rootmap: KVMultiDet/gui/CMakeFiles/libKVMultiDetgui.rootmap.dir/rule
+.PHONY : libKVMultiDetgui.rootmap
+
+# fast build rule for target.
+libKVMultiDetgui.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/libKVMultiDetgui.rootmap.dir/build.make KVMultiDet/gui/CMakeFiles/libKVMultiDetgui.rootmap.dir/build
+.PHONY : libKVMultiDetgui.rootmap/fast
 
 G__KVMultiDetgui.o: G__KVMultiDetgui.cxx.o
 .PHONY : G__KVMultiDetgui.o
 
 # target to build an object file
 G__KVMultiDetgui.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/G__KVMultiDetgui.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/G__KVMultiDetgui.cxx.o
 .PHONY : G__KVMultiDetgui.cxx.o
 
 G__KVMultiDetgui.i: G__KVMultiDetgui.cxx.i
@@ -184,7 +184,7 @@ G__KVMultiDetgui.i: G__KVMultiDetgui.cxx.i
 
 # target to preprocess a source file
 G__KVMultiDetgui.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/G__KVMultiDetgui.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/G__KVMultiDetgui.cxx.i
 .PHONY : G__KVMultiDetgui.cxx.i
 
 G__KVMultiDetgui.s: G__KVMultiDetgui.cxx.s
@@ -192,7 +192,7 @@ G__KVMultiDetgui.s: G__KVMultiDetgui.cxx.s
 
 # target to generate assembly for a file
 G__KVMultiDetgui.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/G__KVMultiDetgui.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/G__KVMultiDetgui.cxx.s
 .PHONY : G__KVMultiDetgui.cxx.s
 
 KVBatchSystemGUI.o: KVBatchSystemGUI.cpp.o
@@ -200,7 +200,7 @@ KVBatchSystemGUI.o: KVBatchSystemGUI.cpp.o
 
 # target to build an object file
 KVBatchSystemGUI.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBatchSystemGUI.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBatchSystemGUI.cpp.o
 .PHONY : KVBatchSystemGUI.cpp.o
 
 KVBatchSystemGUI.i: KVBatchSystemGUI.cpp.i
@@ -208,7 +208,7 @@ KVBatchSystemGUI.i: KVBatchSystemGUI.cpp.i
 
 # target to preprocess a source file
 KVBatchSystemGUI.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBatchSystemGUI.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBatchSystemGUI.cpp.i
 .PHONY : KVBatchSystemGUI.cpp.i
 
 KVBatchSystemGUI.s: KVBatchSystemGUI.cpp.s
@@ -216,7 +216,7 @@ KVBatchSystemGUI.s: KVBatchSystemGUI.cpp.s
 
 # target to generate assembly for a file
 KVBatchSystemGUI.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBatchSystemGUI.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBatchSystemGUI.cpp.s
 .PHONY : KVBatchSystemGUI.cpp.s
 
 KVBrowser.o: KVBrowser.cpp.o
@@ -224,7 +224,7 @@ KVBrowser.o: KVBrowser.cpp.o
 
 # target to build an object file
 KVBrowser.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBrowser.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBrowser.cpp.o
 .PHONY : KVBrowser.cpp.o
 
 KVBrowser.i: KVBrowser.cpp.i
@@ -232,7 +232,7 @@ KVBrowser.i: KVBrowser.cpp.i
 
 # target to preprocess a source file
 KVBrowser.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBrowser.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBrowser.cpp.i
 .PHONY : KVBrowser.cpp.i
 
 KVBrowser.s: KVBrowser.cpp.s
@@ -240,7 +240,7 @@ KVBrowser.s: KVBrowser.cpp.s
 
 # target to generate assembly for a file
 KVBrowser.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBrowser.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVBrowser.cpp.s
 .PHONY : KVBrowser.cpp.s
 
 KVCalculateChIoSiGridDialog.o: KVCalculateChIoSiGridDialog.cpp.o
@@ -248,7 +248,7 @@ KVCalculateChIoSiGridDialog.o: KVCalculateChIoSiGridDialog.cpp.o
 
 # target to build an object file
 KVCalculateChIoSiGridDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCalculateChIoSiGridDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCalculateChIoSiGridDialog.cpp.o
 .PHONY : KVCalculateChIoSiGridDialog.cpp.o
 
 KVCalculateChIoSiGridDialog.i: KVCalculateChIoSiGridDialog.cpp.i
@@ -256,7 +256,7 @@ KVCalculateChIoSiGridDialog.i: KVCalculateChIoSiGridDialog.cpp.i
 
 # target to preprocess a source file
 KVCalculateChIoSiGridDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCalculateChIoSiGridDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCalculateChIoSiGridDialog.cpp.i
 .PHONY : KVCalculateChIoSiGridDialog.cpp.i
 
 KVCalculateChIoSiGridDialog.s: KVCalculateChIoSiGridDialog.cpp.s
@@ -264,7 +264,7 @@ KVCalculateChIoSiGridDialog.s: KVCalculateChIoSiGridDialog.cpp.s
 
 # target to generate assembly for a file
 KVCalculateChIoSiGridDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCalculateChIoSiGridDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCalculateChIoSiGridDialog.cpp.s
 .PHONY : KVCalculateChIoSiGridDialog.cpp.s
 
 KVCanvas.o: KVCanvas.cpp.o
@@ -272,7 +272,7 @@ KVCanvas.o: KVCanvas.cpp.o
 
 # target to build an object file
 KVCanvas.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCanvas.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCanvas.cpp.o
 .PHONY : KVCanvas.cpp.o
 
 KVCanvas.i: KVCanvas.cpp.i
@@ -280,7 +280,7 @@ KVCanvas.i: KVCanvas.cpp.i
 
 # target to preprocess a source file
 KVCanvas.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCanvas.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCanvas.cpp.i
 .PHONY : KVCanvas.cpp.i
 
 KVCanvas.s: KVCanvas.cpp.s
@@ -288,7 +288,7 @@ KVCanvas.s: KVCanvas.cpp.s
 
 # target to generate assembly for a file
 KVCanvas.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCanvas.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVCanvas.cpp.s
 .PHONY : KVCanvas.cpp.s
 
 KVDBSystemDialog.o: KVDBSystemDialog.cpp.o
@@ -296,7 +296,7 @@ KVDBSystemDialog.o: KVDBSystemDialog.cpp.o
 
 # target to build an object file
 KVDBSystemDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDBSystemDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDBSystemDialog.cpp.o
 .PHONY : KVDBSystemDialog.cpp.o
 
 KVDBSystemDialog.i: KVDBSystemDialog.cpp.i
@@ -304,7 +304,7 @@ KVDBSystemDialog.i: KVDBSystemDialog.cpp.i
 
 # target to preprocess a source file
 KVDBSystemDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDBSystemDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDBSystemDialog.cpp.i
 .PHONY : KVDBSystemDialog.cpp.i
 
 KVDBSystemDialog.s: KVDBSystemDialog.cpp.s
@@ -312,7 +312,7 @@ KVDBSystemDialog.s: KVDBSystemDialog.cpp.s
 
 # target to generate assembly for a file
 KVDBSystemDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDBSystemDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDBSystemDialog.cpp.s
 .PHONY : KVDBSystemDialog.cpp.s
 
 KVDalitzPlot.o: KVDalitzPlot.cpp.o
@@ -320,7 +320,7 @@ KVDalitzPlot.o: KVDalitzPlot.cpp.o
 
 # target to build an object file
 KVDalitzPlot.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDalitzPlot.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDalitzPlot.cpp.o
 .PHONY : KVDalitzPlot.cpp.o
 
 KVDalitzPlot.i: KVDalitzPlot.cpp.i
@@ -328,7 +328,7 @@ KVDalitzPlot.i: KVDalitzPlot.cpp.i
 
 # target to preprocess a source file
 KVDalitzPlot.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDalitzPlot.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDalitzPlot.cpp.i
 .PHONY : KVDalitzPlot.cpp.i
 
 KVDalitzPlot.s: KVDalitzPlot.cpp.s
@@ -336,7 +336,7 @@ KVDalitzPlot.s: KVDalitzPlot.cpp.s
 
 # target to generate assembly for a file
 KVDalitzPlot.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDalitzPlot.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDalitzPlot.cpp.s
 .PHONY : KVDalitzPlot.cpp.s
 
 KVDataBaseBrowser.o: KVDataBaseBrowser.cpp.o
@@ -344,7 +344,7 @@ KVDataBaseBrowser.o: KVDataBaseBrowser.cpp.o
 
 # target to build an object file
 KVDataBaseBrowser.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDataBaseBrowser.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDataBaseBrowser.cpp.o
 .PHONY : KVDataBaseBrowser.cpp.o
 
 KVDataBaseBrowser.i: KVDataBaseBrowser.cpp.i
@@ -352,7 +352,7 @@ KVDataBaseBrowser.i: KVDataBaseBrowser.cpp.i
 
 # target to preprocess a source file
 KVDataBaseBrowser.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDataBaseBrowser.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDataBaseBrowser.cpp.i
 .PHONY : KVDataBaseBrowser.cpp.i
 
 KVDataBaseBrowser.s: KVDataBaseBrowser.cpp.s
@@ -360,7 +360,7 @@ KVDataBaseBrowser.s: KVDataBaseBrowser.cpp.s
 
 # target to generate assembly for a file
 KVDataBaseBrowser.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDataBaseBrowser.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDataBaseBrowser.cpp.s
 .PHONY : KVDataBaseBrowser.cpp.s
 
 KVDropDownDialog.o: KVDropDownDialog.cpp.o
@@ -368,7 +368,7 @@ KVDropDownDialog.o: KVDropDownDialog.cpp.o
 
 # target to build an object file
 KVDropDownDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDropDownDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDropDownDialog.cpp.o
 .PHONY : KVDropDownDialog.cpp.o
 
 KVDropDownDialog.i: KVDropDownDialog.cpp.i
@@ -376,7 +376,7 @@ KVDropDownDialog.i: KVDropDownDialog.cpp.i
 
 # target to preprocess a source file
 KVDropDownDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDropDownDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDropDownDialog.cpp.i
 .PHONY : KVDropDownDialog.cpp.i
 
 KVDropDownDialog.s: KVDropDownDialog.cpp.s
@@ -384,7 +384,7 @@ KVDropDownDialog.s: KVDropDownDialog.cpp.s
 
 # target to generate assembly for a file
 KVDropDownDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDropDownDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVDropDownDialog.cpp.s
 .PHONY : KVDropDownDialog.cpp.s
 
 KVFileDialog.o: KVFileDialog.cpp.o
@@ -392,7 +392,7 @@ KVFileDialog.o: KVFileDialog.cpp.o
 
 # target to build an object file
 KVFileDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVFileDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVFileDialog.cpp.o
 .PHONY : KVFileDialog.cpp.o
 
 KVFileDialog.i: KVFileDialog.cpp.i
@@ -400,7 +400,7 @@ KVFileDialog.i: KVFileDialog.cpp.i
 
 # target to preprocess a source file
 KVFileDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVFileDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVFileDialog.cpp.i
 .PHONY : KVFileDialog.cpp.i
 
 KVFileDialog.s: KVFileDialog.cpp.s
@@ -408,7 +408,7 @@ KVFileDialog.s: KVFileDialog.cpp.s
 
 # target to generate assembly for a file
 KVFileDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVFileDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVFileDialog.cpp.s
 .PHONY : KVFileDialog.cpp.s
 
 KVIDGUITelescopeChooserDialog.o: KVIDGUITelescopeChooserDialog.cpp.o
@@ -416,7 +416,7 @@ KVIDGUITelescopeChooserDialog.o: KVIDGUITelescopeChooserDialog.cpp.o
 
 # target to build an object file
 KVIDGUITelescopeChooserDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGUITelescopeChooserDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGUITelescopeChooserDialog.cpp.o
 .PHONY : KVIDGUITelescopeChooserDialog.cpp.o
 
 KVIDGUITelescopeChooserDialog.i: KVIDGUITelescopeChooserDialog.cpp.i
@@ -424,7 +424,7 @@ KVIDGUITelescopeChooserDialog.i: KVIDGUITelescopeChooserDialog.cpp.i
 
 # target to preprocess a source file
 KVIDGUITelescopeChooserDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGUITelescopeChooserDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGUITelescopeChooserDialog.cpp.i
 .PHONY : KVIDGUITelescopeChooserDialog.cpp.i
 
 KVIDGUITelescopeChooserDialog.s: KVIDGUITelescopeChooserDialog.cpp.s
@@ -432,7 +432,7 @@ KVIDGUITelescopeChooserDialog.s: KVIDGUITelescopeChooserDialog.cpp.s
 
 # target to generate assembly for a file
 KVIDGUITelescopeChooserDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGUITelescopeChooserDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGUITelescopeChooserDialog.cpp.s
 .PHONY : KVIDGUITelescopeChooserDialog.cpp.s
 
 KVIDGridEditor.o: KVIDGridEditor.cpp.o
@@ -440,7 +440,7 @@ KVIDGridEditor.o: KVIDGridEditor.cpp.o
 
 # target to build an object file
 KVIDGridEditor.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditor.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditor.cpp.o
 .PHONY : KVIDGridEditor.cpp.o
 
 KVIDGridEditor.i: KVIDGridEditor.cpp.i
@@ -448,7 +448,7 @@ KVIDGridEditor.i: KVIDGridEditor.cpp.i
 
 # target to preprocess a source file
 KVIDGridEditor.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditor.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditor.cpp.i
 .PHONY : KVIDGridEditor.cpp.i
 
 KVIDGridEditor.s: KVIDGridEditor.cpp.s
@@ -456,7 +456,7 @@ KVIDGridEditor.s: KVIDGridEditor.cpp.s
 
 # target to generate assembly for a file
 KVIDGridEditor.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditor.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditor.cpp.s
 .PHONY : KVIDGridEditor.cpp.s
 
 KVIDGridEditorCanvas.o: KVIDGridEditorCanvas.cpp.o
@@ -464,7 +464,7 @@ KVIDGridEditorCanvas.o: KVIDGridEditorCanvas.cpp.o
 
 # target to build an object file
 KVIDGridEditorCanvas.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditorCanvas.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditorCanvas.cpp.o
 .PHONY : KVIDGridEditorCanvas.cpp.o
 
 KVIDGridEditorCanvas.i: KVIDGridEditorCanvas.cpp.i
@@ -472,7 +472,7 @@ KVIDGridEditorCanvas.i: KVIDGridEditorCanvas.cpp.i
 
 # target to preprocess a source file
 KVIDGridEditorCanvas.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditorCanvas.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditorCanvas.cpp.i
 .PHONY : KVIDGridEditorCanvas.cpp.i
 
 KVIDGridEditorCanvas.s: KVIDGridEditorCanvas.cpp.s
@@ -480,7 +480,7 @@ KVIDGridEditorCanvas.s: KVIDGridEditorCanvas.cpp.s
 
 # target to generate assembly for a file
 KVIDGridEditorCanvas.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditorCanvas.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridEditorCanvas.cpp.s
 .PHONY : KVIDGridEditorCanvas.cpp.s
 
 KVIDGridManagerGUI.o: KVIDGridManagerGUI.cpp.o
@@ -488,7 +488,7 @@ KVIDGridManagerGUI.o: KVIDGridManagerGUI.cpp.o
 
 # target to build an object file
 KVIDGridManagerGUI.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridManagerGUI.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridManagerGUI.cpp.o
 .PHONY : KVIDGridManagerGUI.cpp.o
 
 KVIDGridManagerGUI.i: KVIDGridManagerGUI.cpp.i
@@ -496,7 +496,7 @@ KVIDGridManagerGUI.i: KVIDGridManagerGUI.cpp.i
 
 # target to preprocess a source file
 KVIDGridManagerGUI.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridManagerGUI.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridManagerGUI.cpp.i
 .PHONY : KVIDGridManagerGUI.cpp.i
 
 KVIDGridManagerGUI.s: KVIDGridManagerGUI.cpp.s
@@ -504,7 +504,7 @@ KVIDGridManagerGUI.s: KVIDGridManagerGUI.cpp.s
 
 # target to generate assembly for a file
 KVIDGridManagerGUI.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridManagerGUI.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVIDGridManagerGUI.cpp.s
 .PHONY : KVIDGridManagerGUI.cpp.s
 
 KVInputDialog.o: KVInputDialog.cpp.o
@@ -512,7 +512,7 @@ KVInputDialog.o: KVInputDialog.cpp.o
 
 # target to build an object file
 KVInputDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVInputDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVInputDialog.cpp.o
 .PHONY : KVInputDialog.cpp.o
 
 KVInputDialog.i: KVInputDialog.cpp.i
@@ -520,7 +520,7 @@ KVInputDialog.i: KVInputDialog.cpp.i
 
 # target to preprocess a source file
 KVInputDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVInputDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVInputDialog.cpp.i
 .PHONY : KVInputDialog.cpp.i
 
 KVInputDialog.s: KVInputDialog.cpp.s
@@ -528,7 +528,7 @@ KVInputDialog.s: KVInputDialog.cpp.s
 
 # target to generate assembly for a file
 KVInputDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVInputDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVInputDialog.cpp.s
 .PHONY : KVInputDialog.cpp.s
 
 KVKeyHandler.o: KVKeyHandler.cpp.o
@@ -536,7 +536,7 @@ KVKeyHandler.o: KVKeyHandler.cpp.o
 
 # target to build an object file
 KVKeyHandler.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVKeyHandler.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVKeyHandler.cpp.o
 .PHONY : KVKeyHandler.cpp.o
 
 KVKeyHandler.i: KVKeyHandler.cpp.i
@@ -544,7 +544,7 @@ KVKeyHandler.i: KVKeyHandler.cpp.i
 
 # target to preprocess a source file
 KVKeyHandler.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVKeyHandler.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVKeyHandler.cpp.i
 .PHONY : KVKeyHandler.cpp.i
 
 KVKeyHandler.s: KVKeyHandler.cpp.s
@@ -552,7 +552,7 @@ KVKeyHandler.s: KVKeyHandler.cpp.s
 
 # target to generate assembly for a file
 KVKeyHandler.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVKeyHandler.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVKeyHandler.cpp.s
 .PHONY : KVKeyHandler.cpp.s
 
 KVLVContainer.o: KVLVContainer.cpp.o
@@ -560,7 +560,7 @@ KVLVContainer.o: KVLVContainer.cpp.o
 
 # target to build an object file
 KVLVContainer.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVContainer.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVContainer.cpp.o
 .PHONY : KVLVContainer.cpp.o
 
 KVLVContainer.i: KVLVContainer.cpp.i
@@ -568,7 +568,7 @@ KVLVContainer.i: KVLVContainer.cpp.i
 
 # target to preprocess a source file
 KVLVContainer.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVContainer.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVContainer.cpp.i
 .PHONY : KVLVContainer.cpp.i
 
 KVLVContainer.s: KVLVContainer.cpp.s
@@ -576,7 +576,7 @@ KVLVContainer.s: KVLVContainer.cpp.s
 
 # target to generate assembly for a file
 KVLVContainer.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVContainer.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVContainer.cpp.s
 .PHONY : KVLVContainer.cpp.s
 
 KVLVEntry.o: KVLVEntry.cpp.o
@@ -584,7 +584,7 @@ KVLVEntry.o: KVLVEntry.cpp.o
 
 # target to build an object file
 KVLVEntry.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVEntry.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVEntry.cpp.o
 .PHONY : KVLVEntry.cpp.o
 
 KVLVEntry.i: KVLVEntry.cpp.i
@@ -592,7 +592,7 @@ KVLVEntry.i: KVLVEntry.cpp.i
 
 # target to preprocess a source file
 KVLVEntry.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVEntry.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVEntry.cpp.i
 .PHONY : KVLVEntry.cpp.i
 
 KVLVEntry.s: KVLVEntry.cpp.s
@@ -600,7 +600,7 @@ KVLVEntry.s: KVLVEntry.cpp.s
 
 # target to generate assembly for a file
 KVLVEntry.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVEntry.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLVEntry.cpp.s
 .PHONY : KVLVEntry.cpp.s
 
 KVLauncherGUI.o: KVLauncherGUI.cpp.o
@@ -608,7 +608,7 @@ KVLauncherGUI.o: KVLauncherGUI.cpp.o
 
 # target to build an object file
 KVLauncherGUI.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLauncherGUI.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLauncherGUI.cpp.o
 .PHONY : KVLauncherGUI.cpp.o
 
 KVLauncherGUI.i: KVLauncherGUI.cpp.i
@@ -616,7 +616,7 @@ KVLauncherGUI.i: KVLauncherGUI.cpp.i
 
 # target to preprocess a source file
 KVLauncherGUI.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLauncherGUI.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLauncherGUI.cpp.i
 .PHONY : KVLauncherGUI.cpp.i
 
 KVLauncherGUI.s: KVLauncherGUI.cpp.s
@@ -624,7 +624,7 @@ KVLauncherGUI.s: KVLauncherGUI.cpp.s
 
 # target to generate assembly for a file
 KVLauncherGUI.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLauncherGUI.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVLauncherGUI.cpp.s
 .PHONY : KVLauncherGUI.cpp.s
 
 KVListView.o: KVListView.cpp.o
@@ -632,7 +632,7 @@ KVListView.o: KVListView.cpp.o
 
 # target to build an object file
 KVListView.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVListView.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVListView.cpp.o
 .PHONY : KVListView.cpp.o
 
 KVListView.i: KVListView.cpp.i
@@ -640,7 +640,7 @@ KVListView.i: KVListView.cpp.i
 
 # target to preprocess a source file
 KVListView.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVListView.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVListView.cpp.i
 .PHONY : KVListView.cpp.i
 
 KVListView.s: KVListView.cpp.s
@@ -648,7 +648,7 @@ KVListView.s: KVListView.cpp.s
 
 # target to generate assembly for a file
 KVListView.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVListView.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVListView.cpp.s
 .PHONY : KVListView.cpp.s
 
 KVMergeGridsDialog.o: KVMergeGridsDialog.cpp.o
@@ -656,7 +656,7 @@ KVMergeGridsDialog.o: KVMergeGridsDialog.cpp.o
 
 # target to build an object file
 KVMergeGridsDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVMergeGridsDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVMergeGridsDialog.cpp.o
 .PHONY : KVMergeGridsDialog.cpp.o
 
 KVMergeGridsDialog.i: KVMergeGridsDialog.cpp.i
@@ -664,7 +664,7 @@ KVMergeGridsDialog.i: KVMergeGridsDialog.cpp.i
 
 # target to preprocess a source file
 KVMergeGridsDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVMergeGridsDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVMergeGridsDialog.cpp.i
 .PHONY : KVMergeGridsDialog.cpp.i
 
 KVMergeGridsDialog.s: KVMergeGridsDialog.cpp.s
@@ -672,7 +672,7 @@ KVMergeGridsDialog.s: KVMergeGridsDialog.cpp.s
 
 # target to generate assembly for a file
 KVMergeGridsDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVMergeGridsDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVMergeGridsDialog.cpp.s
 .PHONY : KVMergeGridsDialog.cpp.s
 
 KVNewGridDialog.o: KVNewGridDialog.cpp.o
@@ -680,7 +680,7 @@ KVNewGridDialog.o: KVNewGridDialog.cpp.o
 
 # target to build an object file
 KVNewGridDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNewGridDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNewGridDialog.cpp.o
 .PHONY : KVNewGridDialog.cpp.o
 
 KVNewGridDialog.i: KVNewGridDialog.cpp.i
@@ -688,7 +688,7 @@ KVNewGridDialog.i: KVNewGridDialog.cpp.i
 
 # target to preprocess a source file
 KVNewGridDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNewGridDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNewGridDialog.cpp.i
 .PHONY : KVNewGridDialog.cpp.i
 
 KVNewGridDialog.s: KVNewGridDialog.cpp.s
@@ -696,7 +696,7 @@ KVNewGridDialog.s: KVNewGridDialog.cpp.s
 
 # target to generate assembly for a file
 KVNewGridDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNewGridDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNewGridDialog.cpp.s
 .PHONY : KVNewGridDialog.cpp.s
 
 KVNuclearChart.o: KVNuclearChart.cpp.o
@@ -704,7 +704,7 @@ KVNuclearChart.o: KVNuclearChart.cpp.o
 
 # target to build an object file
 KVNuclearChart.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNuclearChart.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNuclearChart.cpp.o
 .PHONY : KVNuclearChart.cpp.o
 
 KVNuclearChart.i: KVNuclearChart.cpp.i
@@ -712,7 +712,7 @@ KVNuclearChart.i: KVNuclearChart.cpp.i
 
 # target to preprocess a source file
 KVNuclearChart.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNuclearChart.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNuclearChart.cpp.i
 .PHONY : KVNuclearChart.cpp.i
 
 KVNuclearChart.s: KVNuclearChart.cpp.s
@@ -720,7 +720,7 @@ KVNuclearChart.s: KVNuclearChart.cpp.s
 
 # target to generate assembly for a file
 KVNuclearChart.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNuclearChart.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNuclearChart.cpp.s
 .PHONY : KVNuclearChart.cpp.s
 
 KVNucleusBox.o: KVNucleusBox.cpp.o
@@ -728,7 +728,7 @@ KVNucleusBox.o: KVNucleusBox.cpp.o
 
 # target to build an object file
 KVNucleusBox.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNucleusBox.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNucleusBox.cpp.o
 .PHONY : KVNucleusBox.cpp.o
 
 KVNucleusBox.i: KVNucleusBox.cpp.i
@@ -736,7 +736,7 @@ KVNucleusBox.i: KVNucleusBox.cpp.i
 
 # target to preprocess a source file
 KVNucleusBox.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNucleusBox.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNucleusBox.cpp.i
 .PHONY : KVNucleusBox.cpp.i
 
 KVNucleusBox.s: KVNucleusBox.cpp.s
@@ -744,7 +744,7 @@ KVNucleusBox.s: KVNucleusBox.cpp.s
 
 # target to generate assembly for a file
 KVNucleusBox.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNucleusBox.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVNucleusBox.cpp.s
 .PHONY : KVNucleusBox.cpp.s
 
 KVSimDirGUI.o: KVSimDirGUI.cpp.o
@@ -752,7 +752,7 @@ KVSimDirGUI.o: KVSimDirGUI.cpp.o
 
 # target to build an object file
 KVSimDirGUI.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSimDirGUI.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSimDirGUI.cpp.o
 .PHONY : KVSimDirGUI.cpp.o
 
 KVSimDirGUI.i: KVSimDirGUI.cpp.i
@@ -760,7 +760,7 @@ KVSimDirGUI.i: KVSimDirGUI.cpp.i
 
 # target to preprocess a source file
 KVSimDirGUI.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSimDirGUI.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSimDirGUI.cpp.i
 .PHONY : KVSimDirGUI.cpp.i
 
 KVSimDirGUI.s: KVSimDirGUI.cpp.s
@@ -768,7 +768,7 @@ KVSimDirGUI.s: KVSimDirGUI.cpp.s
 
 # target to generate assembly for a file
 KVSimDirGUI.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSimDirGUI.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSimDirGUI.cpp.s
 .PHONY : KVSimDirGUI.cpp.s
 
 KVSpIdGUI.o: KVSpIdGUI.cpp.o
@@ -776,7 +776,7 @@ KVSpIdGUI.o: KVSpIdGUI.cpp.o
 
 # target to build an object file
 KVSpIdGUI.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpIdGUI.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpIdGUI.cpp.o
 .PHONY : KVSpIdGUI.cpp.o
 
 KVSpIdGUI.i: KVSpIdGUI.cpp.i
@@ -784,7 +784,7 @@ KVSpIdGUI.i: KVSpIdGUI.cpp.i
 
 # target to preprocess a source file
 KVSpIdGUI.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpIdGUI.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpIdGUI.cpp.i
 .PHONY : KVSpIdGUI.cpp.i
 
 KVSpIdGUI.s: KVSpIdGUI.cpp.s
@@ -792,7 +792,7 @@ KVSpIdGUI.s: KVSpIdGUI.cpp.s
 
 # target to generate assembly for a file
 KVSpIdGUI.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpIdGUI.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpIdGUI.cpp.s
 .PHONY : KVSpIdGUI.cpp.s
 
 KVSpiderIdentificator.o: KVSpiderIdentificator.cpp.o
@@ -800,7 +800,7 @@ KVSpiderIdentificator.o: KVSpiderIdentificator.cpp.o
 
 # target to build an object file
 KVSpiderIdentificator.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpiderIdentificator.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpiderIdentificator.cpp.o
 .PHONY : KVSpiderIdentificator.cpp.o
 
 KVSpiderIdentificator.i: KVSpiderIdentificator.cpp.i
@@ -808,7 +808,7 @@ KVSpiderIdentificator.i: KVSpiderIdentificator.cpp.i
 
 # target to preprocess a source file
 KVSpiderIdentificator.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpiderIdentificator.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpiderIdentificator.cpp.i
 .PHONY : KVSpiderIdentificator.cpp.i
 
 KVSpiderIdentificator.s: KVSpiderIdentificator.cpp.s
@@ -816,7 +816,7 @@ KVSpiderIdentificator.s: KVSpiderIdentificator.cpp.s
 
 # target to generate assembly for a file
 KVSpiderIdentificator.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpiderIdentificator.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVSpiderIdentificator.cpp.s
 .PHONY : KVSpiderIdentificator.cpp.s
 
 KVTestIDGridDialog.o: KVTestIDGridDialog.cpp.o
@@ -824,7 +824,7 @@ KVTestIDGridDialog.o: KVTestIDGridDialog.cpp.o
 
 # target to build an object file
 KVTestIDGridDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestIDGridDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestIDGridDialog.cpp.o
 .PHONY : KVTestIDGridDialog.cpp.o
 
 KVTestIDGridDialog.i: KVTestIDGridDialog.cpp.i
@@ -832,7 +832,7 @@ KVTestIDGridDialog.i: KVTestIDGridDialog.cpp.i
 
 # target to preprocess a source file
 KVTestIDGridDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestIDGridDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestIDGridDialog.cpp.i
 .PHONY : KVTestIDGridDialog.cpp.i
 
 KVTestIDGridDialog.s: KVTestIDGridDialog.cpp.s
@@ -840,7 +840,7 @@ KVTestIDGridDialog.s: KVTestIDGridDialog.cpp.s
 
 # target to generate assembly for a file
 KVTestIDGridDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestIDGridDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestIDGridDialog.cpp.s
 .PHONY : KVTestIDGridDialog.cpp.s
 
 KVTestListView.o: KVTestListView.cpp.o
@@ -848,7 +848,7 @@ KVTestListView.o: KVTestListView.cpp.o
 
 # target to build an object file
 KVTestListView.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestListView.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestListView.cpp.o
 .PHONY : KVTestListView.cpp.o
 
 KVTestListView.i: KVTestListView.cpp.i
@@ -856,7 +856,7 @@ KVTestListView.i: KVTestListView.cpp.i
 
 # target to preprocess a source file
 KVTestListView.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestListView.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestListView.cpp.i
 .PHONY : KVTestListView.cpp.i
 
 KVTestListView.s: KVTestListView.cpp.s
@@ -864,7 +864,7 @@ KVTestListView.s: KVTestListView.cpp.s
 
 # target to generate assembly for a file
 KVTestListView.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestListView.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTestListView.cpp.s
 .PHONY : KVTestListView.cpp.s
 
 KVTextDialog.o: KVTextDialog.cpp.o
@@ -872,7 +872,7 @@ KVTextDialog.o: KVTextDialog.cpp.o
 
 # target to build an object file
 KVTextDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextDialog.cpp.o
 .PHONY : KVTextDialog.cpp.o
 
 KVTextDialog.i: KVTextDialog.cpp.i
@@ -880,7 +880,7 @@ KVTextDialog.i: KVTextDialog.cpp.i
 
 # target to preprocess a source file
 KVTextDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextDialog.cpp.i
 .PHONY : KVTextDialog.cpp.i
 
 KVTextDialog.s: KVTextDialog.cpp.s
@@ -888,7 +888,7 @@ KVTextDialog.s: KVTextDialog.cpp.s
 
 # target to generate assembly for a file
 KVTextDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextDialog.cpp.s
 .PHONY : KVTextDialog.cpp.s
 
 KVTextEntry.o: KVTextEntry.cpp.o
@@ -896,7 +896,7 @@ KVTextEntry.o: KVTextEntry.cpp.o
 
 # target to build an object file
 KVTextEntry.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextEntry.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextEntry.cpp.o
 .PHONY : KVTextEntry.cpp.o
 
 KVTextEntry.i: KVTextEntry.cpp.i
@@ -904,7 +904,7 @@ KVTextEntry.i: KVTextEntry.cpp.i
 
 # target to preprocess a source file
 KVTextEntry.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextEntry.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextEntry.cpp.i
 .PHONY : KVTextEntry.cpp.i
 
 KVTextEntry.s: KVTextEntry.cpp.s
@@ -912,7 +912,7 @@ KVTextEntry.s: KVTextEntry.cpp.s
 
 # target to generate assembly for a file
 KVTextEntry.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextEntry.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTextEntry.cpp.s
 .PHONY : KVTextEntry.cpp.s
 
 KVTreeAnalyzer.o: KVTreeAnalyzer.cpp.o
@@ -920,7 +920,7 @@ KVTreeAnalyzer.o: KVTreeAnalyzer.cpp.o
 
 # target to build an object file
 KVTreeAnalyzer.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTreeAnalyzer.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTreeAnalyzer.cpp.o
 .PHONY : KVTreeAnalyzer.cpp.o
 
 KVTreeAnalyzer.i: KVTreeAnalyzer.cpp.i
@@ -928,7 +928,7 @@ KVTreeAnalyzer.i: KVTreeAnalyzer.cpp.i
 
 # target to preprocess a source file
 KVTreeAnalyzer.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTreeAnalyzer.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTreeAnalyzer.cpp.i
 .PHONY : KVTreeAnalyzer.cpp.i
 
 KVTreeAnalyzer.s: KVTreeAnalyzer.cpp.s
@@ -936,7 +936,7 @@ KVTreeAnalyzer.s: KVTreeAnalyzer.cpp.s
 
 # target to generate assembly for a file
 KVTreeAnalyzer.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTreeAnalyzer.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVTreeAnalyzer.cpp.s
 .PHONY : KVTreeAnalyzer.cpp.s
 
 KVWidget.o: KVWidget.cpp.o
@@ -944,7 +944,7 @@ KVWidget.o: KVWidget.cpp.o
 
 # target to build an object file
 KVWidget.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidget.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidget.cpp.o
 .PHONY : KVWidget.cpp.o
 
 KVWidget.i: KVWidget.cpp.i
@@ -952,7 +952,7 @@ KVWidget.i: KVWidget.cpp.i
 
 # target to preprocess a source file
 KVWidget.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidget.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidget.cpp.i
 .PHONY : KVWidget.cpp.i
 
 KVWidget.s: KVWidget.cpp.s
@@ -960,7 +960,7 @@ KVWidget.s: KVWidget.cpp.s
 
 # target to generate assembly for a file
 KVWidget.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidget.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidget.cpp.s
 .PHONY : KVWidget.cpp.s
 
 KVWidgetList.o: KVWidgetList.cpp.o
@@ -968,7 +968,7 @@ KVWidgetList.o: KVWidgetList.cpp.o
 
 # target to build an object file
 KVWidgetList.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidgetList.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidgetList.cpp.o
 .PHONY : KVWidgetList.cpp.o
 
 KVWidgetList.i: KVWidgetList.cpp.i
@@ -976,7 +976,7 @@ KVWidgetList.i: KVWidgetList.cpp.i
 
 # target to preprocess a source file
 KVWidgetList.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidgetList.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidgetList.cpp.i
 .PHONY : KVWidgetList.cpp.i
 
 KVWidgetList.s: KVWidgetList.cpp.s
@@ -984,7 +984,7 @@ KVWidgetList.s: KVWidgetList.cpp.s
 
 # target to generate assembly for a file
 KVWidgetList.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidgetList.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVWidgetList.cpp.s
 .PHONY : KVWidgetList.cpp.s
 
 KVZAFinderDialog.o: KVZAFinderDialog.cpp.o
@@ -992,7 +992,7 @@ KVZAFinderDialog.o: KVZAFinderDialog.cpp.o
 
 # target to build an object file
 KVZAFinderDialog.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZAFinderDialog.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZAFinderDialog.cpp.o
 .PHONY : KVZAFinderDialog.cpp.o
 
 KVZAFinderDialog.i: KVZAFinderDialog.cpp.i
@@ -1000,7 +1000,7 @@ KVZAFinderDialog.i: KVZAFinderDialog.cpp.i
 
 # target to preprocess a source file
 KVZAFinderDialog.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZAFinderDialog.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZAFinderDialog.cpp.i
 .PHONY : KVZAFinderDialog.cpp.i
 
 KVZAFinderDialog.s: KVZAFinderDialog.cpp.s
@@ -1008,7 +1008,7 @@ KVZAFinderDialog.s: KVZAFinderDialog.cpp.s
 
 # target to generate assembly for a file
 KVZAFinderDialog.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZAFinderDialog.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZAFinderDialog.cpp.s
 .PHONY : KVZAFinderDialog.cpp.s
 
 KVZALineFinder.o: KVZALineFinder.cpp.o
@@ -1016,7 +1016,7 @@ KVZALineFinder.o: KVZALineFinder.cpp.o
 
 # target to build an object file
 KVZALineFinder.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZALineFinder.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZALineFinder.cpp.o
 .PHONY : KVZALineFinder.cpp.o
 
 KVZALineFinder.i: KVZALineFinder.cpp.i
@@ -1024,7 +1024,7 @@ KVZALineFinder.i: KVZALineFinder.cpp.i
 
 # target to preprocess a source file
 KVZALineFinder.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZALineFinder.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZALineFinder.cpp.i
 .PHONY : KVZALineFinder.cpp.i
 
 KVZALineFinder.s: KVZALineFinder.cpp.s
@@ -1032,7 +1032,7 @@ KVZALineFinder.s: KVZALineFinder.cpp.s
 
 # target to generate assembly for a file
 KVZALineFinder.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZALineFinder.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/build.make KVMultiDet/gui/CMakeFiles/KVMultiDetgui.dir/KVZALineFinder.cpp.s
 .PHONY : KVZALineFinder.cpp.s
 
 # Help Target
@@ -1041,12 +1041,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__KVMultiDetgui"
 	@echo "... KVMultiDetgui"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libKVMultiDetgui.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVMultiDetgui.o"
@@ -1168,6 +1168,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

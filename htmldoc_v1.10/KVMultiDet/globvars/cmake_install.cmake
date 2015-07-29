@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.2_x86_64_root-6.04")
+  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,15 +33,12 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "libraries")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES
-    "/home/john/software/build/kaliveda-build/1.10_R6/lib/libKVMultiDetglobvars_rdict.pcm"
-    "/home/john/software/build/kaliveda-build/1.10_R6/lib/libKVMultiDetglobvars.rootmap"
-    )
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_R5/lib/libKVMultiDetglobvars.rootmap")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "libraries")
   foreach(file
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so.1.10.02"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so.1.10.03"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so.1"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so"
       )
@@ -53,12 +50,12 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "librari
     endif()
   endforeach()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES
-    "/home/john/software/build/kaliveda-build/1.10_R6/lib/libKVMultiDetglobvars.so.1.10.02"
-    "/home/john/software/build/kaliveda-build/1.10_R6/lib/libKVMultiDetglobvars.so.1"
-    "/home/john/software/build/kaliveda-build/1.10_R6/lib/libKVMultiDetglobvars.so"
+    "/home/john/software/build/kaliveda-build/1.10_R5/lib/libKVMultiDetglobvars.so.1.10.03"
+    "/home/john/software/build/kaliveda-build/1.10_R5/lib/libKVMultiDetglobvars.so.1"
+    "/home/john/software/build/kaliveda-build/1.10_R5/lib/libKVMultiDetglobvars.so"
     )
   foreach(file
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so.1.10.02"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so.1.10.03"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so.1"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libKVMultiDetglobvars.so"
       )

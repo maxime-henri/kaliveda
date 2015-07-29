@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/KVMultiDet/geometry/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/KVMultiDet/geometry/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-KVMultiDet/geometry/CMakeFiles/G__KVMultiDetgeometry.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/CMakeFiles/G__KVMultiDetgeometry.dir/rule
-.PHONY : KVMultiDet/geometry/CMakeFiles/G__KVMultiDetgeometry.dir/rule
-
-# Convenience name for target.
-G__KVMultiDetgeometry: KVMultiDet/geometry/CMakeFiles/G__KVMultiDetgeometry.dir/rule
-.PHONY : G__KVMultiDetgeometry
-
-# fast build rule for target.
-G__KVMultiDetgeometry/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/G__KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/G__KVMultiDetgeometry.dir/build
-.PHONY : G__KVMultiDetgeometry/fast
-
-# Convenience name for target.
 KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/rule
 .PHONY : KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ KVMultiDetgeometry: KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/rule
 
 # fast build rule for target.
 KVMultiDetgeometry/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build
 .PHONY : KVMultiDetgeometry/fast
+
+# Convenience name for target.
+KVMultiDet/geometry/CMakeFiles/libKVMultiDetgeometry.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 KVMultiDet/geometry/CMakeFiles/libKVMultiDetgeometry.rootmap.dir/rule
+.PHONY : KVMultiDet/geometry/CMakeFiles/libKVMultiDetgeometry.rootmap.dir/rule
+
+# Convenience name for target.
+libKVMultiDetgeometry.rootmap: KVMultiDet/geometry/CMakeFiles/libKVMultiDetgeometry.rootmap.dir/rule
+.PHONY : libKVMultiDetgeometry.rootmap
+
+# fast build rule for target.
+libKVMultiDetgeometry.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/libKVMultiDetgeometry.rootmap.dir/build.make KVMultiDet/geometry/CMakeFiles/libKVMultiDetgeometry.rootmap.dir/build
+.PHONY : libKVMultiDetgeometry.rootmap/fast
 
 G__KVMultiDetgeometry.o: G__KVMultiDetgeometry.cxx.o
 .PHONY : G__KVMultiDetgeometry.o
 
 # target to build an object file
 G__KVMultiDetgeometry.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/G__KVMultiDetgeometry.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/G__KVMultiDetgeometry.cxx.o
 .PHONY : G__KVMultiDetgeometry.cxx.o
 
 G__KVMultiDetgeometry.i: G__KVMultiDetgeometry.cxx.i
@@ -184,7 +184,7 @@ G__KVMultiDetgeometry.i: G__KVMultiDetgeometry.cxx.i
 
 # target to preprocess a source file
 G__KVMultiDetgeometry.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/G__KVMultiDetgeometry.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/G__KVMultiDetgeometry.cxx.i
 .PHONY : G__KVMultiDetgeometry.cxx.i
 
 G__KVMultiDetgeometry.s: G__KVMultiDetgeometry.cxx.s
@@ -192,7 +192,7 @@ G__KVMultiDetgeometry.s: G__KVMultiDetgeometry.cxx.s
 
 # target to generate assembly for a file
 G__KVMultiDetgeometry.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/G__KVMultiDetgeometry.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/G__KVMultiDetgeometry.cxx.s
 .PHONY : G__KVMultiDetgeometry.cxx.s
 
 KVACQParam.o: KVACQParam.cpp.o
@@ -200,7 +200,7 @@ KVACQParam.o: KVACQParam.cpp.o
 
 # target to build an object file
 KVACQParam.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVACQParam.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVACQParam.cpp.o
 .PHONY : KVACQParam.cpp.o
 
 KVACQParam.i: KVACQParam.cpp.i
@@ -208,7 +208,7 @@ KVACQParam.i: KVACQParam.cpp.i
 
 # target to preprocess a source file
 KVACQParam.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVACQParam.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVACQParam.cpp.i
 .PHONY : KVACQParam.cpp.i
 
 KVACQParam.s: KVACQParam.cpp.s
@@ -216,7 +216,7 @@ KVACQParam.s: KVACQParam.cpp.s
 
 # target to generate assembly for a file
 KVACQParam.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVACQParam.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVACQParam.cpp.s
 .PHONY : KVACQParam.cpp.s
 
 KVASGroup.o: KVASGroup.cpp.o
@@ -224,7 +224,7 @@ KVASGroup.o: KVASGroup.cpp.o
 
 # target to build an object file
 KVASGroup.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVASGroup.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVASGroup.cpp.o
 .PHONY : KVASGroup.cpp.o
 
 KVASGroup.i: KVASGroup.cpp.i
@@ -232,7 +232,7 @@ KVASGroup.i: KVASGroup.cpp.i
 
 # target to preprocess a source file
 KVASGroup.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVASGroup.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVASGroup.cpp.i
 .PHONY : KVASGroup.cpp.i
 
 KVASGroup.s: KVASGroup.cpp.s
@@ -240,7 +240,7 @@ KVASGroup.s: KVASGroup.cpp.s
 
 # target to generate assembly for a file
 KVASGroup.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVASGroup.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVASGroup.cpp.s
 .PHONY : KVASGroup.cpp.s
 
 KVCalibrator.o: KVCalibrator.cpp.o
@@ -248,7 +248,7 @@ KVCalibrator.o: KVCalibrator.cpp.o
 
 # target to build an object file
 KVCalibrator.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVCalibrator.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVCalibrator.cpp.o
 .PHONY : KVCalibrator.cpp.o
 
 KVCalibrator.i: KVCalibrator.cpp.i
@@ -256,7 +256,7 @@ KVCalibrator.i: KVCalibrator.cpp.i
 
 # target to preprocess a source file
 KVCalibrator.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVCalibrator.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVCalibrator.cpp.i
 .PHONY : KVCalibrator.cpp.i
 
 KVCalibrator.s: KVCalibrator.cpp.s
@@ -264,7 +264,7 @@ KVCalibrator.s: KVCalibrator.cpp.s
 
 # target to generate assembly for a file
 KVCalibrator.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVCalibrator.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVCalibrator.cpp.s
 .PHONY : KVCalibrator.cpp.s
 
 KVDetector.o: KVDetector.cpp.o
@@ -272,7 +272,7 @@ KVDetector.o: KVDetector.cpp.o
 
 # target to build an object file
 KVDetector.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVDetector.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVDetector.cpp.o
 .PHONY : KVDetector.cpp.o
 
 KVDetector.i: KVDetector.cpp.i
@@ -280,7 +280,7 @@ KVDetector.i: KVDetector.cpp.i
 
 # target to preprocess a source file
 KVDetector.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVDetector.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVDetector.cpp.i
 .PHONY : KVDetector.cpp.i
 
 KVDetector.s: KVDetector.cpp.s
@@ -288,7 +288,7 @@ KVDetector.s: KVDetector.cpp.s
 
 # target to generate assembly for a file
 KVDetector.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVDetector.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVDetector.cpp.s
 .PHONY : KVDetector.cpp.s
 
 KVGeoDetectorNode.o: KVGeoDetectorNode.cpp.o
@@ -296,7 +296,7 @@ KVGeoDetectorNode.o: KVGeoDetectorNode.cpp.o
 
 # target to build an object file
 KVGeoDetectorNode.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoDetectorNode.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoDetectorNode.cpp.o
 .PHONY : KVGeoDetectorNode.cpp.o
 
 KVGeoDetectorNode.i: KVGeoDetectorNode.cpp.i
@@ -304,7 +304,7 @@ KVGeoDetectorNode.i: KVGeoDetectorNode.cpp.i
 
 # target to preprocess a source file
 KVGeoDetectorNode.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoDetectorNode.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoDetectorNode.cpp.i
 .PHONY : KVGeoDetectorNode.cpp.i
 
 KVGeoDetectorNode.s: KVGeoDetectorNode.cpp.s
@@ -312,7 +312,7 @@ KVGeoDetectorNode.s: KVGeoDetectorNode.cpp.s
 
 # target to generate assembly for a file
 KVGeoDetectorNode.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoDetectorNode.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoDetectorNode.cpp.s
 .PHONY : KVGeoDetectorNode.cpp.s
 
 KVGeoNavigator.o: KVGeoNavigator.cpp.o
@@ -320,7 +320,7 @@ KVGeoNavigator.o: KVGeoNavigator.cpp.o
 
 # target to build an object file
 KVGeoNavigator.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoNavigator.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoNavigator.cpp.o
 .PHONY : KVGeoNavigator.cpp.o
 
 KVGeoNavigator.i: KVGeoNavigator.cpp.i
@@ -328,7 +328,7 @@ KVGeoNavigator.i: KVGeoNavigator.cpp.i
 
 # target to preprocess a source file
 KVGeoNavigator.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoNavigator.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoNavigator.cpp.i
 .PHONY : KVGeoNavigator.cpp.i
 
 KVGeoNavigator.s: KVGeoNavigator.cpp.s
@@ -336,7 +336,7 @@ KVGeoNavigator.s: KVGeoNavigator.cpp.s
 
 # target to generate assembly for a file
 KVGeoNavigator.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoNavigator.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoNavigator.cpp.s
 .PHONY : KVGeoNavigator.cpp.s
 
 KVGeoStrucElement.o: KVGeoStrucElement.cpp.o
@@ -344,7 +344,7 @@ KVGeoStrucElement.o: KVGeoStrucElement.cpp.o
 
 # target to build an object file
 KVGeoStrucElement.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoStrucElement.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoStrucElement.cpp.o
 .PHONY : KVGeoStrucElement.cpp.o
 
 KVGeoStrucElement.i: KVGeoStrucElement.cpp.i
@@ -352,7 +352,7 @@ KVGeoStrucElement.i: KVGeoStrucElement.cpp.i
 
 # target to preprocess a source file
 KVGeoStrucElement.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoStrucElement.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoStrucElement.cpp.i
 .PHONY : KVGeoStrucElement.cpp.i
 
 KVGeoStrucElement.s: KVGeoStrucElement.cpp.s
@@ -360,7 +360,7 @@ KVGeoStrucElement.s: KVGeoStrucElement.cpp.s
 
 # target to generate assembly for a file
 KVGeoStrucElement.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoStrucElement.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGeoStrucElement.cpp.s
 .PHONY : KVGeoStrucElement.cpp.s
 
 KVGroup.o: KVGroup.cpp.o
@@ -368,7 +368,7 @@ KVGroup.o: KVGroup.cpp.o
 
 # target to build an object file
 KVGroup.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGroup.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGroup.cpp.o
 .PHONY : KVGroup.cpp.o
 
 KVGroup.i: KVGroup.cpp.i
@@ -376,7 +376,7 @@ KVGroup.i: KVGroup.cpp.i
 
 # target to preprocess a source file
 KVGroup.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGroup.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGroup.cpp.i
 .PHONY : KVGroup.cpp.i
 
 KVGroup.s: KVGroup.cpp.s
@@ -384,7 +384,7 @@ KVGroup.s: KVGroup.cpp.s
 
 # target to generate assembly for a file
 KVGroup.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGroup.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVGroup.cpp.s
 .PHONY : KVGroup.cpp.s
 
 KVLayer.o: KVLayer.cpp.o
@@ -392,7 +392,7 @@ KVLayer.o: KVLayer.cpp.o
 
 # target to build an object file
 KVLayer.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVLayer.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVLayer.cpp.o
 .PHONY : KVLayer.cpp.o
 
 KVLayer.i: KVLayer.cpp.i
@@ -400,7 +400,7 @@ KVLayer.i: KVLayer.cpp.i
 
 # target to preprocess a source file
 KVLayer.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVLayer.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVLayer.cpp.i
 .PHONY : KVLayer.cpp.i
 
 KVLayer.s: KVLayer.cpp.s
@@ -408,7 +408,7 @@ KVLayer.s: KVLayer.cpp.s
 
 # target to generate assembly for a file
 KVLayer.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVLayer.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVLayer.cpp.s
 .PHONY : KVLayer.cpp.s
 
 KVRangeTableGeoNavigator.o: KVRangeTableGeoNavigator.cpp.o
@@ -416,7 +416,7 @@ KVRangeTableGeoNavigator.o: KVRangeTableGeoNavigator.cpp.o
 
 # target to build an object file
 KVRangeTableGeoNavigator.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRangeTableGeoNavigator.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRangeTableGeoNavigator.cpp.o
 .PHONY : KVRangeTableGeoNavigator.cpp.o
 
 KVRangeTableGeoNavigator.i: KVRangeTableGeoNavigator.cpp.i
@@ -424,7 +424,7 @@ KVRangeTableGeoNavigator.i: KVRangeTableGeoNavigator.cpp.i
 
 # target to preprocess a source file
 KVRangeTableGeoNavigator.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRangeTableGeoNavigator.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRangeTableGeoNavigator.cpp.i
 .PHONY : KVRangeTableGeoNavigator.cpp.i
 
 KVRangeTableGeoNavigator.s: KVRangeTableGeoNavigator.cpp.s
@@ -432,7 +432,7 @@ KVRangeTableGeoNavigator.s: KVRangeTableGeoNavigator.cpp.s
 
 # target to generate assembly for a file
 KVRangeTableGeoNavigator.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRangeTableGeoNavigator.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRangeTableGeoNavigator.cpp.s
 .PHONY : KVRangeTableGeoNavigator.cpp.s
 
 KVRing.o: KVRing.cpp.o
@@ -440,7 +440,7 @@ KVRing.o: KVRing.cpp.o
 
 # target to build an object file
 KVRing.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRing.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRing.cpp.o
 .PHONY : KVRing.cpp.o
 
 KVRing.i: KVRing.cpp.i
@@ -448,7 +448,7 @@ KVRing.i: KVRing.cpp.i
 
 # target to preprocess a source file
 KVRing.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRing.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRing.cpp.i
 .PHONY : KVRing.cpp.i
 
 KVRing.s: KVRing.cpp.s
@@ -456,7 +456,7 @@ KVRing.s: KVRing.cpp.s
 
 # target to generate assembly for a file
 KVRing.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRing.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVRing.cpp.s
 .PHONY : KVRing.cpp.s
 
 KVTelescope.o: KVTelescope.cpp.o
@@ -464,7 +464,7 @@ KVTelescope.o: KVTelescope.cpp.o
 
 # target to build an object file
 KVTelescope.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVTelescope.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVTelescope.cpp.o
 .PHONY : KVTelescope.cpp.o
 
 KVTelescope.i: KVTelescope.cpp.i
@@ -472,7 +472,7 @@ KVTelescope.i: KVTelescope.cpp.i
 
 # target to preprocess a source file
 KVTelescope.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVTelescope.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVTelescope.cpp.i
 .PHONY : KVTelescope.cpp.i
 
 KVTelescope.s: KVTelescope.cpp.s
@@ -480,7 +480,7 @@ KVTelescope.s: KVTelescope.cpp.s
 
 # target to generate assembly for a file
 KVTelescope.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVTelescope.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/build.make KVMultiDet/geometry/CMakeFiles/KVMultiDetgeometry.dir/KVTelescope.cpp.s
 .PHONY : KVTelescope.cpp.s
 
 # Help Target
@@ -489,12 +489,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__KVMultiDetgeometry"
 	@echo "... KVMultiDetgeometry"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libKVMultiDetgeometry.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__KVMultiDetgeometry.o"
@@ -547,6 +547,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

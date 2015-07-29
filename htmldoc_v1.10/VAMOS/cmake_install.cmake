@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.2_x86_64_root-6.04")
+  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,20 +45,20 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/VAMOS_e503" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/VAMOS_e503_Makefile")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kaliveda/VAMOS_e503" TYPE FILE RENAME "Makefile" FILES "/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/VAMOS_e503_Makefile")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/geometry/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/calibration/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/reconstruction/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/daq_cec/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/exp_events/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/analysis/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/base/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/db/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/VAMOS/identification/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/geometry/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/calibration/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/reconstruction/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/daq_cec/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/exp_events/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/analysis/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/base/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/db/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/VAMOS/identification/cmake_install.cmake")
 
 endif()
 

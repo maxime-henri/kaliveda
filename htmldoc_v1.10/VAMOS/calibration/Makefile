@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/calibration/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/calibration/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-VAMOS/calibration/CMakeFiles/G__VAMOScalibration.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/CMakeFiles/G__VAMOScalibration.dir/rule
-.PHONY : VAMOS/calibration/CMakeFiles/G__VAMOScalibration.dir/rule
-
-# Convenience name for target.
-G__VAMOScalibration: VAMOS/calibration/CMakeFiles/G__VAMOScalibration.dir/rule
-.PHONY : G__VAMOScalibration
-
-# fast build rule for target.
-G__VAMOScalibration/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/G__VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/G__VAMOScalibration.dir/build
-.PHONY : G__VAMOScalibration/fast
-
-# Convenience name for target.
 VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/rule
 .PHONY : VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ VAMOScalibration: VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/rule
 
 # fast build rule for target.
 VAMOScalibration/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build
 .PHONY : VAMOScalibration/fast
+
+# Convenience name for target.
+VAMOS/calibration/CMakeFiles/libVAMOScalibration.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/calibration/CMakeFiles/libVAMOScalibration.rootmap.dir/rule
+.PHONY : VAMOS/calibration/CMakeFiles/libVAMOScalibration.rootmap.dir/rule
+
+# Convenience name for target.
+libVAMOScalibration.rootmap: VAMOS/calibration/CMakeFiles/libVAMOScalibration.rootmap.dir/rule
+.PHONY : libVAMOScalibration.rootmap
+
+# fast build rule for target.
+libVAMOScalibration.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/libVAMOScalibration.rootmap.dir/build.make VAMOS/calibration/CMakeFiles/libVAMOScalibration.rootmap.dir/build
+.PHONY : libVAMOScalibration.rootmap/fast
 
 G__VAMOScalibration.o: G__VAMOScalibration.cxx.o
 .PHONY : G__VAMOScalibration.o
 
 # target to build an object file
 G__VAMOScalibration.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/G__VAMOScalibration.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/G__VAMOScalibration.cxx.o
 .PHONY : G__VAMOScalibration.cxx.o
 
 G__VAMOScalibration.i: G__VAMOScalibration.cxx.i
@@ -184,7 +184,7 @@ G__VAMOScalibration.i: G__VAMOScalibration.cxx.i
 
 # target to preprocess a source file
 G__VAMOScalibration.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/G__VAMOScalibration.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/G__VAMOScalibration.cxx.i
 .PHONY : G__VAMOScalibration.cxx.i
 
 G__VAMOScalibration.s: G__VAMOScalibration.cxx.s
@@ -192,7 +192,7 @@ G__VAMOScalibration.s: G__VAMOScalibration.cxx.s
 
 # target to generate assembly for a file
 G__VAMOScalibration.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/G__VAMOScalibration.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/G__VAMOScalibration.cxx.s
 .PHONY : G__VAMOScalibration.cxx.s
 
 KVLightEnergyCsIVamos.o: KVLightEnergyCsIVamos.cpp.o
@@ -200,7 +200,7 @@ KVLightEnergyCsIVamos.o: KVLightEnergyCsIVamos.cpp.o
 
 # target to build an object file
 KVLightEnergyCsIVamos.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVLightEnergyCsIVamos.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVLightEnergyCsIVamos.cpp.o
 .PHONY : KVLightEnergyCsIVamos.cpp.o
 
 KVLightEnergyCsIVamos.i: KVLightEnergyCsIVamos.cpp.i
@@ -208,7 +208,7 @@ KVLightEnergyCsIVamos.i: KVLightEnergyCsIVamos.cpp.i
 
 # target to preprocess a source file
 KVLightEnergyCsIVamos.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVLightEnergyCsIVamos.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVLightEnergyCsIVamos.cpp.i
 .PHONY : KVLightEnergyCsIVamos.cpp.i
 
 KVLightEnergyCsIVamos.s: KVLightEnergyCsIVamos.cpp.s
@@ -216,7 +216,7 @@ KVLightEnergyCsIVamos.s: KVLightEnergyCsIVamos.cpp.s
 
 # target to generate assembly for a file
 KVLightEnergyCsIVamos.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVLightEnergyCsIVamos.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVLightEnergyCsIVamos.cpp.s
 .PHONY : KVLightEnergyCsIVamos.cpp.s
 
 KVSeDPositionCal.o: KVSeDPositionCal.cpp.o
@@ -224,7 +224,7 @@ KVSeDPositionCal.o: KVSeDPositionCal.cpp.o
 
 # target to build an object file
 KVSeDPositionCal.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVSeDPositionCal.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVSeDPositionCal.cpp.o
 .PHONY : KVSeDPositionCal.cpp.o
 
 KVSeDPositionCal.i: KVSeDPositionCal.cpp.i
@@ -232,7 +232,7 @@ KVSeDPositionCal.i: KVSeDPositionCal.cpp.i
 
 # target to preprocess a source file
 KVSeDPositionCal.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVSeDPositionCal.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVSeDPositionCal.cpp.i
 .PHONY : KVSeDPositionCal.cpp.i
 
 KVSeDPositionCal.s: KVSeDPositionCal.cpp.s
@@ -240,7 +240,7 @@ KVSeDPositionCal.s: KVSeDPositionCal.cpp.s
 
 # target to generate assembly for a file
 KVSeDPositionCal.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVSeDPositionCal.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/build.make VAMOS/calibration/CMakeFiles/VAMOScalibration.dir/KVSeDPositionCal.cpp.s
 .PHONY : KVSeDPositionCal.cpp.s
 
 # Help Target
@@ -249,12 +249,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__VAMOScalibration"
 	@echo "... VAMOScalibration"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libVAMOScalibration.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__VAMOScalibration.o"
@@ -277,6 +277,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

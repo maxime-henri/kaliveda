@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.2_x86_64_root-6.04")
+  set(CMAKE_INSTALL_PREFIX "/home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,8 +38,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/john/software/build/kaliveda-build/1.10_R6/BackTrack/models/cmake_install.cmake")
-  include("/home/john/software/build/kaliveda-build/1.10_R6/BackTrack/base/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/BackTrack/models/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_R5/BackTrack/base/cmake_install.cmake")
 
 endif()
 

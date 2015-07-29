@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:37 2015            -->
+<!--   Date: Wed Jul 29 15:56:26 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>.cpp,v 1.7 2009/03/27 16:42:58 franklan Exp $
@@ -109,7 +109,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRun" title="Int_t KVINDRAPulserDataTree::fRun">fRun</a> = 0;
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a> = 0;
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a> = 0;
-	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRunlist" title="TList* KVINDRAPulserDataTree::fRunlist">fRunlist</a> = 0;
+	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRunlist" title="KVSeqCollection* KVINDRAPulserDataTree::fRunlist">fRunlist</a> = 0;
 }
 
 <a name="E3kw6D"></a><a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:_KVINDRAPulserDataTree" title="void KVINDRAPulserDataTree::~KVINDRAPulserDataTree()">~KVINDRAPulserDataTree</a>()
@@ -117,7 +117,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
    <span class="comment">// Destructor</span>
 	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>) <span class="keyword">delete</span> [] <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>;
 	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a>){
-		<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a>-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a>();
+		<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a>-&gt;<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a>();
 		<span class="keyword">delete</span> <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a>;
 	}
 }
@@ -184,10 +184,10 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	<span class="comment">// We create a TTree with 1 branch for each detector acquisition parameter.</span>
 	<span class="comment">// For PILA and SI_PIN parameters, we create a 'gene' and a 'laser' branch for each.</span>
 
-	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fGeneDir" title="KVTarArchive* KVINDRAPulserDataTree::fGeneDir">fGeneDir</a> = <span class="keyword">new</span> <a href="../KVTarArchive.html">KVTarArchive</a>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetDirectoryName" title="TString KVINDRAPulserDataTree::GetDirectoryName(const Char_t*)">GetDirectoryName</a>(<span class="string">"GeneDetDir"</span>), <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir() const">GetDataSetDir</a>() );
-	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a> = <span class="keyword">new</span> <a href="../KVTarArchive.html">KVTarArchive</a>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetDirectoryName" title="TString KVINDRAPulserDataTree::GetDirectoryName(const Char_t*)">GetDirectoryName</a>(<span class="string">"GenePinDir"</span>), <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir() const">GetDataSetDir</a>() );
-	<span class="keyword">if</span>(!<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fGeneDir" title="KVTarArchive* KVINDRAPulserDataTree::fGeneDir">fGeneDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK() const">IsOK</a>() &amp;&amp; !<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK() const">IsOK</a>()){
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Build"</span>, <span class="string">"No data available to build pulser data tree"</span>);
+	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fGeneDir" title="KVTarArchive* KVINDRAPulserDataTree::fGeneDir">fGeneDir</a> = <span class="keyword">new</span> <a href="../KVTarArchive.html">KVTarArchive</a>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetDirectoryName" title="TString KVINDRAPulserDataTree::GetDirectoryName(const Char_t* )">GetDirectoryName</a>(<span class="string">"GeneDetDir"</span>), <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir()">GetDataSetDir</a>() );
+	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a> = <span class="keyword">new</span> <a href="../KVTarArchive.html">KVTarArchive</a>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetDirectoryName" title="TString KVINDRAPulserDataTree::GetDirectoryName(const Char_t* )">GetDirectoryName</a>(<span class="string">"GenePinDir"</span>), <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir()">GetDataSetDir</a>() );
+	<span class="keyword">if</span>(!<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fGeneDir" title="KVTarArchive* KVINDRAPulserDataTree::fGeneDir">fGeneDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK()">IsOK</a>() &amp;&amp; !<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK()">IsOK</a>()){
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Build"</span>, <span class="string">"No data available to build pulser data tree"</span>);
 		<span class="keyword">return</span>;
 	}
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:CreateTree" title="void KVINDRAPulserDataTree::CreateTree()">CreateTree</a>();
@@ -196,7 +196,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	<span class="keyword">delete</span> <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a>;
 }
 
-<a name="qMM3R"></a>TString <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetDirectoryName" title="TString KVINDRAPulserDataTree::GetDirectoryName(const Char_t*)">GetDirectoryName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* dirvar)
+<a name="qMM3R"></a>TString <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetDirectoryName" title="TString KVINDRAPulserDataTree::GetDirectoryName(const Char_t* )">GetDirectoryName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* dirvar)
 {
 	<span class="comment">// Returns the name of the directory defined by the .kvrootrc environment variable</span>
 	<span class="comment">//</span>
@@ -206,10 +206,10 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 
 	TString search, datasetenv;
 	datasetenv.Form(<span class="string">"KVINDRAPulserDataTree.%s"</span>, dirvar);
-	search = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>(datasetenv.Data(), <span class="string">""</span>);
+	search = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(datasetenv.Data(), <span class="string">""</span>);
 	<span class="keyword">if</span>( search==<span class="string">""</span> ){
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GetDirectoryName"</span>, <span class="string">"%s is not defined for dataset %s. Check .kvrootrc files."</span>,
-				datasetenv.Data(), <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetDirectoryName"</span>, <span class="string">"%s is not defined for dataset %s. Check .kvrootrc files."</span>,
+				datasetenv.Data(), <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 	}
 	<span class="keyword">return</span> search;
 }
@@ -228,7 +228,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;Branch(<span class="string">"Run"</span>, &amp;<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRun" title="Int_t KVINDRAPulserDataTree::fRun">fRun</a>, <span class="string">"Run/I"</span>);
 
-        <span class="keyword">if</span>(!<a href="../KVINDRA.html">gIndra</a>) <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector" title="KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, Int_t run = -1)">MakeMultiDetector</a>(<a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+        <span class="keyword">if</span>(!<a href="../KVINDRA.html">gIndra</a>) <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector" title="KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name,Int_t run=-1)">MakeMultiDetector</a>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 
 	<a href="../KVSeqCollection.html">KVSeqCollection</a> *acq_pars = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetACQParams" title="KVSeqCollection* KVMultiDetArray::GetACQParams()">GetACQParams</a>();
 
@@ -243,13 +243,13 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	<a href="../KVBase.html">KVBase</a> *iob;
 	<span class="keyword">while</span>( (ap = (<a href="../KVACQParam.html">KVACQParam</a>*)nxtACQ()) ){
 
-		TString ap_name( ap-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() );
-		TString ap_type( ap-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>() );
+		TString ap_name( ap-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() );
+		TString ap_type( ap-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>() );
 		<span class="keyword">if</span>(ap_name.BeginsWith(<span class="string">"PILA"</span>) || ap_name.BeginsWith(<span class="string">"SI_PIN"</span>)){
 			ap_name += <span class="string">"_laser"</span>;
 			iob = <span class="keyword">new</span> <a href="../KVBase.html">KVBase</a>(ap_name.Data()); iob-&gt;<a href="../KVBase.html#KVBase:SetNumber" title="void KVBase::SetNumber(UInt_t num)">SetNumber</a>(ap_num); <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a>-&gt;Add(iob);
 			<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;Branch(ap_name.Data(), &amp;<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>[ap_num++] , Form(<span class="string">"%s/F"</span>, ap_name.Data()));
-			ap_name.Form(<span class="string">"%s%s"</span>, ap-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<span class="string">"_gene"</span>);
+			ap_name.Form(<span class="string">"%s%s"</span>, ap-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<span class="string">"_gene"</span>);
 			iob = <span class="keyword">new</span> <a href="../KVBase.html">KVBase</a>(ap_name.Data()); iob-&gt;<a href="../KVBase.html#KVBase:SetNumber" title="void KVBase::SetNumber(UInt_t num)">SetNumber</a>(ap_num); <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fIndex" title="THashTable* KVINDRAPulserDataTree::fIndex">fIndex</a>-&gt;Add(iob);
 			<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;Branch(ap_name.Data(), &amp;<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>[ap_num++] , Form(<span class="string">"%s/F"</span>, ap_name.Data()));
 		}
@@ -258,7 +258,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 			<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;Branch(ap_name.Data(), &amp;<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>[ap_num++] , Form(<span class="string">"%s/F"</span>, ap_name.Data()));
 		}
 		<span class="keyword">if</span>(ap_num &gt; <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fTab_siz" title="Int_t KVINDRAPulserDataTree::fTab_siz">fTab_siz</a>-2){
-			<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"CreateTree"</span>,
+			<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"CreateTree"</span>,
 					<span class="string">"Number of branches to create is greater than estimated (%d). Not all parameters can be treated."</span>,
 					<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fTab_siz" title="Int_t KVINDRAPulserDataTree::fTab_siz">fTab_siz</a>);
 			<span class="keyword">return</span>;
@@ -269,9 +269,9 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fTab_siz" title="Int_t KVINDRAPulserDataTree::fTab_siz">fTab_siz</a> = ap_num;
 }
 
-<a name="Ec9EKD"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadFile" title="void KVINDRAPulserDataTree::ReadFile(ifstream&amp;)">ReadFile</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a>&amp; fin)
+<a name="Ec9EKD"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadFile" title="void KVINDRAPulserDataTree::ReadFile(ifstream&amp; )">ReadFile</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a>&amp; fin)
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> data in one file</span>
+	<span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> data in one file</span>
 
 	<a href="../KVString.html">KVString</a> line;
 	line.ReadLine(fin);
@@ -279,7 +279,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 		<span class="keyword">if</span>( !line.BeginsWith(<span class="string">"#"</span>) ){
 			line.Begin(<span class="string">" "</span>);
 			<a href="../KVString.html">KVString</a> br_name = line.Next(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
-			<a href="../ListOfTypes.html#Int_t">Int_t</a> index = <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetIndex" title="Int_t KVINDRAPulserDataTree::GetIndex(const Char_t* branchname) const">GetIndex</a>(br_name.Data());
+			<a href="../ListOfTypes.html#Int_t">Int_t</a> index = <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetIndex" title="Int_t KVINDRAPulserDataTree::GetIndex(const Char_t* branchname)">GetIndex</a>(br_name.Data());
 			<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>[index] = line.Next(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>).Atof();
 		}
 		line.ReadLine(fin);
@@ -289,36 +289,36 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 
 <a name="ZfDQP"></a><a href="../ListOfTypes.html#UChar_t">UChar_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadData" title="void KVINDRAPulserDataTree::ReadData() or overloads">ReadData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> run)
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> data for one run, fill tree</span>
+	<span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> data for one run, fill tree</span>
 
 	<a href="../ListOfTypes.html#UChar_t">UChar_t</a> msg = 0;
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRun" title="Int_t KVINDRAPulserDataTree::fRun">fRun</a> = run;
-	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fGeneDir" title="KVTarArchive* KVINDRAPulserDataTree::fGeneDir">fGeneDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK() const">IsOK</a>()){
+	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fGeneDir" title="KVTarArchive* KVINDRAPulserDataTree::fGeneDir">fGeneDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK()">IsOK</a>()){
 		<a href="../ListOfTypes.html#ifstream">ifstream</a> f;
-		<span class="keyword">if</span>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenGeneData" title="Bool_t KVINDRAPulserDataTree::OpenGeneData(Int_t, ifstream&amp;)">OpenGeneData</a>(run,f) ) <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadFile" title="void KVINDRAPulserDataTree::ReadFile(ifstream&amp;)">ReadFile</a>(f);
+		<span class="keyword">if</span>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenGeneData" title="Bool_t KVINDRAPulserDataTree::OpenGeneData(Int_t ,ifstream&amp; )">OpenGeneData</a>(run,f) ) <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadFile" title="void KVINDRAPulserDataTree::ReadFile(ifstream&amp; )">ReadFile</a>(f);
 		<span class="keyword">else</span> msg = msg | 1; 
 	}
-	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK() const">IsOK</a>()){
+	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fPinDir" title="KVTarArchive* KVINDRAPulserDataTree::fPinDir">fPinDir</a>-><a href="../KVTarArchive.html#KVTarArchive:IsOK" title="Bool_t KVTarArchive::IsOK()">IsOK</a>()){
 		<a href="../ListOfTypes.html#ifstream">ifstream</a> f;
-		<span class="keyword">if</span>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenPinData" title="Bool_t KVINDRAPulserDataTree::OpenPinData(Int_t, ifstream&amp;)">OpenPinData</a>(run,f) ) <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadFile" title="void KVINDRAPulserDataTree::ReadFile(ifstream&amp;)">ReadFile</a>(f);
+		<span class="keyword">if</span>( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenPinData" title="Bool_t KVINDRAPulserDataTree::OpenPinData(Int_t ,ifstream&amp; )">OpenPinData</a>(run,f) ) <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadFile" title="void KVINDRAPulserDataTree::ReadFile(ifstream&amp; )">ReadFile</a>(f);
 		<span class="keyword">else</span> msg = msg | 2; 
 	}
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;Fill();
 	<span class="keyword">return</span> msg;
 }
 
-<a name="Rcj2gE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenGeneData" title="Bool_t KVINDRAPulserDataTree::OpenGeneData(Int_t, ifstream&amp;)">OpenGeneData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> run, <a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;f)
+<a name="Rcj2gE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenGeneData" title="Bool_t KVINDRAPulserDataTree::OpenGeneData(Int_t ,ifstream&amp; )">OpenGeneData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> run, <a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;f)
 {
 	<span class="comment">// Open gene data for one run</span>
 	<span class="comment">// We look for file 'runXXXX.gene' in the directory given by</span>
 	<span class="comment">// environment variable <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>.GeneDetDir.</span>
 
 	TString fname; fname.Form(<span class="string">"/run%d.gene"</span>, run);
-	fname.Prepend(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>(<span class="string">"KVINDRAPulserDataTree.GeneDetDir"</span>,<span class="string">""</span>));
-	<span class="keyword">return</span> <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename, ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f);
+	fname.Prepend(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(<span class="string">"KVINDRAPulserDataTree.GeneDetDir"</span>,<span class="string">""</span>));
+	<span class="keyword">return</span> <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename,ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f);
 }
 
-<a name="BMmDLD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenPinData" title="Bool_t KVINDRAPulserDataTree::OpenPinData(Int_t, ifstream&amp;)">OpenPinData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> run, <a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;f)
+<a name="BMmDLD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:OpenPinData" title="Bool_t KVINDRAPulserDataTree::OpenPinData(Int_t ,ifstream&amp; )">OpenPinData</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> run, <a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;f)
 {
 	<span class="comment">// Open pin data for one run</span>
 	<span class="comment">// We look for one of the following files in the directory given by</span>
@@ -330,47 +330,47 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 
 	TString fname;
 	fname.Form(<span class="string">"/run%d.genepin"</span>, run);
-	TString pindir(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>(<span class="string">"KVINDRAPulserDataTree.GenePinDir"</span>,<span class="string">""</span>));
+	TString pindir(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(<span class="string">"KVINDRAPulserDataTree.GenePinDir"</span>,<span class="string">""</span>));
 	fname.Prepend(pindir);
-	<span class="keyword">if</span>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename, ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f)) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+	<span class="keyword">if</span>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename,ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f)) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 	fname.Form(<span class="string">"/run%d.laserpin"</span>, run);
 	fname.Prepend(pindir);
-	<span class="keyword">if</span>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename, ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f)) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+	<span class="keyword">if</span>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename,ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f)) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 	fname.Form(<span class="string">"/run%d.genelaserpin"</span>, run);
 	fname.Prepend(pindir);
-	<span class="keyword">return</span> <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename, ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f);
+	<span class="keyword">return</span> <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenDataSetFile" title="Bool_t KVDataSet::OpenDataSetFile(const Char_t* filename,ifstream&amp; file)">OpenDataSetFile</a>(fname.Data(),f);
 }
 
 <a name="J4b5y"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadData" title="void KVINDRAPulserDataTree::ReadData() or overloads">ReadData</a>()
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> data for every run in dataset</span>
+	<span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> data for every run in dataset</span>
 
-	<span class="keyword">if</span>( !<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRunlist" title="TList* KVINDRAPulserDataTree::fRunlist">fRunlist</a> ) {
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadData"</span>, <span class="string">"Must set list of runs first using SetRunList(TList*)"</span>);
+	<span class="keyword">if</span>( !<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRunlist" title="KVSeqCollection* KVINDRAPulserDataTree::fRunlist">fRunlist</a> ) {
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadData"</span>, <span class="string">"Must set list of runs first using SetRunList(TList*)"</span>);
 		<span class="keyword">return</span>;
 	}
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadData"</span>, <span class="string">"Reading pulser and laser data for all runs"</span>);
-	TIter Nxt_r( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRunlist" title="TList* KVINDRAPulserDataTree::fRunlist">fRunlist</a> );
+	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadData"</span>, <span class="string">"Reading pulser and laser data for all runs"</span>);
+	TIter Nxt_r( <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fRunlist" title="KVSeqCollection* KVINDRAPulserDataTree::fRunlist">fRunlist</a> );
 	<a href="../KVINDRADBRun.html">KVINDRADBRun</a>* run = 0;
 	<a href="../KVNumberList.html">KVNumberList</a> missing1, missing2;
 	<span class="keyword">while</span>( (run = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a>*)Nxt_r()) ){
-		<a href="../ListOfTypes.html#Int_t">Int_t</a> run_num = run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>();
+		<a href="../ListOfTypes.html#Int_t">Int_t</a> run_num = run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
 		<span class="comment">//reset all array members to -1</span>
 		<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=0;i&lt;<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fTab_siz" title="Int_t KVINDRAPulserDataTree::fTab_siz">fTab_siz</a>;i++) <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fVal" title="Float_t* KVINDRAPulserDataTree::fVal">fVal</a>[i]=-1.0;
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadData"</span>, <span class="string">"Reading data for run %d"</span>, run_num);
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadData"</span>, <span class="string">"Reading data for run %d"</span>, run_num);
         <a href="../ListOfTypes.html#UChar_t">UChar_t</a> msg = <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadData" title="void KVINDRAPulserDataTree::ReadData() or overloads">ReadData</a>(run_num);
 		<span class="keyword">if</span>( msg &amp; 1 ) missing1.Add( run_num );
 		<span class="keyword">if</span>( msg &amp; 2 ) missing2.Add( run_num );
 	}
 	<span class="keyword">if</span>( missing1.GetEntries() )
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ReadData"</span>,<span class="string">"Missing file 'run[run_num].gene' for runs: %s"</span>, missing1.GetList() );
+		<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadData"</span>,<span class="string">"Missing file 'run[run_num].gene' for runs: %s"</span>, missing1.GetList() );
 	<span class="keyword">if</span>( missing2.GetEntries() )
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ReadData"</span>,<span class="string">"Missing file 'run[run_num].[gene][laser]pin' for runs: %s"</span>, missing2.GetList() );
+		<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadData"</span>,<span class="string">"Missing file 'run[run_num].[gene][laser]pin' for runs: %s"</span>, missing2.GetList() );
 }
 
-<a name="MMncRC"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadTree" title="void KVINDRAPulserDataTree::ReadTree(TFile*)">ReadTree</a>(TFile *file)
+<a name="MMncRC"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:ReadTree" title="void KVINDRAPulserDataTree::ReadTree(TFile* )">ReadTree</a>(TFile *file)
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> pulser data tree from file</span>
+	<span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> pulser data tree from file</span>
 
 	<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a> = (TTree*)file-&gt;Get(<span class="string">"PulserData"</span>);
 	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>){
@@ -380,19 +380,19 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	}
 }
 
-<a name="fiMxa"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:WriteTree" title="void KVINDRAPulserDataTree::WriteTree(TFile*)">WriteTree</a>(TFile *file)
+<a name="fiMxa"></a><span class="keyword">void</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:WriteTree" title="void KVINDRAPulserDataTree::WriteTree(TFile* )">WriteTree</a>(TFile *file)
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a> pulser data tree in file</span>
+	<span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> pulser data tree in file</span>
 	<span class="comment">// We build and index based on the Run number and store it in the tree.</span>
 
 	<span class="keyword">if</span>(<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>){
 		<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;SetDirectory(file);
 		<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;BuildIndex(<span class="string">"Run"</span>);
-		<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a>();
+		<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;<a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a>();
 	}
 }
 
-<a name="Fqa3."></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetMean" title="Float_t KVINDRAPulserDataTree::GetMean(const Char_t*, Int_t)">GetMean</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* param, <a href="../ListOfTypes.html#Int_t">Int_t</a> run)
+<a name="Fqa3."></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>::<a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetMean" title="Float_t KVINDRAPulserDataTree::GetMean(const Char_t* ,Int_t )">GetMean</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* param, <a href="../ListOfTypes.html#Int_t">Int_t</a> run)
 {
 	<span class="comment">// Return mean value of pulser/laser for given parameter and run.</span>
 	<span class="comment">// For detectors, param should be name of an acquisition parameter</span>
@@ -409,7 +409,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	TBranch *br = <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;GetBranch(param);
 	<span class="keyword">if</span>( !br ){
 		<span class="comment">//no branch found - wrong name given ?</span>
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GetMean"</span>, <span class="string">"No branch found with name %s"</span>, param);
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetMean"</span>, <span class="string">"No branch found with name %s"</span>, param);
 		<span class="keyword">return</span> -1.0;
 	}
 	<span class="comment">//enable branch</span>
@@ -421,7 +421,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> bytes = <a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:fArb" title="TTree* KVINDRAPulserDataTree::fArb">fArb</a>-&gt;GetEntryWithIndex(run);
 	<span class="keyword">if</span>( bytes &lt; 0 ){
 		<span class="comment">//unknown run number</span>
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GetMean"</span>, <span class="string">"Unknown run %d"</span>, run);
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetMean"</span>, <span class="string">"Unknown run %d"</span>, run);
 		<span class="keyword">return</span> -1.0;
 	}
 	<span class="comment">//disable branch</span>
@@ -437,7 +437,7 @@ ClassImp(<a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-07-29 15:56 </em><em>&raquo; Last generated: 2015-07-29 15:56</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

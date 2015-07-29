@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/FAZIA/geometry/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/FAZIA/geometry/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,22 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/rule
 .PHONY : FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/rule
 
 # Convenience name for target.
@@ -154,29 +154,29 @@ FAZIAgeometry: FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/rule
 
 # fast build rule for target.
 FAZIAgeometry/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build
 .PHONY : FAZIAgeometry/fast
 
 # Convenience name for target.
-FAZIA/geometry/CMakeFiles/G__FAZIAgeometry.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/CMakeFiles/G__FAZIAgeometry.dir/rule
-.PHONY : FAZIA/geometry/CMakeFiles/G__FAZIAgeometry.dir/rule
+FAZIA/geometry/CMakeFiles/libFAZIAgeometry.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 FAZIA/geometry/CMakeFiles/libFAZIAgeometry.rootmap.dir/rule
+.PHONY : FAZIA/geometry/CMakeFiles/libFAZIAgeometry.rootmap.dir/rule
 
 # Convenience name for target.
-G__FAZIAgeometry: FAZIA/geometry/CMakeFiles/G__FAZIAgeometry.dir/rule
-.PHONY : G__FAZIAgeometry
+libFAZIAgeometry.rootmap: FAZIA/geometry/CMakeFiles/libFAZIAgeometry.rootmap.dir/rule
+.PHONY : libFAZIAgeometry.rootmap
 
 # fast build rule for target.
-G__FAZIAgeometry/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/G__FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/G__FAZIAgeometry.dir/build
-.PHONY : G__FAZIAgeometry/fast
+libFAZIAgeometry.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/libFAZIAgeometry.rootmap.dir/build.make FAZIA/geometry/CMakeFiles/libFAZIAgeometry.rootmap.dir/build
+.PHONY : libFAZIAgeometry.rootmap/fast
 
 G__FAZIAgeometry.o: G__FAZIAgeometry.cxx.o
 .PHONY : G__FAZIAgeometry.o
 
 # target to build an object file
 G__FAZIAgeometry.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/G__FAZIAgeometry.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/G__FAZIAgeometry.cxx.o
 .PHONY : G__FAZIAgeometry.cxx.o
 
 G__FAZIAgeometry.i: G__FAZIAgeometry.cxx.i
@@ -184,7 +184,7 @@ G__FAZIAgeometry.i: G__FAZIAgeometry.cxx.i
 
 # target to preprocess a source file
 G__FAZIAgeometry.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/G__FAZIAgeometry.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/G__FAZIAgeometry.cxx.i
 .PHONY : G__FAZIAgeometry.cxx.i
 
 G__FAZIAgeometry.s: G__FAZIAgeometry.cxx.s
@@ -192,7 +192,7 @@ G__FAZIAgeometry.s: G__FAZIAgeometry.cxx.s
 
 # target to generate assembly for a file
 G__FAZIAgeometry.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/G__FAZIAgeometry.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/G__FAZIAgeometry.cxx.s
 .PHONY : G__FAZIAgeometry.cxx.s
 
 KVChargeSignal.o: KVChargeSignal.cpp.o
@@ -200,7 +200,7 @@ KVChargeSignal.o: KVChargeSignal.cpp.o
 
 # target to build an object file
 KVChargeSignal.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVChargeSignal.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVChargeSignal.cpp.o
 .PHONY : KVChargeSignal.cpp.o
 
 KVChargeSignal.i: KVChargeSignal.cpp.i
@@ -208,7 +208,7 @@ KVChargeSignal.i: KVChargeSignal.cpp.i
 
 # target to preprocess a source file
 KVChargeSignal.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVChargeSignal.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVChargeSignal.cpp.i
 .PHONY : KVChargeSignal.cpp.i
 
 KVChargeSignal.s: KVChargeSignal.cpp.s
@@ -216,7 +216,7 @@ KVChargeSignal.s: KVChargeSignal.cpp.s
 
 # target to generate assembly for a file
 KVChargeSignal.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVChargeSignal.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVChargeSignal.cpp.s
 .PHONY : KVChargeSignal.cpp.s
 
 KVCurrentSignal.o: KVCurrentSignal.cpp.o
@@ -224,7 +224,7 @@ KVCurrentSignal.o: KVCurrentSignal.cpp.o
 
 # target to build an object file
 KVCurrentSignal.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVCurrentSignal.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVCurrentSignal.cpp.o
 .PHONY : KVCurrentSignal.cpp.o
 
 KVCurrentSignal.i: KVCurrentSignal.cpp.i
@@ -232,7 +232,7 @@ KVCurrentSignal.i: KVCurrentSignal.cpp.i
 
 # target to preprocess a source file
 KVCurrentSignal.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVCurrentSignal.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVCurrentSignal.cpp.i
 .PHONY : KVCurrentSignal.cpp.i
 
 KVCurrentSignal.s: KVCurrentSignal.cpp.s
@@ -240,7 +240,7 @@ KVCurrentSignal.s: KVCurrentSignal.cpp.s
 
 # target to generate assembly for a file
 KVCurrentSignal.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVCurrentSignal.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVCurrentSignal.cpp.s
 .PHONY : KVCurrentSignal.cpp.s
 
 KVDigitalFilter.o: KVDigitalFilter.cpp.o
@@ -248,7 +248,7 @@ KVDigitalFilter.o: KVDigitalFilter.cpp.o
 
 # target to build an object file
 KVDigitalFilter.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVDigitalFilter.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVDigitalFilter.cpp.o
 .PHONY : KVDigitalFilter.cpp.o
 
 KVDigitalFilter.i: KVDigitalFilter.cpp.i
@@ -256,7 +256,7 @@ KVDigitalFilter.i: KVDigitalFilter.cpp.i
 
 # target to preprocess a source file
 KVDigitalFilter.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVDigitalFilter.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVDigitalFilter.cpp.i
 .PHONY : KVDigitalFilter.cpp.i
 
 KVDigitalFilter.s: KVDigitalFilter.cpp.s
@@ -264,7 +264,7 @@ KVDigitalFilter.s: KVDigitalFilter.cpp.s
 
 # target to generate assembly for a file
 KVDigitalFilter.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVDigitalFilter.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVDigitalFilter.cpp.s
 .PHONY : KVDigitalFilter.cpp.s
 
 KVFAZIA.o: KVFAZIA.cpp.o
@@ -272,7 +272,7 @@ KVFAZIA.o: KVFAZIA.cpp.o
 
 # target to build an object file
 KVFAZIA.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA.cpp.o
 .PHONY : KVFAZIA.cpp.o
 
 KVFAZIA.i: KVFAZIA.cpp.i
@@ -280,7 +280,7 @@ KVFAZIA.i: KVFAZIA.cpp.i
 
 # target to preprocess a source file
 KVFAZIA.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA.cpp.i
 .PHONY : KVFAZIA.cpp.i
 
 KVFAZIA.s: KVFAZIA.cpp.s
@@ -288,7 +288,7 @@ KVFAZIA.s: KVFAZIA.cpp.s
 
 # target to generate assembly for a file
 KVFAZIA.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA.cpp.s
 .PHONY : KVFAZIA.cpp.s
 
 KVFAZIABlock.o: KVFAZIABlock.cpp.o
@@ -296,7 +296,7 @@ KVFAZIABlock.o: KVFAZIABlock.cpp.o
 
 # target to build an object file
 KVFAZIABlock.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIABlock.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIABlock.cpp.o
 .PHONY : KVFAZIABlock.cpp.o
 
 KVFAZIABlock.i: KVFAZIABlock.cpp.i
@@ -304,7 +304,7 @@ KVFAZIABlock.i: KVFAZIABlock.cpp.i
 
 # target to preprocess a source file
 KVFAZIABlock.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIABlock.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIABlock.cpp.i
 .PHONY : KVFAZIABlock.cpp.i
 
 KVFAZIABlock.s: KVFAZIABlock.cpp.s
@@ -312,7 +312,7 @@ KVFAZIABlock.s: KVFAZIABlock.cpp.s
 
 # target to generate assembly for a file
 KVFAZIABlock.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIABlock.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIABlock.cpp.s
 .PHONY : KVFAZIABlock.cpp.s
 
 KVFAZIADetector.o: KVFAZIADetector.cpp.o
@@ -320,7 +320,7 @@ KVFAZIADetector.o: KVFAZIADetector.cpp.o
 
 # target to build an object file
 KVFAZIADetector.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIADetector.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIADetector.cpp.o
 .PHONY : KVFAZIADetector.cpp.o
 
 KVFAZIADetector.i: KVFAZIADetector.cpp.i
@@ -328,7 +328,7 @@ KVFAZIADetector.i: KVFAZIADetector.cpp.i
 
 # target to preprocess a source file
 KVFAZIADetector.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIADetector.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIADetector.cpp.i
 .PHONY : KVFAZIADetector.cpp.i
 
 KVFAZIADetector.s: KVFAZIADetector.cpp.s
@@ -336,7 +336,7 @@ KVFAZIADetector.s: KVFAZIADetector.cpp.s
 
 # target to generate assembly for a file
 KVFAZIADetector.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIADetector.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIADetector.cpp.s
 .PHONY : KVFAZIADetector.cpp.s
 
 KVFAZIARawEvent.o: KVFAZIARawEvent.cpp.o
@@ -344,7 +344,7 @@ KVFAZIARawEvent.o: KVFAZIARawEvent.cpp.o
 
 # target to build an object file
 KVFAZIARawEvent.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIARawEvent.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIARawEvent.cpp.o
 .PHONY : KVFAZIARawEvent.cpp.o
 
 KVFAZIARawEvent.i: KVFAZIARawEvent.cpp.i
@@ -352,7 +352,7 @@ KVFAZIARawEvent.i: KVFAZIARawEvent.cpp.i
 
 # target to preprocess a source file
 KVFAZIARawEvent.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIARawEvent.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIARawEvent.cpp.i
 .PHONY : KVFAZIARawEvent.cpp.i
 
 KVFAZIARawEvent.s: KVFAZIARawEvent.cpp.s
@@ -360,7 +360,7 @@ KVFAZIARawEvent.s: KVFAZIARawEvent.cpp.s
 
 # target to generate assembly for a file
 KVFAZIARawEvent.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIARawEvent.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIARawEvent.cpp.s
 .PHONY : KVFAZIARawEvent.cpp.s
 
 KVFAZIASYM.o: KVFAZIASYM.cpp.o
@@ -368,7 +368,7 @@ KVFAZIASYM.o: KVFAZIASYM.cpp.o
 
 # target to build an object file
 KVFAZIASYM.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIASYM.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIASYM.cpp.o
 .PHONY : KVFAZIASYM.cpp.o
 
 KVFAZIASYM.i: KVFAZIASYM.cpp.i
@@ -376,7 +376,7 @@ KVFAZIASYM.i: KVFAZIASYM.cpp.i
 
 # target to preprocess a source file
 KVFAZIASYM.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIASYM.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIASYM.cpp.i
 .PHONY : KVFAZIASYM.cpp.i
 
 KVFAZIASYM.s: KVFAZIASYM.cpp.s
@@ -384,7 +384,7 @@ KVFAZIASYM.s: KVFAZIASYM.cpp.s
 
 # target to generate assembly for a file
 KVFAZIASYM.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIASYM.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIASYM.cpp.s
 .PHONY : KVFAZIASYM.cpp.s
 
 KVFAZIA_2B.o: KVFAZIA_2B.cpp.o
@@ -392,7 +392,7 @@ KVFAZIA_2B.o: KVFAZIA_2B.cpp.o
 
 # target to build an object file
 KVFAZIA_2B.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA_2B.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA_2B.cpp.o
 .PHONY : KVFAZIA_2B.cpp.o
 
 KVFAZIA_2B.i: KVFAZIA_2B.cpp.i
@@ -400,7 +400,7 @@ KVFAZIA_2B.i: KVFAZIA_2B.cpp.i
 
 # target to preprocess a source file
 KVFAZIA_2B.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA_2B.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA_2B.cpp.i
 .PHONY : KVFAZIA_2B.cpp.i
 
 KVFAZIA_2B.s: KVFAZIA_2B.cpp.s
@@ -408,7 +408,7 @@ KVFAZIA_2B.s: KVFAZIA_2B.cpp.s
 
 # target to generate assembly for a file
 KVFAZIA_2B.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA_2B.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVFAZIA_2B.cpp.s
 .PHONY : KVFAZIA_2B.cpp.s
 
 KVINDRAFAZIA.o: KVINDRAFAZIA.cpp.o
@@ -416,7 +416,7 @@ KVINDRAFAZIA.o: KVINDRAFAZIA.cpp.o
 
 # target to build an object file
 KVINDRAFAZIA.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVINDRAFAZIA.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVINDRAFAZIA.cpp.o
 .PHONY : KVINDRAFAZIA.cpp.o
 
 KVINDRAFAZIA.i: KVINDRAFAZIA.cpp.i
@@ -424,7 +424,7 @@ KVINDRAFAZIA.i: KVINDRAFAZIA.cpp.i
 
 # target to preprocess a source file
 KVINDRAFAZIA.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVINDRAFAZIA.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVINDRAFAZIA.cpp.i
 .PHONY : KVINDRAFAZIA.cpp.i
 
 KVINDRAFAZIA.s: KVINDRAFAZIA.cpp.s
@@ -432,7 +432,7 @@ KVINDRAFAZIA.s: KVINDRAFAZIA.cpp.s
 
 # target to generate assembly for a file
 KVINDRAFAZIA.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVINDRAFAZIA.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVINDRAFAZIA.cpp.s
 .PHONY : KVINDRAFAZIA.cpp.s
 
 KVISOFAZIA.o: KVISOFAZIA.cpp.o
@@ -440,7 +440,7 @@ KVISOFAZIA.o: KVISOFAZIA.cpp.o
 
 # target to build an object file
 KVISOFAZIA.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVISOFAZIA.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVISOFAZIA.cpp.o
 .PHONY : KVISOFAZIA.cpp.o
 
 KVISOFAZIA.i: KVISOFAZIA.cpp.i
@@ -448,7 +448,7 @@ KVISOFAZIA.i: KVISOFAZIA.cpp.i
 
 # target to preprocess a source file
 KVISOFAZIA.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVISOFAZIA.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVISOFAZIA.cpp.i
 .PHONY : KVISOFAZIA.cpp.i
 
 KVISOFAZIA.s: KVISOFAZIA.cpp.s
@@ -456,7 +456,7 @@ KVISOFAZIA.s: KVISOFAZIA.cpp.s
 
 # target to generate assembly for a file
 KVISOFAZIA.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVISOFAZIA.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVISOFAZIA.cpp.s
 .PHONY : KVISOFAZIA.cpp.s
 
 KVPSAResult.o: KVPSAResult.cpp.o
@@ -464,7 +464,7 @@ KVPSAResult.o: KVPSAResult.cpp.o
 
 # target to build an object file
 KVPSAResult.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVPSAResult.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVPSAResult.cpp.o
 .PHONY : KVPSAResult.cpp.o
 
 KVPSAResult.i: KVPSAResult.cpp.i
@@ -472,7 +472,7 @@ KVPSAResult.i: KVPSAResult.cpp.i
 
 # target to preprocess a source file
 KVPSAResult.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVPSAResult.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVPSAResult.cpp.i
 .PHONY : KVPSAResult.cpp.i
 
 KVPSAResult.s: KVPSAResult.cpp.s
@@ -480,7 +480,7 @@ KVPSAResult.s: KVPSAResult.cpp.s
 
 # target to generate assembly for a file
 KVPSAResult.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVPSAResult.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVPSAResult.cpp.s
 .PHONY : KVPSAResult.cpp.s
 
 KVSignal.o: KVSignal.cpp.o
@@ -488,7 +488,7 @@ KVSignal.o: KVSignal.cpp.o
 
 # target to build an object file
 KVSignal.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVSignal.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVSignal.cpp.o
 .PHONY : KVSignal.cpp.o
 
 KVSignal.i: KVSignal.cpp.i
@@ -496,7 +496,7 @@ KVSignal.i: KVSignal.cpp.i
 
 # target to preprocess a source file
 KVSignal.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVSignal.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVSignal.cpp.i
 .PHONY : KVSignal.cpp.i
 
 KVSignal.s: KVSignal.cpp.s
@@ -504,7 +504,7 @@ KVSignal.s: KVSignal.cpp.s
 
 # target to generate assembly for a file
 KVSignal.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVSignal.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/build.make FAZIA/geometry/CMakeFiles/FAZIAgeometry.dir/KVSignal.cpp.s
 .PHONY : KVSignal.cpp.s
 
 # Help Target
@@ -514,11 +514,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... FAZIAgeometry"
-	@echo "... G__FAZIAgeometry"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libFAZIAgeometry.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... G__FAZIAgeometry.o"
@@ -574,6 +574,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

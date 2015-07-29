@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R6
+CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_R5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -114,14 +114,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R6/VAMOS/daq_cec/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R6/CMakeFiles 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles /home/john/software/build/kaliveda-build/1.10_R5/VAMOS/daq_cec/CMakeFiles/progress.marks
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_R5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/clean
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/clean
 .PHONY : clean
 
 # The main clean target
@@ -130,36 +130,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/preinstall
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-VAMOS/daq_cec/CMakeFiles/G__VAMOSdaq_cec.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/CMakeFiles/G__VAMOSdaq_cec.dir/rule
-.PHONY : VAMOS/daq_cec/CMakeFiles/G__VAMOSdaq_cec.dir/rule
-
-# Convenience name for target.
-G__VAMOSdaq_cec: VAMOS/daq_cec/CMakeFiles/G__VAMOSdaq_cec.dir/rule
-.PHONY : G__VAMOSdaq_cec
-
-# fast build rule for target.
-G__VAMOSdaq_cec/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/G__VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/G__VAMOSdaq_cec.dir/build
-.PHONY : G__VAMOSdaq_cec/fast
-
-# Convenience name for target.
 VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/rule
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/rule
 .PHONY : VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/rule
 
 # Convenience name for target.
@@ -168,15 +154,29 @@ VAMOSdaq_cec: VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/rule
 
 # fast build rule for target.
 VAMOSdaq_cec/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build
 .PHONY : VAMOSdaq_cec/fast
+
+# Convenience name for target.
+VAMOS/daq_cec/CMakeFiles/libVAMOSdaq_cec.rootmap.dir/rule:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f CMakeFiles/Makefile2 VAMOS/daq_cec/CMakeFiles/libVAMOSdaq_cec.rootmap.dir/rule
+.PHONY : VAMOS/daq_cec/CMakeFiles/libVAMOSdaq_cec.rootmap.dir/rule
+
+# Convenience name for target.
+libVAMOSdaq_cec.rootmap: VAMOS/daq_cec/CMakeFiles/libVAMOSdaq_cec.rootmap.dir/rule
+.PHONY : libVAMOSdaq_cec.rootmap
+
+# fast build rule for target.
+libVAMOSdaq_cec.rootmap/fast:
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/libVAMOSdaq_cec.rootmap.dir/build.make VAMOS/daq_cec/CMakeFiles/libVAMOSdaq_cec.rootmap.dir/build
+.PHONY : libVAMOSdaq_cec.rootmap/fast
 
 GTGanilDataVAMOS.o: GTGanilDataVAMOS.cpp.o
 .PHONY : GTGanilDataVAMOS.o
 
 # target to build an object file
 GTGanilDataVAMOS.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/GTGanilDataVAMOS.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/GTGanilDataVAMOS.cpp.o
 .PHONY : GTGanilDataVAMOS.cpp.o
 
 GTGanilDataVAMOS.i: GTGanilDataVAMOS.cpp.i
@@ -184,7 +184,7 @@ GTGanilDataVAMOS.i: GTGanilDataVAMOS.cpp.i
 
 # target to preprocess a source file
 GTGanilDataVAMOS.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/GTGanilDataVAMOS.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/GTGanilDataVAMOS.cpp.i
 .PHONY : GTGanilDataVAMOS.cpp.i
 
 GTGanilDataVAMOS.s: GTGanilDataVAMOS.cpp.s
@@ -192,7 +192,7 @@ GTGanilDataVAMOS.s: GTGanilDataVAMOS.cpp.s
 
 # target to generate assembly for a file
 GTGanilDataVAMOS.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/GTGanilDataVAMOS.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/GTGanilDataVAMOS.cpp.s
 .PHONY : GTGanilDataVAMOS.cpp.s
 
 G__VAMOSdaq_cec.o: G__VAMOSdaq_cec.cxx.o
@@ -200,7 +200,7 @@ G__VAMOSdaq_cec.o: G__VAMOSdaq_cec.cxx.o
 
 # target to build an object file
 G__VAMOSdaq_cec.cxx.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/G__VAMOSdaq_cec.cxx.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/G__VAMOSdaq_cec.cxx.o
 .PHONY : G__VAMOSdaq_cec.cxx.o
 
 G__VAMOSdaq_cec.i: G__VAMOSdaq_cec.cxx.i
@@ -208,7 +208,7 @@ G__VAMOSdaq_cec.i: G__VAMOSdaq_cec.cxx.i
 
 # target to preprocess a source file
 G__VAMOSdaq_cec.cxx.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/G__VAMOSdaq_cec.cxx.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/G__VAMOSdaq_cec.cxx.i
 .PHONY : G__VAMOSdaq_cec.cxx.i
 
 G__VAMOSdaq_cec.s: G__VAMOSdaq_cec.cxx.s
@@ -216,7 +216,7 @@ G__VAMOSdaq_cec.s: G__VAMOSdaq_cec.cxx.s
 
 # target to generate assembly for a file
 G__VAMOSdaq_cec.cxx.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/G__VAMOSdaq_cec.cxx.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/G__VAMOSdaq_cec.cxx.s
 .PHONY : G__VAMOSdaq_cec.cxx.s
 
 Parameters.o: Parameters.cpp.o
@@ -224,7 +224,7 @@ Parameters.o: Parameters.cpp.o
 
 # target to build an object file
 Parameters.cpp.o:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/Parameters.cpp.o
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/Parameters.cpp.o
 .PHONY : Parameters.cpp.o
 
 Parameters.i: Parameters.cpp.i
@@ -232,7 +232,7 @@ Parameters.i: Parameters.cpp.i
 
 # target to preprocess a source file
 Parameters.cpp.i:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/Parameters.cpp.i
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/Parameters.cpp.i
 .PHONY : Parameters.cpp.i
 
 Parameters.s: Parameters.cpp.s
@@ -240,7 +240,7 @@ Parameters.s: Parameters.cpp.s
 
 # target to generate assembly for a file
 Parameters.cpp.s:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/Parameters.cpp.s
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(MAKE) -f VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/build.make VAMOS/daq_cec/CMakeFiles/VAMOSdaq_cec.dir/Parameters.cpp.s
 .PHONY : Parameters.cpp.s
 
 # Help Target
@@ -249,12 +249,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... G__VAMOSdaq_cec"
 	@echo "... VAMOSdaq_cec"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
+	@echo "... libVAMOSdaq_cec.rootmap"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... GTGanilDataVAMOS.o"
@@ -277,6 +277,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_R6 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/john/software/build/kaliveda-build/1.10_R5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
