@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Thu May 28 11:09:58 2015            -->
+<!--   Date: Tue Aug 11 16:19:12 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -52,14 +52,66 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/01</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/03</a>
  &#187; <a class="locationlevel" href="./BACKTRACK_Index.html">BACKTRACK</a>
  &#187; <a class="locationlevel" href="./BACKTRACK_BASE_Index.html">BASE</a>
  &#187; <a class="locationlevel" href="#TopOfPage">BackTrack::GenericModel</a>
 </div>
 <div class="dropshadow"><div class="withshadow"><h1><a name="BackTrack__GenericModel:description"></a>class BackTrack::GenericModel: public <a href="./KVBase.html">KVBase</a></h1>
 <div class="classdescr">
-</div>
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>BackTrack - a RooFit approach to backtracing</h2>
+<h4>Backtracing</h4>
+<p>Backtracing is a statistical procedure for deducing
+the distributions of model parameters which give the best description of
+some data which the model is supposed to reproduce by transforming parameter distributions
+into observable distributions. By backtracing we try to deduce the model parameter distributions
+from the data observable distributions. See Nuclear Physics A604(1996)183-207
+and Nuclear Instruments and Methods in Physics Research Section A544(2005)679-683</p>
+<p>The model is defined by the conditional probability distributions of observables for a given
+set of parameter values, M(o|p). Then, given a set of parameter distributions P(p) which vary in domain D,
+the observable distributions are given by
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+<span class="latex"><img class="latex" alt="\mathcal{O}(\mathbf{o})=\int_{D_{p}}\mathcal{P}(\mathbf{p})\mathcal{M}(\mathbf{o}|\mathbf{p})\:d\mathbf{p}" title="LATEX" src="LATEX_BackTrack__GenericModel_1_mathcalOmathbfoint_D_pmathcalPmathbfpmathcalMmathbfomathbfpdmathbfp.gif" /></span>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+and the aim of the backtracing procedure is to find the best parameter distributions P(p)
+which reproduce the data observable distributions O(o).</p>
+<h4>BackTrack</h4>
+BackTrack aims to perform backtracing using the <a href="https://root.cern.ch/drupal/content/roofit">RooFit</a> package.
+RooFit can fit probability density functions to experimental data distributions conserving all correlations
+between the observables. We discretize the parameter space Dp in order to set up a pseudo-PDF for our model
+whose adjustable parameters are the weight of each bin in the discretized parameter space. Then by fitting the
+experimental data with this pseudo-PDF we find the distribution of weights in the parameter space, i.e. the
+parameter distributions which best describe the data.
+<h4>Use</h4>
+<p>In order to perform backtracing/BackTracking, you must write a class which inherits from this class and
+override the method<br>
+RooDataSet* <a class="funcname" href="#BackTrack__GenericModel:GetModelDataSet">GetModelDataSet</a>(RooArgList&amp; par)<br>
+which should create and return a pointer to a RooDataSet containing events generated from the model using the
+parameter values which are passed in the RooArgList argument. This can be by directly generating the events on demand,
+or by importing events from e.g. a TTree - whatever you want.</p>
+<p>Then the basic steps for BackTracking are:
+<ul>
+<li> define the parameters for the model with their range and binning using <a class="funcname" href="#BackTrack__GenericModel:AddParameter">AddParameter</a>;
+<li> define the observables of the data/model with their range using <a class="funcname" href="#BackTrack__GenericModel:AddObservable">AddObservable</a>; 
+<li> generate/import the model observable distributions for each cell in the discretized parameter space using <a class="funcname" href="#BackTrack__GenericModel:ImportModelData">ImportModelData</a>; 
+<li> generate the pseudo-PDF from the imported model distributions using <a class="funcname" href="#BackTrack__GenericModel:ConstructPseudoPDF">ConstructPseudoPDF</a>; 
+<li> fit the pseudo-PDF to the data using <a class="funcname" href="#BackTrack__GenericModel:fitTo">fitTo</a>
+</ul>
+See the <a href="BACKTRACK_Index.html">example classes</a> for more details.
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+</pre></div>
 </div></div>
 
 <div id="functions">
@@ -117,6 +169,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetINCDIRFilePath"><span class="baseclass">KVBase::</span>GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">const</span> RooNDKeysPdf*</td><td class="funcname"><a class="funcname" href="#BackTrack__GenericModel:GetKernel">GetKernel</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDate"><span class="baseclass">KVBase::</span>GetKVBuildDate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDir"><span class="baseclass">KVBase::</span>GetKVBuildDir</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildType"><span class="baseclass">KVBase::</span>GetKVBuildType</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildUser"><span class="baseclass">KVBase::</span>GetKVBuildUser</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVSourceDir"><span class="baseclass">KVBase::</span>GetKVSourceDir</a>()</td></tr>
@@ -147,6 +200,7 @@ return false;}
 <tr class="func"><td class="funcret"><span class="keyword">const</span> RooAddPdf*</td><td class="funcname"><a class="funcname" href="#BackTrack__GenericModel:GetPseudoPDF">GetPseudoPDF</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">const</span> RooArgList&amp;</td><td class="funcname"><a class="funcname" href="#BackTrack__GenericModel:GetPseudoPDFFractions">GetPseudoPDFFractions</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTempFileName"><span class="baseclass">KVBase::</span>GetTempFileName</a>(TString&amp; base)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTEMPLATEDIRFilePath"><span class="baseclass">KVBase::</span>GetTEMPLATEDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetType"><span class="baseclass">KVBase::</span>GetType</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
@@ -156,6 +210,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:HasLabel"><span class="baseclass">KVBase::</span>HasLabel</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#BackTrack__GenericModel:ImportModelData">ImportModelData</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> parameter_num = 0, RooArgList* plist = 0)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
@@ -265,6 +320,7 @@ return false;}
 <tr class="data"><td class="datatype">TObjArray</td><td class="dataname"><a name="BackTrack__GenericModel:fDataSetParams"></a>fDataSetParams</td><td class="datadesc">list model parameters for each dataset</td></tr>
 <tr class="data"><td class="datatype">TObjArray</td><td class="dataname"><a name="BackTrack__GenericModel:fDataSets"></a>fDataSets</td><td class="datadesc">list of model datasets</td></tr>
 <tr class="data"><td class="datatype">RooArgList</td><td class="dataname"><a name="BackTrack__GenericModel:fFractions"></a>fFractions</td><td class="datadesc">weights of each kernel in pseudo pdf</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="./KVBase.html#KVBase:fLabel"><span class="baseclass">KVBase::</span>fLabel</a></td><td class="datadesc">label for the object</td></tr>
 <tr class="data"><td class="datatype">RooFitResult*</td><td class="dataname"><a name="BackTrack__GenericModel:fLastFit"></a>fLastFit</td><td class="datadesc">result of last fit</td></tr>
 <tr class="data"><td class="datatype">RooAddPdf*</td><td class="dataname"><a name="BackTrack__GenericModel:fModelPseudoPDF"></a>fModelPseudoPDF</td><td class="datadesc">pseudo-pdf for model to fit data</td></tr>
 <tr class="data"><td class="datatype">TObjArray</td><td class="dataname"><a name="BackTrack__GenericModel:fNDKeys"></a>fNDKeys</td><td class="datadesc">pseudo-pdfs for each dataset</td></tr>
@@ -292,13 +348,13 @@ return false;}
 <area shape="rect" id="clust11" href="./KVBase.html" alt="" coords="635,47,701,64"/>
 <area shape="rect" id="clust13" href="./KVBase.html" alt="" coords="480,47,547,96"/>
 <area shape="rect" id="clust14" href="./KVBase.html" alt="" coords="667,80,669,83"/>
-<area shape="rect" id="clust15" href="./KVBase.html" alt="" coords="635,99,701,432"/>
-<area shape="rect" id="clust16" href="./KVBase.html" alt="" coords="557,99,624,432"/>
-<area shape="rect" id="clust17" href="./KVBase.html" alt="" coords="480,99,547,432"/>
-<area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,432"/>
+<area shape="rect" id="clust15" href="./KVBase.html" alt="" coords="635,99,701,448"/>
+<area shape="rect" id="clust16" href="./KVBase.html" alt="" coords="557,99,624,448"/>
+<area shape="rect" id="clust17" href="./KVBase.html" alt="" coords="480,99,547,448"/>
+<area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,448"/>
 </map>
 <map name="MapBackTrack__GenericModel_Lib" id="MapBackTrack__GenericModel_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="195,377,228,391"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="190,377,221,391"/>
 </map>
 <div class="tabs">
 <a id="imgBackTrack__GenericModel_Inh" class="tabsel" href="inh/BackTrack__GenericModel_Inh.png" onclick="javascript:return SetImg('Charts','inh/BackTrack__GenericModel_Inh.png');">Inheritance</a>
@@ -459,7 +515,7 @@ return false;}
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Thu May 28 11:09:59 2015 </em><em>&raquo; Last generated: 2015-05-28 11:09</em><br />
+<em>&raquo; Last changed: Tue Aug 11 16:19:13 2015 </em><em>&raquo; Last generated: 2015-08-11 16:19</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

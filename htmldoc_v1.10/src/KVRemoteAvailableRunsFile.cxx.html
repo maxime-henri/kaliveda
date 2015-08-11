@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Fri Jul 24 18:06:06 2015            -->
+<!--   Date: Tue Aug 11 11:44:38 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</a>.cpp,v 1.4 2008/02/08 08:19:59 franklan Exp $
@@ -60,7 +60,7 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
 <a name="AvskiC"></a><a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</a>::<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:_KVRemoteAvailableRunsFile" title="void KVRemoteAvailableRunsFile::~KVRemoteAvailableRunsFile()">~KVRemoteAvailableRunsFile</a>()
 {
    <span class="comment">//Destructor</span>
-   <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a> the runlist file from the temp directory if it has been opened</span>
+   <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> the runlist file from the temp directory if it has been opened</span>
    <span class="keyword">if</span> (<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:IsFileOpen" title="Bool_t KVAvailableRunsFile::IsFileOpen()">IsFileOpen</a>()){
       <span class="keyword">if</span>(runlist_lock.Lock(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data())){
          gSystem-&gt;Unlink(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>);
@@ -77,8 +77,8 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
    <span class="comment">//value of DataRepository.RemoteAvailableRuns.protocol</span>
    <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fCurl" title="TString KVRemoteAvailableRunsFile::fCurl">fCurl</a> = gEnv-&gt;GetValue(Form
                           (<span class="string">"%s.DataRepository.RemoteAvailableRuns.protocol"</span>,
-                           <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet() const">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository() const">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()), <span class="string">"curl"</span>);
-   <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindExecutable" title="Bool_t KVBase::FindExecutable(TString&amp; exec, const Char_t* path = &quot;$(PATH)&quot;)">FindExecutable</a>(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fCurl" title="TString KVRemoteAvailableRunsFile::fCurl">fCurl</a>);
+                           <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository()">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <span class="string">"curl"</span>);
+   <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindExecutable" title="Bool_t KVBase::FindExecutable(TString&amp; exec,const Char_t* path=&quot;$(PATH)&quot;)">FindExecutable</a>(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fCurl" title="TString KVRemoteAvailableRunsFile::fCurl">fCurl</a>);
 }
 
 <span class="comment">//__________________________________________________________________________________________________________________</span>
@@ -108,18 +108,18 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
    }
    TString http =
        gEnv-&gt;GetValue(Form(<span class="string">"%s.DataRepository.RemoteAvailableRuns.url"</span>,
-                           <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet() const">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository() const">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()), <span class="string">""</span>);
+                           <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository()">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <span class="string">""</span>);
    <span class="keyword">if</span> (http == <span class="string">""</span>) {
-      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"OpenAvailableRunsFile(ifstream&amp; runlist)"</span>,
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"OpenAvailableRunsFile(ifstream&amp; runlist)"</span>,
               <span class="string">"%s.DataRepository.RemoteAvailableRuns.url is not defined. See $KVROOT/KVFiles/.kvrootrc"</span>,
-              <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet() const">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository() const">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+              <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository()">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
    TString url;
-   url.Form(<span class="string">"%s/%s"</span>, http.Data(), <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFileName" title="const Char_t* KVAvailableRunsFile::GetFileName() const or overloads">GetFileName</a>());
+   url.Form(<span class="string">"%s/%s"</span>, http.Data(), <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFileName" title="const Char_t* KVAvailableRunsFile::GetFileName() or overloads">GetFileName</a>());
    <span class="comment">//remote file will be copied to $TEMP directory with name</span>
    <span class="comment">//repository.available_runs....</span>
-   <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a> = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFileName" title="const Char_t* KVAvailableRunsFile::GetFileName() const or overloads">GetFileName</a>();
+   <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a> = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFileName" title="const Char_t* KVAvailableRunsFile::GetFileName() or overloads">GetFileName</a>();
    <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:GetTempFileName" title="void KVBase::GetTempFileName(TString&amp; base)">GetTempFileName</a>(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>);
    TString cmd;
    cmd.Form(<span class="string">"%s -o%s %s"</span>, <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fCurl" title="TString KVRemoteAvailableRunsFile::fCurl">fCurl</a>.Data(), <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data(), url.Data());
@@ -131,7 +131,7 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
    }
    fRunlist.open(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data());
    <span class="keyword">if</span> (!fRunlist.good() || !fRunlist.is_open()) {
-      <a href="../#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"OpenAvailableRunsFile"</span>,
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"OpenAvailableRunsFile"</span>,
             <span class="string">"Cannot open temp file to copy remote runlist file"</span>);
       runlist_lock.Release();
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
@@ -157,7 +157,7 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-07-24 18:06 </em><em>&raquo; Last generated: 2015-07-24 18:06</em><br />
+<em>&raquo; Last changed: 2015-08-11 11:44 </em><em>&raquo; Last generated: 2015-08-11 11:44</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

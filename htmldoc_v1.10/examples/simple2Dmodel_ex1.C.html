@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Fri Jul 31 11:03:02 2015            -->
+<!--   Date: Tue Aug 11 16:18:42 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -20,11 +20,11 @@
 <div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <h1 class="convert">Example of use of class BackTrack::Simple2DModel</h1>
 <div class="listing"><pre class="listing">
-//# Example of use of class BackTrack::Simple2DModel
+//# Example of use of class <a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Simple2DModel.html">Simple2DModel</a>
 /* simple2Dmodel_ex1.C
  *
- * Example of use of class BackTrack::Simple2DModel in order to demonstrate
- * BackTracking fit of model parameter distribution.
+ * Example of use of class <a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Simple2DModel.html">Simple2DModel</a> in order to demonstrate
+ * BackTracking fit of <a href="../BackTrack__Simple2DModel.html">model</a> parameter distribution.
  *
  * Simple1DModel has 1 parameter and 1 observable; the observable is gaussian-
  * distributed about a mean value given by the parameter (width is fixed).
@@ -49,68 +49,68 @@
 
 using namespace RooFit;
 
-BackTrack::Simple2DModel* model=0;
+<a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Simple2DModel.html">Simple2DModel</a>* model=0;
 
 <a href="../ListOfTypes.html#void">void</a> simple2Dmodel_ex1()
 {
-   model = new BackTrack::Simple2DModel();
+   <a href="../BackTrack__Simple2DModel.html">model</a> = new <a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Simple2DModel.html">Simple2DModel</a>();
    
    // Generate data with correlated parameter distribution
-   model-&gt;SetNumGen(5000);
-   RooDataSet data(<span class="string">"data"</span>,<span class="string">"data to be fitted"</span>,model-&gt;GetObservables());
-   RooDataSet params(<span class="string">"params"</span>,<span class="string">"input parameters"</span>,model-&gt;GetParameters());
-   RooRealVar&amp; PAR1 = model-&gt;GetParameter(<span class="string">"par1"</span>);
-   RooRealVar&amp; PAR2 = model-&gt;GetParameter(<span class="string">"par2"</span>);
-   for(<a href="../ListOfTypes.html#int">int</a> i=0;i&lt;model-&gt;GetNumGen();i++){
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__Simple2DModel.html#BackTrack__Simple2DModel:SetNumGen" title="void BackTrack::Simple2DModel::SetNumGen(Int_t n)">SetNumGen</a>(5000);
+   RooDataSet data(<span class="string">"data"</span>,<span class="string">"data to be fitted"</span>,<a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservables" title="const RooArgList&amp; BackTrack::GenericModel::GetObservables()">GetObservables</a>());
+   RooDataSet params(<span class="string">"params"</span>,<span class="string">"input parameters"</span>,<a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParameters" title="const RooArgList&amp; BackTrack::GenericModel::GetParameters()">GetParameters</a>());
+   RooRealVar&amp; PAR1 = <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParameter" title="RooRealVar&amp; BackTrack::GenericModel::GetParameter(const char* name)">GetParameter</a>(<span class="string">"par1"</span>);
+   RooRealVar&amp; PAR2 = <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParameter" title="RooRealVar&amp; BackTrack::GenericModel::GetParameter(const char* name)">GetParameter</a>(<span class="string">"par2"</span>);
+   for(<a href="../ListOfTypes.html#int">int</a> i=0;i&lt;<a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__Simple2DModel.html#BackTrack__Simple2DModel:GetNumGen" title="Int_t BackTrack::Simple2DModel::GetNumGen()">GetNumGen</a>();i++){
       <a href="../ListOfTypes.html#Double_t">Double_t</a> par1 = gRandom-&gt;Gaus(5,2);
       <a href="../ListOfTypes.html#Double_t">Double_t</a> par2 = gRandom-&gt;Gaus(0,5);
       PAR1.setVal(par1);
       PAR2.setVal(par2);
-      model-&gt;generateEvent(RooArgList(PAR1,PAR2),data);
-      params.add(model-&gt;GetParameters(),1./5000.);
+      <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__Simple2DModel.html#BackTrack__Simple2DModel:generateEvent" title="void BackTrack::Simple2DModel::generateEvent(const RooArgList&amp; parameters,RooDataSet&amp; data)">generateEvent</a>(RooArgList(PAR1,PAR2),data);
+      params.add(<a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParameters" title="const RooArgList&amp; BackTrack::GenericModel::GetParameters()">GetParameters</a>(),1./5000.);
    }
    TH1* hh_data = data.createHistogram(<span class="string">"obs1,obs2"</span>,50,50) ;
-   hh_data-&gt;Draw(<span class="string">"col"</span>);
+   hh_data-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>(<span class="string">"col"</span>);
 
    TH1* hh_params = params.createHistogram(<span class="string">"par1,par2"</span>,PAR1.getBins(),PAR2.getBins()) ;
    new TCanvas;
-   hh_params-&gt;SetName(<span class="string">"inputParameters"</span>);
-   hh_params-&gt;Draw(<span class="string">"lego"</span>);
+   hh_params-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"inputParameters"</span>);
+   hh_params-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>(<span class="string">"lego"</span>);
 
    // Initialise the BackTracking
-   model-&gt;SetNumGen(1000);
-   model-&gt;ImportModelData();
-   model-&gt;SetKernelSmoothing(2);
-   model-&gt;ConstructPseudoPDF();
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__Simple2DModel.html#BackTrack__Simple2DModel:SetNumGen" title="void BackTrack::Simple2DModel::SetNumGen(Int_t n)">SetNumGen</a>(1000);
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:ImportModelData" title="void BackTrack::GenericModel::ImportModelData(Int_t parameter_num=0,RooArgList* plist=0)">ImportModelData</a>();
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:SetKernelSmoothing" title="void BackTrack::GenericModel::SetKernelSmoothing(Double_t rho)">SetKernelSmoothing</a>(2);
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:ConstructPseudoPDF" title="void BackTrack::GenericModel::ConstructPseudoPDF(Bool_t debug=kFALSE)">ConstructPseudoPDF</a>();
 
-   model-&gt;fitTo(&amp;data);
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:fitTo" title="RooFitResult* BackTrack::GenericModel::fitTo(RooDataSet* )">fitTo</a>(&amp;data);
 
    new TCanvas;
-   model-&gt;GetParameterDistributions()-&gt;Draw(<span class="string">"lego"</span>);
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__Simple2DModel.html#BackTrack__Simple2DModel:GetParameterDistributions" title="TH1* BackTrack::Simple2DModel::GetParameterDistributions()">GetParameterDistributions</a>()-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>(<span class="string">"lego"</span>);
 
    RooPlot* p = PAR1.frame();
-   model-&gt;GetParamDataHist()-&gt;plotOn(p, MarkerColor(kRed));
-   params.plotOn(p);
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParamDataHist" title="const RooDataHist* BackTrack::GenericModel::GetParamDataHist()">GetParamDataHist</a>()-&gt;<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p, MarkerColor(kRed));
+   params.<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p);
    new TCanvas;
-   p-&gt;Draw();
+   p-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();
    p = PAR2.frame();
-   model-&gt;GetParamDataHist()-&gt;plotOn(p, MarkerColor(kRed));
-   params.plotOn(p);
+   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParamDataHist" title="const RooDataHist* BackTrack::GenericModel::GetParamDataHist()">GetParamDataHist</a>()-&gt;<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p, MarkerColor(kRed));
+   params.<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p);
    new TCanvas;
-   p-&gt;Draw();
+   p-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();
 
-//   p = model-&gt;GetObservable(<span class="string">"obs1"</span>).frame();
-//   data.plotOn(p);
-//   model-&gt;GetPseudoPDF()-&gt;plotOn(p);
+//   p = <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservable" title="RooRealVar&amp; BackTrack::GenericModel::GetObservable(const char* name)">GetObservable</a>(<span class="string">"obs1"</span>).frame();
+//   data.<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p);
+//   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetPseudoPDF" title="const RooAddPdf* BackTrack::GenericModel::GetPseudoPDF()">GetPseudoPDF</a>()-&gt;<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p);
 //   TCanvas*c = new TCanvas;
 //   c-&gt;Divide(2,1);
 //   c-&gt;cd(1);
-//   p-&gt;Draw();
-//   p = model-&gt;GetObservable(<span class="string">"obs2"</span>).frame();
-//   data.plotOn(p);
-//   model-&gt;GetPseudoPDF()-&gt;plotOn(p);
+//   p-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();
+//   p = <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservable" title="RooRealVar&amp; BackTrack::GenericModel::GetObservable(const char* name)">GetObservable</a>(<span class="string">"obs2"</span>).frame();
+//   data.<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p);
+//   <a href="../BackTrack__Simple2DModel.html">model</a>-><a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetPseudoPDF" title="const RooAddPdf* BackTrack::GenericModel::GetPseudoPDF()">GetPseudoPDF</a>()-&gt;<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:plotOn" title="void BackTrack::GenericModel::plotOn(RooPlot* )">plotOn</a>(p);
 //   c-&gt;cd(2);
-//   p-&gt;Draw();
+//   p-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();
 }
 
 </pre></div>
@@ -120,7 +120,7 @@ BackTrack::Simple2DModel* model=0;
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-07-31 11:03 </em><em>&raquo; Last generated: 2015-07-31 11:03</em><br />
+<em>&raquo; Last changed: 2015-08-11 16:18 </em><em>&raquo; Last generated: 2015-08-11 16:18</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

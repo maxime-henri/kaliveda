@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Fri Jul 24 18:06:00 2015            -->
+<!--   Date: Tue Aug 11 11:44:26 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Mon Jul 20 11:33:43 2009</span>
 <span class="comment">//Author: John Frankland</span>
@@ -65,7 +65,7 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
 }
 
 
-<a name="hmmNO"></a><span class="keyword">void</span> <a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>::<a href="../DMSAvailableRunsFile.html#DMSAvailableRunsFile:Update" title="void DMSAvailableRunsFile::Update(Bool_t no_existing_file = kFALSE)">Update</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> no_existing_file)
+<a name="hmmNO"></a><span class="keyword">void</span> <a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>::<a href="../DMSAvailableRunsFile.html#DMSAvailableRunsFile:Update" title="void DMSAvailableRunsFile::Update(Bool_t no_existing_file=kFALSE)">Update</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> no_existing_file)
 {
    <span class="comment">//Examine the contents of the DMS container corresponding to this datatype</span>
    <span class="comment">//for parent dataset fDataSet.</span>
@@ -78,7 +78,7 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
    <span class="comment">// When no_existing_file=<a href="../ListOfTypes.html#Bool_t">kTRUE</a> we are making an available runs file</span>
    <span class="comment">// for the first time. There is no pre-existing file.</span>
 
-   TString runlist = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFullPathToAvailableRunsFile" title="const Char_t* KVAvailableRunsFile::GetFullPathToAvailableRunsFile() const">GetFullPathToAvailableRunsFile</a>();
+   TString runlist = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFullPathToAvailableRunsFile" title="const Char_t* KVAvailableRunsFile::GetFullPathToAvailableRunsFile()">GetFullPathToAvailableRunsFile</a>();
 
    <span class="keyword">if</span>(!no_existing_file){
       <span class="comment">// read all existing informations</span>
@@ -88,16 +88,16 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
       <span class="keyword">if</span>(!runlist_lock.Lock(runlist.Data())) <span class="keyword">return</span>;
    }
    <span class="comment">//open temporary file</span>
-   TString tmp_file_path(<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFileName" title="const Char_t* KVAvailableRunsFile::GetFileName() const or overloads">GetFileName</a>());
+   TString tmp_file_path(<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetFileName" title="const Char_t* KVAvailableRunsFile::GetFileName() or overloads">GetFileName</a>());
    <a href="../ListOfTypes.html#ofstream">ofstream</a> tmp_file;
-   <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:OpenTempFile" title="void KVBase::OpenTempFile(TString&amp; base, ofstream&amp; fp)">OpenTempFile</a>(tmp_file_path, tmp_file);
+   <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:OpenTempFile" title="void KVBase::OpenTempFile(TString&amp; base,ofstream&amp; fp)">OpenTempFile</a>(tmp_file_path, tmp_file);
 
-   <a href="../KVDataRepository.html">KVDataRepository</a> *repository = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet() const">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository() const">GetRepository</a>();
+   <a href="../KVDataRepository.html">KVDataRepository</a> *repository = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository()">GetRepository</a>();
 
-   cout &lt;&lt; endl &lt;&lt; <span class="string">"Updating runlist : "</span> &lt;&lt; flush;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl &lt;&lt; <span class="string">"Updating runlist : "</span> &lt;&lt; flush;
    <span class="comment">//get directory listing from repository</span>
    <a href="../KVUniqueNameList.html">KVUniqueNameList</a> *dir_list =
-         repository-&gt;GetDirectoryListing(<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet() const">GetDataSet</a>(), GetDataType());
+         repository-&gt;GetDirectoryListing(<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>(), GetDataType());
    <span class="keyword">if</span> (!dir_list)
       <span class="keyword">return</span>;
 
@@ -107,12 +107,12 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
    <a href="../ListOfTypes.html#Int_t">Int_t</a> ntot = dir_list-&gt;GetSize();
    <a href="../ListOfTypes.html#Int_t">Int_t</a> n5pc = TMath::Max(ntot / 20, 1);
    <a href="../ListOfTypes.html#Int_t">Int_t</a> ndone = 0;
-   <a href="../KVDBTable.html">KVDBTable</a> *run_table = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet() const">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetDataBase" title="KVDataBase* KVDataSet::GetDataBase(Option_t* opt = &quot;&quot;)">GetDataBase</a>()-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table) const">GetTable</a>(<span class="string">"Runs"</span>);
+   <a href="../KVDBTable.html">KVDBTable</a> *run_table = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetDataBase" title="KVDataBase* KVDataSet::GetDataBase(Option_t* opt=&quot;&quot;)">GetDataBase</a>()-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"Runs"</span>);
    <span class="keyword">while</span> ((objs = (<a href="../DMSFile_t.html">DMSFile_t</a> *) next())) {     <span class="comment">// loop over all entries in directory</span>
 
       <a href="../ListOfTypes.html#Int_t">Int_t</a> run_num;
       <span class="comment">//is this the correct name of a run in the repository ?</span>
-      <span class="keyword">if</span> ((run_num = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:IsRunFileName" title="Int_t KVAvailableRunsFile::IsRunFileName(const Char_t* filename)">IsRunFileName</a>(objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()))) {
+      <span class="keyword">if</span> ((run_num = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:IsRunFileName" title="Int_t KVAvailableRunsFile::IsRunFileName(const Char_t* filename)">IsRunFileName</a>(objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()))) {
 
          <a href="../KVDBRun.html">KVDBRun</a> *run = (<a href="../KVDBRun.html">KVDBRun</a> *) run_table-&gt;GetRecord(run_num);
          <span class="keyword">if</span> (run) {
@@ -120,16 +120,16 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
             <span class="comment">//check in case it is possible to extract a date from the name of the file</span>
             <span class="comment">//the file may be much older than its DMS modtime (=date of DMS import)</span>
             <a href="../KVDatime.html">KVDatime</a> filedate;
-            <span class="keyword">if</span>(!<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:ExtractDateFromFileName" title="Bool_t KVAvailableRunsFile::ExtractDateFromFileName(const Char_t* name, KVDatime&amp; date)">ExtractDateFromFileName</a>(objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), filedate))
+            <span class="keyword">if</span>(!<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:ExtractDateFromFileName" title="Bool_t KVAvailableRunsFile::ExtractDateFromFileName(const Char_t* name,KVDatime&amp; date)">ExtractDateFromFileName</a>(objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), filedate))
                filedate=objs-&gt;GetModTime();
 
             <span class="keyword">if</span>(!no_existing_file){
                <span class="comment">// was there already an entry for exactly the same file in the previous file ?</span>
                <a href="../ListOfTypes.html#Int_t">Int_t</a> occIdx=0;
-               <a href="../KVNameValueList.html">KVNameValueList</a>* prevEntry = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:RunHasFileWithDateAndName" title="KVNameValueList* KVAvailableRunsFile::RunHasFileWithDateAndName(Int_t run, const Char_t* filename, TDatime modtime, Int_t&amp; OccNum)">RunHasFileWithDateAndName</a>(run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>(), objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), filedate, occIdx);
+               <a href="../KVNameValueList.html">KVNameValueList</a>* prevEntry = <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:RunHasFileWithDateAndName" title="KVNameValueList* KVAvailableRunsFile::RunHasFileWithDateAndName(Int_t run,const Char_t* filename,TDatime modtime,Int_t&amp; OccNum)">RunHasFileWithDateAndName</a>(run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>(), objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), filedate, occIdx);
                <span class="keyword">if</span>(prevEntry){
                   <span class="comment">// copy infos of previous entry</span>
-                  tmp_file &lt;&lt; run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>() &lt;&lt; <span class="string">'|'</span> &lt;&lt; filedate.AsSQLString() &lt;&lt; <span class="string">'|'</span> &lt;&lt; objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+                  tmp_file &lt;&lt; run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() &lt;&lt; <span class="string">'|'</span> &lt;&lt; filedate.AsSQLString() &lt;&lt; <span class="string">'|'</span> &lt;&lt; objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
                   <span class="keyword">if</span>(prevEntry-&gt;HasParameter(Form(<span class="string">"KVVersion[%d]"</span>,occIdx))){
                      tmp_file &lt;&lt;<span class="string">"|"</span>&lt;&lt; prevEntry-&gt;GetStringValue(Form(<span class="string">"KVVersion[%d]"</span>,occIdx)) &lt;&lt;<span class="string">"|"</span>&lt;&lt;prevEntry-&gt;GetStringValue(Form(<span class="string">"Username[%d]"</span>,occIdx));
                   }
@@ -138,23 +138,23 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
                <span class="keyword">else</span>
                {
                   <span class="comment">// New Entry - write in temporary runlist file '[run number]|[date of modification]|[name of file]</span>
-                  tmp_file &lt;&lt; run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>() &lt;&lt; <span class="string">'|'</span> &lt;&lt; filedate.AsSQLString() &lt;&lt; <span class="string">'|'</span> &lt;&lt; objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl;
+                  tmp_file &lt;&lt; run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() &lt;&lt; <span class="string">'|'</span> &lt;&lt; filedate.AsSQLString() &lt;&lt; <span class="string">'|'</span> &lt;&lt; objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
                }
             }
             <span class="keyword">else</span> <span class="comment">// no previous existing file</span>
             {
                <span class="comment">// New Entry in a new file - write in temporary runlist file '[run number]|[date of modification]|[name of file]</span>
-               tmp_file &lt;&lt; run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>() &lt;&lt; <span class="string">'|'</span> &lt;&lt; filedate.AsSQLString() &lt;&lt; <span class="string">'|'</span> &lt;&lt; objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl;
+               tmp_file &lt;&lt; run-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() &lt;&lt; <span class="string">'|'</span> &lt;&lt; filedate.AsSQLString() &lt;&lt; <span class="string">'|'</span> &lt;&lt; objs-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
             }
          }
       }
 
       ndone++;
       <span class="keyword">if</span> (!(ndone % n5pc))
-         cout &lt;&lt; <span class="string">'&gt;'</span> &lt;&lt; flush;
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">'&gt;'</span> &lt;&lt; flush;
    }
 
-   cout &lt;&lt; <span class="string">" DONE"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" DONE"</span> &lt;&lt; endl;
    <span class="keyword">delete</span> dir_list;
    <span class="comment">//close temp file</span>
    tmp_file.close();
@@ -185,7 +185,7 @@ ClassImp(<a href="../DMSAvailableRunsFile.html">DMSAvailableRunsFile</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-07-24 18:06 </em><em>&raquo; Last generated: 2015-07-24 18:06</em><br />
+<em>&raquo; Last changed: 2015-08-11 11:44 </em><em>&raquo; Last generated: 2015-08-11 11:44</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>
