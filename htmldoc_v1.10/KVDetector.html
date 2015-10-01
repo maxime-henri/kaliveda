@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:32 2015            -->
+<!--   Date: Thu Oct  1 14:33:47 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <a name="TopOfPage"></a>
 <script type="text/javascript">WriteFollowPageBox('class KVDetector','libKVMultiDetgeometry','KVDetector.h');</script>
 <div id="toplinks">
@@ -52,7 +52,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/00</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/03</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_GEOMETRY_Index.html">GEOMETRY</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVDetector</a>
@@ -71,10 +71,10 @@ is set as <span class="string">"active"</span> (by default it is the last added 
 
       <a href="./KVDetector.html">KVDetector</a> chio(<span class="string">"Myl"</span>, 2.5*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);                       //first layer - 2.5 micron mylar window
       <a href="./KVMaterial.html">KVMaterial</a> *gas = new <a href="./KVMaterial.html">KVMaterial</a>(<span class="string">"C3F8"</span>, 5.*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:cm" title="const long double KVUnits::cm">cm</a>, 50.0*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:mbar" title="const long double KVUnits::mbar">mbar</a>);
-      chio.<a href="./KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial*)">AddAbsorber</a>(gas);                                         //second layer - 5cm of C3F8 gas at 50mbar pressure and 19 deg. C
-      chio.<a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial*) or overloads">SetActiveLayer</a>(gas);                                      //make gas layer <span class="string">"active"</span>
+      chio.<a href="./KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(gas);                                         //second layer - 5cm of C3F8 gas at 50mbar pressure and 19 deg. C
+      chio.<a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a>(gas);                                      //make gas layer <span class="string">"active"</span>
       <a href="./KVMaterial.html">KVMaterial</a> *win = new <a href="./KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>,2.5*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);       //exit window
-      chio.<a href="./KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial*)">AddAbsorber</a>(win);
+      chio.<a href="./KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(win);
 
 A detector is created either with the constructor taking the material type as argument:
       <a href="./KVDetector.html">KVDetector</a> det(<span class="string">"Si"</span>);
@@ -87,16 +87,16 @@ or using <a href="./KVDetector.html#KVDetector:SetMaterial" title="void KVDetect
 <!-- TDocHtmlDirective end --><pre>
 
 Two methods are available: one simply calculates the energy lost by the particle
-in the detector, but does not modify either the particle or the detector (<a href="./KVDetector.html#KVDetector:GetELostByParticle" title="Double_t KVDetector::GetELostByParticle(KVNucleus*, TVector3* norm = 0)">GetELostByParticle</a>);
+in the detector, but does not modify either the particle or the detector (<a href="./KVDetector.html#KVDetector:GetELostByParticle" title="Double_t KVDetector::GetELostByParticle(KVNucleus* ,TVector3* norm=0)">GetELostByParticle</a>);
 the other simulates the passage of the particle through the detector, the particle's energy
 is reduced by the amount lost in the detector's absorbers and the total energy lost in the
 detector is increased, e.g.:
       <a href="./KVNucleus.html">KVNucleus</a> alpha(2,4);           //an alpha-particle
       alpha.<a href="./KVDetector.html#KVDetector:SetEnergy" title="void KVDetector::SetEnergy(Double_t e)">SetEnergy</a>(100);           //with 100MeV kinetic energy
-      det.<a href="./KVDetector.html#KVDetector:DetectParticle" title="void KVDetector::DetectParticle(KVNucleus*, TVector3* norm = 0)">DetectParticle</a>(&amp;alpha);     //simulate passage of particle in the detector/target
+      det.<a href="./KVDetector.html#KVDetector:DetectParticle" title="void KVDetector::DetectParticle(KVNucleus* ,TVector3* norm=0)">DetectParticle</a>(&amp;alpha);     //simulate passage of particle in the detector/target
       det.<a href="./KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();                        //energy lost by particle in detector/target
       alpha.<a href="./KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();                      //residual energy of particle
-      det.<a href="./KVDetector.html#KVDetector:Clear" title="void KVDetector::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();                            //reset detector ready for a new detection
+      det.<a href="./KVDetector.html#KVDetector:Clear" title="void KVDetector::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();                            //reset detector ready for a new detection
 
 
 
@@ -106,24 +106,24 @@ detector is increased, e.g.:
  The following methods inherited from <a href="./KVPosition.html">KVPosition</a> are here used to refer to the
  ACTIVE LAYER of the detector:
 
-  TVector3 <a href="./KVPosition.html#KVPosition:GetRandomDirection" title="TVector3 KVPosition::GetRandomDirection(Option_t* t = &quot;isotropic&quot;)">GetRandomDirection</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a> * t = <span class="string">"isotropic"</span>);
-  <a href="./ListOfTypes.html#void">void</a> <a href="./KVPosition.html#KVPosition:GetRandomAngles" title="void KVPosition::GetRandomAngles(Double_t&amp; th, Double_t&amp; ph, Option_t* t = &quot;isotropic&quot;)">GetRandomAngles</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> &amp;th, <a href="./ListOfTypes.html#Double_t">Double_t</a> &amp;ph, <a href="./ListOfTypes.html#Option_t">Option_t</a> * t = <span class="string">"isotropic"</span>);
+  TVector3 <a href="./KVPosition.html#KVPosition:GetRandomDirection" title="TVector3 KVPosition::GetRandomDirection(Option_t* t=&quot;isotropic&quot;)">GetRandomDirection</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a> * t = <span class="string">"isotropic"</span>);
+  <a href="./ListOfTypes.html#void">void</a> <a href="./KVPosition.html#KVPosition:GetRandomAngles" title="void KVPosition::GetRandomAngles(Double_t&amp; th,Double_t&amp; ph,Option_t* t=&quot;isotropic&quot;)">GetRandomAngles</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> &amp;th, <a href="./ListOfTypes.html#Double_t">Double_t</a> &amp;ph, <a href="./ListOfTypes.html#Option_t">Option_t</a> * t = <span class="string">"isotropic"</span>);
   TVector3 <a href="./KVPosition.html#KVPosition:GetDirection" title="TVector3 KVPosition::GetDirection()">GetDirection</a>();
-  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta() const">GetTheta</a>() const;
-  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetSinTheta" title="Double_t KVPosition::GetSinTheta() const">GetSinTheta</a>() const;
-  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetCosTheta" title="Double_t KVPosition::GetCosTheta() const">GetCosTheta</a>() const;
+  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>() const;
+  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetSinTheta" title="Double_t KVPosition::GetSinTheta()">GetSinTheta</a>() const;
+  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetCosTheta" title="Double_t KVPosition::GetCosTheta()">GetCosTheta</a>() const;
   <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>();
-  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance() const">GetDistance</a>() const;
+  <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>() const;
   <a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./KVPosition.html#KVPosition:GetSolidAngle" title="Double_t KVPosition::GetSolidAngle()">GetSolidAngle</a>(<a href="./ListOfTypes.html#void">void</a>);
-  TVector3 <a href="./KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint() const">GetRandomPoint</a>() const;
-  TVector3 <a href="./KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre() const">GetCentre</a>() const;
+  TVector3 <a href="./KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>() const;
+  TVector3 <a href="./KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>() const;
 
  If you want the equivalent informations or functions for the ENTRANCE WINDOW
  of the detector, use
 
-  TVector3 <a href="./KVDetector.html#KVDetector:GetRandomPointOnEntranceWindow" title="TVector3 KVDetector::GetRandomPointOnEntranceWindow() const">GetRandomPointOnEntranceWindow</a>() const;
-  TVector3 <a href="./KVDetector.html#KVDetector:GetCentreOfEntranceWindow" title="TVector3 KVDetector::GetCentreOfEntranceWindow() const">GetCentreOfEntranceWindow</a>() const;
-  const <a href="./KVPosition.html">KVPosition</a>&amp; <a href="./KVDetector.html#KVDetector:GetEntranceWindow" title="const KVPosition&amp; KVDetector::GetEntranceWindow() const">GetEntranceWindow</a>() const;
+  TVector3 <a href="./KVDetector.html#KVDetector:GetRandomPointOnEntranceWindow" title="TVector3 KVDetector::GetRandomPointOnEntranceWindow()">GetRandomPointOnEntranceWindow</a>() const;
+  TVector3 <a href="./KVDetector.html#KVDetector:GetCentreOfEntranceWindow" title="TVector3 KVDetector::GetCentreOfEntranceWindow()">GetCentreOfEntranceWindow</a>() const;
+  const <a href="./KVPosition.html">KVPosition</a>&amp; <a href="./KVDetector.html#KVDetector:GetEntranceWindow" title="const KVPosition&amp; KVDetector::GetEntranceWindow()">GetEntranceWindow</a>() const;
 </pre></div>
 </div></div>
 
@@ -131,51 +131,54 @@ detector is increased, e.g.:
 <h2><a id="KVDetector:Function_Members"></a>Function Members (Methods)</h2>
 <div class="access" id="funcpubl"><b>public:</b>
 <table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDetector:KVDetector">KVDetector</a>()</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDetector:KVDetector@2">KVDetector</a>(<span class="keyword">const</span> <a href="./KVDetector.html">KVDetector</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDetector:KVDetector@1">KVDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Float_t">Float_t</a> thick = 0.0)</td></tr>
 <tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVDetector:_KVDetector">~KVDetector</a>()</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddAbsorber">AddAbsorber</a>(<a href="./KVMaterial.html">KVMaterial</a>*)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddACQParam">AddACQParam</a>(<a href="./KVACQParam.html">KVACQParam</a>*)</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:AddCalibrator">AddCalibrator</a>(<a href="./KVCalibrator.html">KVCalibrator</a>* cal)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddHit">AddHit</a>(<a href="./KVNucleus.html">KVNucleus</a>* part)</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddIDTelescope">AddIDTelescope</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* idt)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddIDTelescope">AddIDTelescope</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* idt)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddParentStructure">AddParentStructure</a>(<a href="./KVGeoStrucElement.html">KVGeoStrucElement</a>* elem)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:AddToGeometry">AddToGeometry</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:AreEqual"><span class="baseclass">KVBase::</span>AreEqual</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Long64_t">Long64_t</a> maxdif = 1)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:ArrContainsValue"><span class="baseclass">KVBase::</span>ArrContainsValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n, <a href="./ListOfTypes.html#Int_t">Int_t</a>* arr, <a href="./ListOfTypes.html#Int_t">Int_t</a> val)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:BackupFileWithDate"><span class="baseclass">KVBase::</span>BackupFileWithDate</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path)</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:BelongsToIdentifiedParticle">BelongsToIdentifiedParticle</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:BelongsToUnidentifiedParticle">BelongsToUnidentifiedParticle</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
 <tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVDetector:Class">Class</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:Clear">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:ClearHits">ClearHits</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:Copy">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:Copy">Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:DeduceACQParameters">DeduceACQParameters</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> = -1)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:DetectParticle">DetectParticle</a>(<a href="./KVNucleus.html">KVNucleus</a>*, TVector3* norm = 0)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="func"><td class="funcret">virtual TGraph*</td><td class="funcname"><a class="funcname" href="#KVDetector:DrawPunchThroughEnergyVsZ">DrawPunchThroughEnergyVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="KVNucleus::(anonymous) KVNucleus::kBetaMass">kBetaMass</a>)</td></tr>
-<tr class="func"><td class="funcret">virtual TGraph*</td><td class="funcname"><a class="funcname" href="#KVDetector:DrawPunchThroughEsurAVsZ">DrawPunchThroughEsurAVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="KVNucleus::(anonymous) KVNucleus::kBetaMass">kBetaMass</a>)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual TGraph*</td><td class="funcname"><a class="funcname" href="#KVDetector:DrawPunchThroughEnergyVsZ">DrawPunchThroughEnergyVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="const enum KVNucleus:: KVNucleus::kBetaMass">kBetaMass</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual TGraph*</td><td class="funcname"><a class="funcname" href="#KVDetector:DrawPunchThroughEsurAVsZ">DrawPunchThroughEsurAVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="const enum KVNucleus:: KVNucleus::kBetaMass">kBetaMass</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindClassSourceFiles"><span class="baseclass">KVBase::</span>FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="./KVString.html">KVString</a>&amp; imp_file, <a href="./KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir_name = <span class="string">"."</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindExecutable"><span class="baseclass">KVBase::</span>FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindFile"><span class="baseclass">KVBase::</span>FindFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* search, TString&amp; wfil)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:FindZmin">FindZmin</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ELOSS = -1., <a href="./ListOfTypes.html#Char_t">Char_t</a> mass_formula = -1)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:Fired">Fired</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"any"</span>)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:FiredP">FiredP</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"any"</span>)</td></tr>
@@ -211,8 +214,8 @@ detector is increased, e.g.:
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetDepthInTelescope">GetDepthInTelescope</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetDirection"><span class="baseclass">KVPosition::</span>GetDirection</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetDistance"><span class="baseclass">KVPosition::</span>GetDistance</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetEffectiveAreaDensity"><span class="baseclass">KVMaterial::</span>GetEffectiveAreaDensity</a>(TVector3&amp; norm, TVector3&amp; direction)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetEffectiveThickness"><span class="baseclass">KVMaterial::</span>GetEffectiveThickness</a>(TVector3&amp; norm, TVector3&amp; direction)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetEIncOfMaxDeltaE">GetEIncOfMaxDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</td></tr>
@@ -227,23 +230,24 @@ detector is increased, e.g.:
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetEntranceWindowSurfaceArea">GetEntranceWindowSurfaceArea</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetERes">GetERes</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Einc)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetEResAfterDetector">GetEResAfterDetector</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetEResFromDeltaE"><span class="baseclass">KVMaterial::</span>GetEResFromDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> dE = -1., <span class="keyword">enum</span> SolType type = kEmax)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetEResFromDeltaE"><span class="baseclass">KVMaterial::</span>GetEResFromDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> dE = -1.0, <a href="./KVMaterial.html">KVMaterial</a>::SolType type = kEmax)</td></tr>
 <tr class="func"><td class="funcret">virtual TF1*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetEResFunction">GetEResFunction</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetETCDIRFilePath"><span class="baseclass">KVBase::</span>GetETCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetFiredACQParameterListFormatString">GetFiredACQParameterListFormatString</a>() <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Binary8_t">Binary8_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetFiredBitmask">GetFiredBitmask</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./Binary8_t.html">Binary8_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetFiredBitmask">GetFiredBitmask</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetGain">GetGain</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual TGeoMedium*</td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetGeoMedium"><span class="baseclass">KVMaterial::</span>GetGeoMedium</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret">virtual TGeoVolume*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetGeoVolume">GetGeoVolume</a>()</td></tr>
 <tr class="func"><td class="funcret"><a href="./KVGroup.html">KVGroup</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetGroup">GetGroup</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetGroupNumber">GetGroupNumber</a>()</td></tr>
 <tr class="func"><td class="funcret"><a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetHits">GetHits</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetIDTelescopes">GetIDTelescopes</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetINCDIRFilePath"><span class="baseclass">KVBase::</span>GetINCDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
-<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetIncidentEnergy">GetIncidentEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> delta_e = -1., <span class="keyword">enum</span> SolType type = kEmax)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetIncidentEnergy">GetIncidentEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> delta_e = -1.0, <a href="./KVMaterial.html">KVMaterial</a>::SolType type = kEmax)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetIncidentEnergyFromERes">GetIncidentEnergyFromERes</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Eres)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDate"><span class="baseclass">KVBase::</span>GetKVBuildDate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildDir"><span class="baseclass">KVBase::</span>GetKVBuildDir</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildType"><span class="baseclass">KVBase::</span>GetKVBuildType</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVBuildUser"><span class="baseclass">KVBase::</span>GetKVBuildUser</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetKVSourceDir"><span class="baseclass">KVBase::</span>GetKVSourceDir</a>()</td></tr>
@@ -257,16 +261,16 @@ detector is increased, e.g.:
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetMass"><span class="baseclass">KVMaterial::</span>GetMass</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetMaterialName">GetMaterialName</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetMaxDeltaE">GetMaxDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetNHits">GetNHits</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./KVGeoDetectorNode.html">KVGeoDetectorNode</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetNode">GetNode</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">const</span> TVector3&amp;</td><td class="funcname"><a class="funcname" href="#KVDetector:GetNormal">GetNormal</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumber"><span class="baseclass">KVBase::</span>GetNumber</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetNumberOfObjects"><span class="baseclass">KVBase::</span>GetNumberOfObjects</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetObject"><span class="baseclass">KVBase::</span>GetObject</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetObject"><span class="baseclass">KVBase::</span>GetObject</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetOption"><span class="baseclass">TObject::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./KVGeoStrucElement.html">KVGeoStrucElement</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetParentStructure">GetParentStructure</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetParticleEIncFromERes">GetParticleEIncFromERes</a>(<a href="./KVNucleus.html">KVNucleus</a>*, TVector3* norm = 0)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetPedestal">GetPedestal</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
@@ -291,32 +295,34 @@ detector is increased, e.g.:
 <tr class="func"><td class="funcret">TList*</td><td class="funcname"><a class="funcname" href="#KVDetector:GetTelescopesForIdentification">GetTelescopesForIdentification</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetTemperature"><span class="baseclass">KVMaterial::</span>GetTemperature</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTempFileName"><span class="baseclass">KVBase::</span>GetTempFileName</a>(TString&amp; base)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetTEMPLATEDIRFilePath"><span class="baseclass">KVBase::</span>GetTEMPLATEDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetTheta"><span class="baseclass">KVPosition::</span>GetTheta</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetThetaMax"><span class="baseclass">KVPosition::</span>GetThetaMax</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetThetaMin"><span class="baseclass">KVPosition::</span>GetThetaMin</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetThickness"><span class="baseclass">KVMaterial::</span>GetThickness</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetTitle"><span class="baseclass">TNamed::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetTotalDeltaE">GetTotalDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Einc)</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:GetTotalThicknessInCM">GetTotalThicknessInCM</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetType"><span class="baseclass">KVBase::</span>GetType</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:GetVerticesInOwnFrame">GetVerticesInOwnFrame</a>(TVector3*, <a href="./ListOfTypes.html#Double_t">Double_t</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a>)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetWidthsFromDimension"><span class="baseclass">KVPosition::</span>GetWidthsFromDimension</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> lin_dim)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetWORKDIRFilePath"><span class="baseclass">KVBase::</span>GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:GetZ"><span class="baseclass">KVMaterial::</span>GetZ</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitBranch"><span class="baseclass">KVBase::</span>gitBranch</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:HasLabel"><span class="baseclass">KVBase::</span>HasLabel</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:IncrementIdentifiedParticles">IncrementIdentifiedParticles</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n = 1)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:IncrementUnidentifiedParticles">IncrementUnidentifiedParticles</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> n = 1)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:init">init</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:InitEnvironment"><span class="baseclass">KVBase::</span>InitEnvironment</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
 <tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVDetector:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:IsAlignedWith"><span class="baseclass">KVPosition::</span>IsAlignedWith</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:IsAnalysed">IsAnalysed</a>()</td></tr>
@@ -324,56 +330,53 @@ detector is increased, e.g.:
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:IsCalibrated">IsCalibrated</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsCalled"><span class="baseclass">KVBase::</span>IsCalled</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:IsDetecting">IsDetecting</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:IsGas"><span class="baseclass">KVMaterial::</span>IsGas</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:IsInPhiRange"><span class="baseclass">KVPosition::</span>IsInPhiRange</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:IsInPolarRange"><span class="baseclass">KVPosition::</span>IsInPolarRange</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:IsIsotopic"><span class="baseclass">KVMaterial::</span>IsIsotopic</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:IsNat"><span class="baseclass">KVMaterial::</span>IsNat</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:IsOK">IsOK</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:IsOverlappingWith"><span class="baseclass">KVPosition::</span>IsOverlappingWith</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:IsPresent">IsPresent</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:IsSimMode">IsSimMode</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:IsSmallerThan"><span class="baseclass">KVPosition::</span>IsSmallerThan</a>(<a href="./KVPosition.html">KVPosition</a>* pos)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:IsSortable"><span class="baseclass">TNamed::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:IsType"><span class="baseclass">KVBase::</span>IsType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* typ) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDetector:KVDetector">KVDetector</a>()</td></tr>
-<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDetector:KVDetector@2">KVDetector</a>(<span class="keyword">const</span> <a href="./KVDetector.html">KVDetector</a>&amp;)</td></tr>
-<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVDetector:KVDetector@1">KVDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Float_t">Float_t</a> thick = 0.)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">static <a href="./KVDetector.html">KVDetector</a>*</td><td class="funcname"><a class="funcname" href="#KVDetector:MakeDetector">MakeDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#Float_t">Float_t</a> thick)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenTempFile"><span class="baseclass">KVBase::</span>OpenTempFile</a>(TString&amp; base, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; fp)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
-<tr class="func"><td class="funcret"><a href="./KVDetector.html">KVDetector</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVDetector:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVDetector.html">KVDetector</a>&amp;)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./KVMaterial.html">KVMaterial</a>&amp;</td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:operator_"><span class="baseclass">KVMaterial::</span>operator=</a>(<span class="keyword">const</span> <a href="./KVMaterial.html">KVMaterial</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:Print">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:ReadDefinitionFromFile">ReadDefinitionFromFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:RemoveCalibrators">RemoveCalibrators</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:RemoveParentStructure">RemoveParentStructure</a>(<a href="./KVGeoStrucElement.html">KVGeoStrucElement</a>* elem)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:Reset">Reset</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:ResetAlignedDetectors">ResetAlignedDetectors</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> direction = 1)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchAndOpenKVFile@1"><span class="baseclass">KVBase::</span>SearchAndOpenKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>, <a href="./KVLockfile.html">KVLockfile</a>* locks = 0)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchKVFile"><span class="baseclass">KVBase::</span>SearchKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, TString&amp; fullpath, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>)</td></tr>
@@ -388,13 +391,13 @@ detector is increased, e.g.:
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetAzimuthalAngle"><span class="baseclass">KVPosition::</span>SetAzimuthalAngle</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ph)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetAzimuthalMinMax"><span class="baseclass">KVPosition::</span>SetAzimuthalMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetAzimuthalWidth"><span class="baseclass">KVPosition::</span>SetAzimuthalWidth</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> aw)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetCalibrators">SetCalibrators</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetDetecting">SetDetecting</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> yes = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetDistance"><span class="baseclass">KVPosition::</span>SetDistance</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> d)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetEnergy">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetEnergyLoss">SetEnergyLoss</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetEntranceWindowMatrix">SetEntranceWindowMatrix</a>(<span class="keyword">const</span> TGeoHMatrix*)</td></tr>
@@ -405,10 +408,10 @@ detector is increased, e.g.:
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetLabel"><span class="baseclass">KVBase::</span>SetLabel</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* lab)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:SetMass"><span class="baseclass">KVMaterial::</span>SetMass</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetMaterial">SetMaterial</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetName"><span class="baseclass">TNamed::</span>SetName</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetNameTitle"><span class="baseclass">TNamed::</span>SetNameTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetNumber"><span class="baseclass">KVBase::</span>SetNumber</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> num)</td></tr>
-<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetPedestal">SetPedestal</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./ListOfTypes.html#Float_t">Float_t</a>)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetPhi"><span class="baseclass">KVPosition::</span>SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> p)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetPhiMinMax"><span class="baseclass">KVPosition::</span>SetPhiMinMax</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> min, <a href="./ListOfTypes.html#Double_t">Double_t</a> max)</td></tr>
@@ -422,29 +425,29 @@ detector is increased, e.g.:
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:SetTemperature"><span class="baseclass">KVMaterial::</span>SetTemperature</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:SetTheta"><span class="baseclass">KVPosition::</span>SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> t)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:SetThickness"><span class="baseclass">KVMaterial::</span>SetThickness</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> thick)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SetType"><span class="baseclass">KVBase::</span>SetType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* str)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:ShowMembers">ShowMembers</a>(TMemberInspector&amp; insp) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TNamed.html#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:WorkingDirectory"><span class="baseclass">KVBase::</span>WorkingDirectory</a>()</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
-<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
 
 </table></div>
 <div class="access" id="funcprot"><b>protected:</b>
 <table class="func" id="tabfuncprot" cellspacing="0">
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, <a href="./ListOfTypes.html#va_list">va_list</a> va) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:ELossActive">ELossActive</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:EResDet">EResDet</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="http://root.cern.ch/root/html/TObject.html#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVDetector:RangeDet">RangeDet</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
 
 </table></div>
@@ -461,26 +464,35 @@ detector is increased, e.g.:
 
 <div id="datamembers">
 <h2><a name="KVDetector:Data_Members"></a>Data Members</h2>
-<div class="access" id="datapubl"><b>public:</b>
-<table class="data" id="tabdatapubl" cellspacing="0">
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kBitMask"><span class="baseclass">TObject::</span>kBitMask</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCanDelete"><span class="baseclass">TObject::</span>kCanDelete</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kCannotPick"><span class="baseclass">TObject::</span>kCannotPick</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="./KVMaterial.html">KVMaterial</a>::SolType</td><td class="dataname"><a href="./KVMaterial.html#KVMaterial:kEmax"><span class="baseclass">KVMaterial::</span>kEmax</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="./KVMaterial.html">KVMaterial</a>::SolType</td><td class="dataname"><a href="./KVMaterial.html#KVMaterial:kEmin"><span class="baseclass">KVMaterial::</span>kEmin</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kHasUUID"><span class="baseclass">TObject::</span>kHasUUID</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kInvalidObject"><span class="baseclass">TObject::</span>kInvalidObject</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="./KVBase.html">KVBase</a>::EKaliVedaBits</td><td class="dataname"><a href="./KVBase.html#KVBase:kIsKaliVedaObject"><span class="baseclass">KVBase::</span>kIsKaliVedaObject</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsOnHeap"><span class="baseclass">TObject::</span>kIsOnHeap</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kIsReferenced"><span class="baseclass">TObject::</span>kIsReferenced</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kMustCleanup"><span class="baseclass">TObject::</span>kMustCleanup</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNoContextMenu"><span class="baseclass">TObject::</span>kNoContextMenu</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kNotDeleted"><span class="baseclass">TObject::</span>kNotDeleted</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::EStatusBits</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kObjInCanvas"><span class="baseclass">TObject::</span>kObjInCanvas</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kOverwrite"><span class="baseclass">TObject::</span>kOverwrite</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kSingleKey"><span class="baseclass">TObject::</span>kSingleKey</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kWriteDelete"><span class="baseclass">TObject::</span>kWriteDelete</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">static <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>::(anonymous)</td><td class="dataname"><a href="http://root.cern.ch/root/html/TObject.html#TObject:kZombie"><span class="baseclass">TObject::</span>kZombie</a></td><td></td></tr>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="data"><td class="datatype">enum  { </td><td class="dataname"><a name="KVDetector:kIsAnalysed"></a>kIsAnalysed</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVDetector:kActiveSet"></a>kActiveSet</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVDetector:kUnidentifiedParticle"></a>kUnidentifiedParticle</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVDetector:kIdentifiedParticle"></a>kIdentifiedParticle</td><td></td></tr>
+<tr class="data"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">KVMaterial::</span>SolType { </td><td class="dataname"><a href="./KVMaterial.html#KVMaterial:kEmax">kEmax</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="./KVMaterial.html#KVMaterial:kEmin">kEmin</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">KVBase::</span>EKaliVedaBits { </td><td class="dataname"><a href="./KVBase.html#KVBase:kIsKaliVedaObject">kIsKaliVedaObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
 
 </table></div>
 <div class="access" id="dataprot"><b>protected:</b>
@@ -497,17 +509,18 @@ detector is increased, e.g.:
 <tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KVDetector:fEResF"></a>fEResF</td><td class="datadesc">! parametric function Eres residual energy after all layers of detector</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVDetector:fEResforEinc"></a>fEResforEinc</td><td class="datadesc">! used by GetIncidentEnergy &amp; GetCorrectedEnergy</td></tr>
 <tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDetector:fFName"></a>fFName</td><td class="datadesc">!dynamically generated full name of detector</td></tr>
-<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Binary8_t">Binary8_t</a></td><td class="dataname"><a name="KVDetector:fFiredMask"></a>fFiredMask</td><td class="datadesc">bitmask used by Fired to determine which parameters to take into account</td></tr>
+<tr class="data"><td class="datatype"><a href="./Binary8_t.html">Binary8_t</a></td><td class="dataname"><a name="KVDetector:fFiredMask"></a>fFiredMask</td><td class="datadesc">bitmask used by Fired to determine which parameters to take into account</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVDetector:fGain"></a>fGain</td><td class="datadesc">gain of amplifier</td></tr>
 <tr class="datainh"><td class="datatype">static <a href="./KVIonRangeTable.html">KVIonRangeTable</a>*</td><td class="dataname"><a href="./KVMaterial.html#KVMaterial:fIonRangeTable"><span class="baseclass">KVMaterial::</span>fIonRangeTable</a></td><td class="datadesc">pointer to class used to calculate charged particle ranges &amp; energy losses</td></tr>
-<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="./KVBase.html#KVBase:fLabel"><span class="baseclass">KVBase::</span>fLabel</a></td><td class="datadesc">label for the object</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
 <tr class="datainh"><td class="datatype">TVector3</td><td class="dataname"><a href="./KVMaterial.html#KVMaterial:fNormToMat"><span class="baseclass">KVMaterial::</span>fNormToMat</a></td><td class="datadesc">!dummy vector for calculating normal to absorber</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVDetector:fParticles"></a>fParticles</td><td class="datadesc">!list of particles hitting detector in an event</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDetector:fPresent"></a>fPresent</td><td class="datadesc">! =kTRUE if detector is present, =kFALSE if it has been removed</td></tr>
 <tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KVDetector:fRangeF"></a>fRangeF</td><td class="datadesc">! parametric function range of particles in detector</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="dataname"><a name="KVDetector:fSegment"></a>fSegment</td><td class="datadesc">used in particle reconstruction</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDetector:fSimMode"></a>fSimMode</td><td class="datadesc">! =kTRUE when using to simulate detector response, =kFALSE when analysing data</td></tr>
-<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVDetector:fTotThickness"></a>fTotThickness</td><td class="datadesc">! used to store value calculated by GetTotalThicknessInCM</td></tr>
 
 </table></div>
@@ -524,10 +537,6 @@ detector is increased, e.g.:
 <tr class="data"><td class="datatype"><a href="./KVGeoDetectorNode.html">KVGeoDetectorNode</a></td><td class="dataname"><a name="KVDetector:fNode"></a>fNode</td><td class="datadesc">positioning information relative to other detectors</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVUniqueNameList.html">KVUniqueNameList</a></td><td class="dataname"><a name="KVDetector:fParentStrucList"></a>fParentStrucList</td><td class="datadesc">list of geometry structures which directly contain this detector</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVDetector:fUnidentP"></a>fUnidentP</td><td class="datadesc">! temporary counters, determine state of identified/unidentified particle flags</td></tr>
-<tr class="data"><td class="datatype">static <a href="./KVDetector.html">KVDetector</a>::(anonymous)</td><td class="dataname"><a name="KVDetector:kActiveSet"></a>kActiveSet</td><td></td></tr>
-<tr class="data"><td class="datatype">static <a href="./KVDetector.html">KVDetector</a>::(anonymous)</td><td class="dataname"><a name="KVDetector:kIdentifiedParticle"></a>kIdentifiedParticle</td><td></td></tr>
-<tr class="data"><td class="datatype">static <a href="./KVDetector.html">KVDetector</a>::(anonymous)</td><td class="dataname"><a name="KVDetector:kIsAnalysed"></a>kIsAnalysed</td><td></td></tr>
-<tr class="data"><td class="datatype">static <a href="./KVDetector.html">KVDetector</a>::(anonymous)</td><td class="dataname"><a name="KVDetector:kUnidentifiedParticle"></a>kUnidentifiedParticle</td><td></td></tr>
 
 </table></div>
 </div>
@@ -542,12 +551,12 @@ detector is increased, e.g.:
 <area shape="rect" id="node10" href="./KVCsI.html" title="KVCsI" alt="" coords="601,26,666,38"/>
 <area shape="rect" id="node11" href="./KVPhoswich.html" title="KVPhoswich" alt="" coords="601,38,666,50"/>
 <area shape="rect" id="node12" href="./KVSilicon.html" title="KVSilicon" alt="" coords="601,50,666,63"/>
-<area shape="rect" id="node13" href="./KVSiB.html" title="KVSiB" alt="" coords="700,38,765,50"/>
-<area shape="rect" id="node14" href="./KVCsI_e475s.html" title="KVCsI_e475s" alt="" coords="700,26,765,38"/>
-<area shape="rect" id="node15" href="./KVSiLi.html" title="KVSiLi" alt="" coords="700,50,765,63"/>
-<area shape="rect" id="node16" href="./KVChIo_e475s.html" title="KVChIo_e475s" alt="" coords="700,1,765,13"/>
-<area shape="rect" id="node17" href="./KVBIC.html" title="KVBIC" alt="" coords="700,13,765,25"/>
-<area shape="rect" id="node18" href="./KVSi75.html" title="KVSi75" alt="" coords="700,63,765,75"/>
+<area shape="rect" id="node13" href="./KVBIC.html" title="KVBIC" alt="" coords="700,1,765,13"/>
+<area shape="rect" id="node14" href="./KVChIo_e475s.html" title="KVChIo_e475s" alt="" coords="700,13,765,25"/>
+<area shape="rect" id="node15" href="./KVCsI_e475s.html" title="KVCsI_e475s" alt="" coords="700,26,765,38"/>
+<area shape="rect" id="node16" href="./KVSi75.html" title="KVSi75" alt="" coords="700,38,765,50"/>
+<area shape="rect" id="node17" href="./KVSiB.html" title="KVSiB" alt="" coords="700,50,765,63"/>
+<area shape="rect" id="node18" href="./KVSiLi.html" title="KVSiLi" alt="" coords="700,63,765,75"/>
 <area shape="rect" id="node19" href="./KVSilicon_e475s.html" title="KVSilicon_e475s" alt="" coords="698,75,767,87"/>
 </map>
 <map name="MapKVDetector_InhMem" id="MapKVDetector_InhMem">
@@ -571,13 +580,13 @@ detector is increased, e.g.:
 <area shape="rect" id="clust30" href="./KVBase.html" alt="" coords="557,47,624,96"/>
 <area shape="rect" id="clust31" href="./KVBase.html" alt="" coords="480,47,547,96"/>
 <area shape="rect" id="clust32" href="./KVBase.html" alt="" coords="667,80,669,83"/>
-<area shape="rect" id="clust33" href="./KVBase.html" alt="" coords="635,99,701,432"/>
-<area shape="rect" id="clust34" href="./KVBase.html" alt="" coords="557,99,624,432"/>
-<area shape="rect" id="clust35" href="./KVBase.html" alt="" coords="480,99,547,432"/>
-<area shape="rect" id="clust28" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,432"/>
+<area shape="rect" id="clust33" href="./KVBase.html" alt="" coords="635,99,701,448"/>
+<area shape="rect" id="clust34" href="./KVBase.html" alt="" coords="557,99,624,448"/>
+<area shape="rect" id="clust35" href="./KVBase.html" alt="" coords="480,99,547,448"/>
+<area shape="rect" id="clust28" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,448"/>
 </map>
 <map name="MapKVDetector_Lib" id="MapKVDetector_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="501,44,616,92"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="263,374,309,394"/>
 </map>
 <div class="tabs">
 <a id="imgKVDetector_Inh" class="tabsel" href="inh/KVDetector_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVDetector_Inh.png');">Inheritance</a>
@@ -595,7 +604,7 @@ detector is increased, e.g.:
 <div class="funccomm"><pre>default ctor
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDetector:KVDetector@1" href="src/KVDetector.cxx.html#NeyU6D">KVDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Float_t">Float_t</a> thick = 0.)</span><br />
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVDetector:KVDetector@1" href="src/KVDetector.cxx.html#NeyU6D">KVDetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Float_t">Float_t</a> thick = 0.0)</span><br />
 <div class="funccomm"><pre> Create a new detector of a given material and thickness in centimetres (default value = 0.0)
 </pre></div>
 </div>
@@ -603,7 +612,7 @@ detector is increased, e.g.:
 <div class="funccomm"><pre>copy ctor
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:Copy" href="src/KVDetector.cxx.html#GdhfEC">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) const</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:Copy" href="src/KVDetector.cxx.html#GdhfEC">Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) const</span><br />
 <div class="funccomm"><pre>copy 'this' to 'obj'
 The structure of the detector is copied, with new cloned objects for
 each absorber layer. The active layer is set in the new detector.
@@ -653,7 +662,7 @@ depending on its direction of motion is used for the calculation.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:Print" href="src/KVDetector.cxx.html#YH36qB">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) const</span><br />
-<div class="funccomm"><pre><a href="./KVDetector.html#KVDetector:Print" title="void KVDetector::Print(Option_t* option = &quot;&quot;) const">Print</a> info on this detector
+<div class="funccomm"><pre><a href="./KVDetector.html#KVDetector:Print" title="void KVDetector::Print(Option_t* option=&quot;&quot;)">Print</a> info on this detector
 if option=<span class="string">"data"</span> the energy loss and coder channel data are displayed
 </pre></div>
 </div>
@@ -666,13 +675,13 @@ if option=<span class="string">"data"</span> the energy loss and coder channel d
  Override this method in child classes in order to define a naming
  convention for specific detectors of the array.
 
- By default we return the same name as <a href="./KVDetector.html">KVDetector</a>::<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>
+ By default we return the same name as <a href="./KVDetector.html">KVDetector</a>::<a href="./#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDetector:AddCalibrator" href="src/KVDetector.cxx.html#iNXUhC">AddCalibrator</a>(<a href="./KVCalibrator.html">KVCalibrator</a>* cal)</span><br />
 <div class="funccomm"><pre>Associate a calibration with this detector.
 If the calibrator object has the same class and type
-as an existing object in the list (see <a href="./KVCalibrator.html">KVCalibrator</a>::<a href="./KVCalibrator.html#KVCalibrator:IsEqual" title="Bool_t KVCalibrator::IsEqual(const TObject* obj) const">IsEqual</a>),
+as an existing object in the list (see <a href="./KVCalibrator.html">KVCalibrator</a>::<a href="./KVCalibrator.html#KVCalibrator:IsEqual" title="Bool_t KVCalibrator::IsEqual(const TObject* obj)">IsEqual</a>),
 it will not be added to the list
 (avoids duplicate calibrators) and the method returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a>.
 </pre></div>
@@ -707,7 +716,7 @@ it will not be added to the list
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDetector:IsCalibrated" href="src/KVDetector.cxx.html#BvPbSD">IsCalibrated</a>() const</span><br />
-<div class="funccomm"><pre>Returns true if the detector has been calibrated
+<div class="funccomm"><pre>Returns <a href="./ListOfTypes.html#bool">true</a> if the detector has been calibrated
 i.e. if
   -  it has associated calibrators
   -  ALL of the calibrators are ready
@@ -716,7 +725,7 @@ i.e. if
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:AddAbsorber" href="src/KVDetector.cxx.html#XWHsJD">AddAbsorber</a>(<a href="./KVMaterial.html">KVMaterial</a>* )</span><br />
 <div class="funccomm"><pre> Add a layer of absorber material to the detector
  By default, the first layer added is set as the <span class="string">"Active"</span> layer.
- Call <a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial*) or overloads">SetActiveLayer</a> to change this.
+ Call <a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a> to change this.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetActiveLayer" href="src/KVDetector.cxx.html#sBSmQC">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>* )</span><br />
@@ -746,7 +755,7 @@ parameters specific to each detector.
 the <a href="./KVCalibrator.html">KVCalibrator</a> objects in list <a href="./KVDetector.html#KVDetector:fCalibrators" title="KVList* KVDetector::fCalibrators">fCalibrators</a>.
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:AddIDTelescope" href="src/KVDetector.cxx.html#lBA0VB">AddIDTelescope</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* idt)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:AddIDTelescope" href="src/KVDetector.cxx.html#lBA0VB">AddIDTelescope</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* idt)</span><br />
 <div class="funccomm"><pre>Add ID telescope to list of telescopes to which detector belongs
 </pre></div>
 </div>
@@ -769,21 +778,21 @@ but only including the telescopes of which this detector is a member.
    first call
        <a href="./KVDetector.html#KVDetector:SetEResAfterDetector" title="void KVDetector::SetEResAfterDetector(Double_t e)">SetEResAfterDetector</a>(Eres);
    before calling this method. Otherwise, especially for heavy ions, the
-   correction may be false for particles which are just above the punch-through energy.
+   correction may be <a href="./ListOfTypes.html#bool">false</a> for particles which are just above the punch-through energy.
 
  WARNING 2: if measured energy loss in detector active layer is greater than
  maximum possible theoretical value for given nucleus' Z &amp; A, this may be because
- the A was not measured but calculated from Z and hence could be false, or perhaps
+ the A was not measured but calculated from Z and hence could be <a href="./ListOfTypes.html#bool">false</a>, or perhaps
  there was an (undetected) pile-up of two or more particles in the detector.
  In this case we return the uncorrected energy measured in the active layer
  and we add the following parameters to the particle (in nuc-&gt;GetParameters()):
 
- <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>.<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a> = 1
- <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>.Detector = [name]
- <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>.MeasuredDE = [value]
- <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>.MaxDE = [value]
- <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>.Transmission = 0 or 1
- <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>.ERES = [value]
+ <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>.<a href="./#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a> = 1
+ <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>.Detector = [name]
+ <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>.MeasuredDE = [value]
+ <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>.MaxDE = [value]
+ <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>.Transmission = 0 or 1
+ <a href="./KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>.ERES = [value]
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVDetector:FindZmin" href="src/KVDetector.cxx.html#b2SqnC">FindZmin</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ELOSS = -1., <a href="./ListOfTypes.html#Char_t">Char_t</a> mass_formula = -1)</span><br />
@@ -791,7 +800,7 @@ but only including the telescopes of which this detector is a member.
 we can at least estimate a minimum Z value based on the energy lost in this
 detector.
 
-This is based on the <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetMaxDeltaE" title="Double_t KVMaterial::GetMaxDeltaE(Int_t Z, Int_t A)">GetMaxDeltaE</a> method, giving the maximum
+This is based on the <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetMaxDeltaE" title="Double_t KVMaterial::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a> method, giving the maximum
 energy loss in the active layer of the detector for a given nucleus (A,Z).
 
 The <span class="string">"Zmin"</span> is the Z of the particle which gives a maximum energy loss just greater
@@ -800,7 +809,7 @@ energy and so are excluded.
 
 If ELOSS is not given, we use the current value of <a href="./KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>()
 Use 'mass_formula' to change the formula used to calculate the A of the nucleus
-from its Z. Default is valley of stability value. (see <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t, Char_t mt)">GetAFromZ</a>).
+from its Z. Default is valley of stability value. (see <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t ,Char_t mt)">GetAFromZ</a>).
 
 If the value of ELOSS or <a href="./KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>() is &lt;=0 we return Zmin=0
 </pre></div>
@@ -854,8 +863,8 @@ if not we take the default one
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TVector3&amp; <a class="funcname" name="KVDetector:GetNormal" href="src/KVDetector.cxx.html#XI5fHC">GetNormal</a>()</span><br />
 <div class="funccomm"><pre> Return unit vector normal to surface of detector. The vector points from the target (origin)
- towards the detector's entrance window. It can be used with <a href="./KVDetector.html#KVDetector:GetELostByParticle" title="Double_t KVDetector::GetELostByParticle(KVNucleus*, TVector3* norm = 0)">GetELostByParticle</a> and
- <a href="./KVDetector.html#KVDetector:GetParticleEIncFromERes" title="Double_t KVDetector::GetParticleEIncFromERes(KVNucleus*, TVector3* norm = 0)">GetParticleEIncFromERes</a>.
+ towards the detector's entrance window. It can be used with <a href="./KVDetector.html#KVDetector:GetELostByParticle" title="Double_t KVDetector::GetELostByParticle(KVNucleus* ,TVector3* norm=0)">GetELostByParticle</a> and
+ <a href="./KVDetector.html#KVDetector:GetParticleEIncFromERes" title="Double_t KVDetector::GetParticleEIncFromERes(KVNucleus* ,TVector3* norm=0)">GetParticleEIncFromERes</a>.
  The vector is generated from the theta &amp; phi of the centre of the detector
 </pre></div>
 </div>
@@ -903,23 +912,23 @@ if not we take the default one
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetFiredBitmask" href="src/KVDetector.cxx.html#fQCPDE">SetFiredBitmask</a>(<a href="./KVString.html">KVString</a>&amp; )</span><br />
 <div class="funccomm"><pre> Set bitmask used to determine which acquisition parameters are
- taken into account by <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a> based on the environment variables
+ taken into account by <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a> based on the environment variables
           [dataset].<a href="./KVACQParam.html">KVACQParam</a>.[par name].Working:    NO
-          [dataset].<a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>.ACQParameterList.[type]: PG,GG,T
+          [dataset].<a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>.ACQParameterList.[type]: PG,GG,T
  The first allows to define certain acquisition parameters as not functioning;
  they will not be taken into account.
  The second allows to <span class="string">"fine-tune"</span> what is meant by <span class="string">"all"</span> or <span class="string">"any"</span> acquisition parameters
- (i.e. when using <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>(<span class="string">"all"</span>), <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>(<span class="string">"any"</span>), <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>(<span class="string">"Pall"</span>, etc.).
+ (i.e. when using <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>(<span class="string">"all"</span>), <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>(<span class="string">"any"</span>), <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>(<span class="string">"Pall"</span>, etc.).
  For each detector type, give a comma-separated list of the acquisition
- parameter types to be taken into account in the <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a> method.
+ parameter types to be taken into account in the <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a> method.
  Only those parameters which appear in the list will be considered:
   then <span class="string">"all"</span> means =&gt; all parameters in the list
   and  <span class="string">"any"</span> means =&gt; any of the parameters in the list
- These lists are read during construction of multidetector arrays (<a href="./KVMultiDetArray.html">KVMultiDetArray</a>::<a href="./KVMultiDetArray.html#KVMultiDetArray:Build" title="void KVMultiDetArray::Build(Int_t run = -1)">Build</a>),
+ These lists are read during construction of multidetector arrays (<a href="./KVMultiDetArray.html">KVMultiDetArray</a>::<a href="./KVMultiDetArray.html#KVMultiDetArray:Build" title="void KVMultiDetArray::Build(Int_t run=-1)">Build</a>),
  the method <a href="./KVMultiDetArray.html">KVMultiDetArray</a>::<a href="./KVMultiDetArray.html#KVMultiDetArray:SetACQParams" title="void KVMultiDetArray::SetACQParams()">SetACQParams</a> uses them to define a mask for each detector
  of the array.
  Bits are set/reset in the order of the acquisition parameter list of the detector.
- If no variable [dataset].<a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>.ACQParameterList.[type] exists,
+ If no variable [dataset].<a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>.ACQParameterList.[type] exists,
  we set a bitmask authorizing all acquisition parameters of the detector, e.g.
  if the detector has 3 acquisition parameters the bitmask will be <span class="string">"111"</span>
 </pre></div>
@@ -950,66 +959,66 @@ if not we take the default one
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetEIncOfMaxDeltaE" href="src/KVDetector.cxx.html#WjWvPD">GetEIncOfMaxDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetEIncOfMaxDeltaE" title="Double_t KVMaterial::GetEIncOfMaxDeltaE(Int_t Z, Int_t A)">GetEIncOfMaxDeltaE</a>
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetEIncOfMaxDeltaE" title="Double_t KVMaterial::GetEIncOfMaxDeltaE(Int_t Z,Int_t A)">GetEIncOfMaxDeltaE</a>
  Returns incident energy corresponding to maximum energy loss in the
  active layer of the detector, for a given nucleus.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetMaxDeltaE" href="src/KVDetector.cxx.html#UK_M7C">GetMaxDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetMaxDeltaE" title="Double_t KVMaterial::GetMaxDeltaE(Int_t Z, Int_t A)">GetMaxDeltaE</a>
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetMaxDeltaE" title="Double_t KVMaterial::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a>
  Returns maximum energy loss in the
  active layer of the detector, for a given nucleus.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetDeltaE" href="src/KVDetector.cxx.html#BBdWPB">GetDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Einc)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetDeltaE" title="Double_t KVMaterial::GetDeltaE(Int_t Z, Int_t A, Double_t Einc)">GetDeltaE</a>
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetDeltaE" title="Double_t KVMaterial::GetDeltaE(Int_t Z,Int_t A,Double_t Einc)">GetDeltaE</a>
  Returns energy loss of given nucleus in the active layer of the detector.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetTotalDeltaE" href="src/KVDetector.cxx.html#dLYhe">GetTotalDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Einc)</span><br />
 <div class="funccomm"><pre> Returns calculated total energy loss of ion in ALL layers of the detector.
- This is just (Einc - <a href="./KVDetector.html#KVDetector:GetERes" title="Double_t KVDetector::GetERes(Int_t Z, Int_t A, Double_t Einc)">GetERes</a>(Z,A,Einc))
+ This is just (Einc - <a href="./KVDetector.html#KVDetector:GetERes" title="Double_t KVDetector::GetERes(Int_t Z,Int_t A,Double_t Einc)">GetERes</a>(Z,A,Einc))
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetERes" href="src/KVDetector.cxx.html#SmuZ2B">GetERes</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Einc)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetERes" title="Double_t KVMaterial::GetERes(Int_t Z, Int_t A, Double_t Einc)">GetERes</a>
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetERes" title="Double_t KVMaterial::GetERes(Int_t Z,Int_t A,Double_t Einc)">GetERes</a>
  Returns residual energy of given nucleus after the detector.
  Returns 0 if Einc&lt;=0
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetIncidentEnergy" href="src/KVDetector.cxx.html#oxI5.">GetIncidentEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> delta_e = -1., <span class="keyword">enum</span> SolType type = kEmax)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetIncidentEnergy" title="Double_t KVMaterial::GetIncidentEnergy(Int_t Z, Int_t A, Double_t delta_e = -1., enum SolType type = kEmax)">GetIncidentEnergy</a>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetIncidentEnergy" href="src/KVDetector.cxx.html#oxI5.">GetIncidentEnergy</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> delta_e = -1.0, <a href="./KVMaterial.html">KVMaterial</a>::SolType type = kEmax)</span><br />
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetIncidentEnergy" title="Double_t KVMaterial::GetIncidentEnergy(Int_t Z,Int_t A,Double_t delta_e=-1.0,KVMaterial::SolType type=kEmax)">GetIncidentEnergy</a>
  Returns incident energy corresponding to energy loss delta_e in active layer of detector for a given nucleus.
  If delta_e is not given, the current energy loss in the active layer is used.
 
  By default the solution corresponding to the highest incident energy is returned
  This is the solution found for Einc greater than the maximum of the dE(Einc) curve.
- If you want the low energy solution set SolType = <a href="./KVIonRangeTable.html">KVIonRangeTable</a>::<a href="./KVIonRangeTable.html#KVIonRangeTable:kEmin" title="KVIonRangeTable::SolType KVIonRangeTable::kEmin">kEmin</a>.
+ If you want the low energy solution set SolType = <a href="./KVIonRangeTable.html">KVIonRangeTable</a>::<a href="./KVIonRangeTable.html#KVIonRangeTable:kEmin" title="const KVIonRangeTable::SolType KVIonRangeTable::kEmin">kEmin</a>.
 
  WARNING: calculating the incident energy of a particle using only the dE in a detector
  is ambiguous, as in general (and especially for very heavy ions) the maximum of the dE
  curve occurs for Einc greater than the punch-through energy, therefore it is not always
- true to assume that if the particle does not stop in the detector the required solution
- is that for type=<a href="./KVIonRangeTable.html">KVIonRangeTable</a>::<a href="./KVIonRangeTable.html#KVIonRangeTable:kEmax" title="KVIonRangeTable::SolType KVIonRangeTable::kEmax">kEmax</a>. For a range of energies between punch-through
- and dE_max, the required solution is still that for type=<a href="./KVIonRangeTable.html">KVIonRangeTable</a>::<a href="./KVIonRangeTable.html#KVIonRangeTable:kEmin" title="KVIonRangeTable::SolType KVIonRangeTable::kEmin">kEmin</a>.
+ <a href="./ListOfTypes.html#bool">true</a> to assume that if the particle does not stop in the detector the required solution
+ is that for type=<a href="./KVIonRangeTable.html">KVIonRangeTable</a>::<a href="./KVIonRangeTable.html#KVIonRangeTable:kEmax" title="const KVIonRangeTable::SolType KVIonRangeTable::kEmax">kEmax</a>. For a range of energies between punch-through
+ and dE_max, the required solution is still that for type=<a href="./KVIonRangeTable.html">KVIonRangeTable</a>::<a href="./KVIonRangeTable.html#KVIonRangeTable:kEmin" title="const KVIonRangeTable::SolType KVIonRangeTable::kEmin">kEmin</a>.
  If the residual energy of the particle is unknown, there is no way to know which is the
  correct solution.
 
  WARNING 2
  If the given energy loss in the active layer is greater than the maximum theoretical dE
- for given Z &amp; A, (dE &gt; <a href="./KVDetector.html#KVDetector:GetMaxDeltaE" title="Double_t KVDetector::GetMaxDeltaE(Int_t Z, Int_t A)">GetMaxDeltaE</a>(Z,A)) then we return a NEGATIVE incident energy
- corresponding to the maximum, <a href="./KVDetector.html#KVDetector:GetEIncOfMaxDeltaE" title="Double_t KVDetector::GetEIncOfMaxDeltaE(Int_t Z, Int_t A)">GetEIncOfMaxDeltaE</a>(Z,A)
+ for given Z &amp; A, (dE &gt; <a href="./KVDetector.html#KVDetector:GetMaxDeltaE" title="Double_t KVDetector::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a>(Z,A)) then we return a NEGATIVE incident energy
+ corresponding to the maximum, <a href="./KVDetector.html#KVDetector:GetEIncOfMaxDeltaE" title="Double_t KVDetector::GetEIncOfMaxDeltaE(Int_t Z,Int_t A)">GetEIncOfMaxDeltaE</a>(Z,A)
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetDeltaEFromERes" href="src/KVDetector.cxx.html#IuPXwB">GetDeltaEFromERes</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Eres)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetDeltaEFromERes" title="Double_t KVMaterial::GetDeltaEFromERes(Int_t Z, Int_t A, Double_t Eres)">GetDeltaEFromERes</a>
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetDeltaEFromERes" title="Double_t KVMaterial::GetDeltaEFromERes(Int_t Z,Int_t A,Double_t Eres)">GetDeltaEFromERes</a>
 
  Calculate energy loss in active layer of detGetAlignedDetector for nucleus (Z,A)
  having a residual kinetic energy Eres (MeV)
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetIncidentEnergyFromERes" href="src/KVDetector.cxx.html#uiybuC">GetIncidentEnergyFromERes</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Eres)</span><br />
-<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetIncidentEnergyFromERes" title="Double_t KVMaterial::GetIncidentEnergyFromERes(Int_t Z, Int_t A, Double_t Eres)">GetIncidentEnergyFromERes</a>
+<div class="funccomm"><pre> Overrides <a href="./KVMaterial.html">KVMaterial</a>::<a href="./KVMaterial.html#KVMaterial:GetIncidentEnergyFromERes" title="Double_t KVMaterial::GetIncidentEnergyFromERes(Int_t Z,Int_t A,Double_t Eres)">GetIncidentEnergyFromERes</a>
 
  Calculate incident energy of nucleus from residual energy
 </pre></div>
@@ -1044,8 +1053,8 @@ if not we take the default one
  array described by <a href="./KVMultiDetArray.html">KVMultiDetArray</a>).
 
  By default the list is in the order starting from this detector and going towards the target
- (direction=<a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:kBackwards" title="KVGroup::(anonymous) KVGroup::kBackwards">kBackwards</a>).
- Call with argument direction=<a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:kForwards" title="KVGroup::(anonymous) KVGroup::kForwards">kForwards</a> to have the list of detectors in the order
+ (direction=<a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:kBackwards" title="const enum KVGroup:: KVGroup::kBackwards">kBackwards</a>).
+ Call with argument direction=<a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:kForwards" title="const enum KVGroup:: KVGroup::kForwards">kForwards</a> to have the list of detectors in the order
  <span class="string">"seen"</span> by a particle flying out from the target and arriving in this detector.
 
  If this detector is not part of a <a href="./KVMultiDetArray.html">KVMultiDetArray</a> (i.e. we have no information on
@@ -1054,13 +1063,13 @@ if not we take the default one
  The list pointers are stored in member variable <a href="./KVDetector.html#KVDetector:fAlignedDetectors" title="TList* KVDetector::fAlignedDetectors">fAlignedDetectors</a>[] for rapid retrieval,
  the lists will be deleted with this detector.
 
- See <a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector*, UChar_t dir = kBackwards)">GetAlignedDetectors</a> for more details.
+ See <a href="./KVGroup.html">KVGroup</a>::<a href="./KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a> for more details.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:ResetAlignedDetectors" href="src/KVDetector.cxx.html#Sxlj4B">ResetAlignedDetectors</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> direction = 1)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetRange" href="src/KVDetector.cxx.html#Bbm6f">GetRange</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A, <a href="./ListOfTypes.html#Double_t">Double_t</a> Einc)</span><br />
-<div class="funccomm"><pre> WARNING: SAME AS <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:GetLinearRange" title="Double_t KVDetector::GetLinearRange(Int_t Z, Int_t A, Double_t Einc)">GetLinearRange</a>
+<div class="funccomm"><pre> WARNING: SAME AS <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:GetLinearRange" title="Double_t KVDetector::GetLinearRange(Int_t Z,Int_t A,Double_t Einc)">GetLinearRange</a>
  Only linear range in centimetres is calculated for detectors!
 </pre></div>
 </div>
@@ -1076,13 +1085,13 @@ if not we take the default one
  layers of this detector
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname">TGraph* <a class="funcname" name="KVDetector:DrawPunchThroughEnergyVsZ" href="src/KVDetector.cxx.html#A2_dpB">DrawPunchThroughEnergyVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="KVNucleus::(anonymous) KVNucleus::kBetaMass">kBetaMass</a>)</span><br />
+<div class="funcdoc"><span class="funcname">TGraph* <a class="funcname" name="KVDetector:DrawPunchThroughEnergyVsZ" href="src/KVDetector.cxx.html#A2_dpB">DrawPunchThroughEnergyVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="const enum KVNucleus:: KVNucleus::kBetaMass">kBetaMass</a>)</span><br />
 <div class="funccomm"><pre> Creates and fills a TGraph with the punch through energy in MeV vs. Z for the given detector,
  for Z=1-92. The mass of each nucleus is calculated according to the given mass formula
  (see <a href="./KVNucleus.html">KVNucleus</a>).
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname">TGraph* <a class="funcname" name="KVDetector:DrawPunchThroughEsurAVsZ" href="src/KVDetector.cxx.html#HL3kZC">DrawPunchThroughEsurAVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="KVNucleus::(anonymous) KVNucleus::kBetaMass">kBetaMass</a>)</span><br />
+<div class="funcdoc"><span class="funcname">TGraph* <a class="funcname" name="KVDetector:DrawPunchThroughEsurAVsZ" href="src/KVDetector.cxx.html#HL3kZC">DrawPunchThroughEsurAVsZ</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> massform = <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:kBetaMass" title="const enum KVNucleus:: KVNucleus::kBetaMass">kBetaMass</a>)</span><br />
 <div class="funccomm"><pre> Creates and fills a TGraph with the punch through energy in MeV/nucleon vs. Z for the given detector,
  for Z=1-92. The mass of each nucleus is calculated according to the given mass formula
  (see <a href="./KVNucleus.html">KVNucleus</a>).
@@ -1135,12 +1144,12 @@ if not we take the default one
 </div>
 <div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVDetector:GetRandomPointOnEntranceWindow" href="src/KVDetector.cxx.html#I01fqC">GetRandomPointOnEntranceWindow</a>() const</span><br />
 <div class="funccomm"><pre> Return vector from origin to a random point on the entrance window.
- Use <a href="./KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint() const">GetRandomPoint</a>() if you want a random point on the active layer.
+ Use <a href="./KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>() if you want a random point on the active layer.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVDetector:GetCentreOfEntranceWindow" href="src/KVDetector.cxx.html#mnArWE">GetCentreOfEntranceWindow</a>() const</span><br />
 <div class="funccomm"><pre> Return vector position of centre of entrance window.
- Use <a href="./KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre() const">GetCentre</a>() if you want the centre of the active layer.
+ Use <a href="./KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>() if you want the centre of the active layer.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVCalibrator.html">KVCalibrator</a> * <a class="funcname" name="KVDetector:GetCalibrator" href="src/KVDetector.h.html#FAmAID">GetCalibrator</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type) const</span><br />
@@ -1164,65 +1173,65 @@ if not we take the default one
 
  The actual meaning of hit/fired depends on the context and the option string opt.
 
- If the detector is in <span class="string">"simulation mode"</span>, i.e. if <a href="./KVDetector.html#KVDetector:SetSimMode" title="void KVDetector::SetSimMode(Bool_t on = kTRUE)">SetSimMode</a>(<a href="./ListOfTypes.html#Bool_t">kTRUE</a>) has been called,
+ If the detector is in <span class="string">"simulation mode"</span>, i.e. if <a href="./KVDetector.html#KVDetector:SetSimMode" title="void KVDetector::SetSimMode(Bool_t on=kTRUE)">SetSimMode</a>(<a href="./ListOfTypes.html#Bool_t">kTRUE</a>) has been called,
  this method returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the calculated energy loss in the active layer is &gt; 0.
 
- In <span class="string">"experimental mode"</span> (i.e. <a href="./KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode() const">IsSimMode</a>() returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a>), depending on the option:
+ In <span class="string">"experimental mode"</span> (i.e. <a href="./KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode()">IsSimMode</a>() returns <a href="./ListOfTypes.html#Bool_t">kFALSE</a>), depending on the option:
 
 opt=<span class="string">"any"</span> (default):
-Returns true if ANY* of the working acquisition parameters associated with the detector were fired in an event
+Returns <a href="./ListOfTypes.html#bool">true</a> if ANY* of the working acquisition parameters associated with the detector were fired in an event
 opt=<span class="string">"all"</span> :
-Returns true if ALL* of the working acquisition parameters associated with the detector were fired in an event
+Returns <a href="./ListOfTypes.html#bool">true</a> if ALL* of the working acquisition parameters associated with the detector were fired in an event
 opt=<span class="string">"Pany"</span> :
-Returns true if ANY* of the working acquisition parameters associated with the detector were fired in an event
+Returns <a href="./ListOfTypes.html#bool">true</a> if ANY* of the working acquisition parameters associated with the detector were fired in an event
 and have a value greater than their pedestal value
 opt=<span class="string">"Pall"</span> :
-Returns true if ALL* of the working acquisition parameters associated with the detector were fired in an event
+Returns <a href="./ListOfTypes.html#bool">true</a> if ALL* of the working acquisition parameters associated with the detector were fired in an event
 and have a value greater than their pedestal value
 
  *the actual parameters taken into account can be fine tuned using environment variables such as
-          <a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>.ACQParameterList.[type]: PG,GG,T
- See <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:SetFiredBitmask" title="void KVDetector::SetFiredBitmask(KVString&amp;)">SetFiredBitmask</a>() for more details.
+          <a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>.ACQParameterList.[type]: PG,GG,T
+ See <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:SetFiredBitmask" title="void KVDetector::SetFiredBitmask(KVString&amp; )">SetFiredBitmask</a>() for more details.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDetector:FiredP" href="src/KVDetector.h.html#k0wKyD">FiredP</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"any"</span>)</span><br />
 <div class="funccomm"><pre>opt=<span class="string">"any"</span> :
-Returns true if ANY* of the working acquisition parameters associated with the detector were fired in an event
+Returns <a href="./ListOfTypes.html#bool">true</a> if ANY* of the working acquisition parameters associated with the detector were fired in an event
 and have a value greater than their pedestal value
 opt=<span class="string">"all"</span> :
-Returns true if ALL* of the working acquisition parameters associated with the detector were fired in an event
+Returns <a href="./ListOfTypes.html#bool">true</a> if ALL* of the working acquisition parameters associated with the detector were fired in an event
 and have a value greater than their pedestal value
 
  *the actual parameters taken into account can be fine tuned using environment variables such as
-          <a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>.ACQParameterList.[type]: PG,GG,T
- See <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:SetFiredBitmask" title="void KVDetector::SetFiredBitmask(KVString&amp;)">SetFiredBitmask</a>() for more details.
+          <a href="./KVDetector.html">KVDetector</a>.<a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>.ACQParameterList.[type]: PG,GG,T
+ See <a href="./KVDetector.html">KVDetector</a>::<a href="./KVDetector.html#KVDetector:SetFiredBitmask" title="void KVDetector::SetFiredBitmask(KVString&amp; )">SetFiredBitmask</a>() for more details.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDetector:ROOTGeo" href="src/KVDetector.h.html#N2LpEC">ROOTGeo</a>() const</span><br />
 <div class="funccomm"><pre>make <a href="./KVPosition.html">KVPosition</a> methods private to avoid misuse
 </pre></div>
 
-<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo() const">ROOTGeo</a>(); }</code></div>
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>(); }</code></div>
 <div style="clear:both;"></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetMatrix" href="src/KVDetector.h.html#f_1RPC">SetMatrix</a>(<span class="keyword">const</span> TGeoHMatrix* m)</span><br />
 
-<div class="code"><code class="inlinecode">{ <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:SetMatrix" title="void KVPosition::SetMatrix(const TGeoHMatrix*)">SetMatrix</a>(m); }</code></div>
+<div class="code"><code class="inlinecode">{ <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:SetMatrix" title="void KVPosition::SetMatrix(const TGeoHMatrix* )">SetMatrix</a>(m); }</code></div>
 <div style="clear:both;"></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetShape" href="src/KVDetector.h.html#LMsZHC">SetShape</a>(TGeoBBox* s)</span><br />
 
-<div class="code"><code class="inlinecode">{ <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:SetShape" title="void KVPosition::SetShape(TGeoBBox*)">SetShape</a>(s); }</code></div>
+<div class="code"><code class="inlinecode">{ <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:SetShape" title="void KVPosition::SetShape(TGeoBBox* )">SetShape</a>(s); }</code></div>
 <div style="clear:both;"></div>
 </div>
 <div class="funcdoc"><span class="funcname">TGeoHMatrix* <a class="funcname" name="KVDetector:GetMatrix" href="src/KVDetector.h.html#Xva7LC">GetMatrix</a>() const</span><br />
 
-<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix() const">GetMatrix</a>(); }</code></div>
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>(); }</code></div>
 <div style="clear:both;"></div>
 </div>
 <div class="funcdoc"><span class="funcname">TGeoBBox* <a class="funcname" name="KVDetector:GetShape" href="src/KVDetector.h.html#Unco_D">GetShape</a>() const</span><br />
 
-<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape() const">GetShape</a>(); }</code></div>
+<div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>(); }</code></div>
 <div style="clear:both;"></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetActiveLayer" href="src/KVDetector.h.html#KLSKR">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>* )</span><br />
@@ -1239,7 +1248,7 @@ and have a value greater than their pedestal value
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVDetector:GetTotalThicknessInCM" href="src/KVDetector.h.html#XSF22D">GetTotalThicknessInCM</a>()</span><br />
 <div class="funccomm"><pre> Calculate and return the total thickness in centimetres of ALL absorbers making up the detector,
- not just the active layer (value returned by <a href="./KVMaterial.html#KVMaterial:GetThickness" title="Double_t KVMaterial::GetThickness() const">GetThickness</a>()).
+ not just the active layer (value returned by <a href="./KVMaterial.html#KVMaterial:GetThickness" title="Double_t KVMaterial::GetThickness()">GetThickness</a>()).
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVGeoDetectorNode.html">KVGeoDetectorNode</a>* <a class="funcname" name="KVDetector:GetNode" href="src/KVDetector.h.html#HpQsaD">GetNode</a>()</span><br />
@@ -1308,7 +1317,7 @@ and all aligned detectors placed in front of it
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDetector:BelongsToIdentifiedParticle" href="src/KVDetector.h.html#QxcxdE">BelongsToIdentifiedParticle</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Binary8_t">Binary8_t</a> <a class="funcname" name="KVDetector:GetFiredBitmask" href="src/KVDetector.h.html#bzVapC">GetFiredBitmask</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./Binary8_t.html">Binary8_t</a> <a class="funcname" name="KVDetector:GetFiredBitmask" href="src/KVDetector.h.html#bzVapC">GetFiredBitmask</a>() const</span><br />
 
 <div class="code"><code class="inlinecode">{ <span class="keyword">return</span> <a href="./KVDetector.html#KVDetector:fFiredMask" title="Binary8_t KVDetector::fFiredMask">fFiredMask</a>; }</code></div>
 <div style="clear:both;"></div>
@@ -1335,15 +1344,15 @@ and all aligned detectors placed in front of it
 <div class="funccomm"><pre> Set simulation mode of detector
  If on=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> (default), we are in simulation mode (calculation of energy losses etc.)
  If on=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>, we are analysing/reconstruction experimental data
- Changes behaviour of <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>(): in simulation mode, <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>() returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+ Changes behaviour of <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>(): in simulation mode, <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>() returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
  whenever the energy loss in the active layer is &gt;0
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVDetector:IsSimMode" href="src/KVDetector.h.html#hprfD">IsSimMode</a>() const</span><br />
 <div class="funccomm"><pre> Returns simulation mode of detector:
-   <a href="./KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode() const">IsSimMode</a>()=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> : we are in simulation mode (calculation of energy losses etc.)
-   <a href="./KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode() const">IsSimMode</a>()=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>: we are analysing/reconstruction experimental data
- Changes behaviour of <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>(): in simulation mode, <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>() returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+   <a href="./KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode()">IsSimMode</a>()=<a href="./ListOfTypes.html#Bool_t">kTRUE</a> : we are in simulation mode (calculation of energy losses etc.)
+   <a href="./KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode()">IsSimMode</a>()=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>: we are analysing/reconstruction experimental data
+ Changes behaviour of <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>(): in simulation mode, <a href="./KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>() returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
  whenever the energy loss in the active layer is &gt;0
 </pre></div>
 </div>
@@ -1381,7 +1390,7 @@ and all aligned detectors placed in front of it
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Wed Mar 18 13:42:33 2015 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: Thu Oct  1 14:33:48 2015 </em><em>&raquo; Last generated: 2015-10-01 14:33</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

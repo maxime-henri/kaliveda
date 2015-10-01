@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:12 2015            -->
+<!--   Date: Thu Sep 17 10:50:43 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>.cpp,v 1.7 2007/02/27 11:56:33 franklan Exp $
@@ -49,13 +49,13 @@ ClassImp(<a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>);
 <span class="comment">//pedestal-corrected PG channel is used to estimate the GG channel.</span>
 
 
-<a name="tb4B7E"></a><a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>::<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:KVChannelEnergyBrho" title="KVChannelEnergyBrho KVChannelEnergyBrho::KVChannelEnergyBrho() or overloads">KVChannelEnergyBrho</a>():<a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(3)
+<a name="tb4B7E"></a><a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>::<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:KVChannelEnergyBrho" title="KVChannelEnergyBrho KVChannelEnergyBrho::KVChannelEnergyBrho() or overloads">KVChannelEnergyBrho</a>():KVCalibrator(3)
 {
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"Channel-Energy Brho"</span>);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="nqKcUE"></a><a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>::<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:KVChannelEnergyBrho" title="KVChannelEnergyBrho KVChannelEnergyBrho::KVChannelEnergyBrho() or overloads">KVChannelEnergyBrho</a>(<a href="../KVDetector.html">KVDetector</a> * kvd):<a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(3)
+<a name="nqKcUE"></a><a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>::<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:KVChannelEnergyBrho" title="KVChannelEnergyBrho KVChannelEnergyBrho::KVChannelEnergyBrho() or overloads">KVChannelEnergyBrho</a>(<a href="../KVDetector.html">KVDetector</a> * kvd):KVCalibrator(3)
 {
    <span class="comment">//Create an electronic calibration object for a specific detector (*kvd)</span>
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"Channel-Energy Brho"</span>);
@@ -63,7 +63,7 @@ ClassImp(<a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="idf4RC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>::<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:Compute" title="Double_t KVChannelEnergyBrho::Compute(Double_t chan) const">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan) <span class="keyword">const</span>
+<a name="idf4RC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>::<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:Compute" title="Double_t KVChannelEnergyBrho::Compute(Double_t chan)">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan) <span class="keyword">const</span>
 {
    <span class="comment">//Calculate the calibrated energy (in MeV) for a given GG channel number.</span>
    <span class="comment">//</span>
@@ -73,10 +73,10 @@ ClassImp(<a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>);
    <span class="keyword">if</span> (fReady) {
       <a href="../ListOfTypes.html#Double_t">Double_t</a> chan_corr;
       <span class="keyword">if</span> (chan &gt; 4090.) {
-         chan = ((<a href="../KVSilicon.html">KVSilicon</a> *) <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>())-&gt;GetGGfromPG();
+         chan = ((<a href="../KVSilicon.html">KVSilicon</a> *) <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>())-&gt;GetGGfromPG();
       }
-      chan_corr = chan - <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>);
-      <span class="keyword">return</span> (<a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0) + <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(1) * chan_corr);
+      chan_corr = chan - <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>);
+      <span class="keyword">return</span> (<a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0) + <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(1) * chan_corr);
    }
    <span class="keyword">return</span> 0.;
 }
@@ -92,8 +92,8 @@ ClassImp(<a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>);
    <span class="comment">//</span>
    <span class="comment">//equivalently to:</span>
    <span class="comment">//</span>
-   <span class="comment">//        <a href="../ListOfTypes.html#Float_t">Float_t</a> calibrated_volts = calibrator.<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:Compute" title="Double_t KVChannelEnergyBrho::Compute(Double_t chan) const">Compute</a>(channel);</span>
-   <span class="keyword">return</span> <a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:Compute" title="Double_t KVChannelEnergyBrho::Compute(Double_t chan) const">Compute</a>(chan);
+   <span class="comment">//        <a href="../ListOfTypes.html#Float_t">Float_t</a> calibrated_volts = calibrator.<a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:Compute" title="Double_t KVChannelEnergyBrho::Compute(Double_t chan)">Compute</a>(channel);</span>
+   <span class="keyword">return</span> <a href="../KVChannelEnergyBrho.html#KVChannelEnergyBrho:Compute" title="Double_t KVChannelEnergyBrho::Compute(Double_t chan)">Compute</a>(chan);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
@@ -103,15 +103,15 @@ ClassImp(<a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>);
    <span class="comment">//calculate the corresponding channel number according to the</span>
    <span class="comment">//calibration parameters (useful for filtering simulations).</span>
 
-   <a href="../KVDetector.html">KVDetector</a> *det = <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>();
+   <a href="../KVDetector.html">KVDetector</a> *det = <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>();
    <a href="../ListOfTypes.html#Int_t">Int_t</a> channel = 0;
 
    <span class="keyword">if</span> (fReady) {
       <span class="comment">// linear transfer function</span>
-      channel = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) (0.5 + (energy - <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0)) / <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(1)
+      channel = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) (0.5 + (energy - <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0)) / <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(1)
                          + det-&gt;GetPedestal(<span class="string">"GG"</span>));
    } <span class="keyword">else</span> {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"Compute"</span>, <span class="string">"Parameters not correctly initialized"</span>);
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"Compute"</span>, <span class="string">"Parameters not correctly initialized"</span>);
    }
    <span class="keyword">return</span> (<a href="../ListOfTypes.html#Double_t">Double_t</a>) channel;
 }
@@ -123,7 +123,7 @@ ClassImp(<a href="../KVChannelEnergyBrho.html">KVChannelEnergyBrho</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

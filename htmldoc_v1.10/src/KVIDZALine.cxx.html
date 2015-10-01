@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:24 2015            -->
+<!--   Date: Thu Sep 17 10:51:30 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVIDZALine.html">KVIDZALine</a>.cpp,v 1.10 2009/05/05 15:57:52 franklan Exp $
@@ -55,7 +55,7 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
 <span class="comment">//calculated according to one of the mass formulae defined in <a href="../KVNucleus.html">KVNucleus</a> class. The default is</span>
 <span class="comment">//the default for <a href="../KVNucleus.html">KVNucleus</a>; you can change it with <a href="../KVIDentifier.html#KVIDentifier:SetMassFormula" title="void KVIDentifier::SetMassFormula(Int_t mf)">SetMassFormula</a>.</span>
 <span class="comment">//</span>
-<span class="comment">//The sorting function <a href="../KVIDZALine.html#KVIDZALine:Compare" title="Int_t KVIDZALine::Compare(const TObject*) const">Compare</a>() sorts the lines as a function of increasing Z,</span>
+<span class="comment">//The sorting function <a href="../KVIDZALine.html#KVIDZALine:Compare" title="Int_t KVIDZALine::Compare(const TObject* obj)">Compare</a>() sorts the lines as a function of increasing Z,</span>
 <span class="comment">//then increasing A (i.e. p,d,t,3He,4He,6He, etc. etc.)</span>
 <span class="comment">/////////////////////////////////////////////////////////////////////////////////////////</span>
 
@@ -74,12 +74,12 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
 {
     <span class="comment">// copy constructor</span>
     <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a> = 0;
-    obj.<a href="../KVIDZALine.html#KVIDZALine:Copy" title="void KVIDZALine::Copy(TObject&amp; obj) const">Copy</a>(*<span class="keyword">this</span>);
+    obj.<a href="../KVIDZALine.html#KVIDZALine:Copy" title="void KVIDZALine::Copy(TObject&amp; obj)">Copy</a>(*<span class="keyword">this</span>);
 }
-<a name="RbpdhB"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Copy" title="void KVIDZALine::Copy(TObject&amp; obj) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp; obj) <span class="keyword">const</span>
+<a name="RbpdhB"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Copy" title="void KVIDZALine::Copy(TObject&amp; obj)">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp; obj) <span class="keyword">const</span>
 {
     <span class="comment">// copy 'this' to 'obj'</span>
-    <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:Copy" title="void KVIDentifier::Copy(TObject&amp; obj) const">Copy</a>(obj);
+    <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:Copy" title="void KVIDentifier::Copy(TObject&amp; obj)">Copy</a>(obj);
     ((<a href="../KVIDZALine.html">KVIDZALine</a>&amp;)obj).<a href="../KVIDZALine.html#KVIDZALine:SetWidth" title="void KVIDZALine::SetWidth(Double_t w)">SetWidth</a>(<a href="../KVIDZALine.html#KVIDZALine:fWidth" title="Double_t KVIDZALine::fWidth">fWidth</a>);
 }
 
@@ -90,22 +90,22 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
 
 <span class="comment">//_____________________________________________________________________________________________</span>
 
-<a name="CJA_7B"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:WriteAsciiFile_extras" title="void KVIDZALine::WriteAsciiFile_extras(ofstream&amp;, const Char_t* name_prefix = &quot;&quot;)">WriteAsciiFile_extras</a>(<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; file,
+<a name="CJA_7B"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:WriteAsciiFile_extras" title="void KVIDZALine::WriteAsciiFile_extras(ofstream&amp; ,const Char_t* name_prefix=&quot;&quot;)">WriteAsciiFile_extras</a>(<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; file,
                                        <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name_prefix)
 {
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a> Z &amp; A of line</span>
+    <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> Z &amp; A of line</span>
 
-    <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:WriteAsciiFile_extras" title="void KVIDentifier::WriteAsciiFile_extras(ofstream&amp;, const Char_t* = &quot;&quot;)">WriteAsciiFile_extras</a>(file,name_prefix);
-    file &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetZ" title="Int_t KVIDentifier::GetZ() const">GetZ</a>() &lt;&lt; <span class="string">"\t"</span> &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetA" title="Int_t KVIDentifier::GetA() const">GetA</a>() &lt;&lt; endl;
+    <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:WriteAsciiFile_extras" title="void KVIDentifier::WriteAsciiFile_extras(ofstream&amp; ,const Char_t* =&quot;&quot;)">WriteAsciiFile_extras</a>(file,name_prefix);
+    file &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetZ" title="Int_t KVIDentifier::GetZ()">GetZ</a>() &lt;&lt; <span class="string">"\t"</span> &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetA" title="Int_t KVIDentifier::GetA()">GetA</a>() &lt;&lt; endl;
 }
 
 <span class="comment">//_____________________________________________________________________________________________</span>
 
-<a name="aXBLBD"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:ReadAsciiFile_extras" title="void KVIDZALine::ReadAsciiFile_extras(ifstream&amp;)">ReadAsciiFile_extras</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; file)
+<a name="aXBLBD"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:ReadAsciiFile_extras" title="void KVIDZALine::ReadAsciiFile_extras(ifstream&amp; )">ReadAsciiFile_extras</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; file)
 {
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> Z &amp; A of line</span>
+    <span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> Z &amp; A of line</span>
 
-    <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:ReadAsciiFile_extras" title="void KVIDentifier::ReadAsciiFile_extras(ifstream&amp;)">ReadAsciiFile_extras</a>(file);
+    <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:ReadAsciiFile_extras" title="void KVIDentifier::ReadAsciiFile_extras(ifstream&amp; )">ReadAsciiFile_extras</a>(file);
     <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, A;
     file &gt;&gt; Z &gt;&gt; A;
     <a href="../KVIDentifier.html#KVIDentifier:SetZ" title="void KVIDentifier::SetZ(Int_t ztnum)">SetZ</a>(Z);
@@ -114,12 +114,12 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
 
 <span class="comment">//_____________________________________________________________________________________________</span>
 
-<a name="IF2AFE"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:ReadAsciiFile_KVIDZLine" title="void KVIDZALine::ReadAsciiFile_KVIDZLine(ifstream&amp;)">ReadAsciiFile_KVIDZLine</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; file)
+<a name="IF2AFE"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:ReadAsciiFile_KVIDZLine" title="void KVIDZALine::ReadAsciiFile_KVIDZLine(ifstream&amp; )">ReadAsciiFile_KVIDZLine</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; file)
 {
     <span class="comment">//************ BACKWARDS COMPATIBILITY FIX *************</span>
     <span class="comment">//       special read method for old KVIDZLines</span>
     <span class="comment">//</span>
-    <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> coordinates of line in file buffer stream</span>
+    <span class="comment">//<a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> coordinates of line in file buffer stream</span>
     <span class="comment">//Format is :</span>
     <span class="comment">//Z</span>
     <span class="comment">//number_of_points</span>
@@ -135,22 +135,22 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
     {
         <a href="../ListOfTypes.html#Double_t">Double_t</a> x, y;
         file &gt;&gt; x &gt;&gt; y;
-        <a href="http://root.cern.ch/root/html/TGraph.html#TGraph:SetPoint" title="void TGraph::SetPoint(Int_t i, Double_t x, Double_t y)">SetPoint</a>(i, x, y);
+        <a href="../#TGraph:SetPoint" title="void TGraph::SetPoint(Int_t i,Double_t x,Double_t y)">SetPoint</a>(i, x, y);
     }
 }
 
 <span class="comment">//_____________________________________________________________________________________________</span>
 
-<a name="rmRqMC"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Print" title="void KVIDZALine::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt) <span class="keyword">const</span>
+<a name="rmRqMC"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Print" title="void KVIDZALine::Print(Option_t* opt=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt) <span class="keyword">const</span>
 {
-    <span class="comment">//<a href="../KVIDZALine.html#KVIDZALine:Print" title="void KVIDZALine::Print(Option_t* opt = &quot;&quot;) const">Print</a> out for line</span>
+    <span class="comment">//<a href="../KVIDZALine.html#KVIDZALine:Print" title="void KVIDZALine::Print(Option_t* opt=&quot;&quot;)">Print</a> out for line</span>
     <span class="comment">//The optional <span class="string">"opt"</span> string, if given, is printed in parentheses after the line's name</span>
     <span class="comment">//This is used by <a href="../KVIDGrid.html">KVIDGrid</a> in order to show which lines are <span class="string">"ID"</span> lines and which are</span>
     <span class="comment">//<span class="string">"OK"</span> lines (i.e. used to define an identifiable area in a data map).</span>
-    cout &lt;&lt; <a href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName" title="const char* TObject::ClassName() const">ClassName</a>() &lt;&lt; <span class="string">" : "</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; <span class="string">"("</span> &lt;&lt; opt &lt;&lt; <span class="string">")"</span> &lt;&lt; endl;
-    cout &lt;&lt; <span class="string">"Z="</span> &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetZ" title="Int_t KVIDentifier::GetZ() const">GetZ</a>() &lt;&lt; <span class="string">" A="</span> &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetA" title="Int_t KVIDentifier::GetA() const">GetA</a>() &lt;&lt; endl;
-    <span class="keyword">if</span> (<a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth() const">GetWidth</a>()&gt;0.0) cout &lt;&lt; <span class="string">"Natural Line Width : "</span> &lt;&lt; <a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth() const">GetWidth</a>() &lt;&lt; endl;
-    <a href="http://root.cern.ch/root/html/TGraph.html#TGraph:TGraph" title="TGraph TGraph::TGraph() or overloads">TGraph</a>::<a href="../KVIDZALine.html#KVIDZALine:Print" title="void KVIDZALine::Print(Option_t* opt = &quot;&quot;) const">Print</a>();
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../#TObject:ClassName" title="const char* TObject::ClassName()">ClassName</a>() &lt;&lt; <span class="string">" : "</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"("</span> &lt;&lt; opt &lt;&lt; <span class="string">")"</span> &lt;&lt; endl;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Z="</span> &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetZ" title="Int_t KVIDentifier::GetZ()">GetZ</a>() &lt;&lt; <span class="string">" A="</span> &lt;&lt; <a href="../KVIDentifier.html#KVIDentifier:GetA" title="Int_t KVIDentifier::GetA()">GetA</a>() &lt;&lt; endl;
+    <span class="keyword">if</span> (<a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth()">GetWidth</a>()&gt;0.0) <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Natural Line Width : "</span> &lt;&lt; <a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth()">GetWidth</a>() &lt;&lt; endl;
+    <a href="../#TGraph:TGraph" title="TGraph TGraph::TGraph() or overloads">TGraph</a>::<a href="../KVIDZALine.html#KVIDZALine:Print" title="void KVIDZALine::Print(Option_t* opt=&quot;&quot;)">Print</a>();
 }
 
 <span class="comment">//_____________________________________________________________________________________________</span>
@@ -165,27 +165,27 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
     {
         <span class="keyword">delete</span> <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>;
     }
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a> = <span class="keyword">new</span> TGraphErrors(<a href="http://root.cern.ch/root/html/TGraph.html#TGraph:GetN" title="Int_t TGraph::GetN() const">GetN</a>(), <a href="http://root.cern.ch/root/html/TGraph.html#TGraph:GetX" title="Double_t* TGraph::GetX() const">GetX</a>(), <a href="http://root.cern.ch/root/html/TGraph.html#TGraph:GetY" title="Double_t* TGraph::GetY() const">GetY</a>());
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../KVIDZALine.html#KVIDZALine:SetName" title="void KVIDZALine::SetName(const char* name)">SetName</a>( <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() );
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TAttFill.html#TAttFill:SetFillColor" title="void TAttFill::SetFillColor(Color_t fcolor)">SetFillColor</a>(2);
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TAttFill.html#TAttFill:SetFillStyle" title="void TAttFill::SetFillStyle(Style_t fstyle)">SetFillStyle</a>(3001);
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TAttLine.html#TAttLine:SetLineStyle" title="void TAttLine::SetLineStyle(Style_t lstyle)">SetLineStyle</a>(2);
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TAttLine.html#TAttLine:SetLineWidth" title="void TAttLine::SetLineWidth(Width_t lwidth)">SetLineWidth</a>(2);
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TAttMarker.html#TAttMarker:SetMarkerStyle" title="void TAttMarker::SetMarkerStyle(Style_t mstyle = 1)">SetMarkerStyle</a>(4);
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TAttMarker.html#TAttMarker:SetMarkerSize" title="void TAttMarker::SetMarkerSize(Size_t msize = 1)">SetMarkerSize</a>(0.8);
-    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="http://root.cern.ch/root/html/TGraph.html#TGraph:SetEditable" title="void TGraph::SetEditable(Bool_t editable = kTRUE)">SetEditable</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
-    <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;<a href="http://root.cern.ch/root/html/TGraph.html#TGraph:GetN" title="Int_t TGraph::GetN() const">GetN</a>(); i++)
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a> = <span class="keyword">new</span> TGraphErrors(<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>(), <a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>(), <a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>());
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../KVIDZALine.html#KVIDZALine:SetName" title="void KVIDZALine::SetName(const char* name)">SetName</a>( <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() );
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TAttFill:SetFillColor" title="void TAttFill::SetFillColor(Color_t fcolor)">SetFillColor</a>(2);
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TAttFill:SetFillStyle" title="void TAttFill::SetFillStyle(Style_t fstyle)">SetFillStyle</a>(3001);
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TAttLine:SetLineStyle" title="void TAttLine::SetLineStyle(Style_t lstyle)">SetLineStyle</a>(2);
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TAttLine:SetLineWidth" title="void TAttLine::SetLineWidth(Width_t lwidth)">SetLineWidth</a>(2);
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TAttMarker:SetMarkerStyle" title="void TAttMarker::SetMarkerStyle(Style_t mstyle=1)">SetMarkerStyle</a>(4);
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TAttMarker:SetMarkerSize" title="void TAttMarker::SetMarkerSize(Size_t msize=1)">SetMarkerSize</a>(0.8);
+    <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;<a href="../#TGraph:SetEditable" title="void TGraph::SetEditable(Bool_t editable=kTRUE)">SetEditable</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>(); i++)
     {
-        <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;SetPointError(i, 0., 0.5*(<a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth() const">GetWidth</a>() &lt; 16000 ? <a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth() const">GetWidth</a>() : 0));
+        <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>-&gt;SetPointError(i, 0., 0.5*(<a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth()">GetWidth</a>() &lt; 16000 ? <a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth()">GetWidth</a>() : 0));
     }
     <span class="keyword">return</span> <a href="../KVIDZALine.html#KVIDZALine:fLineWithWidth" title="TGraphErrors* KVIDZALine::fLineWithWidth">fLineWithWidth</a>;
 }
 
 <span class="comment">//_____________________________________________________________________________________________</span>
 
-<a name="svtDx"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:SetAsymWidth" title="void KVIDZALine::SetAsymWidth(Double_t d_l, Double_t d_r)">SetAsymWidth</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> d_l, <a href="../ListOfTypes.html#Double_t">Double_t</a> d_r)
+<a name="svtDx"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:SetAsymWidth" title="void KVIDZALine::SetAsymWidth(Double_t d_l,Double_t d_r)">SetAsymWidth</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> d_l, <a href="../ListOfTypes.html#Double_t">Double_t</a> d_r)
 {
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TGraph.html#TGraph:Set" title="void TGraph::Set(Int_t n)">Set</a> the natural width of the line depending on its asymptotic separation</span>
+    <span class="comment">// <a href="../#TGraph:Set" title="void TGraph::Set(Int_t n)">Set</a> the natural width of the line depending on its asymptotic separation</span>
     <span class="comment">// a gauche (d_l) and a droite (d_r) from a neighbouring line.</span>
     <span class="comment">// This method is used by <a href="../KVIDGrid.html">KVIDGrid</a>::<a href="../KVIDGrid.html#KVIDGrid:CalculateLineWidths" title="void KVIDGrid::CalculateLineWidths()">CalculateLineWidths</a></span>
     <span class="comment">//</span>
@@ -196,7 +196,7 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="qbdUGE"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Streamer" title="void KVIDZALine::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp;R__b)
+<a name="qbdUGE"></a><span class="keyword">void</span> <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Streamer" title="void KVIDZALine::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
 {
     <span class="comment">// Stream an object of class <a href="../KVIDZALine.html">KVIDZALine</a>.</span>
 
@@ -207,7 +207,7 @@ ClassImp(<a href="../KVIDZALine.html">KVIDZALine</a>)
         <span class="keyword">if</span> (R__v &lt; 2)
         {
             R__b.ReadVersion(&amp;R__s, &amp;R__c);<span class="comment">// read version of <a href="../KVIDZLine.html">KVIDZLine</a></span>
-            <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDLine.html#KVIDLine:Streamer" title="void KVIDLine::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
+            <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDLine.html#KVIDLine:Streamer" title="void KVIDLine::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
             <a href="../ListOfTypes.html#UShort_t">UShort_t</a> z;
             R__b &gt;&gt; z;
             R__b &gt;&gt; <a href="../KVIDZALine.html#KVIDZALine:fWidth" title="Double_t KVIDZALine::fWidth">fWidth</a>;
@@ -236,12 +236,12 @@ ClassImp(<a href="../KVIDZLine.html">KVIDZLine</a>)
 <span class="comment">// and must not be used.</span>
 <span class="comment">//////////////////////////////////////////////////</span>
 
-<a href="../KVIDZLine.html">KVIDZLine</a>::<a href="../KVIDZLine.html#KVIDZLine:KVIDZLine" title="KVIDZLine KVIDZLine::KVIDZLine() or overloads">KVIDZLine</a>()
+<a href="../KVIDZLine.html">KVIDZLine</a>::<a href="../KVIDZLine.html#KVIDZLine:KVIDZLine" title="KVIDZLine KVIDZLine::KVIDZLine()">KVIDZLine</a>()
 {
     <span class="comment">// This class is for backwards compatibility only</span>
 }
 
-<span class="keyword">void</span> <a href="../KVIDZLine.html">KVIDZLine</a>::<a href="../KVIDZLine.html#KVIDZLine:Streamer" title="void KVIDZLine::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp;R__b)
+<span class="keyword">void</span> <a href="../KVIDZLine.html">KVIDZLine</a>::<a href="../KVIDZLine.html#KVIDZLine:Streamer" title="void KVIDZLine::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
 {
     <span class="comment">// Stream an object of class <a href="../KVIDZLine.html">KVIDZLine</a></span>
 
@@ -251,9 +251,9 @@ ClassImp(<a href="../KVIDZLine.html">KVIDZLine</a>)
         <a href="../ListOfTypes.html#Version_t">Version_t</a> R__v = R__b.ReadVersion(&amp;R__s, &amp;R__c);
         <span class="keyword">if</span> (R__v!=2)
         {
-            <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"Streamer"</span>, <span class="string">"Reading KVIDZLine with version=%d"</span>, R__v);
+            <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"Streamer"</span>, <span class="string">"Reading KVIDZLine with version=%d"</span>, R__v);
         }
-        <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDLine.html#KVIDLine:Streamer" title="void KVIDLine::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
+        <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDLine.html#KVIDLine:Streamer" title="void KVIDLine::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
         <a href="../ListOfTypes.html#UShort_t">UShort_t</a> z;
         R__b &gt;&gt; z;
         R__b &gt;&gt; <a href="../KVIDZALine.html#KVIDZALine:fWidth" title="Double_t KVIDZALine::fWidth">fWidth</a>;
@@ -268,7 +268,7 @@ ClassImp(<a href="../KVIDZLine.html">KVIDZLine</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:20 2015            -->
+<!--   Date: Thu Sep 17 10:51:27 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
                           <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>.cpp  -  description
@@ -65,30 +65,30 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 <span class="comment">//(Zmax is taken equal to 100 when using the highest Z grid of the telescope (i.e. either</span>
 <span class="comment">//PG1 or PG2).</span>
 <span class="comment">//In addition certain telescopes have both Z and A identification for the SiGG grid.</span>
-<span class="comment">//In this case <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID() const">HasMassID</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>.</span>
+<span class="comment">//In this case <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID()">HasMassID</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>.</span>
 <span class="comment">//</span>
 <span class="comment">//All three grids were fitted using the polynomials tassangot_Z and tassangot_A</span>
 <span class="comment">//defined in <a href="../KVTGIDFunctions.html">KVTGIDFunctions</a>.</span>
 <span class="comment">//</span>
 <span class="comment">//ID SUB-CODES:</span>
 <span class="comment">//-------------</span>
-<span class="comment">// 0  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_GG" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OK_GG">k_OK_GG</a>            <span class="string">"ok in GG"</span>,</span>
-<span class="comment">// 1  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_noTGID_GG" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_noTGID_GG">k_noTGID_GG</a>        <span class="string">"no Z identification available - last grid tried GG"</span>,</span>
-<span class="comment">// 2  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_GG" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OutOfIDRange_GG">k_OutOfIDRange_GG</a>  <span class="string">"point outside of range of possible Z identification in GG"</span>,</span>
-<span class="comment">// 3  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_PG1" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OK_PG1">k_OK_PG1</a>           <span class="string">"ok in PG1"</span>,</span>
-<span class="comment">// 4  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_noTGID_PG1" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_noTGID_PG1">k_noTGID_PG1</a>       <span class="string">"no Z identification available - last grid tried PG1"</span>,</span>
-<span class="comment">// 5  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_PG1" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OutOfIDRange_PG1">k_OutOfIDRange_PG1</a> <span class="string">"point outside of range of possible Z identification in PG1"</span>,</span>
-<span class="comment">// 6  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_PG2" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OK_PG2">k_OK_PG2</a>           <span class="string">"ok in PG2"</span>,</span>
-<span class="comment">// 7  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_noTGID_PG2" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_noTGID_PG2">k_noTGID_PG2</a>       <span class="string">"no Z identification available - last grid tried PG2"</span>,</span>
-<span class="comment">// 8  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_PG2" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OutOfIDRange_PG2">k_OutOfIDRange_PG2</a> <span class="string">"point outside of range of possible Z identification in PG2"</span>,</span>
-<span class="comment">// 9  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_AnoTGID" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::kZOK_AnoTGID">kZOK_AnoTGID</a>       <span class="string">"Z ok, A identification tried but not available"</span>,</span>
-<span class="comment">//10  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_AOutOfIDRange" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::kZOK_AOutOfIDRange">kZOK_AOutOfIDRange</a> <span class="string">"Z ok, A identification tried but point to identify outside of identification range of function"</span>,</span>
-<span class="comment">//11  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_A_ZtooSmall" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::kZOK_A_ZtooSmall">kZOK_A_ZtooSmall</a>   <span class="string">"Z ok, A identification tried but IdentA called with Z&lt;1"</span>,</span>
-<span class="comment">//12  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_A_ZtooLarge" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::kZOK_A_ZtooLarge">kZOK_A_ZtooLarge</a>   <span class="string">"Z ok, A identification tried but IdentA called with Z larger than max Z defined for KVTGIDZA isotopic identification object"</span></span>
+<span class="comment">// 0  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_GG" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OK_GG">k_OK_GG</a>            <span class="string">"ok in GG"</span>,</span>
+<span class="comment">// 1  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_noTGID_GG" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_noTGID_GG">k_noTGID_GG</a>        <span class="string">"no Z identification available - last grid tried GG"</span>,</span>
+<span class="comment">// 2  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_GG" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OutOfIDRange_GG">k_OutOfIDRange_GG</a>  <span class="string">"point outside of range of possible Z identification in GG"</span>,</span>
+<span class="comment">// 3  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_PG1" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OK_PG1">k_OK_PG1</a>           <span class="string">"ok in PG1"</span>,</span>
+<span class="comment">// 4  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_noTGID_PG1" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_noTGID_PG1">k_noTGID_PG1</a>       <span class="string">"no Z identification available - last grid tried PG1"</span>,</span>
+<span class="comment">// 5  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_PG1" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OutOfIDRange_PG1">k_OutOfIDRange_PG1</a> <span class="string">"point outside of range of possible Z identification in PG1"</span>,</span>
+<span class="comment">// 6  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_PG2" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OK_PG2">k_OK_PG2</a>           <span class="string">"ok in PG2"</span>,</span>
+<span class="comment">// 7  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_noTGID_PG2" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_noTGID_PG2">k_noTGID_PG2</a>       <span class="string">"no Z identification available - last grid tried PG2"</span>,</span>
+<span class="comment">// 8  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_PG2" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OutOfIDRange_PG2">k_OutOfIDRange_PG2</a> <span class="string">"point outside of range of possible Z identification in PG2"</span>,</span>
+<span class="comment">// 9  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_AnoTGID" title="const enum KVIDSiCsI5:: KVIDSiCsI5::kZOK_AnoTGID">kZOK_AnoTGID</a>       <span class="string">"Z ok, A identification tried but not available"</span>,</span>
+<span class="comment">//10  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_AOutOfIDRange" title="const enum KVIDSiCsI5:: KVIDSiCsI5::kZOK_AOutOfIDRange">kZOK_AOutOfIDRange</a> <span class="string">"Z ok, A identification tried but point to identify outside of identification range of function"</span>,</span>
+<span class="comment">//11  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_A_ZtooSmall" title="const enum KVIDSiCsI5:: KVIDSiCsI5::kZOK_A_ZtooSmall">kZOK_A_ZtooSmall</a>   <span class="string">"Z ok, A identification tried but IdentA called with Z&lt;1"</span>,</span>
+<span class="comment">//12  <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:kZOK_A_ZtooLarge" title="const enum KVIDSiCsI5:: KVIDSiCsI5::kZOK_A_ZtooLarge">kZOK_A_ZtooLarge</a>   <span class="string">"Z ok, A identification tried but IdentA called with Z larger than max Z defined for KVTGIDZA isotopic identification object"</span></span>
 <span class="comment">/////////////////////////////////////////////////////////////////////////////////////</span>
 <a name="nu4ToC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:IdentifyZ" title="Double_t KVIDSiCsI5::IdentifyZ(Double_t&amp; funLTG)">IdentifyZ</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> &amp; funLTG)
 {
-   <span class="comment">//<a href="../KVIDSiCsI5.html#KVIDSiCsI5:Identify" title="Bool_t KVIDSiCsI5::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a> Z using the following method:</span>
+   <span class="comment">//<a href="../KVIDSiCsI5.html#KVIDSiCsI5:Identify" title="Bool_t KVIDSiCsI5::Identify(KVIdentificationResult* ,Double_t x=-1.,Double_t y=-1.)">Identify</a> Z using the following method:</span>
    <span class="comment">//      - first try GG matrix</span>
    <span class="comment">//      if this doesn't work, or if the Z found is greater than the maximum</span>
    <span class="comment">//      Z for GG....</span>
@@ -99,33 +99,33 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> Z = -1.;
 
-   <span class="keyword">if</span>(((<a href="../KVSilicon.html">KVSilicon</a> *) <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) const or overloads">GetDetector</a>(1))-&gt;GetGG() &lt; 4090){
+   <span class="keyword">if</span>(((<a href="../KVSilicon.html">KVSilicon</a> *) <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1))-&gt;GetGG() &lt; 4090){
       <span class="comment">//try GG identification if SIGG is not saturated</span>
-      <span class="comment">//the condition is applied directly to the raw channel number instead of <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>()</span>
-      <span class="comment">//so that it is correct even if <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a> rescales for the change in gain</span>
-      Z = <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<span class="string">"GG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<span class="string">"GG"</span>), funLTG, <span class="string">"GG"</span>);<span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(this, funLTG, <span class="string">"GG"</span>, <span class="string">"GG"</span>);</span>
-      <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_GG" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_GG">k_GG</a>;
+      <span class="comment">//the condition is applied directly to the raw channel number instead of <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>()</span>
+      <span class="comment">//so that it is correct even if <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a> rescales for the change in gain</span>
+      Z = <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<span class="string">"GG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<span class="string">"GG"</span>), funLTG, <span class="string">"GG"</span>);<span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(this, funLTG, <span class="string">"GG"</span>, <span class="string">"GG"</span>);</span>
+      <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_GG" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_GG">k_GG</a>;
    }
 
    <span class="keyword">if</span> (Z &lt; 0.) {
 
-      Z = <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<span class="string">"PG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<span class="string">"PG"</span>), funLTG, <span class="string">"PG1"</span>); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(this, funLTG, <span class="string">"PG1"</span>, <span class="string">"PG"</span>);</span>
-      <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_PG1" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_PG1">k_PG1</a>;
+      Z = <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<span class="string">"PG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<span class="string">"PG"</span>), funLTG, <span class="string">"PG1"</span>); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(this, funLTG, <span class="string">"PG1"</span>, <span class="string">"PG"</span>);</span>
+      <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_PG1" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_PG1">k_PG1</a>;
 
    } <span class="keyword">else</span> {
       <span class="comment">//successful GG identification</span>
       <span class="keyword">return</span> Z;
    }
 
-   <span class="keyword">if</span> (!<a href="../KVIDSiCsI5.html#KVIDSiCsI5:HasPG2" title="Bool_t KVIDSiCsI5::HasPG2() const">HasPG2</a>()) {
+   <span class="keyword">if</span> (!<a href="../KVIDSiCsI5.html#KVIDSiCsI5:HasPG2" title="Bool_t KVIDSiCsI5::HasPG2()">HasPG2</a>()) {
       <span class="comment">//no 2nd PG fit - this is the end</span>
       <span class="keyword">return</span> Z;
    }
 
    <span class="keyword">if</span> (Z &lt; 0.) {
 
-      Z = <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<span class="string">"PG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<span class="string">"PG"</span>), funLTG, <span class="string">"PG2"</span>); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(this, funLTG, <span class="string">"PG2"</span>, <span class="string">"PG"</span>);</span>
-      <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_PG2" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_PG2">k_PG2</a>;
+      Z = <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<span class="string">"PG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<span class="string">"PG"</span>), funLTG, <span class="string">"PG2"</span>); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(this, funLTG, <span class="string">"PG2"</span>, <span class="string">"PG"</span>);</span>
+      <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_PG2" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_PG2">k_PG2</a>;
 
    }
 
@@ -133,15 +133,15 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="znjokC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:Identify" title="Bool_t KVIDSiCsI5::Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.)">Identify</a>(<a href="../KVIdentificationResult.html">KVIdentificationResult</a>* IDR, <a href="../ListOfTypes.html#Double_t">Double_t</a> , <a href="../ListOfTypes.html#Double_t">Double_t</a> )
+<a name="znjokC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:Identify" title="Bool_t KVIDSiCsI5::Identify(KVIdentificationResult* ,Double_t x=-1.,Double_t y=-1.)">Identify</a>(<a href="../KVIdentificationResult.html">KVIdentificationResult</a>* IDR, <a href="../ListOfTypes.html#Double_t">Double_t</a> , <a href="../ListOfTypes.html#Double_t">Double_t</a> )
 {
    <span class="comment">//Identification of particles using Si(300)-CsI matrices for 5th campaign.</span>
-   <span class="comment">//First of all, Z identification is attempted with <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>.</span>
+   <span class="comment">//First of all, Z identification is attempted with <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>.</span>
    <span class="comment">//If successful, if this telescope has mass identification capabilities</span>
-   <span class="comment">//(<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID() const">HasMassID</a>()=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>), then if the identified Z is not too large for the</span>
+   <span class="comment">//(<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID()">HasMassID</a>()=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>), then if the identified Z is not too large for the</span>
    <span class="comment">//GG grid Z&amp;A identification, we identify the mass of the particle.</span>
    <span class="comment">//In this case, a further check is made that the resulting nucleus is not</span>
-   <span class="comment">//too bizarre, i.e. it must be in the <a href="../KVNucleus.html">KVNucleus</a> mass table (<a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z = -1, int a = -1) const">IsKnown</a> = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>).</span>
+   <span class="comment">//too bizarre, i.e. it must be in the <a href="../KVNucleus.html">KVNucleus</a> mass table (<a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:IsKnown" title="Bool_t KVNucleus::IsKnown(int z=-1,int a=-1)">IsKnown</a> = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>).</span>
    <span class="comment">//If not, or if mass identification is not possible, the mass of the nucleus</span>
    <span class="comment">//is deduced from Z using the default mass formula of class <a href="../KVNucleus.html">KVNucleus</a>.</span>
    <span class="comment">//</span>
@@ -153,15 +153,15 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
    <a href="../ListOfTypes.html#Int_t">Int_t</a> ia = -1;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> iz = -1;
 
- 		IDR-&gt;SetIDType( <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>() );
+ 		IDR-&gt;SetIDType( <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>() );
 		IDR-&gt;IDattempted = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
   <a href="../ListOfTypes.html#Double_t">Double_t</a> Z = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:IdentifyZ" title="Double_t KVIDSiCsI5::IdentifyZ(Double_t&amp; funLTG)">IdentifyZ</a>(funLTG_Z);
 
-   <span class="comment">//use <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a> value for <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a> as identification subcode</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> Zstatus = (<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() + 3 * <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a>);
+   <span class="comment">//use <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a> value for <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a> as identification subcode</span>
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> Zstatus = (<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() + 3 * <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fWhichGrid" title="Int_t KVIDSiCsI5::fWhichGrid">fWhichGrid</a>);
    IDR-&gt;IDquality = Zstatus;
 
-   <span class="keyword">if</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() != <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>)
+   <span class="keyword">if</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() != <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>)
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;            <span class="comment">// no ID</span>
 
    iz = TMath::Nint(Z);
@@ -169,18 +169,18 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
    IDR-&gt;IDOK = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 
    <span class="comment">//is mass identification a possibility ?</span>
-   <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID() const">HasMassID</a>() &amp;&amp; Zstatus == <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_GG" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OK_GG">k_OK_GG</a>) {     <span class="comment">//only in GG...</span>
+   <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID()">HasMassID</a>() &amp;&amp; Zstatus == <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OK_GG" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OK_GG">k_OK_GG</a>) {     <span class="comment">//only in GG...</span>
 
-      mass = <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<span class="string">"GG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<span class="string">"GG"</span>), funLTG_A, <span class="string">"GG"</span>, iz); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a>(this, funLTG_A, <span class="string">"GG"</span>, <span class="string">"GG"</span>, iz);</span>
+      mass = <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<span class="string">"GG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<span class="string">"GG"</span>), funLTG_A, <span class="string">"GG"</span>, iz); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a>(this, funLTG_A, <span class="string">"GG"</span>, <span class="string">"GG"</span>, iz);</span>
 
-      <span class="keyword">if</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() != <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>)     <span class="comment">//mass ID not good ?</span>
+      <span class="keyword">if</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() != <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>)     <span class="comment">//mass ID not good ?</span>
       {
          <span class="comment">//only Z identified</span>
          IDR-&gt;Z = iz;
          IDR-&gt;PID = Z;
          IDR-&gt;Zident = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
          <span class="comment">//subcode says <span class="string">"Z ok but A failed because..."</span></span>
-         IDR-&gt;IDquality = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_PG2" title="KVIDSiCsI5::(anonymous) KVIDSiCsI5::k_OutOfIDRange_PG2">k_OutOfIDRange_PG2</a> + <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>();
+         IDR-&gt;IDquality = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:k_OutOfIDRange_PG2" title="const enum KVIDSiCsI5:: KVIDSiCsI5::k_OutOfIDRange_PG2">k_OutOfIDRange_PG2</a> + <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>();
       }
 		<span class="keyword">else</span>                    <span class="comment">//both Z and A successful ?</span>
       {
@@ -204,29 +204,29 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
          <span class="keyword">if</span>(!tmp.IsKnown()){
          	<span class="comment">// if ia seems too light, we try with iz-1</span>
          	<span class="comment">// if ia seems too heavy, we try with iz+1</span>
-         	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : initial ID Z=%d A=%d funLTG=%g"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), iz, ia, funLTG_A);
+         	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : initial ID Z=%d A=%d funLTG=%g"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), iz, ia, funLTG_A);
          	<a href="../ListOfTypes.html#Int_t">Int_t</a> iz2 = (ia &lt; 2*iz ? iz-1 : iz+1);
          	<span class="keyword">if</span>(iz2&gt;0){
          		<a href="../ListOfTypes.html#Double_t">Double_t</a> old_funLTG_A = funLTG_A;
-                        <a href="../ListOfTypes.html#Double_t">Double_t</a> new_mass = <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<span class="string">"GG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<span class="string">"GG"</span>), funLTG_A, <span class="string">"GG"</span>, iz2); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a>(this, funLTG_A, <span class="string">"GG"</span>, <span class="string">"GG"</span>, iz2);</span>
+                        <a href="../ListOfTypes.html#Double_t">Double_t</a> new_mass = <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a>(<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<span class="string">"GG"</span>), <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<span class="string">"GG"</span>), funLTG_A, <span class="string">"GG"</span>, iz2); <span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a>(this, funLTG_A, <span class="string">"GG"</span>, <span class="string">"GG"</span>, iz2);</span>
       			<span class="comment">// is this a better solution ?</span>
-      			<span class="keyword">if</span>(<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() == <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>){
+      			<span class="keyword">if</span>(<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() == <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>){
       				<a href="../ListOfTypes.html#Int_t">Int_t</a> new_ia = TMath::Nint(new_mass);
       				tmp.SetZ(iz2); tmp.SetA(new_ia);
-         			<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : new ID Z=%d A=%d funLTG=%g"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), iz2, new_ia, funLTG_A);
+         			<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : new ID Z=%d A=%d funLTG=%g"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), iz2, new_ia, funLTG_A);
       				<span class="keyword">if</span>(tmp.IsKnown() &amp;&amp; (TMath::Abs(funLTG_A)&lt;TMath::Abs(old_funLTG_A))){
       					<span class="comment">// new nucleus is known and point is closer to line</span>
       					iz = iz2; ia=new_ia; mass=new_mass;
-         				<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : accepted new ID"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>());
+         				<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : accepted new ID"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>());
       				}
       				<span class="keyword">else</span>
       				{
-         				<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : rejected new ID"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>());
+         				<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : rejected new ID"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>());
       				}
       			}
       			<span class="keyword">else</span>
       			{
-         			<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : failed to obtain new ID with Z=%d"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), iz2);
+         			<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Identify"</span>,<span class="string">"%s : failed to obtain new ID with Z=%d"</span>, <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), iz2);
       			}
          	}
          }
@@ -251,23 +251,23 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
 <span class="comment">//__________________________________________________________________________//</span>
 
-<a name="jCORdE"></a><span class="keyword">void</span> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:Print" title="void KVIDSiCsI5::Print(Option_t* opt = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *) <span class="keyword">const</span>
+<a name="jCORdE"></a><span class="keyword">void</span> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:Print" title="void KVIDSiCsI5::Print(Option_t* opt=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *) <span class="keyword">const</span>
 {
-   cout &lt;&lt; <span class="string">"KVIDSiCsI5 : "</span> &lt;&lt; <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>() &lt;&lt; endl;
-   <span class="keyword">if</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions() const">GetListOfIDFunctions</a>().<a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize() const">GetSize</a>() &gt; 0) {
-      <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID() const">HasMassID</a>()) {
-         cout &lt;&lt; <span class="string">"  A and Z identification"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"KVIDSiCsI5 : "</span> &lt;&lt; <a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>() &lt;&lt; endl;
+   <span class="keyword">if</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions()">GetListOfIDFunctions</a>().<a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>() &gt; 0) {
+      <span class="keyword">if</span> (<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID()">HasMassID</a>()) {
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"  A and Z identification"</span> &lt;&lt; endl;
       } <span class="keyword">else</span> {
-         cout &lt;&lt; <span class="string">"  Z identification only"</span> &lt;&lt; endl;
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"  Z identification only"</span> &lt;&lt; endl;
       }
-      cout &lt;&lt; <span class="string">"Identification objects :"</span> &lt;&lt; endl;
-      <a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions() const">GetListOfIDFunctions</a>().<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:Print" title="void TCollection::Print(Option_t* option = &quot;&quot;) const or overloads">Print</a>();
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Identification objects :"</span> &lt;&lt; endl;
+      <a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions()">GetListOfIDFunctions</a>().<a href="../#TCollection:Print" title="void TCollection::Print(Option_t* option=&quot;&quot;) or overloads">Print</a>();
    }
 }
 
 <span class="comment">//__________________________________________________________________________//</span>
 
-<a name="LntDKC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
+<a name="LntDKC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
 {
    <span class="comment">//Calculates current X coordinate for identification.</span>
    <span class="comment">//It is the CsI detector's total light output calculated from current values of <span class="string">'R'</span> and <span class="string">'L'</span></span>
@@ -277,12 +277,12 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> rapide = (<a href="../ListOfTypes.html#Double_t">Double_t</a>)<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVCsI.html#KVCsI:GetR" title="Float_t KVCsI::GetR()">GetR</a>() + <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsIRPedestal" title="Double_t KVIDSiCsI5::fCsIRPedestal">fCsIRPedestal</a>;
    <a href="../ListOfTypes.html#Double_t">Double_t</a> lente = (<a href="../ListOfTypes.html#Double_t">Double_t</a>)<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVCsI.html#KVCsI:GetL" title="Float_t KVCsI::GetL()">GetL</a>() + <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsILPedestal" title="Double_t KVIDSiCsI5::fCsILPedestal">fCsILPedestal</a>;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> h = (<a href="../ListOfTypes.html#Double_t">Double_t</a>)<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>(rapide,lente);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> h = (<a href="../ListOfTypes.html#Double_t">Double_t</a>)<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>(rapide,lente);
    <span class="keyword">return</span> h;
 }
 <span class="comment">//__________________________________________________________________________//</span>
 
-<a name="hujYfC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetPedestalX" title="Double_t KVIDSiCsI5::GetPedestalX(Option_t* opt = &quot;&quot;)">GetPedestalX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
+<a name="hujYfC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetPedestalX" title="Double_t KVIDSiCsI5::GetPedestalX(Option_t* opt=&quot;&quot;)">GetPedestalX</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *)
 {
    <span class="comment">//Returns pedestal of X coordinate for identification.</span>
    <span class="comment">//It is the CsI detector's total light output calculated values of <span class="string">'R'</span> and <span class="string">'L'</span></span>
@@ -292,7 +292,7 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> rapide = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsIRPedestal" title="Double_t KVIDSiCsI5::fCsIRPedestal">fCsIRPedestal</a>;
    <a href="../ListOfTypes.html#Double_t">Double_t</a> lente = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsILPedestal" title="Double_t KVIDSiCsI5::fCsILPedestal">fCsILPedestal</a>;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> h = (<a href="../ListOfTypes.html#Double_t">Double_t</a>)<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>(rapide,lente);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> h = (<a href="../ListOfTypes.html#Double_t">Double_t</a>)<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>(rapide,lente);
    <span class="keyword">return</span> h;
 }
 
@@ -306,22 +306,22 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
    <span class="comment">// to this telescope for the current run.</span>
 
 	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a> = (<a href="../KVSilicon.html">KVSilicon</a>*)GetDetector(1);
-	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSiPGPedestal" title="Double_t KVIDSiCsI5::fSiPGPedestal">fSiPGPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"PG"</span>);
-	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSiGGPedestal" title="Double_t KVIDSiCsI5::fSiGGPedestal">fSiGGPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>);
-	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSiGain" title="Double_t KVIDSiCsI5::fSiGain">fSiGain</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a>-><a href="../KVDetector.html#KVDetector:GetGain" title="Double_t KVDetector::GetGain() const">GetGain</a>();
+	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSiPGPedestal" title="Double_t KVIDSiCsI5::fSiPGPedestal">fSiPGPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"PG"</span>);
+	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSiGGPedestal" title="Double_t KVIDSiCsI5::fSiGGPedestal">fSiGGPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>);
+	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSiGain" title="Double_t KVIDSiCsI5::fSiGain">fSiGain</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fSi" title="KVSilicon* KVIDSiCsI5::fSi">fSi</a>-><a href="../KVDetector.html#KVDetector:GetGain" title="Double_t KVDetector::GetGain()">GetGain</a>();
 	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a> = (<a href="../KVCsI.html">KVCsI</a>*)GetDetector(2);
-	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsIRPedestal" title="Double_t KVIDSiCsI5::fCsIRPedestal">fCsIRPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"R"</span>);
-	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsILPedestal" title="Double_t KVIDSiCsI5::fCsILPedestal">fCsILPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"L"</span>);
-   <span class="keyword">if</span>( <a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions() const">GetListOfIDFunctions</a>().<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:GetEntries" title="Int_t TCollection::GetEntries() const">GetEntries</a>() ){
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:SetBit" title="void TObject::SetBit(UInt_t f, Bool_t set) or overloads">SetBit</a>(kReadyForID);
+	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsIRPedestal" title="Double_t KVIDSiCsI5::fCsIRPedestal">fCsIRPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"R"</span>);
+	<a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsILPedestal" title="Double_t KVIDSiCsI5::fCsILPedestal">fCsILPedestal</a> = <a href="../KVIDSiCsI5.html#KVIDSiCsI5:fCsI" title="KVCsI* KVIDSiCsI5::fCsI">fCsI</a>-><a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"L"</span>);
+   <span class="keyword">if</span>( <a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions()">GetListOfIDFunctions</a>().<a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>() ){
+      <a href="../#TObject:SetBit" title="void TObject::SetBit(UInt_t f,Bool_t set) or overloads">SetBit</a>(kReadyForID);
    }
    <span class="keyword">else</span>
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:ResetBit" title="void TObject::ResetBit(UInt_t f)">ResetBit</a>(kReadyForID);
+      <a href="../#TObject:ResetBit" title="void TObject::ResetBit(UInt_t f)">ResetBit</a>(kReadyForID);
 }
 
 <span class="comment">//__________________________________________________________________________//</span>
 
-<a name="JINysB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt = &quot;&quot;)">GetIDMapY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
+<a name="JINysB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapY" title="Double_t KVIDSiCsI5::GetIDMapY(Option_t* opt=&quot;&quot;)">GetIDMapY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
 {
    <span class="comment">//Calculates current Y coordinate for identification.</span>
    <span class="comment">//It is the silicon detector's current grand gain (by default, i.e. opt=<span class="string">""</span>, or if opt=<span class="string">"GG"</span>)</span>
@@ -345,7 +345,7 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
 <span class="comment">//__________________________________________________________________________//</span>
 
-<a name="vYNRHD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetPedestalY" title="Double_t KVIDSiCsI5::GetPedestalY(Option_t* opt = &quot;&quot;)">GetPedestalY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
+<a name="vYNRHD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetPedestalY" title="Double_t KVIDSiCsI5::GetPedestalY(Option_t* opt=&quot;&quot;)">GetPedestalY</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
 {
    <span class="comment">//Calculates current Y coordinate pedestal for identification.</span>
    <span class="comment">//It is the silicon detector's current grand gain (by default, i.e. opt=<span class="string">""</span>, or if opt=<span class="string">"GG"</span>)</span>
@@ -364,30 +364,30 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
 <span class="comment">//____________________________________________________________________________________</span>
 
-<a name="dyaclB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:SetIdentificationParameters" title="Bool_t KVIDSiCsI5::SetIdentificationParameters(const KVMultiDetArray*)">SetIdentificationParameters</a>(<span class="keyword">const</span> <a href="../KVMultiDetArray.html">KVMultiDetArray</a>* MDA)
+<a name="dyaclB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:SetIdentificationParameters" title="Bool_t KVIDSiCsI5::SetIdentificationParameters(const KVMultiDetArray* )">SetIdentificationParameters</a>(<span class="keyword">const</span> <a href="../KVMultiDetArray.html">KVMultiDetArray</a>* MDA)
 {
    <span class="comment">//Initialise the identification parameters (grids, etc.) of ALL identification telescopes of this</span>
    <span class="comment">//kind (label) in the multidetector array. Therefore this method need only be called once, and not</span>
-   <span class="comment">//called for each telescope. The kind/label (returned by <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>) of the telescope corresponds</span>
+   <span class="comment">//called for each telescope. The kind/label (returned by <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>) of the telescope corresponds</span>
    <span class="comment">//to the URI used to find the plugin class in $KVROOT/KVFiles/.kvrootrc.</span>
 <span class="comment">//Parameters are read from the file with name given by the environment variable</span>
 <span class="comment">//INDRA_camp5.IdentificationParameterFile.SI-CSI:       [filename]</span>
 
-   TString filename = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>( Form(<span class="string">"IdentificationParameterFile.%s"</span>,<a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>()) );
+   TString filename = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>( Form(<span class="string">"IdentificationParameterFile.%s"</span>,<a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>()) );
    <span class="keyword">if</span>( filename == <span class="string">""</span> ){
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"SetIdentificationParameters"</span>,
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"SetIdentificationParameters"</span>,
             <span class="string">"No filename defined. Should be given by %s.IdentificationParameterFile.%s"</span>,
-            <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel() const">GetLabel</a>());
+            <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetLabel" title="const Char_t* KVBase::GetLabel()">GetLabel</a>());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
    TString path;
-   <span class="keyword">if</span> (!<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name, TString&amp; fullpath, const Char_t* kvsubdir = &quot;&quot;)">SearchKVFile</a>(filename.Data(), path, <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>())){
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"SetIdentificationParameters"</span>,
+   <span class="keyword">if</span> (!<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(filename.Data(), path, <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())){
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"SetIdentificationParameters"</span>,
             <span class="string">"File %s not found. Should be in $KVROOT/KVFiles/%s"</span>,
-            filename.Data(), <a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+            filename.Data(), <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
-   <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"SetIdentificationParameters"</span>, <span class="string">"Using file %s"</span>, path.Data());
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SetIdentificationParameters"</span>, <span class="string">"Using file %s"</span>, path.Data());
    <a href="../ListOfTypes.html#ifstream">ifstream</a> datfile;
    datfile.open(path.Data());
    <a href="../KVString.html">KVString</a> aline;
@@ -409,14 +409,14 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
             aline.ReadLine(datfile);
             <a href="../ListOfTypes.html#Bool_t">Bool_t</a> _Aident = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
             <span class="keyword">if</span> (aline.BeginsWith(<span class="string">"MASS_ID"</span>)) {
-               idt-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:SetHasMassID" title="void KVIDTelescope::SetHasMassID(Bool_t yes = kTRUE)">SetHasMassID</a>();
+               idt-&gt;<a href="../KVIDTelescope.html#KVIDTelescope:SetHasMassID" title="void KVIDTelescope::SetHasMassID(Bool_t yes=kTRUE)">SetHasMassID</a>();
                _Aident = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
                aline.Remove(0, 8);
             }
             sscanf(aline.Data(), <span class="string">"%s"</span>, type);
 
             <span class="keyword">if</span> (!strcmp(type, <span class="string">"PG2"</span>)){
-               idt-&gt;<a href="../KVIDSiCsI5.html#KVIDSiCsI5:SetHasPG2" title="void KVIDSiCsI5::SetHasPG2(Bool_t yes = kTRUE)">SetHasPG2</a>();
+               idt-&gt;<a href="../KVIDSiCsI5.html#KVIDSiCsI5:SetHasPG2" title="void KVIDSiCsI5::SetHasPG2(Bool_t yes=kTRUE)">SetHasPG2</a>();
 				}
 
             aline.ReadLine(datfile);
@@ -430,16 +430,16 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
                <span class="comment">//A-identification functional. Set name of parameter <span class="string">"Z"</span></span>
                _tgid =
                    <span class="keyword">new</span> <a href="../KVTGIDZA.html">KVTGIDZA</a>(idt-&gt;
-                                <a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name, const Char_t* id_type, const Char_t* grid_type)">GetTGIDName</a>(idt-&gt;<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <span class="string">"A"</span>, type),
+                                <a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name,const Char_t* id_type,const Char_t* grid_type)">GetTGIDName</a>(idt-&gt;<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <span class="string">"A"</span>, type),
                                 <span class="string">"tassangot_A"</span>, 0.1, 100., 13, 11, 12);
                _tgid-&gt;SetParName(10, <span class="string">"Z"</span>);
                _tgid2 =
-                   <span class="keyword">new</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>(idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name, const Char_t* id_type, const Char_t* grid_type)">GetTGIDName</a>(idt-&gt;<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <span class="string">"Z"</span>, type),
+                   <span class="keyword">new</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>(idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name,const Char_t* id_type,const Char_t* grid_type)">GetTGIDName</a>(idt-&gt;<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <span class="string">"Z"</span>, type),
                                <span class="string">"pichon_Z"</span>, 0.1, 100., 12, 10, 11);
             } <span class="keyword">else</span> {
                <span class="comment">//Z-identification functional.</span>
                _tgid =
-                   <span class="keyword">new</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>(idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name, const Char_t* id_type, const Char_t* grid_type)">GetTGIDName</a>(idt-&gt;<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName() const">GetName</a>(), <span class="string">"Z"</span>, type),
+                   <span class="keyword">new</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>(idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name,const Char_t* id_type,const Char_t* grid_type)">GetTGIDName</a>(idt-&gt;<a href="../KVINDRAIDTelescope.html#KVINDRAIDTelescope:GetName" title="const Char_t* KVINDRAIDTelescope::GetName()">GetName</a>(), <span class="string">"Z"</span>, type),
                                <span class="string">"pichon_Z"</span>, 0.1, 100., 12, 10, 11);
             }
 
@@ -463,9 +463,9 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
             }
             <span class="keyword">delete</span> par_arr;
             <span class="comment">//add identification object to telescope's ID manager</span>
-            idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:AddTGID" title="void KVTGIDManager::AddTGID(KVTGID*)">AddTGID</a>(_tgid);
+            idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:AddTGID" title="void KVTGIDManager::AddTGID(KVTGID* )">AddTGID</a>(_tgid);
             <span class="keyword">if</span> (_Aident)
-               idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:AddTGID" title="void KVTGIDManager::AddTGID(KVTGID*)">AddTGID</a>(_tgid2);
+               idt-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:AddTGID" title="void KVTGIDManager::AddTGID(KVTGID* )">AddTGID</a>(_tgid2);
          }
       }
       aline.ReadLine(datfile);
@@ -478,36 +478,36 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 
 <a name="bUL8kC"></a><span class="keyword">void</span> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:RemoveIdentificationParameters" title="void KVIDSiCsI5::RemoveIdentificationParameters()">RemoveIdentificationParameters</a>()
 {
-   <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a> any <a href="../KVTGID.html">KVTGID</a> objects associated with this telescope</span>
+   <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> any <a href="../KVTGID.html">KVTGID</a> objects associated with this telescope</span>
    <a href="../KVTGIDManager.html#KVTGIDManager:RemoveAllTGID" title="void KVTGIDManager::RemoveAllTGID()">RemoveAllTGID</a>();
-   <a href="../KVIDTelescope.html#KVIDTelescope:SetHasMassID" title="void KVIDTelescope::SetHasMassID(Bool_t yes = kTRUE)">SetHasMassID</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
-   <a href="../KVIDSiCsI5.html#KVIDSiCsI5:SetHasPG2" title="void KVIDSiCsI5::SetHasPG2(Bool_t yes = kTRUE)">SetHasPG2</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+   <a href="../KVIDTelescope.html#KVIDTelescope:SetHasMassID" title="void KVIDTelescope::SetHasMassID(Bool_t yes=kTRUE)">SetHasMassID</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+   <a href="../KVIDSiCsI5.html#KVIDSiCsI5:SetHasPG2" title="void KVIDSiCsI5::SetHasPG2(Bool_t yes=kTRUE)">SetHasPG2</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
 }
 
-<a name="Px_.fC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetMeanDEFromID" title="Double_t KVIDSiCsI5::GetMeanDEFromID(Int_t&amp; status, Int_t Z, Int_t A = -1, Double_t Eres = -1.)">GetMeanDEFromID</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;status, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> Eres)
+<a name="Px_.fC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>::<a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetMeanDEFromID" title="Double_t KVIDSiCsI5::GetMeanDEFromID(Int_t&amp; status,Int_t Z,Int_t A=-1,Double_t Eres=-1.)">GetMeanDEFromID</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;status, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> Eres)
 {
 	<span class="comment">// Returns the Y-axis value in the 2D identification map containing isotope (Z,A)</span>
-	<span class="comment">// corresponding to either the given X-axis/Eres value or the current X-axis value given by <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>.</span>
+	<span class="comment">// corresponding to either the given X-axis/Eres value or the current X-axis value given by <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>.</span>
 	<span class="comment">// If no mass information is available, just give Z.</span>
 	<span class="comment">//</span>
-	<span class="comment">// This method overrides <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetMeanDEFromID" title="Double_t KVIDTelescope::GetMeanDEFromID(Int_t&amp; status, Int_t Z, Int_t A = -1, Double_t Eres = -1.)">GetMeanDEFromID</a>, as here we have</span>
+	<span class="comment">// This method overrides <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetMeanDEFromID" title="Double_t KVIDTelescope::GetMeanDEFromID(Int_t&amp; status,Int_t Z,Int_t A=-1,Double_t Eres=-1.0)">GetMeanDEFromID</a>, as here we have</span>
 	<span class="comment">// to handle the LTG fits used for identification. This means scanning the TGID objects associated with</span>
 	<span class="comment">// this telescope until we find one with the right Z range, and then calculating</span>
 	<span class="comment">// the Y-coordinate for the current X-coordinate value.</span>
 	<span class="comment">//</span>
-	<span class="comment">// Status is same as for <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetMeanDEFromID" title="Double_t KVIDTelescope::GetMeanDEFromID(Int_t&amp; status, Int_t Z, Int_t A = -1, Double_t Eres = -1.)">GetMeanDEFromID</a>.</span>
+	<span class="comment">// Status is same as for <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../KVIDTelescope.html#KVIDTelescope:GetMeanDEFromID" title="Double_t KVIDTelescope::GetMeanDEFromID(Int_t&amp; status,Int_t Z,Int_t A=-1,Double_t Eres=-1.0)">GetMeanDEFromID</a>.</span>
 
     status = kMeanDE_OK;
-    <span class="keyword">if</span>(!<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID() const">HasMassID</a>()){
+    <span class="keyword">if</span>(!<a href="../KVIDTelescope.html#KVIDTelescope:HasMassID" title="Bool_t KVIDTelescope::HasMassID()">HasMassID</a>()){
         <span class="comment">// mass identification not possible for telescope - ignore A</span>
         A=-1;
     }
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> x = (Eres &lt; 0 ? <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt = &quot;&quot;)">GetIDMapX</a>() : Eres);
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> x = (Eres &lt; 0 ? <a href="../KVIDSiCsI5.html#KVIDSiCsI5:GetIDMapX" title="Double_t KVIDSiCsI5::GetIDMapX(Option_t* opt=&quot;&quot;)">GetIDMapX</a>() : Eres);
     <span class="comment">// loop over TGID objects</span>
-    TIter next( &amp;<a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions() const">GetListOfIDFunctions</a>() );
+    TIter next( &amp;<a href="../KVTGIDManager.html#KVTGIDManager:GetListOfIDFunctions" title="const KVList&amp; KVTGIDManager::GetListOfIDFunctions()">GetListOfIDFunctions</a>() );
     <a href="../KVTGID.html">KVTGID</a>* tgid;
     <span class="keyword">while</span>( (tgid=(<a href="../KVTGID.html">KVTGID</a>*)next()) ){
-        <span class="keyword">if</span>(Z&gt;=tgid-&gt;GetIDmin() &amp;&amp; Z&lt;=tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>()){
+        <span class="keyword">if</span>(Z&gt;=tgid-&gt;GetIDmin() &amp;&amp; Z&lt;=tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>()){
             <span class="keyword">if</span>(A&gt;0 &amp;&amp; tgid-&gt;GetZorA()){
                 <span class="comment">// this is a Z-only identification object &amp; we require isotopic resolution</span>
                 <span class="keyword">continue</span>;
@@ -542,7 +542,7 @@ ClassImp(<a href="../KVIDSiCsI5.html">KVIDSiCsI5</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

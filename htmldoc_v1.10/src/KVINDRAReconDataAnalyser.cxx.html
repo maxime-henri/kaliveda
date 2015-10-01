@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:38 2015            -->
+<!--   Date: Thu Sep 17 10:51:36 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>.cpp,v 1.4 2007/11/15 14:59:45 franklan Exp $
@@ -45,7 +45,7 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 <span class="comment">// For analysing reconstructed INDRA data</span>
 <span class="comment">//</span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
-<a name="yphU_"></a><a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:KVINDRAReconDataAnalyser" title="KVINDRAReconDataAnalyser KVINDRAReconDataAnalyser::KVINDRAReconDataAnalyser() or overloads">KVINDRAReconDataAnalyser</a>()
+<a name="yphU_"></a><a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:KVINDRAReconDataAnalyser" title="KVINDRAReconDataAnalyser KVINDRAReconDataAnalyser::KVINDRAReconDataAnalyser()">KVINDRAReconDataAnalyser</a>()
 {
    <span class="comment">//Default constructor</span>
    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>=<span class="string">"none"</span>;
@@ -89,16 +89,16 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
       <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ChooseKVDataSelector" title="void KVINDRAReconDataAnalyser::ChooseKVDataSelector()">ChooseKVDataSelector</a>();
    }
 
-   cout &lt;&lt; <span class="string">"============&gt; Analysis summary &lt;============="</span> &lt;&lt; endl;
-   cout &lt;&lt; <span class="string">"Analysis of runs "</span> &lt;&lt; fRunList.
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"============&gt; Analysis summary &lt;============="</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Analysis of runs "</span> &lt;&lt; fRunList.
        GetList() &lt;&lt; <span class="string">" with the KVSelector "</span>;
-   cout &lt;&lt; <span class="string">"\""</span> &lt;&lt; <a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>() &lt;&lt; <span class="string">"\"."</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\""</span> &lt;&lt; <a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>() &lt;&lt; <span class="string">"\"."</span> &lt;&lt; endl;
    <span class="keyword">if</span> (nbEventToRead) {
-      cout &lt;&lt; nbEventToRead &lt;&lt; <span class="string">" events will be processed."</span> &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; nbEventToRead &lt;&lt; <span class="string">" events will be processed."</span> &lt;&lt; endl;
    } <span class="keyword">else</span> {
-      cout &lt;&lt; <span class="string">"All events will be processed."</span> &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"All events will be processed."</span> &lt;&lt; endl;
    }
-   cout &lt;&lt; <span class="string">"============================================="</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"============================================="</span> &lt;&lt; endl;
    
    <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
@@ -124,57 +124,57 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 	<span class="comment">// seems to have a little difficulty</span>
    <span class="keyword">while</span>( !fRunList.End() ){
       run = fRunList.Next();
-      TString fullPathToRunfile = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetFullPathToRunfile" title="const Char_t* KVDataSet::GetFullPathToRunfile(const Char_t* type, Int_t run)">GetFullPathToRunfile</a>(fDataType.Data(),run);
-      cout &lt;&lt; <span class="string">"Opening file "</span> &lt;&lt; fullPathToRunfile &lt;&lt;endl;
-      TFile* f = (TFile*)<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenRunfile" title="TObject* KVDataSet::OpenRunfile(const Char_t* type, Int_t run)">OpenRunfile</a>(fDataType.Data(),run);
-      cout &lt;&lt; <span class="string">"Adding file "</span> &lt;&lt; fullPathToRunfile;
-      cout &lt;&lt; <span class="string">" to the TChain."</span> &lt;&lt; endl;
+      TString fullPathToRunfile = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetFullPathToRunfile" title="const Char_t* KVDataSet::GetFullPathToRunfile(const Char_t* type,Int_t run)">GetFullPathToRunfile</a>(fDataType.Data(),run);
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Opening file "</span> &lt;&lt; fullPathToRunfile &lt;&lt;endl;
+      TFile* f = (TFile*)<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenRunfile" title="TObject* KVDataSet::OpenRunfile(const Char_t* type,Int_t run)">OpenRunfile</a>(fDataType.Data(),run);
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Adding file "</span> &lt;&lt; fullPathToRunfile;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" to the TChain."</span> &lt;&lt; endl;
       <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;Add( fullPathToRunfile );
-      <span class="keyword">if</span>(f &amp;&amp; !f-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:IsZombie" title="Bool_t TObject::IsZombie() const">IsZombie</a>()){
+      <span class="keyword">if</span>(f &amp;&amp; !f-&gt;<a href="../#TObject:IsZombie" title="Bool_t TObject::IsZombie()">IsZombie</a>()){
          <span class="comment">// update run infos in available runs file if necessary</span>
          <a href="../KVAvailableRunsFile.html">KVAvailableRunsFile</a>* ARF = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetAvailableRunsFile" title="KVAvailableRunsFile* KVDataSet::GetAvailableRunsFile(const Char_t* type)">GetAvailableRunsFile</a>(fDataType.Data());
          <span class="keyword">if</span>( ARF-&gt;InfosNeedUpdate(run, gSystem-&gt;BaseName( fullPathToRunfile )) ){
 				<span class="keyword">if</span> ( !((TTree*)f-&gt;Get(<span class="string">"ReconstructedEvents"</span>)) ){
-            	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"SubmitTask"</span>,<span class="string">"No tree named ReconstructedEvents is present in the current file"</span>);
+            	<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"SubmitTask"</span>,<span class="string">"No tree named ReconstructedEvents is present in the current file"</span>);
             	<span class="keyword">delete</span> <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>;
                <span class="keyword">return</span>;
             }
-            TEnv*treeInfos = (TEnv*)((TTree*)f-&gt;Get(<span class="string">"ReconstructedEvents"</span>))-&gt;GetUserInfo()-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) const or overloads">FindObject</a>(<span class="string">"TEnv"</span>);
+            TEnv*treeInfos = (TEnv*)((TTree*)f-&gt;Get(<span class="string">"ReconstructedEvents"</span>))-&gt;GetUserInfo()-&gt;<a href="../#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(<span class="string">"TEnv"</span>);
 				<span class="keyword">if</span> (treeInfos){
             	TString kvversion = treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVVersion()"</span>,<span class="string">""</span>);
             	TString username = treeInfos-&gt;GetValue(<span class="string">"gSystem-&gt;GetUserInfo()-&gt;fUser"</span>,<span class="string">""</span>);
            		<span class="keyword">if</span>(kvversion!=<span class="string">""</span>) ARF-&gt;UpdateInfos(run, gSystem-&gt;BaseName( fullPathToRunfile ), kvversion, username);
          	}
             <span class="keyword">else</span>{
-            	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"SubmitTask"</span>,<span class="string">"No TEnv object associated to the tree"</span>);
+            	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>,<span class="string">"No TEnv object associated to the tree"</span>);
             }
          }
       }
    }
    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:TotalEntriesToRead" title="Long64_t KVINDRAReconDataAnalyser::TotalEntriesToRead">TotalEntriesToRead</a> = <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetEntries();
    TString option(<span class="string">""</span>);
-   <span class="keyword">if</span> (<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Length" title="Ssiz_t TString::Length() const">Length</a>()) {
-      option.Form(<span class="string">"DataSelector=%s"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
-      cout &lt;&lt; <span class="string">"Data Selector : "</span> &lt;&lt; <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;
+   <span class="keyword">if</span> (<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="../#TString:Length" title="Ssiz_t TString::Length()">Length</a>()) {
+      option.Form(<span class="string">"DataSelector=%s"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Data Selector : "</span> &lt;&lt; <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;
    }
 
    <span class="comment">// Add any user-defined options</span>
-   <span class="keyword">if</span>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClassOptions" title="const KVString&amp; KVDataAnalyser::GetUserClassOptions() const">GetUserClassOptions</a>()!=<span class="string">""</span>){
+   <span class="keyword">if</span>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClassOptions" title="const KVString&amp; KVDataAnalyser::GetUserClassOptions()">GetUserClassOptions</a>()!=<span class="string">""</span>){
        option += <span class="string">","</span>;
-       option += <a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClassOptions" title="const KVString&amp; KVDataAnalyser::GetUserClassOptions() const">GetUserClassOptions</a>();
+       option += <a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClassOptions" title="const KVString&amp; KVDataAnalyser::GetUserClassOptions()">GetUserClassOptions</a>();
    }
    
    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a> = (<a href="../KVSelector.html">KVSelector</a>*)GetInstanceOfUserClass();
    
-   <span class="keyword">if</span>(!<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a> || !<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a>-><a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"TSelector"</span>))
+   <span class="keyword">if</span>(!<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a> || !<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a>-><a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"TSelector"</span>))
     {
-    	cout &lt;&lt; <span class="string">"The selector \""</span> &lt;&lt; <a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>() &lt;&lt; <span class="string">"\" is not valid."</span> &lt;&lt; endl;
-    	cout &lt;&lt; <span class="string">"Process aborted."</span> &lt;&lt; endl;
+    	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"The selector \""</span> &lt;&lt; <a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>() &lt;&lt; <span class="string">"\" is not valid."</span> &lt;&lt; endl;
+    	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Process aborted."</span> &lt;&lt; endl;
     }
    <span class="keyword">else</span>
     {
    	SafeDelete(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a>);
-		 <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Beginning TChain::Process..."</span>);
+		 <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Beginning TChain::Process..."</span>);
       <span class="keyword">if</span> (nbEventToRead) {
          <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;Process(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>(), option.Data(),nbEventToRead);
       } <span class="keyword">else</span> {
@@ -190,41 +190,41 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 <a name="MbnMyD"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ChooseKVDataSelector" title="void KVINDRAReconDataAnalyser::ChooseKVDataSelector()">ChooseKVDataSelector</a>()
 {
    <span class="comment">// Choose the <a href="../KVDataSelector.html">KVDataSelector</a>. Look for source files in current working directory.</span>
-   <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:SetKVDataSelector" title="void KVINDRAReconDataAnalyser::SetKVDataSelector(const Char_t* kvs = &quot;&quot;)">SetKVDataSelector</a>();
-   cout &lt;&lt; <span class="string">"Give the name of the Data Selector: [&lt;RET&gt;=none]"</span> &lt;&lt; endl;
-   <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:ReadToDelim" title="istream&amp; TString::ReadToDelim(istream&amp; str, char delim = '\n')">ReadToDelim</a>(cin);
-   <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">""</span>) <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name, KVString&amp; imp_file, KVString&amp; dec_file, const Char_t* dir_name = &quot;.&quot;)">FindClassSourceFiles</a>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>);
+   <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:SetKVDataSelector" title="void KVINDRAReconDataAnalyser::SetKVDataSelector(const Char_t* kvs=&quot;&quot;)">SetKVDataSelector</a>();
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Give the name of the Data Selector: [&lt;RET&gt;=none]"</span> &lt;&lt; endl;
+   <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="../#TString:ReadToDelim" title="istream&amp; TString::ReadToDelim(istream&amp; str,char delim='\n')">ReadToDelim</a>(<a href="../ListOfTypes.html#istream">cin</a>);
+   <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">""</span>) <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name,KVString&amp; imp_file,KVString&amp; dec_file,const Char_t* dir_name=&quot;.&quot;)">FindClassSourceFiles</a>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>);
 }
 
 <span class="comment">//__________________________________________________________________________________//</span>
 
-<a name="nRUNYB"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:WriteBatchEnvFile" title="void KVINDRAReconDataAnalyser::WriteBatchEnvFile(const Char_t*, Bool_t sav = kTRUE)">WriteBatchEnvFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* jobname, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> save)
+<a name="nRUNYB"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:WriteBatchEnvFile" title="void KVINDRAReconDataAnalyser::WriteBatchEnvFile(const Char_t* ,Bool_t sav=kTRUE)">WriteBatchEnvFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* jobname, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> save)
 {
    <span class="comment">//Save (in the TEnv fBatchEnv) all necessary information on analysis task which can be used to execute it later</span>
    <span class="comment">//(i.e. when batch processing system executes the job).</span>
    <span class="comment">//If save=<a href="../ListOfTypes.html#Bool_t">kTRUE</a> (default), write the information in a file whose name is given by <span class="string">".jobname"</span></span>
    <span class="comment">//where 'jobname' is the name of the job as given to the batch system.</span>
    
-   <a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:WriteBatchEnvFile" title="void KVDataAnalyser::WriteBatchEnvFile(const Char_t*, Bool_t sav = kTRUE)">WriteBatchEnvFile</a>(jobname, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+   <a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:WriteBatchEnvFile" title="void KVDataAnalyser::WriteBatchEnvFile(const Char_t* ,Bool_t sav=kTRUE)">WriteBatchEnvFile</a>(jobname, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
    <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">"none"</span>&amp;&amp;<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">""</span>){
-      fBatchEnv-&gt;SetValue(<span class="string">"KVDataSelector"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
-      <span class="keyword">if</span>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>!=<span class="string">""</span> ) fBatchEnv-&gt;SetValue(<span class="string">"KVDataSelectorImp"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
-      <span class="keyword">if</span>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>!=<span class="string">""</span> ) fBatchEnv-&gt;SetValue(<span class="string">"KVDataSelectorDec"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
+      fBatchEnv-&gt;SetValue(<span class="string">"KVDataSelector"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+      <span class="keyword">if</span>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>!=<span class="string">""</span> ) fBatchEnv-&gt;SetValue(<span class="string">"KVDataSelectorImp"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+      <span class="keyword">if</span>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>!=<span class="string">""</span> ) fBatchEnv-&gt;SetValue(<span class="string">"KVDataSelectorDec"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
    }
    <span class="keyword">if</span>(save) fBatchEnv-&gt;SaveLevel(kEnvUser);
 }
 
 <span class="comment">//_________________________________________________________________</span>
 
-<a name="gHdRaC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ReadBatchEnvFile" title="Bool_t KVINDRAReconDataAnalyser::ReadBatchEnvFile(const Char_t*)">ReadBatchEnvFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* filename)
+<a name="gHdRaC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ReadBatchEnvFile" title="Bool_t KVINDRAReconDataAnalyser::ReadBatchEnvFile(const Char_t* )">ReadBatchEnvFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* filename)
 {
-   <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> the batch env file <span class="string">"filename"</span> and initialise the analysis task using the</span>
+   <span class="comment">//<a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> the batch env file <span class="string">"filename"</span> and initialise the analysis task using the</span>
    <span class="comment">//informations in the file</span>
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if all goes well</span>
    
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    
-   <span class="keyword">if</span>(!<a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:ReadBatchEnvFile" title="Bool_t KVDataAnalyser::ReadBatchEnvFile(const Char_t*)">ReadBatchEnvFile</a>(filename)) <span class="keyword">return</span> ok;
+   <span class="keyword">if</span>(!<a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:ReadBatchEnvFile" title="Bool_t KVDataAnalyser::ReadBatchEnvFile(const Char_t* )">ReadBatchEnvFile</a>(filename)) <span class="keyword">return</span> ok;
    
    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a> = fBatchEnv-&gt;GetValue(<span class="string">"KVDataSelector"</span>, <span class="string">""</span>);
    <span class="keyword">if</span>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a> != <span class="string">""</span> &amp;&amp; <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">"none"</span> ){
@@ -236,12 +236,12 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
       <span class="keyword">if</span>((<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>!=<span class="string">""</span>) &amp;&amp; (launchDir != gSystem-&gt;WorkingDirectory())){
          TString path_src, path_trg;
          <span class="comment">//copy user's implementation file</span>
-         AssignAndDelete(path_src, gSystem-&gt;ConcatFileName(launchDir.Data(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>()));
-         AssignAndDelete(path_trg, gSystem-&gt;ConcatFileName(gSystem-&gt;WorkingDirectory(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>()));
+         AssignAndDelete(path_src, gSystem-&gt;ConcatFileName(launchDir.Data(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>()));
+         AssignAndDelete(path_trg, gSystem-&gt;ConcatFileName(gSystem-&gt;WorkingDirectory(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>()));
          gSystem-&gt;CopyFile(path_src.Data(), path_trg.Data());
          <span class="comment">//copy user's header file</span>
-         AssignAndDelete(path_src, gSystem-&gt;ConcatFileName(launchDir.Data(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>()));
-         AssignAndDelete(path_trg, gSystem-&gt;ConcatFileName(gSystem-&gt;WorkingDirectory(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>()));
+         AssignAndDelete(path_src, gSystem-&gt;ConcatFileName(launchDir.Data(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>()));
+         AssignAndDelete(path_trg, gSystem-&gt;ConcatFileName(gSystem-&gt;WorkingDirectory(), <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>()));
          gSystem-&gt;CopyFile(path_src.Data(), path_trg.Data());
       }
    }
@@ -253,11 +253,11 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 
 <span class="comment">//_________________________________________________________________</span>
 
-<a name="e6SQe"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:SetKVDataSelector" title="void KVINDRAReconDataAnalyser::SetKVDataSelector(const Char_t* kvs = &quot;&quot;)">SetKVDataSelector</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * kvs)
+<a name="e6SQe"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:SetKVDataSelector" title="void KVINDRAReconDataAnalyser::SetKVDataSelector(const Char_t* kvs=&quot;&quot;)">SetKVDataSelector</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * kvs)
 {
    <span class="comment">//Set name of data selector to use. Look for source files in current working directory.</span>
    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a> = kvs;
-   <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">""</span>) <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name, KVString&amp; imp_file, KVString&amp; dec_file, const Char_t* dir_name = &quot;.&quot;)">FindClassSourceFiles</a>(kvs, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>);
+   <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelector" title="KVString KVINDRAReconDataAnalyser::fDataSelector">fDataSelector</a>!=<span class="string">""</span>) <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name,KVString&amp; imp_file,KVString&amp; dec_file,const Char_t* dir_name=&quot;.&quot;)">FindClassSourceFiles</a>(kvs, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorImp" title="KVString KVINDRAReconDataAnalyser::fDataSelectorImp">fDataSelectorImp</a>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSelectorDec" title="KVString KVINDRAReconDataAnalyser::fDataSelectorDec">fDataSelectorDec</a>);
 }
 
 <span class="comment">//_________________________________________________________________</span>
@@ -305,22 +305,22 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 
    <span class="keyword">int</span> trig = 0;
    <span class="keyword">while</span> (trig &lt; n_trigs) {
-      cout &lt;&lt; <span class="string">" ---&gt; Trigger M&gt;"</span> &lt;&lt; triggers[ord_trig[trig]] &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" ---&gt; Trigger M&gt;"</span> &lt;&lt; triggers[ord_trig[trig]] &lt;&lt; endl;
       all_runs.Begin();
       <span class="keyword">while</span> ( !all_runs.End() ) {
          dbrun = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a> *)fDataSet-&gt;GetDataBase()-&gt;GetTable(<span class="string">"Runs"</span>)-&gt;GetRecord(all_runs.Next());
          <span class="keyword">if</span> (dbrun-&gt;GetTrigger() == triggers[ord_trig[trig]]) {
-            cout &lt;&lt; <span class="string">"    "</span> &lt;&lt; Form(<span class="string">"%4d"</span>, dbrun-&gt;GetNumber());
-            cout &lt;&lt; Form(<span class="string">"\t(%7d events)"</span>, dbrun-&gt;GetEvents());
-            cout &lt;&lt; <span class="string">"\t[File written: "</span> &lt;&lt; dbrun-&gt;GetDatime().
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"    "</span> &lt;&lt; Form(<span class="string">"%4d"</span>, dbrun-&gt;GetNumber());
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; Form(<span class="string">"\t(%7d events)"</span>, dbrun-&gt;GetEvents());
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\t[File written: "</span> &lt;&lt; dbrun-&gt;GetDatime().
                 AsString() &lt;&lt; <span class="string">"]"</span>;
             <span class="keyword">if</span> (dbrun-&gt;GetComments())
-               cout &lt;&lt; <span class="string">"\t"</span> &lt;&lt; dbrun-&gt;GetComments();
-            cout &lt;&lt; endl;
+               <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\t"</span> &lt;&lt; dbrun-&gt;GetComments();
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl;
          }
       }
       trig++;
-      cout &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl;
    }
    <span class="keyword">return</span> all_runs;
 }
@@ -333,7 +333,7 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 	<span class="comment">// Note that at this stage we are not analysing a given run, so the parameters</span>
 	<span class="comment">// of the array are not set (they will be set in <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:preInitRun" title="void KVINDRAReconDataAnalyser::preInitRun()">preInitRun</a>()).</span>
 		
-        <span class="keyword">if</span>( !<a href="../KVINDRA.html">gIndra</a> ) <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector" title="KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, Int_t run = -1)">MakeMultiDetector</a>(<a href="../KVDataSet.html">gDataSet</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+        <span class="keyword">if</span>( !<a href="../KVINDRA.html">gIndra</a> ) <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector" title="KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name,Int_t run=-1)">MakeMultiDetector</a>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 }
 
 
@@ -345,35 +345,35 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
     <span class="comment">// Infos on currently read file/tree are printed.</span>
     <span class="comment">// Any required data patches (<span class="string">"rustines"</span>) are initialized.</span>
 	
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> run = <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunNumberFromFileName" title="Int_t KVDataAnalyser::GetRunNumberFromFileName(const Char_t*)">GetRunNumberFromFileName</a>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetCurrentFile()-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:GetName" title="const char* TObject::GetName() const">GetName</a>() );
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> run = <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunNumberFromFileName" title="Int_t KVDataAnalyser::GetRunNumberFromFileName(const Char_t* )">GetRunNumberFromFileName</a>( <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetCurrentFile()-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>() );
 	<a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:SetParameters" title="void KVMultiDetArray::SetParameters(UShort_t n)">SetParameters</a>(run);
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ConnectRawDataTree" title="void KVINDRAReconDataAnalyser::ConnectRawDataTree()">ConnectRawDataTree</a>();
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:PrintTreeInfos" title="void KVINDRAReconDataAnalyser::PrintTreeInfos()">PrintTreeInfos</a>();
-    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:InitializePatchList" title="void KVDataPatchList::InitializePatchList(TString dataset, TString datatype, Int_t runnumber, TString dataseries, Int_t datareleasenumber, const TList* streamerinfolist)">InitializePatchList</a>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataSet" title="KVDataSet* KVDataAnalyser::GetDataSet()">GetDataSet</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(),run,<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetDataSeries" title="KVString KVINDRAReconDataAnalyser::GetDataSeries() const">GetDataSeries</a>(),
-                                  <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetDataReleaseNumber" title="Int_t KVINDRAReconDataAnalyser::GetDataReleaseNumber() const">GetDataReleaseNumber</a>(),<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetCurrentFile()-&gt;GetStreamerInfoCache());
-    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:Print" title="void KVDataPatchList::Print(Option_t* = &quot;&quot;) const">Print</a>();
+    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:InitializePatchList" title="void KVDataPatchList::InitializePatchList(TString dataset,TString datatype,Int_t runnumber,TString dataseries,Int_t datareleasenumber,const TList* streamerinfolist)">InitializePatchList</a>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataSet" title="KVDataSet* KVDataAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(),run,<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetDataSeries" title="KVString KVINDRAReconDataAnalyser::GetDataSeries()">GetDataSeries</a>(),
+                                  <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetDataReleaseNumber" title="Int_t KVINDRAReconDataAnalyser::GetDataReleaseNumber()">GetDataReleaseNumber</a>(),<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetCurrentFile()-&gt;GetStreamerInfoCache());
+    <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:Print" title="void KVDataPatchList::Print(Option_t* =&quot;&quot;)">Print</a>();
 }
 
 <a name="MFDMPE"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:preAnalysis" title="void KVINDRAReconDataAnalyser::preAnalysis()">preAnalysis</a>()
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> and set raw data for the current reconstructed event</span>
+	<span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> and set raw data for the current reconstructed event</span>
     <span class="comment">// Any required data patches (<span class="string">"rustines"</span>) are applied.</span>
 
 	<span class="keyword">if</span>(!<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>) <span class="keyword">return</span>;
 	<span class="comment">// all recon events are numbered 1, 2, ... : therefore entry number is N-1</span>
 	<a href="../ListOfTypes.html#Long64_t">Long64_t</a> rawEntry = <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a>-><a href="../KVSelector.html#KVSelector:GetEventNumber" title="Int_t KVSelector::GetEventNumber()">GetEventNumber</a>() - 1;
 
-	<a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetACQParams" title="KVSeqCollection* KVMultiDetArray::GetACQParams()">GetACQParams</a>()->R__FOR_EACH(<a href="../KVACQParam.html">KVACQParam</a>,<a href="http://root.cern.ch/root/html/TObject.html#TObject:Clear" title="void TObject::Clear(Option_t* = &quot;&quot;)">Clear</a>)();
+	<a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetACQParams" title="KVSeqCollection* KVMultiDetArray::GetACQParams()">GetACQParams</a>()->R__FOR_EACH(<a href="../KVACQParam.html">KVACQParam</a>,<a href="../#TObject:Clear" title="void TObject::Clear(Option_t* =&quot;&quot;)">Clear</a>)();
 
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;GetEntry(rawEntry);
 	<span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:NbParFired" title="Int_t KVINDRAReconDataAnalyser::NbParFired">NbParFired</a>; i++){
-		<a href="../KVACQParam.html">KVACQParam</a>* par = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetACQParam" title="KVACQParam* KVMultiDetArray::GetACQParam(const Char_t* name)">GetACQParam</a>((*<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:parList" title="TObjArray* KVINDRAReconDataAnalyser::parList">parList</a>)[<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParNum" title="UInt_t* KVINDRAReconDataAnalyser::ParNum">ParNum</a>[i]]-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:GetName" title="const char* TObject::GetName() const">GetName</a>());
+		<a href="../KVACQParam.html">KVACQParam</a>* par = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetACQParam" title="KVACQParam* KVMultiDetArray::GetACQParam(const Char_t* name)">GetACQParam</a>((*<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:parList" title="TObjArray* KVINDRAReconDataAnalyser::parList">parList</a>)[<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParNum" title="UInt_t* KVINDRAReconDataAnalyser::ParNum">ParNum</a>[i]]-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
 		<span class="keyword">if</span>(par) {par-&gt;SetData(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParVal" title="UShort_t* KVINDRAReconDataAnalyser::ParVal">ParVal</a>[i]);}
 	}
 
     <span class="comment">// as rustines often depend on a knowledge of the original raw data,</span>
     <span class="comment">// we apply them after it has been read in</span>
-    <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:HasActivePatches" title="Bool_t KVDataPatchList::HasActivePatches() const">HasActivePatches</a>()) <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent*)">Apply</a>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a>-><a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>());
+    <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:HasActivePatches" title="Bool_t KVDataPatchList::HasActivePatches()">HasActivePatches</a>()) <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fRustines" title="KVDataPatchList KVINDRAReconDataAnalyser::fRustines">fRustines</a>.<a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent* )">Apply</a>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fSelector" title="KVSelector* KVINDRAReconDataAnalyser::fSelector">fSelector</a>-><a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>());
 }
 
 <a name="O.9UiE"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ConnectRawDataTree" title="void KVINDRAReconDataAnalyser::ConnectRawDataTree()">ConnectRawDataTree</a>()
@@ -386,61 +386,61 @@ ClassImp(<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>
 	
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>=(TTree*)<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetCurrentFile()-&gt;Get(<span class="string">"RawData"</span>);
 	<span class="keyword">if</span>(!<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>){
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ConnectRawDataTree"</span>, <span class="string">"RawData tree not found in file; raw data parameters of detectors will not be available in analysis"</span>);
+		<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ConnectRawDataTree"</span>, <span class="string">"RawData tree not found in file; raw data parameters of detectors will not be available in analysis"</span>);
 		<span class="keyword">return</span>;
 	}
 	<span class="keyword">else</span>
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ConnectRawDataTree"</span>, <span class="string">"Found RawData tree in file"</span>);
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ConnectRawDataTree"</span>, <span class="string">"Found RawData tree in file"</span>);
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> maxNopar = <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;GetMaximum(<span class="string">"NbParFired"</span>);
    <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParVal" title="UShort_t* KVINDRAReconDataAnalyser::ParVal">ParVal</a>) <span class="keyword">delete</span> [] <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParVal" title="UShort_t* KVINDRAReconDataAnalyser::ParVal">ParVal</a>;
    <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParNum" title="UInt_t* KVINDRAReconDataAnalyser::ParNum">ParNum</a>) <span class="keyword">delete</span> [] <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParNum" title="UInt_t* KVINDRAReconDataAnalyser::ParNum">ParNum</a>;
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParVal" title="UShort_t* KVINDRAReconDataAnalyser::ParVal">ParVal</a> = <span class="keyword">new</span> <a href="../ListOfTypes.html#UShort_t">UShort_t</a>[maxNopar];	
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParNum" title="UInt_t* KVINDRAReconDataAnalyser::ParNum">ParNum</a> = <span class="keyword">new</span> <a href="../ListOfTypes.html#UInt_t">UInt_t</a>[maxNopar];	
-	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:parList" title="TObjArray* KVINDRAReconDataAnalyser::parList">parList</a> = (TObjArray*)<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;GetUserInfo()-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) const or overloads">FindObject</a>(<span class="string">"ParameterList"</span>);
+	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:parList" title="TObjArray* KVINDRAReconDataAnalyser::parList">parList</a> = (TObjArray*)<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;GetUserInfo()-&gt;<a href="../#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(<span class="string">"ParameterList"</span>);
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;SetBranchAddress(<span class="string">"NbParFired"</span>, &amp;<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:NbParFired" title="Int_t KVINDRAReconDataAnalyser::NbParFired">NbParFired</a>);
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;SetBranchAddress(<span class="string">"ParNum"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParNum" title="UInt_t* KVINDRAReconDataAnalyser::ParNum">ParNum</a>);
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theRawData" title="TTree* KVINDRAReconDataAnalyser::theRawData">theRawData</a>-&gt;SetBranchAddress(<span class="string">"ParVal"</span>, <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:ParVal" title="UShort_t* KVINDRAReconDataAnalyser::ParVal">ParVal</a>);
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ConnectRawDataTree"</span>, <span class="string">"Connected raw data parameters"</span>);
+	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ConnectRawDataTree"</span>, <span class="string">"Connected raw data parameters"</span>);
 	<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:Entry" title="Long64_t KVINDRAReconDataAnalyser::Entry">Entry</a>=0;
 }
 
-<a name="Q_b_EC"></a>TEnv* <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetReconDataTreeInfos" title="TEnv* KVINDRAReconDataAnalyser::GetReconDataTreeInfos() const">GetReconDataTreeInfos</a>() <span class="keyword">const</span>
+<a name="Q_b_EC"></a>TEnv* <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetReconDataTreeInfos" title="TEnv* KVINDRAReconDataAnalyser::GetReconDataTreeInfos()">GetReconDataTreeInfos</a>() <span class="keyword">const</span>
 {
-	<span class="keyword">return</span> (TEnv*)<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetTree()-&gt;GetUserInfo()-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) const or overloads">FindObject</a>(<span class="string">"TEnv"</span>);
+	<span class="keyword">return</span> (TEnv*)<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:theChain" title="TChain* KVINDRAReconDataAnalyser::theChain">theChain</a>-&gt;GetTree()-&gt;GetUserInfo()-&gt;<a href="../#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(<span class="string">"TEnv"</span>);
 }
 
 <a name="R936jC"></a><span class="keyword">void</span> <a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>::<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:PrintTreeInfos" title="void KVINDRAReconDataAnalyser::PrintTreeInfos()">PrintTreeInfos</a>()
 {
-	<span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Print" title="void TObject::Print(Option_t* option = &quot;&quot;) const">Print</a> informations on currently analysed TTree</span>
-	TEnv* treeInfos = <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetReconDataTreeInfos" title="TEnv* KVINDRAReconDataAnalyser::GetReconDataTreeInfos() const">GetReconDataTreeInfos</a>();
+	<span class="comment">// <a href="../#TObject:Print" title="void TObject::Print(Option_t* option=&quot;&quot;)">Print</a> informations on currently analysed TTree</span>
+	TEnv* treeInfos = <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:GetReconDataTreeInfos" title="TEnv* KVINDRAReconDataAnalyser::GetReconDataTreeInfos()">GetReconDataTreeInfos</a>();
 	<span class="keyword">if</span>(!treeInfos) <span class="keyword">return</span>;
-	cout &lt;&lt; endl &lt;&lt; <span class="string">"----------------------------------------------------------------------------------------------------"</span> &lt;&lt; endl;
-	        cout &lt;&lt; <span class="string">"INFORMATIONS ON VERSION OF KALIVEDA USED TO GENERATE FILE:"</span> &lt;&lt; endl &lt;&lt; endl;
+	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl &lt;&lt; <span class="string">"----------------------------------------------------------------------------------------------------"</span> &lt;&lt; endl;
+	        <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"INFORMATIONS ON VERSION OF KALIVEDA USED TO GENERATE FILE:"</span> &lt;&lt; endl &lt;&lt; endl;
            <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a> = treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVVersion()"</span>,<span class="string">"(unknown)"</span>);
-cout &lt;&lt; <span class="string">"version = "</span> &lt;&lt; <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a> &lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"build date = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVBuildDate()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"source directory = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVSourceDir()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"KVROOT = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVRoot()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"BZR branch name = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrBranchNick()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"BZR revision #"</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrRevisionNumber()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"BZR revision ID = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrRevisionId()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"BZR revision date = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrRevisionDate()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-	        cout &lt;&lt; endl &lt;&lt; <span class="string">"INFORMATIONS ON GENERATION OF FILE:"</span> &lt;&lt; endl &lt;&lt; endl;
-cout &lt;&lt; <span class="string">"Generated by : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"gSystem-&gt;GetUserInfo()-&gt;fUser"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"Analysis task : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"AnalysisTask"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"Job name : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"BatchSystem.JobName"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"Job submitted from : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"LaunchDirectory"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"Runs : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"Runs"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-cout &lt;&lt; <span class="string">"Number of events requested : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"NbToRead"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
-	cout &lt;&lt; endl &lt;&lt; <span class="string">"----------------------------------------------------------------------------------------------------"</span> &lt;&lt; endl;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"version = "</span> &lt;&lt; <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a> &lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"build date = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVBuildDate()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"source directory = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVSourceDir()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"KVROOT = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::GetKVRoot()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"BZR branch name = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrBranchNick()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"BZR revision #"</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrRevisionNumber()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"BZR revision ID = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrRevisionId()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"BZR revision date = "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"KVBase::bzrRevisionDate()"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+	        <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl &lt;&lt; <span class="string">"INFORMATIONS ON GENERATION OF FILE:"</span> &lt;&lt; endl &lt;&lt; endl;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Generated by : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"gSystem-&gt;GetUserInfo()-&gt;fUser"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Analysis task : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"AnalysisTask"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Job name : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"BatchSystem.JobName"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Job submitted from : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"LaunchDirectory"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Runs : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"Runs"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Number of events requested : "</span> &lt;&lt; treeInfos-&gt;GetValue(<span class="string">"NbToRead"</span>,<span class="string">"(unknown)"</span>)&lt;&lt; endl ;
+	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl &lt;&lt; <span class="string">"----------------------------------------------------------------------------------------------------"</span> &lt;&lt; endl;
 
    <span class="comment">// if possible, parse <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a> into series and release number</span>
    <span class="comment">// e.g. if <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a> = <span class="string">"1.8.10"</span>:</span>
    <span class="comment">//     =&gt; <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSeries" title="KVString KVINDRAReconDataAnalyser::fDataSeries">fDataSeries</a> = <span class="string">"1.8"</span>   <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataReleaseNum" title="Int_t KVINDRAReconDataAnalyser::fDataReleaseNum">fDataReleaseNum</a> = 10</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> a,b,c;
    <span class="keyword">if</span>(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a>!=<span class="string">"(unknown)"</span>){
-      <span class="keyword">if</span>(sscanf(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(), <span class="string">"%d.%d.%d"</span>, &amp;a, &amp;b, &amp;c) == 3){
-         <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSeries" title="KVString KVINDRAReconDataAnalyser::fDataSeries">fDataSeries</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Form" title="void TString::Form(const char* fmt)">Form</a>(<span class="string">"%d.%d"</span>,a,b);
+      <span class="keyword">if</span>(sscanf(<a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataVersion" title="KVString KVINDRAReconDataAnalyser::fDataVersion">fDataVersion</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), <span class="string">"%d.%d.%d"</span>, &amp;a, &amp;b, &amp;c) == 3){
+         <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataSeries" title="KVString KVINDRAReconDataAnalyser::fDataSeries">fDataSeries</a>.<a href="../#TString:Form" title="void TString::Form(const char* fmt)">Form</a>(<span class="string">"%d.%d"</span>,a,b);
          <a href="../KVINDRAReconDataAnalyser.html#KVINDRAReconDataAnalyser:fDataReleaseNum" title="Int_t KVINDRAReconDataAnalyser::fDataReleaseNum">fDataReleaseNum</a>=c;
       }
    }
@@ -458,7 +458,7 @@ cout &lt;&lt; <span class="string">"Number of events requested : "</span> &lt;&l
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

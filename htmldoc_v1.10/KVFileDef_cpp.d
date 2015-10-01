@@ -41,12 +41,12 @@
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TSysEvtHandler.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TQObject.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TTime.h
-./KVFileDef_cpp.so: /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda/KVBase.h
+./KVFileDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVBase.h
 ./KVFileDef_cpp.so: KVConfig.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TRandom3.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TRandom.h
-./KVFileDef_cpp.so: /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda/KVLockfile.h
-./KVFileDef_cpp.so: /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda/KVString.h
+./KVFileDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVLockfile.h
+./KVFileDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVString.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/Riostream.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/cintdictversion.h /home/john/software/build/root-v5-34-00/include/RVersion.h
-KVFileDef_cpp__ROOTBUILDVERSION= 5.34/31
+KVFileDef_cpp__ROOTBUILDVERSION= 5.34/33

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:22 2015            -->
+<!--   Date: Wed Sep 16 10:48:10 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*********************************************************************************
 $Id: <a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>.cpp,v 1.2 2006/10/19 14:32:43 franklan Exp $
@@ -31,30 +31,30 @@ $Id: <a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>.cpp,v 1.2 2006/
 ClassImp(<a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>)
 <span class="comment">//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">//Stores concatenations of <span class="string">"subcodes"</span> returned by different identification routines</span>
-<span class="comment">//inside a <a href="../ListOfTypes.html#KVIDSubCode">KVIDSubCode</a> (16-bit binary number).</span>
+<span class="comment">//inside a <a href="../KVIDSubCode.html">KVIDSubCode</a> (16-bit binary number).</span>
 <span class="comment">//</span>
 <span class="comment">//For a given type of identification routine/telescope, the subcode is stored</span>
 <span class="comment">//in <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:fNbits" title="UChar_t KVIDSubCodeManager::fNbits">fNbits</a> bits from bit number <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:fMSB" title="UChar_t KVIDSubCodeManager::fMSB">fMSB</a> to bit (<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:fMSB" title="UChar_t KVIDSubCodeManager::fMSB">fMSB</a>-<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:fNbits" title="UChar_t KVIDSubCodeManager::fNbits">fNbits</a>+1) (<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:fMSB" title="UChar_t KVIDSubCodeManager::fMSB">fMSB</a> is the bit-</span>
 <span class="comment">//number of the most significant bit used to store the subcode - bit 0 is the</span>
 <span class="comment">//Least Significant Bit).</span>
 <span class="comment">//</span>
-<a name="E9FoQE"></a>    <a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>::<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:KVIDSubCodeManager" title="KVIDSubCodeManager KVIDSubCodeManager::KVIDSubCodeManager(UChar_t nbits = 16, UChar_t msb = 15) or overloads">KVIDSubCodeManager</a>(<a href="../ListOfTypes.html#UChar_t">UChar_t</a> nbits, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> msb)
+<a name="E9FoQE"></a>    <a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>::<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:KVIDSubCodeManager" title="KVIDSubCodeManager KVIDSubCodeManager::KVIDSubCodeManager(UChar_t nbits=16,UChar_t msb=15) or overloads">KVIDSubCodeManager</a>(<a href="../ListOfTypes.html#UChar_t">UChar_t</a> nbits, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> msb)
 {
    <span class="comment">//Ctor with number of bits and position of Most Significant Bit.</span>
-   <span class="comment">//By default, we use all the bits of a <a href="../ListOfTypes.html#KVIDSubCode">KVIDSubCode</a>.</span>
+   <span class="comment">//By default, we use all the bits of a <a href="../KVIDSubCode.html">KVIDSubCode</a>.</span>
    <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:SetNbits" title="void KVIDSubCodeManager::SetNbits(UChar_t n)">SetNbits</a>(nbits);
    <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:SetMSB" title="void KVIDSubCodeManager::SetMSB(UChar_t n)">SetMSB</a>(msb);
 }
 
-<a name="Z3DE8C"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>::<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCodeString" title="const Char_t* KVIDSubCodeManager::GetIDSubCodeString(KVIDSubCode&amp; concat) const">GetIDSubCodeString</a>(<a href="../ListOfTypes.html#KVIDSubCode">KVIDSubCode</a> &amp; concat) <span class="keyword">const</span>
+<a name="Z3DE8C"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>::<a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCodeString" title="const Char_t* KVIDSubCodeManager::GetIDSubCodeString(KVIDSubCode&amp; concat)">GetIDSubCodeString</a>(<a href="../KVIDSubCode.html">KVIDSubCode</a> &amp; concat) <span class="keyword">const</span>
 {
    <span class="comment">//Should be redefined in child-classes (KVIDTelescopes) so that an appropriate</span>
    <span class="comment">//message corresponding to the subcode is returned.</span>
-   <span class="comment">//If not, we return the result of <span class="string">"SubCodeNotSet()"</span> if <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCode" title="Int_t KVIDSubCodeManager::GetIDSubCode(KVIDSubCode&amp; concat) const">GetIDSubCode</a>=-1, otherwise</span>
-   <span class="comment">//we give the value of <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCode" title="Int_t KVIDSubCodeManager::GetIDSubCode(KVIDSubCode&amp; concat) const">GetIDSubCode</a>() as a string, <span class="string">"ID sub code = x"</span></span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> code = <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCode" title="Int_t KVIDSubCodeManager::GetIDSubCode(KVIDSubCode&amp; concat) const">GetIDSubCode</a>(concat);
+   <span class="comment">//If not, we return the result of <span class="string">"SubCodeNotSet()"</span> if <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCode" title="Int_t KVIDSubCodeManager::GetIDSubCode(KVIDSubCode&amp; concat)">GetIDSubCode</a>=-1, otherwise</span>
+   <span class="comment">//we give the value of <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCode" title="Int_t KVIDSubCodeManager::GetIDSubCode(KVIDSubCode&amp; concat)">GetIDSubCode</a>() as a string, <span class="string">"ID sub code = x"</span></span>
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> code = <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:GetIDSubCode" title="Int_t KVIDSubCodeManager::GetIDSubCode(KVIDSubCode&amp; concat)">GetIDSubCode</a>(concat);
    <span class="keyword">if</span> (code == -1)
-      <span class="keyword">return</span> <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:SubCodeNotSet" title="const Char_t* KVIDSubCodeManager::SubCodeNotSet() const">SubCodeNotSet</a>();
+      <span class="keyword">return</span> <a href="../KVIDSubCodeManager.html#KVIDSubCodeManager:SubCodeNotSet" title="const Char_t* KVIDSubCodeManager::SubCodeNotSet()">SubCodeNotSet</a>();
    <span class="keyword">return</span> Form(<span class="string">"ID sub code = %d"</span>, code);
 }
 </pre>
@@ -65,7 +65,7 @@ ClassImp(<a href="../KVIDSubCodeManager.html">KVIDSubCodeManager</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-16 10:48 </em><em>&raquo; Last generated: 2015-09-16 10:48</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

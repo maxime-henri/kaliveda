@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:35 2015            -->
+<!--   Date: Thu Sep 17 10:52:03 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
                           <a href="../KVTGIDManager.html">KVTGIDManager</a>.cpp  -  description
@@ -39,20 +39,20 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 <span class="comment">//Handles a set of Tassan-Got functional-based identifications</span>
 <span class="comment">//(<a href="../KVTGID.html">KVTGID</a> objects)  for use by a <a href="../KVIDTelescope.html">KVIDTelescope</a>.</span>
 <span class="comment">//</span>
-<span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a> and <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a> are, respectively, Z and A identification procedures.</span>
+<span class="comment">//<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a> and <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a> are, respectively, Z and A identification procedures.</span>
 <span class="comment">//Their purpose is to retrieve the correct <a href="../KVTGID.html">KVTGID</a> identification object</span>
-<span class="comment">//from the manager's list, and then use <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetIdentification" title="Double_t KVTGID::GetIdentification(Double_t ID_min, Double_t ID_max, Double_t&amp; ID_quality, Double_t* par = 0)">GetIdentification</a>.</span>
+<span class="comment">//from the manager's list, and then use <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetIdentification" title="Double_t KVTGID::GetIdentification(Double_t ID_min,Double_t ID_max,Double_t&amp; ID_quality,Double_t* par=0)">GetIdentification</a>.</span>
 <span class="comment">//</span>
-<span class="comment">//Status code for last identification with <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a> and <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a> can be</span>
-<span class="comment">//obtained using <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>/<a href="../KVTGIDManager.html#KVTGIDManager:GetStatusString" title="const Char_t* KVTGIDManager::GetStatusString(KVTGIDManager::ETGIDMStatus s = kCurrentStatus) const">GetStatusString</a>.</span>
+<span class="comment">//Status code for last identification with <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a> and <a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a> can be</span>
+<span class="comment">//obtained using <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>/<a href="../KVTGIDManager.html#KVTGIDManager:GetStatusString" title="const Char_t* KVTGIDManager::GetStatusString(KVTGIDManager::ETGIDMStatus s=kCurrentStatus)">GetStatusString</a>.</span>
 <span class="comment">//</span>
-<span class="comment">// 0 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>            <span class="string">"ok"</span>,</span>
-<span class="comment">// 1 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_noTGID" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_noTGID">kStatus_noTGID</a>        <span class="string">"no KVTGID for requested identification"</span>,</span>
-<span class="comment">// 2 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OutOfIDRange">kStatus_OutOfIDRange</a>  <span class="string">"point to identify outside of identification range of function"</span>,</span>
-<span class="comment">// 3 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooSmall" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooSmall">kStatus_ZtooSmall</a>     <span class="string">"IdentA called with Z&lt;1"</span>,</span>
-<span class="comment">// 4 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooLarge" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooLarge">kStatus_ZtooLarge</a>     <span class="string">"IdentA called with Z larger than max Z defined for KVTGIDZA isotopic identification object"</span></span>
+<span class="comment">// 0 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>            <span class="string">"ok"</span>,</span>
+<span class="comment">// 1 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_noTGID" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_noTGID">kStatus_noTGID</a>        <span class="string">"no KVTGID for requested identification"</span>,</span>
+<span class="comment">// 2 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OutOfIDRange">kStatus_OutOfIDRange</a>  <span class="string">"point to identify outside of identification range of function"</span>,</span>
+<span class="comment">// 3 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooSmall" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooSmall">kStatus_ZtooSmall</a>     <span class="string">"IdentA called with Z&lt;1"</span>,</span>
+<span class="comment">// 4 <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooLarge" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooLarge">kStatus_ZtooLarge</a>     <span class="string">"IdentA called with Z larger than max Z defined for KVTGIDZA isotopic identification object"</span></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////</span>
-<a name="UoN.WC"></a>    <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:KVTGIDManager" title="KVTGIDManager KVTGIDManager::KVTGIDManager() or overloads">KVTGIDManager</a>()
+<a name="UoN.WC"></a>    <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:KVTGIDManager" title="KVTGIDManager KVTGIDManager::KVTGIDManager()">KVTGIDManager</a>()
 {
    <span class="comment">//Default constructor.</span>
    <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = 0.;
@@ -67,12 +67,12 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 
 <span class="comment">//______________________________________________________________________________//</span>
 
-<a name="v3hrD"></a><span class="keyword">void</span> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:AddTGID" title="void KVTGIDManager::AddTGID(KVTGID*)">AddTGID</a>(<a href="../KVTGID.html">KVTGID</a> * _tgid)
+<a name="v3hrD"></a><span class="keyword">void</span> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:AddTGID" title="void KVTGIDManager::AddTGID(KVTGID* )">AddTGID</a>(<a href="../KVTGID.html">KVTGID</a> * _tgid)
 {
    <span class="comment">//Add an identification object to the list.</span>
    <span class="comment">//It will be deleted when the <a href="../KVTGIDManager.html">KVTGIDManager</a> is deleted.</span>
    <a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(_tgid);
-   <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = TMath::Max(<a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a>, _tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>());
+   <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = TMath::Max(<a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a>, _tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>());
 }
 
 <span class="comment">//______________________________________________________________________________//</span>
@@ -80,7 +80,7 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 <a name="s3AV1D"></a><a href="../KVTGID.html">KVTGID</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name)
 {
    <span class="comment">//Retrieve the identification object with name</span>
-   <span class="keyword">return</span> (<a href="../KVTGID.html">KVTGID</a> *) <a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) const or overloads">FindObject</a>(name);
+   <span class="keyword">return</span> (<a href="../KVTGID.html">KVTGID</a> *) <a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(name);
 }
 
 <span class="comment">//______________________________________________________________________________//</span>
@@ -89,12 +89,12 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 {
    <span class="comment">//Delete the identification object with name</span>
    <a href="../KVTGID.html">KVTGID</a>* tgid=0;
-   <span class="keyword">if</span>( (tgid = (<a href="../KVTGID.html">KVTGID</a>*)<a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) const or overloads">FindObject</a>(name)) ){
+   <span class="keyword">if</span>( (tgid = (<a href="../KVTGID.html">KVTGID</a>*)<a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(name)) ){
       <a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Remove" title="TObject* KVSeqCollection::Remove(TObject* obj)">Remove</a>(tgid);
       <span class="comment">//recalculate <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> if needed</span>
-      <span class="keyword">if</span>( tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>() == <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> ){
+      <span class="keyword">if</span>( tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>() == <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> ){
          <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = 0.; TIter n(&amp;<a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>); <a href="../KVTGID.html">KVTGID</a>* t;
-         <span class="keyword">while</span>( (t = (<a href="../KVTGID.html">KVTGID</a>*)n()) ) <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = TMath::Max(<a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a>, t-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>());
+         <span class="keyword">while</span>( (t = (<a href="../KVTGID.html">KVTGID</a>*)n()) ) <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = TMath::Max(<a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a>, t-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>());
       }
       <span class="keyword">delete</span> tgid;
    }
@@ -105,7 +105,7 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 <a name="Di1f6B"></a><span class="keyword">void</span> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:RemoveAllTGID" title="void KVTGIDManager::RemoveAllTGID()">RemoveAllTGID</a>()
 {
    <span class="comment">//Delete all identification objects</span>
-   <a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Delete" title="void KVSeqCollection::Delete(Option_t* option = &quot;&quot;)">Delete</a>(); <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = 0.;
+   <a href="../KVTGIDManager.html#KVTGIDManager:fIDList" title="KVList KVTGIDManager::fIDList">fIDList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Delete" title="void KVSeqCollection::Delete(Option_t* option=&quot;&quot;)">Delete</a>(); <a href="../KVTGIDManager.html#KVTGIDManager:fID_max" title="Double_t KVTGIDManager::fID_max">fID_max</a> = 0.;
 }
 
 <span class="comment">//______________________________________________________________________________//</span>
@@ -118,12 +118,12 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
    <span class="comment">//      idt_name = name of ID telescope</span>
    <span class="comment">//      id_type   = type of identification (<span class="string">"Z"</span>, <span class="string">"A"</span>, <span class="string">"A_for_Z=3"</span>, etc.)</span>
    <span class="comment">//      grid_type = type of identification grid (<span class="string">"GG"</span>, <span class="string">"PG1"</span>, etc.)</span>
-   <span class="keyword">return</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name, const Char_t* id_type, const Char_t* grid_type)">GetTGIDName</a>(idt_name, id_type, grid_type)));
+   <span class="keyword">return</span> (<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name,const Char_t* id_type,const Char_t* grid_type)">GetTGIDName</a>(idt_name, id_type, grid_type)));
 }
 
 <span class="comment">//______________________________________________________________________________//</span>
 
-<a name="iC1G6E"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name, const Char_t* id_type, const Char_t* grid_type)">GetTGIDName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * idt_name,
+<a name="iC1G6E"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDName" title="const Char_t* KVTGIDManager::GetTGIDName(const Char_t* idt_name,const Char_t* id_type,const Char_t* grid_type)">GetTGIDName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * idt_name,
                                          <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * id_type,
                                          <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * grid_type)
 {
@@ -136,7 +136,7 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 
 <span class="comment">//______________________________________________________________________________//</span>
 
-<a name="Sx5ka"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* idtelescope_name, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_X, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_Y, <a href="../ListOfTypes.html#Double_t">Double_t</a> &amp; funLTG,
+<a name="Sx5ka"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* idtelescope_name, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_X, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_Y, <a href="../ListOfTypes.html#Double_t">Double_t</a> &amp; funLTG,
                                <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * grid_type)
 {
    <span class="comment">//Identification in Z of particle for ID telescope idt using Tassan-Got functional corresponding</span>
@@ -151,14 +151,14 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
    <span class="comment">//if no identification of the required type exists, we return -1. and funLTG=-1.</span>
 
    funLTG = -1.;
-   <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>;
+   <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>;
 
    <span class="comment">//get Z identification object from <a href="../KVTGIDManager.html">KVTGIDManager</a></span>
    <a href="../KVTGID.html">KVTGID</a> *_tgid = <a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(idtelescope_name, <span class="string">"Z"</span>, grid_type);
 
    <span class="comment">//if no identification object exists, return -1</span>
    <span class="keyword">if</span> (!_tgid) {
-      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_noTGID" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_noTGID">kStatus_noTGID</a>;
+      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_noTGID" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_noTGID">kStatus_noTGID</a>;
       <span class="keyword">return</span> (-1.0);
    }
    <span class="comment">//Enter current point coordinates into Z identification function</span>
@@ -167,8 +167,8 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> Zfound = -1.;
    <a href="../ListOfTypes.html#Double_t">Double_t</a> Zmin = _tgid-&gt;GetIDmin();
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> Zmax = _tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>();
-   <span class="keyword">if</span> ((<a href="../ListOfTypes.html#Int_t">Int_t</a>) Zmax == (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>()) {
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> Zmax = _tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>();
+   <span class="keyword">if</span> ((<a href="../ListOfTypes.html#Int_t">Int_t</a>) Zmax == (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>()) {
       <span class="comment">//If this functional corresponds to the grid with the highest ID lines,</span>
       <span class="comment">//(i.e. for higher ID there are no more grids) then we need to be able to identify all</span>
       <span class="comment">//particles with this grid, even above the last ID line drawn by hand.</span>
@@ -187,15 +187,15 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 
    Zfound = _tgid-&gt;GetIdentification(Zmin, Zmax, funLTG);
 
-   <span class="keyword">if</span> (_tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() == <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:kStatus_NotBetween_IDMin_IDMax" title="KVTGID::(anonymous) KVTGID::kStatus_NotBetween_IDMin_IDMax">kStatus_NotBetween_IDMin_IDMax</a>)
-      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OutOfIDRange">kStatus_OutOfIDRange</a>;
+   <span class="keyword">if</span> (_tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() == <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:kStatus_NotBetween_IDMin_IDMax" title="const enum KVTGID:: KVTGID::kStatus_NotBetween_IDMin_IDMax">kStatus_NotBetween_IDMin_IDMax</a>)
+      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OutOfIDRange">kStatus_OutOfIDRange</a>;
 
    <span class="keyword">return</span> Zfound;
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="GArzX"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type, Int_t Z)">IdentA</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* idtelescope_name, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_X, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_Y, <a href="../ListOfTypes.html#Double_t">Double_t</a> &amp; funLTG,
+<a name="GArzX"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:IdentA" title="Double_t KVTGIDManager::IdentA(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type,Int_t Z)">IdentA</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* idtelescope_name, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_X, <a href="../ListOfTypes.html#Double_t">Double_t</a> id_map_Y, <a href="../ListOfTypes.html#Double_t">Double_t</a> &amp; funLTG,
                                <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * grid_type, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z)
 {
    <span class="comment">//Get A identification (we already know Z) for ID telescope idt using grid <span class="string">"grid_type"</span>.</span>
@@ -209,22 +209,22 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
    <span class="comment">// funLTG = -1 -&gt; no identification</span>
 
    funLTG = -1.;
-   <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>;
+   <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OK" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OK">kStatus_OK</a>;
 
    <span class="keyword">if</span> (Z &lt; 1) {
-      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooSmall" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooSmall">kStatus_ZtooSmall</a>;
+      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooSmall" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooSmall">kStatus_ZtooSmall</a>;
       <span class="keyword">return</span> -1.;
    }
    <span class="comment">//get A identification object from <a href="../KVTGIDManager.html">KVTGIDManager</a></span>
    <a href="../KVTGID.html">KVTGID</a> *_tgid = <a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(idtelescope_name, <span class="string">"A"</span>, grid_type);
    <span class="comment">//if no identification object exists, return -1</span>
    <span class="keyword">if</span> (!_tgid) {
-      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_noTGID" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_noTGID">kStatus_noTGID</a>;
+      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_noTGID" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_noTGID">kStatus_noTGID</a>;
       <span class="keyword">return</span> (-1.0);
    }
    <span class="comment">//check Z is not too big - no isotopic identification for Z &gt; Zmax of grid</span>
-   <span class="keyword">if</span> (Z &gt; _tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax() const">GetIDmax</a>()) {
-      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooLarge" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooLarge">kStatus_ZtooLarge</a>;
+   <span class="keyword">if</span> (Z &gt; _tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetIDmax" title="Double_t KVTGIDManager::GetIDmax()">GetIDmax</a>()) {
+      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_ZtooLarge" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_ZtooLarge">kStatus_ZtooLarge</a>;
       <span class="keyword">return</span> -1.;
    }
    <span class="comment">//Initialise parameters of A identification function</span>
@@ -260,21 +260,21 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
    	Amax = 2.*Z+8.;
    }
 
-	<span class="comment">// same limit trick as in <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t*, Double_t, Double_t, Double_t&amp; funLTG, const Char_t* grid_type)">IdentZ</a></span>
+	<span class="comment">// same limit trick as in <a href="../KVTGIDManager.html#KVTGIDManager:IdentZ" title="Double_t KVTGIDManager::IdentZ(const Char_t* ,Double_t ,Double_t ,Double_t&amp; funLTG,const Char_t* grid_type)">IdentZ</a></span>
 	Amin -= 0.5;
 	Amax += 0.5;
 	
    Afound = _tgid-&gt;GetIdentification(Amin, Amax, funLTG);
 
-   <span class="keyword">if</span> (_tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() == <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:kStatus_NotBetween_IDMin_IDMax" title="KVTGID::(anonymous) KVTGID::kStatus_NotBetween_IDMin_IDMax">kStatus_NotBetween_IDMin_IDMax</a>)
-      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OutOfIDRange">kStatus_OutOfIDRange</a>;
+   <span class="keyword">if</span> (_tgid-&gt;<a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() == <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:kStatus_NotBetween_IDMin_IDMax" title="const enum KVTGID:: KVTGID::kStatus_NotBetween_IDMin_IDMax">kStatus_NotBetween_IDMin_IDMax</a>)
+      <a href="../KVTGIDManager.html#KVTGIDManager:fStatus" title="Int_t KVTGIDManager::fStatus">fStatus</a> = <a href="../KVTGIDManager.html#KVTGIDManager:kStatus_OutOfIDRange" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kStatus_OutOfIDRange">kStatus_OutOfIDRange</a>;
 
    <span class="keyword">return</span> Afound;
 }
 
 <span class="comment">//___________________________________________________________________________________________//</span>
 
-<a name="v4wIPC"></a><a href="../KVTGIDGrid.html">KVTGIDGrid</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid, Double_t xmax, Double_t xmin = 0., Int_t ID_min = 0, Int_t ID_max = 0, Int_t npoints = 100, Bool_t logscale = kFALSE) or overloads">GetTGIDGrid</a>(<a href="../KVTGID.html">KVTGID</a> *tgid,
+<a name="v4wIPC"></a><a href="../KVTGIDGrid.html">KVTGIDGrid</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid,Double_t xmax,Double_t xmin=0.,Int_t ID_min=0,Int_t ID_max=0,Int_t npoints=100,Bool_t logscale=kFALSE) or overloads">GetTGIDGrid</a>(<a href="../KVTGID.html">KVTGID</a> *tgid,
                                      <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin,
                                      <a href="../ListOfTypes.html#Int_t">Int_t</a> ID_min, <a href="../ListOfTypes.html#Int_t">Int_t</a> ID_max,
                                      <a href="../ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> logscale)
@@ -292,7 +292,7 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 }
 <span class="comment">//___________________________________________________________________________________________//</span>
 
-<a name="d07l1B"></a><a href="../KVTGIDGrid.html">KVTGIDGrid</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid, Double_t xmax, Double_t xmin = 0., Int_t ID_min = 0, Int_t ID_max = 0, Int_t npoints = 100, Bool_t logscale = kFALSE) or overloads">GetTGIDGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * tgid_name,
+<a name="d07l1B"></a><a href="../KVTGIDGrid.html">KVTGIDGrid</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid,Double_t xmax,Double_t xmin=0.,Int_t ID_min=0,Int_t ID_max=0,Int_t npoints=100,Bool_t logscale=kFALSE) or overloads">GetTGIDGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * tgid_name,
                                      <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin,
                                      <a href="../ListOfTypes.html#Int_t">Int_t</a> ID_min, <a href="../ListOfTypes.html#Int_t">Int_t</a> ID_max,
                                      <a href="../ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> logscale)
@@ -302,12 +302,12 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
    <span class="comment">//The <a href="../KVIDGrid.html">KVIDGrid</a> object must be deleted by the user.</span>
    <span class="comment">//See <a href="../KVTGID.html">KVTGID</a>::MakeIDGrid for meaning of other arguments.</span>
 
-   <span class="keyword">return</span> <a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid, Double_t xmax, Double_t xmin = 0., Int_t ID_min = 0, Int_t ID_max = 0, Int_t npoints = 100, Bool_t logscale = kFALSE) or overloads">GetTGIDGrid</a>(<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(tgid_name), xmax, xmin, ID_min, ID_max, npoints, logscale);
+   <span class="keyword">return</span> <a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid,Double_t xmax,Double_t xmin=0.,Int_t ID_min=0,Int_t ID_max=0,Int_t npoints=100,Bool_t logscale=kFALSE) or overloads">GetTGIDGrid</a>(<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(tgid_name), xmax, xmin, ID_min, ID_max, npoints, logscale);
 }
 
 <span class="comment">//___________________________________________________________________________________________//</span>
 
-<a name="RLg_VE"></a><a href="../KVTGIDGrid.html">KVTGIDGrid</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid, Double_t xmax, Double_t xmin = 0., Int_t ID_min = 0, Int_t ID_max = 0, Int_t npoints = 100, Bool_t logscale = kFALSE) or overloads">GetTGIDGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * idt_name,
+<a name="RLg_VE"></a><a href="../KVTGIDGrid.html">KVTGIDGrid</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid,Double_t xmax,Double_t xmin=0.,Int_t ID_min=0,Int_t ID_max=0,Int_t npoints=100,Bool_t logscale=kFALSE) or overloads">GetTGIDGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * idt_name,
                                      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * id_type,
                                      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * grid_type,
                                      <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin,
@@ -320,17 +320,17 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
    <span class="comment">//The <a href="../KVIDGrid.html">KVIDGrid</a> object must be deleted by the user.</span>
    <span class="comment">//See <a href="../KVTGID.html">KVTGID</a>::MakeIDGrid for meaning of other arguments.</span>
 
-   <span class="keyword">return</span> <a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid, Double_t xmax, Double_t xmin = 0., Int_t ID_min = 0, Int_t ID_max = 0, Int_t npoints = 100, Bool_t logscale = kFALSE) or overloads">GetTGIDGrid</a>(<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(idt_name, id_type, grid_type), xmax,
+   <span class="keyword">return</span> <a href="../KVTGIDManager.html#KVTGIDManager:GetTGIDGrid" title="KVTGIDGrid* KVTGIDManager::GetTGIDGrid(KVTGID* tgid,Double_t xmax,Double_t xmin=0.,Int_t ID_min=0,Int_t ID_max=0,Int_t npoints=100,Bool_t logscale=kFALSE) or overloads">GetTGIDGrid</a>(<a href="../KVTGIDManager.html#KVTGIDManager:GetTGID" title="KVTGID* KVTGIDManager::GetTGID(const Char_t* name) or overloads">GetTGID</a>(idt_name, id_type, grid_type), xmax,
                       xmin, ID_min, ID_max, npoints, logscale);
 }
 
 <span class="comment">//_______________________________________________________________________________________//</span>
 
-<a name="Kg1c8B"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetStatusString" title="const Char_t* KVTGIDManager::GetStatusString(KVTGIDManager::ETGIDMStatus s = kCurrentStatus) const">GetStatusString</a>(ETGIDMStatus s) <span class="keyword">const</span>
+<a name="Kg1c8B"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVTGIDManager.html">KVTGIDManager</a>::<a href="../KVTGIDManager.html#KVTGIDManager:GetStatusString" title="const Char_t* KVTGIDManager::GetStatusString(KVTGIDManager::ETGIDMStatus s=kCurrentStatus)">GetStatusString</a>(ETGIDMStatus s) <span class="keyword">const</span>
 {
    <span class="comment">//Returns explanatory message for status code <span class="string">'s'</span></span>
    <span class="comment">//If no code argument is given, the status string corresponds to the current value</span>
-   <span class="comment">//of <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>(), i.e. only valid if an identification has just been performed</span>
+   <span class="comment">//of <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>(), i.e. only valid if an identification has just been performed</span>
 
    <span class="keyword">static</span> TString messages[] = {
       <span class="string">"ok"</span>,
@@ -339,7 +339,7 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
       <span class="string">"IdentA called with Z&lt;1"</span>,
       <span class="string">"IdentA called with Z larger than max Z defined for KVTGIDZA isotopic identification object"</span>
    };
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> status = (s != <a href="../KVTGIDManager.html#KVTGIDManager:kCurrentStatus" title="KVTGIDManager::ETGIDMStatus KVTGIDManager::kCurrentStatus">kCurrentStatus</a> ? s + 1 : <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus() const">GetStatus</a>() + 1);
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> status = (s != <a href="../KVTGIDManager.html#KVTGIDManager:kCurrentStatus" title="const KVTGIDManager::ETGIDMStatus KVTGIDManager::kCurrentStatus">kCurrentStatus</a> ? s + 1 : <a href="../KVTGIDManager.html#KVTGIDManager:GetStatus" title="Int_t KVTGIDManager::GetStatus()">GetStatus</a>() + 1);
    <span class="keyword">if</span> (status--)
       <span class="keyword">return</span> messages[status];
    <span class="keyword">return</span> Form(<span class="string">"no call to IdentZ()/IdentA() performed yet"</span>);
@@ -352,7 +352,7 @@ ClassImp(<a href="../KVTGIDManager.html">KVTGIDManager</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:52 </em><em>&raquo; Last generated: 2015-09-17 10:52</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

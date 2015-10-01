@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:49 2015            -->
+<!--   Date: Thu Sep 17 10:52:09 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//</span>
 <span class="comment">//Author: Daniel Cussol </span>
@@ -43,9 +43,9 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <span class="comment">//      virtual <a href="../ListOfTypes.html#void">void</a> <a href="../KVVarGlobMean.html#KVVarGlobMean:Reset" title="void KVVarGlobMean::Reset()">Reset</a>(<a href="../ListOfTypes.html#void">void</a>)                resets internal fields before the treatment</span>
 <span class="comment">//      virtual <a href="../ListOfTypes.html#void">void</a> <a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="../KVNucleus.html">KVNucleus</a> *c)         tells how to compute the global variable using a <a href="../KVNucleus.html">KVNucleus</a></span>
 <span class="comment">//</span>
-<span class="comment">// A call to the <a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>() method returns the mean value of the variable. One can also obtain the array which</span>
+<span class="comment">// A call to the <a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>() method returns the mean value of the variable. One can also obtain the array which</span>
 <span class="comment">// contains the values of the internal fields by a call to <a href="../KVVarGlobMean.html#KVVarGlobMean:GetValuePtr" title="Double_t* KVVarGlobMean::GetValuePtr()">GetValuePtr</a>(). Individual values can also be</span>
-<span class="comment">// obtained by a call to <a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> index) or by a call to  <a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(Chat_t *name). Parenthesis can also be</span>
+<span class="comment">// obtained by a call to <a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> index) or by a call to  <a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(Chat_t *name). Parenthesis can also be</span>
 <span class="comment">// used. The correspondance between indexes ans names is as follows:</span>
 <span class="comment">//</span>
 <span class="comment">//      Name            Index                   Meaning</span>
@@ -64,24 +64,24 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <span class="comment">// <a href="../KVZmean.html">KVZmean</a> *pzmean=new <a href="../KVZmean.html">KVZmean</a>();</span>
 <span class="comment">// <a href="../KVZmean.html">KVZmean</a> zmean;</span>
 <span class="comment">// ...</span>
-<span class="comment">// <a href="../ListOfTypes.html#Double_t">Double_t</a> mean=pzmean-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>();        |</span>
-<span class="comment">//          mean=pzmean-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(<span class="string">"Mean"</span>);  |---&gt; Mean value</span>
+<span class="comment">// <a href="../ListOfTypes.html#Double_t">Double_t</a> mean=pzmean-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>();        |</span>
+<span class="comment">//          mean=pzmean-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(<span class="string">"Mean"</span>);  |---&gt; Mean value</span>
 <span class="comment">//          mean=zmean();                   |</span>
 <span class="comment">//          mean=zmean(<span class="string">"Mean"</span>);             |</span>
 <span class="comment">// <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVarGlobMean.html#KVVarGlobMean:ect" title="Double_t KVVarGlobMean::ect">ect</a>=zmean(<span class="string">"RMS"</span>);---------------&gt; Standard Deviation</span>
-<span class="comment">// <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVarGlobMean.html#KVVarGlobMean:sw" title="Double_t KVVarGlobMean::sw">sw</a>=pzmean-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(4) ---------&gt; Sum of weights</span>
+<span class="comment">// <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVarGlobMean.html#KVVarGlobMean:sw" title="Double_t KVVarGlobMean::sw">sw</a>=pzmean-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(4) ---------&gt; Sum of weights</span>
 <span class="comment">// <a href="../ListOfTypes.html#Double_t">Double_t</a> *pvalues=zmean.<a href="../KVVarGlobMean.html#KVVarGlobMean:GetValuePtr" title="Double_t* KVVarGlobMean::GetValuePtr()">GetValuePtr</a>();---&gt; Array of values</span>
 <span class="comment">//</span>
-<span class="comment">// The internal fields can be set by a call to the protected methods <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v, <a href="../ListOfTypes.html#Double_t">Double_t</a> w) or</span>
-<span class="comment">// <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v). In the latter case, the weight is set to 1.</span>
+<span class="comment">// The internal fields can be set by a call to the protected methods <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v, <a href="../ListOfTypes.html#Double_t">Double_t</a> w) or</span>
+<span class="comment">// <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v). In the latter case, the weight is set to 1.</span>
 <span class="comment">//</span>
 <span class="comment">//      Method                                  Action</span>
 <span class="comment">//----------------------------------------------------------------</span>
-<span class="comment">//      <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v, <a href="../ListOfTypes.html#Double_t">Double_t</a> w)         SumVar+=w*v;</span>
+<span class="comment">//      <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v, <a href="../ListOfTypes.html#Double_t">Double_t</a> w)         SumVar+=w*v;</span>
 <span class="comment">//                                              SumVarSquared+=w*v*v;</span>
 <span class="comment">//                                              SumOfWeights+=w;</span>
 <span class="comment">//</span>
-<span class="comment">//      <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v)                     SumVar+=v;</span>
+<span class="comment">//      <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v)                     SumVar+=v;</span>
 <span class="comment">//                                              SumVarSquared+=v*v;</span>
 <span class="comment">//                                              SumOfWeights+=1;</span>
 <span class="comment">//</span>
@@ -102,17 +102,17 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
    <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a>++;
    <a href="../KVVarGlobMean.html#KVVarGlobMean:nb_crea" title="Int_t KVVarGlobMean::nb_crea">nb_crea</a>++;
    <a href="../KVVarGlobMean.html#KVVarGlobMean:Init" title="void KVVarGlobMean::Init()">Init</a>();
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"Mean"</span>, 0);
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"RMS"</span>, 1);
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"SumVar"</span>, 2);
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"SumVarSquared"</span>, 3);
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"SumOfWeights"</span>, 4);
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"Min"</span>, 5);
-   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name, Int_t index)">SetNameIndex</a>(<span class="string">"Max"</span>, 6);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"Mean"</span>, 0);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"RMS"</span>, 1);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"SumVar"</span>, 2);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"SumVarSquared"</span>, 3);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"SumOfWeights"</span>, 4);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"Min"</span>, 5);
+   <a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="string">"Max"</span>, 6);
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="UG_81E"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v, <a href="../ListOfTypes.html#Double_t">Double_t</a> w)
+<a name="UG_81E"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v, <a href="../ListOfTypes.html#Double_t">Double_t</a> w)
 {
 <span class="comment">// Routine privee de remplissage</span>
 <span class="comment">//</span>
@@ -146,12 +146,12 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="W879xE"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v)
+<a name="W879xE"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> v)
 {
 <span class="comment">//</span>
 <span class="comment">// Routine privee de remplissage</span>
 <span class="comment">//</span>
-   <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v, Double_t w) or overloads">FillVar</a>(v, 1.);
+   <a href="../KVVarGlobMean.html#KVVarGlobMean:FillVar" title="void KVVarGlobMean::FillVar(Double_t v,Double_t w) or overloads">FillVar</a>(v, 1.);
 }
 
 <span class="comment">//_________________________________________________________________</span>
@@ -163,10 +163,10 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
    TString nom;
    <a href="../KVVarGlobMean.html#KVVarGlobMean:init" title="void KVVarGlobMean::init()">init</a>();
    nom.Form(<span class="string">"KVVarGlobMean_%d"</span>, <a href="../KVVarGlobMean.html#KVVarGlobMean:nb_crea" title="Int_t KVVarGlobMean::nb_crea">nb_crea</a>);
-   <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(nom.Data());
-   <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title = &quot;&quot;)">SetTitle</a>(nom.Data());
+   <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(nom.Data());
+   <a href="../#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(nom.Data());
 <span class="cpp">#ifdef DEBUG_KVVarGlobMean</span>
-   cout &lt;&lt; <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a> &lt;&lt; <span class="string">" crees...(defaut) "</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a> &lt;&lt; <span class="string">" crees...(defaut) "</span> &lt;&lt; endl;
 <span class="cpp">#endif</span>
 }
 
@@ -178,7 +178,7 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <span class="comment">//</span>
    <a href="../KVVarGlobMean.html#KVVarGlobMean:init" title="void KVVarGlobMean::init()">init</a>();
 <span class="cpp">#ifdef DEBUG_KVVarGlobMean</span>
-   cout &lt;&lt; <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a> &lt;&lt; <span class="string">" crees...(nom) "</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a> &lt;&lt; <span class="string">" crees...(nom) "</span> &lt;&lt; endl;
 <span class="cpp">#endif</span>
 }
 
@@ -186,16 +186,16 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <a name="cy60t"></a><a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:KVVarGlobMean" title="KVVarGlobMean KVVarGlobMean::KVVarGlobMean() or overloads">KVVarGlobMean</a>(<span class="keyword">const</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp; a):<a href="../KVVarGlob1.html#KVVarGlob1:KVVarGlob1" title="KVVarGlob1 KVVarGlob1::KVVarGlob1() or overloads">KVVarGlob1</a>(a)
 {
 <span class="comment">// </span>
-<span class="comment">// Contructeur par <a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a></span>
+<span class="comment">// Contructeur par <a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a></span>
 <span class="comment">//</span>
    <a href="../KVVarGlobMean.html#KVVarGlobMean:init" title="void KVVarGlobMean::init()">init</a>();
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
-   a.<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a>(*<span class="keyword">this</span>);
+   a.<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#else</span>
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a>(*<span class="keyword">this</span>);
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#endif</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlobMean</span>
-   cout &lt;&lt; <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a> &lt;&lt; <span class="string">" crees...(Copy) "</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a> &lt;&lt; <span class="string">" crees...(Copy) "</span> &lt;&lt; endl;
 <span class="cpp">#endif</span>
 }
 
@@ -206,7 +206,7 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <span class="comment">// Destructeur</span>
 <span class="comment">//</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlobMean</span>
-   cout &lt;&lt; <span class="string">"Destruction de "</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; <span class="string">"..."</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Destruction de "</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"..."</span> &lt;&lt; endl;
 <span class="cpp">#endif</span>
    <a href="../KVVarGlobMean.html#KVVarGlobMean:nb" title="Int_t KVVarGlobMean::nb">nb</a>--;
 
@@ -215,21 +215,21 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 
 <span class="comment">//_________________________________________________________________</span>
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
-<a name="fKdgtB"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp; a) <span class="keyword">const</span>
+<a name="fKdgtB"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp; a) <span class="keyword">const</span>
 <span class="cpp">#else</span>
-<span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp; a)
+<span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp; a)
 <span class="cpp">#endif</span>
 {
-   <span class="comment">// Methode de <a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a></span>
+   <span class="comment">// Methode de <a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a></span>
 
-   <a href="../KVVarGlob1.html">KVVarGlob1</a>::<a href="../KVVarGlob1.html#KVVarGlob1:Copy" title="void KVVarGlob1::Copy(TObject&amp; obj) const">Copy</a>(a);
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetECT" title="void KVVarGlobMean::SetECT(Double_t x)">SetECT</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(1));
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetSVAR" title="void KVVarGlobMean::SetSVAR(Double_t x)">SetSVAR</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(2));
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetSVAR2" title="void KVVarGlobMean::SetSVAR2(Double_t x)">SetSVAR2</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(3));
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetSW" title="void KVVarGlobMean::SetSW(Double_t x)">SetSW</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(4));
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetMIN" title="void KVVarGlobMean::SetMIN(Double_t x)">SetMIN</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(5));
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetMAX" title="void KVVarGlobMean::SetMAX(Double_t x)">SetMAX</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() const or overloads">GetValue</a>(6));
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetCALC" title="void KVVarGlobMean::SetCALC(Int_t x)">SetCALC</a>(<a href="../KVVarGlobMean.html#KVVarGlobMean:GetCALC" title="Int_t KVVarGlobMean::GetCALC() const">GetCALC</a>());
+   <a href="../KVVarGlob1.html">KVVarGlob1</a>::<a href="../KVVarGlob1.html#KVVarGlob1:Copy" title="void KVVarGlob1::Copy(TObject&amp; obj)">Copy</a>(a);
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetECT" title="void KVVarGlobMean::SetECT(Double_t x)">SetECT</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(1));
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetSVAR" title="void KVVarGlobMean::SetSVAR(Double_t x)">SetSVAR</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(2));
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetSVAR2" title="void KVVarGlobMean::SetSVAR2(Double_t x)">SetSVAR2</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(3));
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetSW" title="void KVVarGlobMean::SetSW(Double_t x)">SetSW</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(4));
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetMIN" title="void KVVarGlobMean::SetMIN(Double_t x)">SetMIN</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(5));
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetMAX" title="void KVVarGlobMean::SetMAX(Double_t x)">SetMAX</a>(((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(6));
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:SetCALC" title="void KVVarGlobMean::SetCALC(Int_t x)">SetCALC</a>(<a href="../KVVarGlobMean.html#KVVarGlobMean:GetCALC" title="Int_t KVVarGlobMean::GetCALC()">GetCALC</a>());
 }
 
 <span class="comment">//_________________________________________________________________</span>
@@ -239,15 +239,15 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <span class="comment">// Operateur =</span>
 <span class="comment">//</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlobMean</span>
-   cout &lt;&lt; <span class="string">"Copy par egalite de "</span> &lt;&lt; a.<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; <span class="string">"..."</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Copy par egalite de "</span> &lt;&lt; a.<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"..."</span> &lt;&lt; endl;
 <span class="cpp">#endif</span>
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
-   a.<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a>(*<span class="keyword">this</span>);
+   a.<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#else</span>
-   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj) const">Copy</a>(*<span class="keyword">this</span>);
+   ((<a href="../KVVarGlobMean.html">KVVarGlobMean</a> &amp;) a).<a href="../KVVarGlobMean.html#KVVarGlobMean:Copy" title="void KVVarGlobMean::Copy(TObject&amp; obj)">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#endif</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlobMean</span>
-   cout &lt;&lt; <span class="string">"Nom de la Copy par egalite: "</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Nom de la Copy par egalite: "</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
 <span class="cpp">#endif</span>
    <span class="keyword">return</span> *<span class="keyword">this</span>;
 }
@@ -276,7 +276,7 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="qNtrK"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:getvalue_void" title="Double_t KVVarGlobMean::getvalue_void() const">getvalue_void</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="qNtrK"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:getvalue_void" title="Double_t KVVarGlobMean::getvalue_void()">getvalue_void</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
 	<span class="comment">// Returns mean value of variable</span>
    <span class="keyword">const_cast</span> &lt; <a href="../KVVarGlobMean.html">KVVarGlobMean</a> * &gt;(<span class="keyword">this</span>)-><a href="../KVVarGlobMean.html#KVVarGlobMean:CalcVar" title="void KVVarGlobMean::CalcVar()">CalcVar</a>();
@@ -366,7 +366,7 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 
 <span class="comment">//_________________________________________________________________</span>
 
-<a name="GPuIDD"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = KVVarGlob::kOneBody)">MakeClass</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * classname, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * classdesc, <span class="keyword">int</span> type)
+<a name="GPuIDD"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=KVVarGlob::kOneBody)">MakeClass</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * classname, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * classdesc, <span class="keyword">int</span> type)
 {
    <span class="comment">//Creates skeleton '.h' and '.cpp' files for a new global variable class which</span>
    <span class="comment">//inherits from this class. Give a name for the new class and a <a href="../ListOfTypes.html#short">short</a> description</span>
@@ -374,9 +374,9 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
    <span class="comment">//</span>
    <span class="comment">// By default the new class will be of type 1-body. A <a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="../KVNucleus.html">KVNucleus</a>*) method</span>
    <span class="comment">// will be generated which the user should complete.</span>
-   <span class="comment">// For a 2-body variable, call <a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = KVVarGlob::kOneBody)">MakeClass</a> with type = <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="KVVarGlob::(anonymous) KVVarGlob::kTwoBody">kTwoBody</a>.</span>
-   <span class="comment">// A skeleton <a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>(<a href="../KVNucleus.html">KVNucleus</a>*,<a href="../KVNucleus.html">KVNucleus</a>*) method will be generated.</span>
-   <span class="comment">// For a N-body variable, call <a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = KVVarGlob::kOneBody)">MakeClass</a> with type = <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:kNBody" title="KVVarGlob::(anonymous) KVVarGlob::kNBody">kNBody</a>.</span>
+   <span class="comment">// For a 2-body variable, call <a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=KVVarGlob::kOneBody)">MakeClass</a> with type = <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="const enum KVVarGlob:: KVVarGlob::kTwoBody">kTwoBody</a>.</span>
+   <span class="comment">// A skeleton <a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>(<a href="../KVNucleus.html">KVNucleus</a>*,<a href="../KVNucleus.html">KVNucleus</a>*) method will be generated.</span>
+   <span class="comment">// For a N-body variable, call <a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=KVVarGlob::kOneBody)">MakeClass</a> with type = <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:kNBody" title="const enum KVVarGlob:: KVVarGlob::kNBody">kNBody</a>.</span>
    <span class="comment">// A skeleton <a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="../KVEvent.html">KVEvent</a>*) method will be generated.</span>
    
    <span class="comment">// basic class template</span>
@@ -385,24 +385,24 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
    <a href="../KVString.html">KVString</a> body;
    
    <span class="comment">// add '<a href="../KVVarGlobMean.html#KVVarGlobMean:init" title="void KVVarGlobMean::init()">init</a>' method</span>
-   <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddInitMethod" title="void KVVarGlob::AddInitMethod(const Char_t* classname, KVClassFactory&amp; cf, KVString&amp; body, int type)">AddInitMethod</a>(classname, cf, body, type);
+   <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddInitMethod" title="void KVVarGlob::AddInitMethod(const Char_t* classname,KVClassFactory&amp; cf,KVString&amp; body,int type)">AddInitMethod</a>(classname, cf, body, type);
    
-   <span class="comment">// add '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
-   <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethod" title="void KVVarGlob::AddFillMethod(KVClassFactory&amp; cf, int type)">AddFillMethod</a>(cf, type);
+   <span class="comment">// add '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
+   <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethod" title="void KVVarGlob::AddFillMethod(KVClassFactory&amp; cf,int type)">AddFillMethod</a>(cf, type);
    
-   <span class="comment">// body of '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
-   <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillMethodBody" title="void KVVarGlobMean::FillMethodBody(KVString&amp; body, int type)">FillMethodBody</a>(body, type);
+   <span class="comment">// body of '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
+   <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillMethodBody" title="void KVVarGlobMean::FillMethodBody(KVString&amp; body,int type)">FillMethodBody</a>(body, type);
    
    <span class="comment">// add body of method</span>
-   <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethodBody" title="void KVVarGlob::AddFillMethodBody(KVClassFactory&amp; cf, KVString&amp; body, int type)">AddFillMethodBody</a>(cf, body, type);
+   <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethodBody" title="void KVVarGlob::AddFillMethodBody(KVClassFactory&amp; cf,KVString&amp; body,int type)">AddFillMethodBody</a>(cf, body, type);
       
    cf.GenerateCode();
 }
 
-<a name="YbecBC"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillMethodBody" title="void KVVarGlobMean::FillMethodBody(KVString&amp; body, int type)">FillMethodBody</a>(<a href="../KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)
+<a name="YbecBC"></a><span class="keyword">void</span> <a href="../KVVarGlobMean.html">KVVarGlobMean</a>::<a href="../KVVarGlobMean.html#KVVarGlobMean:FillMethodBody" title="void KVVarGlobMean::FillMethodBody(KVString&amp; body,int type)">FillMethodBody</a>(<a href="../KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)
 {
-   <span class="comment">// PRIVATE method used by <a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname, const Char_t* classdesc, int type = KVVarGlob::kOneBody)">MakeClass</a>.</span>
-   <span class="comment">// body of '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1, KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
+   <span class="comment">// PRIVATE method used by <a href="../KVVarGlobMean.html#KVVarGlobMean:MakeClass" title="void KVVarGlobMean::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=KVVarGlob::kOneBody)">MakeClass</a>.</span>
+   <span class="comment">// body of '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
    <span class="keyword">switch</span>(type){
       <span class="keyword">case</span> kTwoBody:
          body = <span class="string">"   // Calculation of contribution to 2-body global variable of pair (n1,n2) of nuclei.\n"</span>;
@@ -443,7 +443,7 @@ ClassImp(<a href="../KVVarGlobMean.html">KVVarGlobMean</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:52 </em><em>&raquo; Last generated: 2015-09-17 10:52</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

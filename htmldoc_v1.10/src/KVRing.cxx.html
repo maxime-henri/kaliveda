@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:16 2015            -->
+<!--   Date: Thu Sep 17 10:51:56 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVRing.html">KVRing</a>.cpp,v 1.22 2007/05/31 09:59:22 franklan Exp $
@@ -53,7 +53,7 @@ ClassImp(<a href="../KVRing.html">KVRing</a>)
 //End_Html<span class="comment"></span>
 <span class="comment">//</span>
 
-<a name="et9WtD"></a><a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:KVRing" title="KVRing KVRing::KVRing() or overloads">KVRing</a>()
+<a name="et9WtD"></a><a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:KVRing" title="KVRing KVRing::KVRing()">KVRing</a>()
 {
    <a href="../KVRing.html#KVRing:init" title="void KVRing::init()">init</a>();
 }
@@ -68,20 +68,20 @@ ClassImp(<a href="../KVRing.html">KVRing</a>)
 {
 }
 
-<a name="jcjMbB"></a><span class="keyword">void</span> <a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:Add" title="void KVRing::Add(KVBase*)">Add</a>(<a href="../KVBase.html">KVBase</a> *b)
+<a name="jcjMbB"></a><span class="keyword">void</span> <a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:Add" title="void KVRing::Add(KVBase* )">Add</a>(<a href="../KVBase.html">KVBase</a> *b)
 {
     <span class="comment">// Only <a href="../KVTelescope.html">KVTelescope</a>-derived structures can be placed in a <a href="../KVRing.html">KVRing</a></span>
 
-    <span class="keyword">if</span>(!b-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVTelescope"</span>)) <span class="keyword">return</span>;
-    <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase*)">Add</a>(b);
+    <span class="keyword">if</span>(!b-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVTelescope"</span>)) <span class="keyword">return</span>;
+    <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(b);
 }
 
 
 <span class="comment">//_______________________________________________________________________________________</span>
-<a name="BoVBpB"></a><a href="../KVTelescope.html">KVTelescope</a> *<a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:GetTelescope" title="KVTelescope* KVRing::GetTelescope(Float_t phi) const or overloads">GetTelescope</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> phi) <span class="keyword">const</span>
+<a name="BoVBpB"></a><a href="../KVTelescope.html">KVTelescope</a> *<a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:GetTelescope" title="KVTelescope* KVRing::GetTelescope(Float_t phi) or overloads">GetTelescope</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> phi) <span class="keyword">const</span>
 {
    <span class="comment">// give pointer to telescope in ring which covers azimuthal angle phi</span>
-    TIter next(<a href="../KVRing.html#KVRing:GetTelescopes" title="const KVSeqCollection* KVRing::GetTelescopes() const">GetTelescopes</a>());
+    TIter next(<a href="../KVRing.html#KVRing:GetTelescopes" title="const KVSeqCollection* KVRing::GetTelescopes()">GetTelescopes</a>());
    <a href="../KVTelescope.html">KVTelescope</a> *obj;
    <span class="keyword">while</span> ((obj = (<a href="../KVTelescope.html">KVTelescope</a> *) next())) {     <span class="comment">// loop over telescopes in ring</span>
       <span class="keyword">if</span> (obj-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(phi))
@@ -91,19 +91,19 @@ ClassImp(<a href="../KVRing.html">KVRing</a>)
 }
 
 <span class="comment">//_______________________________________________________________________________________</span>
-<a name="ioOTND"></a><a href="../KVTelescope.html">KVTelescope</a> *<a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:GetTelescope" title="KVTelescope* KVRing::GetTelescope(Float_t phi) const or overloads">GetTelescope</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name) <span class="keyword">const</span>
+<a name="ioOTND"></a><a href="../KVTelescope.html">KVTelescope</a> *<a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:GetTelescope" title="KVTelescope* KVRing::GetTelescope(Float_t phi) or overloads">GetTelescope</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name) <span class="keyword">const</span>
 {
    <span class="comment">// give pointer to telescope in ring with name</span>
-    <span class="keyword">return</span> (<a href="../KVTelescope.html">KVTelescope</a> *)<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetStructure(const Char_t* name) const or overloads">GetStructure</a>(<span class="string">"TELESCOPE"</span>,name);
+    <span class="keyword">return</span> (<a href="../KVTelescope.html">KVTelescope</a> *)<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetStructure(const Char_t* name) or overloads">GetStructure</a>(<span class="string">"TELESCOPE"</span>,name);
 }
 
 <span class="comment">//____________________________________________________________________________________________</span>
-<a name="GhqTsB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:Compare" title="Int_t KVRing::Compare(const TObject* obj) const">Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * obj) <span class="keyword">const</span>
+<a name="GhqTsB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRing.html">KVRing</a>::<a href="../KVRing.html#KVRing:Compare" title="Int_t KVRing::Compare(const TObject* obj)">Compare</a>(<span class="keyword">const</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * obj) <span class="keyword">const</span>
 {
    <span class="comment">// rings are sorted according to lower edge polar angle</span>
-   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin() const">GetThetaMin</a>() &lt; ((<a href="../KVRing.html">KVRing</a> *) obj)-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin() const">GetThetaMin</a>())
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>() &lt; ((<a href="../KVRing.html">KVRing</a> *) obj)-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
       <span class="keyword">return</span> -1;
-   <span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin() const">GetThetaMin</a>() &gt; ((<a href="../KVRing.html">KVRing</a> *) obj)-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin() const">GetThetaMin</a>())
+   <span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>() &gt; ((<a href="../KVRing.html">KVRing</a> *) obj)-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
       <span class="keyword">return</span> 1;
    <span class="keyword">else</span>
       <span class="keyword">return</span> 0;
@@ -118,23 +118,23 @@ ClassImp(<a href="../KVRing.html">KVRing</a>)
 {
 	<span class="comment">// Create and return TGeoVolume representing detectors in this ring.</span>
 
-   TString name(<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+   TString name(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
    name.ToUpper();
    name.ReplaceAll(<span class="string">" "</span>,<span class="string">"_"</span>);
    TGeoVolume *mother_vol = gGeoManager-&gt;MakeVolumeAssembly(name.Data());
    <span class="comment">//**** BUILD &amp; ADD TELESCOPEs ****</span>
-   TIter next(<a href="../KVRing.html#KVRing:GetTelescopes" title="const KVSeqCollection* KVRing::GetTelescopes() const">GetTelescopes</a>()); <a href="../KVTelescope.html">KVTelescope</a> *det;
+   TIter next(<a href="../KVRing.html#KVRing:GetTelescopes" title="const KVSeqCollection* KVRing::GetTelescopes()">GetTelescopes</a>()); <a href="../KVTelescope.html">KVTelescope</a> *det;
    <span class="keyword">while</span>( (det = (<a href="../KVTelescope.html">KVTelescope</a>*)next()) ){
       TGeoVolume* det_vol = det-&gt;<a href="../KVRing.html#KVRing:GetGeoVolume" title="TGeoVolume* KVRing::GetGeoVolume()">GetGeoVolume</a>();
       <span class="comment">// position telescope in ring</span>
       <span class="comment">// rotate telescope to orientation corresponding to (theta,phi)</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> theta = det-&gt;<a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta() const">GetTheta</a>(); <a href="../ListOfTypes.html#Double_t">Double_t</a> phi = det-&gt;<a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>();
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> theta = det-&gt;<a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>(); <a href="../ListOfTypes.html#Double_t">Double_t</a> phi = det-&gt;<a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>();
       TGeoRotation rot1, rot2;
       rot2.SetAngles(phi+90., theta, 0.);
       rot1.SetAngles(-90., 0., 0.);
       <a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel = det-&gt;GetTotalLengthInCM();
       <span class="comment">// distance to telescope centre = distance to telescope + half total length of telescope</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> dist = det-&gt;<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance() const">GetDistance</a>() + tot_len_tel/2.;
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> dist = det-&gt;<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>() + tot_len_tel/2.;
       <span class="comment">// translate telescope to correct distance from target (note: reference is CENTRE of telescope)</span>
       <a href="../ListOfTypes.html#Double_t">Double_t</a> trans_1 = dist;
       <span class="comment">// translate telescope so that centre of ring is on origin</span>
@@ -161,7 +161,7 @@ ClassImp(<a href="../KVRing.html">KVRing</a>)
    TGeoVolume* vol = <a href="../KVRing.html#KVRing:GetGeoVolume" title="TGeoVolume* KVRing::GetGeoVolume()">GetGeoVolume</a>();
 
    <span class="comment">// translate ring to correct distance</span>
-   TGeoTranslation* tr = <span class="keyword">new</span> TGeoTranslation(0,0,<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance() const">GetDistance</a>());<span class="comment">//distance set in <a href="../KVRing.html#KVRing:GetGeoVolume" title="TGeoVolume* KVRing::GetGeoVolume()">GetGeoVolume</a>()</span>
+   TGeoTranslation* tr = <span class="keyword">new</span> TGeoTranslation(0,0,<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>());<span class="comment">//distance set in <a href="../KVRing.html#KVRing:GetGeoVolume" title="TGeoVolume* KVRing::GetGeoVolume()">GetGeoVolume</a>()</span>
 
    <span class="comment">// add ring volume to geometry</span>
    gGeoManager-&gt;GetTopVolume()-&gt;AddNode(vol, 1, tr);
@@ -176,7 +176,7 @@ ClassImp(<a href="../KVRing.html">KVRing</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

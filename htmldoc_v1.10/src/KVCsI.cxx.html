@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:18 2015            -->
+<!--   Date: Thu Sep 17 10:50:46 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVCsI.html">KVCsI</a>.cpp,v 1.38 2009/04/09 09:25:43 ebonnet Exp $
@@ -102,7 +102,7 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
     <span class="keyword">if</span>(thickAl&gt;0.0){
         <a href="../KVMaterial.html">KVMaterial</a> *mat = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Al"</span>,thickAl*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);
         fAbsorbers-&gt;AddFirst(mat);
-        <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial*) or overloads">SetActiveLayer</a>(1);
+        <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a>(1);
     }
     <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"CSI"</span>);
     <a href="../KVCsI.html#KVCsI:init" title="void KVCsI::init()">init</a>();
@@ -111,10 +111,10 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 <a name="CCocWE"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:SetAlThickness" title="void KVCsI::SetAlThickness(Float_t thickAl)">SetAlThickness</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> thickAl <span class="comment">/* um */</span>)
 {
 <a href="../KVMaterial.html">KVMaterial</a>* mat = 0;
-  <span class="keyword">if</span>(!(mat = <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) const or overloads">GetAbsorber</a>(<span class="string">"Al"</span>))){
+  <span class="keyword">if</span>(!(mat = <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) or overloads">GetAbsorber</a>(<span class="string">"Al"</span>))){
       mat = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Al"</span>,thickAl*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);
       fAbsorbers-&gt;AddFirst(mat);
-      <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial*) or overloads">SetActiveLayer</a>(1);
+      <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a>(1);
   }
   <span class="keyword">else</span> mat-&gt;<a href="../KVMaterial.html#KVMaterial:SetThickness" title="void KVMaterial::SetThickness(Double_t thick)">SetThickness</a>(thickAl*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);
 }
@@ -127,7 +127,7 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//______________________________________________________________________________________________</span>
 
-<a name="eGvA_C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
+<a name="eGvA_C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
 {
    <span class="comment">// Returns calculated total light output for a CsI detector from its pedestal-</span>
    <span class="comment">// corrected measured fast and slow components.</span>
@@ -140,61 +140,61 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
    <span class="comment">// deposited in the CsI to calculate the light; then we use the Z &amp; A of 'nuc' (not necessarily</span>
    <span class="comment">// the same) to calculate the calibrated energy from the light.</span>
 
-	<span class="keyword">if</span>(<a href="../KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode() const">IsSimMode</a>()){
-   	<span class="comment">//<a href="../KVDetector.html#KVDetector:GetHits" title="KVList* KVDetector::GetHits() const">GetHits</a>()-><a href="http://root.cern.ch/root/html/TCollection.html#TCollection:ls" title="void TCollection::ls(Option_t* option = &quot;&quot;) const">ls</a>();</span>
-		<span class="keyword">if</span> (<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:Fired" title="Bool_t KVACQParam::Fired(Option_t* what = &quot;&quot;) const">Fired</a>()){
-			<span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, rapide, lente);
+	<span class="keyword">if</span>(<a href="../KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode()">IsSimMode</a>()){
+   	<span class="comment">//<a href="../KVDetector.html#KVDetector:GetHits" title="KVList* KVDetector::GetHits()">GetHits</a>()-><a href="../#TCollection:ls" title="void TCollection::ls(Option_t* option=&quot;&quot;)">ls</a>();</span>
+		<span class="keyword">if</span> (<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:Fired" title="Bool_t KVACQParam::Fired(Option_t* what=&quot;&quot;)">Fired</a>()){
+			<span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, rapide, lente);
 		}
 		<a href="../KVNucleus.html">KVNucleus</a> *nunuc = 0;
-		<span class="keyword">if</span> (<a href="../KVDetector.html#KVDetector:GetNHits" title="Int_t KVDetector::GetNHits() const">GetNHits</a>()&gt;0){
+		<span class="keyword">if</span> (<a href="../KVDetector.html#KVDetector:GetNHits" title="Int_t KVDetector::GetNHits()">GetNHits</a>()&gt;0){
 			<a href="../ListOfTypes.html#Int_t">Int_t</a> zz=0,aa=0;
-			TIter nxthit(<a href="../KVDetector.html#KVDetector:GetHits" title="KVList* KVDetector::GetHits() const">GetHits</a>());
+			TIter nxthit(<a href="../KVDetector.html#KVDetector:GetHits" title="KVList* KVDetector::GetHits()">GetHits</a>());
 			<span class="keyword">while</span>( (nunuc = (<a href="../KVNucleus.html">KVNucleus</a>*)nxthit()) ){
-				zz = nunuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ() const">GetZ</a>();
+				zz = nunuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>();
 				aa = nunuc-&gt;GetA();
 			}	
-			<span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E = -1.)">GetLightFromEnergy</a>(zz,aa,<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>());
+			<span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z,Int_t A,Double_t E=-1.)">GetLightFromEnergy</a>(zz,aa,<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>());
 		}
 		<span class="keyword">else</span> {
 			<span class="keyword">return</span> -1;
 		}
 		<span class="comment">/*
 		<a href="../KVNucleus.html">KVNucleus</a> *nunuc = 0;
-		TIter nxthit(<a href="../KVDetector.html#KVDetector:GetHits" title="KVList* KVDetector::GetHits() const">GetHits</a>()); <a href="../KVNucleus.html">KVNucleus</a> *nunuc, *simnuc=0;
-   	while( (nunuc = (<a href="../KVNucleus.html">KVNucleus</a>*)nxthit()) ) {if(nunuc-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVSimNucleus"</span>)) simnuc=nunuc;}
+		TIter nxthit(<a href="../KVDetector.html#KVDetector:GetHits" title="KVList* KVDetector::GetHits()">GetHits</a>()); <a href="../KVNucleus.html">KVNucleus</a> *nunuc, *simnuc=0;
+   	while( (nunuc = (<a href="../KVNucleus.html">KVNucleus</a>*)nxthit()) ) {if(nunuc-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVSimNucleus"</span>)) simnuc=nunuc;}
    	if(!simnuc) return -1.;
    	*/</span>
-		<span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E = -1.)">GetLightFromEnergy</a>(nunuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ() const">GetZ</a>(),nunuc-&gt;GetA(),<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>());
+		<span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z,Int_t A,Double_t E=-1.)">GetLightFromEnergy</a>(nunuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(),nunuc-&gt;GetA(),<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>());
    }
-   <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, rapide, lente);
+   <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, rapide, lente);
 }
 
 <span class="comment">//______________________________________________________________________________________________</span>
 
-<a name="O8172C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetCorrectedLumiereTotale" title="Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetCorrectedLumiereTotale</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
+<a name="O8172C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetCorrectedLumiereTotale" title="Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetCorrectedLumiereTotale</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
 {
    <span class="comment">// Returns total light output corrected for gain variations, if known (see <a href="../KVINDRADB.html">KVINDRADB</a>::<a href="../KVINDRADB.html#KVINDRADB:ReadCsITotalLightGainCorrections" title="void KVINDRADB::ReadCsITotalLightGainCorrections()">ReadCsITotalLightGainCorrections</a></span>
    <span class="comment">// for how corrections are read into database, format of correction files, etc.).</span>
    <span class="comment">// Correction is calculated using</span>
    <span class="comment">//      rap_corr = (rapide-piedR) * <a href="../KVCsI.html#KVCsI:fGainCorrection" title="Double_t KVCsI::fGainCorrection">fGainCorrection</a> + piedR</span>
    <span class="comment">//      len_corr = (lente-piedL) * <a href="../KVCsI.html#KVCsI:fGainCorrection" title="Double_t KVCsI::fGainCorrection">fGainCorrection</a> + piedL</span>
-   <span class="comment">//      lum_corr = <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>( rap_corr, len_corr )</span>
-   <span class="comment">// For more details on arguments, etc., see <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>.</span>
+   <span class="comment">//      lum_corr = <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>( rap_corr, len_corr )</span>
+   <span class="comment">// For more details on arguments, etc., see <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>.</span>
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> rap_corr;
    <a href="../ListOfTypes.html#Double_t">Double_t</a> len_corr;
    rap_corr = (rapide &lt; 0 ? <a href="../KVCsI.html#KVCsI:GetR" title="Float_t KVCsI::GetR()">GetR</a>() : rapide);
    len_corr = (lente &lt; 0 ? <a href="../KVCsI.html#KVCsI:GetL" title="Float_t KVCsI::GetL()">GetL</a>() : lente);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> piedR = <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal() const">GetPedestal</a>();
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> piedL = <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal() const">GetPedestal</a>();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> piedR = <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal()">GetPedestal</a>();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> piedL = <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal()">GetPedestal</a>();
    rap_corr = (rap_corr - piedR)*<a href="../KVCsI.html#KVCsI:fGainCorrection" title="Double_t KVCsI::fGainCorrection">fGainCorrection</a> + piedR;
    len_corr = (len_corr - piedL)*<a href="../KVCsI.html#KVCsI:fGainCorrection" title="Double_t KVCsI::fGainCorrection">fGainCorrection</a> + piedL;
-   <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>(rap_corr,len_corr);
+   <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>(rap_corr,len_corr);
 }
 
 <span class="comment">//______________________________________________________________________________________________</span>
 
-<a name="F727KD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetTauZero" title="Double_t KVCsI::GetTauZero(Double_t rapide = -1., Double_t lente = -1.)">GetTauZero</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
+<a name="F727KD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetTauZero" title="Double_t KVCsI::GetTauZero(Double_t rapide=-1.0,Double_t lente=-1.0)">GetTauZero</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
 {
    <span class="comment">//Returns <span class="string">"tau_0"</span> for a CsI detector. This is the time constant for the exponential</span>
    <span class="comment">//fall-off of the light output, i.e. i(t) ~ exp( - t / tau_0 ). See Parlog et al.</span>
@@ -202,22 +202,22 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
    <span class="comment">//If no arguments are given, the detector's own ACQData parameters (<span class="string">"R"</span> and <span class="string">"L"</span>)</span>
    <span class="comment">//are used, with pedestal subtraction.</span>
 
-   <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kTau" title="KVCsI::(anonymous) KVCsI::kTau">kTau</a>, rapide, lente);
+   <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kTau" title="const enum KVCsI:: KVCsI::kTau">kTau</a>, rapide, lente);
 }
 
 <span class="comment">//______________________________________________________________________________________________</span>
 
-<a name="NKAPWC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../ListOfTypes.html#UShort_t">UShort_t</a> mode, <a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
+<a name="NKAPWC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../ListOfTypes.html#UShort_t">UShort_t</a> mode, <a href="../ListOfTypes.html#Double_t">Double_t</a> rapide, <a href="../ListOfTypes.html#Double_t">Double_t</a> lente)
 {
    <span class="comment">//Private method</span>
-   <span class="comment">//This function is called by <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a> and <a href="../KVCsI.html#KVCsI:GetTauZero" title="Double_t KVCsI::GetTauZero(Double_t rapide = -1., Double_t lente = -1.)">GetTauZero</a>, the return value depends</span>
-   <span class="comment">//on the value of 'mode' (<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a> or <a href="../KVCsI.html#KVCsI:kTau" title="KVCsI::(anonymous) KVCsI::kTau">kTau</a>).</span>
+   <span class="comment">//This function is called by <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a> and <a href="../KVCsI.html#KVCsI:GetTauZero" title="Double_t KVCsI::GetTauZero(Double_t rapide=-1.0,Double_t lente=-1.0)">GetTauZero</a>, the return value depends</span>
+   <span class="comment">//on the value of 'mode' (<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a> or <a href="../KVCsI.html#KVCsI:kTau" title="const enum KVCsI:: KVCsI::kTau">kTau</a>).</span>
    <span class="comment">//The 'TauZero' in the code is the variable <span class="string">'x'</span>.</span>
    <span class="comment">//In either case, if problems are encountered in the calculation, the value returned</span>
    <span class="comment">//is zero and <a href="../KVCsI.html#KVCsI:fLumTotStatus" title="UInt_t KVCsI::fLumTotStatus">fLumTotStatus</a> should give information on the problem (<a href="../KVCsI.html#KVCsI:GetStatusLumiere" title="UInt_t KVCsI::GetStatusLumiere()">GetStatusLumiere</a>).</span>
 
-   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> ring = <a href="../KVINDRADetector.html#KVINDRADetector:GetRingNumber" title="UInt_t KVINDRADetector::GetRingNumber() const">GetRingNumber</a>();
-   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> module = <a href="../KVINDRADetector.html#KVINDRADetector:GetModuleNumber" title="UInt_t KVINDRADetector::GetModuleNumber() const">GetModuleNumber</a>();
+   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> ring = <a href="../KVINDRADetector.html#KVINDRADetector:GetRingNumber" title="UInt_t KVINDRADetector::GetRingNumber()">GetRingNumber</a>();
+   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> module = <a href="../KVINDRADetector.html#KVINDRADetector:GetModuleNumber" title="UInt_t KVINDRADetector::GetModuleNumber()">GetModuleNumber</a>();
 
    <span class="comment">//pedestal-corrected fast and slow components from raw data</span>
    <a href="../ListOfTypes.html#Double_t">Double_t</a> rap_corr;
@@ -230,8 +230,8 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
       <a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a> = 0.0;
       <span class="keyword">return</span> <a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a>;
    }
-   rap_corr -= <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal() const">GetPedestal</a>();
-   len_corr -= <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal() const">GetPedestal</a>();
+   rap_corr -= <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal()">GetPedestal</a>();
+   len_corr -= <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a>-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal()">GetPedestal</a>();
 
    <span class="keyword">if</span> (rap_corr &lt; 0 || len_corr &lt; 0) {
       <a href="../KVCsI.html#KVCsI:fLumTotStatus" title="UInt_t KVCsI::fLumTotStatus">fLumTotStatus</a> = NEGATIVE_PEDESTAL_CORRECTED_VALUE;
@@ -311,17 +311,17 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
       <span class="keyword">if</span> (niter &gt; 50 || x &lt;= tau) {
          <a href="../KVCsI.html#KVCsI:fLumTotStatus" title="UInt_t KVCsI::fLumTotStatus">fLumTotStatus</a> = CALCULATION_NOT_CONVERGED;
-         <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"GetLumiereTotale"</span>,<span class="string">"Iterative calculation did not converge for %s"</span>,</span>
-         <span class="comment">//       <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());</span>
+         <span class="comment">//<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetLumiereTotale"</span>,<span class="string">"Iterative calculation did not converge for %s"</span>,</span>
+         <span class="comment">//       <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
          <span class="keyword">return</span> (<a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a> = 0.0);
       }
    }
 
-   <span class="comment">//<a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a> calling function</span>
-   <span class="keyword">if</span> (mode == <a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>)
+   <span class="comment">//<a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a> calling function</span>
+   <span class="keyword">if</span> (mode == <a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>)
       <span class="keyword">return</span> (<a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a> = len_corr * (x - tau) / (x * bx));
 
-   <span class="comment">//<a href="../KVCsI.html#KVCsI:GetTauZero" title="Double_t KVCsI::GetTauZero(Double_t rapide = -1., Double_t lente = -1.)">GetTauZero</a> calling function</span>
+   <span class="comment">//<a href="../KVCsI.html#KVCsI:GetTauZero" title="Double_t KVCsI::GetTauZero(Double_t rapide=-1.0,Double_t lente=-1.0)">GetTauZero</a> calling function</span>
    <span class="keyword">return</span> x;
 }
 
@@ -358,35 +358,35 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//_______________________________________________________________________________________________</span>
 
-<a name="Y06oJ"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Clear" title="void KVCsI::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
+<a name="Y06oJ"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Clear" title="void KVCsI::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * opt)
 {
-<span class="comment">//Redefinition of <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Clear" title="void KVDetector::Clear(Option_t* opt = &quot;&quot;)">Clear</a> - set <a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a> and status to zero</span>
-   <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Clear" title="void KVDetector::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(opt);
+<span class="comment">//Redefinition of <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Clear" title="void KVDetector::Clear(Option_t* opt=&quot;&quot;)">Clear</a> - set <a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a> and status to zero</span>
+   <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Clear" title="void KVDetector::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(opt);
    <a href="../KVCsI.html#KVCsI:fLumiereTotale" title="Double_t KVCsI::fLumiereTotale">fLumiereTotale</a> = 0.0;
    <a href="../KVCsI.html#KVCsI:fLumTotStatus" title="UInt_t KVCsI::fLumTotStatus">fLumTotStatus</a> = NOT_CALCULATED;
 }
 
 
-<a name="eLZoME"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Print" title="void KVCsI::Print(Option_t* option = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * option) <span class="keyword">const</span>
+<a name="eLZoME"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Print" title="void KVCsI::Print(Option_t* option=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * option) <span class="keyword">const</span>
 {
-   <span class="comment">//<a href="../KVCsI.html#KVCsI:Print" title="void KVCsI::Print(Option_t* option = &quot;&quot;) const">Print</a> info on this detector - redefinition of <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Print" title="void KVDetector::Print(Option_t* option = &quot;&quot;) const">Print</a> for option=<span class="string">"data"</span> to include total light</span>
+   <span class="comment">//<a href="../KVCsI.html#KVCsI:Print" title="void KVCsI::Print(Option_t* option=&quot;&quot;)">Print</a> info on this detector - redefinition of <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Print" title="void KVDetector::Print(Option_t* option=&quot;&quot;)">Print</a> for option=<span class="string">"data"</span> to include total light</span>
    <span class="comment">//if option=<span class="string">"data"</span> the energy loss, total light and coder channel data are displayed</span>
 
    <span class="keyword">if</span> (!strcmp(option, <span class="string">"data"</span>)) {
-      cout &lt;&lt; ((<a href="../KVCsI.html">KVCsI</a> *) <span class="keyword">this</span>)-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; <span class="string">" -- H="</span> &lt;&lt; ((<a href="../KVCsI.html">KVCsI</a> *) <span class="keyword">this</span>)-&gt;
-          <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>() &lt;&lt; <span class="string">" -- E="</span> &lt;&lt; ((<a href="../KVCsI.html">KVCsI</a> *) <span class="keyword">this</span>)-&gt;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; ((<a href="../KVCsI.html">KVCsI</a> *) <span class="keyword">this</span>)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" -- H="</span> &lt;&lt; ((<a href="../KVCsI.html">KVCsI</a> *) <span class="keyword">this</span>)-&gt;
+          <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>() &lt;&lt; <span class="string">" -- E="</span> &lt;&lt; ((<a href="../KVCsI.html">KVCsI</a> *) <span class="keyword">this</span>)-&gt;
           <a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>() &lt;&lt; <span class="string">"  "</span>;
       TIter next(fACQParams);
       <a href="../KVACQParam.html">KVACQParam</a> *acq;
       <span class="keyword">while</span> ((acq = (<a href="../KVACQParam.html">KVACQParam</a> *) next())) {
-         cout &lt;&lt; acq-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; <span class="string">"="</span> &lt;&lt; (<a href="../ListOfTypes.html#Short_t">Short_t</a>) acq-&gt;
-             GetCoderData() &lt;&lt; <span class="string">"/"</span> &lt;&lt; TMath::Nint(acq-&gt;<a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>())&lt;&lt; <span class="string">"  "</span>;
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; acq-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"="</span> &lt;&lt; (<a href="../ListOfTypes.html#Short_t">Short_t</a>) acq-&gt;
+             GetCoderData() &lt;&lt; <span class="string">"/"</span> &lt;&lt; TMath::Nint(acq-&gt;<a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>())&lt;&lt; <span class="string">"  "</span>;
       }
-      <span class="keyword">if</span> (<a href="../KVDetector.html#KVDetector:BelongsToUnidentifiedParticle" title="Bool_t KVDetector::BelongsToUnidentifiedParticle() const">BelongsToUnidentifiedParticle</a>())
-         cout &lt;&lt; <span class="string">"(Belongs to an unidentified particle)"</span>;
-		cout &lt;&lt; endl;
+      <span class="keyword">if</span> (<a href="../KVDetector.html#KVDetector:BelongsToUnidentifiedParticle" title="Bool_t KVDetector::BelongsToUnidentifiedParticle()">BelongsToUnidentifiedParticle</a>())
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"(Belongs to an unidentified particle)"</span>;
+		<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl;
    } <span class="keyword">else</span> {
-      <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Print" title="void KVDetector::Print(Option_t* option = &quot;&quot;) const">Print</a>(option);
+      <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Print" title="void KVDetector::Print(Option_t* option=&quot;&quot;)">Print</a>(option);
    }
 }
 
@@ -399,8 +399,8 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
    <a href="../KVINDRADetector.html#KVINDRADetector:AddACQParamType" title="void KVINDRADetector::AddACQParamType(const Char_t* type)">AddACQParamType</a>(<span class="string">"R"</span>);
    <a href="../KVINDRADetector.html#KVINDRADetector:AddACQParamType" title="void KVINDRADetector::AddACQParamType(const Char_t* type)">AddACQParamType</a>(<span class="string">"L"</span>);
    <a href="../KVINDRADetector.html#KVINDRADetector:AddACQParamType" title="void KVINDRADetector::AddACQParamType(const Char_t* type)">AddACQParamType</a>(<span class="string">"T"</span>);
-   <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a> = <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"R"</span>);
-   <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a> = <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"L"</span>);
+   <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a> = <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"R"</span>);
+   <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a> = <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"L"</span>);
 }
 
 <a name="bi_Al"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:SetCalibrators" title="void KVCsI::SetCalibrators()">SetCalibrators</a>()
@@ -417,7 +417,7 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="ahkN7C"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Streamer" title="void KVCsI::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp;R__b)
+<a name="ahkN7C"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:Streamer" title="void KVCsI::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
 {
    <span class="comment">// Stream an object of class <a href="../KVCsI.html">KVCsI</a>.</span>
    <span class="comment">// We set the pointers to the calibrator objects</span>
@@ -434,14 +434,14 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
          <span class="comment">// backwards compatibility: persistent member pointers to acquisition</span>
          <span class="comment">// parameters <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a> &amp; <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a> introduced in class version 4 (10 june 2009)</span>
 			<span class="comment">// As the detector name is not always available at this point</span>
-			<span class="comment">// (<a href="../KVDetector.html">KVDetector</a>::<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a> generates dynamically the name from the</span>
-			<span class="comment">// module &amp; ring numbers, no persistent name stored in <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>::fName)</span>
+			<span class="comment">// (<a href="../KVDetector.html">KVDetector</a>::<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a> generates dynamically the name from the</span>
+			<span class="comment">// module &amp; ring numbers, no persistent name stored in <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>::fName)</span>
 			<span class="comment">// we have to loop over the list of acquisition parameters (if it exists)</span>
 			<span class="comment">// and look for parameters which end with <span class="string">"R"</span> or <span class="string">"L"</span></span>
 			<span class="keyword">if</span>(fACQParams){
 				TIter next(fACQParams); <a href="../KVACQParam.html">KVACQParam</a>* par=0;
 				<span class="keyword">while</span>( (par = (<a href="../KVACQParam.html">KVACQParam</a>*)next()) ){
-					TString name(par-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+					TString name(par-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 					<span class="keyword">if</span>(name.EndsWith(<span class="string">"R"</span>)) <a href="../KVCsI.html#KVCsI:fACQ_R" title="KVACQParam* KVCsI::fACQ_R">fACQ_R</a> = par;
 					<span class="keyword">else</span> <span class="keyword">if</span>(name.EndsWith(<span class="string">"L"</span>)) <a href="../KVCsI.html#KVCsI:fACQ_L" title="KVACQParam* KVCsI::fACQ_L">fACQ_L</a> = par;
 				}
@@ -454,13 +454,13 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="CuytNE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetCorrectedEnergy" title="Double_t KVCsI::GetCorrectedEnergy(KVNucleus*, Double_t lum = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> lum, <a href="../ListOfTypes.html#Bool_t">Bool_t</a>)
+<a name="CuytNE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetCorrectedEnergy" title="Double_t KVCsI::GetCorrectedEnergy(KVNucleus* ,Double_t lum=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> lum, <a href="../ListOfTypes.html#Bool_t">Bool_t</a>)
 {
-   <span class="comment">// <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a> calibrated energy loss for a nucleus (Z,A) giving total light output <span class="string">"lum"</span>.</span>
+   <span class="comment">// <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a> calibrated energy loss for a nucleus (Z,A) giving total light output <span class="string">"lum"</span>.</span>
    <span class="comment">// If <span class="string">"lum"</span> is not given, the total light of the detector</span>
    <span class="comment">// calculated from the current values of the <span class="string">"R"</span> and <span class="string">"L"</span> acquisition</span>
    <span class="comment">// parameters will be used (taking into account an eventual correction for gain variations,</span>
-   <span class="comment">// see <a href="../KVCsI.html#KVCsI:GetCorrectedLumiereTotale" title="Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetCorrectedLumiereTotale</a>()).</span>
+   <span class="comment">// see <a href="../KVCsI.html#KVCsI:GetCorrectedLumiereTotale" title="Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetCorrectedLumiereTotale</a>()).</span>
    <span class="comment">//</span>
    <span class="comment">//Two <a href="../KVLightEnergyCsI.html">KVLightEnergyCsI</a> calibrators are used, one for Z=1, the other for Z&gt;1</span>
    <span class="comment">// Returns -1 in case of problems (no calibration available or light calculation not valid).</span>
@@ -471,7 +471,7 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
    <span class="comment">// deposited in the CsI to calculate the light; then we use the Z &amp; A of 'nuc' (not necessarily</span>
    <span class="comment">// the same) to calculate the calibrated energy from the light.</span>
 
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> Z = nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ() const">GetZ</a>();
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> Z = nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>();
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> A = nuc-&gt;GetA();
 	
    <a href="../KVLightEnergyCsI.html">KVLightEnergyCsI</a>* calib = 0;
@@ -480,15 +480,15 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
    <span class="keyword">else</span> calib = <a href="../KVCsI.html#KVCsI:fCal" title="KVLightEnergyCsI* KVCsI::fCal">fCal</a>;
 
    <span class="keyword">if</span>( calib &amp;&amp; calib-&gt;GetStatus() ){
-   	<span class="keyword">if</span>(<a href="../KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode() const">IsSimMode</a>()){
-         lum = <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetLumiereTotale</a>();
+   	<span class="keyword">if</span>(<a href="../KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode()">IsSimMode</a>()){
+         lum = <a href="../KVCsI.html#KVCsI:GetLumiereTotale" title="Double_t KVCsI::GetLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetLumiereTotale</a>();
          <span class="keyword">if</span>(lum&lt;0.) <span class="keyword">return</span> -1.;
          <span class="comment">//force <span class="string">"OK"</span> status for light</span>
          <a href="../KVCsI.html#KVCsI:fLumTotStatus" title="UInt_t KVCsI::fLumTotStatus">fLumTotStatus</a> = NO_GAIN_CORRECTION;
    	}
       <span class="keyword">else</span> <span class="keyword">if</span> (lum &lt; 0.) {
          <span class="comment">//light not given - calculate from R and L components</span>
-         lum = <a href="../KVCsI.html#KVCsI:GetCorrectedLumiereTotale" title="Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide = -1., Double_t lente = -1.)">GetCorrectedLumiereTotale</a>(); <span class="comment">// include gain correction</span>
+         lum = <a href="../KVCsI.html#KVCsI:GetCorrectedLumiereTotale" title="Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide=-1.0,Double_t lente=-1.0)">GetCorrectedLumiereTotale</a>(); <span class="comment">// include gain correction</span>
       } <span class="keyword">else</span> {
          <span class="comment">//light given as argument - force <span class="string">"OK"</span> status for light</span>
          <a href="../KVCsI.html#KVCsI:fLumTotStatus" title="UInt_t KVCsI::fLumTotStatus">fLumTotStatus</a> = NO_GAIN_CORRECTION;
@@ -508,9 +508,9 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//__________________________________________________________________________________________//</span>
 
-<a name="kCX_s"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E = -1.)">GetLightFromEnergy</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E)
+<a name="kCX_s"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z,Int_t A,Double_t E=-1.)">GetLightFromEnergy</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E)
 {
-   <span class="comment">//<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a> calibrated light output given by a nucleus (Z,A) deposing E (MeV)</span>
+   <span class="comment">//<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a> calibrated light output given by a nucleus (Z,A) deposing E (MeV)</span>
    <span class="comment">//in the detector. If E is not given, the current value of <a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>() is used.</span>
    <span class="comment">//Returns -1 in case of problems (no calibration available)</span>
 
@@ -532,9 +532,9 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//__________________________________________________________________________________________//</span>
 
-<a name="GHfMTB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetEnergyFromLight" title="Double_t KVCsI::GetEnergyFromLight(Int_t Z, Int_t A, Double_t lum)">GetEnergyFromLight</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> lum)
+<a name="GHfMTB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:GetEnergyFromLight" title="Double_t KVCsI::GetEnergyFromLight(Int_t Z,Int_t A,Double_t lum)">GetEnergyFromLight</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> lum)
 {
-   <span class="comment">//<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a> energy from a given Z and A and light output (lum)</span>
+   <span class="comment">//<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a> energy from a given Z and A and light output (lum)</span>
 	<span class="comment">//Returns -1 in case of problems (no calibration available)</span>
 	<span class="comment">//This method assumes that the particle is stopped in CsI</span>
 	
@@ -554,25 +554,25 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 
 <span class="comment">//__________________________________________________________________________________________//</span>
 
-<a name="g63TOC"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:DeduceACQParameters" title="void KVCsI::DeduceACQParameters(Int_t zz = -1, Int_t aa = -1)">DeduceACQParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz,<a href="../ListOfTypes.html#Int_t">Int_t</a> aa)
+<a name="g63TOC"></a><span class="keyword">void</span> <a href="../KVCsI.html">KVCsI</a>::<a href="../KVCsI.html#KVCsI:DeduceACQParameters" title="void KVCsI::DeduceACQParameters(Int_t zz=-1,Int_t aa=-1)">DeduceACQParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz,<a href="../ListOfTypes.html#Int_t">Int_t</a> aa)
 {
 
-    <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"R"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(-1);
-    <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"L"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(-1);
-    <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(-1);
+    <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"R"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(-1);
+    <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"L"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(-1);
+    <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(-1);
 	<span class="keyword">if</span> (zz==-1 || aa==-1){ <span class="keyword">return</span>; }
 		
 	<a href="../ListOfTypes.html#UShort_t">UShort_t</a> Mt = 110;
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> Xlen = 0;
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> Yrap = 0;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> lumiere = <a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E = -1.)">GetLightFromEnergy</a>(zz,aa);
-    <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"DeduceACQParameters"</span>, <span class="string">"z=%d a=%d e=%f h=%f"</span>,zz,aa,<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>(),lumiere);</span>
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> lumiere = <a href="../KVCsI.html#KVCsI:GetLightFromEnergy" title="Double_t KVCsI::GetLightFromEnergy(Int_t Z,Int_t A,Double_t E=-1.)">GetLightFromEnergy</a>(zz,aa);
+    <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"DeduceACQParameters"</span>, <span class="string">"z=%d a=%d e=%f h=%f"</span>,zz,aa,<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>(),lumiere);</span>
 	
-	<a href="../KVIDTelescope.html">KVIDTelescope</a> *idcsi=(<a href="../KVIDTelescope.html">KVIDTelescope</a>*)<a href="../KVDetector.html#KVDetector:GetIDTelescopes" title="KVList* KVDetector::GetIDTelescopes()">GetIDTelescopes</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx) const">At</a>(0);
+	<a href="../KVIDTelescope.html">KVIDTelescope</a> *idcsi=(<a href="../KVIDTelescope.html">KVIDTelescope</a>*)<a href="../KVDetector.html#KVDetector:GetIDTelescopes" title="KVList* KVDetector::GetIDTelescopes()">GetIDTelescopes</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx)">At</a>(0);
 	
         <a href="../KVIDZAGrid.html">KVIDZAGrid</a>* idgcsi = (<a href="../KVIDZAGrid.html">KVIDZAGrid</a>*)idcsi-&gt;GetIDGrid();
 	<span class="keyword">if</span> (!idgcsi){
-		<span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"DeduceACQParameters"</span>,<span class="string">"%s, No grid available"</span>,<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());</span>
+		<span class="comment">//<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"DeduceACQParameters"</span>,<span class="string">"%s, No grid available"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
 		<span class="keyword">return</span>;
 	}
 	<a href="../KVIDZALine.html">KVIDZALine</a>* idline = (<a href="../KVIDZALine.html">KVIDZALine</a>*)idgcsi-&gt;GetIdentifier(zz,aa);
@@ -583,7 +583,7 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
         <a href="../ListOfTypes.html#Int_t">Int_t</a> nids = idgcsi-&gt;GetNumberOfIdentifiers();
         <span class="keyword">for</span>(<a href="../ListOfTypes.html#Int_t">Int_t</a> iid=0; iid&lt;nids; iid++){
             <a href="../KVIDZALine.html">KVIDZALine</a>* ll = (<a href="../KVIDZALine.html">KVIDZALine</a>*)idgcsi-&gt;GetIdentifierAt(iid);
-            <span class="keyword">if</span>(ll-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ() const">GetZ</a>()==zz){
+            <span class="keyword">if</span>(ll-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>()==zz){
                 <span class="keyword">if</span>(TMath::Abs(ll-&gt;GetA()-aa)&lt;TMath::Abs(closest_a-aa)){
                     closest_index=iid;
                     closest_a=ll-&gt;GetA();
@@ -597,16 +597,16 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 		<a href="../ListOfTypes.html#Double_t">Double_t</a>  Yrap1,Yrap2,Xlen1,Xlen2;
 		idline-&gt;GetStartPoint(Xlen1,Yrap1);
 		idline-&gt;GetEndPoint(Xlen2,Yrap2);
-        <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
-        <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc2 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap2,Xlen2);
+        <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
+        <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc2 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap2,Xlen2);
         <span class="keyword">if</span>(lumiere&lt;lumcalc1) {
             Xlen2=Xlen1;
             Yrap2=Yrap1;
             lumcalc2=lumcalc1;
-            Xlen1=<a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"L"</span>);
+            Xlen1=<a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"L"</span>);
             Yrap1=idline-&gt;Eval(Xlen1,0,<span class="string">"S"</span>);
-            lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
-            <span class="comment">//cout &lt;&lt; <span class="string">"Extrapolating before start of ID line"</span> &lt;&lt; endl;</span>
+            lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Extrapolating before start of ID line"</span> &lt;&lt; endl;</span>
         }
         <span class="keyword">else</span> <span class="keyword">if</span>(lumiere&gt;lumcalc2) {
             Xlen1=Xlen2;
@@ -614,16 +614,16 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
             lumcalc1=lumcalc2;
             Xlen2=4095;
             Yrap2=idline-&gt;Eval(Xlen2,0,<span class="string">"S"</span>);
-            lumcalc2=<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>,Yrap2,Xlen2);
-            <span class="comment">//cout &lt;&lt; <span class="string">"Extrapolating after end of ID line"</span> &lt;&lt; endl;</span>
+            lumcalc2=<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>,Yrap2,Xlen2);
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Extrapolating after end of ID line"</span> &lt;&lt; endl;</span>
         }
-        <span class="comment">//cout &lt;&lt; <span class="string">"Xlen1="</span> &lt;&lt; Xlen1 &lt;&lt; <span class="string">" Yrap1="</span>&lt;&lt;Yrap1&lt;&lt; <span class="string">"  Lum_min = "</span> &lt;&lt; lumcalc1 &lt;&lt; endl;</span>
-        <span class="comment">//cout &lt;&lt; <span class="string">"Xlen2="</span> &lt;&lt; Xlen2 &lt;&lt; <span class="string">" Yrap2="</span> &lt;&lt; Yrap2&lt;&lt; <span class="string">"  Lum_max = "</span> &lt;&lt; lumcalc2 &lt;&lt; endl;</span>
+        <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Xlen1="</span> &lt;&lt; Xlen1 &lt;&lt; <span class="string">" Yrap1="</span>&lt;&lt;Yrap1&lt;&lt; <span class="string">"  Lum_min = "</span> &lt;&lt; lumcalc1 &lt;&lt; endl;</span>
+        <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Xlen2="</span> &lt;&lt; Xlen2 &lt;&lt; <span class="string">" Yrap2="</span> &lt;&lt; Yrap2&lt;&lt; <span class="string">"  Lum_max = "</span> &lt;&lt; lumcalc2 &lt;&lt; endl;</span>
 
 		Xlen = (Xlen1+Xlen2)/2.;
         Yrap = idline-&gt;Eval(Xlen,0,<span class="string">"S"</span>);
-        <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap,Xlen);
-        <span class="comment">//cout &lt;&lt; <span class="string">"-1 : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
+        <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap,Xlen);
+        <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"-1 : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
 
 		<a href="../ListOfTypes.html#Int_t">Int_t</a> niter=0;
 		<span class="keyword">while</span>(niter&lt;20&amp;&amp;TMath::Abs(lumcalc-lumiere)/lumiere &gt; 0.01){
@@ -635,8 +635,8 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 			}
 			Xlen = (Xlen1+Xlen2)/2.;
             Yrap = idline-&gt;Eval(Xlen,0,<span class="string">"S"</span>);
-            lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>,Yrap,Xlen);
-            <span class="comment">//cout &lt;&lt; niter &lt;&lt; <span class="string">" : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
+            lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>,Yrap,Xlen);
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; niter &lt;&lt; <span class="string">" : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
             niter++;
 			
 		}
@@ -644,14 +644,14 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 <span class="comment">//        mrk-&gt;SetMarkerSize(2);</span>
 <span class="comment">//        mrk-&gt;SetMarkerColor(kRed);</span>
 <span class="comment">//        if(idgcsi-&gt;IsDrawn()) idgcsi-&gt;IsDrawn()-&gt;cd();</span>
-<span class="comment">//        else {new TCanvas; idgcsi-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();}</span>
-<span class="comment">//        mrk-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();</span>
+<span class="comment">//        else {new TCanvas; idgcsi-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();}</span>
+<span class="comment">//        mrk-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();</span>
 	}
 	<span class="keyword">else</span>
 	{
 		<a href="../KVIDCutLine.html">KVIDCutLine</a>*imf_line = (<a href="../KVIDCutLine.html">KVIDCutLine</a>*)idgcsi-&gt;GetCut(<span class="string">"IMF_line"</span>);
 		<span class="keyword">if</span> (!imf_line){
-            <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"DeduceACQParameters"</span>,<span class="string">"%s, No IMF_line defined"</span>,<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());</span>
+            <span class="comment">//<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"DeduceACQParameters"</span>,<span class="string">"%s, No IMF_line defined"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
 			<span class="keyword">return</span>;
 		}
 		<span class="keyword">else</span> {
@@ -660,16 +660,16 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 			imf_line-&gt;GetEndPoint(Xlen2,Yrap2);
             Yrap1+=10.;<span class="comment">//au-dessus de la ligne fragment</span>
             Yrap2+=10.;<span class="comment">//au-dessus de la ligne fragment</span>
-            <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
-            <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc2 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap2,Xlen2);
+            <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
+            <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc2 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap2,Xlen2);
             <span class="keyword">if</span>(lumiere&lt;lumcalc1) {
                 Xlen2=Xlen1;
                 Yrap2=Yrap1;
                 lumcalc2=lumcalc1;
-                Xlen1=<a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"L"</span>);
+                Xlen1=<a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"L"</span>);
                 Yrap1=imf_line-&gt;Eval(Xlen1,0,<span class="string">"S"</span>)+10.;
-                lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
-                <span class="comment">//cout &lt;&lt; <span class="string">"Extrapolating before start of IMF line"</span> &lt;&lt; endl;</span>
+                lumcalc1 = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>, Yrap1,Xlen1);
+                <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Extrapolating before start of IMF line"</span> &lt;&lt; endl;</span>
             }
             <span class="keyword">else</span> <span class="keyword">if</span>(lumiere&gt;lumcalc2) {
                 Xlen1=Xlen2;
@@ -677,16 +677,16 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
                 lumcalc1=lumcalc2;
                 Xlen2=4095;
                 Yrap2=imf_line-&gt;Eval(Xlen2,0,<span class="string">"S"</span>)+10.;
-                lumcalc2=<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>,Yrap2,Xlen2);
-                <span class="comment">//cout &lt;&lt; <span class="string">"Extrapolating after end of IMF line"</span> &lt;&lt; endl;</span>
+                lumcalc2=<a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>,Yrap2,Xlen2);
+                <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Extrapolating after end of IMF line"</span> &lt;&lt; endl;</span>
             }
-            <span class="comment">//cout &lt;&lt; <span class="string">"Xlen1="</span> &lt;&lt; Xlen1 &lt;&lt; <span class="string">" Yrap1="</span>&lt;&lt;Yrap1&lt;&lt; <span class="string">"  Lum_min = "</span> &lt;&lt; lumcalc1 &lt;&lt; endl;</span>
-            <span class="comment">//cout &lt;&lt; <span class="string">"Xlen2="</span> &lt;&lt; Xlen2 &lt;&lt; <span class="string">" Yrap2="</span> &lt;&lt; Yrap2&lt;&lt; <span class="string">"  Lum_max = "</span> &lt;&lt; lumcalc2 &lt;&lt; endl;</span>
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Xlen1="</span> &lt;&lt; Xlen1 &lt;&lt; <span class="string">" Yrap1="</span>&lt;&lt;Yrap1&lt;&lt; <span class="string">"  Lum_min = "</span> &lt;&lt; lumcalc1 &lt;&lt; endl;</span>
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Xlen2="</span> &lt;&lt; Xlen2 &lt;&lt; <span class="string">" Yrap2="</span> &lt;&lt; Yrap2&lt;&lt; <span class="string">"  Lum_max = "</span> &lt;&lt; lumcalc2 &lt;&lt; endl;</span>
 
 			Xlen = (Xlen1+Xlen2)/2.;
 			Yrap = imf_line-&gt;Eval(Xlen) + 10.;<span class="comment">//au-dessus de la ligne fragment</span>
-            <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>,Yrap,Xlen);
-            <span class="comment">//cout &lt;&lt; <span class="string">"-1 : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
+            <a href="../ListOfTypes.html#Double_t">Double_t</a>  lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>,Yrap,Xlen);
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"-1 : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
 
 			<a href="../ListOfTypes.html#Int_t">Int_t</a> niter=0;
 			<span class="keyword">while</span>(niter&lt;20 &amp;&amp; TMath::Abs(lumcalc-lumiere)/lumiere &gt; 0.01){
@@ -698,8 +698,8 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 				}
 				Xlen = (Xlen1+Xlen2)/2.;
 				Yrap = imf_line-&gt;Eval(Xlen) + 10.;<span class="comment">//au-dessus de la ligne fragment</span>
-                lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide = -1., Double_t lente = -1.)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="KVCsI::(anonymous) KVCsI::kLumiere">kLumiere</a>,Yrap,Xlen);
-                <span class="comment">//cout &lt;&lt; niter &lt;&lt; <span class="string">" : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
+                lumcalc = <a href="../KVCsI.html#KVCsI:Calculate" title="Double_t KVCsI::Calculate(UShort_t mode,Double_t rapide=-1.0,Double_t lente=-1.0)">Calculate</a>(<a href="../KVCsI.html#KVCsI:kLumiere" title="const enum KVCsI:: KVCsI::kLumiere">kLumiere</a>,Yrap,Xlen);
+                <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; niter &lt;&lt; <span class="string">" : Rapide = "</span> &lt;&lt; Yrap &lt;&lt; <span class="string">" Lente = "</span> &lt;&lt; Xlen &lt;&lt; <span class="string">" lumcalc = "</span> &lt;&lt; lumcalc &lt;&lt; endl;</span>
 				niter++;
 			}
 			<span class="keyword">if</span> (niter==20){
@@ -711,14 +711,14 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 <span class="comment">//            mrk-&gt;SetMarkerSize(2);</span>
 <span class="comment">//            mrk-&gt;SetMarkerColor(kBlue);</span>
 <span class="comment">//            if(idgcsi-&gt;IsDrawn()) idgcsi-&gt;IsDrawn()-&gt;cd();</span>
-<span class="comment">//            else {new TCanvas; idgcsi-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();}</span>
-<span class="comment">//            mrk-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();</span>
+<span class="comment">//            else {new TCanvas; idgcsi-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();}</span>
+<span class="comment">//            mrk-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();</span>
         }
 		
 	}
-	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"R"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)Yrap);
-	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"L"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)Xlen);
-	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(Mt);
+	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"R"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)Yrap);
+	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"L"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)Xlen);
+	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(Mt);
 
 }
 </pre>
@@ -729,7 +729,7 @@ ClassImp(<a href="../KVCsI.html">KVCsI</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

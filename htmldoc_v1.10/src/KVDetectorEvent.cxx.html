@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:33 2015            -->
+<!--   Date: Thu Sep 17 10:50:56 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
                           kvdetectorevent.cpp  -  description
@@ -51,8 +51,8 @@ ClassImp(<a href="../KVDetectorEvent.html">KVDetectorEvent</a>);
 <span class="comment">//The result is basically a list of all the hit groups of the array (see <a href="../KVGroup.html">KVGroup</a> and <a href="../KVMultiDetArray.html">KVMultiDetArray</a>), from which we</span>
 <span class="comment">//can access the energy losses etc. in the different detectors.</span>
 <span class="comment">//</span>
-<span class="comment">//A group is said to be <span class="string">"hit"</span> if at least one detector has fired in the group (see <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>()).</span>
-<span class="comment">//The list of <span class="string">"hit"</span> groups is filled by <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:GetDetectorEvent" title="void KVMultiDetArray::GetDetectorEvent(KVDetectorEvent* detev, TSeqCollection* fired_params = 0)">GetDetectorEvent</a>().</span>
+<span class="comment">//A group is said to be <span class="string">"hit"</span> if at least one detector has fired in the group (see <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>()).</span>
+<span class="comment">//The list of <span class="string">"hit"</span> groups is filled by <a href="../KVMultiDetArray.html">KVMultiDetArray</a>::<a href="../KVMultiDetArray.html#KVMultiDetArray:GetDetectorEvent" title="void KVMultiDetArray::GetDetectorEvent(KVDetectorEvent* detev,TSeqCollection* fired_params=0)">GetDetectorEvent</a>().</span>
 <span class="comment">//</span>
 <span class="comment">//<a href="../KVDetectorEvent.html#KVDetectorEvent:GetGroups" title="KVUniqueNameList* KVDetectorEvent::GetGroups()">GetGroups</a>() returns a pointer to the list of hit groups.</span>
 <span class="comment">//      To loop over all hit groups in a <a href="../KVDetectorEvent.html">KVDetectorEvent</a>* kde, do something like this:</span>
@@ -78,34 +78,34 @@ ClassImp(<a href="../KVDetectorEvent.html">KVDetectorEvent</a>);
 
 <a name="ZS8OjB"></a><a href="../KVDetectorEvent.html">KVDetectorEvent</a>::<a href="../KVDetectorEvent.html#KVDetectorEvent:_KVDetectorEvent" title="void KVDetectorEvent::~KVDetectorEvent()">~KVDetectorEvent</a>()
 {
-    <a href="../KVDetectorEvent.html#KVDetectorEvent:Clear" title="void KVDetectorEvent::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+    <a href="../KVDetectorEvent.html#KVDetectorEvent:Clear" title="void KVDetectorEvent::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
     <span class="keyword">delete</span> <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a>;
     <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a> = 0;
 }
 
-<a name="A5TeaC"></a><span class="keyword">void</span> <a href="../KVDetectorEvent.html">KVDetectorEvent</a>::<a href="../KVDetectorEvent.html#KVDetectorEvent:Clear" title="void KVDetectorEvent::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * )
+<a name="A5TeaC"></a><span class="keyword">void</span> <a href="../KVDetectorEvent.html">KVDetectorEvent</a>::<a href="../KVDetectorEvent.html#KVDetectorEvent:Clear" title="void KVDetectorEvent::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * )
 {
     <span class="comment">// Reset the list of hit groups, ready for analysis of a new event.</span>
     <span class="comment">// Each 'hit' group is cleared (energy losses in detectors set to zero, etc.).</span>
 
     <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a>->R__FOR_EACH(<a href="../KVGroup.html">KVGroup</a>,Reset) ();
-    <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+    <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
 }
 
 <span class="comment">//____________________________________________________________________________</span>
-<a name="O6_FP"></a><span class="keyword">void</span> <a href="../KVDetectorEvent.html">KVDetectorEvent</a>::<a href="../KVDetectorEvent.html#KVDetectorEvent:Print" title="void KVDetectorEvent::Print(Option_t* t = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *) <span class="keyword">const</span>
+<a name="O6_FP"></a><span class="keyword">void</span> <a href="../KVDetectorEvent.html">KVDetectorEvent</a>::<a href="../KVDetectorEvent.html#KVDetectorEvent:Print" title="void KVDetectorEvent::Print(Option_t* t=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *) <span class="keyword">const</span>
 {
-   <span class="comment">//<a href="../KVDetectorEvent.html#KVDetectorEvent:Print" title="void KVDetectorEvent::Print(Option_t* t = &quot;&quot;) const">Print</a> a listing of hit groups with fired detectors</span>
+   <span class="comment">//<a href="../KVDetectorEvent.html#KVDetectorEvent:Print" title="void KVDetectorEvent::Print(Option_t* t=&quot;&quot;)">Print</a> a listing of hit groups with fired detectors</span>
 
-   cout &lt;&lt; <span class="string">"\nKVDetectorEvent"</span> &lt;&lt; endl;
-   cout &lt;&lt; <span class="string">"--------------"</span> &lt;&lt; endl;
-   cout &lt;&lt; <span class="string">"\nGroups hit: "</span> &lt;&lt; <a href="../KVDetectorEvent.html#KVDetectorEvent:GetMult" title="UInt_t KVDetectorEvent::GetMult() const">GetMult</a>() &lt;&lt; endl;
-   cout &lt;&lt; <span class="string">"\n"</span>;
-   <span class="keyword">if</span> (<a href="../KVDetectorEvent.html#KVDetectorEvent:GetMult" title="UInt_t KVDetectorEvent::GetMult() const">GetMult</a>()) {
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\nKVDetectorEvent"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"--------------"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\nGroups hit: "</span> &lt;&lt; <a href="../KVDetectorEvent.html#KVDetectorEvent:GetMult" title="UInt_t KVDetectorEvent::GetMult()">GetMult</a>() &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"\n"</span>;
+   <span class="keyword">if</span> (<a href="../KVDetectorEvent.html#KVDetectorEvent:GetMult" title="UInt_t KVDetectorEvent::GetMult()">GetMult</a>()) {
       <a href="../KVGroup.html">KVGroup</a> *g;
-      <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> i = 0; i &lt; <a href="../KVDetectorEvent.html#KVDetectorEvent:GetMult" title="UInt_t KVDetectorEvent::GetMult() const">GetMult</a>(); i++) {
-         g = (<a href="../KVGroup.html">KVGroup</a> *) <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a>-><a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx) const">At</a>(i);
-         g-&gt;<a href="../KVDetectorEvent.html#KVDetectorEvent:Print" title="void KVDetectorEvent::Print(Option_t* t = &quot;&quot;) const">Print</a>(<span class="string">"fired"</span>);
+      <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> i = 0; i &lt; <a href="../KVDetectorEvent.html#KVDetectorEvent:GetMult" title="UInt_t KVDetectorEvent::GetMult()">GetMult</a>(); i++) {
+         g = (<a href="../KVGroup.html">KVGroup</a> *) <a href="../KVDetectorEvent.html#KVDetectorEvent:fHitGroups" title="KVUniqueNameList* KVDetectorEvent::fHitGroups">fHitGroups</a>-><a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx)">At</a>(i);
+         g-&gt;<a href="../KVDetectorEvent.html#KVDetectorEvent:Print" title="void KVDetectorEvent::Print(Option_t* t=&quot;&quot;)">Print</a>(<span class="string">"fired"</span>);
       }
    }
 }
@@ -117,7 +117,7 @@ ClassImp(<a href="../KVDetectorEvent.html">KVDetectorEvent</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

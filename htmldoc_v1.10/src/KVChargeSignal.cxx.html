@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Thu May 28 11:10:02 2015            -->
+<!--   Date: Thu Oct  1 14:33:42 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -67,11 +67,11 @@ ClassImp(<a href="../KVChargeSignal.html">KVChargeSignal</a>)
 {
    
 	 <span class="keyword">if</span>(fType.Contains(<span class="string">"QL"</span>)) {
-		<a href="../KVSignal.html#KVSignal:SetChannelWidth" title="void KVSignal::SetChannelWidth(double tau)">SetChannelWidth</a>(4.);
+		<a href="../KVSignal.html#KVSignal:SetChannelWidth" title="void KVSignal::SetChannelWidth(double width)">SetChannelWidth</a>(4.);
 		<a href="../KVSignal.html#KVSignal:SetTauRC" title="void KVSignal::SetTauRC(Int_t taurc)">SetTauRC</a>(250.);
 	}
 	<span class="keyword">else</span>                    {
-		<a href="../KVSignal.html#KVSignal:SetChannelWidth" title="void KVSignal::SetChannelWidth(double tau)">SetChannelWidth</a>(10.);
+		<a href="../KVSignal.html#KVSignal:SetChannelWidth" title="void KVSignal::SetChannelWidth(double width)">SetChannelWidth</a>(10.);
 		<a href="../KVSignal.html#KVSignal:SetTauRC" title="void KVSignal::SetTauRC(Int_t taurc)">SetTauRC</a>(40.);
 	}
 	<a href="../KVSignal.html#KVSignal:SetBaseLineLength" title="void KVSignal::SetBaseLineLength(Int_t length,Int_t first=0)">SetBaseLineLength</a>(100);
@@ -80,44 +80,44 @@ ClassImp(<a href="../KVChargeSignal.html">KVChargeSignal</a>)
     <a href="../KVSignal.html#KVSignal:SetPoleZeroCorrection" title="void KVSignal::SetPoleZeroCorrection(Bool_t with=kTRUE)">SetPoleZeroCorrection</a>();
 }
 
-<a name="ONYEDE"></a><span class="keyword">void</span> <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVChargeSignal.html#KVChargeSignal:LoadPSAParameters" title="void KVChargeSignal::LoadPSAParameters(const Char_t* dettype)">LoadPSAParameters</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* dettype)
+<a name="cR7XUE"></a><span class="keyword">void</span> <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVChargeSignal.html#KVChargeSignal:LoadPSAParameters" title="void KVChargeSignal::LoadPSAParameters()">LoadPSAParameters</a>()
 {
 	
-	TString spar; 
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> lval;
-	<span class="comment">//--- BaseLineLength</span>
-	spar.Form(<span class="string">"%s.%s.BaseLineLength"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);
-	<span class="keyword">else</span> 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);
-	<a href="../KVSignal.html#KVSignal:SetBaseLineLength" title="void KVSignal::SetBaseLineLength(Int_t length,Int_t first=0)">SetBaseLineLength</a>(lval);
-	<span class="comment">//--- ChannelWidth</span>
-	spar.Form(<span class="string">"%s.%s.ChannelWidth"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);
-	<span class="keyword">else</span> 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);
-	<a href="../KVSignal.html#KVSignal:SetChannelWidth" title="void KVSignal::SetChannelWidth(double tau)">SetChannelWidth</a>(lval);
-	<span class="comment">//--- TauRC</span>
-	spar.Form(<span class="string">"%s.%s.TauRC"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);
-	<span class="keyword">else</span> 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);
-	<a href="../KVSignal.html#KVSignal:SetTauRC" title="void KVSignal::SetTauRC(Int_t taurc)">SetTauRC</a>(lval);
-	
-	<span class="comment">//--- ShaperRiseTime for trapezoidal filter</span>
-	spar.Form(<span class="string">"%s.%s.ShaperRiseTime"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);
-	<span class="keyword">else</span> 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> risetime = lval;
-	<span class="comment">//--- ShaperFlatTop for trapezoidal filter</span>
-	spar.Form(<span class="string">"%s.%s.ShaperFlatTop"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);
-	<span class="keyword">else</span> 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> flattop = lval;
-	<a href="../KVSignal.html#KVSignal:SetTrapShaperParameters" title="void KVSignal::SetTrapShaperParameters(Double_t rise,Double_t flat)">SetTrapShaperParameters</a>(risetime,flattop);
-	<span class="comment">//--- Pole-<a href="../#TGraph:Zero" title="void TGraph::Zero(Int_t&amp; k,Double_t AZ,Double_t BZ,Double_t E2,Double_t&amp; X,Double_t&amp; Y,Int_t maxiterations)">Zero</a> Correction</span>
-	spar.Form(<span class="string">"%s.%s.PZCorrection"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);
-	<span class="keyword">else</span> 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);
-	<span class="keyword">if</span> (lval==1) <a href="../KVSignal.html#KVSignal:SetPoleZeroCorrection" title="void KVSignal::SetPoleZeroCorrection(Bool_t with=kTRUE)">SetPoleZeroCorrection</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
-	<span class="keyword">else</span> 				<a href="../KVSignal.html#KVSignal:SetPoleZeroCorrection" title="void KVSignal::SetPoleZeroCorrection(Bool_t with=kTRUE)">SetPoleZeroCorrection</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+<span class="comment">// 	TString spar; </span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Double_t">Double_t</a> lval;</span>
+<span class="comment">// 	//--- BaseLineLength</span>
+<span class="comment">// 	spar.Form(<span class="string">"%s.%s.BaseLineLength"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	if (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);</span>
+<span class="comment">// 	else 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);</span>
+<span class="comment">// 	<a href="../KVSignal.html#KVSignal:SetBaseLineLength" title="void KVSignal::SetBaseLineLength(Int_t length,Int_t first=0)">SetBaseLineLength</a>(lval);</span>
+<span class="comment">// 	//--- ChannelWidth</span>
+<span class="comment">// 	spar.Form(<span class="string">"%s.%s.ChannelWidth"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	if (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);</span>
+<span class="comment">// 	else 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);</span>
+<span class="comment">// 	<a href="../KVSignal.html#KVSignal:SetChannelWidth" title="void KVSignal::SetChannelWidth(double width)">SetChannelWidth</a>(lval);</span>
+<span class="comment">// 	//--- TauRC</span>
+<span class="comment">// 	spar.Form(<span class="string">"%s.%s.TauRC"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	if (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);</span>
+<span class="comment">// 	else 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);</span>
+<span class="comment">// 	<a href="../KVSignal.html#KVSignal:SetTauRC" title="void KVSignal::SetTauRC(Int_t taurc)">SetTauRC</a>(lval);</span>
+<span class="comment">// 	</span>
+<span class="comment">// 	//--- ShaperRiseTime for trapezoidal filter</span>
+<span class="comment">// 	spar.Form(<span class="string">"%s.%s.ShaperRiseTime"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	if (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);</span>
+<span class="comment">// 	else 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Double_t">Double_t</a> risetime = lval;</span>
+<span class="comment">// 	//--- ShaperFlatTop for trapezoidal filter</span>
+<span class="comment">// 	spar.Form(<span class="string">"%s.%s.ShaperFlatTop"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	if (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);</span>
+<span class="comment">// 	else 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Double_t">Double_t</a> flattop = lval;</span>
+<span class="comment">// 	<a href="../KVSignal.html#KVSignal:SetTrapShaperParameters" title="void KVSignal::SetTrapShaperParameters(Double_t rise,Double_t flat)">SetTrapShaperParameters</a>(risetime,flattop);</span>
+<span class="comment">// 	//--- Pole-<a href="../#TGraph:Zero" title="void TGraph::Zero(Int_t&amp; k,Double_t AZ,Double_t BZ,Double_t E2,Double_t&amp; X,Double_t&amp; Y,Int_t maxiterations)">Zero</a> Correction</span>
+<span class="comment">// 	spar.Form(<span class="string">"%s.%s.PZCorrection"</span>,dettype,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	if (<a href="../KVDataSet.html">gDataSet</a>) lval = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(spar.Data(),0.0);</span>
+<span class="comment">// 	else 					lval = gEnv-&gt;GetValue(spar.Data(),0.0);</span>
+<span class="comment">// 	if (lval==1) <a href="../KVSignal.html#KVSignal:SetPoleZeroCorrection" title="void KVSignal::SetPoleZeroCorrection(Bool_t with=kTRUE)">SetPoleZeroCorrection</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);</span>
+<span class="comment">// 	else 				<a href="../KVSignal.html#KVSignal:SetPoleZeroCorrection" title="void KVSignal::SetPoleZeroCorrection(Bool_t with=kTRUE)">SetPoleZeroCorrection</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);</span>
 	
 	
 }
@@ -143,218 +143,218 @@ ClassImp(<a href="../KVChargeSignal.html">KVChargeSignal</a>)
    <span class="comment">//<a href="../KVChargeSignal.html">KVChargeSignal</a>&amp; CastedObj = (<a href="../KVChargeSignal.html">KVChargeSignal</a>&amp;)obj;</span>
 }
 
-<span class="comment">//________________________________________________________________</span>
-<a name="ah3QTE"></a><a href="../KVPSAResult.html">KVPSAResult</a>* <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVChargeSignal.html#KVChargeSignal:TreateSignal" title="KVPSAResult* KVChargeSignal::TreateSignal() or overloads">TreateSignal</a>()
-{
-	<span class="comment">//to be implemented in child class</span>
-   <span class="keyword">if</span> (<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>()==0) {
-		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"TreateSignal"</span>,<span class="string">"Empty signal %s"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-		<span class="keyword">return</span> 0;
-	}	
-   <a href="../KVPSAResult.html">KVPSAResult</a>* psa = <span class="keyword">new</span> <a href="../KVPSAResult.html">KVPSAResult</a>(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	psa-&gt;SetValue(Form(<span class="string">"%s.%s.RawAmplitude"</span>,fDetName.Data(),fType.Data()),<a href="../KVSignal.html#KVSignal:GetRawAmplitude" title="Double_t KVSignal::GetRawAmplitude()">GetRawAmplitude</a>());
-	<span class="keyword">if</span> (fAdc.fN==0) <a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>();
-	
-   <a href="../KVSignal.html#KVSignal:ComputeBaseLine" title="Double_t KVSignal::ComputeBaseLine()">ComputeBaseLine</a>();
-   <a href="../KVSignal.html#KVSignal:Add" title="void KVSignal::Add(Double_t fact)">Add</a>(-1.*fBaseLine);
-   <a href="../KVSignal.html#KVSignal:ApplyModifications" title="void KVSignal::ApplyModifications(TGraph* newSignal=0,Int_t nsa=-1)">ApplyModifications</a>();
-
-   <span class="keyword">if</span>(fWithPoleZeroCorrection) <a href="../KVSignal.html#KVSignal:PoleZeroSuppression" title="void KVSignal::PoleZeroSuppression(Double_t tauRC)">PoleZeroSuppression</a>(fTauRC);
-   <a href="../KVSignal.html#KVSignal:FIR_ApplyTrapezoidal" title="void KVSignal::FIR_ApplyTrapezoidal(double trise,double tflat)">FIR_ApplyTrapezoidal</a>(fTrapRiseTime,fTrapFlatTop);
-
-   <a href="../KVSignal.html#KVSignal:ComputeAmplitude" title="Double_t KVSignal::ComputeAmplitude()">ComputeAmplitude</a>();
-	
-   <span class="comment">//Init(); remplacer par <a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>()</span>
-	<span class="comment">//</span>
-	<a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>(); 
-   <a href="../KVSignal.html#KVSignal:ComputeRiseTime" title="Double_t KVSignal::ComputeRiseTime()">ComputeRiseTime</a>();
-
-	<span class="comment">// storing result</span>
-   psa-&gt;SetValue(Form(<span class="string">"%s.%s.BaseLine"</span>,fDetName.Data(),fType.Data()),fBaseLine);
-   psa-&gt;SetValue(Form(<span class="string">"%s.%s.SigmaBaseLine"</span>,fDetName.Data(),fType.Data()),fSigmaBase);
-   psa-&gt;SetValue(Form(<span class="string">"%s.%s.Amplitude"</span>,fDetName.Data(),fType.Data()),fAmplitude);
-   psa-&gt;SetValue(Form(<span class="string">"%s.%s.RiseTime"</span>,fDetName.Data(),fType.Data()),fRiseTime);
-	
-	<span class="keyword">return</span> psa;
-
-
-	<span class="comment">/*
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> xmin_bl = 0;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> xmax_bl = 200;
-	psa-&gt;SetValue(<span class="string">"BaseLine.Xmin"</span>,xmin_bl);
-   psa-&gt;SetValue(<span class="string">"BaseLine.Xmax"</span>,xmax_bl);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> xx,yy;
-	<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(0,xx,yy);
-	*/</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> nn = <a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();
-   <span class="keyword">if</span> (!<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>){
-   	<span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"TreateSignal"</span>,<span class="string">"Creation de la fonction de fit"</span>);</span>
-      <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a> = <span class="keyword">new</span> TF1(<span class="string">"KVChargeSignal1"</span>,<span class="string">"[0]+[1]/(1+TMath::Exp([2]-x))"</span>,0,nn-1); <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetNpx(nn);
-      <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a> = <span class="keyword">new</span> TF1(<span class="string">"KVChargeSignal2"</span>,<span class="string">"[0]+([1]+[3]*x)/(1+TMath::Exp([2]-x))"</span>,0,nn-2); <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;SetNpx(nn);
-   }
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> par0 = <a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(2)-2*<a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);	<span class="comment">//BaseLine</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> par1 = <a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);	<span class="comment">//Amplitude</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> par2 = <a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(1);	<span class="comment">//Front</span>
-   
-   <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetParameters(par0,par1,par2);
-   <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetParLimits(1,0,1e5);
-   <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetParLimits(2,50,nn);
-   
-   <span class="comment">//Determination ligne de base par fit pol0</span>
-	<span class="comment">//</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> times=0;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> nres1 = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>,<span class="string">"0WRQ"</span>));
-   <span class="keyword">if</span> (nres1!=0 &amp;&amp;  times&lt;3){
-   	nres1 = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>,<span class="string">"0WRQ"</span>));
-   	times+=1;
-   }
-   <span class="keyword">if</span> (nres1!=0){
-    <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s:%s : Fit #1 of the signal failed"</span>,fDetName.Data(),fType.Data());
-   	<span class="keyword">return</span> 0;
-   }
-	<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetNpar();nn+=1)
-   	<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;SetParameter(nn,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(nn));
-   <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;SetParameter(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetNpar()-1,0.);
-   
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> nres2 = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>,<span class="string">"0WRQ"</span>));
-   <span class="keyword">if</span> (nres2!=0){
-    <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s:%s : Fit #2 of the signal failed"</span>,fDetName.Data(),fType.Data());
-   	psa-&gt;SetValue(<span class="string">"BaseLine.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(0));
-   	psa-&gt;SetValue(<span class="string">"Amplitude.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(1));
-   	psa-&gt;SetValue(<span class="string">"Front0.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(2));
-   	psa-&gt;SetValue(<span class="string">"Front1.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(3));
-   } 
-   <span class="keyword">else</span>{
-   	psa-&gt;SetValue(<span class="string">"BaseLine.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(0));
-   	psa-&gt;SetValue(<span class="string">"Amplitude.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(1));
-   	psa-&gt;SetValue(<span class="string">"Front0.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(2));
-   	psa-&gt;SetValue(<span class="string">"Front1.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(3));
-   }
-   <span class="comment">//Min et Max de la ligne de base</span>
-	<span class="comment">/*
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> blmin = 1e6;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> blmax = -1e6;
-	for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=xmin_bl;nn&lt;xmax_bl;nn+=1)
-	{
-		<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(nn,xx,yy);
-		yy-=ybl;
-		if (yy&gt;blmax) blmax=yy;
-		if (yy&lt;blmin) blmin=yy;
-	}
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> trigger = 0;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> threshold = blmax;
-	
-   psa-&gt;SetValue(<span class="string">"Noise.Threshold"</span>,blmax);
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> max_signal=-1e6;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> tmax_signal=-1;
-   
-   for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();nn+=1)
-	{
-		<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(nn,xx,yy);
-		yy-=ybl;
-		if (yy&gt;threshold){
-			trigger += 1;
-			if (yy&gt;max_signal){
-				max_signal = yy;
-				tmax_signal = xx;
-			}
-		}
-		<a href="../#TGraph:SetPoint" title="void TGraph::SetPoint(Int_t i,Double_t x,Double_t y)">SetPoint</a>(nn,xx,yy);
-	}
-   psa-&gt;SetValue(<span class="string">"Noise.Trigger"</span>,trigger/<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>());   
-   psa-&gt;SetValue(<span class="string">"Signal.Max"</span>,max_signal);   
-   psa-&gt;SetValue(<span class="string">"Signal.tMax"</span>,tmax_signal);   
-   */</span>
-   <span class="keyword">delete</span> <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>;
-   <span class="keyword">delete</span> <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>;
-   <span class="keyword">return</span> psa;
-
-}
-<span class="comment">//________________________________________________________________</span>
-<a name="exDPXB"></a><a href="../KVPSAResult.html">KVPSAResult</a>* <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVChargeSignal.html#KVChargeSignal:TreateSignal" title="KVPSAResult* KVChargeSignal::TreateSignal() or overloads">TreateSignal</a>(TF1* filter)
-{
-	<span class="comment">//to be implemented in child class</span>
-   <a href="../KVPSAResult.html">KVPSAResult</a>* psa = <span class="keyword">new</span> <a href="../KVPSAResult.html">KVPSAResult</a>(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> nn = <a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();
-   <span class="keyword">if</span> (!filter){
-   	<span class="keyword">return</span> 0;
-   }
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> xx,yy,y0;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> ymin=1e6,ymax=-1e6;
-   <a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(0,xx,y0);
-	<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();nn+=1){
-   	<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(nn,xx,yy);
-   	<span class="keyword">if</span> (yy&gt;ymax) ymax=yy;
-      <span class="keyword">if</span> (yy&lt;ymin) ymin=yy;
-   }
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> width = ymax-ymin;
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> par0 = y0; <span class="comment">//<a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(2)-3*<a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);	//BaseLine</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> par1 = width; <span class="comment">//2*<a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);		//Amplitude</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> par2 = <a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(1);	<span class="comment">//Front</span>
-   
-   filter-&gt;SetParameters(par0,par1,par2,40);
-   <span class="comment">//filter-&gt;SetParameters(-7350,par1,590,70);</span>
-   filter-&gt;SetParLimits(1,0,width*1.1);
-   filter-&gt;SetParLimits(2,50,nn);
-   filter-&gt;SetParLimits(3,0.01,nn);
-   <span class="comment">//filter-&gt;SetParLimits(Parameter(3,1);</span>
-   <span class="comment">//filter-&gt;FixParameter(4,1);</span>
-   
-   <span class="comment">/*
-   filter-&gt;SetParLimits(3,-1,0.0001);
-   filter-&gt;SetParLimits(4,0.000,100);
-   */</span>
-   <span class="comment">//Determination ligne de base par fit pol0</span>
-	<span class="comment">//</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> times=0;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));
-   <span class="keyword">while</span> (nres!=0 &amp;&amp;  times&lt;10){
-   	nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));
-   	times+=1;
-      <span class="comment">//printf(<span class="string">"on recommence Fit #1 %d/10\n"</span>,times);</span>
-   }
-   <span class="keyword">if</span> (nres!=0){
-    <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s:%s : Fit #1 of the signal failed"</span>,fDetName.Data(),fType.Data());
-   	<span class="keyword">return</span> 0;
-   }
-	
-   
-   <span class="comment">/*
-   filter-&gt;ReleaseParameter(3);
-   filter-&gt;SetParLimits(3,-1,0.000);
-   */</span>
-   <span class="comment">/*
-   filter-&gt;ReleaseParameter(4);
-   filter-&gt;SetParLimits(4, 0,10);
-   */</span>
-   <span class="comment">/*
-   times=0;
-	nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));
-   while (nres!=0 &amp;&amp;  times&lt;10){
-   	nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));
-   	times+=1;
-      printf(<span class="string">"on recommence Fit #2 %d/10\n"</span>,times);
-   }
-   if (nres!=0){
-    <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s : Fit #2 of the signal failed"</span>,fDetName.Data(),fType.Data());
-   	return 0;
-   }
-   */</span>
-   <span class="comment">//<a href="../ListOfTypes.html#Int_t">Int_t</a> np=0;</span>
-   psa-&gt;SetValue(<span class="string">"width"</span>,width);
-   
-   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;filter-&gt;GetNpar();nn+=1)
-   	filter-&gt;ReleaseParameter(nn);
-   
-   <span class="keyword">return</span> psa;
-
-}
+<span class="comment">// //________________________________________________________________</span>
+<span class="comment">// <a href="../KVPSAResult.html">KVPSAResult</a>* <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVSignal.html#KVSignal:TreateSignal" title="void KVSignal::TreateSignal()">TreateSignal</a>()</span>
+<span class="comment">// {</span>
+<span class="comment">// 	//to be implemented in child class</span>
+<span class="comment">//    if (<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>()==0) {</span>
+<span class="comment">// 		//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"TreateSignal"</span>,<span class="string">"Empty signal %s"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 		return 0;</span>
+<span class="comment">// 	}	</span>
+<span class="comment">//    <a href="../KVPSAResult.html">KVPSAResult</a>* psa = new <a href="../KVPSAResult.html">KVPSAResult</a>(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	psa-&gt;SetValue(Form(<span class="string">"%s.%s.RawAmplitude"</span>,fDetName.Data(),fType.Data()),<a href="../KVSignal.html#KVSignal:GetRawAmplitude" title="Double_t KVSignal::GetRawAmplitude()">GetRawAmplitude</a>());</span>
+<span class="comment">// 	if (fAdc.fN==0) <a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>();</span>
+<span class="comment">// 	</span>
+<span class="comment">//    <a href="../KVSignal.html#KVSignal:ComputeBaseLine" title="Double_t KVSignal::ComputeBaseLine()">ComputeBaseLine</a>();</span>
+<span class="comment">//    <a href="../KVSignal.html#KVSignal:Add" title="void KVSignal::Add(Double_t fact)">Add</a>(-1.*fBaseLine);</span>
+<span class="comment">//    <a href="../KVSignal.html#KVSignal:ApplyModifications" title="void KVSignal::ApplyModifications(TGraph* newSignal=0,Int_t nsa=-1)">ApplyModifications</a>();</span>
+<span class="comment">// </span>
+<span class="comment">//    if(fWithPoleZeroCorrection) <a href="../KVSignal.html#KVSignal:PoleZeroSuppression" title="void KVSignal::PoleZeroSuppression(Double_t tauRC)">PoleZeroSuppression</a>(fTauRC);</span>
+<span class="comment">//    <a href="../KVSignal.html#KVSignal:FIR_ApplyTrapezoidal" title="void KVSignal::FIR_ApplyTrapezoidal(double trise,double tflat)">FIR_ApplyTrapezoidal</a>(fTrapRiseTime,fTrapFlatTop);</span>
+<span class="comment">// </span>
+<span class="comment">//    <a href="../KVSignal.html#KVSignal:ComputeAmplitude" title="Double_t KVSignal::ComputeAmplitude()">ComputeAmplitude</a>();</span>
+<span class="comment">// 	</span>
+<span class="comment">//    //Init(); remplacer par <a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>()</span>
+<span class="comment">// 	//</span>
+<span class="comment">// 	<a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>(); </span>
+<span class="comment">//    <a href="../KVSignal.html#KVSignal:ComputeRiseTime" title="Double_t KVSignal::ComputeRiseTime()">ComputeRiseTime</a>();</span>
+<span class="comment">// </span>
+<span class="comment">// 	// storing result</span>
+<span class="comment">//    psa-&gt;SetValue(Form(<span class="string">"%s.%s.BaseLine"</span>,fDetName.Data(),fType.Data()),fBaseLine);</span>
+<span class="comment">//    psa-&gt;SetValue(Form(<span class="string">"%s.%s.SigmaBaseLine"</span>,fDetName.Data(),fType.Data()),fSigmaBase);</span>
+<span class="comment">//    psa-&gt;SetValue(Form(<span class="string">"%s.%s.Amplitude"</span>,fDetName.Data(),fType.Data()),fAmplitude);</span>
+<span class="comment">//    psa-&gt;SetValue(Form(<span class="string">"%s.%s.RiseTime"</span>,fDetName.Data(),fType.Data()),fRiseTime);</span>
+<span class="comment">// 	</span>
+<span class="comment">// 	return psa;</span>
+<span class="comment">// </span>
+<span class="comment">// </span>
+<span class="comment">// 	/*</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Int_t">Int_t</a> xmin_bl = 0;</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Int_t">Int_t</a> xmax_bl = 200;</span>
+<span class="comment">// 	psa-&gt;SetValue(<span class="string">"BaseLine.Xmin"</span>,xmin_bl);</span>
+<span class="comment">//    psa-&gt;SetValue(<span class="string">"BaseLine.Xmax"</span>,xmax_bl);</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> xx,yy;</span>
+<span class="comment">// 	<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(0,xx,yy);</span>
+<span class="comment">// 	*/</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Int_t">Int_t</a> nn = <a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();</span>
+<span class="comment">//    if (!<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>){</span>
+<span class="comment">//    	//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"TreateSignal"</span>,<span class="string">"Creation de la fonction de fit"</span>);</span>
+<span class="comment">//       <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a> = new TF1(<span class="string">"KVChargeSignal1"</span>,<span class="string">"[0]+[1]/(1+TMath::Exp([2]-x))"</span>,0,nn-1); <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetNpx(nn);</span>
+<span class="comment">//       <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a> = new TF1(<span class="string">"KVChargeSignal2"</span>,<span class="string">"[0]+([1]+[3]*x)/(1+TMath::Exp([2]-x))"</span>,0,nn-2); <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;SetNpx(nn);</span>
+<span class="comment">//    }</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> par0 = <a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(2)-2*<a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);	//BaseLine</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> par1 = <a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);	//Amplitude</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> par2 = <a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(1);	//Front</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetParameters(par0,par1,par2);</span>
+<span class="comment">//    <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetParLimits(1,0,1e5);</span>
+<span class="comment">//    <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;SetParLimits(2,50,nn);</span>
+<span class="comment">//    </span>
+<span class="comment">//    //Determination ligne de base par fit pol0</span>
+<span class="comment">// 	//</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Int_t">Int_t</a> times=0;</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Int_t">Int_t</a> nres1 = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>,<span class="string">"0WRQ"</span>));</span>
+<span class="comment">//    if (nres1!=0 &amp;&amp;  times&lt;3){</span>
+<span class="comment">//    	nres1 = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>,<span class="string">"0WRQ"</span>));</span>
+<span class="comment">//    	times+=1;</span>
+<span class="comment">//    }</span>
+<span class="comment">//    if (nres1!=0){</span>
+<span class="comment">//     <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s:%s : Fit #1 of the signal failed"</span>,fDetName.Data(),fType.Data());</span>
+<span class="comment">//    	return 0;</span>
+<span class="comment">//    }</span>
+<span class="comment">// 	for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetNpar();nn+=1)</span>
+<span class="comment">//    	<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;SetParameter(nn,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(nn));</span>
+<span class="comment">//    <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;SetParameter(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetNpar()-1,0.);</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Int_t">Int_t</a> nres2 = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>,<span class="string">"0WRQ"</span>));</span>
+<span class="comment">//    if (nres2!=0){</span>
+<span class="comment">//     <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s:%s : Fit #2 of the signal failed"</span>,fDetName.Data(),fType.Data());</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"BaseLine.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(0));</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"Amplitude.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(1));</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"Front0.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(2));</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"Front1.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>-&gt;GetParameter(3));</span>
+<span class="comment">//    } </span>
+<span class="comment">//    else{</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"BaseLine.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(0));</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"Amplitude.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(1));</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"Front0.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(2));</span>
+<span class="comment">//    	psa-&gt;SetValue(<span class="string">"Front1.Fit"</span>,<a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>-&gt;GetParameter(3));</span>
+<span class="comment">//    }</span>
+<span class="comment">//    //Min et Max de la ligne de base</span>
+<span class="comment">// 	/*</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> blmin = 1e6;</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Double_t">Double_t</a> blmax = -1e6;</span>
+<span class="comment">// 	for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=xmin_bl;nn&lt;xmax_bl;nn+=1)</span>
+<span class="comment">// 	{</span>
+<span class="comment">// 		<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(nn,xx,yy);</span>
+<span class="comment">// 		yy-=ybl;</span>
+<span class="comment">// 		if (yy&gt;blmax) blmax=yy;</span>
+<span class="comment">// 		if (yy&lt;blmin) blmin=yy;</span>
+<span class="comment">// 	}</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> trigger = 0;</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Double_t">Double_t</a> threshold = blmax;</span>
+<span class="comment">// 	</span>
+<span class="comment">//    psa-&gt;SetValue(<span class="string">"Noise.Threshold"</span>,blmax);</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> max_signal=-1e6;</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Double_t">Double_t</a> tmax_signal=-1;</span>
+<span class="comment">//    </span>
+<span class="comment">//    for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();nn+=1)</span>
+<span class="comment">// 	{</span>
+<span class="comment">// 		<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(nn,xx,yy);</span>
+<span class="comment">// 		yy-=ybl;</span>
+<span class="comment">// 		if (yy&gt;threshold){</span>
+<span class="comment">// 			trigger += 1;</span>
+<span class="comment">// 			if (yy&gt;max_signal){</span>
+<span class="comment">// 				max_signal = yy;</span>
+<span class="comment">// 				tmax_signal = xx;</span>
+<span class="comment">// 			}</span>
+<span class="comment">// 		}</span>
+<span class="comment">// 		<a href="../#TGraph:SetPoint" title="void TGraph::SetPoint(Int_t i,Double_t x,Double_t y)">SetPoint</a>(nn,xx,yy);</span>
+<span class="comment">// 	}</span>
+<span class="comment">//    psa-&gt;SetValue(<span class="string">"Noise.Trigger"</span>,trigger/<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>());   </span>
+<span class="comment">//    psa-&gt;SetValue(<span class="string">"Signal.Max"</span>,max_signal);   </span>
+<span class="comment">//    psa-&gt;SetValue(<span class="string">"Signal.tMax"</span>,tmax_signal);   </span>
+<span class="comment">//    */</span>
+<span class="comment">//    delete <a href="../KVChargeSignal.html#KVChargeSignal:fFunc1" title="TF1* KVChargeSignal::fFunc1">fFunc1</a>;</span>
+<span class="comment">//    delete <a href="../KVChargeSignal.html#KVChargeSignal:fFunc2" title="TF1* KVChargeSignal::fFunc2">fFunc2</a>;</span>
+<span class="comment">//    return psa;</span>
+<span class="comment">// </span>
+<span class="comment">// }</span>
+<span class="comment">// //________________________________________________________________</span>
+<span class="comment">// <a href="../KVPSAResult.html">KVPSAResult</a>* <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVSignal.html#KVSignal:TreateSignal" title="void KVSignal::TreateSignal()">TreateSignal</a>(TF1* filter)</span>
+<span class="comment">// {</span>
+<span class="comment">// 	//to be implemented in child class</span>
+<span class="comment">//    <a href="../KVPSAResult.html">KVPSAResult</a>* psa = new <a href="../KVPSAResult.html">KVPSAResult</a>(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Int_t">Int_t</a> nn = <a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();</span>
+<span class="comment">//    if (!filter){</span>
+<span class="comment">//    	return 0;</span>
+<span class="comment">//    }</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> xx,yy,y0;</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> ymin=1e6,ymax=-1e6;</span>
+<span class="comment">//    <a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(0,xx,y0);</span>
+<span class="comment">// 	for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;<a href="../#TGraph:GetN" title="Int_t TGraph::GetN()">GetN</a>();nn+=1){</span>
+<span class="comment">//    	<a href="../#TGraph:GetPoint" title="Int_t TGraph::GetPoint(Int_t i,Double_t&amp; x,Double_t&amp; y)">GetPoint</a>(nn,xx,yy);</span>
+<span class="comment">//    	if (yy&gt;ymax) ymax=yy;</span>
+<span class="comment">//       if (yy&lt;ymin) ymin=yy;</span>
+<span class="comment">//    }</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> width = ymax-ymin;</span>
+<span class="comment">//    </span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> par0 = y0; //<a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(2)-3*<a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);	//BaseLine</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> par1 = width; //2*<a href="../#TGraph:GetRMS" title="Double_t TGraph::GetRMS(Int_t axis=1)">GetRMS</a>(2);		//Amplitude</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Double_t">Double_t</a> par2 = <a href="../#TGraph:GetMean" title="Double_t TGraph::GetMean(Int_t axis=1)">GetMean</a>(1);	//Front</span>
+<span class="comment">//    </span>
+<span class="comment">//    filter-&gt;SetParameters(par0,par1,par2,40);</span>
+<span class="comment">//    //filter-&gt;SetParameters(-7350,par1,590,70);</span>
+<span class="comment">//    filter-&gt;SetParLimits(1,0,width*1.1);</span>
+<span class="comment">//    filter-&gt;SetParLimits(2,50,nn);</span>
+<span class="comment">//    filter-&gt;SetParLimits(3,0.01,nn);</span>
+<span class="comment">//    //filter-&gt;SetParLimits(Parameter(3,1);</span>
+<span class="comment">//    //filter-&gt;FixParameter(4,1);</span>
+<span class="comment">//    </span>
+<span class="comment">//    /*</span>
+<span class="comment">//    filter-&gt;SetParLimits(3,-1,0.0001);</span>
+<span class="comment">//    filter-&gt;SetParLimits(4,0.000,100);</span>
+<span class="comment">//    */</span>
+<span class="comment">//    //Determination ligne de base par fit pol0</span>
+<span class="comment">// 	//</span>
+<span class="comment">//    <a href="../ListOfTypes.html#Int_t">Int_t</a> times=0;</span>
+<span class="comment">// 	<a href="../ListOfTypes.html#Int_t">Int_t</a> nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));</span>
+<span class="comment">//    while (nres!=0 &amp;&amp;  times&lt;10){</span>
+<span class="comment">//    	nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));</span>
+<span class="comment">//    	times+=1;</span>
+<span class="comment">//       //printf(<span class="string">"on recommence Fit #1 %d/10\n"</span>,times);</span>
+<span class="comment">//    }</span>
+<span class="comment">//    if (nres!=0){</span>
+<span class="comment">//     <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s:%s : Fit #1 of the signal failed"</span>,fDetName.Data(),fType.Data());</span>
+<span class="comment">//    	return 0;</span>
+<span class="comment">//    }</span>
+<span class="comment">// 	</span>
+<span class="comment">//    </span>
+<span class="comment">//    /*</span>
+<span class="comment">//    filter-&gt;ReleaseParameter(3);</span>
+<span class="comment">//    filter-&gt;SetParLimits(3,-1,0.000);</span>
+<span class="comment">//    */</span>
+<span class="comment">//    /*</span>
+<span class="comment">//    filter-&gt;ReleaseParameter(4);</span>
+<span class="comment">//    filter-&gt;SetParLimits(4, 0,10);</span>
+<span class="comment">//    */</span>
+<span class="comment">//    /*</span>
+<span class="comment">//    times=0;</span>
+<span class="comment">// 	nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));</span>
+<span class="comment">//    while (nres!=0 &amp;&amp;  times&lt;10){</span>
+<span class="comment">//    	nres = <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../#TGraph:Fit" title="TFitResultPtr TGraph::Fit(const char* formula,Option_t* option=&quot;&quot;,Option_t* goption=&quot;&quot;,Axis_t xmin=0,Axis_t xmax=0) or overloads">Fit</a>(filter,<span class="string">"WRQ"</span>));</span>
+<span class="comment">//    	times+=1;</span>
+<span class="comment">//       printf(<span class="string">"on recommence Fit #2 %d/10\n"</span>,times);</span>
+<span class="comment">//    }</span>
+<span class="comment">//    if (nres!=0){</span>
+<span class="comment">//     <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"TreateSignal"</span>,<span class="string">"%s : Fit #2 of the signal failed"</span>,fDetName.Data(),fType.Data());</span>
+<span class="comment">//    	return 0;</span>
+<span class="comment">//    }</span>
+<span class="comment">//    */</span>
+<span class="comment">//    //<a href="../ListOfTypes.html#Int_t">Int_t</a> np=0;</span>
+<span class="comment">//    psa-&gt;SetValue(<span class="string">"width"</span>,width);</span>
+<span class="comment">//    </span>
+<span class="comment">//    for (<a href="../ListOfTypes.html#Int_t">Int_t</a> nn=0;nn&lt;filter-&gt;GetNpar();nn+=1)</span>
+<span class="comment">//    	filter-&gt;ReleaseParameter(nn);</span>
+<span class="comment">//    </span>
+<span class="comment">//    return psa;</span>
+<span class="comment">// </span>
+<span class="comment">// }</span>
 
 <a name="VxSq1C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChargeSignal.html">KVChargeSignal</a>::<a href="../KVChargeSignal.html#KVChargeSignal:GetMaxFluctuationsWindow" title="Double_t KVChargeSignal::GetMaxFluctuationsWindow(Double_t* window,Int_t width=10)">GetMaxFluctuationsWindow</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* window,<a href="../ListOfTypes.html#Int_t">Int_t</a> width)
 {
@@ -445,7 +445,7 @@ ClassImp(<a href="../KVChargeSignal.html">KVChargeSignal</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-05-28 11:10 </em><em>&raquo; Last generated: 2015-05-28 11:10</em><br />
+<em>&raquo; Last changed: 2015-10-01 14:33 </em><em>&raquo; Last generated: 2015-10-01 14:33</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

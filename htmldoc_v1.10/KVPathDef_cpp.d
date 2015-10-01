@@ -35,12 +35,12 @@
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TObjString.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/ThreadLocalStorage.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/RConfigure.h
-./KVPathDef_cpp.so: /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda/KVBase.h
+./KVPathDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVBase.h
 ./KVPathDef_cpp.so: KVConfig.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TRandom3.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TRandom.h
-./KVPathDef_cpp.so: /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda/KVLockfile.h
-./KVPathDef_cpp.so: /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda/KVString.h
+./KVPathDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVLockfile.h
+./KVPathDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVString.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/Riostream.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TSystem.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TInetAddress.h
@@ -49,4 +49,4 @@
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TQObject.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TTime.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/cintdictversion.h /home/john/software/build/root-v5-34-00/include/RVersion.h
-KVPathDef_cpp__ROOTBUILDVERSION= 5.34/31
+KVPathDef_cpp__ROOTBUILDVERSION= 5.34/33

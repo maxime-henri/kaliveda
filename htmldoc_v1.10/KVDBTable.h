@@ -26,22 +26,25 @@ class KVDBRecord;
 
 class KVDBTable:public TFolder {
 
- protected:
+   private:
+   TObject *FindObject(const Char_t *) const { return nullptr; } // do not use
+   TObject *FindObject(const TObject*) const { return nullptr; } // do not use
+
+   protected:
 
    Bool_t fIsUnique;            // Must each record name be unique ?
-   TString fFullPath;  //full path to table in folder structure
-   TString fDefFormatNumRec; // default formatting for names of numbered records
+   TString fFullPath;           //full path to table in folder structure
+   TString fDefFormatNumRec;    // default formatting for names of numbered records
 
- public:
+   public:
 
    KVDBTable();
-   KVDBTable(const Char_t * name, const Char_t * title =
-             "", Bool_t unique = kFALSE);
-    virtual ~ KVDBTable();
+   KVDBTable(const Char_t * name, const Char_t * title = "", Bool_t unique = kFALSE);
+   virtual ~ KVDBTable();
 
-   inline virtual KVDBRecord *GetRecord(const Char_t * rec_name) const;
+   virtual KVDBRecord *GetRecord(const Char_t * rec_name) const{return (KVDBRecord *) GetRecords()->FindObject(rec_name);}
    virtual KVDBRecord *GetRecord(Int_t n) const;
-   inline virtual KVSeqCollection* GetRecords() const;
+   virtual KVSeqCollection* GetRecords() const {return (KVSeqCollection*)GetListOfFolders();}
    virtual Bool_t AddRecord(KVDBRecord * add);
    virtual void RemoveRecord(KVDBRecord * add);
    virtual void ls(Option_t * option = "*") const;
@@ -51,19 +54,9 @@ class KVDBTable:public TFolder {
    
    void SetDefaultFormat(const TString&);
    Bool_t HasDefaultFormat() const { return fDefFormatNumRec!=""; }
+   void Rehash(void);
 
-    ClassDef(KVDBTable, 3)      //Table object for database
+   ClassDef(KVDBTable, 3)      //Table object for database
 };
-
-KVDBRecord *KVDBTable::GetRecord(const Char_t * rec) const
-{
-   return (KVDBRecord *) FindObject(rec);
-}
-
-KVSeqCollection* KVDBTable::GetRecords() const
-{
-   return (KVSeqCollection*)GetListOfFolders();
-}
-
 
 #endif

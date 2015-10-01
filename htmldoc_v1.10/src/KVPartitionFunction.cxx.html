@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:07 2015            -->
+<!--   Date: Thu Sep 17 10:51:51 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Thu Sep 30 16:48:24 2010</span>
 <span class="comment">//Author: John Frankland,,,,</span>
@@ -56,7 +56,7 @@ Double_t PartSum(Int_t A, Int_t Z) returns the total number of partitions summed
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="cefHOC"></a><a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:KVPartitionFunction" title="KVPartitionFunction KVPartitionFunction::KVPartitionFunction() or overloads">KVPartitionFunction</a>()
+<a name="cefHOC"></a><a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:KVPartitionFunction" title="KVPartitionFunction KVPartitionFunction::KVPartitionFunction()">KVPartitionFunction</a>()
     : <a href="../KVPartitionFunction.html#KVPartitionFunction:fTable" title="THashTable KVPartitionFunction::fTable">fTable</a>(10000000,5)
 {
    <span class="comment">// Default constructor</span>
@@ -67,7 +67,7 @@ Double_t PartSum(Int_t A, Int_t Z) returns the total number of partitions summed
    <span class="comment">// Destructor</span>
 }
 
-<a name="bK3qvB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> M)
+<a name="bK3qvB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> M)
 {
     <span class="comment">// recursive calculation of number of partitions of A nucleons</span>
     <span class="comment">// into M fragments of size 1, 2, ..., A</span>
@@ -91,7 +91,7 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">int</span> klim = A/M-1;
     <span class="keyword">for</span>(<span class="keyword">int</span> k=0; k&lt;=klim; k++)
     {
-        p += <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A-k*M-1, M-1);
+        p += <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A-k*M-1, M-1);
     }
     <span class="keyword">return</span> p;
 }
@@ -103,18 +103,18 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="comment">// from Eq. (2.7) of Bondorf et al., Nucl. Phys. A443, 321 (1985)</span>
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> p = 0.;
-    <span class="keyword">for</span>(<span class="keyword">int</span> m=1;m&lt;=A;m++) p+=<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A,m);
+    <span class="keyword">for</span>(<span class="keyword">int</span> m=1;m&lt;=A;m++) p+=<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A,m);
     <span class="keyword">return</span> p;
 }
 
 
-<a name="u9.ujD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A, int Z, int M, int B)">sneppen_Nclass</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M, <span class="keyword">int</span> B)
+<a name="u9.ujD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A,int Z,int M,int B)">sneppen_Nclass</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M, <span class="keyword">int</span> B)
 {
     <span class="keyword">if</span>(A&gt;0&amp;&amp;Z&gt;=0&amp;&amp;M&gt;0&amp;&amp;B&gt;=0){
-            <a href="../ListOfTypes.html#Double_t">Double_t</a> snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:get_value" title="Double_t KVPartitionFunction::get_value(Int_t A, Int_t Z, Int_t M, Int_t B = -1)">get_value</a>(A,Z,M,B);
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:get_value" title="Double_t KVPartitionFunction::get_value(Int_t A,Int_t Z,Int_t M,Int_t B=-1)">get_value</a>(A,Z,M,B);
             <span class="keyword">if</span>(snc&lt;0){
-                snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Nclass" title="Double_t KVPartitionFunction::calc_sneppen_Nclass(int A, int Z, int M, int B)">calc_sneppen_Nclass</a>(A,Z,M,B);
-                <a href="../KVPartitionFunction.html#KVPartitionFunction:store_value" title="void KVPartitionFunction::store_value(Double_t val, Int_t A, Int_t Z, Int_t M, Int_t B = -1)">store_value</a>(snc,A,Z,M,B);
+                snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Nclass" title="Double_t KVPartitionFunction::calc_sneppen_Nclass(int A,int Z,int M,int B)">calc_sneppen_Nclass</a>(A,Z,M,B);
+                <a href="../KVPartitionFunction.html#KVPartitionFunction:store_value" title="void KVPartitionFunction::store_value(Double_t val,Int_t A,Int_t Z,Int_t M,Int_t B=-1)">store_value</a>(snc,A,Z,M,B);
                 <a href="../KVPartitionFunction.html#KVPartitionFunction:maxvalueNclass" title="Double_t KVPartitionFunction::maxvalueNclass">maxvalueNclass</a> = TMath::Max(snc,<a href="../KVPartitionFunction.html#KVPartitionFunction:maxvalueNclass" title="Double_t KVPartitionFunction::maxvalueNclass">maxvalueNclass</a>);
             }
             <span class="keyword">return</span> snc;
@@ -122,14 +122,14 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">return</span> 0;
 }
 
-<a name="y3LOk"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M)
+<a name="y3LOk"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M)
 {
     <span class="keyword">if</span>(A&gt;0&amp;&amp;Z&gt;=0&amp;&amp;M&gt;0){
         <span class="keyword">if</span>(Z&gt;A-Z) Z=A-Z; <span class="comment">// symmetry</span>
-            <a href="../ListOfTypes.html#Double_t">Double_t</a> snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:get_value" title="Double_t KVPartitionFunction::get_value(Int_t A, Int_t Z, Int_t M, Int_t B = -1)">get_value</a>(A,Z,M);
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:get_value" title="Double_t KVPartitionFunction::get_value(Int_t A,Int_t Z,Int_t M,Int_t B=-1)">get_value</a>(A,Z,M);
             <span class="keyword">if</span>(snc&lt;0){
-                snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Np" title="Double_t KVPartitionFunction::calc_sneppen_Np(int A, int Z, int M)">calc_sneppen_Np</a>(A,Z,M);
-                <a href="../KVPartitionFunction.html#KVPartitionFunction:store_value" title="void KVPartitionFunction::store_value(Double_t val, Int_t A, Int_t Z, Int_t M, Int_t B = -1)">store_value</a>(snc,A,Z,M);
+                snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Np" title="Double_t KVPartitionFunction::calc_sneppen_Np(int A,int Z,int M)">calc_sneppen_Np</a>(A,Z,M);
+                <a href="../KVPartitionFunction.html#KVPartitionFunction:store_value" title="void KVPartitionFunction::store_value(Double_t val,Int_t A,Int_t Z,Int_t M,Int_t B=-1)">store_value</a>(snc,A,Z,M);
                 <a href="../KVPartitionFunction.html#KVPartitionFunction:maxvalueNp" title="Double_t KVPartitionFunction::maxvalueNp">maxvalueNp</a> = TMath::Max(snc,<a href="../KVPartitionFunction.html#KVPartitionFunction:maxvalueNp" title="Double_t KVPartitionFunction::maxvalueNp">maxvalueNp</a>);
             }
             <span class="keyword">return</span> snc;
@@ -137,7 +137,7 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">return</span> 0;
 }
 
-<a name="scqfqC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Nclass" title="Double_t KVPartitionFunction::calc_sneppen_Nclass(int A, int Z, int M, int B)">calc_sneppen_Nclass</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M, <span class="keyword">int</span> B)
+<a name="scqfqC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Nclass" title="Double_t KVPartitionFunction::calc_sneppen_Nclass(int A,int Z,int M,int B)">calc_sneppen_Nclass</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M, <span class="keyword">int</span> B)
 {
     <span class="comment">// calculates Eqs. 5a-d</span>
     
@@ -154,8 +154,8 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     }
     <span class="keyword">if</span>(Z==0){
          <span class="keyword">if</span>(A-B*M &gt; 0){
-            <a href="../ListOfTypes.html#Double_t">Double_t</a> sn1 = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(A-(B-1)*M,0,M);
-            <a href="../ListOfTypes.html#Double_t">Double_t</a> sn2 = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(A-B*M,0,M);
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> sn1 = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(A-(B-1)*M,0,M);
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> sn2 = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(A-B*M,0,M);
             <span class="keyword">return</span> sn1-sn2;
         } 
         <span class="keyword">return</span> 0;
@@ -163,8 +163,8 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">if</span>(B==0){
         <span class="keyword">if</span>(A-M&gt;=M &amp;&amp; Z-M&gt;=0){
             <a href="../ListOfTypes.html#Double_t">Double_t</a> snp,snc;
-            snp = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(A-M,Z-M,M);
-            snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A, int Z, int M, int B)">sneppen_Nclass</a>(A-1,Z-1,M-1,0);
+            snp = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(A-M,Z-M,M);
+            snc = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A,int Z,int M,int B)">sneppen_Nclass</a>(A-1,Z-1,M-1,0);
             <span class="keyword">return</span> snp+snc;
         }
         <span class="keyword">return</span> 0;
@@ -172,14 +172,14 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <a href="../ListOfTypes.html#Double_t">Double_t</a> ncl=0;
     <span class="keyword">if</span>(A-B&gt;0 &amp;&amp; M-1&gt;0 &amp;&amp; B&gt;1){
         <span class="keyword">for</span>(<span class="keyword">int</span> i=1;i&lt;=B-1;i++){
-            ncl += <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A, int Z, int M, int B)">sneppen_Nclass</a>(A-B,Z,M-1,i);
+            ncl += <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A,int Z,int M,int B)">sneppen_Nclass</a>(A-B,Z,M-1,i);
         }
     }
-    ncl = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(A-B,Z,M-1)-ncl;
+    ncl = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(A-B,Z,M-1)-ncl;
     <span class="keyword">return</span> ncl;
 }
 
-<a name="oBNWED"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Np" title="Double_t KVPartitionFunction::calc_sneppen_Np(int A, int Z, int M)">calc_sneppen_Np</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M)
+<a name="oBNWED"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:calc_sneppen_Np" title="Double_t KVPartitionFunction::calc_sneppen_Np(int A,int Z,int M)">calc_sneppen_Np</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M)
 {
     <span class="comment">// calculates Eq. 4</span>
 
@@ -188,26 +188,26 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">if</span>(Z&lt;0) <span class="keyword">return</span> 0;
     <span class="keyword">if</span>(Z==0){
         <span class="comment">// one-component system</span>
-        <span class="keyword">return</span> <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A,M);
+        <span class="keyword">return</span> <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A,M);
     }
     <span class="keyword">if</span>(M&gt;A) <span class="keyword">return</span> 0;
     <span class="keyword">if</span>(M==1) <span class="keyword">return</span> 1;
     <span class="keyword">if</span>(M==A) <span class="keyword">return</span> 1;
     <a href="../ListOfTypes.html#Double_t">Double_t</a> Np=0;
     <span class="keyword">int</span> N=A-Z;
-    <span class="keyword">for</span>(<span class="keyword">int</span> b=0; b&lt;=N; b++) Np += <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A, int Z, int M, int B)">sneppen_Nclass</a>(A,Z,M,b);
+    <span class="keyword">for</span>(<span class="keyword">int</span> b=0; b&lt;=N; b++) Np += <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Nclass" title="Double_t KVPartitionFunction::sneppen_Nclass(int A,int Z,int M,int B)">sneppen_Nclass</a>(A,Z,M,b);
     <span class="keyword">return</span> Np;
 }
 
-<a name="hGH5KB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M)
+<a name="hGH5KB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(<span class="keyword">int</span> A, <span class="keyword">int</span> Z, <span class="keyword">int</span> M)
 {
     <span class="comment">// Returns the total number of partitions of Z protons and (A-Z) neutrons</span>
     <span class="comment">// into M fragments, using the method given by K. Sneppen</span>
     <span class="comment">// in Nucl. Phys. A470, 213 (1987), Eqs. (4)-(6).</span>
     
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> p = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(A, Z, M);
-    <span class="comment">/*<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"PartFunc(A,Z,M)"</span>, <span class="string">"p=%f array use=%f max value=%f\n"</span>,
-            p, <a href="../KVPartitionFunction.html#KVPartitionFunction:NvalsNcl" title="Double_t KVPartitionFunction::NvalsNcl">NvalsNcl</a>/pow(SNEPPENMAXTAB,4),<a href="../KVPartitionFunction.html#KVPartitionFunction:GetMaxValueNclass" title="Double_t KVPartitionFunction::GetMaxValueNclass() const">GetMaxValueNclass</a>());*/</span>
+    <a href="../ListOfTypes.html#Double_t">Double_t</a> p = <a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(A, Z, M);
+    <span class="comment">/*<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PartFunc(A,Z,M)"</span>, <span class="string">"p=%f array use=%f max value=%f\n"</span>,
+            p, <a href="../KVPartitionFunction.html#KVPartitionFunction:NvalsNcl" title="Double_t KVPartitionFunction::NvalsNcl">NvalsNcl</a>/pow(SNEPPENMAXTAB,4),<a href="../KVPartitionFunction.html#KVPartitionFunction:GetMaxValueNclass" title="Double_t KVPartitionFunction::GetMaxValueNclass()">GetMaxValueNclass</a>());*/</span>
     <span class="keyword">return</span> p;
 }
 
@@ -218,13 +218,13 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="comment">// in Nucl. Phys. A470, 213 (1987), Eqs. (4)-(6).</span>
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> p=0;
-    <span class="keyword">for</span>(<span class="keyword">int</span> m=1; m&lt;=A;m++) p+=<a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A, int Z, int M)">sneppen_Np</a>(A,Z,m);
-    <span class="comment">/*<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"PartSum(A,Z)"</span>, <span class="string">"p=%f array use=%f max value=%f\n"</span>,
-            p, <a href="../KVPartitionFunction.html#KVPartitionFunction:NvalsNcl" title="Double_t KVPartitionFunction::NvalsNcl">NvalsNcl</a>/pow(SNEPPENMAXTAB,4),<a href="../KVPartitionFunction.html#KVPartitionFunction:GetMaxValueNclass" title="Double_t KVPartitionFunction::GetMaxValueNclass() const">GetMaxValueNclass</a>());*/</span>
+    <span class="keyword">for</span>(<span class="keyword">int</span> m=1; m&lt;=A;m++) p+=<a href="../KVPartitionFunction.html#KVPartitionFunction:sneppen_Np" title="Double_t KVPartitionFunction::sneppen_Np(int A,int Z,int M)">sneppen_Np</a>(A,Z,m);
+    <span class="comment">/*<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PartSum(A,Z)"</span>, <span class="string">"p=%f array use=%f max value=%f\n"</span>,
+            p, <a href="../KVPartitionFunction.html#KVPartitionFunction:NvalsNcl" title="Double_t KVPartitionFunction::NvalsNcl">NvalsNcl</a>/pow(SNEPPENMAXTAB,4),<a href="../KVPartitionFunction.html#KVPartitionFunction:GetMaxValueNclass" title="Double_t KVPartitionFunction::GetMaxValueNclass()">GetMaxValueNclass</a>());*/</span>
     <span class="keyword">return</span> p;
 }
 
-<a name="tG7xJE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0, int A) or overloads">MeanNA</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> A)
+<a name="tG7xJE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0,int A) or overloads">MeanNA</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> A)
 {
     <span class="comment">// Calculate the mean number of clusters of size A when a system of size A0</span>
     <span class="comment">// fragments in all possible ways with equal probability</span>
@@ -245,7 +245,7 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">return</span> NA;
 }
 
-<a name="OQF5fD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA_M" title="Double_t KVPartitionFunction::MeanNA_M(int A0, int A, int M)">MeanNA_M</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> A, <span class="keyword">int</span> M)
+<a name="OQF5fD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA_M" title="Double_t KVPartitionFunction::MeanNA_M(int A0,int A,int M)">MeanNA_M</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> A, <span class="keyword">int</span> M)
 {
     <span class="comment">// Calculate the mean number of clusters of size A when a system of size A0</span>
     <span class="comment">// breaks up into M fragments, each partition having equal probability</span>
@@ -254,12 +254,12 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="comment">// Correction for M=1:</span>
     <span class="comment">//     if A==A0, mean multiplicity is 1; otherwise 0.</span>
     <span class="comment">// Correction for M=2 and even values of A0:</span>
-    <span class="comment">//    when an odd-A0 splits into M=2, there are <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M) partitions</span>
+    <span class="comment">//    when an odd-A0 splits into M=2, there are <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M) partitions</span>
     <span class="comment">//    in which each A between 1 and A0-1 occurs once only, therefore</span>
-    <span class="comment">//    the mean multiplicity for any A is 1/<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M)</span>
-    <span class="comment">//    when an even-A0 splits into M=2, one of the <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M) partitions</span>
+    <span class="comment">//    the mean multiplicity for any A is 1/<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M)</span>
+    <span class="comment">//    when an even-A0 splits into M=2, one of the <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M) partitions</span>
     <span class="comment">//    is the symmetric split (A0/2, A0/2). Therefore the mean multiplicity</span>
-    <span class="comment">//    of A=A0/2 is twice that of the other A, i.e. 2/<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M)</span>
+    <span class="comment">//    of A=A0/2 is twice that of the other A, i.e. 2/<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M)</span>
     <span class="comment">// Correction for M=A0:</span>
     <span class="comment">//    in this case only one partition exists, made of M=A0 monomers A=1</span>
     <span class="comment">//    therefore mean multiplicity of A=1 is M, for all other A it is 0.</span>
@@ -269,8 +269,8 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
         <span class="keyword">else</span> <span class="keyword">return</span> 0.;
     }
     <span class="keyword">if</span>(M==2){
-        <span class="keyword">if</span>(!(A0%2) &amp;&amp; A==A0/2) <span class="keyword">return</span> 2./<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M);
-        <span class="keyword">else</span> <span class="keyword">if</span>(A&gt;=1 &amp;&amp; A&lt;A0) <span class="keyword">return</span> 1./<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M);
+        <span class="keyword">if</span>(!(A0%2) &amp;&amp; A==A0/2) <span class="keyword">return</span> 2./<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M);
+        <span class="keyword">else</span> <span class="keyword">if</span>(A&gt;=1 &amp;&amp; A&lt;A0) <span class="keyword">return</span> 1./<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M);
         <span class="keyword">else</span> <span class="keyword">return</span> 0.;
     }
     <span class="keyword">if</span>(M==A0){
@@ -282,16 +282,16 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     imax = TMath::Min(imax, M-1);
     <span class="keyword">for</span>(<span class="keyword">int</span> i=1; i&lt;=imax; i++){
         <a href="../ListOfTypes.html#Int_t">Int_t</a> A1 = A0-i*A;
-        <span class="keyword">if</span>(A1&gt;0)NA+=<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A1, M-i);
+        <span class="keyword">if</span>(A1&gt;0)NA+=<a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A1, M-i);
     }
-    NA /= <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,M);
+    NA /= <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,M);
     <span class="keyword">return</span> NA;
 }
 <span class="comment">/*
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0, int A) or overloads">MeanNA</a>(<a href="../ListOfTypes.html#int">int</a> A0, <a href="../ListOfTypes.html#int">int</a> Z0, <a href="../ListOfTypes.html#int">int</a> A);
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNZ" title="Double_t KVPartitionFunction::MeanNZ(int A0, int Z0, int Z)">MeanNZ</a>(<a href="../ListOfTypes.html#int">int</a> A0, <a href="../ListOfTypes.html#int">int</a> Z0, <a href="../ListOfTypes.html#int">int</a> Z);*/</span>
+    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0,int A) or overloads">MeanNA</a>(<a href="../ListOfTypes.html#int">int</a> A0, <a href="../ListOfTypes.html#int">int</a> Z0, <a href="../ListOfTypes.html#int">int</a> A);
+    <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNZ" title="Double_t KVPartitionFunction::MeanNZ(int A0,int Z0,int Z)">MeanNZ</a>(<a href="../ListOfTypes.html#int">int</a> A0, <a href="../ListOfTypes.html#int">int</a> Z0, <a href="../ListOfTypes.html#int">int</a> Z);*/</span>
 
-<a name="nkJ96D"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0, int Z0, int A, int Z)">MeanNAZ</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> Z0, <span class="keyword">int</span> A, <span class="keyword">int</span> Z)
+<a name="nkJ96D"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0,int Z0,int A,int Z)">MeanNAZ</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> Z0, <span class="keyword">int</span> A, <span class="keyword">int</span> Z)
 {
     <span class="comment">// Calculate the mean number of clusters of mass A and charge Z</span>
     <span class="comment">// when a two-component system (A0,Z0) fragments in all possible ways with equal probability</span>
@@ -307,25 +307,25 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
     <span class="keyword">return</span> NAZ;    
 }
 
-<a name="oIpiF"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0, int A) or overloads">MeanNA</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> Z0, <span class="keyword">int</span> A)
+<a name="oIpiF"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0,int A) or overloads">MeanNA</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> Z0, <span class="keyword">int</span> A)
 {
     <span class="comment">// Calculate the mean number of clusters of mass A</span>
     <span class="comment">// when a two-component system (A0,Z0) fragments in all possible ways with equal probability</span>
-    <span class="comment">// This is just the sum of <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0, int Z0, int A, int Z)">MeanNAZ</a>(A0,Z0,A,Z) with 0&lt;=Z&lt;= min(A,Z0)</span>
+    <span class="comment">// This is just the sum of <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0,int Z0,int A,int Z)">MeanNAZ</a>(A0,Z0,A,Z) with 0&lt;=Z&lt;= min(A,Z0)</span>
     
     <a href="../ListOfTypes.html#Double_t">Double_t</a> NA=0;
-    <span class="keyword">for</span>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z=0; Z&lt;=TMath::Min(A,Z0); Z++) NA += <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0, int Z0, int A, int Z)">MeanNAZ</a>(A0,Z0,A,Z);
+    <span class="keyword">for</span>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z=0; Z&lt;=TMath::Min(A,Z0); Z++) NA += <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0,int Z0,int A,int Z)">MeanNAZ</a>(A0,Z0,A,Z);
     <span class="keyword">return</span> NA;    
 }
 
-<a name="MrZxC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNZ" title="Double_t KVPartitionFunction::MeanNZ(int A0, int Z0, int Z)">MeanNZ</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> Z0, <span class="keyword">int</span> Z)
+<a name="MrZxC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPartitionFunction.html">KVPartitionFunction</a>::<a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNZ" title="Double_t KVPartitionFunction::MeanNZ(int A0,int Z0,int Z)">MeanNZ</a>(<span class="keyword">int</span> A0, <span class="keyword">int</span> Z0, <span class="keyword">int</span> Z)
 {
     <span class="comment">// Calculate the mean number of clusters of charge Z</span>
     <span class="comment">// when a two-component system (A0,Z0) fragments in all possible ways with equal probability</span>
-    <span class="comment">// This is just the sum of <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0, int Z0, int A, int Z)">MeanNAZ</a>(A0,Z0,A,Z) with Z&lt;=A&lt;=(Z+A0-Z0)</span>
+    <span class="comment">// This is just the sum of <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0,int Z0,int A,int Z)">MeanNAZ</a>(A0,Z0,A,Z) with Z&lt;=A&lt;=(Z+A0-Z0)</span>
     
     <a href="../ListOfTypes.html#Double_t">Double_t</a> NZ=0;
-    <span class="keyword">for</span>(<a href="../ListOfTypes.html#Int_t">Int_t</a> A=Z; A&lt;=(Z+A0-Z0); A++) NZ += <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0, int Z0, int A, int Z)">MeanNAZ</a>(A0,Z0,A,Z);
+    <span class="keyword">for</span>(<a href="../ListOfTypes.html#Int_t">Int_t</a> A=Z; A&lt;=(Z+A0-Z0); A++) NZ += <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNAZ" title="Double_t KVPartitionFunction::MeanNAZ(int A0,int Z0,int A,int Z)">MeanNAZ</a>(A0,Z0,A,Z);
     <span class="keyword">return</span> NZ;    
 }
 
@@ -337,7 +337,7 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> part_sum=0;
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> part_func=0;
 	<span class="keyword">for</span>(<span class="keyword">int</span> i=1; i&lt;=A0; i++){
-		part_func = <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A, int M) or overloads">PartFunc</a>(A0,i);
+		part_func = <a href="../KVPartitionFunction.html#KVPartitionFunction:PartFunc" title="Double_t KVPartitionFunction::PartFunc(int A,int M) or overloads">PartFunc</a>(A0,i);
 		mult += i*part_func;
 		part_sum += part_func;
 	}
@@ -352,7 +352,7 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> mult,moy=0.;
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> sum=0;
 	<span class="keyword">for</span>(<span class="keyword">int</span> i=1; i&lt;=A0; i++){
-		mult = <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0, int A) or overloads">MeanNA</a>(A0,i);
+		mult = <a href="../KVPartitionFunction.html#KVPartitionFunction:MeanNA" title="Double_t KVPartitionFunction::MeanNA(int A0,int A) or overloads">MeanNA</a>(A0,i);
 		moy += i*mult;
 		sum += mult;
 	}
@@ -367,7 +367,7 @@ P(A0,M) = P(A0-1,M-l) + P(A0-M, M)    Eq. (2.5)<span class="string">"</span>
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

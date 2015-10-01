@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:33 2015            -->
+<!--   Date: Thu Sep 17 10:51:33 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Sat Oct  3 14:18:09 2009</span>
 <span class="comment">//Author: John Frankland,,,</span>
@@ -60,8 +60,8 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
    <span class="comment">// The root of the name is the detector type</span>
 	
    fFName =
-       Form(<span class="string">"%s_%02d%02d"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>(), <a href="../KVINDRADetector.html#KVINDRADetector:GetRingNumber" title="UInt_t KVINDRADetector::GetRingNumber() const">GetRingNumber</a>(),
-            <a href="../KVINDRADetector.html#KVINDRADetector:GetModuleNumber" title="UInt_t KVINDRADetector::GetModuleNumber() const">GetModuleNumber</a>());
+       Form(<span class="string">"%s_%02d%02d"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>(), <a href="../KVINDRADetector.html#KVINDRADetector:GetRingNumber" title="UInt_t KVINDRADetector::GetRingNumber()">GetRingNumber</a>(),
+            <a href="../KVINDRADetector.html#KVINDRADetector:GetModuleNumber" title="UInt_t KVINDRADetector::GetModuleNumber()">GetModuleNumber</a>());
    <span class="keyword">return</span> fFName.Data();
 }
 
@@ -79,31 +79,31 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
 	<span class="comment">//</span>
 	<span class="comment">//   e613.<a href="../KVACQParam.html">KVACQParam</a>.SI_0101.T:    TOF</span>
 	<span class="comment">//</span>
-	<span class="comment">// Then for the dataset 'e613', calling <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"T"</span>) for the detector</span>
+	<span class="comment">// Then for the dataset 'e613', calling <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"T"</span>) for the detector</span>
 	<span class="comment">// SI_0101 will return the parameter with name <span class="string">"SI_0101_TOF"</span></span>
 
    <a href="../KVACQParam.html">KVACQParam</a> *par = <span class="keyword">new</span> <a href="../KVACQParam.html">KVACQParam</a>();
-   TString extension = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>(Form(<span class="string">"KVACQParam.%s.%s"</span>,<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),type),type);
+   TString extension = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(Form(<span class="string">"KVACQParam.%s.%s"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),type),type);
    TString name;
-   name = <span class="keyword">this</span>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+   name = <span class="keyword">this</span>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
    name.Append(<span class="string">"_"</span>);
    name.Append(extension.Data());
-   par-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(name);
+   par-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(name);
    par-&gt;<a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(type);
-   <a href="../KVDetector.html#KVDetector:AddACQParam" title="void KVDetector::AddACQParam(KVACQParam*)">AddACQParam</a>(par);
+   <a href="../KVDetector.html#KVDetector:AddACQParam" title="void KVDetector::AddACQParam(KVACQParam* )">AddACQParam</a>(par);
 }
 
 <span class="comment">//________________________________________________________________________________</span>
-<a name="ztFT_D"></a><a href="../KVACQParam.html">KVACQParam</a> *<a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *type)
+<a name="ztFT_D"></a><a href="../KVACQParam.html">KVACQParam</a> *<a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *type)
 {
    <span class="comment">// Look for acquisition parameter with given type in list</span>
 	<span class="comment">// of parameters associated with this detector.</span>
 	<span class="comment">//</span>
 	<span class="comment">//    *** WARNING ***</span>
-	<span class="comment">// This method overrides the <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:GetACQParam" title="KVACQParam* KVDetector::GetACQParam(const Char_t*)">GetACQParam</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a>* name)</span>
+	<span class="comment">// This method overrides the <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:GetACQParam" title="KVACQParam* KVDetector::GetACQParam(const Char_t* )">GetACQParam</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a>* name)</span>
 	<span class="comment">// method, which interprets the argument as the FULL name of the parameter.</span>
 	<span class="comment">// In this version, only the 'type' needs to be given,</span>
-	<span class="comment">//   e.g.  <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"PG"</span>) to retrieve e.g. the <span class="string">"CI_0201_PG"</span> parameter</span>
+	<span class="comment">//   e.g.  <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"PG"</span>) to retrieve e.g. the <span class="string">"CI_0201_PG"</span> parameter</span>
 	<span class="comment">//    associated to detector <span class="string">"CI_0201"</span>.</span>
 	<span class="comment">// If using this method in a loop over a list of INDRA- and non-INDRA</span>
 	<span class="comment">// detectors, the behaviour of the method will be different for the two</span>
@@ -114,17 +114,17 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
 	<span class="comment">//</span>
 	<span class="comment">//   e613.<a href="../KVACQParam.html">KVACQParam</a>.SI_0101.T:    TOF</span>
 	<span class="comment">//</span>
-	<span class="comment">// Then for the dataset 'e613', calling <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"T"</span>) for the detector</span>
+	<span class="comment">// Then for the dataset 'e613', calling <a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"T"</span>) for the detector</span>
 	<span class="comment">// SI_0101 will return the parameter with name <span class="string">"SI_0101_TOF"</span></span>
 	
-	TString extension = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type, const Char_t* defval = &quot;&quot;) const or overloads">GetDataSetEnv</a>(Form(<span class="string">"KVACQParam.%s.%s"</span>,<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),type),type);
+	TString extension = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(Form(<span class="string">"KVACQParam.%s.%s"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),type),type);
    extension.Prepend(<span class="string">"_"</span>);
    <span class="comment">// search just using the extension</span>
    <span class="comment">// (in case e.g. of a mismatch between detector &amp; parameter names)</span>
    TIter next(<a href="../KVDetector.html#KVDetector:GetACQParamList" title="KVList* KVDetector::GetACQParamList()">GetACQParamList</a>());
    <a href="../KVACQParam.html">KVACQParam</a>* p;
    <span class="keyword">while</span>( (p = (<a href="../KVACQParam.html">KVACQParam</a>*)next()) ){
-      TString name = p-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+      TString name = p-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
       <span class="keyword">if</span>(name.EndsWith(extension)) <span class="keyword">return</span> p;
    }
    <span class="keyword">return</span> 0;
@@ -132,7 +132,7 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
 
 <span class="comment">//__________________________________________________________________________________________________________________________</span>
 
-<a name="p2gpdD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetPGfromGG" title="Double_t KVINDRADetector::GetPGfromGG(Double_t GG = -1)">GetPGfromGG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> GG)
+<a name="p2gpdD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetPGfromGG" title="Double_t KVINDRADetector::GetPGfromGG(Double_t GG=-1)">GetPGfromGG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> GG)
 {
    <span class="comment">//Linear conversion from GG to PG coder values (silicon and ionisation chamber detectors)</span>
    <span class="comment">//If GG is not given as argument, the current value of the detector's GG ACQParam is read</span>
@@ -142,13 +142,13 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
    <span class="keyword">if</span> (GG &lt; 0)
       GG = (<a href="../ListOfTypes.html#Double_t">Double_t</a>) <a href="../KVINDRADetector.html#KVINDRADetector:GetGG" title="Float_t KVINDRADetector::GetGG()">GetGG</a>();
    <a href="../ListOfTypes.html#Double_t">Double_t</a> PG =
-       <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"PG"</span>) + <a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_0" title="Double_t KVINDRADetector::fGGtoPG_0">fGGtoPG_0</a> + <a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_1" title="Double_t KVINDRADetector::fGGtoPG_1">fGGtoPG_1</a> * (GG - <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>));
+       <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"PG"</span>) + <a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_0" title="Double_t KVINDRADetector::fGGtoPG_0">fGGtoPG_0</a> + <a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_1" title="Double_t KVINDRADetector::fGGtoPG_1">fGGtoPG_1</a> * (GG - <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>));
    <span class="keyword">return</span> PG;
 }
 
 <span class="comment">//__________________________________________________________________________________________________________________________</span>
 
-<a name="BP4fnB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG = -1)">GetGGfromPG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> PG)
+<a name="BP4fnB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG=-1)">GetGGfromPG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> PG)
 {
    <span class="comment">//Linear conversion from PG to GG coder values (silicon and ionisation chamber detectors)</span>
    <span class="comment">//If PG is not given as argument, the current value of the detector's PG ACQParam is read</span>
@@ -158,23 +158,23 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
    <span class="keyword">if</span> (PG &lt; 0)
       PG = (<a href="../ListOfTypes.html#Double_t">Double_t</a>) <a href="../KVINDRADetector.html#KVINDRADetector:GetPG" title="Float_t KVINDRADetector::GetPG()">GetPG</a>();
    <a href="../ListOfTypes.html#Double_t">Double_t</a> GG =
-       <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>) - (<a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_0" title="Double_t KVINDRADetector::fGGtoPG_0">fGGtoPG_0</a>/<a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_1" title="Double_t KVINDRADetector::fGGtoPG_1">fGGtoPG_1</a>)  +  (PG - <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"PG"</span>))/<a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_1" title="Double_t KVINDRADetector::fGGtoPG_1">fGGtoPG_1</a>;
+       <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>) - (<a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_0" title="Double_t KVINDRADetector::fGGtoPG_0">fGGtoPG_0</a>/<a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_1" title="Double_t KVINDRADetector::fGGtoPG_1">fGGtoPG_1</a>)  +  (PG - <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"PG"</span>))/<a href="../KVINDRADetector.html#KVINDRADetector:fGGtoPG_1" title="Double_t KVINDRADetector::fGGtoPG_1">fGGtoPG_1</a>;
    <span class="keyword">return</span> GG;
 }
 
 <a name="OoOhqE"></a><a href="../KVINDRADetector.html">KVINDRADetector</a>*<a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:FindChIo" title="KVINDRADetector* KVINDRADetector::FindChIo()">FindChIo</a>()
 {
    <span class="comment">//PRIVATE METHOD</span>
-   <span class="comment">//Used when <a href="../KVINDRADetector.html#KVINDRADetector:GetChIo" title="KVINDRADetector* KVINDRADetector::GetChIo() const">GetChIo</a> is called the first time to retrieve the</span>
+   <span class="comment">//Used when <a href="../KVINDRADetector.html#KVINDRADetector:GetChIo" title="KVINDRADetector* KVINDRADetector::GetChIo()">GetChIo</a> is called the first time to retrieve the</span>
    <span class="comment">//pointer to the ChIo of the group associated to this detector</span>
-   <span class="keyword">if</span> (<a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope() const">GetTelescope</a>()) {
-      <a href="../KVGroup.html">KVGroup</a> *kvgr = <a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope() const">GetTelescope</a>()-><a href="../KVINDRATelescope.html#KVINDRATelescope:GetGroup" title="KVGroup* KVINDRATelescope::GetGroup() const">GetGroup</a>();
+   <span class="keyword">if</span> (<a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope()">GetTelescope</a>()) {
+      <a href="../KVGroup.html">KVGroup</a> *kvgr = <a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope()">GetTelescope</a>()-><a href="../KVINDRATelescope.html#KVINDRATelescope:GetGroup" title="KVGroup* KVINDRATelescope::GetGroup()">GetGroup</a>();
       <span class="keyword">if</span> (kvgr) {
          <span class="keyword">const</span> <a href="../KVSeqCollection.html">KVSeqCollection</a> *dets = kvgr-&gt;GetDetectors();
          TIter next_det(dets);
          <a href="../KVINDRADetector.html">KVINDRADetector</a> *dd;
          <span class="keyword">while</span> ((dd = (<a href="../KVINDRADetector.html">KVINDRADetector</a> *) next_det())) {
-            <span class="keyword">if</span> (dd-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVChIo"</span>))
+            <span class="keyword">if</span> (dd-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVChIo"</span>))
                <a href="../KVINDRADetector.html#KVINDRADetector:fChIo" title="KVINDRADetector* KVINDRADetector::fChIo">fChIo</a> = dd;
          }
       }
@@ -194,7 +194,7 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
 <a name="Egc0W"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRADetector.html">KVINDRADetector</a>::<a href="../KVINDRADetector.html#KVINDRADetector:GetNumeroCodeur" title="Int_t KVINDRADetector::GetNumeroCodeur()">GetNumeroCodeur</a>()
 {
 	<span class="comment">//Get the number of the electronic module of type QDC</span>
-	<span class="comment">//this field are initialized in <a href="../KVINDRA.html">KVINDRA</a>::<a href="../KVINDRA.html#KVINDRA:Build" title="void KVINDRA::Build(Int_t run = -1)">Build</a>()</span>
+	<span class="comment">//this field are initialized in <a href="../KVINDRA.html">KVINDRA</a>::<a href="../KVINDRA.html#KVINDRA:Build" title="void KVINDRA::Build(Int_t run=-1)">Build</a>()</span>
 	<span class="keyword">return</span> <a href="../KVINDRADetector.html#KVINDRADetector:NumeroCodeur" title="Int_t KVINDRADetector::NumeroCodeur">NumeroCodeur</a>;
 }
 </pre>
@@ -205,7 +205,7 @@ ClassImp(<a href="../KVINDRADetector.html">KVINDRADetector</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:37 2015            -->
+<!--   Date: Thu Sep 17 10:52:04 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="cpp">#include "<a href="../KVTelescope.h">KVTelescope.h</a>"</span>
 <span class="cpp">#include "<a href="../KVDetector.h">KVDetector.h</a>"</span>
@@ -52,7 +52,7 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 <span class="comment">//</span>
 <span class="comment">//     STRUCT_TELESCOPE_[number]</span>
 <span class="comment">//</span>
-<a name="EWSFf"></a>    <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:KVTelescope" title="KVTelescope KVTelescope::KVTelescope() or overloads">KVTelescope</a>()
+<a name="EWSFf"></a>    <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:KVTelescope" title="KVTelescope KVTelescope::KVTelescope()">KVTelescope</a>()
 {
    <a href="../KVTelescope.html#KVTelescope:init" title="void KVTelescope::init()">init</a>();
 };
@@ -65,7 +65,7 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
    <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a> = 0;
    <a href="../KVTelescope.html#KVTelescope:fDepth" title="Float_t* KVTelescope::fDepth">fDepth</a> = 0;
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"TELESCOPE"</span>);
-   <a href="../KVGeoStrucElement.html#KVGeoStrucElement:SetOwnsDetectors" title="void KVGeoStrucElement::SetOwnsDetectors(Bool_t yes = kTRUE)">SetOwnsDetectors</a>();
+   <a href="../KVGeoStrucElement.html#KVGeoStrucElement:SetOwnsDetectors" title="void KVGeoStrucElement::SetOwnsDetectors(Bool_t yes=kTRUE)">SetOwnsDetectors</a>();
 }
 
 <span class="comment">//____________________________________________________________________________</span>
@@ -85,19 +85,19 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
     <span class="comment">// For detectors we set up the KVDetectorNode (in front of - behind</span>
     <span class="comment">// relationships) information.</span>
 
-    <span class="keyword">if</span>(element-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Class" title="TClass* KVDetector::Class()">Class</a>())){
-        <a href="../ListOfTypes.html#Int_t">Int_t</a> ndets = <a href="../KVTelescope.html#KVTelescope:GetSize" title="Int_t KVTelescope::GetSize() const">GetSize</a>();
+    <span class="keyword">if</span>(element-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:Class" title="TClass* KVDetector::Class()">Class</a>())){
+        <a href="../ListOfTypes.html#Int_t">Int_t</a> ndets = <a href="../KVTelescope.html#KVTelescope:GetSize" title="Int_t KVTelescope::GetSize()">GetSize</a>();
         <span class="keyword">if</span>(ndets){
             <a href="../KVDetector.html">KVDetector</a>* d=<span class="keyword">dynamic_cast</span>&lt;<a href="../KVDetector.html">KVDetector</a>*&gt;(element);
-            <a href="../KVDetector.html">KVDetector</a>* ld=<a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n) const">GetDetector</a>(ndets);
+            <a href="../KVDetector.html">KVDetector</a>* ld=<a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n)">GetDetector</a>(ndets);
             ld-&gt;GetNode()-&gt;AddBehind(d);
             d-&gt;GetNode()-&gt;AddInFront(ld);
         }
     }
-    <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase*)">Add</a>(element);
+    <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(element);
 }
 
-<a name="gWpGbD"></a><span class="keyword">void</span> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:DetectParticle" title="void KVTelescope::DetectParticle(KVNucleus* kvp, KVNameValueList* nvl = 0)">DetectParticle</a>(<a href="../KVNucleus.html">KVNucleus</a> * kvp,<a href="../KVNameValueList.html">KVNameValueList</a>* nvl)
+<a name="gWpGbD"></a><span class="keyword">void</span> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:DetectParticle" title="void KVTelescope::DetectParticle(KVNucleus* kvp,KVNameValueList* nvl=0)">DetectParticle</a>(<a href="../KVNucleus.html">KVNucleus</a> * kvp,<a href="../KVNameValueList.html">KVNameValueList</a>* nvl)
 {
    <span class="comment">//Simulates the passage of a charged particle through all detectors of the telescope, in the order in which they</span>
    <span class="comment">//were added to it (corresponding to rank given by <a href="../KVTelescope.html#KVTelescope:GetDetectorRank" title="Int_t KVTelescope::GetDetectorRank(KVDetector* kvd)">GetDetectorRank</a>()).</span>
@@ -115,25 +115,25 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
     <span class="comment">//exemple : for a Silicon-CsI telescope named SI_CSI_0401 , you will obtain:</span>
     <span class="comment">//		{</span>
     <span class="comment">//			<a href="../KVNucleus.html">KVNucleus</a> nn(6,12); nn.SetKE(1000);</span>
-    <span class="comment">//			<a href="../KVTelescope.html">KVTelescope</a>* tel = <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetTelescope" title="KVTelescope* KVMultiDetArray::GetTelescope(const Char_t* name) const">GetTelescope</a>(<span class="string">"SI_CSI_0401"</span>);</span>
+    <span class="comment">//			<a href="../KVTelescope.html">KVTelescope</a>* tel = <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetTelescope" title="KVTelescope* KVMultiDetArray::GetTelescope(const Char_t* name)">GetTelescope</a>(<span class="string">"SI_CSI_0401"</span>);</span>
     <span class="comment">//			<a href="../KVNameValueList.html">KVNameValueList</a>* nvl = new <a href="../KVNameValueList.html">KVNameValueList</a>;</span>
-    <span class="comment">//			tel-&gt;<a href="../KVTelescope.html#KVTelescope:DetectParticle" title="void KVTelescope::DetectParticle(KVNucleus* kvp, KVNameValueList* nvl = 0)">DetectParticle</a>(&amp;nn,nvl);</span>
-    <span class="comment">//			nvl-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Print" title="void KVGeoStrucElement::Print(Option_t* option = &quot;&quot;) const">Print</a>();</span>
+    <span class="comment">//			tel-&gt;<a href="../KVTelescope.html#KVTelescope:DetectParticle" title="void KVTelescope::DetectParticle(KVNucleus* kvp,KVNameValueList* nvl=0)">DetectParticle</a>(&amp;nn,nvl);</span>
+    <span class="comment">//			nvl-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Print" title="void KVGeoStrucElement::Print(Option_t* option=&quot;&quot;)">Print</a>();</span>
     <span class="comment">//		}</span>
     <span class="comment">//		Collection name='<a href="../KVNameValueList.html">KVNameValueList</a>', class='<a href="../KVNameValueList.html">KVNameValueList</a>', size=2</span>
-    <span class="comment">//		 OBJ: <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>	SI_0401	8.934231</span>
-    <span class="comment">//		 OBJ: <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>	CSI_0401	991.065769</span>
+    <span class="comment">//		 OBJ: <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>	SI_0401	8.934231</span>
+    <span class="comment">//		 OBJ: <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>	CSI_0401	991.065769</span>
     <span class="comment">//The energy loss in each detector corresponds to those lost in active layer</span>
 	
     <a href="../KVDetector.html">KVDetector</a> *obj;
 
-    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>());
+    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
     <span class="keyword">while</span> ((obj = (<a href="../KVDetector.html">KVDetector</a> *) next())) {
         <a href="../ListOfTypes.html#Double_t">Double_t</a> ebefore = obj-&gt;GetEnergy();	<span class="comment">//Energie dans le detecteur avant passage</span>
-        obj-&gt;<a href="../KVTelescope.html#KVTelescope:DetectParticle" title="void KVTelescope::DetectParticle(KVNucleus* kvp, KVNameValueList* nvl = 0)">DetectParticle</a>(kvp);					<span class="comment">//Detection de la particule</span>
+        obj-&gt;<a href="../KVTelescope.html#KVTelescope:DetectParticle" title="void KVTelescope::DetectParticle(KVNucleus* kvp,KVNameValueList* nvl=0)">DetectParticle</a>(kvp);					<span class="comment">//Detection de la particule</span>
         ebefore -= obj-&gt;GetEnergy();				<span class="comment">//la difference d energie avant et apres passage (donc l energie laissee par la particule)</span>
         <span class="keyword">if</span> (nvl)
-            nvl-&gt;SetValue(obj-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),TMath::Abs(ebefore)); <span class="comment">//Enregistrement de la perte d energie</span>
+            nvl-&gt;SetValue(obj-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),TMath::Abs(ebefore)); <span class="comment">//Enregistrement de la perte d energie</span>
         <span class="keyword">if</span> (kvp-&gt;GetEnergy() &lt;= 0.0)
             <span class="keyword">break</span>;
     }
@@ -143,12 +143,12 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 <a name="Dk7xiE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetDetectorRank" title="Int_t KVTelescope::GetDetectorRank(KVDetector* kvd)">GetDetectorRank</a>(<a href="../KVDetector.html">KVDetector</a> * kvd)
 {
    <span class="comment">//returns position (1=front, 2=next, etc.) detector in the telescope structure</span>
-    <span class="keyword">if</span> ((<a href="../KVTelescope.html">KVTelescope</a>*)kvd-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type, const Char_t* name = &quot;&quot;) const">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>) != <span class="keyword">this</span>) {
-       <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"GetDetectorRank"</span>, <span class="string">"Detector does not belong to this telescope!"</span>);
-      cout &lt;&lt; endl;
+    <span class="keyword">if</span> ((<a href="../KVTelescope.html">KVTelescope</a>*)kvd-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>) != <span class="keyword">this</span>) {
+       <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetDetectorRank"</span>, <span class="string">"Detector does not belong to this telescope!"</span>);
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl;
       <span class="keyword">return</span> 0;
    }
-    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>());
+    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
    <a href="../KVDetector.html">KVDetector</a> *d;
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> i = 1;
    <span class="keyword">while</span> ((d = (<a href="../KVDetector.html">KVDetector</a> *) next())) {
@@ -164,23 +164,23 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 <a name="C0_9IB"></a><span class="keyword">void</span> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:ResetDetectors" title="void KVTelescope::ResetDetectors()">ResetDetectors</a>()
 {
    <span class="comment">// Reset Energy losses to be ready for the next event</span>
-   <span class="keyword">const_cast</span>&lt;<a href="../KVSeqCollection.html">KVSeqCollection</a>*&gt;(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>())-><a href="../KVSeqCollection.html#KVSeqCollection:Execute" title="void KVSeqCollection::Execute(const char* method, const char* params, Int_t* error = 0) or overloads">Execute</a>(<span class="string">"Clear"</span>, <span class="string">""</span>);
+   <span class="keyword">const_cast</span>&lt;<a href="../KVSeqCollection.html">KVSeqCollection</a>*&gt;(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>())-><a href="../KVSeqCollection.html#KVSeqCollection:Execute" title="void KVSeqCollection::Execute(const char* method,const char* params,Int_t* error=0) or overloads">Execute</a>(<span class="string">"Clear"</span>, <span class="string">""</span>);
 }
 
 <span class="comment">//__________________________________________________________________________________</span>
 
-<a name="FkPpzE"></a><span class="keyword">void</span> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:SetDepth" title="void KVTelescope::SetDepth(UInt_t ndet, Float_t depth)">SetDepth</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> ndet, <a href="../ListOfTypes.html#Float_t">Float_t</a> depth)
+<a name="FkPpzE"></a><span class="keyword">void</span> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:SetDepth" title="void KVTelescope::SetDepth(UInt_t ndet,Float_t depth)">SetDepth</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> ndet, <a href="../ListOfTypes.html#Float_t">Float_t</a> depth)
 {
    <span class="comment">//set the depth of detector number ndet(=1,2,...) in mm.</span>
 
-   <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a> = <a href="../KVTelescope.html#KVTelescope:GetSize" title="Int_t KVTelescope::GetSize() const">GetSize</a>();
+   <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a> = <a href="../KVTelescope.html#KVTelescope:GetSize" title="Int_t KVTelescope::GetSize()">GetSize</a>();
    <span class="keyword">if</span> (!<a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a>) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"SetDepth"</span>,
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"SetDepth"</span>,
             <span class="string">"Add detectors to telescope before setting depth."</span>);
       <span class="keyword">return</span>;
    }
    <span class="keyword">if</span> ((<span class="keyword">int</span>) ndet &gt; <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a>) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"SetDepth"</span>,
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"SetDepth"</span>,
             <span class="string">"Cannot set depth for detector %d in %d-member telescope."</span>,
             ndet, <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a>);
       <span class="keyword">return</span>;
@@ -188,20 +188,20 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
    <span class="keyword">if</span> (!<a href="../KVTelescope.html#KVTelescope:fDepth" title="Float_t* KVTelescope::fDepth">fDepth</a>)
       <a href="../KVTelescope.html#KVTelescope:fDepth" title="Float_t* KVTelescope::fDepth">fDepth</a> = <span class="keyword">new</span> <a href="../ListOfTypes.html#Float_t">Float_t</a>[<a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a>];
    <a href="../KVTelescope.html#KVTelescope:fDepth" title="Float_t* KVTelescope::fDepth">fDepth</a>[ndet - 1] = depth;
-   <a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n) const">GetDetector</a>(ndet)-><a href="../KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>(<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance() const">GetDistance</a>()+depth*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>);
+   <a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n)">GetDetector</a>(ndet)-><a href="../KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>(<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>()+depth*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>);
 }
 
 <span class="comment">//__________________________________________________________________________________</span>
 
-<a name="t1JPQB"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetDepth" title="Float_t KVTelescope::GetDepth(Int_t ndet) const or overloads">GetDepth</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> ndet) <span class="keyword">const</span>
+<a name="t1JPQB"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetDepth" title="Float_t KVTelescope::GetDepth(Int_t ndet) or overloads">GetDepth</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> ndet) <span class="keyword">const</span>
 {
    <span class="comment">//get depth of detector ndet(=1,2,...) in mm</span>
    <span class="keyword">if</span> (!<a href="../KVTelescope.html#KVTelescope:fDepth" title="Float_t* KVTelescope::fDepth">fDepth</a>) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GetDepth"</span>, <span class="string">"Depths have not been set."</span>);
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetDepth"</span>, <span class="string">"Depths have not been set."</span>);
       <span class="keyword">return</span> -1.0;
    }
    <span class="keyword">if</span> ((<span class="keyword">int</span>) ndet &gt; <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a>) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"SetDepth"</span>,
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"SetDepth"</span>,
             <span class="string">"Cannot get depth for detector %d in %d-member telescope."</span>,
             ndet, <a href="../KVTelescope.html#KVTelescope:fNdets" title="Int_t KVTelescope::fNdets">fNdets</a>);
       <span class="keyword">return</span> -1.0;
@@ -211,11 +211,11 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 
 <span class="comment">//__________________________________________________________________________________</span>
 
-<a name="rsgi3E"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetDepth" title="Float_t KVTelescope::GetDepth(Int_t ndet) const or overloads">GetDepth</a>() <span class="keyword">const</span>
+<a name="rsgi3E"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetDepth" title="Float_t KVTelescope::GetDepth(Int_t ndet) or overloads">GetDepth</a>() <span class="keyword">const</span>
 {
    <span class="comment">//get depth of entire telescope in mm (sum of depths of detectors)</span>
    <span class="keyword">if</span> (!<a href="../KVTelescope.html#KVTelescope:fDepth" title="Float_t* KVTelescope::fDepth">fDepth</a>) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GetDepth"</span>, <span class="string">"Depths have not been set."</span>);
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetDepth"</span>, <span class="string">"Depths have not been set."</span>);
       <span class="keyword">return</span> -1.0;
    }
    <a href="../ListOfTypes.html#Float_t">Float_t</a> sum = 0.0;
@@ -231,16 +231,16 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 {
 	<span class="comment">// Create and return TGeoVolume representing detectors in this telescope.</span>
 	
-	<span class="keyword">int</span> no_of_dets = <a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>()-><a href="http://root.cern.ch/root/html/TCollection.html#TCollection:GetEntries" title="Int_t TCollection::GetEntries() const">GetEntries</a>();
+	<span class="keyword">int</span> no_of_dets = <a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>();
 	<span class="keyword">if</span>(no_of_dets==1){
 		<span class="comment">// single detector <span class="string">"telescope"</span>: just return detector volume</span>
-		<span class="keyword">return</span> <a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n) const">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetGeoVolume" title="TGeoVolume* KVDetector::GetGeoVolume()">GetGeoVolume</a>();
+		<span class="keyword">return</span> <a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n)">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetGeoVolume" title="TGeoVolume* KVDetector::GetGeoVolume()">GetGeoVolume</a>();
 	}
-	TGeoVolume *mother_vol = gGeoManager-&gt;MakeVolumeAssembly(Form(<span class="string">"%s_TEL"</span>,<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()));
+	TGeoVolume *mother_vol = gGeoManager-&gt;MakeVolumeAssembly(Form(<span class="string">"%s_TEL"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()));
 	<span class="comment">// total length of telescope = depth of last detector + thickness of last detector</span>
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel =  <a href="../KVTelescope.html#KVTelescope:GetTotalLengthInCM" title="Double_t KVTelescope::GetTotalLengthInCM() const">GetTotalLengthInCM</a>();
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel =  <a href="../KVTelescope.html#KVTelescope:GetTotalLengthInCM" title="Double_t KVTelescope::GetTotalLengthInCM()">GetTotalLengthInCM</a>();
 	<span class="comment">//**** BUILD &amp; ADD DETECTOR VOLUMES ****</span>
-    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>()); <a href="../KVDetector.html">KVDetector</a> *det;
+    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()); <a href="../KVDetector.html">KVDetector</a> *det;
 	<span class="keyword">while</span>( (det = (<a href="../KVDetector.html">KVDetector</a>*)next()) ){
 		TGeoVolume* det_vol = det-&gt;<a href="../KVTelescope.html#KVTelescope:GetGeoVolume" title="TGeoVolume* KVTelescope::GetGeoVolume()">GetGeoVolume</a>();
 		<span class="comment">// position detector in telescope	</span>
@@ -260,13 +260,13 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 	TGeoVolume* vol = <a href="../KVTelescope.html#KVTelescope:GetGeoVolume" title="TGeoVolume* KVTelescope::GetGeoVolume()">GetGeoVolume</a>();
 
 	<span class="comment">// rotate telescope to orientation corresponding to (theta,phi)</span>
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> theta = <a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta() const">GetTheta</a>(); <a href="../ListOfTypes.html#Double_t">Double_t</a> phi = <a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>();
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> theta = <a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>(); <a href="../ListOfTypes.html#Double_t">Double_t</a> phi = <a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>();
 	TGeoRotation rot1, rot2;
 	rot2.SetAngles(phi+90., theta, 0.);
 	rot1.SetAngles(-90., 0., 0.);
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel = <a href="../KVTelescope.html#KVTelescope:GetTotalLengthInCM" title="Double_t KVTelescope::GetTotalLengthInCM() const">GetTotalLengthInCM</a>();
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel = <a href="../KVTelescope.html#KVTelescope:GetTotalLengthInCM" title="Double_t KVTelescope::GetTotalLengthInCM()">GetTotalLengthInCM</a>();
 	<span class="comment">// distance to telescope centre = distance to telescope + half total lenght of telescope</span>
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> dist = <a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance() const">GetDistance</a>() + tot_len_tel/2.;
+    <a href="../ListOfTypes.html#Double_t">Double_t</a> dist = <a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>() + tot_len_tel/2.;
 	<span class="comment">// translate telescope to correct distance from target (note: reference is CENTRE of telescope)</span>
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> trans_z = dist;
 
@@ -278,12 +278,12 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 	gGeoManager-&gt;GetTopVolume()-&gt;AddNode(vol, 1, ph);
 }
 
-<a name="HIghz"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetTotalLengthInCM" title="Double_t KVTelescope::GetTotalLengthInCM() const">GetTotalLengthInCM</a>() <span class="keyword">const</span>
+<a name="HIghz"></a>   <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTelescope.html">KVTelescope</a>::<a href="../KVTelescope.html#KVTelescope:GetTotalLengthInCM" title="Double_t KVTelescope::GetTotalLengthInCM()">GetTotalLengthInCM</a>() <span class="keyword">const</span>
    {
    	<span class="comment">// calculate total length of telescope from entrance of first detector to</span>
    	<span class="comment">// backside of last detector</span>
-		<span class="keyword">int</span> no_of_dets = <a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>()-><a href="http://root.cern.ch/root/html/TCollection.html#TCollection:GetEntries" title="Int_t TCollection::GetEntries() const">GetEntries</a>();
-		<a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel = <a href="../KVTelescope.html#KVTelescope:GetDepthInCM" title="Double_t KVTelescope::GetDepthInCM(Int_t ndet) const">GetDepthInCM</a>(no_of_dets) + <a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n) const">GetDetector</a>(no_of_dets)-><a href="../KVDetector.html#KVDetector:GetTotalThicknessInCM" title="Double_t KVDetector::GetTotalThicknessInCM()">GetTotalThicknessInCM</a>();
+		<span class="keyword">int</span> no_of_dets = <a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>();
+		<a href="../ListOfTypes.html#Double_t">Double_t</a> tot_len_tel = <a href="../KVTelescope.html#KVTelescope:GetDepthInCM" title="Double_t KVTelescope::GetDepthInCM(Int_t ndet)">GetDepthInCM</a>(no_of_dets) + <a href="../KVTelescope.html#KVTelescope:GetDetector" title="KVDetector* KVTelescope::GetDetector(Int_t n)">GetDetector</a>(no_of_dets)-><a href="../KVDetector.html#KVDetector:GetTotalThicknessInCM" title="Double_t KVDetector::GetTotalThicknessInCM()">GetTotalThicknessInCM</a>();
 		<span class="keyword">return</span> tot_len_tel;
    }
 
@@ -295,7 +295,7 @@ ClassImp(<a href="../KVTelescope.html">KVTelescope</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:52 </em><em>&raquo; Last generated: 2015-09-17 10:52</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

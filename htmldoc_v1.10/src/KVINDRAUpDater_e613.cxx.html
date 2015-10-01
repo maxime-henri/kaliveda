@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:43 2015            -->
+<!--   Date: Wed Sep 16 10:48:22 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Wed Nov 16 14:10:43 2011</span>
 <span class="comment">//Author: bonnet</span>
@@ -53,7 +53,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 
 <span class="comment">//_______________________________________________________________//</span>
 
-<a name="q4Lay"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>::<a href="../KVINDRAUpDater_e613.html#KVINDRAUpDater_e613:SetGains" title="void KVINDRAUpDater_e613::SetGains(KVDBRun*)">SetGains</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
+<a name="q4Lay"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>::<a href="../KVINDRAUpDater_e613.html#KVINDRAUpDater_e613:SetGains" title="void KVINDRAUpDater_e613::SetGains(KVDBRun* )">SetGains</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
 {
     <span class="comment">//Set gains used during this run</span>
     <span class="comment">//Read gains in database just print detectors for which gains have changed</span>
@@ -75,7 +75,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 	 <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0; i &lt; ndets; i++)
     {
         <a href="../KVDBParameterSet.html">KVDBParameterSet</a> *dbps = (<a href="../KVDBParameterSet.html">KVDBParameterSet</a> *) gain_list-&gt;At(i);
-        kvd = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(dbps-&gt;GetName());
+        kvd = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(dbps-&gt;GetName());
 		  <span class="keyword">if</span>(!kvd){
 			  <span class="comment">//Error(<span class="string">"SetGains"</span>,</span>
 			<span class="comment">//		  <span class="string">"Detector %s is unknown or does not exist at the current time...???"</span>,</span>
@@ -86,7 +86,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 		  	oldgain = kvd-&gt;GetGain();
 		  	<span class="keyword">if</span> ( oldgain != dbps-&gt;GetParameter(0) ){
 		  	  kvd-&gt;SetGain(dbps-&gt;GetParameter(0));
-           <span class="comment">//cout &lt;&lt; <span class="string">"            "</span> &lt;&lt; kvd-&gt;GetName() &lt;&lt; <span class="string">" set gain from "</span> &lt;&lt; oldgain &lt;&lt; <span class="string">" to G="</span> &lt;&lt; kvd-&gt;GetGain() &lt;&lt; endl;</span>
+           <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"            "</span> &lt;&lt; kvd-&gt;GetName() &lt;&lt; <span class="string">" set gain from "</span> &lt;&lt; oldgain &lt;&lt; <span class="string">" to G="</span> &lt;&lt; kvd-&gt;GetGain() &lt;&lt; endl;</span>
 		  	  list += kvd-&gt;GetName();
 			  list += <span class="string">","</span>;
 			  nchange += 1;
@@ -102,7 +102,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 
 <span class="comment">//_______________________________________________________________//</span>
 
-<a name="tV9BQC"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>::<a href="../KVINDRAUpDater_e613.html#KVINDRAUpDater_e613:SetPedestals" title="void KVINDRAUpDater_e613::SetPedestals(KVDBRun*)">SetPedestals</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
+<a name="tV9BQC"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>::<a href="../KVINDRAUpDater_e613.html#KVINDRAUpDater_e613:SetPedestals" title="void KVINDRAUpDater_e613::SetPedestals(KVDBRun* )">SetPedestals</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
 {
     <span class="comment">//Set pedestals for this run</span>
 
@@ -146,7 +146,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 }
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="cuAxY"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>::<a href="../KVINDRAUpDater_e613.html#KVINDRAUpDater_e613:SetChVoltParameters" title="void KVINDRAUpDater_e613::SetChVoltParameters(KVDBRun*)">SetChVoltParameters</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
+<a name="cuAxY"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>::<a href="../KVINDRAUpDater_e613.html#KVINDRAUpDater_e613:SetChVoltParameters" title="void KVINDRAUpDater_e613::SetChVoltParameters(KVDBRun* )">SetChVoltParameters</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
 {
 
 
@@ -169,7 +169,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
     {
         str = kvps-&gt;GetName();
         str.Remove(str.Sizeof() - 4, 3);  <span class="comment">//Removing 3 last letters (ex : <span class="string">"_PG"</span>)</span>
-        kvd = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data());
+        kvd = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data());
         <span class="keyword">if</span> (!kvd){
         <span class="comment">//    Warning(<span class="string">"SetChVoltParameters(UInt_t)"</span>, <span class="string">"Dectector %s not found !"</span>,</span>
         <span class="comment">//            str.Data());</span>
@@ -208,22 +208,22 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 
    <span class="comment">// inversion cables CsI 2.9 &amp; 3.10</span>
    <span class="keyword">if</span>(run&lt;559){
-      <a href="../KVDetector.html">KVDetector</a>*d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(<span class="string">"CSI_0209"</span>);
+      <a href="../KVDetector.html">KVDetector</a>*d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(<span class="string">"CSI_0209"</span>);
       d-&gt;GetACQParam(<span class="string">"R"</span>)-&gt;SetName(<span class="string">"CSI_0310_R"</span>);
       d-&gt;GetACQParam(<span class="string">"L"</span>)-&gt;SetName(<span class="string">"CSI_0310_L"</span>);
       d-&gt;GetACQParam(<span class="string">"T"</span>)-&gt;SetName(<span class="string">"CSI_0310_T"</span>);
-      d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(<span class="string">"CSI_0310"</span>);
+      d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(<span class="string">"CSI_0310"</span>);
       d-&gt;GetACQParam(<span class="string">"R"</span>)-&gt;SetName(<span class="string">"CSI_0209_R"</span>);
       d-&gt;GetACQParam(<span class="string">"L"</span>)-&gt;SetName(<span class="string">"CSI_0209_L"</span>);
       d-&gt;GetACQParam(<span class="string">"T"</span>)-&gt;SetName(<span class="string">"CSI_0209_T"</span>);
       ((<a href="../KVHashList.html">KVHashList</a>*)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetACQParams" title="KVSeqCollection* KVMultiDetArray::GetACQParams()">GetACQParams</a>())-&gt;Rehash();
    }
    <span class="keyword">else</span> {
-      <a href="../KVDetector.html">KVDetector</a>*d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(<span class="string">"CSI_0209"</span>);
+      <a href="../KVDetector.html">KVDetector</a>*d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(<span class="string">"CSI_0209"</span>);
       d-&gt;GetACQParam(<span class="string">"R"</span>)-&gt;SetName(<span class="string">"CSI_0209_R"</span>);
       d-&gt;GetACQParam(<span class="string">"L"</span>)-&gt;SetName(<span class="string">"CSI_0209_L"</span>);
       d-&gt;GetACQParam(<span class="string">"T"</span>)-&gt;SetName(<span class="string">"CSI_0209_T"</span>);
-      d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(<span class="string">"CSI_0310"</span>);
+      d = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(<span class="string">"CSI_0310"</span>);
       d-&gt;GetACQParam(<span class="string">"R"</span>)-&gt;SetName(<span class="string">"CSI_0310_R"</span>);
       d-&gt;GetACQParam(<span class="string">"L"</span>)-&gt;SetName(<span class="string">"CSI_0310_L"</span>);
       d-&gt;GetACQParam(<span class="string">"T"</span>)-&gt;SetName(<span class="string">"CSI_0310_T"</span>);
@@ -240,7 +240,7 @@ ClassImp(<a href="../KVINDRAUpDater_e613.html">KVINDRAUpDater_e613</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-16 10:48 </em><em>&raquo; Last generated: 2015-09-16 10:48</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

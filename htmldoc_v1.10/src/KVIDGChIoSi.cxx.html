@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:10 2015            -->
+<!--   Date: Thu Sep 17 10:51:20 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>.cpp,v 1.35 2009/05/05 15:57:52 franklan Exp $
@@ -44,35 +44,35 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
 <span class="comment">//</span>
 <span class="comment">// Z-only identification grids for INDRA Ionisation chamber-Silicon telescopes.</span>
 <span class="comment">// To identify a particle with this grid, do:</span>
-<span class="comment">//     if( grid-&gt;<a href="../KVIDGChIoSi.html#KVIDGChIoSi:IsIdentifiable" title="Bool_t KVIDGChIoSi::IsIdentifiable(Double_t x, Double_t y) const">IsIdentifiable</a>(x,y) ){</span>
-<span class="comment">//            grid-&gt;<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Identify" title="void KVIDGChIoSi::Identify(Double_t x, Double_t y, KVIdentificationResult*) const">Identify</a>(x,y,nuc);</span>
+<span class="comment">//     if( grid-&gt;<a href="../KVIDGChIoSi.html#KVIDGChIoSi:IsIdentifiable" title="Bool_t KVIDGChIoSi::IsIdentifiable(Double_t x,Double_t y)">IsIdentifiable</a>(x,y) ){</span>
+<span class="comment">//            grid-&gt;<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Identify" title="void KVIDGChIoSi::Identify(Double_t x,Double_t y,KVIdentificationResult* )">Identify</a>(x,y,nuc);</span>
 <span class="comment">//     }</span>
 <span class="comment">//</span>
-<span class="comment">// After attempting identification with method <a href="../KVIDGChIoSi.html#KVIDGChIoSi:Identify" title="void KVIDGChIoSi::Identify(Double_t x, Double_t y, KVIdentificationResult*) const">Identify</a>, <a href="../KVIDZAGrid.html#KVIDZAGrid:GetQualityCode" title="Int_t KVIDZAGrid::GetQualityCode() const">GetQualityCode</a>() method returns</span>
+<span class="comment">// After attempting identification with method <a href="../KVIDGChIoSi.html#KVIDGChIoSi:Identify" title="void KVIDGChIoSi::Identify(Double_t x,Double_t y,KVIdentificationResult* )">Identify</a>, <a href="../KVIDZAGrid.html#KVIDZAGrid:GetQualityCode" title="Int_t KVIDZAGrid::GetQualityCode()">GetQualityCode</a>() method returns</span>
 <span class="comment">// one of the following status codes:</span>
 <span class="comment">//</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE0" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE0">kICODE0</a>,                   OK</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE1" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE1">kICODE1</a>,                   slight ambiguity of Z, which could be larger</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE2" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE2">kICODE2</a>,                   slight ambiguity of Z, which could be smaller</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE3" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE3">kICODE3</a>,                   slight ambiguity of Z, which could be larger or smaller</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE4">kICODE4</a>,                   point is in between two lines of different Z, too far from either to be considered well-identified</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE5" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE5">kICODE5</a>,                   point is in between two lines of different Z, too far from either to be considered well-identified</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE6" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE6">kICODE6</a>,                   (x,y) is below first line in grid</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE7" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE7">kICODE7</a>,                   (x,y) is above last line in grid</span>
-<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE8" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE8">kICODE8</a>,                   no identification: (x,y) out of range covered by grid</span>
-<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a>   <span class="string">"warning: point below punch-through line"</span>,</span>
-<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowSeuilSi" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_BelowSeuilSi">k_BelowSeuilSi</a>      <span class="string">"point to identify left of Si threshold line (bruit/arret ChIo?)"</span>,</span>
-<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a>       <span class="string">"point to identify below Bragg curve. Z given is a Zmin"</span>,</span>
-<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_RightOfEmaxSi" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_RightOfEmaxSi">k_RightOfEmaxSi</a>         <span class="string">"point to identify has E_Si &gt; Emax_Si i.e. codeur is saturated. Unidentifiable"</span>,</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE0" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE0">kICODE0</a>,                   OK</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE1" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE1">kICODE1</a>,                   slight ambiguity of Z, which could be larger</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE2" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE2">kICODE2</a>,                   slight ambiguity of Z, which could be smaller</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE3" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE3">kICODE3</a>,                   slight ambiguity of Z, which could be larger or smaller</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE4">kICODE4</a>,                   point is in between two lines of different Z, too far from either to be considered well-identified</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE5" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE5">kICODE5</a>,                   point is in between two lines of different Z, too far from either to be considered well-identified</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE6" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE6">kICODE6</a>,                   (x,y) is below first line in grid</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE7" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE7">kICODE7</a>,                   (x,y) is above last line in grid</span>
+<span class="comment">// <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE8" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE8">kICODE8</a>,                   no identification: (x,y) out of range covered by grid</span>
+<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a>   <span class="string">"warning: point below punch-through line"</span>,</span>
+<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowSeuilSi" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_BelowSeuilSi">k_BelowSeuilSi</a>      <span class="string">"point to identify left of Si threshold line (bruit/arret ChIo?)"</span>,</span>
+<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a>       <span class="string">"point to identify below Bragg curve. Z given is a Zmin"</span>,</span>
+<span class="comment">// <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_RightOfEmaxSi" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_RightOfEmaxSi">k_RightOfEmaxSi</a>         <span class="string">"point to identify has E_Si &gt; Emax_Si i.e. codeur is saturated. Unidentifiable"</span>,</span>
 <span class="comment">//</span>
-<span class="comment">// Correctly-identified particles with no ambiguity have quality codes &lt; <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE4">kICODE4</a>.</span>
-<span class="comment">// Particles with quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a> are also in principle correctly identified,</span>
+<span class="comment">// Correctly-identified particles with no ambiguity have quality codes &lt; <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE4">kICODE4</a>.</span>
+<span class="comment">// Particles with quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a> are also in principle correctly identified,</span>
 <span class="comment">// but we give a warning that the point is below the line 'Punch_through' delimiting the region in which the</span>
 <span class="comment">// identification lines can be mixed with particles punching through the silicon if no additional condition</span>
 <span class="comment">// is placed on e.g. the CsI detector behind the silicon not firing.</span>
-<span class="comment">// Particles with quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a> are below the Bragg curve and the Z attributed</span>
+<span class="comment">// Particles with quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a> are below the Bragg curve and the Z attributed</span>
 <span class="comment">// is a minimum value.</span>
-<span class="comment">// Particles with code <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE7" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE7">kICODE7</a> are (far) above the last line of the grid, their Z is also a minimum.</span>
+<span class="comment">// Particles with code <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE7" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE7">kICODE7</a> are (far) above the last line of the grid, their Z is also a minimum.</span>
 <span class="comment">//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <a name="LpLdEC"></a><a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:KVIDGChIoSi" title="KVIDGChIoSi KVIDGChIoSi::KVIDGChIoSi() or overloads">KVIDGChIoSi</a>()
 {
@@ -90,10 +90,10 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
 <a name="EebcoB"></a><span class="keyword">void</span> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:init" title="void KVIDGChIoSi::init()">init</a>()
 {
     <span class="comment">//default initialisations</span>
-    <span class="comment">//<a href="../KVIDGraph.html#KVIDGraph:SetOnlyZId" title="void KVIDGraph::SetOnlyZId(Bool_t yes = kTRUE)">SetOnlyZId</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>) is called</span>
+    <span class="comment">//<a href="../KVIDGraph.html#KVIDGraph:SetOnlyZId" title="void KVIDGraph::SetOnlyZId(Bool_t yes=kTRUE)">SetOnlyZId</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>) is called</span>
 
     <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a> = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fPunch" title="KVIDLine* KVIDGChIoSi::fPunch">fPunch</a> = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fSeuil" title="KVIDLine* KVIDGChIoSi::fSeuil">fSeuil</a> = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fEmaxSi" title="KVIDLine* KVIDGChIoSi::fEmaxSi">fEmaxSi</a> = 0;
-    <a href="../KVIDGraph.html#KVIDGraph:SetOnlyZId" title="void KVIDGraph::SetOnlyZId(Bool_t yes = kTRUE)">SetOnlyZId</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
+    <a href="../KVIDGraph.html#KVIDGraph:SetOnlyZId" title="void KVIDGraph::SetOnlyZId(Bool_t yes=kTRUE)">SetOnlyZId</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
 }
 
 
@@ -104,7 +104,7 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
 
 <span class="comment">//______________________________________________________________________________________________________//</span>
 
-<a name="KSJfwC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:IsIdentifiable" title="Bool_t KVIDGChIoSi::IsIdentifiable(Double_t x, Double_t y) const">IsIdentifiable</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y) <span class="keyword">const</span>
+<a name="KSJfwC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:IsIdentifiable" title="Bool_t KVIDGChIoSi::IsIdentifiable(Double_t x,Double_t y)">IsIdentifiable</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y) <span class="keyword">const</span>
 {
     <span class="comment">// Sets fStatus for particle depending on its position in the grid.</span>
     <span class="comment">//</span>
@@ -121,20 +121,20 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
     <span class="comment">//must be right of arret chio/seuil si line</span>
     <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fSeuil" title="KVIDLine* KVIDGChIoSi::fSeuil">fSeuil</a>)
     {
-        can_id = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fSeuil" title="KVIDLine* KVIDGChIoSi::fSeuil">fSeuil</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px, Double_t py, Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"right"</span>);
+        can_id = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fSeuil" title="KVIDLine* KVIDGChIoSi::fSeuil">fSeuil</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px,Double_t py,Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"right"</span>);
         <span class="keyword">if</span> (!can_id)
         {
-            <span class="keyword">const_cast</span> &lt; <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a> * &gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowSeuilSi" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_BelowSeuilSi">k_BelowSeuilSi</a>;
+            <span class="keyword">const_cast</span> &lt; <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a> * &gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowSeuilSi" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_BelowSeuilSi">k_BelowSeuilSi</a>;
             <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
         };
     }
     <span class="comment">//must be left of Emax_Si line</span>
     <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fEmaxSi" title="KVIDLine* KVIDGChIoSi::fEmaxSi">fEmaxSi</a>)
     {
-        can_id =  <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fEmaxSi" title="KVIDLine* KVIDGChIoSi::fEmaxSi">fEmaxSi</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px, Double_t py, Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"left"</span>);
+        can_id =  <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fEmaxSi" title="KVIDLine* KVIDGChIoSi::fEmaxSi">fEmaxSi</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px,Double_t py,Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"left"</span>);
         <span class="keyword">if</span> (!can_id)
         {
-            <span class="keyword">const_cast</span> &lt; <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a> * &gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_RightOfEmaxSi" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_RightOfEmaxSi">k_RightOfEmaxSi</a>;
+            <span class="keyword">const_cast</span> &lt; <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a> * &gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_RightOfEmaxSi" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_RightOfEmaxSi">k_RightOfEmaxSi</a>;
             <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
         };
     }
@@ -174,7 +174,7 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
     <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDGraph.html#KVIDGraph:BackwardsCompatibilityFix" title="void KVIDGraph::BackwardsCompatibilityFix()">BackwardsCompatibilityFix</a>();
     <span class="keyword">if</span> ( fPar-&gt;HasParameter(<span class="string">"IDTelescopes"</span>) ) <span class="keyword">return</span>;
 
-    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"BackwardsCompatibilityFix"</span>,
+    <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"BackwardsCompatibilityFix"</span>,
             <span class="string">"This fix no longer works correctly. Dummy ID telescopes will be associated with this grid. There will be problems."</span>);
     <span class="keyword">if</span> ( fPar-&gt;HasParameter(<span class="string">"Rings"</span>) )<span class="comment">// &amp;&amp; <a href="../KVINDRA.html">gIndra</a> ) &lt;== SHOULD NOT DEPEND ON <a href="../KVINDRA.html">KVINDRA</a>!!!</span>
     {
@@ -189,7 +189,7 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
             <span class="keyword">while</span> ( !Modules.End() )
             {
                 m=Modules.Next();
-                <a href="../KVIDTelescope.html">KVIDTelescope</a>* id = <span class="keyword">new</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>(); id-&gt;<a href="../KVIDGraph.html#KVIDGraph:SetName" title="void KVIDGraph::SetName(const char* name)">SetName</a>(Form(<span class="string">"CI_SI_%02d%02d"</span>, r,m)); <span class="comment">// <a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetIDTelescope" title="KVIDTelescope* KVMultiDetArray::GetIDTelescope(const Char_t* name) const">GetIDTelescope</a>( Form(<span class="string">"CI_SI_%02d%02d"</span>, r,m) ); &lt;== SHOULD NOT DEPEND ON <a href="../KVINDRA.html">KVINDRA</a>!!!</span>
+                <a href="../KVIDTelescope.html">KVIDTelescope</a>* id = <span class="keyword">new</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>(); id-&gt;<a href="../KVIDGraph.html#KVIDGraph:SetName" title="void KVIDGraph::SetName(const char* name)">SetName</a>(Form(<span class="string">"CI_SI_%02d%02d"</span>, r,m)); <span class="comment">// <a href="../KVINDRA.html">gIndra</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetIDTelescope" title="KVIDTelescope* KVMultiDetArray::GetIDTelescope(const Char_t* name)">GetIDTelescope</a>( Form(<span class="string">"CI_SI_%02d%02d"</span>, r,m) ); &lt;== SHOULD NOT DEPEND ON <a href="../KVINDRA.html">KVINDRA</a>!!!</span>
                 <span class="keyword">if</span> (id) <a href="../KVIDGraph.html#KVIDGraph:AddIDTelescope" title="void KVIDGraph::AddIDTelescope(KVBase* t)">AddIDTelescope</a>(id);
             }
         }
@@ -207,12 +207,12 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
     <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fEmaxSi" title="KVIDLine* KVIDGChIoSi::fEmaxSi">fEmaxSi</a>) ((<a href="../KVIDCutLine.html">KVIDCutLine</a>*)<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fEmaxSi" title="KVIDLine* KVIDGChIoSi::fEmaxSi">fEmaxSi</a>)-&gt;SetAcceptedDirection(<span class="string">"left"</span>);
     <a href="../KVIDGraph.html#KVIDGraph:SetVarY" title="void KVIDGraph::SetVarY(const char* v)">SetVarY</a>(<span class="string">"CI-E/PG/GG"</span>);
     <a href="../KVIDGraph.html#KVIDGraph:SetVarX" title="void KVIDGraph::SetVarX(const char* v)">SetVarX</a>(<span class="string">"SI-E/PG/GG"</span>);
-    <a href="../KVIDGraph.html#KVIDGraph:SetOnlyZId" title="void KVIDGraph::SetOnlyZId(Bool_t yes = kTRUE)">SetOnlyZId</a>();
+    <a href="../KVIDGraph.html#KVIDGraph:SetOnlyZId" title="void KVIDGraph::SetOnlyZId(Bool_t yes=kTRUE)">SetOnlyZId</a>();
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="R0H50D"></a><span class="keyword">void</span> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Streamer" title="void KVIDGChIoSi::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp;R__b)
+<a name="R0H50D"></a><span class="keyword">void</span> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Streamer" title="void KVIDGChIoSi::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
 {
     <span class="comment">// Stream an object of class <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>.</span>
 
@@ -225,13 +225,13 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
             R__v = R__b.ReadVersion(&amp;R__s, &amp;R__c);<span class="comment">// read version of <a href="../KVIDZGrid.html">KVIDZGrid</a></span>
             <span class="keyword">if</span> (R__v != 1)
             {
-                <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"Streamer"</span>, <span class="string">"Reading KVIDZGrid with version=%d"</span>, R__v);
+                <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"Streamer"</span>, <span class="string">"Reading KVIDZGrid with version=%d"</span>, R__v);
             }
-            <a href="../KVIDGrid.html">KVIDGrid</a>::<a href="../KVIDGrid.html#KVIDGrid:Streamer" title="void KVIDGrid::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
+            <a href="../KVIDGrid.html">KVIDGrid</a>::<a href="../KVIDGrid.html#KVIDGrid:Streamer" title="void KVIDGrid::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
             R__b &gt;&gt; fZMax;
             <a href="../KVINDRARRMValidator.html">KVINDRARRMValidator</a> rrm;
-            rrm.<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Streamer" title="void KVIDGChIoSi::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
-            fPattern.<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Streamer" title="void KVIDGChIoSi::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
+            rrm.<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Streamer" title="void KVIDGChIoSi::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
+            fPattern.<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Streamer" title="void KVIDGChIoSi::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
             R__b &gt;&gt; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a>;
             R__b &gt;&gt; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fPunch" title="KVIDLine* KVIDGChIoSi::fPunch">fPunch</a>;
             R__b &gt;&gt; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fSeuil" title="KVIDLine* KVIDGChIoSi::fSeuil">fSeuil</a>;
@@ -250,40 +250,40 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
     }
 }
 
-<a name="bDqGj"></a><span class="keyword">void</span> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Identify" title="void KVIDGChIoSi::Identify(Double_t x, Double_t y, KVIdentificationResult*) const">Identify</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../KVIdentificationResult.html">KVIdentificationResult</a>* idr) <span class="keyword">const</span>
+<a name="bDqGj"></a><span class="keyword">void</span> <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:Identify" title="void KVIDGChIoSi::Identify(Double_t x,Double_t y,KVIdentificationResult* )">Identify</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../KVIdentificationResult.html">KVIdentificationResult</a>* idr) <span class="keyword">const</span>
 {
    <span class="comment">// After identification of the particle, we adjust the quality code</span>
-	<span class="comment">// (if the particle was well-identified by <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:Identify" title="void KVIDZAGrid::Identify(Double_t x, Double_t y, KVIdentificationResult*) const">Identify</a>, i.e. with</span>
-	<span class="comment">// fICode&lt;<a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE4">kICODE4</a>) if:</span>
-	<span class="comment">//    the particle is below the 'Bragg_line' =&gt; quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a></span>
+	<span class="comment">// (if the particle was well-identified by <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:Identify" title="void KVIDZAGrid::Identify(Double_t x,Double_t y,KVIdentificationResult* )">Identify</a>, i.e. with</span>
+	<span class="comment">// fICode&lt;<a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE4">kICODE4</a>) if:</span>
+	<span class="comment">//    the particle is below the 'Bragg_line' =&gt; quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a></span>
 	<span class="comment">//           in this case the Z given is a minimum value</span>
 	<span class="comment">//    the particle is below the 'Punch_through' line</span>
-	<span class="comment">//          =&gt; quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a>, but the particle</span>
+	<span class="comment">//          =&gt; quality code <a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>::<a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a>, but the particle</span>
 	<span class="comment">//            is in principle well identified, if a condition has been applied</span>
 	<span class="comment">//            to make sure that the detector behind the silicon (i.e. CsI) did not</span>
 	<span class="comment">//            fire.</span>
 
-    <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:Identify" title="void KVIDZAGrid::Identify(Double_t x, Double_t y, KVIdentificationResult*) const">Identify</a>(x,y,idr);
+    <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:Identify" title="void KVIDZAGrid::Identify(Double_t x,Double_t y,KVIdentificationResult* )">Identify</a>(x,y,idr);
 	 <span class="comment">// check Bragg &amp; punch through for well identified particles</span>
-    <span class="keyword">if</span>(fICode&lt;<a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE4">kICODE4</a>)
+    <span class="keyword">if</span>(fICode&lt;<a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE4" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE4">kICODE4</a>)
 	 {
 		 <span class="comment">//identified particles below (left of) Bragg line : Z is a Zmin</span>
-        <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a> &amp;&amp; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px, Double_t py, Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"left"</span>)){
-            <span class="keyword">const_cast</span>&lt;<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>*&gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a>;idr-&gt;SetComment(<span class="string">"Point to identify below Bragg curve. Z given is a Zmin"</span>);
+        <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a> &amp;&amp; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px,Double_t py,Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"left"</span>)){
+            <span class="keyword">const_cast</span>&lt;<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>*&gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a>;idr-&gt;SetComment(<span class="string">"Point to identify below Bragg curve. Z given is a Zmin"</span>);
         }
         <span class="comment">//if a particle is well-identified (i.e. not too far from the identification lines)</span>
         <span class="comment">//but it lies below the 'Punch_through' line, we give it a warning code</span>
-        <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fPunch" title="KVIDLine* KVIDGChIoSi::fPunch">fPunch</a> &amp;&amp; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fPunch" title="KVIDLine* KVIDGChIoSi::fPunch">fPunch</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px, Double_t py, Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"below"</span>)){
-            <span class="keyword">const_cast</span>&lt;<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>*&gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a>;
+        <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fPunch" title="KVIDLine* KVIDGChIoSi::fPunch">fPunch</a> &amp;&amp; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fPunch" title="KVIDLine* KVIDGChIoSi::fPunch">fPunch</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px,Double_t py,Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"below"</span>)){
+            <span class="keyword">const_cast</span>&lt;<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>*&gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_BelowPunchThrough" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_BelowPunchThrough">k_BelowPunchThrough</a>;
             idr-&gt;SetComment(<span class="string">"warning: point below punch-through line"</span>);
         }
         idr-&gt;IDquality = fICode;
     }
-    <span class="keyword">else</span> <span class="keyword">if</span>(fICode==<a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE7" title="KVIDZAGrid::(anonymous) KVIDZAGrid::kICODE7">kICODE7</a>)
+    <span class="keyword">else</span> <span class="keyword">if</span>(fICode==<a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:kICODE7" title="const enum KVIDZAGrid:: KVIDZAGrid::kICODE7">kICODE7</a>)
     {
         <span class="comment">// for particles above last line in grid, check if we are in fact in the Bragg zone</span>
-        <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a> &amp;&amp; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px, Double_t py, Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"left"</span>)){
-            <span class="keyword">const_cast</span>&lt;<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>*&gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="KVIDGChIoSi::(anonymous) KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a>;
+        <span class="keyword">if</span> (<a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a> &amp;&amp; <a href="../KVIDGChIoSi.html#KVIDGChIoSi:fBragg" title="KVIDLine* KVIDGChIoSi::fBragg">fBragg</a>-><a href="../KVIDLine.html#KVIDLine:WhereAmI" title="Bool_t KVIDLine::WhereAmI(Double_t px,Double_t py,Option_t* opt)">WhereAmI</a>(x, y, <span class="string">"left"</span>)){
+            <span class="keyword">const_cast</span>&lt;<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>*&gt;(<span class="keyword">this</span>)->fICode = <a href="../KVIDGChIoSi.html#KVIDGChIoSi:k_LeftOfBragg" title="const enum KVIDGChIoSi:: KVIDGChIoSi::k_LeftOfBragg">k_LeftOfBragg</a>;
             idr-&gt;SetComment(<span class="string">"Point to identify below Bragg curve. Z given is a Zmin"</span>);
             idr-&gt;IDOK=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
             idr-&gt;IDquality=fICode;
@@ -299,7 +299,7 @@ ClassImp(<a href="../KVIDGChIoSi.html">KVIDGChIoSi</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

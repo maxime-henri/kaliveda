@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:27 2015            -->
+<!--   Date: Thu Sep 17 10:50:52 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//$Id: <a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>.cpp,v 1.2 2006/10/19 14:32:43 franklan Exp $</span>
 <span class="cpp">#include "Riostream.h"</span>
@@ -34,9 +34,9 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 <span class="comment">// KaliVeda DataBase Browser and Configuration Tool</span>
 <span class="comment">//////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">//______________________________________________________________________________________                                                                                                                                                                                                                                                                                                                                                                                                                                      </span>
-<a name="AiJ2.B"></a><a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:KVDataBaseBrowser" title="KVDataBaseBrowser KVDataBaseBrowser::KVDataBaseBrowser(const TGWindow* p, KVDataBase* d, UInt_t w, UInt_t h) or overloads">KVDataBaseBrowser</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TGWindow.html#TGWindow:TGWindow" title="TGWindow TGWindow::TGWindow(Window_t id) or overloads">TGWindow</a> * p,
+<a name="AiJ2.B"></a><a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:KVDataBaseBrowser" title="KVDataBaseBrowser KVDataBaseBrowser::KVDataBaseBrowser(const TGWindow* p,KVDataBase* d,UInt_t w,UInt_t h)">KVDataBaseBrowser</a>(<span class="keyword">const</span> <a href="../#TGWindow:TGWindow" title="TGWindow TGWindow::TGWindow(Window_t id) or overloads">TGWindow</a> * p,
                                          <a href="../KVDataBase.html">KVDataBase</a> * d, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> w,
-                                         <a href="../ListOfTypes.html#UInt_t">UInt_t</a> h):<a href="http://root.cern.ch/root/html/TGMainFrame.html#TGMainFrame:TGMainFrame" title="TGMainFrame TGMainFrame::TGMainFrame(const TGMainFrame&amp;) or overloads">TGMainFrame</a>(p, w, h)
+                                         <a href="../ListOfTypes.html#UInt_t">UInt_t</a> h):<a href="../#TGMainFrame:TGMainFrame" title="TGMainFrame TGMainFrame::TGMainFrame(const TGMainFrame&amp; ) or overloads">TGMainFrame</a>(p, w, h)
 {
 
    <span class="comment">// pointer to DataBase under examination                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </span>
@@ -52,19 +52,19 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
    widg-&gt;SetWidget(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>);
    <a href="../KVBrowser.html#KVBrowser:AddToWidgetList" title="void KVBrowser::AddToWidgetList(KVWidget* widg)">AddToWidgetList</a>(widg);
    <span class="comment">// fill list with all available tables</span>
-   TIter next_tab(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables() const">GetTables</a>());
+   TIter next_tab(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables()">GetTables</a>());
    <a href="../KVDBTable.html">KVDBTable</a> *tab;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0;
    <span class="keyword">while</span> ((tab = (<a href="../KVDBTable.html">KVDBTable</a> *) next_tab())) {
-      <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;AddEntry(tab-&gt;<a href="http://root.cern.ch/root/html/TGWindow.html#TGWindow:GetName" title="const char* TGWindow::GetName() const">GetName</a>(), i++);
+      <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;AddEntry(tab-&gt;<a href="../#TGWindow:GetName" title="const char* TGWindow::GetName()">GetName</a>(), i++);
    }
    <span class="comment">//highlight first table</span>
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;Select(0);
    <span class="comment">//layout</span>
    TGLayoutHints *lay =
        <span class="keyword">new</span> TGLayoutHints(kLHintsCenterX | kLHintsTop, 2, 2, 2, 2);
-   <a href="http://root.cern.ch/root/html/TGCompositeFrame.html#TGCompositeFrame:AddFrame" title="void TGCompositeFrame::AddFrame(TGFrame* f, TGLayoutHints* l = 0)">AddFrame</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>, lay);
-   <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;<a href="http://root.cern.ch/root/html/TGFrame.html#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w = 0, UInt_t h = 0) or overloads">Resize</a>(150, 20);
+   <a href="../#TGCompositeFrame:AddFrame" title="void TGCompositeFrame::AddFrame(TGFrame* f,TGLayoutHints* l=0)">AddFrame</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>, lay);
+   <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;<a href="../#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w=0,UInt_t h=0) or overloads">Resize</a>(150, 20);
    <a href="../KVBrowser.html#KVBrowser:AddToCleanupList" title="void KVBrowser::AddToCleanupList(TObject* obj)">AddToCleanupList</a>(lay);
 
    <span class="comment">//combo box for showing all records in the table selected in <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a></span>
@@ -74,21 +74,21 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
    widg-&gt;SetWidget(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>);
    <a href="../KVBrowser.html#KVBrowser:AddToWidgetList" title="void KVBrowser::AddToWidgetList(KVWidget* widg)">AddToWidgetList</a>(widg);
    <span class="comment">//fill list with records from first (selected) table</span>
-   <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:FillRecordsList" title="void KVDataBaseBrowser::FillRecordsList(Long_t)">FillRecordsList</a>(0);
+   <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:FillRecordsList" title="void KVDataBaseBrowser::FillRecordsList(Long_t )">FillRecordsList</a>(0);
    <span class="comment">//layout</span>
-   <a href="http://root.cern.ch/root/html/TGCompositeFrame.html#TGCompositeFrame:AddFrame" title="void TGCompositeFrame::AddFrame(TGFrame* f, TGLayoutHints* l = 0)">AddFrame</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>, lay);
-   <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;<a href="http://root.cern.ch/root/html/TGFrame.html#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w = 0, UInt_t h = 0) or overloads">Resize</a>(150, 20);
+   <a href="../#TGCompositeFrame:AddFrame" title="void TGCompositeFrame::AddFrame(TGFrame* f,TGLayoutHints* l=0)">AddFrame</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>, lay);
+   <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;<a href="../#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w=0,UInt_t h=0) or overloads">Resize</a>(150, 20);
    <a href="../KVBrowser.html#KVBrowser:AddToCleanupList" title="void KVBrowser::AddToCleanupList(TObject* obj)">AddToCleanupList</a>(lay);
 
 <span class="comment">//______________________________________________________________________________________</span>
-   <span class="comment">// <a href="../ListOfTypes.html#Display">Display</a> main window </span>
-   <a href="http://root.cern.ch/root/html/TGCompositeFrame.html#TGCompositeFrame:MapSubwindows" title="void TGCompositeFrame::MapSubwindows()">MapSubwindows</a>();
-   <a href="http://root.cern.ch/root/html/TGCompositeFrame.html#TGCompositeFrame:Layout" title="void TGCompositeFrame::Layout()">Layout</a>();
-   <a href="http://root.cern.ch/root/html/TGFrame.html#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w = 0, UInt_t h = 0) or overloads">Resize</a>(200, 200);
+   <span class="comment">// Display main window </span>
+   <a href="../#TGCompositeFrame:MapSubwindows" title="void TGCompositeFrame::MapSubwindows()">MapSubwindows</a>();
+   <a href="../#TGCompositeFrame:Layout" title="void TGCompositeFrame::Layout()">Layout</a>();
+   <a href="../#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w=0,UInt_t h=0) or overloads">Resize</a>(200, 200);
 
-   <a href="http://root.cern.ch/root/html/TGMainFrame.html#TGMainFrame:SetWindowName" title="void TGMainFrame::SetWindowName(const char* name = 0)">SetWindowName</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
-   <a href="http://root.cern.ch/root/html/TGMainFrame.html#TGMainFrame:SetIconName" title="void TGMainFrame::SetIconName(const char* name)">SetIconName</a>(<span class="string">"KVDataBaseBrowser"</span>);
-   <a href="http://root.cern.ch/root/html/TGFrame.html#TGFrame:MapWindow" title="void TGFrame::MapWindow()">MapWindow</a>();
+   <a href="../#TGMainFrame:SetWindowName" title="void TGMainFrame::SetWindowName(const char* name=0)">SetWindowName</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+   <a href="../#TGMainFrame:SetIconName" title="void TGMainFrame::SetIconName(const char* name)">SetIconName</a>(<span class="string">"KVDataBaseBrowser"</span>);
+   <a href="../#TGFrame:MapWindow" title="void TGFrame::MapWindow()">MapWindow</a>();
 }
 
 <span class="comment">//_________________________________________________________________________________________</span>
@@ -100,7 +100,7 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 
 <span class="comment">//________________________________________________________________________________</span>
 
-<a name="WkAMYB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:ProcessMessage" title="Bool_t KVDataBaseBrowser::ProcessMessage(Long_t msg, Long_t parm1, Long_t)">ProcessMessage</a>(<a href="../ListOfTypes.html#Long_t">Long_t</a> msg, <a href="../ListOfTypes.html#Long_t">Long_t</a> parm1,
+<a name="WkAMYB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:ProcessMessage" title="Bool_t KVDataBaseBrowser::ProcessMessage(Long_t msg,Long_t parm1,Long_t )">ProcessMessage</a>(<a href="../ListOfTypes.html#Long_t">Long_t</a> msg, <a href="../ListOfTypes.html#Long_t">Long_t</a> parm1,
                                          <a href="../ListOfTypes.html#Long_t">Long_t</a> parm2)
 {
    <span class="comment">// Handle messages send to the TestMainFrame object. E.g. all menu button</span>
@@ -135,7 +135,7 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
       <span class="keyword">switch</span> (GET_SUBMSG(msg)) {
 
       <span class="keyword">case</span> kTE_TEXTCHANGED:
-         cout &lt;&lt; <span class="string">"TEXTCHANGED"</span> &lt;&lt; endl;
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"TEXTCHANGED"</span> &lt;&lt; endl;
          <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
             widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
          <span class="keyword">if</span> (widg)
@@ -150,26 +150,26 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 
 <span class="comment">//__________________________________________________________________________________________//</span>
 
-<a name="bJkGJE"></a><span class="keyword">void</span> <a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:FillRecordsList" title="void KVDataBaseBrowser::FillRecordsList(Long_t)">FillRecordsList</a>(<a href="../ListOfTypes.html#Long_t">Long_t</a> table)
+<a name="bJkGJE"></a><span class="keyword">void</span> <a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:FillRecordsList" title="void KVDataBaseBrowser::FillRecordsList(Long_t )">FillRecordsList</a>(<a href="../ListOfTypes.html#Long_t">Long_t</a> table)
 {
    <span class="comment">//Fill <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a> with records found in table number <span class="string">"table"</span> in the GetTables() list of dataBase</span>
 
    <span class="comment">//How many entries in <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a> already ?</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> n_records = <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;GetListBox()-&gt;GetNumberOfEntries();
 
-   <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Clear" title="void TObject::Clear(Option_t* = &quot;&quot;)">Clear</a> out any existing records in list</span>
+   <span class="comment">//<a href="../#TObject:Clear" title="void TObject::Clear(Option_t* =&quot;&quot;)">Clear</a> out any existing records in list</span>
    <span class="keyword">if</span> (n_records)
       <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;RemoveEntries(0, n_records - 1);
 
    <span class="comment">//Get list of records for our table</span>
-   <a href="../KVDBTable.html">KVDBTable</a> *dbtab = (<a href="../KVDBTable.html">KVDBTable</a> *) <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables() const">GetTables</a>()-&gt;At(table);
+   <a href="../KVDBTable.html">KVDBTable</a> *dbtab = (<a href="../KVDBTable.html">KVDBTable</a> *) <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables()">GetTables</a>()-&gt;At(table);
 
    <span class="comment">// fill list with all available tables</span>
    TIter next_rec(dbtab-&gt;GetRecords());
    <a href="../KVDBRecord.html">KVDBRecord</a> *rec;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0;
    <span class="keyword">while</span> ((rec = (<a href="../KVDBRecord.html">KVDBRecord</a> *) next_rec())) {
-      <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;AddEntry(rec-&gt;<a href="http://root.cern.ch/root/html/TGWindow.html#TGWindow:GetName" title="const char* TGWindow::GetName() const">GetName</a>(), i++);
+      <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;AddEntry(rec-&gt;<a href="../#TGWindow:GetName" title="const char* TGWindow::GetName()">GetName</a>(), i++);
    }
    <span class="comment">//highlight first table</span>
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;Select(0);
@@ -182,7 +182,7 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

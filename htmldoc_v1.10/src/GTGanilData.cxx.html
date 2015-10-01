@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:41:58 2015            -->
+<!--   Date: Thu Sep 17 10:50:36 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 *                        <a href="../GTGanilData.html">GTGanilData</a>.cpp  -  Main Header to ROOTGAnilTape
@@ -53,13 +53,13 @@
 <span class="cpp">#include &lt;gan_tape_get_parametres.h&gt;</span>
 <span class="keyword">extern</span> <span class="string">"C"</span> {
    <span class="keyword">typedef</span> <span class="keyword">struct</span> SCALE {
-      <a href="../ListOfTypes.html#UNSINT32">UNSINT32</a> Length; <span class="comment">/* Nb bytes utils suivant ce mot */</span>
-      <a href="../ListOfTypes.html#UNSINT32">UNSINT32</a> Nb_channel;
-      <a href="../ListOfTypes.html#UNSINT32">UNSINT32</a> Acq_status;
-      <a href="../ListOfTypes.html#UNSINT32">UNSINT32</a> Reserve[2];
+      UNSINT32 Length; <span class="comment">/* Nb bytes utils suivant ce mot */</span>
+      UNSINT32 Nb_channel;
+      UNSINT32 Acq_status;
+      UNSINT32 Reserve[2];
       <span class="keyword">union</span> JBUS_SCALE {
          <a href="../ListOfTypes.html#scale_struct">scale_struct</a> UnScale[NB_MAX_CHANNEL];
-         <a href="../ListOfTypes.html#UNSINT16">UNSINT16</a> Info_jbus  [NB_MAX_JBUS];
+         UNSINT16 Info_jbus  [NB_MAX_JBUS];
       } jbus_scale;
    } scale;
 }
@@ -83,7 +83,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 <span class="comment">// Usage can be as simple as:</span>
 <span class="comment">// <a href="../GTGanilData.html">GTGanilData</a> myData(<span class="string">"filename.dat"</span>);</span>
 <span class="comment">//</span>
-<span class="comment">// It allow connection of data parameters values by <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index, UShort_t** p) const or overloads">Connect</a>() routines</span>
+<span class="comment">// It allow connection of data parameters values by <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index,UShort_t** p) or overloads">Connect</a>() routines</span>
 <span class="comment">// that can operate with the index or the parameter name.</span>
 <span class="comment">//</span>
 <span class="comment">// Values of parameters are stored in an array of <a href="../ListOfTypes.html#UShort_t">UShort_t</a> (0 - 65535)</span>
@@ -97,7 +97,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 {
   <span class="comment">// Default constructor</span>
 
-  <a href="../GTGanilData.html#GTGanilData:InitDefault" title="void GTGanilData::InitDefault(const Int_t argc = 0, char** argv = __null)">InitDefault</a>();
+  <a href="../GTGanilData.html#GTGanilData:InitDefault" title="void GTGanilData::InitDefault(const Int_t argc=0,char** argv=0)">InitDefault</a>();
 }
 
 <span class="comment">//_____________________________________________________________________________</span>
@@ -105,7 +105,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 {
   <span class="comment">// Create the reading class over the given file with all defaults values</span>
 
-  <a href="../GTGanilData.html#GTGanilData:InitDefault" title="void GTGanilData::InitDefault(const Int_t argc = 0, char** argv = __null)">InitDefault</a>();
+  <a href="../GTGanilData.html#GTGanilData:InitDefault" title="void GTGanilData::InitDefault(const Int_t argc=0,char** argv=0)">InitDefault</a>();
   <a href="../GTGanilData.html#GTGanilData:SetFileName" title="void GTGanilData::SetFileName(const TString filename)">SetFileName</a>(filename);
 }
 
@@ -126,7 +126,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>)<span class="keyword">delete</span>   <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>;
   <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>)<span class="keyword">delete</span>   <a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>;
   <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fDevice" title="gan_tape_desc* GTGanilData::fDevice">fDevice</a>)<span class="keyword">delete</span>   <a href="../GTGanilData.html#GTGanilData:fDevice" title="gan_tape_desc* GTGanilData::fDevice">fDevice</a>;
-  <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>)<span class="keyword">delete</span>   <a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>;
+  <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>)<span class="keyword">delete</span>   <a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>;
   <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fStructEvent" title="char* GTGanilData::fStructEvent">fStructEvent</a>)<span class="keyword">delete</span>[] <a href="../GTGanilData.html#GTGanilData:fStructEvent" title="char* GTGanilData::fStructEvent">fStructEvent</a>;
   <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>) <span class="keyword">delete</span>[] <a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>;
   <span class="keyword">if</span>(<a href="../GTGanilData.html#GTGanilData:fEventBrut" title="UShort_t* GTGanilData::fEventBrut">fEventBrut</a>) <span class="keyword">delete</span>[] <a href="../GTGanilData.html#GTGanilData:fEventBrut" title="UShort_t* GTGanilData::fEventBrut">fEventBrut</a>;
@@ -135,7 +135,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="ExiwkE"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:InitDefault" title="void GTGanilData::InitDefault(const Int_t argc = 0, char** argv = __null)">InitDefault</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> argc, <span class="keyword">char</span> **argv)
+<a name="ExiwkE"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:InitDefault" title="void GTGanilData::InitDefault(const Int_t argc=0,char** argv=0)">InitDefault</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> argc, <span class="keyword">char</span> **argv)
 {
   <span class="comment">// PRIVATE</span>
   <span class="comment">// Called by every constructors.</span>
@@ -156,8 +156,8 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <a href="../GTGanilData.html#GTGanilData:fIsScalerBuffer" title="bool GTGanilData::fIsScalerBuffer">fIsScalerBuffer</a> = <span class="keyword">false</span>;
   <a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>      = 0;
 
-  <a href="../GTGanilData.html#GTGanilData:fDevice" title="gan_tape_desc* GTGanilData::fDevice">fDevice</a>         = <span class="keyword">new</span> <a href="../ListOfTypes.html#gan_tape_desc">gan_tape_desc</a>;
-  <a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>         = <span class="keyword">new</span> <a href="../ListOfTypes.html#in2p3_buffer_struct">in2p3_buffer_struct</a>;
+  <a href="../GTGanilData.html#GTGanilData:fDevice" title="gan_tape_desc* GTGanilData::fDevice">fDevice</a>         = <span class="keyword">new</span> gan_tape_desc;
+  <a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>         = <span class="keyword">new</span> in2p3_buffer_struct;
   <a href="../GTGanilData.html#GTGanilData:fStructEvent" title="char* GTGanilData::fStructEvent">fStructEvent</a>    = <span class="keyword">new</span> <span class="keyword">char</span>[STRUCTEVENTSIZE];
 
   <a href="../GTGanilData.html#GTGanilData:fScalerTree" title="TTree* GTGanilData::fScalerTree">fScalerTree</a>     = NULL; <span class="comment">// By default, no scaler tree</span>
@@ -204,14 +204,14 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="VI57vB"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:PrintRunParameters" title="void GTGanilData::PrintRunParameters() const">PrintRunParameters</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="VI57vB"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:PrintRunParameters" title="void GTGanilData::PrintRunParameters()">PrintRunParameters</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
   <span class="comment">// Print every class parameters, for now a simple dump.</span>
-  <a href="../GTGanilData.html#GTGanilData:DumpParameterName" title="void GTGanilData::DumpParameterName() const">DumpParameterName</a>();
+  <a href="../GTGanilData.html#GTGanilData:DumpParameterName" title="void GTGanilData::DumpParameterName()">DumpParameterName</a>();
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="r9KKoD"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:PrintDataParameters" title="void GTGanilData::PrintDataParameters() const">PrintDataParameters</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="r9KKoD"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:PrintDataParameters" title="void GTGanilData::PrintDataParameters()">PrintDataParameters</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
   <span class="comment">// Not implemented.</span>
   <span class="comment">// ...</span>
@@ -221,7 +221,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 <a name="blKPTE"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:Open" title="void GTGanilData::Open()">Open</a>(<span class="keyword">void</span>)
 {
   <span class="comment">// <a href="../GTGanilData.html#GTGanilData:Open" title="void GTGanilData::Open()">Open</a> the data file (could be on a tape) with a few checks.</span>
-   <span class="comment">// Use <a href="../GTGanilData.html#GTGanilData:IsOpen" title="Bool_t GTGanilData::IsOpen() const">IsOpen</a>() to check whether the file is opened successfully.</span>
+   <span class="comment">// Use <a href="../GTGanilData.html#GTGanilData:IsOpen" title="Bool_t GTGanilData::IsOpen()">IsOpen</a>() to check whether the file is opened successfully.</span>
   <span class="comment">// After successfully opening the file, we call <a href="../GTGanilData.html#GTGanilData:ReadParameters" title="void GTGanilData::ReadParameters()">ReadParameters</a>()</span>
    <span class="comment">// to fill the parameter list from the first data buffer</span>
    <span class="comment">// which *has to* be a parameter buffer.</span>
@@ -238,7 +238,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>=acq_mt_alloc_c(*<a href="../GTGanilData.html#GTGanilData:fDevice" title="gan_tape_desc* GTGanilData::fDevice">fDevice</a>);     <span class="comment">// Allocation</span>
   <span class="keyword">if</span> (<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>!=ACQ_OK) {
     <span class="keyword">if</span> (<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>==ACQ_NOTALLOC) 
-      cout &lt;&lt; <span class="string">"This tape drive is already in use !"</span>&lt;&lt;endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"This tape drive is already in use !"</span>&lt;&lt;endl;
     gan_tape_erreur(<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>,<span class="string">"allocation"</span>);
     <span class="keyword">return</span>;
   }
@@ -246,7 +246,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>=acq_mt_mount_c(*<a href="../GTGanilData.html#GTGanilData:fDevice" title="gan_tape_desc* GTGanilData::fDevice">fDevice</a>,<a href="../GTGanilData.html#GTGanilData:fDensity" title="Int_t GTGanilData::fDensity">fDensity</a>,<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>);
   <span class="keyword">if</span> (<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>!=ACQ_OK) {  <span class="comment">// There might be some imprecisions here</span>
     <span class="keyword">if</span> (<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_ALREADYMOUNT)
-      cout &lt;&lt; <span class="string">"The tape you want to use is already mounted"</span>&lt;&lt;endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"The tape you want to use is already mounted"</span>&lt;&lt;endl;
     gan_tape_erreur(<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>,<span class="string">"mount"</span>);
     <span class="keyword">return</span>;
   }
@@ -257,14 +257,14 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
     <span class="keyword">return</span>;
   }
   <a href="../GTGanilData.html#GTGanilData:fRunNumber" title="Int_t GTGanilData::fRunNumber">fRunNumber</a>=0;
-  <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = acq_mt_ini_run_c ( <a href="../GTGanilData.html#GTGanilData:fLun" title="Int_t GTGanilData::fLun">fLun</a>, <a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>, <a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>, &amp;<a href="../GTGanilData.html#GTGanilData:fRunNumber" title="Int_t GTGanilData::fRunNumber">fRunNumber</a>,
+  <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = acq_mt_ini_run_c ( <a href="../GTGanilData.html#GTGanilData:fLun" title="Int_t GTGanilData::fLun">fLun</a>, <a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>, <a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>, &amp;<a href="../GTGanilData.html#GTGanilData:fRunNumber" title="Int_t GTGanilData::fRunNumber">fRunNumber</a>,
 			      <a href="../GTGanilData.html#GTGanilData:fStructEvent" title="char* GTGanilData::fStructEvent">fStructEvent</a>,structEvent_size );
 
   <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> != ACQ_OK ) {
     gan_tape_erreur (<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> , <span class="string">"Init Run"</span>);
     <span class="keyword">return</span>;
   }
-  cout &lt;&lt; <span class="string">"Run "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fRunNumber" title="Int_t GTGanilData::fRunNumber">fRunNumber</a>&lt;&lt;<span class="string">" opened"</span>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Run "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fRunNumber" title="Int_t GTGanilData::fRunNumber">fRunNumber</a>&lt;&lt;<span class="string">" opened"</span>&lt;&lt;endl;
   <a href="../GTGanilData.html#GTGanilData:ReadParameters" title="void GTGanilData::ReadParameters()">ReadParameters</a>();
   <span class="keyword">return</span>;  
 }
@@ -280,7 +280,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <span class="keyword">do</span> {
     <a href="../GTGanilData.html#GTGanilData:ReadBuffer" title="void GTGanilData::ReadBuffer()">ReadBuffer</a>();
     <span class="keyword">if</span> (strcmp (<a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a>, PARAM_Id) == 0 )
-      <a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>=<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:Fill" title="int GTDataParameters::Fill(const char* buffParam)">Fill</a>(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.Buf_param);
+      <a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>=<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:Fill" title="int GTDataParameters::Fill(const char* buffParam)">Fill</a>(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.Buf_param);
   } <span class="keyword">while</span> (strcmp (<a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a>, PARAM_Id) == 0);
   
   <a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a> = <span class="keyword">new</span> <a href="../ListOfTypes.html#UShort_t">UShort_t</a>[<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>+1]; <span class="comment">// Data buffer is allocated</span>
@@ -290,12 +290,12 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="WWH2qB"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index, UShort_t** p) const or overloads">Connect</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> index,<a href="../ListOfTypes.html#UShort_t">UShort_t</a> **p) <span class="keyword">const</span>
+<a name="WWH2qB"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index,UShort_t** p) or overloads">Connect</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> index,<a href="../ListOfTypes.html#UShort_t">UShort_t</a> **p) <span class="keyword">const</span>
 {
-  <span class="comment">// <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index, UShort_t** p) const or overloads">Connect</a> a pointer to a data to the defined index in the Data Array</span>
+  <span class="comment">// <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index,UShort_t** p) or overloads">Connect</a> a pointer to a data to the defined index in the Data Array</span>
   
   <span class="keyword">if</span> ((index&lt;1)||(index&gt;<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>)) {
-    cout &lt;&lt;<span class="string">"Invalid connexion:"</span>&lt;&lt;index&lt;&lt;<span class="string">". Valid only in 1&lt;=index&lt;="</span>
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"Invalid connexion:"</span>&lt;&lt;index&lt;&lt;<span class="string">". Valid only in 1&lt;=index&lt;="</span>
 	 &lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>&lt;&lt;endl; 
     <span class="keyword">return</span>;
   }
@@ -303,16 +303,16 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="kA6h3"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index, UShort_t** p) const or overloads">Connect</a>(<span class="keyword">const</span> TString parName,<a href="../ListOfTypes.html#UShort_t">UShort_t</a> **p) <span class="keyword">const</span>
+<a name="kA6h3"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index,UShort_t** p) or overloads">Connect</a>(<span class="keyword">const</span> TString parName,<a href="../ListOfTypes.html#UShort_t">UShort_t</a> **p) <span class="keyword">const</span>
 {
-  <span class="comment">// <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index, UShort_t** p) const or overloads">Connect</a> a pointer to a data to a given parameter name in the Data Array</span>
+  <span class="comment">// <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index,UShort_t** p) or overloads">Connect</a> a pointer to a data to a given parameter name in the Data Array</span>
 
-  <a href="../ListOfTypes.html#Int_t">Int_t</a> index=<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetIndex" title="int GTDataParameters::GetIndex(const TString parName) const">GetIndex</a>(parName);
+  <a href="../ListOfTypes.html#Int_t">Int_t</a> index=<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetIndex" title="int GTDataParameters::GetIndex(const TString parName)">GetIndex</a>(parName);
   <span class="keyword">if</span>(index&lt;0){
 	  <span class="comment">//parameter not found</span>
 	  <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
   }
-  <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index, UShort_t** p) const or overloads">Connect</a>(index,p);
+  <a href="../GTGanilData.html#GTGanilData:Connect" title="void GTGanilData::Connect(const Int_t index,UShort_t** p) or overloads">Connect</a>(index,p);
   <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
 
@@ -320,10 +320,10 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 <a name="ekP3LE"></a><span class="keyword">bool</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>(<span class="keyword">void</span>)
 {
   <span class="comment">// Read an event on tape/file and put in into the event array</span>
-  <span class="comment">// return true until read fails </span>
+  <span class="comment">// return <a href="../ListOfTypes.html#bool">true</a> until read fails </span>
   <span class="comment">//</span>
   <span class="comment">// If scaler buffer management (<a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a>) has been set to</span>
-  <span class="comment">// <a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>, <a href="../GTGanilData.html#GTGanilData:kDumpScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kDumpScaler">kDumpScaler</a> or <a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a>, then every time this method</span>
+  <span class="comment">// <a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>, <a href="../GTGanilData.html#GTGanilData:kDumpScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kDumpScaler">kDumpScaler</a> or <a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a>, then every time this method</span>
   <span class="comment">// returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> a new event has been read (and perhaps 1 or more scaler buffers</span>
   <span class="comment">// were read and dealt with internally).</span>
   <span class="comment">// In this case, a loop over all events will look like this:</span>
@@ -333,17 +333,17 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <span class="comment">//    my_gtganilData-&gt;GetFiredDataParameters()-&gt;ls(); // or whatever</span>
   <span class="comment">// }</span>
   <span class="comment">//</span>
-  <span class="comment">// If <a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a> = <a href="../GTGanilData.html#GTGanilData:kReportScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a> then this method also returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> after</span>
+  <span class="comment">// If <a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a> = <a href="../GTGanilData.html#GTGanilData:kReportScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a> then this method also returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> after</span>
   <span class="comment">// reading a scaler buffer (no new event read), so that the user can do</span>
   <span class="comment">// something with the scalers.</span>
   <span class="comment">// In this case, a loop over all events including treatment of scaler buffers</span>
   <span class="comment">// will look like this:</span>
   <span class="comment">//</span>
   <span class="comment">// while( my_gtganildata-&gt;<a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>() ){</span>
-  <span class="comment">//    if( my_gtganildata-&gt;<a href="../GTGanilData.html#GTGanilData:IsScalerBuffer" title="bool GTGanilData::IsScalerBuffer() const">IsScalerBuffer</a>() ){</span>
+  <span class="comment">//    if( my_gtganildata-&gt;<a href="../GTGanilData.html#GTGanilData:IsScalerBuffer" title="bool GTGanilData::IsScalerBuffer()">IsScalerBuffer</a>() ){</span>
   <span class="comment">//       // scaler buffer read from file</span>
   <span class="comment">//       <a href="../GTScalers.html">GTScalers</a>* scalers = my_gtganildata-&gt;<a href="../GTGanilData.html#GTGanilData:GetScalers" title="GTScalers* GTGanilData::GetScalers()">GetScalers</a>();</span>
-  <span class="comment">//       // N.B. <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:GetScalers" title="GTScalers* GTGanilData::GetScalers()">GetScalers</a>() also resets the <a href="../GTGanilData.html#GTGanilData:IsScalerBuffer" title="bool GTGanilData::IsScalerBuffer() const">IsScalerBuffer</a>()</span>
+  <span class="comment">//       // N.B. <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:GetScalers" title="GTScalers* GTGanilData::GetScalers()">GetScalers</a>() also resets the <a href="../GTGanilData.html#GTGanilData:IsScalerBuffer" title="bool GTGanilData::IsScalerBuffer()">IsScalerBuffer</a>()</span>
   <span class="comment">//       // flag ready for next event/buffer, so even if you don't</span>
   <span class="comment">//       // do anything with the scalers, you should call it</span>
   <span class="comment">//    }</span>
@@ -366,25 +366,25 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   {
     <span class="keyword">switch</span>(<a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a>)
     {
-    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>:     <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>()); <span class="comment">// Skip</span>
-    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kDumpScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kDumpScaler">kDumpScaler</a>:
-		 <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:Fill" title="void GTScalers::Fill(void*)">Fill</a>((scale*)&amp;(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.scale));    
+    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>:     <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>()); <span class="comment">// Skip</span>
+    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kDumpScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kDumpScaler">kDumpScaler</a>:
+		 <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:Fill" title="void GTScalers::Fill(void* )">Fill</a>((scale*)&amp;(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.scale));    
         <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:DumpScalers" title="void GTScalers::DumpScalers()">DumpScalers</a>();
 		 <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>());
 		 
-    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kReportScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a>:   
-		 <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:Fill" title="void GTScalers::Fill(void*)">Fill</a>((scale*)&amp;(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.scale));    
+    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kReportScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a>:   
+		 <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:Fill" title="void GTScalers::Fill(void* )">Fill</a>((scale*)&amp;(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.scale));    
     	 <a href="../GTGanilData.html#GTGanilData:fIsScalerBuffer" title="bool GTGanilData::fIsScalerBuffer">fIsScalerBuffer</a>=<span class="keyword">true</span>; 
 		 <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 		 
-    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a>: {
-      <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:Fill" title="void GTScalers::Fill(void*)">Fill</a>((scale*)&amp;(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.scale));
+    <span class="keyword">case</span> <a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a>: {
+      <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:Fill" title="void GTScalers::Fill(void* )">Fill</a>((scale*)&amp;(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.cas.scale));
       <a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>-><a href="../GTScalers.html#GTScalers:DumpScalers" title="void GTScalers::DumpScalers()">DumpScalers</a>();
       <a href="../GTGanilData.html#GTGanilData:fScalerTree" title="TTree* GTGanilData::fScalerTree">fScalerTree</a>-&gt;Fill();
       <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>());}
       <span class="keyword">break</span>;
     <span class="keyword">default</span>:
-      cout &lt;&lt;<span class="string">"GTGanilData::Next: unexpected value for fWhatScaler"</span>&lt;&lt;endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"GTGanilData::Next: unexpected value for fWhatScaler"</span>&lt;&lt;endl;
     }
   }
   <span class="keyword">if</span> ( strcmp (<a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a> , EVENTDB_Id ) == 0 )  {
@@ -405,12 +405,12 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
     <a href="../GTGanilData.html#GTGanilData:fEventCount" title="Int_t GTGanilData::fEventCount">fEventCount</a>++;
     <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:ReadNextEvent_EBYEDAT" title="bool GTGanilData::ReadNextEvent_EBYEDAT()">ReadNextEvent_EBYEDAT</a>());   
   }
-  cout&lt;&lt;<span class="string">"Unknown header in GTGanilData::Next:"</span>&lt;&lt; <a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a> &lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a>&lt;&lt;<span class="string">"Unknown header in GTGanilData::Next:"</span>&lt;&lt; <a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a> &lt;&lt;endl;
   <span class="keyword">return</span>(<span class="keyword">true</span>);
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="v_CyrC"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:MakeTree" title="void GTGanilData::MakeTree(const TString filename = &quot;&quot;, UInt_t nEvents = kMaxUInt)">MakeTree</a>(<span class="keyword">const</span> TString filename, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> nEvents)
+<a name="v_CyrC"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:MakeTree" title="void GTGanilData::MakeTree(const TString filename=&quot;&quot;,UInt_t nEvents=kMaxUInt)">MakeTree</a>(<span class="keyword">const</span> TString filename, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> nEvents)
 {
   <span class="comment">// Automatically create and fill a tree created from ganil data.</span>
   <span class="comment">// Can be use to convert a ganil tape or file to a ROOT file.</span>
@@ -424,7 +424,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   TTree theTree(<span class="string">"AutoTree"</span>,<span class="string">"Automatic filled Tree"</span>);
   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=1;i&lt;=<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>;i++)
   {
-    TString parName=<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index) const">GetParName</a>(i);
+    TString parName=<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index)">GetParName</a>(i);
     TString parType=parName+<span class="string">"/s"</span>;
     theTree.Branch(parName,&amp;(<a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>[i]),parType);
   }
@@ -447,13 +447,13 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 
   <span class="keyword">if</span> (!<a href="../GTGanilData.html#GTGanilData:fIsCtrl" title="bool GTGanilData::fIsCtrl">fIsCtrl</a>)
   {
-    <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = get_next_event(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>,<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>,
+    <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = get_next_event(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>,<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>,
 			     (<span class="keyword">short</span>*)<a href="../GTGanilData.html#GTGanilData:fEventBrut" title="UShort_t* GTGanilData::fEventBrut">fEventBrut</a>,<a href="../GTGanilData.html#GTGanilData:fEvbsize" title="Int_t GTGanilData::fEvbsize">fEvbsize</a>,&amp;<a href="../GTGanilData.html#GTGanilData:fEventNumber" title="Int_t GTGanilData::fEventNumber">fEventNumber</a> );
     <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_OK ) {
       <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = s_evctrl ((<span class="keyword">short</span>*)<a href="../GTGanilData.html#GTGanilData:fEventBrut" title="UShort_t* GTGanilData::fEventBrut">fEventBrut</a>,(<span class="keyword">short</span>*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>,
 			  <a href="../GTGanilData.html#GTGanilData:fStructEvent" title="char* GTGanilData::fStructEvent">fStructEvent</a>,&amp;<a href="../GTGanilData.html#GTGanilData:fCtrlForm" title="Int_t GTGanilData::fCtrlForm">fCtrlForm</a> );
       <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == GR_OK )
-	<span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT*)">EventUnravelling</a>((<a href="../ListOfTypes.html#CTRL_EVENT">CTRL_EVENT</a>*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>));
+	<span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT* )">EventUnravelling</a>((CTRL_EVENT*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>));
       <span class="keyword">else</span> {
 	puts (<span class="string">"\n&gt;&gt;&gt; Erreur de reconstruction"</span>);
 	<span class="keyword">return</span>(<span class="keyword">false</span>);
@@ -470,10 +470,10 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   }
   <span class="keyword">else</span>
   {
-    <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = get_next_event(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>,<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>,(<span class="keyword">short</span>*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>,
+    <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = get_next_event(<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>,<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a>,(<span class="keyword">short</span>*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>,
 			    <a href="../GTGanilData.html#GTGanilData:fEvcsize" title="Int_t GTGanilData::fEvcsize">fEvcsize</a>,&amp;<a href="../GTGanilData.html#GTGanilData:fEventNumber" title="Int_t GTGanilData::fEventNumber">fEventNumber</a> );
     <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_OK ) {
-      <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT*)">EventUnravelling</a>((<a href="../ListOfTypes.html#CTRL_EVENT">CTRL_EVENT</a>*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>));
+      <span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT* )">EventUnravelling</a>((CTRL_EVENT*)<a href="../GTGanilData.html#GTGanilData:fEventCtrl" title="UShort_t* GTGanilData::fEventCtrl">fEventCtrl</a>));
     }
     <span class="keyword">else</span> <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_ENDOFBUFFER ) {
       <a href="../GTGanilData.html#GTGanilData:fEventNumber" title="Int_t GTGanilData::fEventNumber">fEventNumber</a>=-1;
@@ -494,9 +494,9 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
    <span class="comment">//Shamelessly copied from Luc Legeard's GEvent</span>
   <span class="keyword">if</span> (!<a href="../GTGanilData.html#GTGanilData:fIsCtrl" title="bool GTGanilData::fIsCtrl">fIsCtrl</a>)
   {
-     <a href="../ListOfTypes.html#UNSINT16">UNSINT16</a>* ebyeEventCtrl;
-    <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = acq_ebyedat_get_next_event((<a href="../ListOfTypes.html#UNSINT16">UNSINT16</a>*)<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>, &amp;ebyeEventCtrl, &amp;<a href="../GTGanilData.html#GTGanilData:fEventNumber" title="Int_t GTGanilData::fEventNumber">fEventNumber</a>, EVCT_VAR);
-      <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_OK ) 	<span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT*)">EventUnravelling</a>((<a href="../ListOfTypes.html#CTRL_EVENT">CTRL_EVENT</a>*)ebyeEventCtrl));
+     UNSINT16* ebyeEventCtrl;
+    <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = acq_ebyedat_get_next_event((UNSINT16*)<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>, &amp;ebyeEventCtrl, &amp;<a href="../GTGanilData.html#GTGanilData:fEventNumber" title="Int_t GTGanilData::fEventNumber">fEventNumber</a>, EVCT_VAR);
+      <span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_OK ) 	<span class="keyword">return</span>(<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT* )">EventUnravelling</a>((CTRL_EVENT*)ebyeEventCtrl));
   <span class="keyword">else</span> 
 	<span class="keyword">if</span> ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> == ACQ_ENDOFBUFFER ) 
 	  {
@@ -505,7 +505,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 	  }
 	<span class="keyword">else</span> 
 	  {
-	    cout&lt;&lt; <span class="string">" in ReadNextEvent__EBEYEDAT error status: "</span> &lt;&lt; <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> &lt;&lt;<span class="string">"  n"</span>;
+	    <a href="../ListOfTypes.html#ostream">cout</a>&lt;&lt; <span class="string">" in ReadNextEvent__EBEYEDAT error status: "</span> &lt;&lt; <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> &lt;&lt;<span class="string">"  n"</span>;
 	    <span class="keyword">return</span>(<span class="keyword">false</span>);
 	  }
     }
@@ -521,16 +521,16 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   <span class="comment">// PRIVATE</span>
   <span class="comment">// Read a single buffer from file</span>
 
-  <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = acq_mt_read_c ( <a href="../GTGanilData.html#GTGanilData:fLun" title="Int_t GTGanilData::fLun">fLun</a>, <a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>-&gt;Buffer, &amp;<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a> );
+  <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> = acq_mt_read_c ( <a href="../GTGanilData.html#GTGanilData:fLun" title="Int_t GTGanilData::fLun">fLun</a>, <a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>-&gt;Buffer, &amp;<a href="../GTGanilData.html#GTGanilData:fBufSize" title="Int_t GTGanilData::fBufSize">fBufSize</a> );
   <span class="comment">//if ( <a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a> != ACQ_OK )</span>
-    <span class="comment">//cout &lt;&lt; <span class="string">"Not OK"</span>&lt;&lt;endl; // Maybe stuff to do to handle the error</span>
+    <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Not OK"</span>&lt;&lt;endl; // Maybe stuff to do to handle the error</span>
 
-  strncpy(<a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a>,<a href="../GTGanilData.html#GTGanilData:fBuffer" title="in2p3_buffer_struct* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.Ident, 8);
+  strncpy(<a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a>,<a href="../GTGanilData.html#GTGanilData:fBuffer" title="IN2P3_BUFFER_STRUCT* GTGanilData::fBuffer">fBuffer</a>-&gt;les_donnees.Ident, 8);
   <a href="../GTGanilData.html#GTGanilData:fHeader" title="char GTGanilData::fHeader">fHeader</a>[8]='\0';
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="tm1yq"></a><span class="keyword">bool</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT*)">EventUnravelling</a>(<a href="../ListOfTypes.html#CTRL_EVENT">CTRL_EVENT</a>* pCtrlEvent)
+<a name="tm1yq"></a><span class="keyword">bool</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:EventUnravelling" title="bool GTGanilData::EventUnravelling(CTRL_EVENT* )">EventUnravelling</a>(CTRL_EVENT* pCtrlEvent)
 {
   <span class="comment">// PRIVATE</span>
   <span class="comment">// If mode is variable length event, we have to reconstruct the Data buffer</span>
@@ -550,16 +550,16 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
   
   <span class="keyword">for</span>(<a href="../ListOfTypes.html#Int_t">Int_t</a> i=0;i&lt;eventLength;i+=2)
   {
-	 <span class="comment">// cout &lt;&lt; <span class="string">"Param index="</span> &lt;&lt; brutData[i] &lt;&lt; <span class="string">" Value="</span> &lt;&lt; brutData[i+1]&lt;&lt;endl;</span>
+	 <span class="comment">// <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Param index="</span> &lt;&lt; brutData[i] &lt;&lt; <span class="string">" Value="</span> &lt;&lt; brutData[i+1]&lt;&lt;endl;</span>
     <span class="keyword">if</span> (brutData[i]&lt;=<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a> &amp;&amp; brutData[i]&gt;=1)
 	 {
       <a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>[brutData[i]]=brutData[i+1];
 		}
     <span class="keyword">else</span> <span class="comment">// More on error handling would be cool</span>
     {
-<span class="comment">/*      cout &lt;&lt; <span class="string">"Index overflow : Parameter index "</span>&lt;&lt;i&lt;&lt;<span class="string">" is "</span>&lt;&lt;brutData[i]&lt;&lt;
+<span class="comment">/*      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Index overflow : Parameter index "</span>&lt;&lt;i&lt;&lt;<span class="string">" is "</span>&lt;&lt;brutData[i]&lt;&lt;
 		<span class="string">" but fDataArraySize is "</span> &lt;&lt; <a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>&lt;&lt;endl;
-      return(false);
+      return(<a href="../ListOfTypes.html#bool">false</a>);
 */</span>
 	}
   }
@@ -570,44 +570,44 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="dtj_R"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:DumpEvent" title="void GTGanilData::DumpEvent() const">DumpEvent</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="dtj_R"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:DumpEvent" title="void GTGanilData::DumpEvent()">DumpEvent</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
   <span class="comment">// Dump parameter index, name and value for the current event.</span>
 
-  cout &lt;&lt;<span class="string">"--------- DUMPING EVENT ----------------------------"</span>&lt;&lt;endl;
-  cout &lt;&lt;<span class="string">"------- number:"</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fEventCount" title="Int_t GTGanilData::fEventCount">fEventCount</a>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"--------- DUMPING EVENT ----------------------------"</span>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"------- number:"</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fEventCount" title="Int_t GTGanilData::fEventCount">fEventCount</a>&lt;&lt;endl;
   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=1;i&lt;=<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>;i++)
   {
-    <span class="keyword">if</span>((<a href="../ListOfTypes.html#Short_t">Short_t</a>)<a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>[i]&gt;-1) cout &lt;&lt; <span class="string">"index :"</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index) const">GetParName</a>(i)&lt;&lt;<span class="string">" : "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>[i]&lt;&lt;endl;
+    <span class="keyword">if</span>((<a href="../ListOfTypes.html#Short_t">Short_t</a>)<a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>[i]&gt;-1) <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"index :"</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index)">GetParName</a>(i)&lt;&lt;<span class="string">" : "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataArray" title="UShort_t* GTGanilData::fDataArray">fDataArray</a>[i]&lt;&lt;endl;
   }
-  cout &lt;&lt;<span class="string">"--------- END           ----------------------------"</span>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"--------- END           ----------------------------"</span>&lt;&lt;endl;
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="a1FtZD"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:DumpParameterName" title="void GTGanilData::DumpParameterName() const">DumpParameterName</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="a1FtZD"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:DumpParameterName" title="void GTGanilData::DumpParameterName()">DumpParameterName</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
   <span class="comment">// Dump parameter index and name</span>
 
-  cout &lt;&lt;<span class="string">"--------- DUMPING PARAMETERS  ----------------------------"</span>&lt;&lt;endl;
-  cout &lt;&lt;<span class="string">"------- number:"</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fEventCount" title="Int_t GTGanilData::fEventCount">fEventCount</a>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"--------- DUMPING PARAMETERS  ----------------------------"</span>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"------- number:"</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fEventCount" title="Int_t GTGanilData::fEventCount">fEventCount</a>&lt;&lt;endl;
   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=1;i&lt;=<a href="../GTGanilData.html#GTGanilData:fDataArraySize" title="Int_t GTGanilData::fDataArraySize">fDataArraySize</a>;i++)
   { <span class="comment">// WARNING : index start at one, the first value is boggus</span>
-    cout &lt;&lt; <span class="string">"index :"</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index) const">GetParName</a>(i)&lt;&lt;endl;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"index :"</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;<a href="../GTGanilData.html#GTGanilData:fDataParameters" title="GTDataParameters* GTGanilData::fDataParameters">fDataParameters</a>-><a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index)">GetParName</a>(i)&lt;&lt;endl;
   }
-  cout &lt;&lt;<span class="string">"--------- END           ----------------------------"</span>&lt;&lt;endl;
+  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;<span class="string">"--------- END           ----------------------------"</span>&lt;&lt;endl;
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 <a name="nbMhvD"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:SetScalerBuffersManagement" title="void GTGanilData::SetScalerBuffersManagement(const GTGanilData::ScalerWhat_t sc)">SetScalerBuffersManagement</a>(<span class="keyword">const</span> ScalerWhat_t sc )
 {
   <span class="comment">// Set scaler buffers management. It can be:</span>
-  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>      : Skip scaler buffers</span>
-  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kDumpScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kDumpScaler">kDumpScaler</a>      : Dump all scaler buffers on stdout</span>
-  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a> : Automatic scaler buffer management, all scalers written in a TTree</span>
+  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>      : Skip scaler buffers</span>
+  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kDumpScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kDumpScaler">kDumpScaler</a>      : Dump all scaler buffers on stdout</span>
+  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a> : Automatic scaler buffer management, all scalers written in a TTree</span>
   <span class="comment">//                     To use this, the current TFile (i.e. gFile) must be writable.</span>
   <span class="comment">//                     i.e. you should do TFile file(<span class="string">"somefile.root"</span>, <span class="string">"create"</span>)</span>
-  <span class="comment">//                     and then toto.<a href="../GTGanilData.html#GTGanilData:SetScalerBuffersManagement" title="void GTGanilData::SetScalerBuffersManagement(const GTGanilData::ScalerWhat_t sc)">SetScalerBuffersManagement</a>(<a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kReportScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a>)</span>
-  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kReportScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a>    : when <a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>() encounters a scaler buffer, the <a href="../GTGanilData.html#GTGanilData:IsScalerBuffer" title="bool GTGanilData::IsScalerBuffer() const">IsScalerBuffer</a>()</span>
+  <span class="comment">//                     and then toto.<a href="../GTGanilData.html#GTGanilData:SetScalerBuffersManagement" title="void GTGanilData::SetScalerBuffersManagement(const GTGanilData::ScalerWhat_t sc)">SetScalerBuffersManagement</a>(<a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kReportScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a>)</span>
+  <span class="comment">//  <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:kReportScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kReportScaler">kReportScaler</a>    : when <a href="../GTGanilData.html#GTGanilData:Next" title="bool GTGanilData::Next()">Next</a>() encounters a scaler buffer, the <a href="../GTGanilData.html#GTGanilData:IsScalerBuffer" title="bool GTGanilData::IsScalerBuffer()">IsScalerBuffer</a>()</span>
   <span class="comment">//                     flag is set to <a href="../ListOfTypes.html#Bool_t">kTRUE</a> and the data can be retrieved by</span>
   <span class="comment">//                     calling <a href="../GTGanilData.html#GTGanilData:GetScalers" title="GTScalers* GTGanilData::GetScalers()">GetScalers</a>() (returns a pointer to a GScalers object).</span>
   <span class="comment">//                     WARNING: this option changes the logic of a loop over all events</span>
@@ -615,23 +615,23 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 
   <a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a>=sc;
 
-  <span class="keyword">if</span> (<a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a>==<a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a>) {
+  <span class="keyword">if</span> (<a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a>==<a href="../GTGanilData.html#GTGanilData:kAutoWriteScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kAutoWriteScaler">kAutoWriteScaler</a>) {
   	<span class="keyword">if</span>(gFile &amp;&amp; gFile-&gt;IsWritable()){
     	<a href="../GTGanilData.html#GTGanilData:fScalerTree" title="TTree* GTGanilData::fScalerTree">fScalerTree</a> = <span class="keyword">new</span> TTree(<span class="string">"Scalers"</span>,<span class="string">"Automatic filled scalers"</span>);
     	<a href="../GTGanilData.html#GTGanilData:fScalerTree" title="TTree* GTGanilData::fScalerTree">fScalerTree</a>-&gt;Branch(<span class="string">"scalers"</span>,<a href="../GTGanilData.html#GTGanilData:fScaler" title="GTScalers* GTGanilData::fScaler">fScaler</a>,8000,99);
     }
     <span class="keyword">else</span>
     {
-    	cout &lt;&lt; <span class="string">"Error in &lt;GTGanilData::SetScalerBuffersManagement&gt; : "</span>;
-    	cout &lt;&lt; <span class="string">"You must open a writable TFile before calling SetScalerBuffersManagement(kAutoWriteScaler)"</span> &lt;&lt; endl;
-    	<a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a> = <a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>;
+    	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Error in &lt;GTGanilData::SetScalerBuffersManagement&gt; : "</span>;
+    	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"You must open a writable TFile before calling SetScalerBuffersManagement(kAutoWriteScaler)"</span> &lt;&lt; endl;
+    	<a href="../GTGanilData.html#GTGanilData:fWhatScaler" title="GTGanilData::ScalerWhat_t GTGanilData::fWhatScaler">fWhatScaler</a> = <a href="../GTGanilData.html#GTGanilData:kSkipScaler" title="const GTGanilData::ScalerWhat_t GTGanilData::kSkipScaler">kSkipScaler</a>;
     }
   }
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="KbQQhC"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:GetRunNumber" title="Int_t GTGanilData::GetRunNumber() const">GetRunNumber</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="KbQQhC"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:GetRunNumber" title="Int_t GTGanilData::GetRunNumber()">GetRunNumber</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
 	<span class="comment">//Returns current run number</span>
    <span class="keyword">return</span> <a href="../GTGanilData.html#GTGanilData:fRunNumber" title="Int_t GTGanilData::fRunNumber">fRunNumber</a>;
@@ -639,14 +639,14 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 
 <span class="comment">//______________________________________________________________________________</span>
   
-<a name="u4opkB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:IsOpen" title="Bool_t GTGanilData::IsOpen() const">IsOpen</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="u4opkB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:IsOpen" title="Bool_t GTGanilData::IsOpen()">IsOpen</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
    <span class="keyword">return</span> (<a href="../GTGanilData.html#GTGanilData:fStatus" title="Int_t GTGanilData::fStatus">fStatus</a>==ACQ_OK &amp;&amp; <a href="../GTGanilData.html#GTGanilData:fLun" title="Int_t GTGanilData::fLun">fLun</a>);
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="p3EBd"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:SetUserTree" title="void GTGanilData::SetUserTree(TTree*)">SetUserTree</a>(TTree*)
+<a name="p3EBd"></a><span class="keyword">void</span> <a href="../GTGanilData.html">GTGanilData</a>::<a href="../GTGanilData.html#GTGanilData:SetUserTree" title="void GTGanilData::SetUserTree(TTree* )">SetUserTree</a>(TTree*)
 {
    <span class="comment">//Not used</span>
 }
@@ -658,7 +658,7 @@ ClassImp ( <a href="../GTGanilData.html">GTGanilData</a> )
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:41 </em><em>&raquo; Last generated: 2015-03-18 13:41</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

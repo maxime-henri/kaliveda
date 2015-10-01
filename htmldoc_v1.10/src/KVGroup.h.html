@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:56 2015            -->
+<!--   Date: Thu Sep 17 10:51:11 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="cpp">#ifndef KVGROUP_H</span>
 <span class="cpp">#define KVGROUP_H</span>
@@ -35,21 +35,21 @@
 
 <span class="keyword">protected</span>:
     <span class="keyword">enum</span> {
-        <a href="../KVGroup.html#KVGroup:kIsRemoving" title="KVGroup::(anonymous) KVGroup::kIsRemoving">kIsRemoving</a> = BIT(14)     <span class="comment">//flag set during call to RemoveTelescope</span>
+        <a href="../KVGroup.html#KVGroup:kIsRemoving" title="const enum KVGroup:: KVGroup::kIsRemoving">kIsRemoving</a> = BIT(14)     <span class="comment">//flag set during call to RemoveTelescope</span>
     };
     <a href="../KVList.html">KVList</a> *<a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>;        <span class="comment">//!Particles reconstructed in this group</span>
 
 <span class="keyword">public</span>:
     <span class="keyword">enum</span> {
-        <a href="../KVGroup.html#KVGroup:kForwards" title="KVGroup::(anonymous) KVGroup::kForwards">kForwards</a>,
-        <a href="../KVGroup.html#KVGroup:kBackwards" title="KVGroup::(anonymous) KVGroup::kBackwards">kBackwards</a>
+        <a href="../KVGroup.html#KVGroup:kForwards" title="const enum KVGroup:: KVGroup::kForwards">kForwards</a>,
+        <a href="../KVGroup.html#KVGroup:kBackwards" title="const enum KVGroup:: KVGroup::kBackwards">kBackwards</a>
     };
-<a name="PKDyX"></a>    <a href="../KVGroup.html">KVGroup</a>();
+    <a href="../KVGroup.html">KVGroup</a>();
     <span class="keyword">void</span> <a href="../KVGroup.html#KVGroup:init" title="void KVGroup::init()">init</a>();
     <span class="keyword">virtual</span> ~ <a href="../KVGroup.html">KVGroup</a>();
 <a name="LMgVvD"></a>    <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVGroup.html#KVGroup:SetNumber" title="void KVGroup::SetNumber(UInt_t num)">SetNumber</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> num) {
         <span class="comment">// Setting number for group also sets name to <span class="string">"Group_n"</span></span>
-        <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"Group_%u"</span>, num) );
+        <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"Group_%u"</span>, num) );
         <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVBase.html#KVBase:SetNumber" title="void KVBase::SetNumber(UInt_t num)">SetNumber</a>(num);
     };
 
@@ -58,11 +58,11 @@
     <span class="keyword">void</span> <a href="../KVGroup.html#KVGroup:Reset" title="void KVGroup::Reset()">Reset</a>();
 
     <span class="keyword">virtual</span> TList *<a href="../KVGroup.html#KVGroup:GetDetectorsInLayer" title="TList* KVGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay);
-    <span class="keyword">virtual</span> TList *<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector*, UChar_t dir = kBackwards)">GetAlignedDetectors</a>(<a href="../KVDetector.html">KVDetector</a> *, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> dir = <a href="../KVGroup.html#KVGroup:kBackwards" title="KVGroup::(anonymous) KVGroup::kBackwards">kBackwards</a>);
+    <span class="keyword">virtual</span> TList *<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>(<a href="../KVDetector.html">KVDetector</a> *, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> dir = <a href="../KVGroup.html#KVGroup:kBackwards" title="const enum KVGroup:: KVGroup::kBackwards">kBackwards</a>);
 
 <a name="LS2WlB"></a>    <span class="keyword">inline</span> <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVGroup.html#KVGroup:GetHits" title="UInt_t KVGroup::GetHits()">GetHits</a>() {
         <span class="keyword">if</span> (<a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>)
-            <span class="keyword">return</span> <a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize() const">GetSize</a>();
+            <span class="keyword">return</span> <a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();
         <span class="keyword">else</span>
             <span class="keyword">return</span> 0;
     };
@@ -76,7 +76,7 @@
     <span class="keyword">void</span> <a href="../KVGroup.html#KVGroup:RemoveHit" title="void KVGroup::RemoveHit(KVNucleus* kvd)">RemoveHit</a>(<a href="../KVNucleus.html">KVNucleus</a> * kvd);
 
 <a name="weZgoC"></a>    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVGroup.html#KVGroup:IsRemoving" title="Bool_t KVGroup::IsRemoving()">IsRemoving</a>() {
-        <span class="keyword">return</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TestBit" title="Bool_t TObject::TestBit(UInt_t f) const">TestBit</a>(<a href="../KVGroup.html#KVGroup:kIsRemoving" title="KVGroup::(anonymous) KVGroup::kIsRemoving">kIsRemoving</a>);
+        <span class="keyword">return</span> <a href="../#TObject:TestBit" title="Bool_t TObject::TestBit(UInt_t f)">TestBit</a>(<a href="../KVGroup.html#KVGroup:kIsRemoving" title="const enum KVGroup:: KVGroup::kIsRemoving">kIsRemoving</a>);
     }
 <a name="YQbHZ"></a>    <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVGroup.html#KVGroup:Sort" title="void KVGroup::Sort()">Sort</a>(){};
 <a name="jWO2BC"></a>    <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVGroup.html#KVGroup:CountLayers" title="void KVGroup::CountLayers()">CountLayers</a>(){};
@@ -114,7 +114,7 @@ inline <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVGroup.html"
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

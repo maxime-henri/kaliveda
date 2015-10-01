@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:33 2015            -->
+<!--   Date: Thu Sep 17 10:52:02 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
                           <a href="../KVTGID.html">KVTGID</a>.cpp  -  description
@@ -50,22 +50,22 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 <span class="comment">//giving its name to the constructor. These objects are persistent, i.e. can be</span>
 <span class="comment">//retrieved from a ROOT file and used for identification.</span>
 <span class="comment">//</span>
-<span class="comment">//<a href="../KVTGID.html#KVTGID:GetIdentification" title="Double_t KVTGID::GetIdentification(Double_t ID_min, Double_t ID_max, Double_t&amp; ID_quality, Double_t* par = 0)">GetIdentification</a>() method performs an identification. Status code can be retrieved</span>
-<span class="comment">//afterwards using <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus() const">GetStatus</a>();</span>
+<span class="comment">//<a href="../KVTGID.html#KVTGID:GetIdentification" title="Double_t KVTGID::GetIdentification(Double_t ID_min,Double_t ID_max,Double_t&amp; ID_quality,Double_t* par=0)">GetIdentification</a>() method performs an identification. Status code can be retrieved</span>
+<span class="comment">//afterwards using <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus()">GetStatus</a>();</span>
 <span class="comment">//</span>
 <span class="comment">//A <a href="../KVIDGrid.html">KVIDGrid</a> identification grid can be generated from the functional in order</span>
 <span class="comment">//to visualise the corresponding identification lines. (MakeIDGrid)</span>
 <span class="comment">//</span>
 <span class="comment">//The following methods must be defined by child-classes:</span>
 <span class="comment">//</span>
-<span class="comment">//      <a href="../KVTGID.html#KVTGID:SetIdent" title="void KVTGID::SetIdent(KVIDLine*, Double_t ID)">SetIdent</a>() -- determine how to set the identification for each line in the grid</span>
-<span class="comment">//      <a href="../KVTGID.html#KVTGID:AddLine" title="KVIDLine* KVTGID::AddLine(KVIDGrid*)">AddLine</a>()  -- define the type of IDLine added to the grid</span>
+<span class="comment">//      <a href="../KVTGID.html#KVTGID:SetIdent" title="void KVTGID::SetIdent(KVIDLine* ,Double_t ID)">SetIdent</a>() -- determine how to set the identification for each line in the grid</span>
+<span class="comment">//      <a href="../KVTGID.html#KVTGID:AddLine" title="KVIDLine* KVTGID::AddLine(KVIDGrid* )">AddLine</a>()  -- define the type of IDLine added to the grid</span>
 <span class="comment">//      NewGrid()  -- define the type of IDGrid to generate</span>
 <span class="comment">//</span>
 <a name="gUnq2D"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:init" title="void KVTGID::init()">init</a>()
 {
     <span class="comment">//Default intitialisations</span>
-    <span class="comment">// We remove this object from gROOT-&gt;GetListOfFunctions() to stop the <a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a></span>
+    <span class="comment">// We remove this object from gROOT-&gt;GetListOfFunctions() to stop the <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a></span>
     <span class="comment">// constructors from deleting previous <a href="../KVTGID.html">KVTGID</a>'s with the same name</span>
     <a href="../KVTGID.html#KVTGID:fID_min" title="Double_t KVTGID::fID_min">fID_min</a> = 1.;
     <a href="../KVTGID.html#KVTGID:fID_max" title="Double_t KVTGID::fID_max">fID_max</a> = 100.;
@@ -83,14 +83,14 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <a href="../KVTGID.html#KVTGID:fType" title="Int_t KVTGID::fType">fType</a> = 0;
     <a href="../KVTGID.html#KVTGID:fLight" title="Int_t KVTGID::fLight">fLight</a>=0;
     <a href="../KVTGID.html#KVTGID:fZorA" title="Int_t KVTGID::fZorA">fZorA</a>=0;
-    <a href="../KVTGID.html#KVTGID:fMassFormula" title="Int_t KVTGID::fMassFormula">fMassFormula</a>=<a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:kEALMass" title="KVNucleus::(anonymous) KVNucleus::kEALMass">kEALMass</a>;
+    <a href="../KVTGID.html#KVTGID:fMassFormula" title="Int_t KVTGID::fMassFormula">fMassFormula</a>=<a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:kEALMass" title="const enum KVNucleus:: KVNucleus::kEALMass">kEALMass</a>;
     <a href="../KVTGID.html#KVTGID:fTelescopes" title="KVString KVTGID::fTelescopes">fTelescopes</a>=<span class="string">"/"</span>;
     gROOT-&gt;GetListOfFunctions()-&gt;Remove(<span class="keyword">this</span>);
 }
 
 <span class="comment">//___________________________________________________________________________//</span>
 
-<a name="sQgeoE"></a><a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:KVTGID" title="KVTGID KVTGID::KVTGID() or overloads">KVTGID</a>():<a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>()
+<a href="../KVTGID.html">KVTGID</a>::KVTGID():<a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>()
 {
     <span class="comment">// Default ctor</span>
     <a href="../KVTGID.html#KVTGID:init" title="void KVTGID::init()">init</a>();
@@ -98,12 +98,12 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//___________________________________________________________________________//</span>
 
-<a name="X4oi3E"></a><a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:KVTGID" title="KVTGID KVTGID::KVTGID() or overloads">KVTGID</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name,
+<a href="../KVTGID.html">KVTGID</a>::KVTGID(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name,
                <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * function, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin,
                <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="../ListOfTypes.html#Int_t">Int_t</a> npar, <a href="../ListOfTypes.html#Int_t">Int_t</a> par_x, <a href="../ListOfTypes.html#Int_t">Int_t</a> par_y)
-        :<a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>(name, <a href="../KVTGIDFunctions.html">KVTGIDFunctions</a>::<a href="../KVTGIDFunctions.html#KVTGIDFunctions:tassangot_Z" title="Double_t KVTGIDFunctions::tassangot_Z(Double_t* x, Double_t* par)">tassangot_Z</a>, xmin, xmax, npar)
+        :<a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>(name, <a href="../KVTGIDFunctions.html">KVTGIDFunctions</a>::<a href="../KVTGIDFunctions.html#KVTGIDFunctions:tassangot_Z" title="Double_t KVTGIDFunctions::tassangot_Z(Double_t* x,Double_t* par)">tassangot_Z</a>, xmin, xmax, npar)
 {
-    <span class="comment">//Create <a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a> named <span class="string">"name"</span> using <span class="string">"function"</span>, range xmin-&gt;xmax and number of</span>
+    <span class="comment">//Create <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a> named <span class="string">"name"</span> using <span class="string">"function"</span>, range xmin-&gt;xmax and number of</span>
     <span class="comment">//parameters npar.</span>
     <span class="comment">//</span>
     <span class="comment">//The given function name must correspond to one of the functions</span>
@@ -116,15 +116,15 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">//par_x and par_y are the indices of the parameters of the functional which</span>
     <span class="comment">//correspond to the <span class="string">'X'</span> and <span class="string">'Y'</span> coordinates of the identification map, respectively.</span>
     <span class="comment">//</span>
-    <span class="comment">//NOTE: the function pointer passed to the <a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a> constructor is just a dummy to</span>
-    <span class="comment">//make sure that the right constructor is called, and that the <a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a> is set up correctly.</span>
+    <span class="comment">//NOTE: the function pointer passed to the <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a> constructor is just a dummy to</span>
+    <span class="comment">//make sure that the right constructor is called, and that the <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a> is set up correctly.</span>
     <span class="comment">//The actual function used is set using the name given as argument 'function'.</span>
 
     <a href="../KVTGID.html#KVTGID:init" title="void KVTGID::init()">init</a>();
 
     <span class="comment">//set names of <span class="string">'X'</span> and <span class="string">'Y'</span> parameters. these are used by MakeIDGrid.</span>
-    <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(par_x, <span class="string">"X"</span>);
-    <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(par_y, <span class="string">"Y"</span>);
+    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(par_x, <span class="string">"X"</span>);
+    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(par_y, <span class="string">"Y"</span>);
 
     <a href="../KVTGID.html#KVTGID:fTGIDFunctionName" title="TString KVTGID::fTGIDFunctionName">fTGIDFunctionName</a>.Form(<span class="string">"KVTGIDFunctions::%s"</span>, function);
     SetFunction((<a href="../ListOfTypes.html#Double_t">Double_t</a>(*)(<a href="../ListOfTypes.html#Double_t">Double_t</a> *, <a href="../ListOfTypes.html#Double_t">Double_t</a> *)) gROOT-&gt;
@@ -133,17 +133,17 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//___________________________________________________________________________//</span>
 
-<a name="CfJE8C"></a><a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:KVTGID" title="KVTGID KVTGID::KVTGID() or overloads">KVTGID</a>(<span class="keyword">const</span> <a href="../KVTGID.html">KVTGID</a> &amp;obj) : <a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>()
+<a href="../KVTGID.html">KVTGID</a>::KVTGID(<span class="keyword">const</span> <a href="../KVTGID.html">KVTGID</a> &amp;obj) : <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>()
 {
 	<span class="comment">// copy constructor</span>
 	<a href="../KVTGID.html#KVTGID:init" title="void KVTGID::init()">init</a>();
-	((<a href="../KVTGID.html">KVTGID</a> &amp;)obj).<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid) const">Copy</a>(*<span class="keyword">this</span>);
+	((<a href="../KVTGID.html">KVTGID</a> &amp;)obj).<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid)">Copy</a>(*<span class="keyword">this</span>);
 }
 
 <span class="comment">//___________________________________________________________________________//</span>
-<a name="YEWR4"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid) const">Copy</a>(<a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;tgid) <span class="keyword">const</span>{
-	<span class="comment">// <a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid) const">Copy</a> this <a href="../KVTGID.html">KVTGID</a> function into the <a href="../KVTGID.html">KVTGID</a> object referenced by tgid </span>
-	<a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>::<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid) const">Copy</a>(tgid);
+<a name="YEWR4"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid)">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> &amp;tgid) <span class="keyword">const</span>{
+	<span class="comment">// <a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid)">Copy</a> this <a href="../KVTGID.html">KVTGID</a> function into the <a href="../KVTGID.html">KVTGID</a> object referenced by tgid </span>
+	<a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>::<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid)">Copy</a>(tgid);
 	((<a href="../KVTGID.html">KVTGID</a> &amp;) tgid).<a href="../KVTGID.html#KVTGID:fID_min" title="Double_t KVTGID::fID_min">fID_min</a>           = <a href="../KVTGID.html#KVTGID:fID_min" title="Double_t KVTGID::fID_min">fID_min</a>;
 	((<a href="../KVTGID.html">KVTGID</a> &amp;) tgid).<a href="../KVTGID.html#KVTGID:fID_max" title="Double_t KVTGID::fID_max">fID_max</a>           = <a href="../KVTGID.html#KVTGID:fID_max" title="Double_t KVTGID::fID_max">fID_max</a>;
 	((<a href="../KVTGID.html">KVTGID</a> &amp;) tgid).<a href="../KVTGID.html#KVTGID:fTGIDFunctionName" title="TString KVTGID::fTGIDFunctionName">fTGIDFunctionName</a> = <a href="../KVTGID.html#KVTGID:fTGIDFunctionName" title="TString KVTGID::fTGIDFunctionName">fTGIDFunctionName</a>;
@@ -169,7 +169,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//___________________________________________________________________________//</span>
 
-<a name="n2ku4"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetIdentification" title="Double_t KVTGID::GetIdentification(Double_t ID_min, Double_t ID_max, Double_t&amp; ID_quality, Double_t* par = 0)">GetIdentification</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> ID_min, <a href="../ListOfTypes.html#Double_t">Double_t</a> ID_max,
+<a name="n2ku4"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetIdentification" title="Double_t KVTGID::GetIdentification(Double_t ID_min,Double_t ID_max,Double_t&amp; ID_quality,Double_t* par=0)">GetIdentification</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> ID_min, <a href="../ListOfTypes.html#Double_t">Double_t</a> ID_max,
                                    <a href="../ListOfTypes.html#Double_t">Double_t</a> &amp; ID_quality, <a href="../ListOfTypes.html#Double_t">Double_t</a> * par)
 {
     <span class="comment">//Use the functional with the current parameter values in order to perform</span>
@@ -178,7 +178,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">//If the identification is not possible, -1 is returned</span>
     <span class="comment">//(ID_quality=-1 also).</span>
     <span class="comment">//</span>
-    <span class="comment">//For status code use <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus() const">GetStatus</a>().</span>
+    <span class="comment">//For status code use <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus()">GetStatus</a>().</span>
     <span class="comment">//</span>
     <span class="comment">//ID_min and ID_max are the lower &amp; upper limits for the identification.</span>
     <span class="comment">//The functional must change sign between these two limits in order for</span>
@@ -191,20 +191,20 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">//Optional argument <span class="string">"par"</span> allows to replace the current parameters.</span>
 
     <span class="keyword">if</span> (par)
-        <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(par);
+        <a href="../#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(par);
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> ID;
     ID = ID_quality = -1.;
-    <a href="../KVTGID.html#KVTGID:fStatus" title="Int_t KVTGID::fStatus">fStatus</a> = <a href="../KVTGID.html#KVTGID:kStatus_NotBetween_IDMin_IDMax" title="KVTGID::(anonymous) KVTGID::kStatus_NotBetween_IDMin_IDMax">kStatus_NotBetween_IDMin_IDMax</a>;
+    <a href="../KVTGID.html#KVTGID:fStatus" title="Int_t KVTGID::fStatus">fStatus</a> = <a href="../KVTGID.html#KVTGID:kStatus_NotBetween_IDMin_IDMax" title="const enum KVTGID:: KVTGID::kStatus_NotBetween_IDMin_IDMax">kStatus_NotBetween_IDMin_IDMax</a>;
 
-    <span class="keyword">if</span> (<a href="http://root.cern.ch/root/html/TF1.html#TF1:Eval" title="Double_t TF1::Eval(Double_t x, Double_t y = 0, Double_t z = 0, Double_t t = 0) const">Eval</a>(ID_min) * <a href="http://root.cern.ch/root/html/TF1.html#TF1:Eval" title="Double_t TF1::Eval(Double_t x, Double_t y = 0, Double_t z = 0, Double_t t = 0) const">Eval</a>(ID_max) &lt; 0.) {
+    <span class="keyword">if</span> (<a href="../#TF1:Eval" title="Double_t TF1::Eval(Double_t x,Double_t y=0,Double_t z=0,Double_t t=0)">Eval</a>(ID_min) * <a href="../#TF1:Eval" title="Double_t TF1::Eval(Double_t x,Double_t y=0,Double_t z=0,Double_t t=0)">Eval</a>(ID_max) &lt; 0.) {
         <span class="comment">//if the sign of the identification function changes between ID_min</span>
         <span class="comment">//and ID_max i.e. if the ID_min line is below the point and ID_max above</span>
         <span class="comment">//it this means that the point to identify is in between these two lines</span>
-        ID = <a href="http://root.cern.ch/root/html/TF1.html#TF1:GetX" title="Double_t TF1::GetX(Double_t y, Double_t xmin = 0, Double_t xmax = 0, Double_t epsilon = 1.0E-10, Int_t maxiter = 100, Bool_t logx = false) const">GetX</a>(0., ID_min, ID_max);
+        ID = <a href="../#TF1:GetX" title="Double_t TF1::GetX(Double_t y,Double_t xmin=0,Double_t xmax=0,Double_t epsilon=1.E-10,Int_t maxiter=100,Bool_t logx=false)">GetX</a>(0., ID_min, ID_max);
         <span class="comment">//what is actual value of Tassan-Got formula for this ID ?</span>
-        ID_quality = TMath::Abs(<a href="http://root.cern.ch/root/html/TF1.html#TF1:Eval" title="Double_t TF1::Eval(Double_t x, Double_t y = 0, Double_t z = 0, Double_t t = 0) const">Eval</a>(ID));
-        <a href="../KVTGID.html#KVTGID:fStatus" title="Int_t KVTGID::fStatus">fStatus</a> = <a href="../KVTGID.html#KVTGID:kStatus_OK" title="KVTGID::(anonymous) KVTGID::kStatus_OK">kStatus_OK</a>;
+        ID_quality = TMath::Abs(<a href="../#TF1:Eval" title="Double_t TF1::Eval(Double_t x,Double_t y=0,Double_t z=0,Double_t t=0)">Eval</a>(ID));
+        <a href="../KVTGID.html#KVTGID:fStatus" title="Int_t KVTGID::fStatus">fStatus</a> = <a href="../KVTGID.html#KVTGID:kStatus_OK" title="const enum KVTGID:: KVTGID::kStatus_OK">kStatus_OK</a>;
     }
 
     <span class="keyword">return</span> ID;
@@ -212,7 +212,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//_______________________________________________________________________________________//</span>
 
-<a name="UVBXuC"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:AddLineToGrid" title="void KVTGID::AddLineToGrid(KVIDGrid* g, Int_t ID, Int_t npoints, Double_t xmin, Double_t xmax, Bool_t log_scale = kFALSE)">AddLineToGrid</a>(<a href="../KVIDGrid.html">KVIDGrid</a> * g, <a href="../ListOfTypes.html#Int_t">Int_t</a> ID, <a href="../ListOfTypes.html#Int_t">Int_t</a> npoints,
+<a name="UVBXuC"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:AddLineToGrid" title="void KVTGID::AddLineToGrid(KVIDGrid* g,Int_t ID,Int_t npoints,Double_t xmin,Double_t xmax,Bool_t log_scale=kFALSE)">AddLineToGrid</a>(<a href="../KVIDGrid.html">KVIDGrid</a> * g, <a href="../ListOfTypes.html#Int_t">Int_t</a> ID, <a href="../ListOfTypes.html#Int_t">Int_t</a> npoints,
                            <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> log_scale)
 {
     <span class="comment">// Add a line to the grid <span class="string">'g'</span> for identification label 'ID' with 'npoints' points calculated between</span>
@@ -223,10 +223,10 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">// of the line than at the end, with a logarithmic dependence.</span>
 
     <span class="comment">//add new line to grid</span>
-    <a href="../KVIDLine.html">KVIDLine</a> *new_line = <a href="../KVTGID.html#KVTGID:AddLine" title="KVIDLine* KVTGID::AddLine(KVIDGrid*)">AddLine</a>(g);
+    <a href="../KVIDLine.html">KVIDLine</a> *new_line = <a href="../KVTGID.html#KVTGID:AddLine" title="KVIDLine* KVTGID::AddLine(KVIDGrid* )">AddLine</a>(g);
 
     <span class="comment">//set identification label for line</span>
-    <a href="../KVTGID.html#KVTGID:SetIdent" title="void KVTGID::SetIdent(KVIDLine*, Double_t ID)">SetIdent</a>(new_line, ID);
+    <a href="../KVTGID.html#KVTGID:SetIdent" title="void KVTGID::SetIdent(KVIDLine* ,Double_t ID)">SetIdent</a>(new_line, ID);
     <span class="comment">//set mass formula for line</span>
     new_line-&gt;SetMassFormula(<a href="../KVTGID.html#KVTGID:fMassFormula" title="Int_t KVTGID::fMassFormula">fMassFormula</a>);
 
@@ -248,15 +248,15 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
         <span class="keyword">else</span>
             X = xmin + dX * ((<a href="../ListOfTypes.html#Double_t">Double_t</a>) i);
 
-        <span class="comment">//leave value Y as it is. The value of GetIDFunc()-&gt;<a href="http://root.cern.ch/root/html/TF1.html#TF1:Eval" title="Double_t TF1::Eval(Double_t x, Double_t y = 0, Double_t z = 0, Double_t t = 0) const">Eval</a>(ID)</span>
+        <span class="comment">//leave value Y as it is. The value of GetIDFunc()-&gt;<a href="../#TF1:Eval" title="Double_t TF1::Eval(Double_t x,Double_t y=0,Double_t z=0,Double_t t=0)">Eval</a>(ID)</span>
         <span class="comment">//is the vertical distance delta_Y from point (X,Y) to the line; therefore the</span>
         <span class="comment">//Y coordinate of the point on the line is Y + delta_Y, whatever the value Y.</span>
 
         <span class="comment">//set values of parameters which correspond to X and Y coordinates in grid</span>
-        <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"X"</span>, X);
-        <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"Y"</span>, Y);
+        <a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"X"</span>, X);
+        <a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"Y"</span>, Y);
 
-        Y += <a href="http://root.cern.ch/root/html/TF1.html#TF1:Eval" title="Double_t TF1::Eval(Double_t x, Double_t y = 0, Double_t z = 0, Double_t t = 0) const">Eval</a>((<a href="../ListOfTypes.html#Double_t">Double_t</a>) ID);
+        Y += <a href="../#TF1:Eval" title="Double_t TF1::Eval(Double_t x,Double_t y=0,Double_t z=0,Double_t t=0)">Eval</a>((<a href="../ListOfTypes.html#Double_t">Double_t</a>) ID);
 
         <span class="keyword">if</span> (!TMath::IsNaN(Y))
             new_line-&gt;SetPoint(p_index++, X, Y);
@@ -267,27 +267,27 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//_______________________________________________________________________________________//</span>
 
-<a name="DNog0"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Print" title="void KVTGID::Print(Option_t* option = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * option) <span class="keyword">const</span>
+<a name="DNog0"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Print" title="void KVTGID::Print(Option_t* option=&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * option) <span class="keyword">const</span>
 {
-    <span class="comment">//<a href="../KVTGID.html#KVTGID:Print" title="void KVTGID::Print(Option_t* option = &quot;&quot;) const">Print</a> info on functional and grid</span>
-    cout &lt;&lt; <a href="../KVTGID.html#KVTGID:Class" title="TClass* KVTGID::Class()">Class</a>()-&gt;
-    <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt;
+    <span class="comment">//<a href="../KVTGID.html#KVTGID:Print" title="void KVTGID::Print(Option_t* option=&quot;&quot;)">Print</a> info on functional and grid</span>
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVTGID.html#KVTGID:Class" title="TClass* KVTGID::Class()">Class</a>()-&gt;
+    <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt;
     <span class="string">" object for identification using Tassan-Got functional"</span> &lt;&lt; endl;
-    cout &lt;&lt; <span class="string">"Limits for fit : fID_min = "</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetIDmin" title="Double_t KVTGID::GetIDmin() const">GetIDmin</a>() &lt;&lt; <span class="string">"  fID_max = "</span> &lt;&lt;
-    <a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax() const">GetIDmax</a>() &lt;&lt; endl;
-    <a href="http://root.cern.ch/root/html/TF1.html#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>::<a href="../KVTGID.html#KVTGID:Print" title="void KVTGID::Print(Option_t* option = &quot;&quot;) const">Print</a>(option);
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Limits for fit : fID_min = "</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetIDmin" title="Double_t KVTGID::GetIDmin()">GetIDmin</a>() &lt;&lt; <span class="string">"  fID_max = "</span> &lt;&lt;
+    <a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax()">GetIDmax</a>() &lt;&lt; endl;
+    <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>::<a href="../KVTGID.html#KVTGID:Print" title="void KVTGID::Print(Option_t* option=&quot;&quot;)">Print</a>(option);
 }
 
 <span class="comment">//_______________________________________________________________________________________//</span>
 
-<a name="KJXYbD"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Compare" title="Int_t KVTGID::Compare(const TObject* obj) const">Compare</a>(<span class="keyword">const</span> <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * obj) <span class="keyword">const</span>
+<a name="KJXYbD"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Compare" title="Int_t KVTGID::Compare(const TObject* obj)">Compare</a>(<span class="keyword">const</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> * obj) <span class="keyword">const</span>
 {
     <span class="comment">//Used to sort list of <a href="../KVTGID.html">KVTGID</a> in <a href="../KVTGIDManager.html">KVTGIDManager</a></span>
     <span class="comment">//ID obj with smallest IDmax will be first in sorted list</span>
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> id1 = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax() const">GetIDmax</a>();
+    <a href="../ListOfTypes.html#Int_t">Int_t</a> id1 = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax()">GetIDmax</a>();
     <span class="keyword">if</span> (id1 &lt; 0)
         <span class="keyword">return</span> 0;
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> id2 = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">static_cast</span> &lt; <span class="keyword">const</span> <a href="../KVTGID.html">KVTGID</a> * &gt;(obj)-><a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax() const">GetIDmax</a>();
+    <a href="../ListOfTypes.html#Int_t">Int_t</a> id2 = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">static_cast</span> &lt; <span class="keyword">const</span> <a href="../KVTGID.html">KVTGID</a> * &gt;(obj)-><a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax()">GetIDmax</a>();
     <span class="keyword">if</span> (id2 &lt; 0)
         <span class="keyword">return</span> 0;
     <span class="keyword">if</span> (id1 &gt; id2)
@@ -299,15 +299,15 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//_______________________________________________________________________________________//</span>
 
-<a name="r.IQ9"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetStatusString" title="const Char_t* KVTGID::GetStatusString() const">GetStatusString</a>() <span class="keyword">const</span>
+<a name="r.IQ9"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetStatusString" title="const Char_t* KVTGID::GetStatusString()">GetStatusString</a>() <span class="keyword">const</span>
 {
-    <span class="comment">//Returns explanatory message for value of <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus() const">GetStatus</a>()</span>
+    <span class="comment">//Returns explanatory message for value of <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus()">GetStatus</a>()</span>
 
     <span class="keyword">static</span> TString messages[] = {
         <span class="string">"ok"</span>,
         <span class="string">"point to identify outside of identification range of function"</span>
     };
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> status = <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus() const">GetStatus</a>() + 1;
+    <a href="../ListOfTypes.html#Int_t">Int_t</a> status = <a href="../KVTGID.html#KVTGID:GetStatus" title="Int_t KVTGID::GetStatus()">GetStatus</a>() + 1;
     <span class="keyword">if</span> (status--)
         <span class="keyword">return</span> messages[status];
     <span class="keyword">return</span> Form(<span class="string">"no call to GetIdentification() performed yet"</span>);
@@ -315,7 +315,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//_______________________________________________________________________________________//</span>
 
-<a name="W8b_3B"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetDistanceToLine" title="Double_t KVTGID::GetDistanceToLine(Double_t x, Double_t y, Int_t id, Double_t* params = 0)">GetDistanceToLine</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Int_t">Int_t</a> id,
+<a name="W8b_3B"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetDistanceToLine" title="Double_t KVTGID::GetDistanceToLine(Double_t x,Double_t y,Int_t id,Double_t* params=0)">GetDistanceToLine</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Int_t">Int_t</a> id,
                                    <a href="../ListOfTypes.html#Double_t">Double_t</a> * params)
 {
     <span class="comment">//Given a point (x,y) (which could, for example, be a point in a <a href="../KVIDGrid.html">KVIDGrid</a> line which we want to fit)</span>
@@ -324,15 +324,15 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">//If the parameter array 'params' is not given, we use the current values of the parameters.</span>
 
     <span class="keyword">if</span> (params)
-        <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(params);
-    <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"X"</span>, x);
-    <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"Y"</span>, y);
-    <span class="keyword">return</span> <a href="http://root.cern.ch/root/html/TF1.html#TF1:Eval" title="Double_t TF1::Eval(Double_t x, Double_t y = 0, Double_t z = 0, Double_t t = 0) const">Eval</a>((<a href="../ListOfTypes.html#Double_t">Double_t</a>) id);
+        <a href="../#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(params);
+    <a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"X"</span>, x);
+    <a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(<span class="string">"Y"</span>, y);
+    <span class="keyword">return</span> <a href="../#TF1:Eval" title="Double_t TF1::Eval(Double_t x,Double_t y=0,Double_t z=0,Double_t t=0)">Eval</a>((<a href="../ListOfTypes.html#Double_t">Double_t</a>) id);
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="YY9T7C"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Streamer" title="void KVTGID::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp; R__b)
+<a name="YY9T7C"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:Streamer" title="void KVTGID::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp; R__b)
 {
     <span class="comment">// Stream an object of class <a href="../KVTGID.html">KVTGID</a>.</span>
     <span class="comment">// If the name of the KVTGIDFunction has been set (version &gt; 1) then</span>
@@ -351,7 +351,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="u_gNgB"></a><a href="../KVTGID.html">KVTGID</a>* <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:MakeTGID" title="KVTGID* KVTGID::MakeTGID(const Char_t* name, Int_t type, Int_t light, Int_t ZorA, Int_t mass)">MakeTGID</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <a href="../ListOfTypes.html#Int_t">Int_t</a> type, <a href="../ListOfTypes.html#Int_t">Int_t</a> light, <a href="../ListOfTypes.html#Int_t">Int_t</a> ZorA, <a href="../ListOfTypes.html#Int_t">Int_t</a> mass)
+<a name="u_gNgB"></a><a href="../KVTGID.html">KVTGID</a>* <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:MakeTGID" title="KVTGID* KVTGID::MakeTGID(const Char_t* name,Int_t type,Int_t light,Int_t ZorA,Int_t mass)">MakeTGID</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <a href="../ListOfTypes.html#Int_t">Int_t</a> type, <a href="../ListOfTypes.html#Int_t">Int_t</a> light, <a href="../ListOfTypes.html#Int_t">Int_t</a> ZorA, <a href="../ListOfTypes.html#Int_t">Int_t</a> mass)
 {
     <span class="comment">// Static function used to create TGID objects</span>
     <span class="comment">//</span>
@@ -373,7 +373,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">// ZorA   -----&gt;   functional used to find Z or A</span>
     <span class="comment">//  *    ZorA :  =0-&gt;A    &lt;&gt;0-&gt;Z</span>
 
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> npar=6+<a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type, Int_t light)">GetNumberOfLTGParameters</a>(type,light);
+    <a href="../ListOfTypes.html#Int_t">Int_t</a> npar=6+<a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type,Int_t light)">GetNumberOfLTGParameters</a>(type,light);
     <a href="../KVTGID.html">KVTGID</a>* _tgid_ = 0;
     <span class="keyword">if</span> (ZorA){
         _tgid_ = <span class="keyword">new</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>(name, npar, type, light, mass);
@@ -450,9 +450,9 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">//  par[8] = pdy</span>
     <span class="comment">//  par[9] = eta</span>
 
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> npar = <a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type, Int_t light)">GetNumberOfLTGParameters</a>(<a href="../KVTGID.html#KVTGID:fType" title="Int_t KVTGID::fType">fType</a>,<a href="../KVTGID.html#KVTGID:fLight" title="Int_t KVTGID::fLight">fLight</a>);
+    <a href="../ListOfTypes.html#Int_t">Int_t</a> npar = <a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type,Int_t light)">GetNumberOfLTGParameters</a>(<a href="../KVTGID.html#KVTGID:fType" title="Int_t KVTGID::fType">fType</a>,<a href="../KVTGID.html#KVTGID:fLight" title="Int_t KVTGID::fLight">fLight</a>);
     <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ipar=0; ipar&lt;npar; ipar++){
-        <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(6+ipar, par[ipar]);
+        <a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(6+ipar, par[ipar]);
     }
 }
 
@@ -506,15 +506,15 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="comment">//  par[8] = pdy</span>
     <span class="comment">//  par[9] = eta</span>
 
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> npar = <a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type, Int_t light)">GetNumberOfLTGParameters</a>(<a href="../KVTGID.html#KVTGID:fType" title="Int_t KVTGID::fType">fType</a>,<a href="../KVTGID.html#KVTGID:fLight" title="Int_t KVTGID::fLight">fLight</a>);
+    <a href="../ListOfTypes.html#Int_t">Int_t</a> npar = <a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type,Int_t light)">GetNumberOfLTGParameters</a>(<a href="../KVTGID.html#KVTGID:fType" title="Int_t KVTGID::fType">fType</a>,<a href="../KVTGID.html#KVTGID:fLight" title="Int_t KVTGID::fLight">fLight</a>);
     <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ipar=0; ipar&lt;npar; ipar++){
-        <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(6+ipar, (<a href="../ListOfTypes.html#Double_t">Double_t</a>)par[ipar]);
+        <a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(6+ipar, (<a href="../ListOfTypes.html#Double_t">Double_t</a>)par[ipar]);
     }
 }
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="QDu2gE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type, Int_t light)">GetNumberOfLTGParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> type, <a href="../ListOfTypes.html#Int_t">Int_t</a> light)
+<a name="QDu2gE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type,Int_t light)">GetNumberOfLTGParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> type, <a href="../ListOfTypes.html#Int_t">Int_t</a> light)
 {
     <span class="comment">// Static function returning number of parameters used by Tassan-Got functional.</span>
     <span class="comment">// Depends on type of functional (type) and whether non-linear light response</span>
@@ -535,19 +535,19 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 
 <a name="IMr_dD"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:SetLTGParameterNames" title="void KVTGID::SetLTGParameterNames()">SetLTGParameterNames</a>()
 {
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fLambda" title="Int_t KVTGID::fLambda">fLambda</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fLambda" title="Int_t KVTGID::fLambda">fLambda</a>,<span class="string">"#lambda"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fAlpha" title="Int_t KVTGID::fAlpha">fAlpha</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fAlpha" title="Int_t KVTGID::fAlpha">fAlpha</a>,<span class="string">"#alpha"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fBeta" title="Int_t KVTGID::fBeta">fBeta</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fBeta" title="Int_t KVTGID::fBeta">fBeta</a>,<span class="string">"#beta"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fMu" title="Int_t KVTGID::fMu">fMu</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fMu" title="Int_t KVTGID::fMu">fMu</a>,<span class="string">"#mu"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fNu" title="Int_t KVTGID::fNu">fNu</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fNu" title="Int_t KVTGID::fNu">fNu</a>,<span class="string">"#nu"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fXi" title="Int_t KVTGID::fXi">fXi</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fXi" title="Int_t KVTGID::fXi">fXi</a>,<span class="string">"#xi"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fG" title="Int_t KVTGID::fG">fG</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fG" title="Int_t KVTGID::fG">fG</a>,<span class="string">"g"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fPdx" title="Int_t KVTGID::fPdx">fPdx</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fPdx" title="Int_t KVTGID::fPdx">fPdx</a>,<span class="string">"pdx"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fPdy" title="Int_t KVTGID::fPdy">fPdy</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fPdy" title="Int_t KVTGID::fPdy">fPdy</a>,<span class="string">"pdy"</span>);
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fEta" title="Int_t KVTGID::fEta">fEta</a>&gt;-1) <a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fEta" title="Int_t KVTGID::fEta">fEta</a>,<span class="string">"#eta"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fLambda" title="Int_t KVTGID::fLambda">fLambda</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fLambda" title="Int_t KVTGID::fLambda">fLambda</a>,<span class="string">"#lambda"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fAlpha" title="Int_t KVTGID::fAlpha">fAlpha</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fAlpha" title="Int_t KVTGID::fAlpha">fAlpha</a>,<span class="string">"#alpha"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fBeta" title="Int_t KVTGID::fBeta">fBeta</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fBeta" title="Int_t KVTGID::fBeta">fBeta</a>,<span class="string">"#beta"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fMu" title="Int_t KVTGID::fMu">fMu</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fMu" title="Int_t KVTGID::fMu">fMu</a>,<span class="string">"#mu"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fNu" title="Int_t KVTGID::fNu">fNu</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fNu" title="Int_t KVTGID::fNu">fNu</a>,<span class="string">"#nu"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fXi" title="Int_t KVTGID::fXi">fXi</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fXi" title="Int_t KVTGID::fXi">fXi</a>,<span class="string">"#xi"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fG" title="Int_t KVTGID::fG">fG</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fG" title="Int_t KVTGID::fG">fG</a>,<span class="string">"g"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fPdx" title="Int_t KVTGID::fPdx">fPdx</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fPdx" title="Int_t KVTGID::fPdx">fPdx</a>,<span class="string">"pdx"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fPdy" title="Int_t KVTGID::fPdy">fPdy</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fPdy" title="Int_t KVTGID::fPdy">fPdy</a>,<span class="string">"pdy"</span>);
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:fEta" title="Int_t KVTGID::fEta">fEta</a>&gt;-1) <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(<a href="../KVTGID.html#KVTGID:fEta" title="Int_t KVTGID::fEta">fEta</a>,<span class="string">"#eta"</span>);
 }
 
-<a name="UOvXiD"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:SetIDTelescopes" title="void KVTGID::SetIDTelescopes(const TCollection*)">SetIDTelescopes</a>(<span class="keyword">const</span> TCollection*list)
+<a name="UOvXiD"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:SetIDTelescopes" title="void KVTGID::SetIDTelescopes(const TCollection* )">SetIDTelescopes</a>(<span class="keyword">const</span> TCollection*list)
 {
     <span class="comment">// set list of ID telescopes for which fit is valid.</span>
     <span class="comment">// any previous list is deleted.</span>
@@ -557,40 +557,40 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="keyword">while</span> ( (t=(<a href="../KVBase.html">KVBase</a>*)next()) ) <a href="../KVTGID.html#KVTGID:AddIDTelescope" title="void KVTGID::AddIDTelescope(KVBase* tel)">AddIDTelescope</a>(t);
 };
 
-<a name="velCkB"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:WriteToAsciiFile" title="void KVTGID::WriteToAsciiFile(ofstream&amp;) const">WriteToAsciiFile</a>(<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; gridfile) <span class="keyword">const</span>
+<a name="velCkB"></a><span class="keyword">void</span> <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:WriteToAsciiFile" title="void KVTGID::WriteToAsciiFile(ofstream&amp; )">WriteToAsciiFile</a>(<a href="../ListOfTypes.html#ofstream">ofstream</a> &amp; gridfile) <span class="keyword">const</span>
 {
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a> parameters of LTG fit in file.</span>
+    <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> parameters of LTG fit in file.</span>
 
-    gridfile &lt;&lt; <span class="string">"++KVTGID::"</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"Type="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetFunctionalType" title="Int_t KVTGID::GetFunctionalType() const">GetFunctionalType</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"LightEnergyDependence="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetLightEnergyDependence" title="Int_t KVTGID::GetLightEnergyDependence() const">GetLightEnergyDependence</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"ZorA="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetZorA" title="Int_t KVTGID::GetZorA() const">GetZorA</a>() &lt;&lt; endl;
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:GetZorA" title="Int_t KVTGID::GetZorA() const">GetZorA</a>()==1){
-        gridfile &lt;&lt; <span class="string">"MassFormula="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetMassFormula" title="Int_t KVTGID::GetMassFormula() const">GetMassFormula</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"++KVTGID::"</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"Type="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetFunctionalType" title="Int_t KVTGID::GetFunctionalType()">GetFunctionalType</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"LightEnergyDependence="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetLightEnergyDependence" title="Int_t KVTGID::GetLightEnergyDependence()">GetLightEnergyDependence</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"ZorA="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetZorA" title="Int_t KVTGID::GetZorA()">GetZorA</a>() &lt;&lt; endl;
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:GetZorA" title="Int_t KVTGID::GetZorA()">GetZorA</a>()==1){
+        gridfile &lt;&lt; <span class="string">"MassFormula="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetMassFormula" title="Int_t KVTGID::GetMassFormula()">GetMassFormula</a>() &lt;&lt; endl;
     }
-    gridfile &lt;&lt; <span class="string">"Functional="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetFunctionName" title="const Char_t* KVTGID::GetFunctionName() const">GetFunctionName</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"Runs="</span> &lt;&lt; ((<a href="../KVNumberList.html">KVNumberList</a>&amp;)<a href="../KVTGID.html#KVTGID:GetValidRuns" title="const KVNumberList&amp; KVTGID::GetValidRuns() const">GetValidRuns</a>()).AsString() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"IDTelescopes="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:fTelescopes" title="KVString KVTGID::fTelescopes">fTelescopes</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"&lt;VARX&gt; "</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetVarX" title="const Char_t* KVTGID::GetVarX() const">GetVarX</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"&lt;VARY&gt; "</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetVarY" title="const Char_t* KVTGID::GetVarY() const">GetVarY</a>() &lt;&lt; endl;
-    gridfile &lt;&lt; <span class="string">"ZMIN="</span> &lt;&lt; (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVTGID.html#KVTGID:GetIDmin" title="Double_t KVTGID::GetIDmin() const">GetIDmin</a>();
-    gridfile &lt;&lt; <span class="string">"  ZMAX="</span> &lt;&lt; (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax() const">GetIDmax</a>() &lt;&lt; endl;
-    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> type1 = (<a href="../KVTGID.html#KVTGID:GetFunctionalType" title="Int_t KVTGID::GetFunctionalType() const">GetFunctionalType</a>()==1);
-    gridfile &lt;&lt; Form(<span class="string">"Lambda=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetLambda" title="Double_t KVTGID::GetLambda() const">GetLambda</a>()) &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"Functional="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetFunctionName" title="const Char_t* KVTGID::GetFunctionName()">GetFunctionName</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"Runs="</span> &lt;&lt; ((<a href="../KVNumberList.html">KVNumberList</a>&amp;)<a href="../KVTGID.html#KVTGID:GetValidRuns" title="const KVNumberList&amp; KVTGID::GetValidRuns()">GetValidRuns</a>()).AsString() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"IDTelescopes="</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:fTelescopes" title="KVString KVTGID::fTelescopes">fTelescopes</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"&lt;VARX&gt; "</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetVarX" title="const Char_t* KVTGID::GetVarX()">GetVarX</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"&lt;VARY&gt; "</span> &lt;&lt; <a href="../KVTGID.html#KVTGID:GetVarY" title="const Char_t* KVTGID::GetVarY()">GetVarY</a>() &lt;&lt; endl;
+    gridfile &lt;&lt; <span class="string">"ZMIN="</span> &lt;&lt; (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVTGID.html#KVTGID:GetIDmin" title="Double_t KVTGID::GetIDmin()">GetIDmin</a>();
+    gridfile &lt;&lt; <span class="string">"  ZMAX="</span> &lt;&lt; (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVTGID.html#KVTGID:GetIDmax" title="Double_t KVTGID::GetIDmax()">GetIDmax</a>() &lt;&lt; endl;
+    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> type1 = (<a href="../KVTGID.html#KVTGID:GetFunctionalType" title="Int_t KVTGID::GetFunctionalType()">GetFunctionalType</a>()==1);
+    gridfile &lt;&lt; Form(<span class="string">"Lambda=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetLambda" title="Double_t KVTGID::GetLambda()">GetLambda</a>()) &lt;&lt; endl;
     <span class="keyword">if</span> (type1){
-        gridfile &lt;&lt; Form(<span class="string">"Alpha=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetAlpha" title="Double_t KVTGID::GetAlpha() const">GetAlpha</a>()) &lt;&lt; endl;
-        gridfile &lt;&lt; Form(<span class="string">"Beta=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetBeta" title="Double_t KVTGID::GetBeta() const">GetBeta</a>()) &lt;&lt; endl;
+        gridfile &lt;&lt; Form(<span class="string">"Alpha=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetAlpha" title="Double_t KVTGID::GetAlpha()">GetAlpha</a>()) &lt;&lt; endl;
+        gridfile &lt;&lt; Form(<span class="string">"Beta=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetBeta" title="Double_t KVTGID::GetBeta()">GetBeta</a>()) &lt;&lt; endl;
     }
-    gridfile &lt;&lt; Form(<span class="string">"Mu=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetMu" title="Double_t KVTGID::GetMu() const">GetMu</a>()) &lt;&lt; endl;
+    gridfile &lt;&lt; Form(<span class="string">"Mu=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetMu" title="Double_t KVTGID::GetMu()">GetMu</a>()) &lt;&lt; endl;
     <span class="keyword">if</span> (type1){
-        gridfile &lt;&lt; Form(<span class="string">"Nu=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetNu" title="Double_t KVTGID::GetNu() const">GetNu</a>()) &lt;&lt; endl;
-        gridfile &lt;&lt; Form(<span class="string">"Xi=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetXi" title="Double_t KVTGID::GetXi() const">GetXi</a>()) &lt;&lt; endl;
+        gridfile &lt;&lt; Form(<span class="string">"Nu=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetNu" title="Double_t KVTGID::GetNu()">GetNu</a>()) &lt;&lt; endl;
+        gridfile &lt;&lt; Form(<span class="string">"Xi=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetXi" title="Double_t KVTGID::GetXi()">GetXi</a>()) &lt;&lt; endl;
     }
-    gridfile &lt;&lt; Form(<span class="string">"G=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetG" title="Double_t KVTGID::GetG() const">GetG</a>()) &lt;&lt; endl;
-    gridfile &lt;&lt; Form(<span class="string">"Pdx=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetPdx" title="Double_t KVTGID::GetPdx() const">GetPdx</a>()) &lt;&lt; endl;
-    gridfile &lt;&lt; Form(<span class="string">"Pdy=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetPdy" title="Double_t KVTGID::GetPdy() const">GetPdy</a>()) &lt;&lt; endl;
-    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:GetLightEnergyDependence" title="Int_t KVTGID::GetLightEnergyDependence() const">GetLightEnergyDependence</a>()==1){
-        gridfile &lt;&lt; Form(<span class="string">"Eta=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetEta" title="Double_t KVTGID::GetEta() const">GetEta</a>()) &lt;&lt; endl;
+    gridfile &lt;&lt; Form(<span class="string">"G=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetG" title="Double_t KVTGID::GetG()">GetG</a>()) &lt;&lt; endl;
+    gridfile &lt;&lt; Form(<span class="string">"Pdx=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetPdx" title="Double_t KVTGID::GetPdx()">GetPdx</a>()) &lt;&lt; endl;
+    gridfile &lt;&lt; Form(<span class="string">"Pdy=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetPdy" title="Double_t KVTGID::GetPdy()">GetPdy</a>()) &lt;&lt; endl;
+    <span class="keyword">if</span> (<a href="../KVTGID.html#KVTGID:GetLightEnergyDependence" title="Int_t KVTGID::GetLightEnergyDependence()">GetLightEnergyDependence</a>()==1){
+        gridfile &lt;&lt; Form(<span class="string">"Eta=%20.13e"</span>,<a href="../KVTGID.html#KVTGID:GetEta" title="Double_t KVTGID::GetEta()">GetEta</a>()) &lt;&lt; endl;
     }
     gridfile &lt;&lt; <span class="string">"!"</span> &lt;&lt; endl &lt;&lt; endl;
 }
@@ -602,10 +602,10 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
     <span class="keyword">return</span> l.Next(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
 }
 
-<a name="HUfGYC"></a><a href="../KVTGID.html">KVTGID</a>* <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:ReadFromAsciiFile" title="KVTGID* KVTGID::ReadFromAsciiFile(const Char_t* name, ifstream&amp;)">ReadFromAsciiFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; gridfile)
+<a name="HUfGYC"></a><a href="../KVTGID.html">KVTGID</a>* <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:ReadFromAsciiFile" title="KVTGID* KVTGID::ReadFromAsciiFile(const Char_t* name,ifstream&amp; )">ReadFromAsciiFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <a href="../ListOfTypes.html#ifstream">ifstream</a> &amp; gridfile)
 {
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> parameters of LTG fit in file (which must have been written with</span>
-    <span class="comment">// current version of <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:WriteToAsciiFile" title="void KVTGID::WriteToAsciiFile(ofstream&amp;) const">WriteToAsciiFile</a>)</span>
+    <span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> parameters of LTG fit in file (which must have been written with</span>
+    <span class="comment">// current version of <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:WriteToAsciiFile" title="void KVTGID::WriteToAsciiFile(ofstream&amp; )">WriteToAsciiFile</a>)</span>
 
     <a href="../KVTGID.html">KVTGID</a>* LTGfit=0;
     <a href="../ListOfTypes.html#Int_t">Int_t</a> Ftyp, Flite, FZorA, Fmass;
@@ -628,7 +628,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
         Fmass = buff.Atoi();
     }
 
-    LTGfit = <a href="../KVTGID.html#KVTGID:MakeTGID" title="KVTGID* KVTGID::MakeTGID(const Char_t* name, Int_t type, Int_t light, Int_t ZorA, Int_t mass)">MakeTGID</a>(name,Ftyp,Flite,FZorA,Fmass);
+    LTGfit = <a href="../KVTGID.html#KVTGID:MakeTGID" title="KVTGID* KVTGID::MakeTGID(const Char_t* name,Int_t type,Int_t light,Int_t ZorA,Int_t mass)">MakeTGID</a>(name,Ftyp,Flite,FZorA,Fmass);
 
     line.ReadLine(gridfile); <span class="comment">// skip <span class="string">"Functional="</span> line : name of functional not used</span>
     line.ReadLine(gridfile);
@@ -698,7 +698,7 @@ ClassImp(<a href="../KVTGID.html">KVTGID</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:52 </em><em>&raquo; Last generated: 2015-09-17 10:52</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

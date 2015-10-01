@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:56 2015            -->
+<!--   Date: Wed Sep 16 10:48:59 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Wed Feb  2 16:13:08 2011</span>
 <span class="comment">//Author: frankland,,,,</span>
@@ -67,9 +67,9 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <span class="comment">// Destructor</span>
 }
 
-<a name="tl5Vi"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:ReadRangeTable" title="Bool_t KVedaLossMaterial::ReadRangeTable(FILE* fp)">ReadRangeTable</a>(<a href="../ListOfTypes.html#FILE">FILE</a>* fp)
+<a name="tl5Vi"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:ReadRangeTable" title="Bool_t KVedaLossMaterial::ReadRangeTable(FILE* fp)">ReadRangeTable</a>(FILE* fp)
 {
-   <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> Z- &amp; A-dependent range parameters for material</span>
+   <span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> Z- &amp; A-dependent range parameters for material</span>
    <span class="comment">//</span>
    <span class="comment">// For each material we create 4 TF1 objects:</span>
    <span class="comment">//   <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>:[type]:Range                -  gives range in g/cm**2 as a function of particle energy</span>
@@ -88,8 +88,8 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
 
    <span class="comment">//look for energy limits to calculation validity</span>
    <span class="keyword">if</span> (!fgets(line, 132, fp)) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"Problem reading energy limits in range table file for %s (%s)"</span>,
-              <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"Problem reading energy limits in range table file for %s (%s)"</span>,
+              <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    } <span class="keyword">else</span> {
       <span class="keyword">if</span>(!strncmp(line,<span class="string">"COMPOUND"</span>,8)){
@@ -100,7 +100,7 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
       		<span class="keyword">if</span>(fgets(line, 132, fp)){}
       		<span class="keyword">int</span> z,a,w;
       		sscanf(line, <span class="string">"%d %d %d"</span>, &amp;z, &amp;a, &amp;w);
-      		<a href="../KVIonRangeTableMaterial.html#KVIonRangeTableMaterial:AddCompoundElement" title="void KVIonRangeTableMaterial::AddCompoundElement(Int_t Z, Int_t A, Int_t Natoms)">AddCompoundElement</a>(z,a,w);
+      		<a href="../KVIonRangeTableMaterial.html#KVIonRangeTableMaterial:AddCompoundElement" title="void KVIonRangeTableMaterial::AddCompoundElement(Int_t Z,Int_t A,Int_t Natoms)">AddCompoundElement</a>(z,a,w);
       	}
       }
       <span class="keyword">else</span> <span class="keyword">if</span>(!strncmp(line,<span class="string">"MIXTURE"</span>,7)){
@@ -111,13 +111,13 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
       		<span class="keyword">if</span>(fgets(line, 132, fp)){}
       		<span class="keyword">int</span> z,a,nat; <span class="keyword">float</span> w;
       		sscanf(line, <span class="string">"%d %d %d %f"</span>, &amp;z, &amp;a, &amp;nat, &amp;w);
-      		<a href="../KVIonRangeTableMaterial.html#KVIonRangeTableMaterial:AddMixtureElement" title="void KVIonRangeTableMaterial::AddMixtureElement(Int_t Z, Int_t A, Int_t Natoms, Double_t Proportion)">AddMixtureElement</a>(z,a,nat,w);
+      		<a href="../KVIonRangeTableMaterial.html#KVIonRangeTableMaterial:AddMixtureElement" title="void KVIonRangeTableMaterial::AddMixtureElement(Int_t Z,Int_t A,Int_t Natoms,Double_t Proportion)">AddMixtureElement</a>(z,a,nat,w);
       	}
       }
    }
    <span class="keyword">if</span> (!fgets(line, 132, fp)) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"Problem reading energy limits in range table file for %s (%s)"</span>,
-              <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"Problem reading energy limits in range table file for %s (%s)"</span>,
+              <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    } <span class="keyword">else</span> {
       <span class="keyword">while</span> (line[0] == <span class="string">'Z'</span>) {
@@ -136,21 +136,21 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <span class="comment">// get require Npx value from (user-defined) environment variables</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> my_npx = gEnv-&gt;GetValue(<span class="string">"KVedaLoss.Range.Npx"</span>, 100);   
    
-   fRange = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:Range"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t*, Double_t*)">RangeFunc</a>,
+   fRange = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:Range"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t* ,Double_t* )">RangeFunc</a>,
                     0., 1.e+03, 0, <span class="string">"KVedaLossMaterial"</span>, <span class="string">"RangeFunc"</span>);
    fRange-&gt;SetNpx(my_npx);
 
-   fStopping = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:StoppingPower"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:StoppingFunc" title="Double_t KVedaLossMaterial::StoppingFunc(Double_t*, Double_t*)">StoppingFunc</a>,
+   fStopping = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:StoppingPower"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:StoppingFunc" title="Double_t KVedaLossMaterial::StoppingFunc(Double_t* ,Double_t* )">StoppingFunc</a>,
                     0., 1.e+03, 0, <span class="string">"KVedaLossMaterial"</span>, <span class="string">"StoppingFunc"</span>);
    fStopping-&gt;SetNpx(my_npx);
 
    my_npx = gEnv-&gt;GetValue(<span class="string">"KVedaLoss.EnergyLoss.Npx"</span>, 100);   
-   fDeltaE = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:EnergyLoss"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:DeltaEFunc" title="Double_t KVedaLossMaterial::DeltaEFunc(Double_t*, Double_t*)">DeltaEFunc</a>,
+   fDeltaE = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:EnergyLoss"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:DeltaEFunc" title="Double_t KVedaLossMaterial::DeltaEFunc(Double_t* ,Double_t* )">DeltaEFunc</a>,
                      0., 1.e+03, 0, <span class="string">"KVedaLossMaterial"</span>, <span class="string">"DeltaEFunc"</span>);
    fDeltaE-&gt;SetNpx(my_npx);
 
    my_npx = gEnv-&gt;GetValue(<span class="string">"KVedaLoss.ResidualEnergy.Npx"</span>, 100);   
-   fEres = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:ResidualEnergy"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:EResFunc" title="Double_t KVedaLossMaterial::EResFunc(Double_t*, Double_t*)">EResFunc</a>,
+   fEres = <span class="keyword">new</span> TF1(Form(<span class="string">"KVedaLossMaterial:%s:ResidualEnergy"</span>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>()), <span class="keyword">this</span>, &amp;<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:EResFunc" title="Double_t KVedaLossMaterial::EResFunc(Double_t* ,Double_t* )">EResFunc</a>,
                    0., 1.e+03, 0, <span class="string">"KVedaLossMaterial"</span>, <span class="string">"EResFunc"</span>);
    fEres-&gt;SetNpx(my_npx);
    
@@ -162,11 +162,11 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
                  &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][4], &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][5],
                  &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][6], &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][7])
           != 8) {
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"problem reading coeffs 0-7 in range table for %s (%s)"</span>, <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"problem reading coeffs 0-7 in range table for %s (%s)"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());
          <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
       }
       <span class="keyword">if</span> (!fgets(line, 132, fp)) {
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"file too short ??? %s (%s)"</span>, <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());
+         <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"file too short ??? %s (%s)"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());
          <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
       } <span class="keyword">else</span> {
          <span class="keyword">if</span> (sscanf(line, <span class="string">"%lf %lf %lf %lf %lf %lf"</span>,
@@ -174,14 +174,14 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
                     &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][10], &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][11],
                     &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][12], &amp;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][13])
              != 6) {
-            <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"problem reading coeffs 8-13 in range table for %s (%s)"</span>, <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());
+            <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"problem reading coeffs 8-13 in range table for %s (%s)"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());
             <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
          }
       }
       <span class="keyword">if</span>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fNoLimits" title="Bool_t KVedaLossMaterial::fNoLimits">fNoLimits</a>){
          <span class="comment">// if we ignore nominal validity limits on incident energy, we must still use energy limits</span>
          <span class="comment">// such that all range functions increase monotonically in the energy interval</span>
-         <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetRangeFunction</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1])-&gt;SetRange(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEminValid" title="Float_t KVedaLossMaterial::GetEminValid(Int_t Z, Int_t A) const">GetEminValid</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1]), VERY_BIG_ENERGY);
+         <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetRangeFunction</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1])-&gt;SetRange(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEminValid" title="Float_t KVedaLossMaterial::GetEminValid(Int_t Z,Int_t A)">GetEminValid</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1]), VERY_BIG_ENERGY);
          <a href="../ListOfTypes.html#Double_t">Double_t</a> emax = fRange-&gt;GetMaximumX()-1;
          emax/=<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1];
          <a href="../ListOfTypes.html#Double_t">Double_t</a> original_emax = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count];
@@ -190,13 +190,13 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
          <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count]=TMath::Min(TMath::Max(original_emax,emax),1000.);
          <span class="comment">// we may further reduce the upper limit to correspond to the minimum of stopping,</span>
          <span class="comment">// if one exists</span>
-         <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetStoppingFunction" title="TF1* KVedaLossMaterial::GetStoppingFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetStoppingFunction</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1])-&gt;SetRange(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEminValid" title="Float_t KVedaLossMaterial::GetEminValid(Int_t Z, Int_t A) const">GetEminValid</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1]), <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1]));
+         <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetStoppingFunction" title="TF1* KVedaLossMaterial::GetStoppingFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetStoppingFunction</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1])-&gt;SetRange(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEminValid" title="Float_t KVedaLossMaterial::GetEminValid(Int_t Z,Int_t A)">GetEminValid</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1]), <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][0], <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1]));
          emax = fStopping-&gt;GetMinimumX();
          emax/=<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fCoeff" title="Double_t KVedaLossMaterial::fCoeff">fCoeff</a>[count][1];
          <span class="comment">// again, the new emax is only accepted if it is &gt; than the nominal emax (400 or 250 AMeV),</span>
          <span class="comment">// and at most 1 GeV/nucleon</span>
          <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count]=TMath::Min(TMath::Max(original_emax,emax),1000.);
-         <span class="comment">//if(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count]!=original_emax) <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"Max. incident E for Z=%d  ===&gt;  E/A = %f"</span>, count+1, <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count]);</span>
+         <span class="comment">//if(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count]!=original_emax) <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadRangeTable"</span>, <span class="string">"Max. incident E for Z=%d  ===&gt;  E/A = %f"</span>, count+1, <a href="../KVedaLossMaterial.html#KVedaLossMaterial:fEmax" title="Double_t KVedaLossMaterial::fEmax">fEmax</a>[count]);</span>
       }
       <span class="keyword">if</span>(fgets(line, 132, fp)){}
    }
@@ -204,14 +204,14 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
 
-<a name="oBWOlB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:DeltaEFunc" title="Double_t KVedaLossMaterial::DeltaEFunc(Double_t*, Double_t*)">DeltaEFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
+<a name="oBWOlB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:DeltaEFunc" title="Double_t KVedaLossMaterial::DeltaEFunc(Double_t* ,Double_t* )">DeltaEFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
 {
    <span class="comment">// Function parameterising the energy loss of charged particles in this material.</span>
    <span class="comment">// The incident energy E[0] is given in MeV.</span>
    <span class="comment">// The energy loss is calculated in MeV.</span>
 
    <span class="comment">// if range &lt; <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a>, particle stops: dE = E0</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> R0 = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t*, Double_t*)">RangeFunc</a>(E, 0);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> R0 = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t* ,Double_t* )">RangeFunc</a>(E, 0);
    <span class="keyword">if</span> (R0 &lt; <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a>) {
       <span class="keyword">return</span> E[0];
    }
@@ -273,14 +273,14 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
       */</span>
 }
 
-<a name="h2fNIC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:EResFunc" title="Double_t KVedaLossMaterial::EResFunc(Double_t*, Double_t*)">EResFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
+<a name="h2fNIC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:EResFunc" title="Double_t KVedaLossMaterial::EResFunc(Double_t* ,Double_t* )">EResFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
 {
    <span class="comment">// Function parameterising the residual energy of charged particles in this material.</span>
    <span class="comment">// The incident energy E[0] is given in MeV.</span>
    <span class="comment">// The residual energy is calculated in MeV.</span>
 
    <span class="comment">// if range &lt; <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a>, particle stops: Eres=0</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> R0 = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t*, Double_t*)">RangeFunc</a>(E, 0);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> R0 = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t* ,Double_t* )">RangeFunc</a>(E, 0);
    <span class="keyword">if</span> (R0 &lt; <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a>) {
       <span class="keyword">return</span> 0.0;
    }
@@ -293,7 +293,7 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
 }
 
 
-<a name="Xj_uP"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetRangeFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
+<a name="Xj_uP"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetRangeFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Return function giving range (in g/cm**2) as a function of energy (in MeV) for</span>
    <span class="comment">// charged particles (Z,A) in this material.</span>
@@ -322,11 +322,11 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <a href="../KVedaLossMaterial.html#KVedaLossMaterial:riso" title="Double_t KVedaLossMaterial::riso">riso</a> = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:RF_A" title="Double_t KVedaLossMaterial::RF_A">RF_A</a> / <a href="../KVedaLossMaterial.html#KVedaLossMaterial:par" title="Double_t* KVedaLossMaterial::par">par</a>[1];
    <span class="keyword">if</span> (isoAmat &gt; 0.0) <a href="../KVedaLossMaterial.html#KVedaLossMaterial:riso" title="Double_t KVedaLossMaterial::riso">riso</a> *= (isoAmat / fAmat);
    
-   fRange-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A));
+   fRange-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A));
    <span class="keyword">return</span> fRange;
 }
 
-<a name="WoTALE"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetStoppingFunction" title="TF1* KVedaLossMaterial::GetStoppingFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetStoppingFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
+<a name="WoTALE"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetStoppingFunction" title="TF1* KVedaLossMaterial::GetStoppingFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetStoppingFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Return function giving stopping power (in MeV/(g/cm**2)) as a function of energy (in MeV) for</span>
    <span class="comment">// charged particles (Z,A) in this material.</span>
@@ -353,11 +353,11 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <a href="../KVedaLossMaterial.html#KVedaLossMaterial:adn" title="Double_t KVedaLossMaterial::adn">adn</a> = (y1 - <a href="../KVedaLossMaterial.html#KVedaLossMaterial:adm" title="Double_t KVedaLossMaterial::adm">adm</a> * x1);
    <a href="../KVedaLossMaterial.html#KVedaLossMaterial:riso" title="Double_t KVedaLossMaterial::riso">riso</a> = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:RF_A" title="Double_t KVedaLossMaterial::RF_A">RF_A</a> / <a href="../KVedaLossMaterial.html#KVedaLossMaterial:par" title="Double_t* KVedaLossMaterial::par">par</a>[1];
    <span class="keyword">if</span> (isoAmat &gt; 0.0) <a href="../KVedaLossMaterial.html#KVedaLossMaterial:riso" title="Double_t KVedaLossMaterial::riso">riso</a> *= (isoAmat / fAmat);   
-   fStopping-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A));
+   fStopping-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A));
    <span class="keyword">return</span> fStopping;
 }
 
-<a name="ZzUVfE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t*, Double_t*)">RangeFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
+<a name="ZzUVfE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:RangeFunc" title="Double_t KVedaLossMaterial::RangeFunc(Double_t* ,Double_t* )">RangeFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
 {
    <span class="comment">// Function parameterising the range of charged particles in this material.</span>
    <span class="comment">// The energy E[0] is given in MeV.</span>
@@ -380,7 +380,7 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <span class="keyword">return</span> <a href="../KVedaLossMaterial.html#KVedaLossMaterial:riso" title="Double_t KVedaLossMaterial::riso">riso</a> * TMath::Exp(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:ran" title="Double_t KVedaLossMaterial::ran">ran</a>) * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mg" title="const long double KVUnits::mg">mg</a>;
 }
 
-<a name="tIjRqC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:StoppingFunc" title="Double_t KVedaLossMaterial::StoppingFunc(Double_t*, Double_t*)">StoppingFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
+<a name="tIjRqC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:StoppingFunc" title="Double_t KVedaLossMaterial::StoppingFunc(Double_t* ,Double_t* )">StoppingFunc</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* E, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
 {
    <span class="comment">// Function parameterising the stopping of charged particles in this material.</span>
    <span class="comment">// The energy E[0] is given in MeV.</span>
@@ -404,68 +404,68 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
    <span class="keyword">return</span> E[0]/(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:riso" title="Double_t KVedaLossMaterial::riso">riso</a>*TMath::Exp(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:ran" title="Double_t KVedaLossMaterial::ran">ran</a>) * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mg" title="const long double KVUnits::mg">mg</a>)/<a href="../KVedaLossMaterial.html#KVedaLossMaterial:drande" title="Double_t KVedaLossMaterial::drande">drande</a>;
 }
 
-<a name="AJO2VD"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetDeltaEFunction" title="TF1* KVedaLossMaterial::GetDeltaEFunction(Double_t e, Int_t Z, Int_t A, Double_t isoAmat = 0)">GetDeltaEFunction</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
+<a name="AJO2VD"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetDeltaEFunction" title="TF1* KVedaLossMaterial::GetDeltaEFunction(Double_t e,Int_t Z,Int_t A,Double_t isoAmat=0)">GetDeltaEFunction</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Return function giving energy loss (in MeV) as a function of incident energy (in MeV) for</span>
    <span class="comment">// charged particles (Z,A) traversing (or not) the <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a> e (in g/cm**2) of this material.</span>
    <span class="comment">// If required, the isotopic mass of the material can be given.</span>
 
-   <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetRangeFunction</a>(Z, A, isoAmat);
+   <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetRangeFunction</a>(Z, A, isoAmat);
    <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a> = e;
-   fDeltaE-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A));
+   fDeltaE-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A));
    <span class="keyword">return</span> fDeltaE;
 }
 
-<a name="cz7x0B"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEResFunction" title="TF1* KVedaLossMaterial::GetEResFunction(Double_t e, Int_t Z, Int_t A, Double_t isoAmat = 0)">GetEResFunction</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
+<a name="cz7x0B"></a>TF1* <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEResFunction" title="TF1* KVedaLossMaterial::GetEResFunction(Double_t e,Int_t Z,Int_t A,Double_t isoAmat=0)">GetEResFunction</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Return function giving residual energy (in MeV) as a function of incident energy (in MeV) for</span>
    <span class="comment">// charged particles (Z,A) traversing (or not) the <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a> e (in g/cm**2) of this material.</span>
    <span class="comment">// If required, the isotopic mass of the material can be given.</span>
 
-   <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetRangeFunction</a>(Z, A, isoAmat);
+   <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetRangeFunction</a>(Z, A, isoAmat);
    <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a> = e;
-   fEres-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A));
+   fEres-&gt;SetRange(0., <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A));
    <span class="keyword">return</span> fEres;
 }
 
-<a name="N0uJ3D"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeOfIon" title="Double_t KVedaLossMaterial::GetRangeOfIon(Int_t Z, Int_t A, Double_t E, Double_t isoAmat = 0.)">GetRangeOfIon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
+<a name="N0uJ3D"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeOfIon" title="Double_t KVedaLossMaterial::GetRangeOfIon(Int_t Z,Int_t A,Double_t E,Double_t isoAmat=0.)">GetRangeOfIon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Returns range (in g/cm**2) of ion (Z,A) with energy E (MeV) in material.</span>
    <span class="comment">// Give Amat to change default (isotopic) mass of material,</span>
    
-   <span class="comment">/*if(E&gt;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A))
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"GetRangeOfIon"</span>, <span class="string">"Incident energy of (%d,%d) &gt; limit of validity of KVedaLoss (Emax=%f)"</span>,
-            Z,A,<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A));*/</span>
-   TF1* f = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z, Int_t A, Double_t isoAmat = 0)">GetRangeFunction</a>(Z, A, isoAmat);
+   <span class="comment">/*if(E&gt;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A))
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetRangeOfIon"</span>, <span class="string">"Incident energy of (%d,%d) &gt; limit of validity of KVedaLoss (Emax=%f)"</span>,
+            Z,A,<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A));*/</span>
+   TF1* f = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetRangeFunction" title="TF1* KVedaLossMaterial::GetRangeFunction(Int_t Z,Int_t A,Double_t isoAmat=0)">GetRangeFunction</a>(Z, A, isoAmat);
    <span class="keyword">return</span> f-&gt;Eval(E);
 }
 
-<a name="aj05G"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetDeltaEOfIon" title="Double_t KVedaLossMaterial::GetDeltaEOfIon(Int_t Z, Int_t A, Double_t E, Double_t e, Double_t isoAmat = 0.)">GetDeltaEOfIon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E, <a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
+<a name="aj05G"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetDeltaEOfIon" title="Double_t KVedaLossMaterial::GetDeltaEOfIon(Int_t Z,Int_t A,Double_t E,Double_t e,Double_t isoAmat=0.)">GetDeltaEOfIon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E, <a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Returns energy lost (in MeV) by ion (Z,A) with energy E (MeV) after <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a> e (in g/cm**2).</span>
    <span class="comment">// Give Amat to change default (isotopic) mass of material,</span>
 
-   <span class="comment">/* if(E&gt;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A))
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"GetDeltaEOfIon"</span>, <span class="string">"Incident energy of (%d,%d) &gt; limit of validity of KVedaLoss (Emax=%f)"</span>,
-            Z,A,<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A)); */</span>
-   TF1* f = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetDeltaEFunction" title="TF1* KVedaLossMaterial::GetDeltaEFunction(Double_t e, Int_t Z, Int_t A, Double_t isoAmat = 0)">GetDeltaEFunction</a>(e, Z, A, isoAmat);
+   <span class="comment">/* if(E&gt;<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A))
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetDeltaEOfIon"</span>, <span class="string">"Incident energy of (%d,%d) &gt; limit of validity of KVedaLoss (Emax=%f)"</span>,
+            Z,A,<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A)); */</span>
+   TF1* f = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetDeltaEFunction" title="TF1* KVedaLossMaterial::GetDeltaEFunction(Double_t e,Int_t Z,Int_t A,Double_t isoAmat=0)">GetDeltaEFunction</a>(e, Z, A, isoAmat);
    <span class="keyword">return</span> f-&gt;Eval(E);
 }
 
-<a name="jIrXdB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEResOfIon" title="Double_t KVedaLossMaterial::GetEResOfIon(Int_t Z, Int_t A, Double_t E, Double_t e, Double_t isoAmat = 0.)">GetEResOfIon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E, <a href="../ListOfTypes.html#Double_t">Double_t</a> e,
+<a name="jIrXdB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEResOfIon" title="Double_t KVedaLossMaterial::GetEResOfIon(Int_t Z,Int_t A,Double_t E,Double_t e,Double_t isoAmat=0.)">GetEResOfIon</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Double_t">Double_t</a> E, <a href="../ListOfTypes.html#Double_t">Double_t</a> e,
                                          <a href="../ListOfTypes.html#Double_t">Double_t</a> isoAmat)
 {
    <span class="comment">// Returns residual energy (in MeV) of ion (Z,A) with energy E (MeV) after <a href="../KVedaLossMaterial.html#KVedaLossMaterial:thickness" title="Double_t KVedaLossMaterial::thickness">thickness</a> e (in g/cm**2).</span>
    <span class="comment">// Give Amat to change default (isotopic) mass of material</span>
    
-   <span class="comment">/* if(E&gt;(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A)+0.1))
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"GetEResOfIon"</span>, <span class="string">"Incident energy of (%d,%d) %f MeV/A &gt; limit of validity of KVedaLoss (Emax=%f MeV/A)"</span>,
-            Z,A,E/A,<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z, Int_t A) const">GetEmaxValid</a>(Z,A)/A); */</span>
-   TF1* f = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEResFunction" title="TF1* KVedaLossMaterial::GetEResFunction(Double_t e, Int_t Z, Int_t A, Double_t isoAmat = 0)">GetEResFunction</a>(e, Z, A, isoAmat);
+   <span class="comment">/* if(E&gt;(<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A)+0.1))
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetEResOfIon"</span>, <span class="string">"Incident energy of (%d,%d) %f MeV/A &gt; limit of validity of KVedaLoss (Emax=%f MeV/A)"</span>,
+            Z,A,E/A,<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEmaxValid" title="Float_t KVedaLossMaterial::GetEmaxValid(Int_t Z,Int_t A)">GetEmaxValid</a>(Z,A)/A); */</span>
+   TF1* f = <a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetEResFunction" title="TF1* KVedaLossMaterial::GetEResFunction(Double_t e,Int_t Z,Int_t A,Double_t isoAmat=0)">GetEResFunction</a>(e, Z, A, isoAmat);
    <span class="keyword">return</span> f-&gt;Eval(E);
 }
 
-<a name="zJbNeD"></a><span class="keyword">void</span> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetParameters" title="void KVedaLossMaterial::GetParameters(Int_t Zion, Int_t&amp; Aion, Double_t*&amp; rangepar)">GetParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Zion, <a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;Aion, <a href="../ListOfTypes.html#Double_t">Double_t</a> *&amp;rangepar)
+<a name="zJbNeD"></a><span class="keyword">void</span> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:GetParameters" title="void KVedaLossMaterial::GetParameters(Int_t Zion,Int_t&amp; Aion,Double_t*&amp; rangepar)">GetParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Zion, <a href="../ListOfTypes.html#Int_t">Int_t</a> &amp;Aion, <a href="../ListOfTypes.html#Double_t">Double_t</a> *&amp;rangepar)
 {
     <span class="comment">// For the given ion atomic number, give the reference mass used and the six</span>
     <span class="comment">// parameters for the range function fit</span>
@@ -482,7 +482,7 @@ ClassImp(<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-16 10:49 </em><em>&raquo; Last generated: 2015-09-16 10:49</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

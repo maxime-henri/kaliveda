@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:08 2015            -->
+<!--   Date: Thu Sep 17 10:51:52 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVPhoswich.html">KVPhoswich</a>.cpp,v 1.14 2007/01/04 16:38:50 franklan Exp $
@@ -70,7 +70,7 @@ ClassImp(<a href="../KVPhoswich.html">KVPhoswich</a>);
    <span class="comment">//Type of detector is <span class="string">"PHOS"</span></span>
 
    <a href="../KVMaterial.html">KVMaterial</a> *ne115 = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"NE102"</span>, 25);
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial*)">AddAbsorber</a>(ne115);
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(ne115);
 
    fSegment=2;
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"PHOS"</span>);
@@ -88,8 +88,8 @@ ClassImp(<a href="../KVPhoswich.html">KVPhoswich</a>);
 {
    <span class="comment">//Override <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a> to return total energy lost in both layers</span>
 
-   <span class="keyword">return</span> (<a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) const or overloads">GetAbsorber</a>(0)-><a href="../KVMaterial.html#KVMaterial:GetEnergyLoss" title="Double_t KVMaterial::GetEnergyLoss()">GetEnergyLoss</a>() +
-           <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) const or overloads">GetAbsorber</a>(1)-><a href="../KVMaterial.html#KVMaterial:GetEnergyLoss" title="Double_t KVMaterial::GetEnergyLoss()">GetEnergyLoss</a>());
+   <span class="keyword">return</span> (<a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) or overloads">GetAbsorber</a>(0)-><a href="../KVMaterial.html#KVMaterial:GetEnergyLoss" title="Double_t KVMaterial::GetEnergyLoss()">GetEnergyLoss</a>() +
+           <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) or overloads">GetAbsorber</a>(1)-><a href="../KVMaterial.html#KVMaterial:GetEnergyLoss" title="Double_t KVMaterial::GetEnergyLoss()">GetEnergyLoss</a>());
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
@@ -97,8 +97,8 @@ ClassImp(<a href="../KVPhoswich.html">KVPhoswich</a>);
 {
    <span class="comment">//Set energy lost in both layers</span>
 
-   <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) const or overloads">GetAbsorber</a>(0)-><a href="../KVMaterial.html#KVMaterial:SetEnergyLoss" title="void KVMaterial::SetEnergyLoss(Double_t e)">SetEnergyLoss</a>(e / 2.);
-   <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) const or overloads">GetAbsorber</a>(1)-><a href="../KVMaterial.html#KVMaterial:SetEnergyLoss" title="void KVMaterial::SetEnergyLoss(Double_t e)">SetEnergyLoss</a>(e / 2.);
+   <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) or overloads">GetAbsorber</a>(0)-><a href="../KVMaterial.html#KVMaterial:SetEnergyLoss" title="void KVMaterial::SetEnergyLoss(Double_t e)">SetEnergyLoss</a>(e / 2.);
+   <a href="../KVDetector.html#KVDetector:GetAbsorber" title="KVMaterial* KVDetector::GetAbsorber(Int_t i) or overloads">GetAbsorber</a>(1)-><a href="../KVMaterial.html#KVMaterial:SetEnergyLoss" title="void KVMaterial::SetEnergyLoss(Double_t e)">SetEnergyLoss</a>(e / 2.);
 }
 
 <span class="comment">//_______________________________________________________________________________________</span>
@@ -107,7 +107,7 @@ ClassImp(<a href="../KVPhoswich.html">KVPhoswich</a>);
    <span class="comment">//Overrides <a href="../KVDetector.html">KVDetector</a> method.</span>
    <span class="comment">//Gives name of phoswich as PHOS_01, PHOS_02, etc.</span>
 
-   fFName.Form(<span class="string">"PHOS_%02d"</span>, <a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope() const">GetTelescope</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>());
+   fFName.Form(<span class="string">"PHOS_%02d"</span>, <a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope()">GetTelescope</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>());
    <span class="keyword">return</span> fFName.Data();
 }
 
@@ -128,7 +128,7 @@ ClassImp(<a href="../KVPhoswich.html">KVPhoswich</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

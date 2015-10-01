@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:06 2015            -->
+<!--   Date: Thu Sep 17 10:50:41 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVBatchSystem.html">KVBatchSystem</a>.cpp,v 1.12 2008/04/14 08:49:11 franklan Exp $
@@ -94,7 +94,7 @@ else {
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 <a href="../KVBatchSystem.html">KVBatchSystem</a> *<a href="../KVBatchSystem.html">gBatchSystem</a> = 0;
 
-<a name="crqlTD"></a><a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:KVBatchSystem" title="KVBatchSystem KVBatchSystem::KVBatchSystem(const Char_t* name) or overloads">KVBatchSystem</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name)
+<a name="crqlTD"></a><a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:KVBatchSystem" title="KVBatchSystem KVBatchSystem::KVBatchSystem(const Char_t* name)">KVBatchSystem</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name)
       :<a href="../KVBase.html">KVBase</a>(name), fMultiJobs(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
 {
    <span class="comment">// Constructor with name of batch system. Name will be used to retrieve</span>
@@ -111,13 +111,13 @@ else {
 
    <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a> = NULL;
    <span class="comment">//set title of batch system</span>
-   <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title = &quot;&quot;)">SetTitle</a>( gEnv-&gt;GetValue(Form(<span class="string">"%s.BatchSystem.Title"</span>, name), <span class="string">""</span>) );
+   <a href="../#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>( gEnv-&gt;GetValue(Form(<span class="string">"%s.BatchSystem.Title"</span>, name), <span class="string">""</span>) );
    <span class="comment">//command for job submission</span>
    <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a> = gEnv-&gt;GetValue(Form(<span class="string">"%s.BatchSystem.JobSubCmd"</span>, name), <span class="string">""</span>);
    <span class="comment">//check command is valid</span>
-   <span class="keyword">if</span>( !<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindExecutable" title="Bool_t KVBase::FindExecutable(TString&amp; exec, const Char_t* path = &quot;$(PATH)&quot;)">FindExecutable</a>(<a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>) ){
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"KVBatchSystem"</span>, <span class="string">"Batch system %s has unknown job submission command: %s"</span>,
-            name, <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
+   <span class="keyword">if</span>( !<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:FindExecutable" title="Bool_t KVBase::FindExecutable(TString&amp; exec,const Char_t* path=&quot;$(PATH)&quot;)">FindExecutable</a>(<a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>) ){
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"KVBatchSystem"</span>, <span class="string">"Batch system %s has unknown job submission command: %s"</span>,
+            name, <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
    }
    <span class="comment">//script for batch job</span>
    <a href="../KVBatchSystem.html#KVBatchSystem:SetJobScript" title="void KVBatchSystem::SetJobScript(const Char_t* path)">SetJobScript</a>(gEnv-&gt;GetValue(Form(<span class="string">"%s.BatchSystem.JobScript"</span>, name), <span class="string">""</span>));
@@ -159,11 +159,11 @@ else {
    <span class="comment">//jobname returned by <a href="../KVBatchSystem.html#KVBatchSystem:GetJobName" title="const Char_t* KVBatchSystem::GetJobName()">GetJobName</a>() at the moment of job submission.</span>
 
    <span class="keyword">static</span> TString command_line;
-   command_line.Form(<span class="string">"%s %s "</span>, <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>(), <a href="../KVBatchSystem.html#KVBatchSystem:fDefOpt" title="KVString KVBatchSystem::fDefOpt">fDefOpt</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
-   <span class="keyword">if</span> (<a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar() const">GetNpar</a>()) {
-      <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar() const">GetNpar</a>(); i++) {
-         <a href="../KVNamedParameter.html">KVNamedParameter</a>*par = <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetParameter" title="KVNamedParameter* KVNameValueList::GetParameter(Int_t idx) const">GetParameter</a>(i);
-         command_line += par-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+   command_line.Form(<span class="string">"%s %s "</span>, <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>(), <a href="../KVBatchSystem.html#KVBatchSystem:fDefOpt" title="KVString KVBatchSystem::fDefOpt">fDefOpt</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+   <span class="keyword">if</span> (<a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar()">GetNpar</a>()) {
+      <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar()">GetNpar</a>(); i++) {
+         <a href="../KVNamedParameter.html">KVNamedParameter</a>*par = <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetParameter" title="KVNamedParameter* KVNameValueList::GetParameter(Int_t idx)">GetParameter</a>(i);
+         command_line += par-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
          <span class="keyword">if</span> (par-&gt;GetTString() != <span class="string">""</span>) {
             command_line += par-&gt;GetString();
          }
@@ -178,13 +178,13 @@ else {
 
 <span class="comment">//_______________________________________________________________________________//</span>
 
-<a name="TWQ1NB"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:Clear" title="void KVBatchSystem::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>*)
+<a name="TWQ1NB"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:Clear" title="void KVBatchSystem::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>*)
 {
-   <span class="comment">//<a href="../KVBatchSystem.html#KVBatchSystem:Clear" title="void KVBatchSystem::Clear(Option_t* opt = &quot;&quot;)">Clear</a> previously set parameters in order to create a new job submission command</span>
+   <span class="comment">//<a href="../KVBatchSystem.html#KVBatchSystem:Clear" title="void KVBatchSystem::Clear(Option_t* opt=&quot;&quot;)">Clear</a> previously set parameters in order to create a new job submission command</span>
    <span class="comment">//(default options are not affected: use <a href="../KVBatchSystem.html#KVBatchSystem:SetDefaultJobOptions" title="void KVBatchSystem::SetDefaultJobOptions(const Char_t* opt)">SetDefaultJobOptions</a> to change them)</span>
 
    <a href="../KVBatchSystem.html#KVBatchSystem:fJobName" title="KVString KVBatchSystem::fJobName">fJobName</a>=<span class="string">""</span>;
-   <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+   <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
    <a href="../KVBatchSystem.html#KVBatchSystem:fMultiJobs" title="Bool_t KVBatchSystem::fMultiJobs">fMultiJobs</a>=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>=0;
 }
@@ -209,8 +209,8 @@ else {
    <span class="comment">//set environment variables required by KaliVedaAnalysis batch executable</span>
    gSystem-&gt;Setenv(<span class="string">"KVBATCHNAME"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:GetJobName" title="const Char_t* KVBatchSystem::GetJobName()">GetJobName</a>());
    gSystem-&gt;Setenv(<span class="string">"KVLAUNCHDIR"</span>, gSystem-&gt;<a href="../KVBase.html#KVBase:WorkingDirectory" title="const Char_t* KVBase::WorkingDirectory()">WorkingDirectory</a>());
-   cout &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:GetJobSubCmdLine" title="const Char_t* KVBatchSystem::GetJobSubCmdLine()">GetJobSubCmdLine</a>() &lt;&lt; endl;
-   <span class="keyword">if</span>( <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a> ) <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:WriteBatchEnvFile" title="void KVDataAnalyser::WriteBatchEnvFile(const Char_t*, Bool_t sav = kTRUE)">WriteBatchEnvFile</a>( <a href="../KVBatchSystem.html#KVBatchSystem:GetJobName" title="const Char_t* KVBatchSystem::GetJobName()">GetJobName</a>() );
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:GetJobSubCmdLine" title="const Char_t* KVBatchSystem::GetJobSubCmdLine()">GetJobSubCmdLine</a>() &lt;&lt; endl;
+   <span class="keyword">if</span>( <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a> ) <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:WriteBatchEnvFile" title="void KVDataAnalyser::WriteBatchEnvFile(const Char_t* ,Bool_t sav=kTRUE)">WriteBatchEnvFile</a>( <a href="../KVBatchSystem.html#KVBatchSystem:GetJobName" title="const Char_t* KVBatchSystem::GetJobName()">GetJobName</a>() );
    gSystem-&gt;Exec( <a href="../KVBatchSystem.html#KVBatchSystem:GetJobSubCmdLine" title="const Char_t* KVBatchSystem::GetJobSubCmdLine()">GetJobSubCmdLine</a>() );
 }
 
@@ -224,24 +224,24 @@ else {
 
    <span class="keyword">if</span>(!<a href="../KVBatchSystem.html#KVBatchSystem:CheckJobParameters" title="Bool_t KVBatchSystem::CheckJobParameters()">CheckJobParameters</a>()) <span class="keyword">return</span>;
 
-   <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode() const">MultiJobsMode</a>()){
-      <span class="comment">//submit jobs for every <a href="../KVBatchSystem.html#KVBatchSystem:GetRunsPerJob" title="Int_t KVBatchSystem::GetRunsPerJob() const">GetRunsPerJob</a>() runs in runlist</span>
+   <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode()">MultiJobsMode</a>()){
+      <span class="comment">//submit jobs for every <a href="../KVBatchSystem.html#KVBatchSystem:GetRunsPerJob" title="Int_t KVBatchSystem::GetRunsPerJob()">GetRunsPerJob</a>() runs in runlist</span>
       <a href="../KVNumberList.html">KVNumberList</a> runs = <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>();
       runs.Begin();
       <a href="../ListOfTypes.html#Int_t">Int_t</a> remaining_runs = runs.GetNValues();
-      <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Clear" title="void KVNumberList::Clear(Option_t* = &quot;&quot;)">Clear</a>();
+      <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Clear" title="void KVNumberList::Clear(Option_t* =&quot;&quot;)">Clear</a>();
       <span class="keyword">while</span>( remaining_runs &amp;&amp; !runs.End() ){
          <a href="../ListOfTypes.html#Int_t">Int_t</a> run = runs.Next();
          remaining_runs--;
-         <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Add" title="void KVNumberList::Add(Int_t) or overloads">Add</a>(run);
-         <span class="keyword">if</span>((<a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:GetNValues" title="Int_t KVNumberList::GetNValues()">GetNValues</a>()==<a href="../KVBatchSystem.html#KVBatchSystem:GetRunsPerJob" title="Int_t KVBatchSystem::GetRunsPerJob() const">GetRunsPerJob</a>()) || runs.End()){
-             <span class="comment">// submit job for <a href="../KVBatchSystem.html#KVBatchSystem:GetRunsPerJob" title="Int_t KVBatchSystem::GetRunsPerJob() const">GetRunsPerJob</a>() runs (or less if we have reached end of runlist 'runs')</span>
-            <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:SetRuns" title="void KVDataAnalyser::SetRuns(KVNumberList&amp; nl, Bool_t check = kTRUE) or overloads">SetRuns</a>(<a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+         <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Add" title="void KVNumberList::Add(Int_t ) or overloads">Add</a>(run);
+         <span class="keyword">if</span>((<a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:GetNValues" title="Int_t KVNumberList::GetNValues()">GetNValues</a>()==<a href="../KVBatchSystem.html#KVBatchSystem:GetRunsPerJob" title="Int_t KVBatchSystem::GetRunsPerJob()">GetRunsPerJob</a>()) || runs.End()){
+             <span class="comment">// submit job for <a href="../KVBatchSystem.html#KVBatchSystem:GetRunsPerJob" title="Int_t KVBatchSystem::GetRunsPerJob()">GetRunsPerJob</a>() runs (or less if we have reached end of runlist 'runs')</span>
+            <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:SetRuns" title="void KVDataAnalyser::SetRuns(KVNumberList&amp; nl,Bool_t check=kTRUE) or overloads">SetRuns</a>(<a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
             <a href="../KVBatchSystem.html#KVBatchSystem:SubmitJob" title="void KVBatchSystem::SubmitJob()">SubmitJob</a>();
-            <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Clear" title="void KVNumberList::Clear(Option_t* = &quot;&quot;)">Clear</a>();
+            <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Clear" title="void KVNumberList::Clear(Option_t* =&quot;&quot;)">Clear</a>();
          }
       }
-      <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:SetRuns" title="void KVDataAnalyser::SetRuns(KVNumberList&amp; nl, Bool_t check = kTRUE) or overloads">SetRuns</a>(runs, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+      <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:SetRuns" title="void KVDataAnalyser::SetRuns(KVNumberList&amp; nl,Bool_t check=kTRUE) or overloads">SetRuns</a>(runs, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
    }
    <span class="keyword">else</span>
    {
@@ -258,7 +258,7 @@ else {
    <span class="comment">// will be initialised from resources defined in .kvrootrc using its name.</span>
 
    <span class="comment">//check and load plugin library</span>
-   TPluginHandler *ph=<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base, const Char_t* uri = &quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVBatchSystem"</span>, plugin);
+   TPluginHandler *ph=<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVBatchSystem"</span>, plugin);
    <span class="keyword">if</span> (!ph)
       <span class="keyword">return</span> <span class="keyword">new</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>(plugin);
 
@@ -275,7 +275,7 @@ else {
    <span class="comment">// Note that the default options for this batch system may be changed just before</span>
 	<span class="comment">// job submission depending on the current environment, see <a href="../KVBatchSystem.html#KVBatchSystem:ChangeDefJobOpt" title="void KVBatchSystem::ChangeDefJobOpt(KVDataAnalyser* da)">ChangeDefJobOpt</a>().</span>
 
-   <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Task submission for analyser class : %s"</span>, da-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName" title="const char* TObject::ClassName() const">ClassName</a>());
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Task submission for analyser class : %s"</span>, da-&gt;<a href="../#TObject:ClassName" title="const char* TObject::ClassName()">ClassName</a>());
    <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a> = da;
 	<span class="comment">//change job submission options depending on task, environment, etc.</span>
 	<a href="../KVBatchSystem.html#KVBatchSystem:ChangeDefJobOpt" title="void KVBatchSystem::ChangeDefJobOpt(KVDataAnalyser* da)">ChangeDefJobOpt</a>(da);
@@ -299,15 +299,15 @@ else {
 	<span class="comment">// [batch system name].BatchSystem.DefaultJobOptions</span>
 
    TString tmp = gEnv-&gt;GetValue( Form(<span class="string">"%s.BatchSystem.DefaultJobOptions.%s"</span>,
-         <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), da-&gt;GetAnalysisTask()-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()), <span class="string">""</span> );
+         <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), da-&gt;GetAnalysisTask()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <span class="string">""</span> );
    <span class="keyword">if</span>( tmp.Length() ){
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ChangeDefJobOpt"</span>, <span class="string">"Changing default batch options for task %s."</span>, da-&gt;GetAnalysisTask()-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ChangeDefJobOpt"</span>, <span class="string">"Batch job options for this job are : %s"</span>, tmp.Data());
+      <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ChangeDefJobOpt"</span>, <span class="string">"Changing default batch options for task %s."</span>, da-&gt;GetAnalysisTask()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+      <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ChangeDefJobOpt"</span>, <span class="string">"Batch job options for this job are : %s"</span>, tmp.Data());
       <a href="../KVBatchSystem.html#KVBatchSystem:SetDefaultJobOptions" title="void KVBatchSystem::SetDefaultJobOptions(const Char_t* opt)">SetDefaultJobOptions</a>( tmp.Data() );
    }
 	<span class="keyword">else</span>
 	{
-   	tmp = gEnv-&gt;GetValue( Form(<span class="string">"%s.BatchSystem.DefaultJobOptions"</span>,<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()), <span class="string">""</span> );
+   	tmp = gEnv-&gt;GetValue( Form(<span class="string">"%s.BatchSystem.DefaultJobOptions"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <span class="string">""</span> );
       <a href="../KVBatchSystem.html#KVBatchSystem:SetDefaultJobOptions" title="void KVBatchSystem::SetDefaultJobOptions(const Char_t* opt)">SetDefaultJobOptions</a>( tmp.Data() );
 	}
 }
@@ -332,8 +332,8 @@ else {
       <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobName" title="KVString KVBatchSystem::fCurrJobName">fCurrJobName</a> = <a href="../KVBatchSystem.html#KVBatchSystem:fJobName" title="KVString KVBatchSystem::fJobName">fJobName</a>;
    } <span class="keyword">else</span> {
       <span class="comment">//replace any special symbols with their current values</span>
-      <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobName" title="KVString KVBatchSystem::fCurrJobName">fCurrJobName</a> = <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:ExpandAutoBatchName" title="const Char_t* KVDataAnalyser::ExpandAutoBatchName(const Char_t* format)">ExpandAutoBatchName</a>(<a href="../KVBatchSystem.html#KVBatchSystem:fJobName" title="KVString KVBatchSystem::fJobName">fJobName</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
-      <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode() const">MultiJobsMode</a>() &amp;&amp; !<a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:BatchMode" title="Bool_t KVDataAnalyser::BatchMode() const">BatchMode</a>()){
+      <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobName" title="KVString KVBatchSystem::fCurrJobName">fCurrJobName</a> = <a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:ExpandAutoBatchName" title="const Char_t* KVDataAnalyser::ExpandAutoBatchName(const Char_t* format)">ExpandAutoBatchName</a>(<a href="../KVBatchSystem.html#KVBatchSystem:fJobName" title="KVString KVBatchSystem::fJobName">fJobName</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
+      <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode()">MultiJobsMode</a>() &amp;&amp; !<a href="../KVBatchSystem.html#KVBatchSystem:fAnalyser" title="KVDataAnalyser* KVBatchSystem::fAnalyser">fAnalyser</a>-><a href="../KVDataAnalyser.html#KVDataAnalyser:BatchMode" title="Bool_t KVDataAnalyser::BatchMode()">BatchMode</a>()){
           <a href="../KVString.html">KVString</a> tmp;
           <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:GetNValues" title="Int_t KVNumberList::GetNValues()">GetNValues</a>()&gt;1)
             tmp.Form(<span class="string">"_R%d-%d"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:First" title="Int_t KVNumberList::First()">First</a>(), <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:Last" title="Int_t KVNumberList::Last()">Last</a>());
@@ -343,7 +343,7 @@ else {
       }
    }
    <a href="../KVBatchSystem.html#KVBatchSystem:SanitizeJobName" title="void KVBatchSystem::SanitizeJobName()">SanitizeJobName</a>();
-   <span class="keyword">return</span> <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobName" title="KVString KVBatchSystem::fCurrJobName">fCurrJobName</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>();
+   <span class="keyword">return</span> <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobName" title="KVString KVBatchSystem::fCurrJobName">fCurrJobName</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>();
 }
 
 <span class="comment">//_______________________________________________________________________________//</span>
@@ -354,8 +354,8 @@ else {
    <a href="../KVString.html">KVString</a> jobName=<a href="../KVBatchSystem.html#KVBatchSystem:fJobName" title="KVString KVBatchSystem::fJobName">fJobName</a>;
    <span class="keyword">while</span>(!jobName.Length())
     {
-    cout &lt;&lt; <span class="string">"Please enter the job name : "</span>; cout.flush();
-    jobName.ReadToDelim(cin);
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Please enter the job name : "</span>; <a href="../ListOfTypes.html#ostream">cout</a>.flush();
+    jobName.ReadToDelim(<a href="../ListOfTypes.html#istream">cin</a>);
     <span class="keyword">if</span>(jobName.Length())
      {
      <a href="../KVBatchSystem.html#KVBatchSystem:SetJobName" title="void KVBatchSystem::SetJobName(const Char_t* name)">SetJobName</a>(jobName.Data());
@@ -366,45 +366,45 @@ else {
 
 <span class="comment">//_______________________________________________________________________________//</span>
 
-<a name="zaBBb"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:WriteBatchEnvFile" title="void KVBatchSystem::WriteBatchEnvFile(TEnv*)">WriteBatchEnvFile</a>(TEnv* env)
+<a name="zaBBb"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:WriteBatchEnvFile" title="void KVBatchSystem::WriteBatchEnvFile(TEnv* )">WriteBatchEnvFile</a>(TEnv* env)
 {
    <span class="comment">//Store any useful information on batch system in the TEnv</span>
-   <span class="comment">//(this method is used by <a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:WriteBatchEnvFile" title="void KVDataAnalyser::WriteBatchEnvFile(const Char_t*, Bool_t sav = kTRUE)">WriteBatchEnvFile</a>)</span>
-   env-&gt;SetValue(<span class="string">"BatchSystem.MultiJobs"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode() const">MultiJobsMode</a>());
-   <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode() const">MultiJobsMode</a>()) env-&gt;SetValue(<span class="string">"BatchSystem.CurrentRunList"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars = 0)">AsString</a>());
+   <span class="comment">//(this method is used by <a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:WriteBatchEnvFile" title="void KVDataAnalyser::WriteBatchEnvFile(const Char_t* ,Bool_t sav=kTRUE)">WriteBatchEnvFile</a>)</span>
+   env-&gt;SetValue(<span class="string">"BatchSystem.MultiJobs"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode()">MultiJobsMode</a>());
+   <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode()">MultiJobsMode</a>()) env-&gt;SetValue(<span class="string">"BatchSystem.CurrentRunList"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars=0)">AsString</a>());
    env-&gt;SetValue(<span class="string">"BatchSystem.JobName"</span>, <a href="../KVBatchSystem.html#KVBatchSystem:GetJobName" title="const Char_t* KVBatchSystem::GetJobName()">GetJobName</a>());
 }
 
 <span class="comment">//_______________________________________________________________________________//</span>
 
-<a name="p7ot8B"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:ReadBatchEnvFile" title="void KVBatchSystem::ReadBatchEnvFile(TEnv*)">ReadBatchEnvFile</a>(TEnv* env)
+<a name="p7ot8B"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:ReadBatchEnvFile" title="void KVBatchSystem::ReadBatchEnvFile(TEnv* )">ReadBatchEnvFile</a>(TEnv* env)
 {
-   <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> any useful information on batch system from the TEnv</span>
-   <span class="comment">//(this method is used by <a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:ReadBatchEnvFile" title="Bool_t KVDataAnalyser::ReadBatchEnvFile(const Char_t*)">ReadBatchEnvFile</a>)</span>
+   <span class="comment">//<a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> any useful information on batch system from the TEnv</span>
+   <span class="comment">//(this method is used by <a href="../KVDataAnalyser.html">KVDataAnalyser</a>::<a href="../KVDataAnalyser.html#KVDataAnalyser:ReadBatchEnvFile" title="Bool_t KVDataAnalyser::ReadBatchEnvFile(const Char_t* )">ReadBatchEnvFile</a>)</span>
    <a href="../KVBatchSystem.html#KVBatchSystem:fJobName" title="KVString KVBatchSystem::fJobName">fJobName</a> = env-&gt;GetValue(<span class="string">"BatchSystem.JobName"</span>, <span class="string">""</span>);
-   <a href="../KVBatchSystem.html#KVBatchSystem:SetMultiJobsMode" title="void KVBatchSystem::SetMultiJobsMode(Bool_t on = kTRUE)">SetMultiJobsMode</a>(env-&gt;GetValue(<span class="string">"BatchSystem.MultiJobs"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>));
-   <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode() const">MultiJobsMode</a>()) <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:SetList" title="void KVNumberList::SetList(TString&amp;) or overloads">SetList</a>(env-&gt;GetValue(<span class="string">"BatchSystem.CurrentRunList"</span>, <span class="string">""</span>));
+   <a href="../KVBatchSystem.html#KVBatchSystem:SetMultiJobsMode" title="void KVBatchSystem::SetMultiJobsMode(Bool_t on=kTRUE)">SetMultiJobsMode</a>(env-&gt;GetValue(<span class="string">"BatchSystem.MultiJobs"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>));
+   <span class="keyword">if</span>(<a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode()">MultiJobsMode</a>()) <a href="../KVBatchSystem.html#KVBatchSystem:fCurrJobRunList" title="KVNumberList KVBatchSystem::fCurrJobRunList">fCurrJobRunList</a>.<a href="../KVNumberList.html#KVNumberList:SetList" title="void KVNumberList::SetList(const TString&amp; )">SetList</a>(env-&gt;GetValue(<span class="string">"BatchSystem.CurrentRunList"</span>, <span class="string">""</span>));
 }
 
 <span class="comment">//_______________________________________________________________________________//</span>
 
-<a name="iordPB"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:Print" title="void KVBatchSystem::Print(Option_t* = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* option) <span class="keyword">const</span>
+<a name="iordPB"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:Print" title="void KVBatchSystem::Print(Option_t* =&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* option) <span class="keyword">const</span>
 {
    <span class="comment">//if option=<span class="string">"log"</span>, print infos for batch log file</span>
    <span class="comment">//if option=<span class="string">"all"</span>, print detailed info on batch system</span>
    <span class="keyword">if</span>(!strcmp(option, <span class="string">"log"</span>)){
-      cout &lt;&lt; <span class="string">"Job "</span> &lt;&lt;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Job "</span> &lt;&lt;
             <span class="keyword">const_cast</span>&lt;<a href="../KVBatchSystem.html">KVBatchSystem</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVBatchSystem.html#KVBatchSystem:GetJobName" title="const Char_t* KVBatchSystem::GetJobName()">GetJobName</a>()
-            &lt;&lt; <span class="string">" executed by batch system "</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl;
+            &lt;&lt; <span class="string">" executed by batch system "</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
    }
    <span class="keyword">else</span> <span class="keyword">if</span>(!strcmp(option, <span class="string">"all"</span>)){
-      cout &lt;&lt; <a href="http://root.cern.ch/root/html/TObject.html#TObject:ClassName" title="const char* TObject::ClassName() const">ClassName</a>() &lt;&lt; <span class="string">" : Name = "</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() &lt;&lt; endl &lt;&lt; <span class="string">" Title = "</span> &lt;&lt; <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetTitle" title="const char* TNamed::GetTitle() const">GetTitle</a>() &lt;&lt; endl;
-      cout &lt;&lt; <span class="string">" fJobSubCmd = "</span> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;
-      cout &lt;&lt; <span class="string">" fJobScript = "</span> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:fJobScript" title="KVString KVBatchSystem::fJobScript">fJobScript</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;
-      cout &lt;&lt; <span class="string">" fDefOpt = "</span> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:fDefOpt" title="KVString KVBatchSystem::fDefOpt">fDefOpt</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>() &lt;&lt; endl;
-      <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:Print" title="void KVNameValueList::Print(Option_t* opt = &quot;&quot;) const">Print</a>();        <span class="comment">//list of parameters/switches to be passed on job submission command line</span>
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../#TObject:ClassName" title="const char* TObject::ClassName()">ClassName</a>() &lt;&lt; <span class="string">" : Name = "</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl &lt;&lt; <span class="string">" Title = "</span> &lt;&lt; <a href="../#TNamed:GetTitle" title="const char* TNamed::GetTitle()">GetTitle</a>() &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" fJobSubCmd = "</span> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:fJobSubCmd" title="KVString KVBatchSystem::fJobSubCmd">fJobSubCmd</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" fJobScript = "</span> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:fJobScript" title="KVString KVBatchSystem::fJobScript">fJobScript</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" fDefOpt = "</span> &lt;&lt; <a href="../KVBatchSystem.html#KVBatchSystem:fDefOpt" title="KVString KVBatchSystem::fDefOpt">fDefOpt</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>() &lt;&lt; endl;
+      <a href="../KVBatchSystem.html#KVBatchSystem:fParList" title="KVNameValueList KVBatchSystem::fParList">fParList</a>.<a href="../KVNameValueList.html#KVNameValueList:Print" title="void KVNameValueList::Print(Option_t* opt=&quot;&quot;)">Print</a>();        <span class="comment">//list of parameters/switches to be passed on job submission command line</span>
    } <span class="keyword">else</span>
-       <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option = &quot;&quot;) const">Print</a>(option);
+       <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option=&quot;&quot;)">Print</a>(option);
 }
 
 <a name="sHuhrC"></a><a href="../KVList.html">KVList</a> *<a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:GetListOfJobs" title="KVList* KVBatchSystem::GetListOfJobs()">GetListOfJobs</a>()
@@ -421,7 +421,7 @@ else {
 
 <a name="r2bG9C"></a><span class="keyword">void</span> <a href="../KVBatchSystem.html">KVBatchSystem</a>::<a href="../KVBatchSystem.html#KVBatchSystem:SetJobName" title="void KVBatchSystem::SetJobName(const Char_t* name)">SetJobName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *name)
 {
-   <span class="comment">//Set the job name. In <a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode() const">MultiJobsMode</a> this will be used as the base name for all jobs;</span>
+   <span class="comment">//Set the job name. In <a href="../KVBatchSystem.html#KVBatchSystem:MultiJobsMode" title="Bool_t KVBatchSystem::MultiJobsMode()">MultiJobsMode</a> this will be used as the base name for all jobs;</span>
    <span class="comment">//each individual job will have the name 'basejobname_Rxxxx<span class="string">", with xxxx=run number for job.</span></span>
    <span class="comment">//</span>
    <span class="comment">//The job name can be generated automatically by replacing certain special symbols</span>
@@ -437,7 +437,7 @@ else {
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

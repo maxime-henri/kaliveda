@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Fri Jul 17 16:52:24 2015            -->
+<!--   Date: Thu Oct  1 14:33:48 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -52,7 +52,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/02</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/03</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_EVENTS_Index.html">EVENTS</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVEvent</a>
@@ -91,7 +91,10 @@ When writing events in a TTree, it is very important to call the TBranch::SetAut
 method of the branch which is used to store the event object.
 If not, when the events are read back, the <a href="./KVEvent.html">KVEvent</a> constructor and destructor will be called
 every time an event is read from the TTRee!! Leading to very slow reading times (&amp; probably
-memory leaks)
+memory leaks).
+For this reason we provide the method:
+    <a href="./ListOfTypes.html#void">void</a> <a href="./KVEvent.html#KVEvent:MakeEventBranch" title="void KVEvent::MakeEventBranch(TTree* tree,const TString&amp; branchname,const TString&amp; classname,void* event,Int_t bufsize=10000000)">MakeEventBranch</a>(TTree*, const TString&amp;, const TString&amp;, <a href="./ListOfTypes.html#void">void</a>*)
+which should be used whenever it is required to stock <a href="./KVEvent.html">KVEvent</a>-derived objects in a TTree.
 
 :
 </pre></div>
@@ -208,6 +211,7 @@ memory leaks)
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:ls">ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* t = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:MakeEventBranch">MakeEventBranch</a>(TTree* tree, <span class="keyword">const</span> TString&amp; branchname, <span class="keyword">const</span> TString&amp; classname, <span class="keyword">void</span>* event, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 10000000)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
@@ -315,13 +319,11 @@ memory leaks)
 </div>
 <h2><a id="KVEvent:Class_Charts"></a>Class Charts</h2>
 <map name="MapKVEvent_Inh" id="MapKVEvent_Inh">
-<area shape="rect" id="node2" href="./KVBase.html" title="KVBase" alt="" coords="211,21,281,34"/>
-<area shape="rect" id="node5" href="./KVReconstructedEvent.html" title="KVReconstructedEvent" alt="" coords="421,8,518,21"/>
-<area shape="rect" id="node6" href="./KVSimEvent.html" title="KVSimEvent" alt="" coords="435,21,505,34"/>
-<area shape="rect" id="node7" href="./KVTestEvent.html" title="KVTestEvent" alt="" coords="435,34,505,47"/>
-<area shape="rect" id="node8" href="./KVINDRAReconEvent.html" title="KVINDRAReconEvent" alt="" coords="556,1,653,14"/>
-<area shape="rect" id="node9" href="./KVVAMOSReconEvent.html" title="KVVAMOSReconEvent" alt="" coords="553,14,655,27"/>
-<area shape="rect" id="node10" href="./KVIVReconEvent.html" title="KVIVReconEvent" alt="" coords="690,1,767,14"/>
+<area shape="rect" id="node2" href="./KVBase.html" title="KVBase" alt="" coords="249,17,331,32"/>
+<area shape="rect" id="node5" href="./KVReconstructedEvent.html" title="KVReconstructedEvent" alt="" coords="496,1,611,17"/>
+<area shape="rect" id="node6" href="./KVSimEvent.html" title="KVSimEvent" alt="" coords="512,17,595,32"/>
+<area shape="rect" id="node7" href="./KVTestEvent.html" title="KVTestEvent" alt="" coords="512,33,595,48"/>
+<area shape="rect" id="node8" href="./KVINDRAReconEvent.html" title="KVINDRAReconEvent" alt="" coords="652,1,767,17"/>
 </map>
 <map name="MapKVEvent_InhMem" id="MapKVEvent_InhMem">
 <area shape="rect" id="clust11" href="./KVBase.html" alt="" coords="557,47,624,96"/>
@@ -334,7 +336,7 @@ memory leaks)
 <area shape="rect" id="clust9" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,448"/>
 </map>
 <map name="MapKVEvent_Lib" id="MapKVEvent_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="286,373,338,395"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="262,374,309,394"/>
 </map>
 <div class="tabs">
 <a id="imgKVEvent_Inh" class="tabsel" href="inh/KVEvent_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVEvent_Inh.png');">Inheritance</a>
@@ -706,12 +708,18 @@ return list of isotopes of the event with the format :
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEvent:CustomStreamer" href="src/KVEvent.h.html#C4Zl_">CustomStreamer</a>()</span><br />
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEvent:MakeEventBranch" href="src/KVEvent.h.html#TWqBAC">MakeEventBranch</a>(TTree* tree, <span class="keyword">const</span> TString&amp; branchname, <span class="keyword">const</span> TString&amp; classname, <span class="keyword">void</span>* event, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 10000000)</span><br />
+<div class="funccomm"><pre> Use this method when adding a branch to a TTree to store <a href="./KVEvent.html">KVEvent</a>-derived objects.
+ If (*e) points to a valid <a href="./KVEvent.html">KVEvent</a>-derived object, we use the name of the class of the object.
+ Otherwise we use the value of classname (default = <span class="string">"KVEvent"</span>)
+</pre></div>
+</div>
 
 <br />
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jul 17 16:52:25 2015 </em><em>&raquo; Last generated: 2015-07-17 16:52</em><br />
+<em>&raquo; Last changed: Thu Oct  1 14:33:49 2015 </em><em>&raquo; Last generated: 2015-10-01 14:33</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

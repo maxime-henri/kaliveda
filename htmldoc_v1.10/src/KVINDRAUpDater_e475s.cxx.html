@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:43 2015            -->
+<!--   Date: Thu Sep 17 10:51:39 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>.cpp,v 1.7 2009/04/15 09:52:45 ebonnet Exp $
@@ -66,7 +66,7 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
    <span class="comment">//Destructor</span>
 }
 
-<a name="u0uAtB"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>::<a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetCalibrationParameters" title="void KVINDRAUpDater_e475s::SetCalibrationParameters(UInt_t)">SetCalibrationParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run){
+<a name="u0uAtB"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>::<a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetCalibrationParameters" title="void KVINDRAUpDater_e475s::SetCalibrationParameters(UInt_t )">SetCalibrationParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run){
 
 
     <span class="comment">//Set calibration parameters for this run.</span>
@@ -75,16 +75,16 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
     <span class="comment">//      set calibration parameters for the run</span>
     <span class="comment">//      set pedestals for the run</span>
     
-    cout &lt;&lt; <span class="string">"Setting calibration parameters of INDRA array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Setting calibration parameters of INDRA array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
     endl;
-    <a href="../KVDBRun.html">KVDBRun</a> *kvrun = <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run) const or overloads">GetRun</a>(run);
+    <a href="../KVDBRun.html">KVDBRun</a> *kvrun = <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run);
     <span class="keyword">if</span> (!kvrun)
     {
         Error(<span class="string">"SetParameters(UInt_t)"</span>, <span class="string">"Run %u not found in database!"</span>, run);
         <span class="keyword">return</span>;
     }
     <span class="comment">//Reset all calibrators of all detectors first</span>
-    TIter next(<a href="../KVINDRA.html">gIndra</a>-><a href="../KVINDRA.html#KVINDRA:GetListOfDetectors" title="const KVSeqCollection* KVINDRA::GetListOfDetectors() const">GetListOfDetectors</a>());
+    TIter next(<a href="../KVINDRA.html">gIndra</a>-><a href="../KVINDRA.html#KVINDRA:GetListOfDetectors" title="const KVSeqCollection* KVINDRA::GetListOfDetectors()">GetListOfDetectors</a>());
     <a href="../KVDetector.html">KVDetector</a> *kvd;
     <span class="keyword">while</span> ((kvd = (<a href="../KVDetector.html">KVDetector</a> *) next()))
     {
@@ -106,7 +106,7 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
     	}
 	 }
     <a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetCalibParameters" title="void KVINDRAUpDater_e475s::SetCalibParameters(KVDBRun* run)">SetCalibParameters</a>(kvrun);
-    <a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetPedestals" title="void KVINDRAUpDater_e475s::SetPedestals(KVDBRun*)">SetPedestals</a>(kvrun);
+    <a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetPedestals" title="void KVINDRAUpDater_e475s::SetPedestals(KVDBRun* )">SetPedestals</a>(kvrun);
 
 }
 
@@ -130,16 +130,16 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
    <span class="comment">// Setting all calibration parameters available</span>
    <span class="keyword">while</span> ((kvps = (<a href="../KVDBParameterSet.html">KVDBParameterSet</a> *) next_ps())) {    <span class="comment">// boucle sur les parametres</span>
       str = kvps-&gt;GetName();
-		<span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data())){
+		<span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data())){
 		   
-			<span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data())-><a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVSilicon_e475s"</span>)) {
-				((<a href="../KVSilicon_e475s.html">KVSilicon_e475s</a> *)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data()))-&gt;SetCalibrator(kvps);
+			<span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data())-><a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVSilicon_e475s"</span>)) {
+				((<a href="../KVSilicon_e475s.html">KVSilicon_e475s</a> *)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data()))-&gt;SetCalibrator(kvps);
          }
-			<span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data())-><a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVChIo_e475s"</span>)){
-				((<a href="../KVChIo_e475s.html">KVChIo_e475s</a> *)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data()))-&gt;SetCalibrator(kvps);
+			<span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data())-><a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVChIo_e475s"</span>)){
+				((<a href="../KVChIo_e475s.html">KVChIo_e475s</a> *)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data()))-&gt;SetCalibrator(kvps);
 			}
-			<span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data())-><a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>(<span class="string">"KVCsI_e475s"</span>)){
-				((<a href="../KVCsI_e475s.html">KVCsI_e475s</a> *)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data()))-&gt;SetCalibrator(kvps);
+			<span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data())-><a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVCsI_e475s"</span>)){
+				((<a href="../KVCsI_e475s.html">KVCsI_e475s</a> *)<a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data()))-&gt;SetCalibrator(kvps);
 			}
 			<span class="keyword">else</span> {
 				Warning(<span class="string">"SetCalibParameters(KVDBRun*)"</span>,
@@ -153,7 +153,7 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
 
 
 
-<a name="N_hOTB"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>::<a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetPedestals" title="void KVINDRAUpDater_e475s::SetPedestals(KVDBRun*)">SetPedestals</a>(<a href="../KVDBRun.html">KVDBRun</a>* kvrun)
+<a name="N_hOTB"></a><span class="keyword">void</span> <a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>::<a href="../KVINDRAUpDater_e475s.html#KVINDRAUpDater_e475s:SetPedestals" title="void KVINDRAUpDater_e475s::SetPedestals(KVDBRun* )">SetPedestals</a>(<a href="../KVDBRun.html">KVDBRun</a>* kvrun)
 {
    
 	<a href="../KVRList.html">KVRList</a> *param_list = kvrun-&gt;GetLinks(<span class="string">"Pedestals"</span>);
@@ -172,7 +172,7 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
    <span class="comment">// Setting all pedestal values available</span>
    <span class="keyword">while</span> ((kvps = (<a href="../KVDBParameterSet.html">KVDBParameterSet</a> *) next_ps())) {    <span class="comment">// boucle sur les parametres</span>
       str = kvps-&gt;GetName();
-		<span class="keyword">if</span> ( (det = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name) const">GetDetector</a>(str.Data())) ){
+		<span class="keyword">if</span> ( (det = <a href="../KVINDRA.html">gIndra</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(str.Data())) ){
 		   pied_value = kvps-&gt;GetParameter(1);
 			det-&gt;SetPedestal(kvps-&gt;GetTitle(),pied_value);
 		}                      <span class="comment">//detector found</span>
@@ -187,7 +187,7 @@ ClassImp(<a href="../KVINDRAUpDater_e475s.html">KVINDRAUpDater_e475s</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

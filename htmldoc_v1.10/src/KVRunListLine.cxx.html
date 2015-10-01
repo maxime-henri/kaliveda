@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:17 2015            -->
+<!--   Date: Thu Sep 17 10:51:57 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVRunListLine.html">KVRunListLine</a>.cpp,v 1.6 2006/10/19 14:32:43 franklan Exp $
@@ -40,10 +40,10 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 <span class="comment">//based on the DST runlists kept at CC-IN2P3 (KVLineDST).</span>
 <span class="comment">//</span>
 <span class="comment">//For backwards compatibility, this uses <a href="../KVString.html">KVString</a> whenever possible.</span>
-<a name="lUpeaD"></a>    <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:KVRunListLine" title="KVRunListLine KVRunListLine::KVRunListLine() or overloads">KVRunListLine</a>()
+<a name="lUpeaD"></a>    <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:KVRunListLine" title="KVRunListLine KVRunListLine::KVRunListLine()">KVRunListLine</a>()
 {
    <span class="comment">//Default ctor</span>
-   <span class="comment">//Initial size of TObjArray (<a href="../KVRunListLine.html#KVRunListLine:fMaxNFields" title="Int_t KVRunListLine::fMaxNFields">fMaxNFields</a>) is 5. This will be increased if necessary in <a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char)">BreakLineIntoFields</a>().</span>
+   <span class="comment">//Initial size of TObjArray (<a href="../KVRunListLine.html#KVRunListLine:fMaxNFields" title="Int_t KVRunListLine::fMaxNFields">fMaxNFields</a>) is 5. This will be increased if necessary in <a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char )">BreakLineIntoFields</a>().</span>
 
    <a href="../KVRunListLine.html#KVRunListLine:fMaxNFields" title="Int_t KVRunListLine::fMaxNFields">fMaxNFields</a> = 5;
    <a href="../KVRunListLine.html#KVRunListLine:fFields" title="TObjArray* KVRunListLine::fFields">fFields</a> = <span class="keyword">new</span> TObjArray(<a href="../KVRunListLine.html#KVRunListLine:fMaxNFields" title="Int_t KVRunListLine::fMaxNFields">fMaxNFields</a>);
@@ -56,13 +56,13 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
    <a href="../KVRunListLine.html#KVRunListLine:fFields" title="TObjArray* KVRunListLine::fFields">fFields</a>-&gt;Delete();
    <span class="keyword">delete</span> <a href="../KVRunListLine.html#KVRunListLine:fFields" title="TObjArray* KVRunListLine::fFields">fFields</a>;
    <a href="../KVRunListLine.html#KVRunListLine:fFields" title="TObjArray* KVRunListLine::fFields">fFields</a> = 0;
-   <a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
-   <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+   <a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
+   <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="EEizcD"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char)">BreakLineIntoFields</a>(<span class="keyword">const</span> <span class="keyword">char</span> _delim)
+<a name="EEizcD"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char )">BreakLineIntoFields</a>(<span class="keyword">const</span> <span class="keyword">char</span> _delim)
 {
    <span class="comment">//Break down <span class="string">"line"</span> into fields separated by the delimiter <span class="string">"_delim"</span>. Fields are stored in TObjArray of TObjString s (including empty fields</span>
    <span class="comment">//i.e. 2 consecutive delimiters in <span class="string">"line"</span> with nothing between are translated as a field whose content is <span class="string">""</span>. TString::Tokenize() simply skips over such</span>
@@ -119,12 +119,12 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 <a name="B40atE"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:SetFields" title="void KVRunListLine::SetFields()">SetFields</a>()
 {
    <span class="comment">//set field idxes based on field header line in file identified by <a href="../KVRunListLine.html#KVRunListLine:IsFieldHeader" title="Bool_t KVRunListLine::IsFieldHeader()">IsFieldHeader</a>().</span>
-   <span class="comment">//this method is called automatically by <a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char)">BreakLineIntoFields</a>().</span>
+   <span class="comment">//this method is called automatically by <a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char )">BreakLineIntoFields</a>().</span>
    <span class="comment">//we check that at least one index has been defined at the end</span>
    <span class="comment">//previous definitions are forgotten</span>
 
    <span class="comment">//clear index list</span>
-   <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt = &quot;&quot;)">Clear</a>();
+   <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
    <span class="comment">//reset flag</span>
    <a href="../KVRunListLine.html#KVRunListLine:fFieldsSet" title="Bool_t KVRunListLine::fFieldsSet">fFieldsSet</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 
@@ -135,15 +135,15 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
       <span class="keyword">if</span> (field-&gt;GetString().IsAscii() &amp;&amp; field-&gt;GetString().Length()) {
          <span class="comment">//non-null ASCII string ? use it as column header</span>
-         <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:SetValue" title="void KVNameValueList::SetValue(const Char_t* name, const Char_t* value) or overloads">SetValue</a>(field-&gt;GetString().Data(), idx);
+         <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:SetValue" title="void KVNameValueList::SetValue(const Char_t* name,const Char_t* value) or overloads">SetValue</a>(field-&gt;GetString().Data(), idx);
       }
       idx++;
 
    }
 
-   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar() const">GetNpar</a>() ) {
+   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar()">GetNpar</a>() ) {
       <span class="comment">//no indices set - something's wrong </span>
-      Error(Form(<span class="string">"%s::SetFields"</span>, <a href="../KVRunListLine.html#KVRunListLine:IsA" title="TClass* KVRunListLine::IsA() const">IsA</a>()-&gt;GetName()), <span class="string">"No indices set"</span>);
+      Error(Form(<span class="string">"%s::SetFields"</span>, <a href="../KVRunListLine.html#KVRunListLine:IsA" title="TClass* KVRunListLine::IsA()">IsA</a>()-&gt;GetName()), <span class="string">"No indices set"</span>);
       <span class="keyword">return</span>;
    }
    <span class="comment">//set flag</span>
@@ -152,12 +152,12 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="xgJ4aD"></a>TObjString *<a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t*) const">GetFieldString</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname) <span class="keyword">const</span>
+<a name="xgJ4aD"></a>TObjString *<a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t* )">GetFieldString</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname) <span class="keyword">const</span>
 {
    <span class="comment">//returns a TObjString containing the field in the line corresponding to column title <span class="string">"fname"</span>.</span>
    <span class="comment">//Check that field indices are set and field is known otherwise return 0</span>
 
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> idx = <a href="../KVRunListLine.html#KVRunListLine:GetFieldIndex" title="Int_t KVRunListLine::GetFieldIndex(const Char_t*) const">GetFieldIndex</a>(fname);
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> idx = <a href="../KVRunListLine.html#KVRunListLine:GetFieldIndex" title="Int_t KVRunListLine::GetFieldIndex(const Char_t* fname)">GetFieldIndex</a>(fname);
    <span class="keyword">if</span> (idx &lt; 0)
       <span class="keyword">return</span> 0;
    TObjArray &amp; tca = *<a href="../KVRunListLine.html#KVRunListLine:fFields" title="TObjArray* KVRunListLine::fFields">fFields</a>;
@@ -166,12 +166,12 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="iKJIgE"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t*) const">GetField</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname) <span class="keyword">const</span>
+<a name="iKJIgE"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t* )">GetField</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname) <span class="keyword">const</span>
 {
    <span class="comment">//returns a string containing the field in the line corresponding to column title <span class="string">"fname"</span>.</span>
    <span class="comment">//returns 0 if field not found</span>
 
-   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t*) const">GetFieldString</a>(fname);
+   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t* )">GetFieldString</a>(fname);
    <span class="keyword">if</span> (tmp)
       <span class="keyword">return</span> tmp-&gt;String().Data();
    <span class="keyword">return</span> 0;
@@ -179,30 +179,30 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="C6W6l"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetIntField" title="Int_t KVRunListLine::GetIntField(const Char_t*)">GetIntField</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname)
+<a name="C6W6l"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetIntField" title="Int_t KVRunListLine::GetIntField(const Char_t* )">GetIntField</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname)
 {
    <span class="comment">//Returns the integer translation of the field in the line corresponding to column title <span class="string">"fname"</span>.</span>
-   <span class="comment">//We check the field is present in current line and that all characters in the field are numbers (<a href="../KVString.html">KVString</a>::<a href="http://root.cern.ch/root/html/TString.html#TString:IsDigit" title="Bool_t TString::IsDigit() const">IsDigit</a>).</span>
+   <span class="comment">//We check the field is present in current line and that all characters in the field are numbers (<a href="../KVString.html">KVString</a>::<a href="../#TString:IsDigit" title="Bool_t TString::IsDigit()">IsDigit</a>).</span>
    <span class="comment">//If not, 0 is returned.</span>
 
-   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t*) const">GetFieldString</a>(fname);
+   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t* )">GetFieldString</a>(fname);
    <span class="keyword">if</span> (!tmp)
       <span class="keyword">return</span> 0;
    <a href="../KVString.html">KVString</a> kvs(tmp-&gt;String());
-   <span class="keyword">if</span> (<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t*) const">HasFieldValue</a>(fname) &amp;&amp; kvs.IsDigit())
+   <span class="keyword">if</span> (<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t* fname)">HasFieldValue</a>(fname) &amp;&amp; kvs.IsDigit())
       <span class="keyword">return</span> kvs.Atoi();
    <span class="keyword">return</span> 0;
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="clXYXE"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetFloatField" title="Float_t KVRunListLine::GetFloatField(const Char_t*)">GetFloatField</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname)
+<a name="clXYXE"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetFloatField" title="Float_t KVRunListLine::GetFloatField(const Char_t* )">GetFloatField</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fname)
 {
    <span class="comment">//returns the floating-point translation of the field in the line corresponding to column title <span class="string">"fname"</span>.</span>
    <span class="comment">//We check that the field is a floating point number (<a href="../KVRunListLine.html#KVRunListLine:IsFloat" title="Bool_t KVRunListLine::IsFloat(const Char_t* name)">IsFloat</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>)</span>
    <span class="comment">//If not, 0 is returned.</span>
 
-   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t*) const">GetFieldString</a>(fname);
+   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t* )">GetFieldString</a>(fname);
    <span class="keyword">if</span> (!tmp)
       <span class="keyword">return</span> 0;
    <a href="../KVString.html">KVString</a> kvs(tmp-&gt;String());
@@ -213,24 +213,24 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="rsHn4B"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print() const">Print</a>() <span class="keyword">const</span>
+<a name="rsHn4B"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print()">Print</a>() <span class="keyword">const</span>
 {
-   <span class="comment">//<a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print() const">Print</a> information on this reader object.</span>
+   <span class="comment">//<a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print()">Print</a> information on this reader object.</span>
    <span class="comment">//If fields have been set, we show which fields have been found.</span>
    <span class="comment">//Break down of current line is shown.</span>
 
-   cout &lt;&lt; <a href="../KVRunListLine.html#KVRunListLine:IsA" title="TClass* KVRunListLine::IsA() const">IsA</a>()-&gt;GetName() &lt;&lt; <span class="string">" object"</span> &lt;&lt; endl;
-   cout &lt;&lt; <span class="string">"Current line : "</span> &lt;&lt; endl &lt;&lt; <a href="../KVRunListLine.html#KVRunListLine:fLine" title="TString KVRunListLine::fLine">fLine</a> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVRunListLine.html#KVRunListLine:IsA" title="TClass* KVRunListLine::IsA()">IsA</a>()-&gt;GetName() &lt;&lt; <span class="string">" object"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Current line : "</span> &lt;&lt; endl &lt;&lt; <a href="../KVRunListLine.html#KVRunListLine:fLine" title="TString KVRunListLine::fLine">fLine</a> &lt;&lt; endl;
 
-   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:FieldsSet" title="Bool_t KVRunListLine::FieldsSet() const">FieldsSet</a>())
+   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:FieldsSet" title="Bool_t KVRunListLine::FieldsSet()">FieldsSet</a>())
       <span class="keyword">return</span>;
 
    <span class="comment">//show all defined fields with current values</span>
-   cout &lt;&lt; <span class="string">"Field name : current value"</span> &lt;&lt; endl;
-   cout &lt;&lt; <span class="string">"=========================="</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Field name : current value"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"=========================="</span> &lt;&lt; endl;
 
-   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> j = 0; j &lt; <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar() const">GetNpar</a>(); j++) {
-      <a href="../KVRunListLine.html#KVRunListLine:PrintFieldValue" title="void KVRunListLine::PrintFieldValue(const Char_t* name) const">PrintFieldValue</a>(<a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetParameter" title="KVNamedParameter* KVNameValueList::GetParameter(Int_t idx) const">GetParameter</a>(j)-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> j = 0; j &lt; <a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetNpar" title="Int_t KVNameValueList::GetNpar()">GetNpar</a>(); j++) {
+      <a href="../KVRunListLine.html#KVRunListLine:PrintFieldValue" title="void KVRunListLine::PrintFieldValue(const Char_t* name)">PrintFieldValue</a>(<a href="../KVRunListLine.html#KVRunListLine:fIndexList" title="KVNameValueList KVRunListLine::fIndexList">fIndexList</a>.<a href="../KVNameValueList.html#KVNameValueList:GetParameter" title="KVNamedParameter* KVNameValueList::GetParameter(Int_t idx)">GetParameter</a>(j)-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
    }
 }
 
@@ -245,9 +245,9 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
    <span class="comment">//      6.43e20   6.43E20</span>
    <span class="comment">//      6.43e-20  6.43E-20</span>
 
-   <span class="keyword">if</span> (<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t*) const">HasFieldValue</a>(name)) {   <span class="comment">//check field is present</span>
+   <span class="keyword">if</span> (<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t* fname)">HasFieldValue</a>(name)) {   <span class="comment">//check field is present</span>
 
-      TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t*) const">GetFieldString</a>(name);
+      TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t* )">GetFieldString</a>(name);
       <span class="keyword">if</span> (!tmp)
          <span class="keyword">return</span> 0;
       <a href="../KVString.html">KVString</a> kvs(tmp-&gt;String());
@@ -258,13 +258,13 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//______________________________________________________________________//</span>
 
-<a name="wXPucC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:FieldContains" title="Bool_t KVRunListLine::FieldContains(const Char_t*, const Char_t*) const">FieldContains</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * field,
+<a name="wXPucC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:FieldContains" title="Bool_t KVRunListLine::FieldContains(const Char_t* ,const Char_t* )">FieldContains</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * field,
                                     <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * string) <span class="keyword">const</span>
 {
-   <span class="comment">//Returns true if <span class="string">"field"</span> exists, has been filled, and contains <span class="string">"string"</span> as part or all of its value</span>
-   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t*) const">HasFieldValue</a>(field))
+   <span class="comment">//Returns <a href="../ListOfTypes.html#bool">true</a> if <span class="string">"field"</span> exists, has been filled, and contains <span class="string">"string"</span> as part or all of its value</span>
+   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t* fname)">HasFieldValue</a>(field))
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
-   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t*) const">GetFieldString</a>(field);
+   TObjString *tmp = <a href="../KVRunListLine.html#KVRunListLine:GetFieldString" title="TObjString* KVRunListLine::GetFieldString(const Char_t* )">GetFieldString</a>(field);
    <span class="keyword">if</span> (!tmp)
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <a href="../KVString.html">KVString</a> kvs(tmp-&gt;String());
@@ -273,7 +273,7 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="PXvgtD"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetTrigger" title="Int_t KVRunListLine::GetTrigger(const Char_t* field_name = &quot;Trigger&quot;, const Char_t* fmt = &quot;M&gt;=%d&quot;)">GetTrigger</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * field_name,
+<a name="PXvgtD"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GetTrigger" title="Int_t KVRunListLine::GetTrigger(const Char_t* field_name=&quot;Trigger&quot;,const Char_t* fmt=&quot;M&gt;=%d&quot;)">GetTrigger</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * field_name,
                                 <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fmt)
 {
    <span class="comment">//Returns value of <span class="string">"Trigger"</span> field, assuming it is written with format <span class="string">"fmt"</span> i.e. if fmt = <span class="string">"M&gt;=%d"</span> (default) we expect <span class="string">"M&gt;=1"</span>, <span class="string">"M&gt;=4"</span> etc.</span>
@@ -281,19 +281,19 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
    <span class="comment">//If trigger field is not present, we return -1 (but no error)</span>
    <span class="comment">//If format is not respected, an error message is printed and -1 is returned.</span>
 
-   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t*) const">HasFieldValue</a>(field_name))
+   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t* fname)">HasFieldValue</a>(field_name))
       <span class="keyword">return</span> -1;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> trigger = -1;
-   <span class="keyword">if</span> (sscanf(<a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t*) const">GetField</a>(field_name), fmt, &amp;trigger) != 1) {
-      Warning(Form(<span class="string">"%s::GetTrigger"</span>, <a href="../KVRunListLine.html#KVRunListLine:IsA" title="TClass* KVRunListLine::IsA() const">IsA</a>()-&gt;GetName()),
-              <span class="string">"trigger field - %s - unreadable"</span>, <a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t*) const">GetField</a>(field_name));
+   <span class="keyword">if</span> (sscanf(<a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t* )">GetField</a>(field_name), fmt, &amp;trigger) != 1) {
+      Warning(Form(<span class="string">"%s::GetTrigger"</span>, <a href="../KVRunListLine.html#KVRunListLine:IsA" title="TClass* KVRunListLine::IsA()">IsA</a>()-&gt;GetName()),
+              <span class="string">"trigger field - %s - unreadable"</span>, <a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t* )">GetField</a>(field_name));
    }
    <span class="keyword">return</span> trigger;
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="OAbybD"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:SetFieldKeys" title="void KVRunListLine::SetFieldKeys(Int_t nkeys, const Char_t* key1)">SetFieldKeys</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> nkeys, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * key1, ...)
+<a name="OAbybD"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:SetFieldKeys" title="void KVRunListLine::SetFieldKeys(Int_t nkeys,const Char_t* key1)">SetFieldKeys</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> nkeys, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * key1, ...)
 {
    <span class="comment">//Set keywords used to identify lines in the file which define the column headings, i.e. the field names.</span>
    <span class="comment">//Give the number of keywords (nkeys&gt;=1) and then the list of keywords (at least one).</span>
@@ -302,12 +302,12 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
    <span class="comment">//a column heading. Lines identified as such (by <a href="../KVRunListLine.html#KVRunListLine:IsFieldHeader" title="Bool_t KVRunListLine::IsFieldHeader()">IsFieldHeader</a>()) are used to set indices for each column (<a href="../KVRunListLine.html#KVRunListLine:SetFields" title="void KVRunListLine::SetFields()">SetFields</a>()).</span>
 
    <span class="comment">//clear out list of keywords</span>
-   <a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+   <a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
 
    <a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(<span class="keyword">new</span> TObjString(key1));
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> narg = 1;
-   <a href="../ListOfTypes.html#va_list">va_list</a> ap;
+   va_list ap;
    va_start(ap, key1);
    <span class="keyword">while</span> (narg &lt; nkeys) {
 
@@ -319,18 +319,18 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="tFcvdD"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:SetRunKeys" title="void KVRunListLine::SetRunKeys(Int_t nkeys, const Char_t* key1)">SetRunKeys</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> nkeys, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * key1, ...)
+<a name="tFcvdD"></a><span class="keyword">void</span> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:SetRunKeys" title="void KVRunListLine::SetRunKeys(Int_t nkeys,const Char_t* key1)">SetRunKeys</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> nkeys, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * key1, ...)
 {
    <span class="comment">//Set list of fields which must have values for a line to be considered a <span class="string">"good"</span> run line</span>
    <span class="comment">//Give the number of fields (nkeys&gt;=1) and then the list of field names (at least one).</span>
 
    <span class="comment">//clear out list of keywords</span>
-   <a href="../KVRunListLine.html#KVRunListLine:fRunKeys" title="KVList KVRunListLine::fRunKeys">fRunKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+   <a href="../KVRunListLine.html#KVRunListLine:fRunKeys" title="KVList KVRunListLine::fRunKeys">fRunKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
 
    <a href="../KVRunListLine.html#KVRunListLine:fRunKeys" title="KVList KVRunListLine::fRunKeys">fRunKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(<span class="keyword">new</span> TObjString(key1));
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> narg = 1;
-   <a href="../ListOfTypes.html#va_list">va_list</a> ap;
+   va_list ap;
    va_start(ap, key1);
    <span class="keyword">while</span> (narg &lt; nkeys) {
 
@@ -344,9 +344,9 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <a name="sk6XhD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:IsFieldHeader" title="Bool_t KVRunListLine::IsFieldHeader()">IsFieldHeader</a>()
 {
-   <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if and only if current line contains ALL of the keywords defined by <a href="../KVRunListLine.html#KVRunListLine:SetFieldKeys" title="void KVRunListLine::SetFieldKeys(Int_t nkeys, const Char_t* key1)">SetFieldKeys</a>()</span>
+   <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if and only if current line contains ALL of the keywords defined by <a href="../KVRunListLine.html#KVRunListLine:SetFieldKeys" title="void KVRunListLine::SetFieldKeys(Int_t nkeys,const Char_t* key1)">SetFieldKeys</a>()</span>
 
-   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize() const">GetSize</a>()) {
+   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:fFieldKeys" title="KVList KVRunListLine::fFieldKeys">fFieldKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>()) {
       <span class="comment">//no keywords set - can't recognize header</span>
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
@@ -365,9 +365,9 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 
 <a name="N_7liD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GoodRunLine" title="Bool_t KVRunListLine::GoodRunLine()">GoodRunLine</a>()
 {
-   <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if and only if current line contains integer values for ALL the fields defined by <a href="../KVRunListLine.html#KVRunListLine:SetRunKeys" title="void KVRunListLine::SetRunKeys(Int_t nkeys, const Char_t* key1)">SetRunKeys</a></span>
+   <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if and only if current line contains integer values for ALL the fields defined by <a href="../KVRunListLine.html#KVRunListLine:SetRunKeys" title="void KVRunListLine::SetRunKeys(Int_t nkeys,const Char_t* key1)">SetRunKeys</a></span>
 
-   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:fRunKeys" title="KVList KVRunListLine::fRunKeys">fRunKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize() const">GetSize</a>()) {
+   <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:fRunKeys" title="KVList KVRunListLine::fRunKeys">fRunKeys</a>.<a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>()) {
       <span class="comment">//no fields set</span>
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
@@ -375,9 +375,9 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
    TIter next_kw(&amp;<a href="../KVRunListLine.html#KVRunListLine:fRunKeys" title="KVList KVRunListLine::fRunKeys">fRunKeys</a>);
    TObjString *os;
    <span class="keyword">while</span> ((os = (TObjString *) next_kw())) {
-      <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t*) const">HasFieldValue</a>(os-&gt;GetString()))
+      <span class="keyword">if</span> (!<a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t* fname)">HasFieldValue</a>(os-&gt;GetString()))
       {<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;}
-      <a href="../KVString.html">KVString</a> tmp(<a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t*) const">GetField</a>(os-&gt;GetString()));
+      <a href="../KVString.html">KVString</a> tmp(<a href="../KVRunListLine.html#KVRunListLine:GetField" title="const Char_t* KVRunListLine::GetField(const Char_t* )">GetField</a>(os-&gt;GetString()));
       <span class="keyword">if</span> (!tmp.IsDigit())
       {<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;}
    }
@@ -391,7 +391,7 @@ ClassImp(<a href="../KVRunListLine.html">KVRunListLine</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:51 </em><em>&raquo; Last generated: 2015-09-17 10:51</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

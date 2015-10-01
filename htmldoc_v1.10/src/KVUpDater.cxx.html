@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:46 2015            -->
+<!--   Date: Thu Sep 17 10:52:08 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVUpDater.html">KVUpDater</a>.cpp,v 1.4 2006/10/19 14:32:43 franklan Exp $
@@ -47,7 +47,7 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
 <span class="comment">//for each run of the current dataset, <a href="../KVDataSet.html">gDataSet</a></span>
 <span class="comment">//</span>
 <span class="comment">//In specific implementations for different detectors, the method</span>
-<span class="comment">//      <a href="../ListOfTypes.html#void">void</a> <a href="../KVUpDater.html#KVUpDater:SetParameters" title="void KVUpDater::SetParameters(UInt_t)">SetParameters</a> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)</span>
+<span class="comment">//      <a href="../ListOfTypes.html#void">void</a> <a href="../KVUpDater.html#KVUpDater:SetParameters" title="void KVUpDater::SetParameters(UInt_t )">SetParameters</a> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)</span>
 <span class="comment">//must be defined. This updates the current detector array <a href="../KVMultiDetArray.html">gMultiDetArray</a> with the</span>
 <span class="comment">//parameter values for the run found in the current <a href="../KVDataBase.html">gDataBase</a> database.</span>
 <a name="IzHL0C"></a>    <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:KVUpDater" title="KVUpDater KVUpDater::KVUpDater() or overloads">KVUpDater</a>()
@@ -71,7 +71,7 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
    <span class="comment">//check and load plugin library</span>
    TPluginHandler *ph;
    <a href="../KVUpDater.html">KVUpDater</a> *upd = 0;
-   <span class="keyword">if</span> (!(ph = <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base, const Char_t* uri = &quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVUpDater"</span>, uri))){
+   <span class="keyword">if</span> (!(ph = <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVUpDater"</span>, uri))){
       upd = <span class="keyword">new</span> <a href="../KVUpDater.html">KVUpDater</a>;
    }
    <span class="keyword">else</span>
@@ -82,7 +82,7 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
    <span class="keyword">return</span> upd;
 }
 
-<a name="KY4IOD"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetParameters" title="void KVUpDater::SetParameters(UInt_t)">SetParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
+<a name="KY4IOD"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetParameters" title="void KVUpDater::SetParameters(UInt_t )">SetParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
 {
    <span class="comment">// Set parameters of multidetector for this run</span>
     <span class="comment">//This will:</span>
@@ -91,68 +91,68 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
     <span class="comment">//      set identification parameters for the run</span>
 
     <span class="keyword">if</span>(!<a href="../KVDataBase.html">gDataBase</a>) <span class="keyword">return</span>;
-    cout &lt;&lt; <span class="string">"Setting parameters of multidetector array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Setting parameters of multidetector array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
     endl;
-    <a href="../KVDBRun.html">KVDBRun</a> *kvrun = <span class="keyword">dynamic_cast</span>&lt;<a href="../KVDBRun.html">KVDBRun</a>*&gt;(<a href="../KVDataBase.html">gDataBase</a>-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table) const">GetTable</a>(<span class="string">"Runs"</span>)-><a href="../KVDBTable.html#KVDBTable:GetRecord" title="KVDBRecord* KVDBTable::GetRecord(const Char_t* rec_name) const or overloads">GetRecord</a>(run));
+    <a href="../KVDBRun.html">KVDBRun</a> *kvrun = <span class="keyword">dynamic_cast</span>&lt;<a href="../KVDBRun.html">KVDBRun</a>*&gt;(<a href="../KVDataBase.html">gDataBase</a>-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"Runs"</span>)-><a href="../KVDBTable.html#KVDBTable:GetRecord" title="KVDBRecord* KVDBTable::GetRecord(const Char_t* rec_name) or overloads">GetRecord</a>(run));
     <span class="keyword">if</span> (!kvrun)
     {
         Error(<span class="string">"SetParameters(UInt_t)"</span>, <span class="string">"Run %u not found in database!"</span>, run);
         <span class="keyword">return</span>;
     }
-    <a href="../KVUpDater.html#KVUpDater:SetTarget" title="void KVUpDater::SetTarget(KVDBRun*)">SetTarget</a>(kvrun);
-    <a href="../KVUpDater.html#KVUpDater:SetCalibrationParameters" title="void KVUpDater::SetCalibrationParameters(UInt_t)">SetCalibrationParameters</a>(run);
-    <a href="../KVUpDater.html#KVUpDater:SetIdentificationParameters" title="void KVUpDater::SetIdentificationParameters(UInt_t)">SetIdentificationParameters</a>(run);
+    <a href="../KVUpDater.html#KVUpDater:SetTarget" title="void KVUpDater::SetTarget(KVDBRun* )">SetTarget</a>(kvrun);
+    <a href="../KVUpDater.html#KVUpDater:SetCalibrationParameters" title="void KVUpDater::SetCalibrationParameters(UInt_t )">SetCalibrationParameters</a>(run);
+    <a href="../KVUpDater.html#KVUpDater:SetIdentificationParameters" title="void KVUpDater::SetIdentificationParameters(UInt_t )">SetIdentificationParameters</a>(run);
 }
 
 <span class="comment">//_______________________________________________________________//</span>
 
-<a name="qZ589B"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetTarget" title="void KVUpDater::SetTarget(KVDBRun*)">SetTarget</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
+<a name="qZ589B"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetTarget" title="void KVUpDater::SetTarget(KVDBRun* )">SetTarget</a>(<a href="../KVDBRun.html">KVDBRun</a> * kvrun)
 {
     <span class="comment">//Set target used during this run</span>
     <span class="comment">//If no target is found in the database, the existing target (if there is one)</span>
     <span class="comment">//will be removed, and the multidetector array will have no target defined.</span>
 
-    cout &lt;&lt; <span class="string">"--&gt; Setting Target:"</span> &lt;&lt; endl;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"--&gt; Setting Target:"</span> &lt;&lt; endl;
 
     <span class="comment">//remove existing target</span>
-    <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:SetTarget" title="void KVMultiDetArray::SetTarget(const Char_t* material, const Float_t thickness) or overloads">SetTarget</a>(0);
+    <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:SetTarget" title="void KVMultiDetArray::SetTarget(const Char_t* material,const Float_t thickness) or overloads">SetTarget</a>(0);
     <span class="keyword">if</span> (!kvrun-&gt;GetSystem() || !kvrun-&gt;GetSystem()-&gt;GetTarget())
     {
-        cout &lt;&lt; <span class="string">"      No target defined for run."</span> &lt;&lt; endl;
+        <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"      No target defined for run."</span> &lt;&lt; endl;
         <span class="keyword">return</span>;
     }
 
-    <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:SetTarget" title="void KVMultiDetArray::SetTarget(const Char_t* material, const Float_t thickness) or overloads">SetTarget</a>((<a href="../KVTarget.html">KVTarget</a> *) kvrun-&gt;GetSystem()-&gt;GetTarget());
+    <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:SetTarget" title="void KVMultiDetArray::SetTarget(const Char_t* material,const Float_t thickness) or overloads">SetTarget</a>((<a href="../KVTarget.html">KVTarget</a> *) kvrun-&gt;GetSystem()-&gt;GetTarget());
 
-    cout &lt;&lt; <span class="string">"      "</span> &lt;&lt; <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetTarget" title="KVTarget* KVMultiDetArray::GetTarget()">GetTarget</a>()->
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"      "</span> &lt;&lt; <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetTarget" title="KVTarget* KVMultiDetArray::GetTarget()">GetTarget</a>()->
     GetName() &lt;&lt; <span class="string">" Total Thickness: "</span> &lt;&lt; <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetTarget" title="KVTarget* KVMultiDetArray::GetTarget()">GetTarget</a>()->
     GetTotalThickness()
     &lt;&lt; <span class="string">" mg/cm2"</span> &lt;&lt; endl;
 }
 
 
-<a name="N2lHBE"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetIdentificationParameters" title="void KVUpDater::SetIdentificationParameters(UInt_t)">SetIdentificationParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
+<a name="N2lHBE"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetIdentificationParameters" title="void KVUpDater::SetIdentificationParameters(UInt_t )">SetIdentificationParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
 {
     <span class="comment">// Set identification parameters for this run.</span>
     <span class="comment">// Will call <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:InitializeIDTelescopes" title="void KVMultiDetArray::InitializeIDTelescopes()">InitializeIDTelescopes</a>() in order to initialize</span>
     <span class="comment">// identifications &amp; set status IsReadyForID() of each ID telescope for run.</span>
 
-    cout &lt;&lt; <span class="string">"Setting identification parameters of multidetector array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Setting identification parameters of multidetector array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
     endl;
-    <a href="../KVUpDater.html#KVUpDater:SetIDGrids" title="void KVUpDater::SetIDGrids(UInt_t)">SetIDGrids</a>(run);
+    <a href="../KVUpDater.html#KVUpDater:SetIDGrids" title="void KVUpDater::SetIDGrids(UInt_t )">SetIDGrids</a>(run);
     <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:InitializeIDTelescopes" title="void KVMultiDetArray::InitializeIDTelescopes()">InitializeIDTelescopes</a>();
 }
 
 <span class="comment">//________________________________________________________________________________________________</span>
 
-<a name="mLFoC"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetIDGrids" title="void KVUpDater::SetIDGrids(UInt_t)">SetIDGrids</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
+<a name="mLFoC"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetIDGrids" title="void KVUpDater::SetIDGrids(UInt_t )">SetIDGrids</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
 {
     <span class="comment">// Use global ID grid manager <a href="../KVIDGridManager.html">gIDGridManager</a> to set identification grids for all</span>
     <span class="comment">// ID telescopes for this run. First, any previously set grids are removed.</span>
     <span class="comment">// Then all grids for current run are set in the associated ID telescopes.</span>
 
-    cout &lt;&lt; <span class="string">"--&gt; Setting Identification Grids"</span> &lt;&lt; endl;
-    TIter next_idt(<a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetListOfIDTelescopes" title="KVSeqCollection* KVMultiDetArray::GetListOfIDTelescopes() const">GetListOfIDTelescopes</a>());
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"--&gt; Setting Identification Grids"</span> &lt;&lt; endl;
+    TIter next_idt(<a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:GetListOfIDTelescopes" title="KVSeqCollection* KVMultiDetArray::GetListOfIDTelescopes()">GetListOfIDTelescopes</a>());
     <a href="../KVIDTelescope.html">KVIDTelescope</a> *idt;
     <span class="keyword">while</span> ((idt = (<a href="../KVIDTelescope.html">KVIDTelescope</a> *) next_idt()))
     {
@@ -163,23 +163,23 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
 
 <span class="comment">//_______________________________________________________________//</span>
 
-<a name="oCuhVD"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetCalibrationParameters" title="void KVUpDater::SetCalibrationParameters(UInt_t)">SetCalibrationParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
+<a name="oCuhVD"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetCalibrationParameters" title="void KVUpDater::SetCalibrationParameters(UInt_t )">SetCalibrationParameters</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
 {
     <span class="comment">//Set calibration parameters for this run.</span>
     <span class="comment">//This will:</span>
     <span class="comment">//      reset all the calibrators of all the detectors ready to receive the calibrators for the run (handled by child classes),</span>
     <span class="comment">//      set calibration parameters for the run</span>
 
-    cout &lt;&lt; <span class="string">"Setting calibration parameters of multidetector array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Setting calibration parameters of multidetector array for run "</span> &lt;&lt; run &lt;&lt; <span class="string">":"</span> &lt;&lt;
     endl;
-    <a href="../KVDBRun.html">KVDBRun</a> *kvrun = <span class="keyword">dynamic_cast</span>&lt;<a href="../KVDBRun.html">KVDBRun</a>*&gt;(<a href="../KVDataBase.html">gDataBase</a>-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table) const">GetTable</a>(<span class="string">"Runs"</span>)-><a href="../KVDBTable.html#KVDBTable:GetRecord" title="KVDBRecord* KVDBTable::GetRecord(const Char_t* rec_name) const or overloads">GetRecord</a>(run));
+    <a href="../KVDBRun.html">KVDBRun</a> *kvrun = <span class="keyword">dynamic_cast</span>&lt;<a href="../KVDBRun.html">KVDBRun</a>*&gt;(<a href="../KVDataBase.html">gDataBase</a>-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"Runs"</span>)-><a href="../KVDBTable.html#KVDBTable:GetRecord" title="KVDBRecord* KVDBTable::GetRecord(const Char_t* rec_name) or overloads">GetRecord</a>(run));
     <span class="keyword">if</span> (!kvrun)
     {
         Error(<span class="string">"SetParameters(UInt_t)"</span>, <span class="string">"Run %u not found in database!"</span>, run);
         <span class="keyword">return</span>;
     }
     <span class="comment">//Reset all calibrators of all detectors first</span>
-    TIter next(<a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors() const">GetDetectors</a>());
+    TIter next(<a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
     <a href="../KVDetector.html">KVDetector</a> *kvd;
     <a href="../KVCalibrator.html">KVCalibrator</a> *kvc;
     <span class="keyword">while</span> ((kvd = (<a href="../KVDetector.html">KVDetector</a> *) next()))
@@ -193,10 +193,10 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
             }
         }
     }
-    <a href="../KVUpDater.html#KVUpDater:SetCalibParameters" title="void KVUpDater::SetCalibParameters(KVDBRun*)">SetCalibParameters</a>(kvrun);
+    <a href="../KVUpDater.html#KVUpDater:SetCalibParameters" title="void KVUpDater::SetCalibParameters(KVDBRun* )">SetCalibParameters</a>(kvrun);
 }
 
-<a name="xTOH3C"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetCalibParameters" title="void KVUpDater::SetCalibParameters(KVDBRun*)">SetCalibParameters</a>(<a href="../KVDBRun.html">KVDBRun</a> *)
+<a name="xTOH3C"></a><span class="keyword">void</span> <a href="../KVUpDater.html">KVUpDater</a>::<a href="../KVUpDater.html#KVUpDater:SetCalibParameters" title="void KVUpDater::SetCalibParameters(KVDBRun* )">SetCalibParameters</a>(<a href="../KVDBRun.html">KVDBRun</a> *)
 {
    <span class="comment">// Generic (empty) method. Override in child classes to set specific calibrations.</span>
 }
@@ -208,7 +208,7 @@ ClassImp(<a href="../KVUpDater.html">KVUpDater</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:52 </em><em>&raquo; Last generated: 2015-09-17 10:52</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: ROOT team (rootdev@cern.ch)         -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:11 2015            -->
+<!--   Date: Thu Sep 17 10:50:43 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<div id="root_header"><img src="http://root.cern.ch/drupal/sites/default/files/rootdrawing-logo.png" alt="ROOT logo"/></div>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVChIo.html">KVChIo</a>.cpp,v 1.55 2008/02/21 10:14:38 franklan Exp $
@@ -86,11 +86,11 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 
    <span class="comment">//gas layer</span>
    <a href="../KVMaterial.html">KVMaterial</a> *mat = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"C3F8"</span>, thick, pressure*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mbar" title="const long double KVUnits::mbar">mbar</a>);
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial*)">AddAbsorber</a>(mat);
-   <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial*) or overloads">SetActiveLayer</a>(mat);         <span class="comment">//gas is the active layer</span>
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(mat);
+   <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a>(mat);         <span class="comment">//gas is the active layer</span>
    <span class="comment">// mylar for second window</span>
    mat = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 2.5*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial*)">AddAbsorber</a>(mat);
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(mat);
 
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"CI"</span>);
    <a href="../KVChIo.html#KVChIo:init" title="void KVChIo::init()">init</a>();
@@ -103,7 +103,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 }
 
 <span class="comment">//____________________________________________________________________________________________</span>
-<a name="HaQd7C"></a><span class="keyword">void</span> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:SetMylarThicknesses" title="void KVChIo::SetMylarThicknesses(Float_t thickF, Float_t thickB)">SetMylarThicknesses</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> thickF, <a href="../ListOfTypes.html#Float_t">Float_t</a> thickB)
+<a name="HaQd7C"></a><span class="keyword">void</span> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:SetMylarThicknesses" title="void KVChIo::SetMylarThicknesses(Float_t thickF,Float_t thickB)">SetMylarThicknesses</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> thickF, <a href="../ListOfTypes.html#Float_t">Float_t</a> thickB)
 {
     <span class="keyword">if</span>(thickF&gt;0.) ((<a href="../KVMaterial.html">KVMaterial</a>*)fAbsorbers-&gt;At(0))-&gt;<a href="../KVMaterial.html#KVMaterial:SetThickness" title="void KVMaterial::SetThickness(Double_t thick)">SetThickness</a>(thickF*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);
     <span class="keyword">if</span>(thickF&gt;0.) ((<a href="../KVMaterial.html">KVMaterial</a>*)fAbsorbers-&gt;At(2))-&gt;<a href="../KVMaterial.html#KVMaterial:SetThickness" title="void KVMaterial::SetThickness(Double_t thick)">SetThickness</a>(thickB*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);
@@ -120,9 +120,9 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//Returns -1 if PG &lt;-&gt; Volts calibration is not available</span>
 
 
-      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>())
+      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>())
          <span class="keyword">return</span> -1;
-      <a href="../ListOfTypes.html#Int_t">Int_t</a> chan = TMath::Nint(<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"PG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0));
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> chan = TMath::Nint(<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"PG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0));
       <span class="keyword">return</span> chan;
 
 }
@@ -137,28 +137,28 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//</span>
    <span class="comment">//Returns GG calculated from PG if GG &lt;-&gt; Volts calibration is not available</span>
 
-      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>()){
-         <span class="keyword">return</span> <a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG = -1)">GetGGfromPG</a>(<a href="../KVChIo.html#KVChIo:GetCanalPGFromVolts" title="Int_t KVChIo::GetCanalPGFromVolts(Float_t volts)">GetCanalPGFromVolts</a>(volts));
+      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>()){
+         <span class="keyword">return</span> <a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG=-1)">GetGGfromPG</a>(<a href="../KVChIo.html#KVChIo:GetCanalPGFromVolts" title="Int_t KVChIo::GetCanalPGFromVolts(Float_t volts)">GetCanalPGFromVolts</a>(volts));
       }
-      <a href="../ListOfTypes.html#Int_t">Int_t</a> chan = TMath::Nint(<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0));
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> chan = TMath::Nint(<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0));
       <span class="keyword">return</span> chan;
 }
 
 <span class="comment">//____________________________________________________________________________________________</span>
 <a name="WwSKmD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetCanalPGFromVoltsDouble" title="Double_t KVChIo::GetCanalPGFromVoltsDouble(Float_t volts)">GetCanalPGFromVoltsDouble</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> volts)
 {
-      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>())
+      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>())
          <span class="keyword">return</span> -1;
-      <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"PG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(0);
+      <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"PG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(0);
 }
 
 <span class="comment">//____________________________________________________________________________________________</span>
 <a name="uSwQmD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetCanalGGFromVoltsDouble" title="Double_t KVChIo::GetCanalGGFromVoltsDouble(Float_t volts)">GetCanalGGFromVoltsDouble</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> volts)
 {
-      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>()){
-         <span class="keyword">return</span> <a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG = -1)">GetGGfromPG</a>(<a href="../KVChIo.html#KVChIo:GetCanalPGFromVoltsDouble" title="Double_t KVChIo::GetCanalPGFromVoltsDouble(Float_t volts)">GetCanalPGFromVoltsDouble</a>(volts));
+      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>()){
+         <span class="keyword">return</span> <a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG=-1)">GetGGfromPG</a>(<a href="../KVChIo.html#KVChIo:GetCanalPGFromVoltsDouble" title="Double_t KVChIo::GetCanalPGFromVoltsDouble(Float_t volts)">GetCanalPGFromVoltsDouble</a>(volts));
       }
-      <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(0);
+      <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(volts) + <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>) - <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:InvertDouble" title="Double_t KVChannelVolt::InvertDouble(Double_t volts)">InvertDouble</a>(0);
 }
 
 <span class="comment">//___________________________________________________________________________________________</span>
@@ -192,7 +192,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 
 <span class="comment">//__________________________________________________________________________________________________________________________</span>
 
-<a name="UDLU3B"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetELossMylar" title="Double_t KVChIo::GetELossMylar(UInt_t z, UInt_t a, Double_t egas = -1., Bool_t stopped = kFALSE)">GetELossMylar</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> z, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> a, <a href="../ListOfTypes.html#Double_t">Double_t</a> egas, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> stopped)
+<a name="UDLU3B"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetELossMylar" title="Double_t KVChIo::GetELossMylar(UInt_t z,UInt_t a,Double_t egas=-1.0,Bool_t stopped=kFALSE)">GetELossMylar</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> z, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> a, <a href="../ListOfTypes.html#Double_t">Double_t</a> egas, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> stopped)
 {
    <span class="comment">//Based on energy loss in gas, calculates sum of energy losses in mylar windows</span>
    <span class="comment">//from energy loss tables.</span>
@@ -205,14 +205,14 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//   first call</span>
    <span class="comment">//       <a href="../KVDetector.html#KVDetector:SetEResAfterDetector" title="void KVDetector::SetEResAfterDetector(Double_t e)">SetEResAfterDetector</a>(Eres);</span>
    <span class="comment">//   before calling this method. Otherwise, especially for heavy ions, the</span>
-   <span class="comment">//   correction may be false for particles which are just above the punch-through energy.</span>
+   <span class="comment">//   correction may be <a href="../ListOfTypes.html#bool">false</a> for particles which are just above the punch-through energy.</span>
 
    egas = ((egas &lt; 0.) ? <a href="../KVChIo.html#KVChIo:GetEnergy" title="Double_t KVChIo::GetEnergy()">GetEnergy</a>() : egas);
    <span class="keyword">if</span> (egas &lt;= 0.)
       <span class="keyword">return</span> 0.0;               <span class="comment">//check measured (calibrated) energy in gas is reasonable (&gt;0)</span>
 
 	<a href="../KVNucleus.html">KVNucleus</a> tmp(z,a);
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> emylar = <a href="../KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE)">GetCorrectedEnergy</a>(&amp;tmp,egas,!stopped) - egas;
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> emylar = <a href="../KVDetector.html#KVDetector:GetCorrectedEnergy" title="Double_t KVDetector::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.,Bool_t transmission=kTRUE)">GetCorrectedEnergy</a>(&amp;tmp,egas,!stopped) - egas;
    <span class="keyword">return</span> emylar;
 }
 
@@ -225,19 +225,19 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//(we require that at least one acquisition parameter have a value</span>
    <span class="comment">//greater than the current pedestal value)</span>
 
-   <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:IsCalibrated" title="Bool_t KVChIo::IsCalibrated() const">IsCalibrated</a>() &amp;&amp; <a href="../KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt = &quot;any&quot;)">Fired</a>(<span class="string">"Pany"</span>)){
-      <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVVoltEnergy.html#KVVoltEnergy:Compute" title="Double_t KVVoltEnergy::Compute(Double_t volts) const">Compute</a>( <a href="../KVChIo.html#KVChIo:GetVolts" title="Double_t KVChIo::GetVolts()">GetVolts</a>() ));
+   <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:IsCalibrated" title="Bool_t KVChIo::IsCalibrated()">IsCalibrated</a>() &amp;&amp; <a href="../KVDetector.html#KVDetector:Fired" title="Bool_t KVDetector::Fired(Option_t* opt=&quot;any&quot;)">Fired</a>(<span class="string">"Pany"</span>)){
+      <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVVoltEnergy.html#KVVoltEnergy:Compute" title="Double_t KVVoltEnergy::Compute(Double_t volts)">Compute</a>( <a href="../KVChIo.html#KVChIo:GetVolts" title="Double_t KVChIo::GetVolts()">GetVolts</a>() ));
    }
    <span class="keyword">return</span> 0;
 }
 
 <span class="comment">//_______________________________________________________________________________</span>
 
-<a name="orG6C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetVoltsFromEnergy" title="Double_t KVChIo::GetVoltsFromEnergy(Double_t)">GetVoltsFromEnergy</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e)
+<a name="orG6C"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetVoltsFromEnergy" title="Double_t KVChIo::GetVoltsFromEnergy(Double_t )">GetVoltsFromEnergy</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> e)
 {
    <span class="comment">//Inverts calibration, i.e. calculates volts for a given energy loss (in MeV)</span>
 
-   <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>()){
+   <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>()){
       <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVVoltEnergy.html#KVVoltEnergy:Invert" title="Double_t KVVoltEnergy::Invert(Double_t energy)">Invert</a>( e ));
    }
    <span class="keyword">return</span> 0;
@@ -245,21 +245,21 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 
 <span class="comment">//____________________________________________________________________________________________</span>
 
-<a name="HLT7mD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetEnergyFromVolts" title="Double_t KVChIo::GetEnergyFromVolts(Double_t volts = 0.)">GetEnergyFromVolts</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> volts){
+<a name="HLT7mD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetEnergyFromVolts" title="Double_t KVChIo::GetEnergyFromVolts(Double_t volts=0.0)">GetEnergyFromVolts</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> volts){
         <span class="comment">//Calculate energy in MeV from calibrated detector signal in</span>
         <span class="comment">//Volts. If 'volts' is not given, the value in volt returned</span>
         <span class="comment">//by <a href="../KVChIo.html#KVChIo:GetVolts" title="Double_t KVChIo::GetVolts()">GetVolts</a>().</span>
 
-        <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a> &amp;&amp; <a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>()){
+        <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a> &amp;&amp; <a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>()){
                 <span class="keyword">if</span>(!volts) volts = <a href="../KVChIo.html#KVChIo:GetVolts" title="Double_t KVChIo::GetVolts()">GetVolts</a>();
-        <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVVoltEnergy.html#KVVoltEnergy:Compute" title="Double_t KVVoltEnergy::Compute(Double_t volts) const">Compute</a>( volts );
+        <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:fVoltE" title="KVVoltEnergy* KVChIo::fVoltE">fVoltE</a>-><a href="../KVVoltEnergy.html#KVVoltEnergy:Compute" title="Double_t KVVoltEnergy::Compute(Double_t volts)">Compute</a>( volts );
         }
         <span class="keyword">return</span> 0.;
 }
 
 <span class="comment">//____________________________________________________________________________________________</span>
 
-<a name="xk7nS"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetVoltsFromCanalPG" title="Double_t KVChIo::GetVoltsFromCanalPG(Double_t chan = 0.)">GetVoltsFromCanalPG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan)
+<a name="xk7nS"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetVoltsFromCanalPG" title="Double_t KVChIo::GetVoltsFromCanalPG(Double_t chan=0.0)">GetVoltsFromCanalPG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan)
 {
    <span class="comment">//Return calibrated detector signal in Volts calculated from PG channel number.</span>
    <span class="comment">//If <span class="string">"chan"</span> is not given, the value of the <span class="string">"PG"</span> acquisition parameter read from</span>
@@ -268,7 +268,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//Any change in the coder pedestal between the current run and the effective pedestal</span>
    <span class="comment">//of the channel-volt calibration (GetCanal(V=0)) is automatically corrected for.</span>
 
-      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>())
+      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>())
          <span class="keyword">return</span> 0;
 
       <span class="keyword">if</span> (!chan) {
@@ -277,12 +277,12 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
       <span class="keyword">if</span> (chan &lt; -0.5)
          <span class="keyword">return</span> 0.;          <span class="comment">//PG parameter absent</span>
       <span class="comment">//correct for pedestal drift</span>
-      chan = chan - (<a href="../ListOfTypes.html#Double_t">Double_t</a>) <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"PG"</span>) + <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0.);
-      <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Compute" title="Double_t KVChannelVolt::Compute(Double_t chan) const">Compute</a>(chan));
+      chan = chan - (<a href="../ListOfTypes.html#Double_t">Double_t</a>) <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"PG"</span>) + <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0.);
+      <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Compute" title="Double_t KVChannelVolt::Compute(Double_t chan)">Compute</a>(chan));
 }
 
 <span class="comment">//____________________________________________________________________________________________</span>
-<a name="Bs7nS"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetVoltsFromCanalGG" title="Double_t KVChIo::GetVoltsFromCanalGG(Double_t chan = 0.)">GetVoltsFromCanalGG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan)
+<a name="Bs7nS"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetVoltsFromCanalGG" title="Double_t KVChIo::GetVoltsFromCanalGG(Double_t chan=0.0)">GetVoltsFromCanalGG</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan)
 {
    <span class="comment">//Return calibrated detector signal in Volts calculated from GG channel number.</span>
    <span class="comment">//If <span class="string">"chan"</span> is not given, the value of the <span class="string">"GG"</span> acquisition parameter read from</span>
@@ -291,7 +291,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//Any change in the coder pedestal between the current run and the effective pedestal</span>
    <span class="comment">//of the channel-volt calibration (GetCanal(V=0)) is automatically corrected for.</span>
 
-      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>())
+      <span class="keyword">if</span> (!<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> || !<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>())
          <span class="keyword">return</span> 0;
 
       <span class="keyword">if</span> (!chan) {
@@ -300,8 +300,8 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
       <span class="keyword">if</span> (chan &lt; -0.5)
          <span class="keyword">return</span> 0.;          <span class="comment">//GG parameter absent</span>
       <span class="comment">//correct for pedestal drift</span>
-      chan = chan - (<a href="../ListOfTypes.html#Double_t">Double_t</a>) <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t*)">GetPedestal</a>(<span class="string">"GG"</span>) + <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0);
-      <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Compute" title="Double_t KVChannelVolt::Compute(Double_t chan) const">Compute</a>(chan));
+      chan = chan - (<a href="../ListOfTypes.html#Double_t">Double_t</a>) <a href="../KVDetector.html#KVDetector:GetPedestal" title="Float_t KVDetector::GetPedestal(const Char_t* )">GetPedestal</a>(<span class="string">"GG"</span>) + <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Invert" title="Double_t KVChannelVolt::Invert(Double_t volts)">Invert</a>(0);
+      <span class="keyword">return</span> (<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVChannelVolt.html#KVChannelVolt:Compute" title="Double_t KVChannelVolt::Compute(Double_t chan)">Compute</a>(chan));
 
 }
 
@@ -315,11 +315,11 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
    <span class="comment">//we convert PG to GG and use the GG calibration)</span>
    <span class="comment">//Returns 0 if no calibration available</span>
 
-      <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> &amp;&amp; <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>()) {
-         <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:GetVoltsFromCanalPG" title="Double_t KVChIo::GetVoltsFromCanalPG(Double_t chan = 0.)">GetVoltsFromCanalPG</a>();
+      <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a> &amp;&amp; <a href="../KVChIo.html#KVChIo:fChVoltPG" title="KVChannelVolt* KVChIo::fChVoltPG">fChVoltPG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>()) {
+         <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:GetVoltsFromCanalPG" title="Double_t KVChIo::GetVoltsFromCanalPG(Double_t chan=0.0)">GetVoltsFromCanalPG</a>();
       }
-      <span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> &amp;&amp; <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus() const">GetStatus</a>()) {
-         <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:GetVoltsFromCanalGG" title="Double_t KVChIo::GetVoltsFromCanalGG(Double_t chan = 0.)">GetVoltsFromCanalGG</a>(<a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG = -1)">GetGGfromPG</a>());
+      <span class="keyword">else</span> <span class="keyword">if</span> (<a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a> &amp;&amp; <a href="../KVChIo.html#KVChIo:fChVoltGG" title="KVChannelVolt* KVChIo::fChVoltGG">fChVoltGG</a>-><a href="../KVCalibrator.html#KVCalibrator:GetStatus" title="Bool_t KVCalibrator::GetStatus()">GetStatus</a>()) {
+         <span class="keyword">return</span> <a href="../KVChIo.html#KVChIo:GetVoltsFromCanalGG" title="Double_t KVChIo::GetVoltsFromCanalGG(Double_t chan=0.0)">GetVoltsFromCanalGG</a>(<a href="../KVINDRADetector.html#KVINDRADetector:GetGGfromPG" title="Double_t KVINDRADetector::GetGGfromPG(Double_t PG=-1)">GetGGfromPG</a>());
       }
 
    <span class="keyword">return</span> 0;
@@ -339,7 +339,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 
    <span class="comment">//fELoss already set, return its value</span>
    <a href="../ListOfTypes.html#Double_t">Double_t</a> ELoss = <a href="../KVDetector.html">KVDetector</a>::<a href="../KVDetector.html#KVDetector:GetEnergy" title="Double_t KVDetector::GetEnergy()">GetEnergy</a>();
-   <span class="keyword">if</span>(<a href="../KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode() const">IsSimMode</a>()) <span class="keyword">return</span> ELoss; <span class="comment">// in simulation mode, return calculated energy loss in active layer</span>
+   <span class="keyword">if</span>(<a href="../KVDetector.html#KVDetector:IsSimMode" title="Bool_t KVDetector::IsSimMode()">IsSimMode</a>()) <span class="keyword">return</span> ELoss; <span class="comment">// in simulation mode, return calculated energy loss in active layer</span>
    <span class="keyword">if</span>( ELoss &gt; 0 ) <span class="keyword">return</span> ELoss;
    ELoss = <a href="../KVChIo.html#KVChIo:GetCalibratedEnergy" title="Double_t KVChIo::GetCalibratedEnergy()">GetCalibratedEnergy</a>();
    <span class="keyword">if</span>( ELoss &lt; 0 ) ELoss = 0;
@@ -349,7 +349,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="WE_B7E"></a><span class="keyword">void</span> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:Streamer" title="void KVChIo::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp;R__b)
+<a name="WE_B7E"></a><span class="keyword">void</span> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:Streamer" title="void KVChIo::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
 {
    <span class="comment">// Stream an object of class <a href="../KVChIo.html">KVChIo</a>.</span>
    <span class="comment">// We set the pointers to the calibrator objects</span>
@@ -366,31 +366,31 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="KeP3FB"></a><a href="../ListOfTypes.html#Short_t">Short_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetCalcACQParam" title="Short_t KVChIo::GetCalcACQParam(KVACQParam*, Double_t) const">GetCalcACQParam</a>(<a href="../KVACQParam.html">KVACQParam</a>* ACQ, <a href="../ListOfTypes.html#Double_t">Double_t</a> ECalc) <span class="keyword">const</span>
+<a name="KeP3FB"></a><a href="../ListOfTypes.html#Short_t">Short_t</a> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:GetCalcACQParam" title="Short_t KVChIo::GetCalcACQParam(KVACQParam* ,Double_t )">GetCalcACQParam</a>(<a href="../KVACQParam.html">KVACQParam</a>* ACQ, <a href="../ListOfTypes.html#Double_t">Double_t</a> ECalc) <span class="keyword">const</span>
 {
    <span class="comment">// Calculates &amp; returns value of given acquisition parameter corresponding to</span>
    <span class="comment">// given calculated energy loss in the detector</span>
    <span class="comment">// Returns -1 if detector is not calibrated</span>
 
-   <span class="keyword">if</span>(!<a href="../KVChIo.html#KVChIo:IsCalibrated" title="Bool_t KVChIo::IsCalibrated() const">IsCalibrated</a>()) <span class="keyword">return</span> -1;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> volts = <span class="keyword">const_cast</span>&lt;<a href="../KVChIo.html">KVChIo</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVChIo.html#KVChIo:GetVoltsFromEnergy" title="Double_t KVChIo::GetVoltsFromEnergy(Double_t)">GetVoltsFromEnergy</a>( ECalc );
-   <span class="keyword">if</span>(ACQ-&gt;<a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ) const">IsType</a>(<span class="string">"PG"</span>)) <span class="keyword">return</span> (<a href="../ListOfTypes.html#Short_t">Short_t</a>)<span class="keyword">const_cast</span>&lt;<a href="../KVChIo.html">KVChIo</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVChIo.html#KVChIo:GetCanalPGFromVolts" title="Int_t KVChIo::GetCanalPGFromVolts(Float_t volts)">GetCanalPGFromVolts</a>(volts);
-   <span class="keyword">else</span> <span class="keyword">if</span>(ACQ-&gt;<a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ) const">IsType</a>(<span class="string">"GG"</span>)) <span class="keyword">return</span> (<a href="../ListOfTypes.html#Short_t">Short_t</a>)<span class="keyword">const_cast</span>&lt;<a href="../KVChIo.html">KVChIo</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVChIo.html#KVChIo:GetCanalGGFromVolts" title="Int_t KVChIo::GetCanalGGFromVolts(Float_t volts)">GetCanalGGFromVolts</a>(volts);
+   <span class="keyword">if</span>(!<a href="../KVChIo.html#KVChIo:IsCalibrated" title="Bool_t KVChIo::IsCalibrated()">IsCalibrated</a>()) <span class="keyword">return</span> -1;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> volts = <span class="keyword">const_cast</span>&lt;<a href="../KVChIo.html">KVChIo</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVChIo.html#KVChIo:GetVoltsFromEnergy" title="Double_t KVChIo::GetVoltsFromEnergy(Double_t )">GetVoltsFromEnergy</a>( ECalc );
+   <span class="keyword">if</span>(ACQ-&gt;<a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ)">IsType</a>(<span class="string">"PG"</span>)) <span class="keyword">return</span> (<a href="../ListOfTypes.html#Short_t">Short_t</a>)<span class="keyword">const_cast</span>&lt;<a href="../KVChIo.html">KVChIo</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVChIo.html#KVChIo:GetCanalPGFromVolts" title="Int_t KVChIo::GetCanalPGFromVolts(Float_t volts)">GetCanalPGFromVolts</a>(volts);
+   <span class="keyword">else</span> <span class="keyword">if</span>(ACQ-&gt;<a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ)">IsType</a>(<span class="string">"GG"</span>)) <span class="keyword">return</span> (<a href="../ListOfTypes.html#Short_t">Short_t</a>)<span class="keyword">const_cast</span>&lt;<a href="../KVChIo.html">KVChIo</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVChIo.html#KVChIo:GetCanalGGFromVolts" title="Int_t KVChIo::GetCanalGGFromVolts(Float_t volts)">GetCanalGGFromVolts</a>(volts);
    <span class="keyword">return</span> -1;
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="D3lZfD"></a><span class="keyword">void</span> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:DeduceACQParameters" title="void KVChIo::DeduceACQParameters(Int_t zz = -1, Int_t a = -1)">DeduceACQParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a>,<a href="../ListOfTypes.html#Int_t">Int_t</a>)
+<a name="D3lZfD"></a><span class="keyword">void</span> <a href="../KVChIo.html">KVChIo</a>::<a href="../KVChIo.html#KVChIo:DeduceACQParameters" title="void KVChIo::DeduceACQParameters(Int_t zz=-1,Int_t a=-1)">DeduceACQParameters</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a>,<a href="../ListOfTypes.html#Int_t">Int_t</a>)
 {
 
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> volts = <a href="../KVChIo.html#KVChIo:GetVoltsFromEnergy" title="Double_t KVChIo::GetVoltsFromEnergy(Double_t)">GetVoltsFromEnergy</a>(<a href="../KVChIo.html#KVChIo:GetEnergy" title="Double_t KVChIo::GetEnergy()">GetEnergy</a>());
+	<a href="../ListOfTypes.html#Double_t">Double_t</a> volts = <a href="../KVChIo.html#KVChIo:GetVoltsFromEnergy" title="Double_t KVChIo::GetVoltsFromEnergy(Double_t )">GetVoltsFromEnergy</a>(<a href="../KVChIo.html#KVChIo:GetEnergy" title="Double_t KVChIo::GetEnergy()">GetEnergy</a>());
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> cipg = (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVChIo.html#KVChIo:GetCanalPGFromVolts" title="Int_t KVChIo::GetCanalPGFromVolts(Float_t volts)">GetCanalPGFromVolts</a>(volts);
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> cigg = (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVChIo.html#KVChIo:GetCanalGGFromVolts" title="Int_t KVChIo::GetCanalGGFromVolts(Float_t volts)">GetCanalGGFromVolts</a>(volts);
-	<span class="comment">//cout &lt;&lt; <span class="string">"chio: pg = "</span> &lt;&lt; cipg &lt;&lt; <span class="string">" gg = "</span> &lt;&lt; cigg &lt;&lt; endl;</span>
-	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"PG"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)TMath::Min(4095,cipg));
-	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"GG"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)TMath::Min(4095,cigg));
-	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t*)">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(110);
+	<span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"chio: pg = "</span> &lt;&lt; cipg &lt;&lt; <span class="string">" gg = "</span> &lt;&lt; cigg &lt;&lt; endl;</span>
+	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"PG"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)TMath::Min(4095,cipg));
+	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"GG"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>((<a href="../ListOfTypes.html#UShort_t">UShort_t</a>)TMath::Min(4095,cigg));
+	<a href="../KVINDRADetector.html#KVINDRADetector:GetACQParam" title="KVACQParam* KVINDRADetector::GetACQParam(const Char_t* )">GetACQParam</a>(<span class="string">"T"</span>)-><a href="../KVACQParam.html#KVACQParam:SetData" title="void KVACQParam::SetData(UShort_t val)">SetData</a>(110);
 
 }
 </pre>
@@ -401,7 +401,7 @@ ClassImp(<a href="../KVChIo.html">KVChIo</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
+<em>&raquo; Last changed: 2015-09-17 10:50 </em><em>&raquo; Last generated: 2015-09-17 10:50</em><br />
 <em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
 </div>
 </div>

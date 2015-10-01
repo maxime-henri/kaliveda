@@ -3,7 +3,7 @@
 */
 
 /* Root directory of installation */
-#define KV_ROOT "/home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34"
+#define KV_ROOT "/home/john/software/build/kaliveda/1.10_root-v5-34-00"
 
 /* String with version information */
 #define KV_VERSION "1.10/03"
@@ -12,10 +12,10 @@
 #define KV_PATCH_VERSION 03
 
 /* Date when project was built */
-#define KV_BUILD_DATE "2015-08-12"
+#define KV_BUILD_DATE "2015-09-30"
 
 /* Time when project was built */
-#define KV_BUILD_TIME "17:16:45"
+#define KV_BUILD_TIME "16:27:36"
 
 /* Username of person who performed the build */
 #define KV_BUILD_USER "john"
@@ -30,25 +30,25 @@
 #define KV_BUILD_TYPE "RelWithDebInfo"
 
 /* String with ROOT version information */
-#define KV_ROOT_VERSION "5.34/31"
+#define KV_ROOT_VERSION "5.34/33"
 
 /* Directory with class templates */
-#define TEMPLATEDIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/share/kaliveda/templates
+#define TEMPLATEDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda/templates
 
 /* Directory with configuration files */
-#define ETCDIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/share/kaliveda/etc
+#define ETCDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda/etc
 
 /* Directory with data files used by classes */
-#define DATADIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/share/kaliveda
+#define DATADIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda
 
 /* Directory containing class libraries */
-#define LIBDIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/lib
+#define LIBDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/lib
 
 /* Directory containing header files */
-#define INCDIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/include/kaliveda
+#define INCDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda
 
 /* Directory containing executables */
-#define BINDIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/bin
+#define BINDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/bin
 
 /* Directory containing dataset files */
-#define DATASETDIR /home/john/.kvroot-1.10_gcc-4.9.1_x86_64_root-5.34/share/kaliveda
+#define DATASETDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda
