@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:18 2015            -->
+<!--   Date: Thu Oct  1 17:52:26 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVRungeKutta - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Thu Jun 24 11:04:34 2010</span>
 <span class="comment">//Author: John Frankland,,,</span>
@@ -92,7 +92,7 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
 <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRungeKutta.html">KVRungeKutta</a>::<a href="../KVRungeKutta.html#KVRungeKutta:c6" title="Double_t KVRungeKutta::c6">c6</a> = 512.0 / 1771.0;
 <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRungeKutta.html">KVRungeKutta</a>::<a href="../KVRungeKutta.html#KVRungeKutta:dc5" title="Double_t KVRungeKutta::dc5">dc5</a> = -277.00 / 14336.0;
    
-<a name="b8_ZSC"></a><a href="../KVRungeKutta.html">KVRungeKutta</a>::<a href="../KVRungeKutta.html#KVRungeKutta:KVRungeKutta" title="KVRungeKutta KVRungeKutta::KVRungeKutta() or overloads">KVRungeKutta</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> N, <a href="../ListOfTypes.html#Double_t">Double_t</a> PREC, <a href="../ListOfTypes.html#Double_t">Double_t</a> MINSTEP)
+<a href="../KVRungeKutta.html">KVRungeKutta</a>::KVRungeKutta(<a href="../ListOfTypes.html#Int_t">Int_t</a> N, <a href="../ListOfTypes.html#Double_t">Double_t</a> PREC, <a href="../ListOfTypes.html#Double_t">Double_t</a> MINSTEP)
 	: <a href="../KVBase.html">KVBase</a>(<span class="string">"RK4NR"</span>, <span class="string">"Runge-Kutta ODE integrator with adaptive step-size control"</span>),
 	<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>(N), <a href="../KVRungeKutta.html#KVRungeKutta:eps" title="Double_t KVRungeKutta::eps">eps</a>(PREC), <a href="../KVRungeKutta.html#KVRungeKutta:hmin" title="Double_t KVRungeKutta::hmin">hmin</a>(MINSTEP)
 {
@@ -136,12 +136,12 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
    <span class="keyword">delete</span> [] <a href="../KVRungeKutta.html#KVRungeKutta:ak6" title="Double_t* KVRungeKutta::ak6">ak6</a>;
 }
 
-<a name="XdWFlD"></a><span class="keyword">void</span> <a href="../KVRungeKutta.html">KVRungeKutta</a>::<a href="../KVRungeKutta.html#KVRungeKutta:Integrate" title="void KVRungeKutta::Integrate(Double_t* ystart, Double_t x1, Double_t x2, Double_t h1)">Integrate</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *ystart, <a href="../ListOfTypes.html#Double_t">Double_t</a> x1, <a href="../ListOfTypes.html#Double_t">Double_t</a> x2, <a href="../ListOfTypes.html#Double_t">Double_t</a> h1)
+<a name="XdWFlD"></a><span class="keyword">void</span> <a href="../KVRungeKutta.html">KVRungeKutta</a>::<a href="../KVRungeKutta.html#KVRungeKutta:Integrate" title="void KVRungeKutta::Integrate(Double_t* ystart,Double_t x1,Double_t x2,Double_t h1)">Integrate</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *ystart, <a href="../ListOfTypes.html#Double_t">Double_t</a> x1, <a href="../ListOfTypes.html#Double_t">Double_t</a> x2, <a href="../ListOfTypes.html#Double_t">Double_t</a> h1)
 {
    <span class="comment">// Runge-Kutta driver with adaptive stepsize control.</span>
-   <span class="comment">// <a href="../KVRungeKutta.html#KVRungeKutta:Integrate" title="void KVRungeKutta::Integrate(Double_t* ystart, Double_t x1, Double_t x2, Double_t h1)">Integrate</a> <a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a> starting values ystart[0,...,<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>-1] from x1 to x2 with accuracy <a href="../KVRungeKutta.html#KVRungeKutta:eps" title="Double_t KVRungeKutta::eps">eps</a>.</span>
+   <span class="comment">// <a href="../KVRungeKutta.html#KVRungeKutta:Integrate" title="void KVRungeKutta::Integrate(Double_t* ystart,Double_t x1,Double_t x2,Double_t h1)">Integrate</a> <a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a> starting values ystart[0,...,<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>-1] from x1 to x2 with accuracy <a href="../KVRungeKutta.html#KVRungeKutta:eps" title="Double_t KVRungeKutta::eps">eps</a>.</span>
    <span class="comment">// h1 should be set as a guessed first stepsize.</span>
-   <span class="comment">// after call, <a href="../KVRungeKutta.html#KVRungeKutta:GetNGoodSteps" title="Int_t KVRungeKutta::GetNGoodSteps() const">GetNGoodSteps</a>() and <a href="../KVRungeKutta.html#KVRungeKutta:GetNBadSteps" title="Int_t KVRungeKutta::GetNBadSteps() const">GetNBadSteps</a>() give the number of good</span>
+   <span class="comment">// after call, <a href="../KVRungeKutta.html#KVRungeKutta:GetNGoodSteps" title="Int_t KVRungeKutta::GetNGoodSteps()">GetNGoodSteps</a>() and <a href="../KVRungeKutta.html#KVRungeKutta:GetNBadSteps" title="Int_t KVRungeKutta::GetNBadSteps()">GetNBadSteps</a>() give the number of good</span>
    <span class="comment">// and bad (but retried and fixed) steps taken,</span>
    <span class="comment">// and ystart values are replaced by values at the end of the integration interval. </span>
 
@@ -156,7 +156,7 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
       
       <span class="comment">// calculate derivatives before performing step</span>
       <a href="../KVRungeKutta.html#KVRungeKutta:fInitialDeriv" title="Bool_t KVRungeKutta::fInitialDeriv">fInitialDeriv</a> = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
-      <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X, Double_t* Y, Double_t* DYDX)">CalcDerivs</a>( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>, <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>, <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a> );
+      <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X,Double_t* Y,Double_t* DYDX)">CalcDerivs</a>( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>, <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>, <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a> );
       <a href="../KVRungeKutta.html#KVRungeKutta:fInitialDeriv" title="Bool_t KVRungeKutta::fInitialDeriv">fInitialDeriv</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
       
       <span class="keyword">for</span> ( <a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0; i &lt; <a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
@@ -166,7 +166,7 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
       
       <a href="../KVRungeKutta.html#KVRungeKutta:rkqs" title="void KVRungeKutta::rkqs(Double_t htry)">rkqs</a> (h);
       <span class="keyword">if</span>(!<a href="../KVRungeKutta.html#KVRungeKutta:fOK" title="Bool_t KVRungeKutta::fOK">fOK</a>) {
-      	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"Integrate"</span>, <span class="string">"integration stopped at x=%g"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>);
+      	<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Integrate"</span>, <span class="string">"integration stopped at x=%g"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>);
       	<span class="keyword">return</span>;
       }
       
@@ -178,14 +178,14 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
       }
       
       <span class="keyword">if</span> ( TMath::Abs( <a href="../KVRungeKutta.html#KVRungeKutta:hnext" title="Double_t KVRungeKutta::hnext">hnext</a> ) &lt;= <a href="../KVRungeKutta.html#KVRungeKutta:hmin" title="Double_t KVRungeKutta::hmin">hmin</a> ){
-      	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a> (<span class="string">"Integrate"</span>,  <span class="string">"Step size %g too small"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:hnext" title="Double_t KVRungeKutta::hnext">hnext</a> );
-      	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"Integrate"</span>, <span class="string">"integration stopped at x=%g"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>);
+      	<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a> (<span class="string">"Integrate"</span>,  <span class="string">"Step size %g too small"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:hnext" title="Double_t KVRungeKutta::hnext">hnext</a> );
+      	<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Integrate"</span>, <span class="string">"integration stopped at x=%g"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>);
       	<span class="keyword">return</span>;
       }
       h = <a href="../KVRungeKutta.html#KVRungeKutta:hnext" title="Double_t KVRungeKutta::hnext">hnext</a>;
    }
-   <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a> ( <span class="string">"Integrate"</span>, <span class="string">"Too many steps"</span> );
-   <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"Integrate"</span>, <span class="string">"integration stopped at x=%g"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>);
+   <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a> ( <span class="string">"Integrate"</span>, <span class="string">"Too many steps"</span> );
+   <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Integrate"</span>, <span class="string">"integration stopped at x=%g"</span>, <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a>);
 }
 
 <a name="EFEIYE"></a><span class="keyword">void</span> <a href="../KVRungeKutta.html">KVRungeKutta</a>::<a href="../KVRungeKutta.html#KVRungeKutta:rkqs" title="void KVRungeKutta::rkqs(Double_t htry)">rkqs</a> (<a href="../ListOfTypes.html#Double_t">Double_t</a> htry)
@@ -211,7 +211,7 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
       h = ( h &gt;= 0.0 ? TMath::Max( htemp, 0.1 * h ) : TMath::Min( htemp, 0.1 * h ) );
       xnew = <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + h;
       <span class="keyword">if</span> ( xnew == <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> ) {
-      	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>( <span class="string">"rkqs"</span>, <span class="string">"stepsize underflow"</span> );
+      	<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>( <span class="string">"rkqs"</span>, <span class="string">"stepsize underflow"</span> );
       	<a href="../KVRungeKutta.html#KVRungeKutta:fOK" title="Bool_t KVRungeKutta::fOK">fOK</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
       	<span class="keyword">return</span>;
       }
@@ -232,19 +232,19 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
   
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
       <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>[i] = <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b21" title="Double_t KVRungeKutta::b21">b21</a> * h * <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a>[i];
-   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X, Double_t* Y, Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a2" title="Double_t KVRungeKutta::a2">a2</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak2" title="Double_t* KVRungeKutta::ak2">ak2</a> );
+   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X,Double_t* Y,Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a2" title="Double_t KVRungeKutta::a2">a2</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak2" title="Double_t* KVRungeKutta::ak2">ak2</a> );
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
       <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>[i] = <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>[i] + h * ( <a href="../KVRungeKutta.html#KVRungeKutta:b31" title="Double_t KVRungeKutta::b31">b31</a> * <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b32" title="Double_t KVRungeKutta::b32">b32</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak2" title="Double_t* KVRungeKutta::ak2">ak2</a>[i] );
-   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X, Double_t* Y, Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a3" title="Double_t KVRungeKutta::a3">a3</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak3" title="Double_t* KVRungeKutta::ak3">ak3</a> );
+   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X,Double_t* Y,Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a3" title="Double_t KVRungeKutta::a3">a3</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak3" title="Double_t* KVRungeKutta::ak3">ak3</a> );
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
       <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>[i] = <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>[i] + h * ( <a href="../KVRungeKutta.html#KVRungeKutta:b41" title="Double_t KVRungeKutta::b41">b41</a> * <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b42" title="Double_t KVRungeKutta::b42">b42</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak2" title="Double_t* KVRungeKutta::ak2">ak2</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b43" title="Double_t KVRungeKutta::b43">b43</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak3" title="Double_t* KVRungeKutta::ak3">ak3</a>[i] );
-   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X, Double_t* Y, Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a4" title="Double_t KVRungeKutta::a4">a4</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak4" title="Double_t* KVRungeKutta::ak4">ak4</a> );
+   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X,Double_t* Y,Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a4" title="Double_t KVRungeKutta::a4">a4</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak4" title="Double_t* KVRungeKutta::ak4">ak4</a> );
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
       <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>[i] = <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>[i] + h * ( <a href="../KVRungeKutta.html#KVRungeKutta:b51" title="Double_t KVRungeKutta::b51">b51</a> * <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b52" title="Double_t KVRungeKutta::b52">b52</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak2" title="Double_t* KVRungeKutta::ak2">ak2</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b53" title="Double_t KVRungeKutta::b53">b53</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak3" title="Double_t* KVRungeKutta::ak3">ak3</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b54" title="Double_t KVRungeKutta::b54">b54</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak4" title="Double_t* KVRungeKutta::ak4">ak4</a>[i] );
-   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X, Double_t* Y, Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a5" title="Double_t KVRungeKutta::a5">a5</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak5" title="Double_t* KVRungeKutta::ak5">ak5</a> );
+   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X,Double_t* Y,Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a5" title="Double_t KVRungeKutta::a5">a5</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak5" title="Double_t* KVRungeKutta::ak5">ak5</a> );
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
       <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>[i] = <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>[i] + h * ( <a href="../KVRungeKutta.html#KVRungeKutta:b61" title="Double_t KVRungeKutta::b61">b61</a> * <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b62" title="Double_t KVRungeKutta::b62">b62</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak2" title="Double_t* KVRungeKutta::ak2">ak2</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b63" title="Double_t KVRungeKutta::b63">b63</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak3" title="Double_t* KVRungeKutta::ak3">ak3</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b64" title="Double_t KVRungeKutta::b64">b64</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak4" title="Double_t* KVRungeKutta::ak4">ak4</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:b65" title="Double_t KVRungeKutta::b65">b65</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak5" title="Double_t* KVRungeKutta::ak5">ak5</a>[i] );
-   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X, Double_t* Y, Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a6" title="Double_t KVRungeKutta::a6">a6</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak6" title="Double_t* KVRungeKutta::ak6">ak6</a> );
+   <a href="../KVRungeKutta.html#KVRungeKutta:CalcDerivs" title="void KVRungeKutta::CalcDerivs(Double_t X,Double_t* Y,Double_t* DYDX)">CalcDerivs</a> ( <a href="../KVRungeKutta.html#KVRungeKutta:x" title="Double_t KVRungeKutta::x">x</a> + <a href="../KVRungeKutta.html#KVRungeKutta:a6" title="Double_t KVRungeKutta::a6">a6</a>*h, <a href="../KVRungeKutta.html#KVRungeKutta:ytemp" title="Double_t* KVRungeKutta::ytemp">ytemp</a>, <a href="../KVRungeKutta.html#KVRungeKutta:ak6" title="Double_t* KVRungeKutta::ak6">ak6</a> );
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
       <a href="../KVRungeKutta.html#KVRungeKutta:yout" title="Double_t* KVRungeKutta::yout">yout</a>[i] = <a href="../KVRungeKutta.html#KVRungeKutta:y" title="Double_t* KVRungeKutta::y">y</a>[i] + h * ( <a href="../KVRungeKutta.html#KVRungeKutta:c1" title="Double_t KVRungeKutta::c1">c1</a> * <a href="../KVRungeKutta.html#KVRungeKutta:dydx" title="Double_t* KVRungeKutta::dydx">dydx</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:c3" title="Double_t KVRungeKutta::c3">c3</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak3" title="Double_t* KVRungeKutta::ak3">ak3</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:c4" title="Double_t KVRungeKutta::c4">c4</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak4" title="Double_t* KVRungeKutta::ak4">ak4</a>[i] + <a href="../KVRungeKutta.html#KVRungeKutta:c6" title="Double_t KVRungeKutta::c6">c6</a> * <a href="../KVRungeKutta.html#KVRungeKutta:ak6" title="Double_t* KVRungeKutta::ak6">ak6</a>[i] );
    <span class="keyword">for</span> ( <span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;<a href="../KVRungeKutta.html#KVRungeKutta:nvar" title="Int_t KVRungeKutta::nvar">nvar</a>; i++ )
@@ -259,8 +259,8 @@ RKex.Integrate(ystart, x1, x2, 0.01); // example initial step-size guess
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

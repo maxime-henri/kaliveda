@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:27 2015            -->
+<!--   Date: Thu Oct  1 17:52:31 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVSimReader_HIPSE - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Wed Jul  7 12:15:56 2010</span>
 <span class="comment">//Author: bonnet</span>
@@ -45,7 +45,7 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 {
    <a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:init" title="void KVSimReader_HIPSE::init()">init</a>();
 	<span class="keyword">if</span> (!<a href="../KVFileReader.html#KVFileReader:OpenFileToRead" title="Bool_t KVFileReader::OpenFileToRead(KVString filename)">OpenFileToRead</a>(filename)) <span class="keyword">return</span>;
-	<a href="../KVSimReader.html#KVSimReader:Run" title="void KVSimReader::Run(KVString filename = &quot;Output.root&quot;, Option_t* option = &quot;recreate&quot;)">Run</a>();
+	<a href="../KVSimReader.html#KVSimReader:Run" title="void KVSimReader::Run(KVString filename=&quot;Output.root&quot;,Option_t* option=&quot;recreate&quot;)">Run</a>();
 	<a href="../KVFileReader.html#KVFileReader:CloseFile" title="void KVFileReader::CloseFile()">CloseFile</a>();
 }
 
@@ -60,13 +60,13 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 <a name="DueVcE"></a><span class="keyword">void</span> <a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>::<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:ReadFile" title="void KVSimReader_HIPSE::ReadFile()">ReadFile</a>(){
 
 	<a href="../KVSimReader.html#KVSimReader:AddObject" title="void KVSimReader::AddObject(TObject* obj)">AddObject</a>(<span class="keyword">new</span> TH1F(<span class="string">"impact_parameter"</span>,<span class="string">"distri"</span>,200,0,20));
-	<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:h1" title="TH1F* KVSimReader_HIPSE::h1">h1</a> = (TH1F* )<a href="../KVSimReader.html#KVSimReader:GetLinkedObjects" title="KVList* KVSimReader::GetLinkedObjects()">GetLinkedObjects</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last() const">Last</a>();
+	<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:h1" title="TH1F* KVSimReader_HIPSE::h1">h1</a> = (TH1F* )<a href="../KVSimReader.html#KVSimReader:GetLinkedObjects" title="KVList* KVSimReader::GetLinkedObjects()">GetLinkedObjects</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last()">Last</a>();
 	
 	<span class="keyword">if</span> (!<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:ReadHeader" title="Bool_t KVSimReader_HIPSE::ReadHeader()">ReadHeader</a>()) <span class="keyword">return</span>;
 
 	<span class="keyword">while</span> (<a href="../KVFileReader.html#KVFileReader:IsOK" title="Bool_t KVFileReader::IsOK()">IsOK</a>()){
 		<span class="keyword">while</span> (<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:ReadEvent" title="Bool_t KVSimReader_HIPSE::ReadEvent()">ReadEvent</a>()){
-			<span class="keyword">if</span> (nevt%1000==0) <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadFile"</span>,<span class="string">"%d evts lus"</span>,nevt);
+			<span class="keyword">if</span> (nevt%1000==0) <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadFile"</span>,<span class="string">"%d evts lus"</span>,nevt);
 			<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:h1" title="TH1F* KVSimReader_HIPSE::h1">h1</a>-&gt;Fill(evt-&gt;GetParameters()-&gt;GetDoubleValue(<span class="string">"Bparstore"</span>));
 			<span class="keyword">if</span> (<a href="../KVSimReader.html#KVSimReader:HasToFill" title="Bool_t KVSimReader::HasToFill()">HasToFill</a>()) <a href="../KVSimReader.html#KVSimReader:FillTree" title="void KVSimReader::FillTree()">FillTree</a>();
 		}
@@ -82,25 +82,25 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 
 <a name="B_MOfC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>::<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:ReadHeader" title="Bool_t KVSimReader_HIPSE::ReadHeader()">ReadHeader</a>(){
 	
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	<span class="keyword">case</span> 1:
-		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name, const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Aproj"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
-		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name, const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Zproj"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(1).Data());
+		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name,const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Aproj"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
+		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name,const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Zproj"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(1).Data());
 		<span class="keyword">break</span>;
 	<span class="keyword">default</span>:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;	
 	}
 	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	<span class="keyword">case</span> 1:
-		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name, const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Atarg"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
-		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name, const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Ztarg"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(1).Data());
+		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name,const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Atarg"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
+		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name,const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Ztarg"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(1).Data());
 		
 		<span class="keyword">break</span>;
 	<span class="keyword">default</span>:
@@ -108,12 +108,12 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;	
 	}
 
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	<span class="keyword">case</span> 1:
-		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name, const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Ebeam"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
+		<a href="../KVSimReader.html#KVSimReader:AddInfo" title="void KVSimReader::AddInfo(const Char_t* name,const Char_t* val) or overloads">AddInfo</a>(<span class="string">"Ebeam"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 		
 	
@@ -126,7 +126,7 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 
 <a name="SfqZwE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>::<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:ReadEvent" title="Bool_t KVSimReader_HIPSE::ReadEvent()">ReadEvent</a>(){
 
-	evt-&gt;<a href="../KVFileReader.html#KVFileReader:Clear" title="void KVFileReader::Clear(Option_t* = &quot;&quot;)">Clear</a>();
+	evt-&gt;<a href="../KVFileReader.html#KVFileReader:Clear" title="void KVFileReader::Clear(Option_t* =&quot;&quot;)">Clear</a>();
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> mult=0,mtotal=0;
 
 <span class="comment">/*---------------------------------------------
@@ -134,10 +134,10 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 	mult     = total multiplicity (i.e. including neutrons)
 //---------------------------------------------      
 */</span>
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadEvent"</span>,<span class="string">"case 0 line est vide"</span>); 
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadEvent"</span>,<span class="string">"case 0 line est vide"</span>); 
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	<span class="keyword">case</span> 1:
 		evt-&gt;<a href="../KVBase.html#KVBase:SetNumber" title="void KVBase::SetNumber(UInt_t num)">SetNumber</a>(nevt);
@@ -157,7 +157,7 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 	Bparstore = impact parameter 
 //---------------------------------------------      	 
 */</span>	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
@@ -181,7 +181,7 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 	erotav         : total rotational energy at freeze-out	 
 //---------------------------------------------
 */</span>	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
@@ -195,7 +195,7 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;	
 	}	
 	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
@@ -223,10 +223,10 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 
 <a name="Rgv7C"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>::<a href="../KVSimReader_HIPSE.html#KVSimReader_HIPSE:ReadNucleus" title="Bool_t KVSimReader_HIPSE::ReadNucleus()">ReadNucleus</a>(){
 
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	
 	<span class="keyword">case</span> 1:
@@ -245,10 +245,10 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;	
 	}
 
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	
 	<span class="keyword">case</span> 1:
@@ -268,10 +268,10 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 	spinx(i),spiny(i),spinz(i) : angular momentum (hbar units)
 //---------------------------------------------
 */</span>	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(2,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	
 	<span class="keyword">case</span> 1:
@@ -283,10 +283,10 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;	
 	}
 	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(3,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	
 	<span class="keyword">case</span> 1:
@@ -309,8 +309,8 @@ ClassImp(<a href="../KVSimReader_HIPSE.html">KVSimReader_HIPSE</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:10 2015            -->
+<!--   Date: Thu Oct  1 17:52:18 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVPulseHeightDefect - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>.cpp,v 1.5 2008/10/07 15:55:20 franklan Exp $
@@ -60,7 +60,7 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="rOgPFB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x, Double_t* par)">PHDMoulton</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> * x, <a href="../ListOfTypes.html#Double_t">Double_t</a> * par)
+<a name="rOgPFB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x,Double_t* par)">PHDMoulton</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> * x, <a href="../ListOfTypes.html#Double_t">Double_t</a> * par)
 {
    <span class="comment">//Returns Moulton PHD for given E and Z:</span>
    <span class="comment">// </span>
@@ -78,10 +78,10 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
    <a href="../ListOfTypes.html#Int_t">Int_t</a>      Z = par[0];
    <span class="comment">// by definition, no PHD for Z=2 or less</span>
    <span class="keyword">if</span>(Z&lt;3) <span class="keyword">return</span> 0;
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> a_1 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> a_2 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(1);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> b_1 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(2);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> b_2 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(3);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> a_1 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> a_2 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(1);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> b_1 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(2);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> b_2 = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(3);
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> a = a_1*Z*Z/1000. + a_2;
    <a href="../ListOfTypes.html#Double_t">Double_t</a> b = b_1*100./Z + b_2;
@@ -98,13 +98,13 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
    <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a> = <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a> = 0;
 }
 
-<a name="ngT1kC"></a><a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:KVPulseHeightDefect" title="KVPulseHeightDefect KVPulseHeightDefect::KVPulseHeightDefect() or overloads">KVPulseHeightDefect</a>():<a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(4)
+<a name="ngT1kC"></a><a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:KVPulseHeightDefect" title="KVPulseHeightDefect KVPulseHeightDefect::KVPulseHeightDefect() or overloads">KVPulseHeightDefect</a>():KVCalibrator(4)
 {
    <span class="comment">//Default constructor</span>
    <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:init" title="void KVPulseHeightDefect::init()">init</a>();
 }
 
-<a name="o5zWpE"></a><a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:KVPulseHeightDefect" title="KVPulseHeightDefect KVPulseHeightDefect::KVPulseHeightDefect() or overloads">KVPulseHeightDefect</a>(<a href="../KVDetector.html">KVDetector</a>*d):<a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(4)
+<a name="o5zWpE"></a><a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:KVPulseHeightDefect" title="KVPulseHeightDefect KVPulseHeightDefect::KVPulseHeightDefect() or overloads">KVPulseHeightDefect</a>(<a href="../KVDetector.html">KVDetector</a>*d):KVCalibrator(4)
 {
    <span class="comment">//Associate PHD calculation to detector</span>
    <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:init" title="void KVPulseHeightDefect::init()">init</a>();
@@ -120,7 +120,7 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="plFSi"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Compute" title="Double_t KVPulseHeightDefect::Compute(Double_t E) const">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy) <span class="keyword">const</span>
+<a name="plFSi"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Compute" title="Double_t KVPulseHeightDefect::Compute(Double_t E)">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy) <span class="keyword">const</span>
 {
    <span class="comment">//Calculate the pulse height defect (in MeV) for a given energy loss in the detector</span>
    <span class="comment">//and a given Z (the Z  of the particle should be set first using method <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:SetZ" title="void KVPulseHeightDefect::SetZ(Int_t z)">SetZ</a>)</span>
@@ -134,19 +134,19 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
    <span class="comment">//          b(Z) = b_1*(100/Z) + b_2</span>
    <span class="comment">//            E = energy loss of particle</span>
 
-   <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetMoultonPHDFunction" title="TF1* KVPulseHeightDefect::GetMoultonPHDFunction(Int_t Z)">GetMoultonPHDFunction</a>(<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetZ" title="Int_t KVPulseHeightDefect::GetZ() const">GetZ</a>())-&gt;Eval(energy);
+   <span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetMoultonPHDFunction" title="TF1* KVPulseHeightDefect::GetMoultonPHDFunction(Int_t Z)">GetMoultonPHDFunction</a>(<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetZ" title="Int_t KVPulseHeightDefect::GetZ()">GetZ</a>())-&gt;Eval(energy);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
 
 <a name="Kvy9kE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<span class="keyword">operator</span>() (<a href="../ListOfTypes.html#Double_t">Double_t</a> energy)
 {
-   <span class="comment">//Same as <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Compute" title="Double_t KVPulseHeightDefect::Compute(Double_t E) const">Compute</a>()</span>
+   <span class="comment">//Same as <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Compute" title="Double_t KVPulseHeightDefect::Compute(Double_t E)">Compute</a>()</span>
 
-   <span class="keyword">return</span> <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Compute" title="Double_t KVPulseHeightDefect::Compute(Double_t E) const">Compute</a>(energy);
+   <span class="keyword">return</span> <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Compute" title="Double_t KVPulseHeightDefect::Compute(Double_t E)">Compute</a>(energy);
 }
 
-<a name="UL_eyB"></a>TF1* <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetELossFunction" title="TF1* KVPulseHeightDefect::GetELossFunction(Int_t Z, Int_t A, Bool_t Wrong = kFALSE)">GetELossFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> Wrong)
+<a name="UL_eyB"></a>TF1* <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetELossFunction" title="TF1* KVPulseHeightDefect::GetELossFunction(Int_t Z,Int_t A,Bool_t Wrong=kFALSE)">GetELossFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> Wrong)
 {
    <span class="comment">// Return pointer to TF1 giving energy loss in active layer of detector minus</span>
    <span class="comment">// the pulse height defect for a given nucleus (Z,A).</span>
@@ -159,18 +159,18 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
     <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:wrong" title="Bool_t KVPulseHeightDefect::wrong">wrong</a>=Wrong;
 
    <span class="keyword">if</span>(!<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>){
-      <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"KVPulseHeightDefect:%s:ELossActive"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()),
-           <span class="keyword">this</span>, &amp;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:ELossActive" title="Double_t KVPulseHeightDefect::ELossActive(Double_t* x, Double_t* par)">ELossActive</a>, 0., 1.e+04, 2, <span class="string">"KVPulseHeightDefect"</span>, <span class="string">"ELossActive"</span>);
+      <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"KVPulseHeightDefect:%s:ELossActive"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()),
+           <span class="keyword">this</span>, &amp;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:ELossActive" title="Double_t KVPulseHeightDefect::ELossActive(Double_t* x,Double_t* par)">ELossActive</a>, 0., 1.e+04, 2, <span class="string">"KVPulseHeightDefect"</span>, <span class="string">"ELossActive"</span>);
       <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>-&gt;SetNpx( gEnv-&gt;GetValue(<span class="string">"KVPulseHeightDefect.EnergyLoss.Npx"</span>, 20) );
    }
    <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameters" title="void KVCalibrator::SetParameters(Double_t val)">SetParameters</a>((<a href="../ListOfTypes.html#Double_t">Double_t</a>)Z, (<a href="../ListOfTypes.html#Double_t">Double_t</a>)A);
-   <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>-&gt;SetRange(0., <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetSmallestEmaxValid" title="Double_t KVDetector::GetSmallestEmaxValid(Int_t Z, Int_t A)">GetSmallestEmaxValid</a>(Z,A));
-   <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title = &quot;&quot;)">SetTitle</a>(Form(<span class="string">"PHD dependent energy loss [MeV] in detector %s for Z=%d A=%d"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), Z, A));
+   <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>-&gt;SetRange(0., <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetSmallestEmaxValid" title="Double_t KVDetector::GetSmallestEmaxValid(Int_t Z,Int_t A)">GetSmallestEmaxValid</a>(Z,A));
+   <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>-&gt;<a href="../#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(Form(<span class="string">"PHD dependent energy loss [MeV] in detector %s for Z=%d A=%d"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), Z, A));
    <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetMoultonPHDFunction" title="TF1* KVPulseHeightDefect::GetMoultonPHDFunction(Int_t Z)">GetMoultonPHDFunction</a>(Z);
    <span class="keyword">return</span> <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fDeltaEphd" title="TF1* KVPulseHeightDefect::fDeltaEphd">fDeltaEphd</a>;
 }
 
-<a name="fHM7CD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:ELossActive" title="Double_t KVPulseHeightDefect::ELossActive(Double_t* x, Double_t* par)">ELossActive</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *x, <a href="../ListOfTypes.html#Double_t">Double_t</a> *par)
+<a name="fHM7CD"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:ELossActive" title="Double_t KVPulseHeightDefect::ELossActive(Double_t* x,Double_t* par)">ELossActive</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *x, <a href="../ListOfTypes.html#Double_t">Double_t</a> *par)
 {
    <span class="comment">// Calculate energy lost in active layer of detector minus the Moulton PHD</span>
    <span class="comment">// x[0] = incident energy</span>
@@ -178,8 +178,8 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
    <span class="comment">// par[1] = A</span>
    
    <a href="../ListOfTypes.html#Double_t">Double_t</a> e = x[0];
-   TIter next(<a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetListOfAbsorbers" title="KVList* KVDetector::GetListOfAbsorbers() const">GetListOfAbsorbers</a>()); <a href="../KVMaterial.html">KVMaterial</a>* mat;
-   <span class="keyword">while</span>( (mat = (<a href="../KVMaterial.html">KVMaterial</a>*)next()) != <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetActiveLayer" title="KVMaterial* KVDetector::GetActiveLayer() const">GetActiveLayer</a>() ){
+   TIter next(<a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetListOfAbsorbers" title="KVList* KVDetector::GetListOfAbsorbers()">GetListOfAbsorbers</a>()); <a href="../KVMaterial.html">KVMaterial</a>* mat;
+   <span class="keyword">while</span>( (mat = (<a href="../KVMaterial.html">KVMaterial</a>*)next()) != <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetActiveLayer" title="KVMaterial* KVDetector::GetActiveLayer()">GetActiveLayer</a>() ){
       <span class="comment">// calculate energy losses in absorbers before active layer</span>
          e = mat-&gt;GetERes(par[0], par[1], e);     <span class="comment">//residual energy after layer</span>
          <span class="keyword">if</span> (e &lt;= 0.)
@@ -189,8 +189,8 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
    <a href="../ListOfTypes.html#Double_t">Double_t</a> dE = mat-&gt;GetDeltaE(par[0], par[1], e);
    <span class="comment">// calculate Moulton PHD corresponding to energy lost in active layer</span>
    <a href="../ListOfTypes.html#Double_t">Double_t</a> phd;
-   <span class="keyword">if</span>(<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:wrong" title="Bool_t KVPulseHeightDefect::wrong">wrong</a>) phd = <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x, Double_t* par)">PHDMoulton</a>(&amp;e, par);<span class="comment">//incorrect calculation using incident energy</span>
-   <span class="keyword">else</span> phd = <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x, Double_t* par)">PHDMoulton</a>(&amp;dE, par);
+   <span class="keyword">if</span>(<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:wrong" title="Bool_t KVPulseHeightDefect::wrong">wrong</a>) phd = <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x,Double_t* par)">PHDMoulton</a>(&amp;e, par);<span class="comment">//incorrect calculation using incident energy</span>
+   <span class="keyword">else</span> phd = <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x,Double_t* par)">PHDMoulton</a>(&amp;dE, par);
    
    <span class="keyword">return</span> dE - phd; 
 }
@@ -200,23 +200,23 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
       <span class="comment">// Create TF1* <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a> if not already done</span>
    
       <span class="keyword">if</span>(!<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>) {
-         <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"MoultonPHD:%s"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()),
-            <span class="keyword">this</span>, &amp;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x, Double_t* par)">PHDMoulton</a>, 0., 1.e+04, 1, <span class="string">"KVPulseHeightDefect"</span>, <span class="string">"PHDMoulton"</span>);
+         <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"MoultonPHD:%s"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()),
+            <span class="keyword">this</span>, &amp;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:PHDMoulton" title="Double_t KVPulseHeightDefect::PHDMoulton(Double_t* x,Double_t* par)">PHDMoulton</a>, 0., 1.e+04, 1, <span class="string">"KVPulseHeightDefect"</span>, <span class="string">"PHDMoulton"</span>);
          <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>-&gt;SetNpx(500);
       }
-      <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameter" title="void KVCalibrator::SetParameter(UShort_t i, Float_t par_val)">SetParameter</a>(0,Z);
+      <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameter" title="void KVCalibrator::SetParameter(UShort_t i,Float_t par_val)">SetParameter</a>(0,Z);
       <span class="keyword">return</span> <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>;
    }
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="MdpuCE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Invert" title="Double_t KVPulseHeightDefect::Invert(Double_t)">Invert</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy)
+<a name="MdpuCE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>::<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:Invert" title="Double_t KVPulseHeightDefect::Invert(Double_t )">Invert</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy)
 {
    <span class="comment">//Given the PHD (in MeV) of a particle of charge Z</span>
    <span class="comment">//(set using <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:SetZ" title="void KVPulseHeightDefect::SetZ(Int_t z)">SetZ</a>() method), this method inverts the Moulton formula</span>
    <span class="comment">//in order to find the energy loss of the particle in the detector.</span>
 
-   <span class="keyword">const_cast</span>&lt;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetMoultonPHDFunction" title="TF1* KVPulseHeightDefect::GetMoultonPHDFunction(Int_t Z)">GetMoultonPHDFunction</a>(<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetZ" title="Int_t KVPulseHeightDefect::GetZ() const">GetZ</a>());
+   <span class="keyword">const_cast</span>&lt;<a href="../KVPulseHeightDefect.html">KVPulseHeightDefect</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetMoultonPHDFunction" title="TF1* KVPulseHeightDefect::GetMoultonPHDFunction(Int_t Z)">GetMoultonPHDFunction</a>(<a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:GetZ" title="Int_t KVPulseHeightDefect::GetZ()">GetZ</a>());
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> xmin, xmax; <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>-&gt;GetRange(xmin,xmax);
    <span class="keyword">return</span> <a href="../KVPulseHeightDefect.html#KVPulseHeightDefect:fMoulton" title="TF1* KVPulseHeightDefect::fMoulton">fMoulton</a>-&gt;GetX(energy,xmin,xmax);
 }
@@ -228,8 +228,8 @@ is calibrated with the fixed values of a_1=0.0223 and a_2=0.5682.
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

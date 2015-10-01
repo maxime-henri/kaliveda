@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:41 2015            -->
+<!--   Date: Thu Oct  1 17:51:59 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVINDRARunSheetReader - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*******************************************************************************
 $Id: <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>.cpp,v 1.13 2008/12/08 14:07:37 franklan Exp $
@@ -54,22 +54,22 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
 <span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetRunSheetDir" title="void KVINDRARunSheetReader::SetRunSheetDir(const Char_t* dir)">SetRunSheetDir</a>(<span class="string">"/space/eindra/e475s/acquisition/run"</span>);// directory containing runsheets</span>
 <span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetFileFormat" title="void KVINDRARunSheetReader::SetFileFormat(const Char_t* fmt)">SetFileFormat</a>(<span class="string">"RUN_%04d.TXT"</span>);// format for file name, including run number. This example works for e.g. RUN_0100.TXT</span>
 <span class="comment">//</span>
-<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes = kTRUE)">SetMakeTree</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);// in case you change your mind about the TTree ;-)</span>
-<span class="comment">//s.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes = kTRUE)">SetMakeTree</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);</span>
+<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes=kTRUE)">SetMakeTree</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);// in case you change your mind about the TTree ;-)</span>
+<span class="comment">//s.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes=kTRUE)">SetMakeTree</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);</span>
 <span class="comment">//</span>
 <span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadRunSheet" title="Bool_t KVINDRARunSheetReader::ReadRunSheet(Int_t run)">ReadRunSheet</a>( 100 );// read run sheet for run number 100</span>
-<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first = 1, Int_t last = 9999)">ReadAllRunSheets</a>();// read all run sheets in the directory (default: from run 1 to 9999)</span>
-<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first = 1, Int_t last = 9999)">ReadAllRunSheets</a>(100, 199);// read all run sheets in the directory from 100 to 199</span>
+<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first=1,Int_t last=9999)">ReadAllRunSheets</a>();// read all run sheets in the directory (default: from run 1 to 9999)</span>
+<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first=1,Int_t last=9999)">ReadAllRunSheets</a>(100, 199);// read all run sheets in the directory from 100 to 199</span>
 <span class="comment">//</span>
-<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetTree" title="TTree* KVINDRARunSheetReader::GetTree() const">GetTree</a>()-&gt;StartViewer();// draw histograms of info stored in the TTree</span>
+<span class="comment">//r.<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetTree" title="TTree* KVINDRARunSheetReader::GetTree()">GetTree</a>()-&gt;StartViewer();// draw histograms of info stored in the TTree</span>
 <span class="comment">//</span>
-<span class="comment">//<a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetRuns" title="TList* KVINDRADB::GetRuns() const">GetRuns</a>()-&gt;ls();// view runs stored in database</span>
+<span class="comment">//<a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetRuns" title="KVSeqCollection* KVINDRADB::GetRuns()">GetRuns</a>()-><a href="../#TCollection:ls" title="void TCollection::ls(Option_t* option=&quot;&quot;)">ls</a>();// view runs stored in database</span>
 <span class="comment">//</span>
-<a name="CwH7o"></a>    <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:KVINDRARunSheetReader" title="KVINDRARunSheetReader KVINDRARunSheetReader::KVINDRARunSheetReader(Bool_t make_tree = kFALSE) or overloads">KVINDRARunSheetReader</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> make_tree)
+<a name="CwH7o"></a>    <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:KVINDRARunSheetReader" title="KVINDRARunSheetReader KVINDRARunSheetReader::KVINDRARunSheetReader(Bool_t make_tree=kFALSE) or overloads">KVINDRARunSheetReader</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> make_tree)
 {
    <span class="comment">//Default ctor. If make_tree = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>, a TTree will be created and filled with</span>
    <span class="comment">//data from runsheets.</span>
-   <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes = kTRUE)">SetMakeTree</a>(make_tree);
+   <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:SetMakeTree" title="void KVINDRARunSheetReader::SetMakeTree(Bool_t yes=kTRUE)">SetMakeTree</a>(make_tree);
    <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTree" title="TTree* KVINDRARunSheetReader::fTree">fTree</a> = 0;
    <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:init_vars" title="void KVINDRARunSheetReader::init_vars()">init_vars</a>();
    <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTIME_START" title="UInt_t KVINDRARunSheetReader::fTIME_START">fTIME_START</a> = 0;
@@ -133,10 +133,10 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
    <span class="comment">//Create TTree if required and if not already done</span>
    <span class="comment">//Return <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if all goes well.</span>
 
-      cout &lt;&lt;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;
           <span class="string">"&lt;KVINDRARunSheetReader::ReadRunSheet&gt; : Reading runsheet for new run, Run "</span>
           &lt;&lt; run &lt;&lt; endl;
-   <a href="../KVINDRADBRun.html">KVINDRADBRun</a> *indra_db_run = <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run) const or overloads">GetRun</a>(run);
+   <a href="../KVINDRADBRun.html">KVINDRADBRun</a> *indra_db_run = <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run);
    <span class="keyword">if</span> (!indra_db_run) {
       <span class="comment">//create new run and add it to the database</span>
       indra_db_run = <span class="keyword">new</span> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>(run);
@@ -146,7 +146,7 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
    <span class="comment">//open runsheet file</span>
    <a href="../ListOfTypes.html#ifstream">ifstream</a> read_file(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetRunSheetFileName" title="const Char_t* KVINDRARunSheetReader::GetRunSheetFileName(Int_t run)">GetRunSheetFileName</a>(run));
    <span class="keyword">if</span> (!read_file.good()) {
-      cout &lt;&lt; <span class="string">"Error opening file : "</span> &lt;&lt; <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fFilePath" title="TString KVINDRARunSheetReader::fFilePath">fFilePath</a>.Data() &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Error opening file : "</span> &lt;&lt; <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fFilePath" title="TString KVINDRARunSheetReader::fFilePath">fFilePath</a>.Data() &lt;&lt; endl;
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
    <span class="comment">//reset runsheet/TTree variables</span>
@@ -160,20 +160,20 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
    <span class="keyword">while</span> (read_file.good() &amp;&amp; !line.Contains(<span class="string">"Echelles"</span>)) {
 
       <span class="keyword">if</span> (line.Contains(<span class="string">"Run numero"</span>))
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:run_num" title="Int_t KVINDRARunSheetReader::run_num">run_num</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:run_num" title="Int_t KVINDRARunSheetReader::run_num">run_num</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(line);
       <span class="keyword">if</span> (line.Contains(<span class="string">"Debut"</span>)) {
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="../KVDatime.html#KVDatime:SetGanacqDate" title="void KVDatime::SetGanacqDate(const Char_t* GanacqDateString)">SetGanacqDate</a>(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetDateField" title="const Char_t* KVINDRARunSheetReader::GetDateField(TString&amp;, const Char_t* delim = &quot;:&quot;)">GetDateField</a>(line));
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:istart" title="Int_t KVINDRARunSheetReader::istart">istart</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="http://root.cern.ch/root/html/TDatime.html#TDatime:Convert" title="UInt_t TDatime::Convert(Bool_t toGMT = kFALSE) const">Convert</a>();
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="../KVDatime.html#KVDatime:SetGanacqDate" title="void KVDatime::SetGanacqDate(const Char_t* GanacqDateString)">SetGanacqDate</a>(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetDateField" title="const Char_t* KVINDRARunSheetReader::GetDateField(TString&amp; ,const Char_t* delim=&quot;:&quot;)">GetDateField</a>(line));
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:istart" title="Int_t KVINDRARunSheetReader::istart">istart</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="../#TDatime:Convert" title="UInt_t TDatime::Convert(Bool_t toGMT=kFALSE)">Convert</a>();
          <span class="keyword">if</span> (!<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTIME_START" title="UInt_t KVINDRARunSheetReader::fTIME_START">fTIME_START</a>) {
             <span class="comment">//we put the <span class="string">"time origin"</span> at the start of the first run we read</span>
-            <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTIME_START" title="UInt_t KVINDRARunSheetReader::fTIME_START">fTIME_START</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="http://root.cern.ch/root/html/TDatime.html#TDatime:Convert" title="UInt_t TDatime::Convert(Bool_t toGMT = kFALSE) const">Convert</a>();
+            <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTIME_START" title="UInt_t KVINDRARunSheetReader::fTIME_START">fTIME_START</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="../#TDatime:Convert" title="UInt_t TDatime::Convert(Bool_t toGMT=kFALSE)">Convert</a>();
          }
-         indra_db_run-&gt;SetStartDate(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="../KVDatime.html#KVDatime:AsGanacqDateString" title="const Char_t* KVDatime::AsGanacqDateString() const">AsGanacqDateString</a>());
+         indra_db_run-&gt;SetStartDate(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:start_run" title="KVDatime KVINDRARunSheetReader::start_run">start_run</a>.<a href="../KVDatime.html#KVDatime:AsGanacqDateString" title="const Char_t* KVDatime::AsGanacqDateString()">AsGanacqDateString</a>());
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Fin"</span>)) {
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:endrun" title="KVDatime KVINDRARunSheetReader::endrun">endrun</a>.<a href="../KVDatime.html#KVDatime:SetGanacqDate" title="void KVDatime::SetGanacqDate(const Char_t* GanacqDateString)">SetGanacqDate</a>(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetDateField" title="const Char_t* KVINDRARunSheetReader::GetDateField(TString&amp;, const Char_t* delim = &quot;:&quot;)">GetDateField</a>(line));
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:iend" title="Int_t KVINDRARunSheetReader::iend">iend</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:endrun" title="KVDatime KVINDRARunSheetReader::endrun">endrun</a>.<a href="http://root.cern.ch/root/html/TDatime.html#TDatime:Convert" title="UInt_t TDatime::Convert(Bool_t toGMT = kFALSE) const">Convert</a>();
-         indra_db_run-&gt;SetEndDate(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:endrun" title="KVDatime KVINDRARunSheetReader::endrun">endrun</a>.<a href="../KVDatime.html#KVDatime:AsGanacqDateString" title="const Char_t* KVDatime::AsGanacqDateString() const">AsGanacqDateString</a>());
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:endrun" title="KVDatime KVINDRARunSheetReader::endrun">endrun</a>.<a href="../KVDatime.html#KVDatime:SetGanacqDate" title="void KVDatime::SetGanacqDate(const Char_t* GanacqDateString)">SetGanacqDate</a>(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetDateField" title="const Char_t* KVINDRARunSheetReader::GetDateField(TString&amp; ,const Char_t* delim=&quot;:&quot;)">GetDateField</a>(line));
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:iend" title="Int_t KVINDRARunSheetReader::iend">iend</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:endrun" title="KVDatime KVINDRARunSheetReader::endrun">endrun</a>.<a href="../#TDatime:Convert" title="UInt_t TDatime::Convert(Bool_t toGMT=kFALSE)">Convert</a>();
+         indra_db_run-&gt;SetEndDate(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:endrun" title="KVDatime KVINDRARunSheetReader::endrun">endrun</a>.<a href="../KVDatime.html#KVDatime:AsGanacqDateString" title="const Char_t* KVDatime::AsGanacqDateString()">AsGanacqDateString</a>());
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Length of run"</span>)) {
          sscanf(line.Data(),
@@ -183,39 +183,39 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
          indra_db_run-&gt;SetSize(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:size" title="Double_t KVINDRARunSheetReader::size">size</a>);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Stat_eve"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:stat_eve" title="TString KVINDRARunSheetReader::stat_eve">stat_eve</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(dumstr, <span class="string">" "</span>, 0);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:stat_eve" title="TString KVINDRARunSheetReader::stat_eve">stat_eve</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(dumstr, <span class="string">" "</span>, 0);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Buffers sauves"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:buf_sav" title="Int_t KVINDRARunSheetReader::buf_sav">buf_sav</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_sav" title="Int_t KVINDRARunSheetReader::eve_sav">eve_sav</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(line, <span class="string">":"</span>, 2);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:buf_sav" title="Int_t KVINDRARunSheetReader::buf_sav">buf_sav</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_sav" title="Int_t KVINDRARunSheetReader::eve_sav">eve_sav</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(line, <span class="string">":"</span>, 2);
          indra_db_run-&gt;SetScaler(<span class="string">"Buffers"</span>, <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:buf_sav" title="Int_t KVINDRARunSheetReader::buf_sav">buf_sav</a>);
          indra_db_run-&gt;SetEvents(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_sav" title="Int_t KVINDRARunSheetReader::eve_sav">eve_sav</a>);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Evenements lus"</span>))
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_lus" title="Int_t KVINDRARunSheetReader::eve_lus">eve_lus</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_lus" title="Int_t KVINDRARunSheetReader::eve_lus">eve_lus</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(line);
       <span class="keyword">if</span> (line.Contains(<span class="string">"Buffers ctrl"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:buf_ctrl" title="Int_t KVINDRARunSheetReader::buf_ctrl">buf_ctrl</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_ctrl" title="Int_t KVINDRARunSheetReader::eve_ctrl">eve_ctrl</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(line, <span class="string">":"</span>, 2);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:buf_ctrl" title="Int_t KVINDRARunSheetReader::buf_ctrl">buf_ctrl</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:eve_ctrl" title="Int_t KVINDRARunSheetReader::eve_ctrl">eve_ctrl</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(line, <span class="string">":"</span>, 2);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Taux d'acquisition"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:acq_rate" title="Double_t KVINDRARunSheetReader::acq_rate">acq_rate</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:acq_rate" title="Double_t KVINDRARunSheetReader::acq_rate">acq_rate</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Taux de traitement"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:trait_rate" title="Double_t KVINDRARunSheetReader::trait_rate">trait_rate</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:trait_rate" title="Double_t KVINDRARunSheetReader::trait_rate">trait_rate</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Taux de controle"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ctrl_rate" title="Double_t KVINDRARunSheetReader::ctrl_rate">ctrl_rate</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ctrl_rate" title="Double_t KVINDRARunSheetReader::ctrl_rate">ctrl_rate</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
       }
       <span class="keyword">if</span> (line.Contains(<span class="string">"Remplissage"</span>)) {
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:rempli_dlt_pc" title="Double_t KVINDRARunSheetReader::rempli_dlt_pc">rempli_dlt_pc</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
-         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:rempli_dlt_blocs" title="Int_t KVINDRARunSheetReader::rempli_dlt_blocs">rempli_dlt_blocs</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 3);
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:rempli_dlt_pc" title="Double_t KVINDRARunSheetReader::rempli_dlt_pc">rempli_dlt_pc</a> = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 0);
+         <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:rempli_dlt_blocs" title="Int_t KVINDRARunSheetReader::rempli_dlt_blocs">rempli_dlt_blocs</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(dumstr, <span class="string">" "</span>, 3);
       }
  
       <span class="comment">//read next line</span>
@@ -228,9 +228,9 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
       <span class="keyword">while</span> (read_file.good() &amp;&amp; !line.Contains(<span class="string">":"</span>))  line.ReadLine(read_file);
       <span class="comment">//now read all scalers</span>
       <span class="keyword">while</span> (read_file.good() &amp;&amp; line.Contains(<span class="string">":"</span>)){
-         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(line,<span class="string">":"</span>,0); dumstr.Remove(TString::kBoth, <span class="string">' '</span>);
-         <a href="../ListOfTypes.html#Int_t">Int_t</a> scaler = (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(line);
-         <span class="comment">//cout &lt;&lt; <span class="string">"SCALER: \""</span> &lt;&lt; dumstr.Data() &lt;&lt; <span class="string">"\" = "</span> &lt;&lt; scaler &lt;&lt; endl;</span>
+         dumstr = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(line,<span class="string">":"</span>,0); dumstr.Remove(TString::kBoth, <span class="string">' '</span>);
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> scaler = (<a href="../ListOfTypes.html#Int_t">Int_t</a>)<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(line);
+         <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"SCALER: \""</span> &lt;&lt; dumstr.Data() &lt;&lt; <span class="string">"\" = "</span> &lt;&lt; scaler &lt;&lt; endl;</span>
          indra_db_run-&gt;SetScaler( dumstr.Data(), scaler );
          line.ReadLine(read_file);
          <span class="keyword">if</span>(<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fMakeTree" title="Bool_t KVINDRARunSheetReader::fMakeTree">fMakeTree</a>){
@@ -240,13 +240,13 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
             <span class="keyword">if</span>(!br_sca){
                index = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTree" title="TTree* KVINDRARunSheetReader::fTree">fTree</a>-&gt;GetListOfBranches()-&gt;GetEntries();
                br_sca = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTree" title="TTree* KVINDRARunSheetReader::fTree">fTree</a>-&gt;Branch( dumstr.Data(), &amp;<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fScalers" title="Int_t KVINDRARunSheetReader::fScalers">fScalers</a>[index], Form(<span class="string">"%s/I"</span>, dumstr.Data()));
-               <span class="comment">//cout &lt;&lt; <span class="string">"br_sca = fTree-&gt;Branch( \""</span> &lt;&lt;dumstr.Data()&lt;&lt;<span class="string">"\", &amp;fScalers["</span>&lt;&lt;index&lt;&lt;<span class="string">"], "</span>&lt;&lt;Form(<span class="string">"%s/I"</span>, dumstr.Data())&lt;&lt;<span class="string">");"</span>&lt;&lt;endl;</span>
+               <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"br_sca = fTree-&gt;Branch( \""</span> &lt;&lt;dumstr.Data()&lt;&lt;<span class="string">"\", &amp;fScalers["</span>&lt;&lt;index&lt;&lt;<span class="string">"], "</span>&lt;&lt;Form(<span class="string">"%s/I"</span>, dumstr.Data())&lt;&lt;<span class="string">");"</span>&lt;&lt;endl;</span>
             } <span class="keyword">else</span> {
                index = <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fTree" title="TTree* KVINDRARunSheetReader::fTree">fTree</a>-&gt;GetListOfBranches()-&gt;IndexOf(br_sca);
             }
             <span class="comment">//fill tableau with value</span>
             <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fScalers" title="Int_t KVINDRARunSheetReader::fScalers">fScalers</a>[index] = scaler;
-            <span class="comment">//cout &lt;&lt; <span class="string">"fScalers["</span>&lt;&lt;index&lt;&lt;<span class="string">"] = "</span>&lt;&lt;scaler&lt;&lt;<span class="string">";"</span>&lt;&lt;endl;</span>
+            <span class="comment">//<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"fScalers["</span>&lt;&lt;index&lt;&lt;<span class="string">"] = "</span>&lt;&lt;scaler&lt;&lt;<span class="string">";"</span>&lt;&lt;endl;</span>
          }
       }
    }   
@@ -272,7 +272,7 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
 
 <span class="comment">//_______________________________________________________________________________________________//</span>
 
-<a name="e42Cl"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetNumberField</a>(TString &amp; line,
+<a name="e42Cl"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetNumberField" title="Double_t KVINDRARunSheetReader::GetNumberField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetNumberField</a>(TString &amp; line,
                                                <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * delim,
                                                <span class="keyword">int</span> index)
 {
@@ -286,7 +286,7 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
 
 <span class="comment">//_______________________________________________________________________________________________//</span>
 
-<a name="i6K7rE"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a>(TString &amp; line,
+<a name="i6K7rE"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a>(TString &amp; line,
                                                     <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * delim,
                                                     <span class="keyword">int</span> index)
 {
@@ -300,10 +300,10 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
 
 <span class="comment">//_______________________________________________________________________________________________//</span>
 
-<a name="dTUtBB"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetDateField" title="const Char_t* KVINDRARunSheetReader::GetDateField(TString&amp;, const Char_t* delim = &quot;:&quot;)">GetDateField</a>(TString &amp; line,
+<a name="dTUtBB"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetDateField" title="const Char_t* KVINDRARunSheetReader::GetDateField(TString&amp; ,const Char_t* delim=&quot;:&quot;)">GetDateField</a>(TString &amp; line,
                                                   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * delim)
 {
-   <span class="comment">//Special case of <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp;, const Char_t* delim = &quot;:&quot;, int index = 1)">GetStringField</a> for date-strings with <span class="string">':'</span> used in between hours, minutes, seconds.</span>
+   <span class="comment">//Special case of <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:GetStringField" title="const Char_t* KVINDRARunSheetReader::GetStringField(TString&amp; ,const Char_t* delim=&quot;:&quot;,int index=1)">GetStringField</a> for date-strings with <span class="string">':'</span> used in between hours, minutes, seconds.</span>
    <span class="comment">//If <span class="string">':'</span> is also the delimiter of the string, we need to stick the time back together.</span>
    TObjArray *toks = line.Tokenize(delim);
 
@@ -323,7 +323,7 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
 
 <span class="comment">//_______________________________________________________________________________________________//</span>
 
-<a name="HkQ2SE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first = 1, Int_t last = 9999)">ReadAllRunSheets</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> first, <a href="../ListOfTypes.html#Int_t">Int_t</a> last)
+<a name="HkQ2SE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>::<a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:ReadAllRunSheets" title="Int_t KVINDRARunSheetReader::ReadAllRunSheets(Int_t first=1,Int_t last=9999)">ReadAllRunSheets</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> first, <a href="../ListOfTypes.html#Int_t">Int_t</a> last)
 {
    <span class="comment">//Read all run sheets in the directory <a href="../KVINDRARunSheetReader.html#KVINDRARunSheetReader:fRunSheetDir" title="TString KVINDRARunSheetReader::fRunSheetDir">fRunSheetDir</a> from run number 'first' to 'last'</span>
    <span class="comment">//(default values are 1 and 9999).</span>
@@ -353,8 +353,8 @@ ClassImp(<a href="../KVINDRARunSheetReader.html">KVINDRARunSheetReader</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

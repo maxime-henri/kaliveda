@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:55 2015            -->
+<!--   Date: Thu Oct  1 17:52:10 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVMemoryPool - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Fri Oct  1 16:50:02 2010</span>
 <span class="comment">//Author: John Frankland,,,,</span>
@@ -35,7 +35,7 @@ ClassImp(<a href="../KVMemoryPool.html">KVMemoryPool</a>)
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="MMWPvB"></a><a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:KVMemoryPool" title="KVMemoryPool KVMemoryPool::KVMemoryPool(int nchunks, size_t bytes) or overloads">KVMemoryPool</a>(<span class="keyword">int</span> nchunks, <a href="../ListOfTypes.html#size_t">size_t</a> bytes)
+<a name="MMWPvB"></a><a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:KVMemoryPool" title="KVMemoryPool KVMemoryPool::KVMemoryPool(int nchunks,size_t bytes) or overloads">KVMemoryPool</a>(<span class="keyword">int</span> nchunks, <a href="../ListOfTypes.html#size_t">size_t</a> bytes)
 {
    <span class="comment">// Create nchunks chunks each of size 'bytes'</span>
    <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = 0;
@@ -52,13 +52,13 @@ ClassImp(<a href="../KVMemoryPool.html">KVMemoryPool</a>)
 <a name="cTbH0"></a><span class="keyword">void</span> *<a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:GetMemory" title="void* KVMemoryPool::GetMemory(size_t bytes)">GetMemory</a>(<a href="../ListOfTypes.html#size_t">size_t</a> bytes)
 {
     <span class="comment">// return pointer to memory of size 'bytes'</span>
-    <span class="keyword">void</span>* p=<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t)">GetMemory</a>(bytes);
+    <span class="keyword">void</span>* p=<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
     <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
     <span class="keyword">if</span>( !p ){
     	<span class="comment">// search for first available chunk which can provide memory</span>
         <span class="keyword">do</span> {
-            <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:Next" title="KVMemoryChunk* KVMemoryChunk::Next() const">Next</a>();
-            <span class="keyword">if</span>(<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>) p = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t)">GetMemory</a>(bytes);
+            <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:Next" title="KVMemoryChunk* KVMemoryChunk::Next()">Next</a>();
+            <span class="keyword">if</span>(<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>) p = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
         } <span class="keyword">while</span> (!p &amp;&amp; <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>);
     }
     <span class="keyword">if</span>( !p ){
@@ -71,7 +71,7 @@ ClassImp(<a href="../KVMemoryPool.html">KVMemoryPool</a>)
     	<a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:SetNext" title="void KVMemoryChunk::SetNext(KVMemoryChunk* n)">SetNext</a>(chunk);
     	<a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>=chunk;
     	<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = chunk;
-    	p=<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t)">GetMemory</a>(bytes);
+    	p=<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
     }
     <span class="keyword">return</span> p;
 }
@@ -104,8 +104,8 @@ ClassImp(<a href="../KVMemoryPool.html">KVMemoryPool</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:46 2015            -->
+<!--   Date: Thu Oct  1 17:52:03 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVInputDialog - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVInputDialog.html">KVInputDialog</a>.cpp,v 1.6 2007/12/12 11:17:54 franklan Exp $
@@ -45,7 +45,7 @@ ClassImp(<a href="../KVInputDialog.html">KVInputDialog</a>)
 <span class="comment">//      We use a <a href="../KVTextEntry.html">KVTextEntry</a>, so the string can take any length.</span>
 <span class="comment">//</span>
 <span class="comment">/////////////////////////////////////////////////////////////</span>
-<a name="pUFL4E"></a>    <a href="../KVInputDialog.html">KVInputDialog</a>::<a href="../KVInputDialog.html#KVInputDialog:KVInputDialog" title="KVInputDialog KVInputDialog::KVInputDialog(const TGWindow* main, const Char_t* question, TString* answer, Bool_t* ok, const Char_t* tooltip = &quot;&quot;) or overloads">KVInputDialog</a>(<span class="keyword">const</span> TGWindow * main,
+<a name="pUFL4E"></a>    <a href="../KVInputDialog.html">KVInputDialog</a>::<a href="../KVInputDialog.html#KVInputDialog:KVInputDialog" title="KVInputDialog KVInputDialog::KVInputDialog(const TGWindow* main,const Char_t* question,TString* answer,Bool_t* ok,const Char_t* tooltip=&quot;&quot;)">KVInputDialog</a>(<span class="keyword">const</span> TGWindow * main,
                                  <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * question, TString * answer,
                                  <a href="../ListOfTypes.html#Bool_t">Bool_t</a> * ok, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * tooltip)
 {
@@ -55,7 +55,7 @@ ClassImp(<a href="../KVInputDialog.html">KVInputDialog</a>)
    <span class="comment">//Optional argument 'tooltip' will be displayed when mouse held over text entry widget</span>
 
    <a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a> = <span class="keyword">new</span> TGTransientFrame(gClient-&gt;GetRoot(), main, 600, 150);
-   <a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"CloseWindow()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
+   <a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"CloseWindow()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
    <a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>-&gt;DontCallClose();      <span class="comment">// to avoid <a href="../ListOfTypes.html#double">double</a> deletions.</span>
    <span class="comment">// use hierarchical cleaning</span>
    <a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>-&gt;SetCleanup(kDeepCleanup);
@@ -68,9 +68,9 @@ ClassImp(<a href="../KVInputDialog.html">KVInputDialog</a>)
    TGLabel *l = <span class="keyword">new</span> TGLabel(<a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>, question);
    <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a> = <span class="keyword">new</span> <a href="../KVTextEntry.html">KVTextEntry</a>(<a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>, answer-&gt;Data());
    <span class="keyword">if</span> (strcmp(tooltip, <span class="string">""</span>))
-      <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="http://root.cern.ch/root/html/TGTextEntry.html#TGTextEntry:SetToolTipText" title="void TGTextEntry::SetToolTipText(const char* text, Long_t delayms = 500)">SetToolTipText</a>(tooltip);
+      <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="../#TGTextEntry:SetToolTipText" title="void TGTextEntry::SetToolTipText(const char* text,Long_t delayms=500)">SetToolTipText</a>(tooltip);
 
-   <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="http://root.cern.ch/root/html/TGFrame.html#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w = 0, UInt_t h = 0) or overloads">Resize</a>(l-&gt;GetDefaultWidth(), <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="http://root.cern.ch/root/html/TGFrame.html#TGFrame:GetDefaultHeight" title="UInt_t TGFrame::GetDefaultHeight() const">GetDefaultHeight</a>());
+   <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="../#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w=0,UInt_t h=0) or overloads">Resize</a>(l-&gt;GetDefaultWidth(), <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="../#TGFrame:GetDefaultHeight" title="UInt_t TGFrame::GetDefaultHeight()">GetDefaultHeight</a>());
    <a href="../KVInputDialog.html#KVInputDialog:fMain" title="TGTransientFrame* KVInputDialog::fMain">fMain</a>-&gt;AddFrame(l,
                    <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsCenterX, 5, 5, 5,
                                      0));
@@ -95,15 +95,15 @@ ClassImp(<a href="../KVInputDialog.html">KVInputDialog</a>)
    height = <a href="../KVInputDialog.html#KVInputDialog:fOKBut" title="TGTextButton* KVInputDialog::fOKBut">fOKBut</a>-&gt;GetDefaultHeight();
    width = TMath::Max(width, <a href="../KVInputDialog.html#KVInputDialog:fOKBut" title="TGTextButton* KVInputDialog::fOKBut">fOKBut</a>-&gt;GetDefaultWidth());
    ++nb;
-   <a href="../KVInputDialog.html#KVInputDialog:fOKBut" title="TGTextButton* KVInputDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"ReadAnswer()"</span>);
-   <a href="../KVInputDialog.html#KVInputDialog:fOKBut" title="TGTextButton* KVInputDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
+   <a href="../KVInputDialog.html#KVInputDialog:fOKBut" title="TGTextButton* KVInputDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"ReadAnswer()"</span>);
+   <a href="../KVInputDialog.html#KVInputDialog:fOKBut" title="TGTextButton* KVInputDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
 
    <a href="../KVInputDialog.html#KVInputDialog:fCancelBut" title="TGTextButton* KVInputDialog::fCancelBut">fCancelBut</a> = <span class="keyword">new</span> TGTextButton(hf, <span class="string">"&amp;Cancel"</span>, 3);
    hf-&gt;AddFrame(<a href="../KVInputDialog.html#KVInputDialog:fCancelBut" title="TGTextButton* KVInputDialog::fCancelBut">fCancelBut</a>, l1);
    height = <a href="../KVInputDialog.html#KVInputDialog:fCancelBut" title="TGTextButton* KVInputDialog::fCancelBut">fCancelBut</a>-&gt;GetDefaultHeight();
    width = TMath::Max(width, <a href="../KVInputDialog.html#KVInputDialog:fCancelBut" title="TGTextButton* KVInputDialog::fCancelBut">fCancelBut</a>-&gt;GetDefaultWidth());
    ++nb;
-   <a href="../KVInputDialog.html#KVInputDialog:fCancelBut" title="TGTextButton* KVInputDialog::fCancelBut">fCancelBut</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
+   <a href="../KVInputDialog.html#KVInputDialog:fCancelBut" title="TGTextButton* KVInputDialog::fCancelBut">fCancelBut</a>-&gt;<a href="../KVInputDialog.html#KVInputDialog:Connect" title="Bool_t KVInputDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVInputDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
 
    <span class="comment">// place buttons at the bottom</span>
    l1 = <span class="keyword">new</span> TGLayoutHints(kLHintsBottom | kLHintsCenterX, 0, 0, 5, 5);
@@ -169,7 +169,7 @@ ClassImp(<a href="../KVInputDialog.html">KVInputDialog</a>)
 {
    <span class="comment">//Read text from text entry widget and store in <span class="string">"answer"</span> TString.</span>
    <span class="comment">//Set <span class="string">"ok"</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> flag to <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
-   *<a href="../KVInputDialog.html#KVInputDialog:fAnswer" title="TString* KVInputDialog::fAnswer">fAnswer</a> = <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="http://root.cern.ch/root/html/TGTextEntry.html#TGTextEntry:GetText" title="const char* TGTextEntry::GetText() const">GetText</a>();
+   *<a href="../KVInputDialog.html#KVInputDialog:fAnswer" title="TString* KVInputDialog::fAnswer">fAnswer</a> = <a href="../KVInputDialog.html#KVInputDialog:fTextEntry" title="KVTextEntry* KVInputDialog::fTextEntry">fTextEntry</a>-><a href="../#TGTextEntry:GetText" title="const char* TGTextEntry::GetText()">GetText</a>();
    *<a href="../KVInputDialog.html#KVInputDialog:fOK" title="Bool_t* KVInputDialog::fOK">fOK</a> = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
 </pre>
@@ -180,8 +180,8 @@ ClassImp(<a href="../KVInputDialog.html">KVInputDialog</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

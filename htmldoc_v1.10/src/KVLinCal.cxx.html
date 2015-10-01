@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:52 2015            -->
+<!--   Date: Thu Oct  1 17:52:07 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVLinCal - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVLinCal.html">KVLinCal</a>.cpp,v 1.3 2007/03/05 14:09:03 franklan Exp $
@@ -59,7 +59,7 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
 <span class="comment">//</span>
 <span class="comment">//By default, no pedestal correction is performed.</span>
 
-<a name="phcmJD"></a><a href="../KVLinCal.html">KVLinCal</a>::<a href="../KVLinCal.html#KVLinCal:KVLinCal" title="KVLinCal KVLinCal::KVLinCal() or overloads">KVLinCal</a>():<a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(2)
+<a name="phcmJD"></a><a href="../KVLinCal.html">KVLinCal</a>::<a href="../KVLinCal.html#KVLinCal:KVLinCal" title="KVLinCal KVLinCal::KVLinCal() or overloads">KVLinCal</a>():KVCalibrator(2)
 {
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"Linear calibration"</span>);
    <a href="../KVLinCal.html#KVLinCal:fPedCorr" title="Bool_t KVLinCal::fPedCorr">fPedCorr</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
@@ -67,7 +67,7 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="brzC9"></a><a href="../KVLinCal.html">KVLinCal</a>::<a href="../KVLinCal.html#KVLinCal:KVLinCal" title="KVLinCal KVLinCal::KVLinCal() or overloads">KVLinCal</a>(<a href="../KVDetector.html">KVDetector</a> * kvd):<a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(2)
+<a name="brzC9"></a><a href="../KVLinCal.html">KVLinCal</a>::<a href="../KVLinCal.html#KVLinCal:KVLinCal" title="KVLinCal KVLinCal::KVLinCal() or overloads">KVLinCal</a>(<a href="../KVDetector.html">KVDetector</a> * kvd):KVCalibrator(2)
 {
    <span class="comment">//Create a calibration object for a specific detector (*kvd)</span>
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"Linear calibration"</span>);
@@ -87,11 +87,11 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="lKsiLC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVLinCal.html">KVLinCal</a>::<a href="../KVLinCal.html#KVLinCal:Compute" title="Double_t KVLinCal::Compute(Double_t) const">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan) <span class="keyword">const</span>
+<a name="lKsiLC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVLinCal.html">KVLinCal</a>::<a href="../KVLinCal.html#KVLinCal:Compute" title="Double_t KVLinCal::Compute(Double_t )">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> chan) <span class="keyword">const</span>
 {
    <span class="comment">//Calculate the calibrated energy.</span>
    <span class="comment">//if chan&lt;0 channel number is taken directly from the chosen acquisition parameter of the associated detector</span>
-   <span class="comment">//   -  returns -99 if the parameter has not fired (<a href="../KVACQParam.html">KVACQParam</a>::<a href="../KVACQParam.html#KVACQParam:Fired" title="Bool_t KVACQParam::Fired(Option_t* what = &quot;&quot;) const">Fired</a>==<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)</span>
+   <span class="comment">//   -  returns -99 if the parameter has not fired (<a href="../KVACQParam.html">KVACQParam</a>::<a href="../KVACQParam.html#KVACQParam:Fired" title="Bool_t KVACQParam::Fired(Option_t* what=&quot;&quot;)">Fired</a>==<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)</span>
    <span class="comment">//if chan&gt;=0 we use value of chan</span>
    <span class="comment">//</span>
    <span class="comment">//Returns -99 if calibrator is not ready (parameters not set)</span>
@@ -99,14 +99,14 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
    <span class="keyword">if</span> (fReady) {
       <a href="../ListOfTypes.html#Double_t">Double_t</a> chan_corr;
       <span class="keyword">if</span>( chan &lt; 0 ) {
-         <span class="keyword">if</span>(!<a href="../KVLinCal.html#KVLinCal:GetParam" title="KVACQParam* KVLinCal::GetParam() const">GetParam</a>()-><a href="../KVACQParam.html#KVACQParam:Fired" title="Bool_t KVACQParam::Fired(Option_t* what = &quot;&quot;) const">Fired</a>()) <span class="keyword">return</span> -99.;
-         chan_corr = <a href="../KVLinCal.html#KVLinCal:GetParam" title="KVACQParam* KVLinCal::GetParam() const">GetParam</a>()-><a href="../KVACQParam.html#KVACQParam:GetData" title="Float_t KVACQParam::GetData() const">GetData</a>();
+         <span class="keyword">if</span>(!<a href="../KVLinCal.html#KVLinCal:GetParam" title="KVACQParam* KVLinCal::GetParam()">GetParam</a>()-><a href="../KVACQParam.html#KVACQParam:Fired" title="Bool_t KVACQParam::Fired(Option_t* what=&quot;&quot;)">Fired</a>()) <span class="keyword">return</span> -99.;
+         chan_corr = <a href="../KVLinCal.html#KVLinCal:GetParam" title="KVACQParam* KVLinCal::GetParam()">GetParam</a>()-><a href="../KVACQParam.html#KVACQParam:GetData" title="Float_t KVACQParam::GetData()">GetData</a>();
       }
       <span class="keyword">else</span> chan_corr = chan;
       
-      <span class="keyword">if</span>(<a href="../KVLinCal.html#KVLinCal:fPedCorr" title="Bool_t KVLinCal::fPedCorr">fPedCorr</a>) chan_corr -= <a href="../KVLinCal.html#KVLinCal:GetParam" title="KVACQParam* KVLinCal::GetParam() const">GetParam</a>()-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal() const">GetPedestal</a>();
+      <span class="keyword">if</span>(<a href="../KVLinCal.html#KVLinCal:fPedCorr" title="Bool_t KVLinCal::fPedCorr">fPedCorr</a>) chan_corr -= <a href="../KVLinCal.html#KVLinCal:GetParam" title="KVACQParam* KVLinCal::GetParam()">GetParam</a>()-><a href="../KVACQParam.html#KVACQParam:GetPedestal" title="Float_t KVACQParam::GetPedestal()">GetPedestal</a>();
 
-      <span class="keyword">return</span> (<a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0) + <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(1) * chan_corr);
+      <span class="keyword">return</span> (<a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0) + <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(1) * chan_corr);
    }
    <span class="keyword">return</span> -99.;
 }
@@ -122,8 +122,8 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
    <span class="comment">//</span>
    <span class="comment">//equivalently to:</span>
    <span class="comment">//</span>
-   <span class="comment">//        <a href="../ListOfTypes.html#Float_t">Float_t</a> calibrated_volts = calibrator.<a href="../KVLinCal.html#KVLinCal:Compute" title="Double_t KVLinCal::Compute(Double_t) const">Compute</a>(channel);</span>
-   <span class="keyword">return</span> <a href="../KVLinCal.html#KVLinCal:Compute" title="Double_t KVLinCal::Compute(Double_t) const">Compute</a>(chan);
+   <span class="comment">//        <a href="../ListOfTypes.html#Float_t">Float_t</a> calibrated_volts = calibrator.<a href="../KVLinCal.html#KVLinCal:Compute" title="Double_t KVLinCal::Compute(Double_t )">Compute</a>(channel);</span>
+   <span class="keyword">return</span> <a href="../KVLinCal.html#KVLinCal:Compute" title="Double_t KVLinCal::Compute(Double_t )">Compute</a>(chan);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
@@ -133,16 +133,16 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
    <span class="comment">//calculate the corresponding channel number according to the</span>
    <span class="comment">//calibration parameters (useful for filtering simulations).</span>
 
-   <a href="../KVDetector.html">KVDetector</a> *det = <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>();
+   <a href="../KVDetector.html">KVDetector</a> *det = <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>();
    <a href="../ListOfTypes.html#Int_t">Int_t</a> channel = 0;
 
    <span class="keyword">if</span> (fReady) {
       <span class="comment">// linear transfer function</span>
       <span class="keyword">if</span>(<a href="../KVLinCal.html#KVLinCal:fPedCorr" title="Bool_t KVLinCal::fPedCorr">fPedCorr</a>){
-         channel = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) (0.5 + (energy - <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0)) / <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(1)
+         channel = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) (0.5 + (energy - <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0)) / <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(1)
                          + det-&gt;GetPedestal(<span class="string">"GG"</span>));
       }<span class="keyword">else</span> {
-         channel = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) (0.5 + (energy - <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0)) / <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(1));
+         channel = (<a href="../ListOfTypes.html#Int_t">Int_t</a>) (0.5 + (energy - <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0)) / <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(1));
       }
    }
    <span class="keyword">return</span> (<a href="../ListOfTypes.html#Double_t">Double_t</a>) channel;
@@ -155,8 +155,8 @@ ClassImp(<a href="../KVLinCal.html">KVLinCal</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

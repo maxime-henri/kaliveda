@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:31 2015            -->
+<!--   Date: Thu Oct  1 17:51:52 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVINDRADB_e416a - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>.cpp,v 1.2 2007/02/14 14:12:31 franklan Exp $
@@ -69,7 +69,7 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
 
 <a name="VVL8NB"></a><span class="keyword">void</span> <a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>::<a href="../KVINDRADB_e416a.html#KVINDRADB_e416a:ReadBICPressures" title="void KVINDRADB_e416a::ReadBICPressures()">ReadBICPressures</a>()
 {
-   <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> BIC pressures for different run ranges and enter into database.</span>
+   <span class="comment">//<a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> BIC pressures for different run ranges and enter into database.</span>
    <span class="comment">//Format of file is:</span>
    <span class="comment">//</span>
    <span class="comment">//# some comments</span>
@@ -82,12 +82,12 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
    <span class="comment">//Pressures (of CF4) are given in Torr.</span>
 
    <a href="../ListOfTypes.html#ifstream">ifstream</a> fin;
-   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type, ifstream&amp; fs) const">OpenCalibFile</a>(<span class="string">"BICPressures"</span>, fin)) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadBICPressures()"</span>, <span class="string">"Could not open file %s"</span>,
-            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type) const">GetCalibFileName</a>(<span class="string">"BICPressures"</span>));
+   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type,ifstream&amp; fs)">OpenCalibFile</a>(<span class="string">"BICPressures"</span>, fin)) {
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadBICPressures()"</span>, <span class="string">"Could not open file %s"</span>,
+            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"BICPressures"</span>));
       <span class="keyword">return</span>;
    }
-   <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadBICPressures()"</span>, <span class="string">"Reading BIC pressures parameters..."</span>);
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadBICPressures()"</span>, <span class="string">"Reading BIC pressures parameters..."</span>);
 
    TString sline;
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> frun = 0, lrun = 0;
@@ -111,10 +111,10 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
             <span class="comment">//have we just finished reading some pressures ?</span>
             <span class="keyword">if</span> (read_pressure){
                parset = <span class="keyword">new</span> <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a>(pressure);
-               <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table) const">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
-               par_list-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);               
-               <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list, UInt_t rr_number, UInt_t[][2] run_ranges)">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
-               par_list-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Clear" title="void TFolder::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+               <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
+               par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);               
+               <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list,UInt_t rr_number,UInt_t run_ranges[][2])">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
+               par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
                <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> zz=0;zz&lt;3;zz++) pressure[zz]=0.;
                read_pressure=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
             }
@@ -122,7 +122,7 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
             
          }
          <span class="keyword">if</span> (sscanf(sline.Data(), <span class="string">"Run Range : %u %u"</span>, &amp;frun, &amp;lrun) != 2) {
-            <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"ReadBICPressures()"</span>,
+            <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadBICPressures()"</span>,
                     <span class="string">"Bad format in line :\n%s\nUnable to read run range values"</span>,
                     sline.Data());
          } <span class="keyword">else</span> {
@@ -131,7 +131,7 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
             run_ranges[rr_number][1] = lrun;
             rr_number++;
             <span class="keyword">if</span> (rr_number == MAX_NUM_RUN_RANGES) {
-               <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadBICPressures"</span>, <span class="string">"Too many run ranges (&gt;%d)"</span>,
+               <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadBICPressures"</span>, <span class="string">"Too many run ranges (&gt;%d)"</span>,
                      rr_number);
                rr_number--;
             }
@@ -141,10 +141,10 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
             <span class="comment">//have we just finished reading some pressures ?</span>
             <span class="keyword">if</span> (read_pressure){
                parset = <span class="keyword">new</span> <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a>(pressure);
-               <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table) const">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
-               par_list-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);               
-               <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list, UInt_t rr_number, UInt_t[][2] run_ranges)">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
-               par_list-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Clear" title="void TFolder::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+               <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
+               par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);               
+               <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list,UInt_t rr_number,UInt_t run_ranges[][2])">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
+               par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
                <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> zz=0;zz&lt;3;zz++) pressure[zz]=0.;
                read_pressure=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
             }
@@ -180,8 +180,8 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:41:58 2015            -->
+<!--   Date: Thu Oct  1 17:50:41 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>GTDataParameters - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">// $Id: <a href="../GTDataParameters.html">GTDataParameters</a>.cpp,v 1.6 2007/06/08 15:49:10 franklan Exp $</span>
 <span class="comment">// Author: $Author: franklan $</span>
@@ -83,7 +83,7 @@ ClassImp(<a href="../GTDataParameters.html">GTDataParameters</a>);
 
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="xKZdFD"></a><span class="keyword">char</span> * <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest, char* Source) const">CopyParam</a> (<span class="keyword">char</span> *Dest, <span class="keyword">char</span> *Source) <span class="keyword">const</span>
+<a name="xKZdFD"></a><span class="keyword">char</span> * <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest,char* Source)">CopyParam</a> (<span class="keyword">char</span> *Dest, <span class="keyword">char</span> *Source) <span class="keyword">const</span>
 {
   <span class="comment">// Small utility routine to copy a <a href="../ListOfTypes.html#char">char</a> string.</span>
   <span class="keyword">char</span> c;
@@ -116,10 +116,10 @@ ClassImp(<a href="../GTDataParameters.html">GTDataParameters</a>);
   <span class="keyword">while</span> ( strncmp(CurrPointer, <span class="string">"    "</span>,4) != 0 &amp;&amp;  
 	  strncmp(CurrPointer, <span class="string">"!!!!"</span>,4) != 0   )
   {
-    CurrPointer = <a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest, char* Source) const">CopyParam</a>(NomParam, CurrPointer);
-    CurrPointer = <a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest, char* Source) const">CopyParam</a>( chaine, CurrPointer);
+    CurrPointer = <a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest,char* Source)">CopyParam</a>(NomParam, CurrPointer);
+    CurrPointer = <a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest,char* Source)">CopyParam</a>( chaine, CurrPointer);
     sscanf( chaine,<span class="string">"%d"</span>,&amp;NumPar);
-    CurrPointer = <a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest, char* Source) const">CopyParam</a>( chaine, CurrPointer);
+    CurrPointer = <a href="../GTDataParameters.html#GTDataParameters:CopyParam" title="char* GTDataParameters::CopyParam(char* Dest,char* Source)">CopyParam</a>( chaine, CurrPointer);
     sscanf( chaine,<span class="string">"%d"</span>,&amp;NbBits);
     GTDataPar *par=<span class="keyword">new</span> GTDataPar(NomParam,NumPar,NbBits);
     <a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>-&gt;Add(par);
@@ -129,32 +129,32 @@ ClassImp(<a href="../GTDataParameters.html">GTDataParameters</a>);
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="QbJdhE"></a><span class="keyword">int</span> <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetIndex" title="int GTDataParameters::GetIndex(const TString parName) const">GetIndex</a> (<span class="keyword">const</span> TString parName) <span class="keyword">const</span>
+<a name="QbJdhE"></a><span class="keyword">int</span> <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetIndex" title="int GTDataParameters::GetIndex(const TString parName)">GetIndex</a> (<span class="keyword">const</span> TString parName) <span class="keyword">const</span>
 {
   <span class="comment">// Return the index number corresponding to a text label.</span>
-  GTDataPar *par=(GTDataPar*)<a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) const or overloads">FindObject</a>(parName);
+  GTDataPar *par=(GTDataPar*)<a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>-&gt;<a href="../#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(parName);
   <span class="keyword">if</span> (!par)
   {
-    cout &lt;&lt; <span class="string">"Parameter "</span>&lt;&lt;parName&lt;&lt;<span class="string">" not found!"</span>&lt;&lt;endl;
+    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Parameter "</span>&lt;&lt;parName&lt;&lt;<span class="string">" not found!"</span>&lt;&lt;endl;
     <span class="keyword">return</span>(-1);
   }
   <span class="keyword">return</span>(par-&gt;Index());
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="mbn9ID"></a><span class="keyword">const</span> <span class="keyword">char</span>* <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index) const">GetParName</a> (<span class="keyword">const</span> <span class="keyword">int</span> index) <span class="keyword">const</span>
+<a name="mbn9ID"></a><span class="keyword">const</span> <span class="keyword">char</span>* <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetParName" title="const char* GTDataParameters::GetParName(const int index)">GetParName</a> (<span class="keyword">const</span> <span class="keyword">int</span> index) <span class="keyword">const</span>
 {
    <span class="comment">// Return the text label name corresponding to a parameter number</span>
    TIter next(<a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>);
    GTDataPar *par;
    <span class="keyword">while</span>( (par = (GTDataPar*)next()) ){
-      <span class="keyword">if</span>( par-&gt;Index() == index ) <span class="keyword">return</span> par-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:GetName" title="const char* TObject::GetName() const">GetName</a>();
+      <span class="keyword">if</span>( par-&gt;Index() == index ) <span class="keyword">return</span> par-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>();
    }
    <span class="keyword">return</span>(<span class="string">""</span>);
 }
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="lA47HE"></a>GTDataPar* <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetPar" title="GTDataPar* GTDataParameters::GetPar(const int index) const or overloads">GetPar</a>(<span class="keyword">const</span> <span class="keyword">int</span> index) <span class="keyword">const</span>
+<a name="lA47HE"></a>GTDataPar* <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetPar" title="GTDataPar* GTDataParameters::GetPar(const int index) or overloads">GetPar</a>(<span class="keyword">const</span> <span class="keyword">int</span> index) <span class="keyword">const</span>
 {
    <span class="comment">// Return the parameter corresponding to the parameter number</span>
    TIter next(<a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>);
@@ -167,10 +167,10 @@ ClassImp(<a href="../GTDataParameters.html">GTDataParameters</a>);
 
 
 <span class="comment">//______________________________________________________________________________</span>
-<a name="AxJxYE"></a>GTDataPar* <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetPar" title="GTDataPar* GTDataParameters::GetPar(const int index) const or overloads">GetPar</a>(<span class="keyword">const</span> TString parName) <span class="keyword">const</span>
+<a name="AxJxYE"></a>GTDataPar* <a href="../GTDataParameters.html">GTDataParameters</a>::<a href="../GTDataParameters.html#GTDataParameters:GetPar" title="GTDataPar* GTDataParameters::GetPar(const int index) or overloads">GetPar</a>(<span class="keyword">const</span> TString parName) <span class="keyword">const</span>
 {
    <span class="comment">// Return the parameter corresponding to the parameter name</span>
-   <span class="keyword">return</span> (GTDataPar*)<a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) const or overloads">FindObject</a>(parName);
+   <span class="keyword">return</span> (GTDataPar*)<a href="../GTDataParameters.html#GTDataParameters:fList" title="TList* GTDataParameters::fList">fList</a>-&gt;<a href="../#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(parName);
 }
 
 </pre>
@@ -181,8 +181,8 @@ ClassImp(<a href="../GTDataParameters.html">GTDataParameters</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:41 </em><em>&raquo; Last generated: 2015-03-18 13:41</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:50 </em><em>&raquo; Last generated: 2015-10-01 17:50</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

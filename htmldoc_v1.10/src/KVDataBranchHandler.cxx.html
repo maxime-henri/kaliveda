@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:28 2015            -->
+<!--   Date: Thu Oct  1 17:51:03 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVDataBranchHandler - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Fri Dec 11 11:52:02 2009</span>
 <span class="comment">//Author: John Frankland,,,</span>
@@ -35,7 +35,7 @@ ClassImp(<a href="../KVDataBranchHandler.html">KVDataBranchHandler</a>)
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="Ls_Nl"></a><a href="../KVDataBranchHandler.html">KVDataBranchHandler</a>::<a href="../KVDataBranchHandler.html#KVDataBranchHandler:KVDataBranchHandler" title="KVDataBranchHandler KVDataBranchHandler::KVDataBranchHandler(TTree*, TObject*, const Char_t*, const Char_t*, const Char_t* = &quot;&quot;) or overloads">KVDataBranchHandler</a>(TTree* tree, <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* var,
+<a name="Ls_Nl"></a><a href="../KVDataBranchHandler.html">KVDataBranchHandler</a>::<a href="../KVDataBranchHandler.html#KVDataBranchHandler:KVDataBranchHandler" title="KVDataBranchHandler KVDataBranchHandler::KVDataBranchHandler(TTree* ,TObject* ,const Char_t* ,const Char_t* ,const Char_t* =&quot;&quot;) or overloads">KVDataBranchHandler</a>(TTree* tree, <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* var,
    <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* prefix) :
    <a href="../KVBase.html">KVBase</a>()
 {
@@ -44,18 +44,18 @@ ClassImp(<a href="../KVDataBranchHandler.html">KVDataBranchHandler</a>)
    <span class="comment">// (will be prepended as 'p.').</span>
    
    <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fTree" title="TTree* KVDataBranchHandler::fTree">fTree</a> = tree;
-   <a href="../ListOfTypes.html#Long_t">Long_t</a> offset = obj-&gt;<a href="../KVDataBranchHandler.html#KVDataBranchHandler:IsA" title="TClass* KVDataBranchHandler::IsA() const">IsA</a>()-&gt;GetDataMemberOffset(var);
+   <a href="../ListOfTypes.html#Long_t">Long_t</a> offset = obj-&gt;<a href="../KVDataBranchHandler.html#KVDataBranchHandler:IsA" title="TClass* KVDataBranchHandler::IsA()">IsA</a>()-&gt;GetDataMemberOffset(var);
    <span class="keyword">if</span>(!offset) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"KVDataBranchHandler"</span>, <span class="string">"Offset for member %s of %s is 0"</span>, var, obj-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"KVDataBranchHandler"</span>, <span class="string">"Offset for member %s of %s is 0"</span>, var, obj-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
       <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a>=0;
       <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fBranch" title="TBranch* KVDataBranchHandler::fBranch">fBranch</a>=0;
       <span class="keyword">return</span>;
     }
    <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a> = (<span class="keyword">void</span>*)((<a href="../ListOfTypes.html#Long_t">Long_t</a>)obj + offset);
-   <span class="keyword">if</span>(strcmp(prefix,<span class="string">""</span>)) <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"%s.%s.%s"</span>,prefix,obj-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),var) );
-   <span class="keyword">else</span> <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"%s.%s"</span>,obj-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),var) );
-   <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>( Form(<span class="string">"%s/%s"</span>, <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), type) );
-   <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fBranch" title="TBranch* KVDataBranchHandler::fBranch">fBranch</a> = <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fTree" title="TTree* KVDataBranchHandler::fTree">fTree</a>-&gt;<a href="../KVDataBranchHandler.html#KVDataBranchHandler:GetBranch" title="TBranch* KVDataBranchHandler::GetBranch() const">GetBranch</a>( <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>() );
+   <span class="keyword">if</span>(strcmp(prefix,<span class="string">""</span>)) <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"%s.%s.%s"</span>,prefix,obj-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),var) );
+   <span class="keyword">else</span> <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>( Form(<span class="string">"%s.%s"</span>,obj-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),var) );
+   <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>( Form(<span class="string">"%s/%s"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), type) );
+   <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fBranch" title="TBranch* KVDataBranchHandler::fBranch">fBranch</a> = <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fTree" title="TTree* KVDataBranchHandler::fTree">fTree</a>-&gt;<a href="../KVDataBranchHandler.html#KVDataBranchHandler:GetBranch" title="TBranch* KVDataBranchHandler::GetBranch()">GetBranch</a>( <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() );
    <span class="keyword">if</span>(!<a href="../KVDataBranchHandler.html#KVDataBranchHandler:ConnectBranch" title="Bool_t KVDataBranchHandler::ConnectBranch()">ConnectBranch</a>()) <a href="../KVDataBranchHandler.html#KVDataBranchHandler:CreateBranch" title="TBranch* KVDataBranchHandler::CreateBranch()">CreateBranch</a>();
 }
 
@@ -80,8 +80,8 @@ ClassImp(<a href="../KVDataBranchHandler.html">KVDataBranchHandler</a>)
    <span class="comment">// Create new branch in TTree for member variable and return its address.</span>
    
    <span class="keyword">if</span>(!<a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a>) <span class="keyword">return</span> 0;
-   <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"CreateBranch"</span>, <span class="string">"fTree-&gt;Branch(\"%s\", %p, \"%s\")"</span>, <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());</span>
-   <span class="keyword">return</span> (<a href="../KVDataBranchHandler.html#KVDataBranchHandler:fBranch" title="TBranch* KVDataBranchHandler::fBranch">fBranch</a> = <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fTree" title="TTree* KVDataBranchHandler::fTree">fTree</a>-&gt;Branch(<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>()));
+   <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"CreateBranch"</span>, <span class="string">"fTree-&gt;Branch(\"%s\", %p, \"%s\")"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());</span>
+   <span class="keyword">return</span> (<a href="../KVDataBranchHandler.html#KVDataBranchHandler:fBranch" title="TBranch* KVDataBranchHandler::fBranch">fBranch</a> = <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fTree" title="TTree* KVDataBranchHandler::fTree">fTree</a>-&gt;Branch(<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVDataBranchHandler.html#KVDataBranchHandler:fAddr" title="void* KVDataBranchHandler::fAddr">fAddr</a>, <a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>()));
 }
 
 </pre>
@@ -92,8 +92,8 @@ ClassImp(<a href="../KVDataBranchHandler.html">KVDataBranchHandler</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:30 2015            -->
+<!--   Date: Thu Oct  1 17:51:51 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVINDRADB2 - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVINDRADB2.html">KVINDRADB2</a>.cpp,v 1.16 2007/04/26 16:40:58 franklan Exp $
@@ -77,15 +77,15 @@ ClassImp(<a href="../KVINDRADB2.html">KVINDRADB2</a>)
 {
    <span class="comment">//Use <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a> utility subclass to read complete runlist</span>
    TString runlist_fullpath;
-   <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name, TString&amp; fullpath, const Char_t* kvsubdir = &quot;&quot;)">SearchKVFile</a>(<a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type) const">GetCalibFileName</a>(<span class="string">"Runlist"</span>), runlist_fullpath,
+   <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Runlist"</span>), runlist_fullpath,
                         fDataSet);
    <a href="../KVINDRARunListReader.html#KVINDRARunListReader:SetRLCommentChar" title="void KVINDRARunListReader::SetRLCommentChar(Char_t c)">SetRLCommentChar</a>(<span class="string">'#'</span>);
    <a href="../KVINDRARunListReader.html#KVINDRARunListReader:SetRLSeparatorChar" title="void KVINDRARunListReader::SetRLSeparatorChar(Char_t c)">SetRLSeparatorChar</a>('\t');
-   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader() const">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:SetFieldKeys" title="void KVRunListLine::SetFieldKeys(Int_t nkeys, const Char_t* key1)">SetFieldKeys</a>(3, <span class="string">"Tape"</span>, <span class="string">"Run"</span>, <span class="string">"Events"</span>);
-   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader() const">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:SetRunKeys" title="void KVRunListLine::SetRunKeys(Int_t nkeys, const Char_t* key1)">SetRunKeys</a>(2, <span class="string">"Run"</span>, <span class="string">"Events"</span>);
+   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:SetFieldKeys" title="void KVRunListLine::SetFieldKeys(Int_t nkeys,const Char_t* key1)">SetFieldKeys</a>(3, <span class="string">"Tape"</span>, <span class="string">"Run"</span>, <span class="string">"Events"</span>);
+   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:SetRunKeys" title="void KVRunListLine::SetRunKeys(Int_t nkeys,const Char_t* key1)">SetRunKeys</a>(2, <span class="string">"Run"</span>, <span class="string">"Events"</span>);
    kFirstRun = 999999;
    kLastRun = 0;
-   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:ReadRunList" title="void KVINDRARunListReader::ReadRunList(const Char_t* name = &quot;&quot;)">ReadRunList</a>(runlist_fullpath.Data());
+   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:ReadRunList" title="void KVINDRARunListReader::ReadRunList(const Char_t* name=&quot;&quot;)">ReadRunList</a>(runlist_fullpath.Data());
    <a href="../KVINDRADB.html#KVINDRADB:ReadSystemList" title="void KVINDRADB::ReadSystemList()">ReadSystemList</a>();
    <a href="../KVINDRADB.html#KVINDRADB:ReadChIoPressures" title="void KVINDRADB::ReadChIoPressures()">ReadChIoPressures</a>();
 }
@@ -101,15 +101,15 @@ ClassImp(<a href="../KVINDRADB2.html">KVINDRADB2</a>)
    <span class="comment">//      set properties of run and tape objects</span>
    <span class="comment">//kFirstRun &amp; kLastRun are set</span>
 
-   <a href="../KVRunListLine.html">KVRunListLine</a> *csv_line = <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader() const">GetLineReader</a>();
+   <a href="../KVRunListLine.html">KVRunListLine</a> *csv_line = <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>();
 
    <span class="comment">//run number</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> run_n = csv_line-&gt;GetIntField(<span class="string">"Run"</span>);
 
    <span class="keyword">if</span> (!run_n) {
-      cout &lt;&lt; <span class="string">"run_n = 0 ?????????  line number ="</span> &lt;&lt; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRLLineNumber" title="Int_t KVINDRARunListReader::GetRLLineNumber() const">GetRLLineNumber</a>() &lt;&lt;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"run_n = 0 ?????????  line number ="</span> &lt;&lt; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRLLineNumber" title="Int_t KVINDRARunListReader::GetRLLineNumber()">GetRLLineNumber</a>() &lt;&lt;
           endl;
-      <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader() const">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print() const">Print</a>();
+      <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print()">Print</a>();
       <span class="keyword">return</span>;
    }
    kLastRun = TMath::Max(kLastRun, run_n);
@@ -126,7 +126,7 @@ ClassImp(<a href="../KVINDRADB2.html">KVINDRADB2</a>)
    <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"Tape"</span>)) {
       <a href="../ListOfTypes.html#Int_t">Int_t</a> tape_n = csv_line-&gt;GetIntField(<span class="string">"Tape"</span>);
       <span class="comment">//already exists ?</span>
-      tape = <a href="../KVINDRADB.html#KVINDRADB:GetTape" title="KVDBTape* KVINDRADB::GetTape(Int_t tape) const">GetTape</a>(tape_n);
+      tape = <a href="../KVINDRADB.html#KVINDRADB:GetTape" title="KVDBTape* KVINDRADB::GetTape(Int_t tape)">GetTape</a>(tape_n);
       <span class="keyword">if</span> (!tape) {
          tape = <span class="keyword">new</span> <a href="../KVDBTape.html">KVDBTape</a>(tape_n);
          <a href="../KVINDRADB.html#KVINDRADB:AddTape" title="void KVINDRADB::AddTape(KVDBTape* r)">AddTape</a>(tape);
@@ -137,11 +137,11 @@ ClassImp(<a href="../KVINDRADB2.html">KVINDRADB2</a>)
 		WE CREATE A NEW RUN AND ADD
 		IT TO THE DATABASE. WE SET ALL
 		AVAILABLE INFORMATIONS ON
-		RUN FROM THE <a href="../ListOfTypes.html#FILE">FILE</a>. ERROR IF
+		RUN FROM THE FILE. ERROR IF
 		DBASE RUN ALREADY EXISTS =&gt;
 		SAME RUN APPEARS TWICE
 	*********************************************/</span>
-   <a href="../KVINDRADBRun.html">KVINDRADBRun</a> *run = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a> *) <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run) const or overloads">GetRun</a>(run_n);
+   <a href="../KVINDRADBRun.html">KVINDRADBRun</a> *run = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a> *) <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run_n);
    <span class="keyword">if</span> (!run) {
 
       run = <span class="keyword">new</span> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>(run_n);
@@ -154,42 +154,42 @@ ClassImp(<a href="../KVINDRADB2.html">KVINDRADB2</a>)
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"Events"</span>))
          run-&gt;SetEvents(csv_line-&gt;GetIntField(<span class="string">"Events"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No Events field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No Events field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"FAR"</span>))
          run-&gt;SetScaler(<span class="string">"Faraday 1"</span>,csv_line-&gt;GetIntField(<span class="string">"FAR"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No FAR field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No FAR field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"MFI"</span>))
          run-&gt;SetScaler(<span class="string">"MFI"</span>, csv_line-&gt;GetIntField(<span class="string">"MFI"</span>));
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"Blocs"</span>))
          run-&gt;SetScaler(<span class="string">"Buffers"</span>, csv_line-&gt;GetIntField(<span class="string">"Blocs"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No Blocs field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No Blocs field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"G. dir"</span>))
          run-&gt;SetScaler(<span class="string">"Gene DIRECT"</span>, csv_line-&gt;GetIntField(<span class="string">"G. dir"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No G. dir field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No G. dir field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"G. marq"</span>))
          run-&gt;SetScaler(<span class="string">"Gene MARQ"</span>, csv_line-&gt;GetIntField(<span class="string">"G. marq"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No G. marq field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No G. marq field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"G. TM"</span>))
          run-&gt;SetScaler(<span class="string">"Gene TM"</span>, csv_line-&gt;GetIntField(<span class="string">"G. TM"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No G. TM field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No G. TM field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"TM %"</span>))
          run-&gt;SetTMpercent(csv_line-&gt;GetFloatField(<span class="string">"TM %"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No TM %% field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No TM %% field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasField(<span class="string">"Trigger"</span>))
-         run-&gt;SetTrigger(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRunListTrigger" title="Int_t KVINDRARunListReader::GetRunListTrigger(const Char_t* field, const Char_t* fmt)">GetRunListTrigger</a>(<span class="string">"Trigger"</span>, <span class="string">"M&gt;=%d"</span>));
+         run-&gt;SetTrigger(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRunListTrigger" title="Int_t KVINDRARunListReader::GetRunListTrigger(const Char_t* field,const Char_t* fmt)">GetRunListTrigger</a>(<span class="string">"Trigger"</span>, <span class="string">"M&gt;=%d"</span>));
       <span class="keyword">else</span>
-         <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No Trigger field ? run=%d"</span>, run_n);
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"No Trigger field ? run=%d"</span>, run_n);
       <span class="keyword">if</span> (csv_line-&gt;HasFieldValue(<span class="string">"NB"</span>))
          run-&gt;SetComments(csv_line-&gt;GetField(<span class="string">"NB"</span>));
 
    } <span class="keyword">else</span> {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"Run %d already exists"</span>, run_n);
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GoodRunLine"</span>, <span class="string">"Run %d already exists"</span>, run_n);
    }
 }
 </pre>
@@ -200,8 +200,8 @@ ClassImp(<a href="../KVINDRADB2.html">KVINDRADB2</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

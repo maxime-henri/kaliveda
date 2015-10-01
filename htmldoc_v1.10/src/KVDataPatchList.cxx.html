@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:28 2015            -->
+<!--   Date: Thu Oct  1 17:51:03 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVDataPatchList - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Thu Jan 30 11:06:10 2014</span>
 <span class="comment">//Author: John Frankland,,,</span>
@@ -45,19 +45,19 @@ ClassImp(<a href="../KVDataPatchList.html">KVDataPatchList</a>)
 
     <a href="../KVString.html">KVString</a> plugins = <a href="../KVBase.html#KVBase:GetListOfPlugins" title="const Char_t* KVBase::GetListOfPlugins(const Char_t* base)">GetListOfPlugins</a>(<span class="string">"KVDataPatch"</span>);
     <span class="keyword">if</span>(plugins==<span class="string">""</span>){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"FillPatchList"</span>, <span class="string">"No data patch plugins defined"</span>);
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"FillPatchList"</span>, <span class="string">"No data patch plugins defined"</span>);
         <span class="keyword">return</span>;
     }
     plugins.Begin(<span class="string">" "</span>);
     <span class="keyword">while</span>( !plugins.End() ){
         <a href="../KVString.html">KVString</a> plug = plugins.Next(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
-        TPluginHandler* h = <a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base, const Char_t* uri = &quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVDataPatch"</span>, <a href="../KVBase.html#KVBase:GetPluginURI" title="const Char_t* KVBase::GetPluginURI(const Char_t* base, const Char_t* plugin)">GetPluginURI</a>(<span class="string">"KVDataPatch"</span>, plug));
+        TPluginHandler* h = <a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVDataPatch"</span>, <a href="../KVBase.html#KVBase:GetPluginURI" title="const Char_t* KVBase::GetPluginURI(const Char_t* base,const Char_t* plugin)">GetPluginURI</a>(<span class="string">"KVDataPatch"</span>, plug));
         <span class="keyword">if</span>(h){
             <a href="../KVDataPatch.html">KVDataPatch</a>* p = (<a href="../KVDataPatch.html">KVDataPatch</a>*)h-&gt;ExecPlugin(0);
             <a href="../KVDataPatchList.html#KVDataPatchList:fPatchList" title="KVUniqueNameList* KVDataPatchList::fPatchList">fPatchList</a>-><a href="../KVUniqueNameList.html#KVUniqueNameList:Add" title="void KVUniqueNameList::Add(TObject* obj)">Add</a>(p);
         }
         <span class="keyword">else</span>
-            <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"FillPatchList"</span>,<span class="string">"Cannot load plugin data patch %s"</span>, plug.Data());
+            <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"FillPatchList"</span>,<span class="string">"Cannot load plugin data patch %s"</span>, plug.Data());
     }
 }
 
@@ -81,7 +81,7 @@ ClassImp(<a href="../KVDataPatchList.html">KVDataPatchList</a>)
 
 <a name="Kv.j6"></a><a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:KVDataPatchList" title="KVDataPatchList KVDataPatchList::KVDataPatchList() or overloads">KVDataPatchList</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* title) : <a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>(name, title)
 {
-    <span class="comment">// <a href="http://root.cern.ch/root/html/TObject.html#TObject:Write" title="Int_t TObject::Write(const char* name = 0, Int_t option = 0, Int_t bufsize = 0) or overloads">Write</a> your code here</span>
+    <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> your code here</span>
     <a href="../KVDataPatchList.html#KVDataPatchList:init" title="void KVDataPatchList::init()">init</a>();
 }
 
@@ -90,16 +90,16 @@ ClassImp(<a href="../KVDataPatchList.html">KVDataPatchList</a>)
     <span class="comment">// Destructor</span>
 }
 
-<a name="uxnQeB"></a><span class="keyword">void</span> <a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:InitializePatchList" title="void KVDataPatchList::InitializePatchList(TString dataset, TString datatype, Int_t runnumber, TString dataseries, Int_t datareleasenumber, const TList* streamerinfolist)">InitializePatchList</a>(TString dataset, TString datatype, <a href="../ListOfTypes.html#Int_t">Int_t</a> runnumber,
+<a name="uxnQeB"></a><span class="keyword">void</span> <a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:InitializePatchList" title="void KVDataPatchList::InitializePatchList(TString dataset,TString datatype,Int_t runnumber,TString dataseries,Int_t datareleasenumber,const TList* streamerinfolist)">InitializePatchList</a>(TString dataset, TString datatype, <a href="../ListOfTypes.html#Int_t">Int_t</a> runnumber,
                                           TString dataseries, <a href="../ListOfTypes.html#Int_t">Int_t</a> datareleasenumber, <span class="keyword">const</span> TList *streamerinfolist)
 {
     <span class="comment">// Fill lists of active patches for given data</span>
 
-    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"InitializePatchList"</span>,
+    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InitializePatchList"</span>,
          <span class="string">"Initializing patches for |%s|%s|%04d|%s|%02d|"</span>,
          dataset.Data(), datatype.Data(),runnumber,dataseries.Data(), datareleasenumber);
-    <a href="../KVDataPatchList.html#KVDataPatchList:fActiveEventPatches" title="KVUniqueNameList KVDataPatchList::fActiveEventPatches">fActiveEventPatches</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
-    <a href="../KVDataPatchList.html#KVDataPatchList:fActiveParticlePatches" title="KVUniqueNameList KVDataPatchList::fActiveParticlePatches">fActiveParticlePatches</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+    <a href="../KVDataPatchList.html#KVDataPatchList:fActiveEventPatches" title="KVUniqueNameList KVDataPatchList::fActiveEventPatches">fActiveEventPatches</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
+    <a href="../KVDataPatchList.html#KVDataPatchList:fActiveParticlePatches" title="KVUniqueNameList KVDataPatchList::fActiveParticlePatches">fActiveParticlePatches</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
     <a href="../KVDataPatchList.html#KVDataPatchList:fEventPatches" title="Bool_t KVDataPatchList::fEventPatches">fEventPatches</a>=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
     <a href="../KVDataPatchList.html#KVDataPatchList:fParticlePatches" title="Bool_t KVDataPatchList::fParticlePatches">fParticlePatches</a>=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
     TIter nxtP(<a href="../KVDataPatchList.html#KVDataPatchList:fPatchList" title="KVUniqueNameList* KVDataPatchList::fPatchList">fPatchList</a>);
@@ -112,18 +112,18 @@ ClassImp(<a href="../KVDataPatchList.html">KVDataPatchList</a>)
     }
 }
 
-<a name="Xn62GB"></a><span class="keyword">void</span> <a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent*)">Apply</a>(<a href="../KVEvent.html">KVEvent</a> *event)
+<a name="Xn62GB"></a><span class="keyword">void</span> <a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent* )">Apply</a>(<a href="../KVEvent.html">KVEvent</a> *event)
 {
-    <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent*)">Apply</a> all currently active patches to event</span>
+    <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent* )">Apply</a> all currently active patches to event</span>
 
     <span class="keyword">if</span>(<a href="../KVDataPatchList.html#KVDataPatchList:fEventPatches" title="Bool_t KVDataPatchList::fEventPatches">fEventPatches</a>){
-        <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent*)">Apply</a> event-level patches</span>
+        <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent* )">Apply</a> event-level patches</span>
         TIter nxt(&amp;<a href="../KVDataPatchList.html#KVDataPatchList:fActiveEventPatches" title="KVUniqueNameList KVDataPatchList::fActiveEventPatches">fActiveEventPatches</a>);
         <a href="../KVDataPatch.html">KVDataPatch</a>* patch;
         <span class="keyword">while</span>( (patch = (<a href="../KVDataPatch.html">KVDataPatch</a>*)nxt()) ) patch-&gt;ApplyToEvent(event);
     }
     <span class="keyword">if</span>(<a href="../KVDataPatchList.html#KVDataPatchList:fParticlePatches" title="Bool_t KVDataPatchList::fParticlePatches">fParticlePatches</a>){
-        <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent*)">Apply</a> particle-level patches</span>
+        <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Apply" title="void KVDataPatchList::Apply(KVEvent* )">Apply</a> particle-level patches</span>
         TIter nxt(&amp;<a href="../KVDataPatchList.html#KVDataPatchList:fActiveParticlePatches" title="KVUniqueNameList KVDataPatchList::fActiveParticlePatches">fActiveParticlePatches</a>);
         <a href="../KVDataPatch.html">KVDataPatch</a>* patch;
         <a href="../KVNucleus.html">KVNucleus</a>* particle;
@@ -134,20 +134,20 @@ ClassImp(<a href="../KVDataPatchList.html">KVDataPatchList</a>)
     }
 }
 
-<a name="PLFFCD"></a><span class="keyword">void</span> <a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:Print" title="void KVDataPatchList::Print(Option_t* = &quot;&quot;) const">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *) <span class="keyword">const</span>
+<a name="PLFFCD"></a><span class="keyword">void</span> <a href="../KVDataPatchList.html">KVDataPatchList</a>::<a href="../KVDataPatchList.html#KVDataPatchList:Print" title="void KVDataPatchList::Print(Option_t* =&quot;&quot;)">Print</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> *) <span class="keyword">const</span>
 {
-    <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Print" title="void KVDataPatchList::Print(Option_t* = &quot;&quot;) const">Print</a> list of currently active patches</span>
+    <span class="comment">// <a href="../KVDataPatchList.html#KVDataPatchList:Print" title="void KVDataPatchList::Print(Option_t* =&quot;&quot;)">Print</a> list of currently active patches</span>
     <span class="keyword">if</span>(!<a href="../KVDataPatchList.html#KVDataPatchList:fEventPatches" title="Bool_t KVDataPatchList::fEventPatches">fEventPatches</a> &amp;&amp; !<a href="../KVDataPatchList.html#KVDataPatchList:fParticlePatches" title="Bool_t KVDataPatchList::fParticlePatches">fParticlePatches</a>){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Print"</span>, <span class="string">"No currently active data patches"</span>);
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Print"</span>, <span class="string">"No currently active data patches"</span>);
         <span class="keyword">return</span>;
     }
     <span class="keyword">if</span>(<a href="../KVDataPatchList.html#KVDataPatchList:fEventPatches" title="Bool_t KVDataPatchList::fEventPatches">fEventPatches</a>){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Print"</span>,<span class="string">"Currently active event-level patches:"</span>);
-        <a href="../KVDataPatchList.html#KVDataPatchList:fActiveEventPatches" title="KVUniqueNameList KVDataPatchList::fActiveEventPatches">fActiveEventPatches</a>.<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:Print" title="void TCollection::Print(Option_t* option = &quot;&quot;) const or overloads">Print</a>();
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Print"</span>,<span class="string">"Currently active event-level patches:"</span>);
+        <a href="../KVDataPatchList.html#KVDataPatchList:fActiveEventPatches" title="KVUniqueNameList KVDataPatchList::fActiveEventPatches">fActiveEventPatches</a>.<a href="../#TCollection:Print" title="void TCollection::Print(Option_t* option=&quot;&quot;) or overloads">Print</a>();
     }
     <span class="keyword">if</span>(<a href="../KVDataPatchList.html#KVDataPatchList:fParticlePatches" title="Bool_t KVDataPatchList::fParticlePatches">fParticlePatches</a>){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"Print"</span>,<span class="string">"Currently active particle-level patches:"</span>);
-        <a href="../KVDataPatchList.html#KVDataPatchList:fActiveParticlePatches" title="KVUniqueNameList KVDataPatchList::fActiveParticlePatches">fActiveParticlePatches</a>.<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:Print" title="void TCollection::Print(Option_t* option = &quot;&quot;) const or overloads">Print</a>();
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Print"</span>,<span class="string">"Currently active particle-level patches:"</span>);
+        <a href="../KVDataPatchList.html#KVDataPatchList:fActiveParticlePatches" title="KVUniqueNameList KVDataPatchList::fActiveParticlePatches">fActiveParticlePatches</a>.<a href="../#TCollection:Print" title="void TCollection::Print(Option_t* option=&quot;&quot;) or overloads">Print</a>();
     }
 }
 </pre>
@@ -158,8 +158,8 @@ ClassImp(<a href="../KVDataPatchList.html">KVDataPatchList</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

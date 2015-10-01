@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:35 2015            -->
+<!--   Date: Thu Oct  1 17:52:37 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVTGIDZ - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
                           <a href="../KVTGIDZ.html">KVTGIDZ</a>.cpp  -  description
@@ -46,8 +46,8 @@ ClassImp(<a href="../KVTGIDZ.html">KVTGIDZ</a>)
 <span class="comment">//</span>
 <span class="comment">//The following methods are defined in this class:</span>
 <span class="comment">//</span>
-<span class="comment">//      <a href="../KVTGIDZ.html#KVTGIDZ:SetIdent" title="void KVTGIDZ::SetIdent(KVIDLine*, Double_t ID)">SetIdent</a>() -- sets the Z for each <a href="../KVIDZLine.html">KVIDZLine</a></span>
-<span class="comment">//      <a href="../KVTGIDZ.html#KVTGIDZ:AddLine" title="KVIDLine* KVTGIDZ::AddLine(KVIDGrid*)">AddLine</a>()  -- adds a <a href="../KVIDZLine.html">KVIDZLine</a> to the grid</span>
+<span class="comment">//      <a href="../KVTGIDZ.html#KVTGIDZ:SetIdent" title="void KVTGIDZ::SetIdent(KVIDLine* ,Double_t ID)">SetIdent</a>() -- sets the Z for each <a href="../KVIDZLine.html">KVIDZLine</a></span>
+<span class="comment">//      <a href="../KVTGIDZ.html#KVTGIDZ:AddLine" title="KVIDLine* KVTGIDZ::AddLine(KVIDGrid* )">AddLine</a>()  -- adds a <a href="../KVIDZLine.html">KVIDZLine</a> to the grid</span>
 <span class="comment">//      NewGrid()  -- generates a new <a href="../KVIDZGrid.html">KVIDZGrid</a></span>
 <span class="comment">//</span>
 <span class="comment">///////////////////////////////////////////////////////////////////////////////</span>
@@ -72,20 +72,20 @@ ClassImp(<a href="../KVTGIDZ.html">KVTGIDZ</a>)
 	:<a href="../KVTGID.html">KVTGID</a>(name, <span class="string">"fede"</span>, 0.1, 150., npar, 4, 5)
 {
    <span class="comment">// Create Z identification with given <span class="string">"name"</span>, using the generalised</span>
-	<span class="comment">// Tassan-Got functional <a href="../KVTGIDFunctions.html">KVTGIDFunctions</a>::<a href="../KVTGIDFunctions.html#KVTGIDFunctions:fede" title="Double_t KVTGIDFunctions::fede(Double_t* x, Double_t* par)">fede</a>.</span>
+	<span class="comment">// Tassan-Got functional <a href="../KVTGIDFunctions.html">KVTGIDFunctions</a>::<a href="../KVTGIDFunctions.html#KVTGIDFunctions:fede" title="Double_t KVTGIDFunctions::fede(Double_t* x,Double_t* par)">fede</a>.</span>
 	<span class="comment">// npar = total number of parameters</span>
 	<span class="comment">// type = functional type (0: standard, 1:extended)</span>
 	<span class="comment">// light = with (1) or without (0) CsI light-energy dependence</span>
-	<span class="comment">// mass = mass formula used to calculate A for each Z (see <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t, Char_t mt)">GetAFromZ</a>)</span>
+	<span class="comment">// mass = mass formula used to calculate A for each Z (see <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t ,Char_t mt)">GetAFromZ</a>)</span>
 	
 	fType=type;
 	fLight=light;
 	fZorA=1; <span class="comment">//only Z identification</span>
 	fMassFormula=mass;
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(0,type);
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(1,light);
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(2,fZorA);
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(3,mass);
+	<a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(0,type);
+	<a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(1,light);
+	<a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(2,fZorA);
+	<a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(3,mass);
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> np=6;
 	fLambda = np++;
 	<span class="keyword">if</span>(type){
@@ -108,23 +108,23 @@ ClassImp(<a href="../KVTGIDZ.html">KVTGIDZ</a>)
 <span class="comment">//___________________________________________________________________________//</span>
 
 <a name="SnUec"></a><a href="../KVTGIDZ.html">KVTGIDZ</a>::<a href="../KVTGIDZ.html#KVTGIDZ:KVTGIDZ" title="KVTGIDZ KVTGIDZ::KVTGIDZ() or overloads">KVTGIDZ</a>(<span class="keyword">const</span> <a href="../KVTGID.html">KVTGID</a> &amp;obj){
-	<span class="comment">// <a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid) const">Copy</a> constructor. Can be used with any daughter class of <a href="../KVTGID.html">KVTGID</a>.</span>
+	<span class="comment">// <a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid)">Copy</a> constructor. Can be used with any daughter class of <a href="../KVTGID.html">KVTGID</a>.</span>
 	<span class="comment">// The parameter ZorA is set to 1 (i.e. only Z idenfification) and </span>
 	<span class="comment">// the Parameter 3 is the mass formula.</span>
 	<a href="../KVTGID.html#KVTGID:init" title="void KVTGID::init()">init</a>();
-	((<a href="../KVTGID.html">KVTGID</a> &amp;)obj).<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid) const">Copy</a>(*<span class="keyword">this</span>);
+	((<a href="../KVTGID.html">KVTGID</a> &amp;)obj).<a href="../KVTGID.html#KVTGID:Copy" title="void KVTGID::Copy(TObject&amp; tgid)">Copy</a>(*<span class="keyword">this</span>);
 
 	<span class="comment">// Case where obj is a <a href="../KVTGIDZA.html">KVTGIDZA</a></span>
 	<span class="keyword">if</span>(!fZorA){
 	fZorA=1; <span class="comment">//only Z identification</span>
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(2,fZorA);
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name, Double_t parvalue) or overloads">SetParameter</a>(3,fMassFormula);
-	<a href="http://root.cern.ch/root/html/TFormula.html#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar, const char* name)">SetParName</a>(3,<span class="string">"MassFormula"</span>);
+	<a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(2,fZorA);
+	<a href="../#TFormula:SetParameter" title="void TFormula::SetParameter(const char* name,Double_t parvalue) or overloads">SetParameter</a>(3,fMassFormula);
+	<a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(3,<span class="string">"MassFormula"</span>);
 	}
 }
 <span class="comment">//___________________________________________________________________________//</span>
 
-<a name="nV.XMD"></a><span class="keyword">void</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>::<a href="../KVTGIDZ.html#KVTGIDZ:SetIdent" title="void KVTGIDZ::SetIdent(KVIDLine*, Double_t ID)">SetIdent</a>(<a href="../KVIDLine.html">KVIDLine</a> * line, <a href="../ListOfTypes.html#Double_t">Double_t</a> Z)
+<a name="nV.XMD"></a><span class="keyword">void</span> <a href="../KVTGIDZ.html">KVTGIDZ</a>::<a href="../KVTGIDZ.html#KVTGIDZ:SetIdent" title="void KVTGIDZ::SetIdent(KVIDLine* ,Double_t ID)">SetIdent</a>(<a href="../KVIDLine.html">KVIDLine</a> * line, <a href="../ListOfTypes.html#Double_t">Double_t</a> Z)
 {
    <span class="comment">//Set atomic number Z of identification line</span>
    <span class="keyword">dynamic_cast</span> &lt; <a href="../KVIDZALine.html">KVIDZALine</a> * &gt;(line)-><a href="../KVIDentifier.html#KVIDentifier:SetZ" title="void KVIDentifier::SetZ(Int_t ztnum)">SetZ</a>((<a href="../ListOfTypes.html#Int_t">Int_t</a>) Z);
@@ -132,7 +132,7 @@ ClassImp(<a href="../KVTGIDZ.html">KVTGIDZ</a>)
 
 <span class="comment">//___________________________________________________________________________//</span>
 
-<a name="ma1kY"></a><a href="../KVIDLine.html">KVIDLine</a> *<a href="../KVTGIDZ.html">KVTGIDZ</a>::<a href="../KVTGIDZ.html#KVTGIDZ:AddLine" title="KVIDLine* KVTGIDZ::AddLine(KVIDGrid*)">AddLine</a>(<a href="../KVIDGrid.html">KVIDGrid</a> * g)
+<a name="ma1kY"></a><a href="../KVIDLine.html">KVIDLine</a> *<a href="../KVTGIDZ.html">KVTGIDZ</a>::<a href="../KVTGIDZ.html#KVTGIDZ:AddLine" title="KVIDLine* KVTGIDZ::AddLine(KVIDGrid* )">AddLine</a>(<a href="../KVIDGrid.html">KVIDGrid</a> * g)
 {
    <span class="comment">//Add a new <a href="../KVIDZALine.html">KVIDZALine</a> to the grid</span>
    <span class="keyword">return</span> (<a href="../KVIDLine.html">KVIDLine</a>*)g-&gt;Add(<span class="string">"ID"</span>, <span class="string">"KVIDZALine"</span>);
@@ -145,8 +145,8 @@ ClassImp(<a href="../KVTGIDZ.html">KVTGIDZ</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

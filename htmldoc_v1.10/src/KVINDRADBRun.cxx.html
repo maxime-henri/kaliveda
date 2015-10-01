@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:30 2015            -->
+<!--   Date: Thu Oct  1 17:51:52 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVINDRADBRun - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/***************************************************************************
 $Id: <a href="../KVINDRADBRun.html">KVINDRADBRun</a>.cpp,v 1.11 2009/01/22 13:58:33 franklan Exp $
@@ -39,8 +39,8 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
 <span class="comment">//      all infos from runlists/runsheets (scalers, i.e. gene direct/TM/MRQ, faraday), length of run,</span>
 <span class="comment">//      size of run on tape, tape number, multiplicity trigger, etc.</span>
 <span class="comment">//</span>
-<span class="comment">//Cross-section for a given run can be calculated with <a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetEventCrossSection</a>()</span>
-<span class="comment">//Total measured cross-section for all events in run can be calculated with <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTotalCrossSection" title="Double_t KVINDRADBRun::GetTotalCrossSection(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetTotalCrossSection</a>()</span>
+<span class="comment">//Cross-section for a given run can be calculated with <a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetEventCrossSection</a>()</span>
+<span class="comment">//Total measured cross-section for all events in run can be calculated with <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTotalCrossSection" title="Double_t KVINDRADBRun::GetTotalCrossSection(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetTotalCrossSection</a>()</span>
 
 <span class="comment">//____________________________________________________________________________</span>
 
@@ -64,15 +64,15 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="XvVomB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetEventCrossSection</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Q_apres_cible,
+<a name="XvVomB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetEventCrossSection</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Q_apres_cible,
                                             <a href="../ListOfTypes.html#Double_t">Double_t</a> Coul_par_top) <span class="keyword">const</span>
 {
    <span class="comment">//Calculation of cross-section (in millibarn) per event of this run from the measured integrated beam current and correcting for dead time.</span>
    <span class="comment">//Based on sect_effic.f by M.F. Rivet</span>
    <span class="comment">//</span>
-   <span class="comment">//For meaning of arguments, see <a href="../KVINDRADBRun.html#KVINDRADBRun:GetNIncidentIons" title="Double_t KVINDRADBRun::GetNIncidentIons(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetNIncidentIons</a>()</span>
+   <span class="comment">//For meaning of arguments, see <a href="../KVINDRADBRun.html#KVINDRADBRun:GetNIncidentIons" title="Double_t KVINDRADBRun::GetNIncidentIons(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetNIncidentIons</a>()</span>
 
-   <a href="../KVTarget.html">KVTarget</a> *target = <a href="../KVDBRun.html#KVDBRun:GetTarget" title="KVTarget* KVDBRun::GetTarget() const">GetTarget</a>();
+   <a href="../KVTarget.html">KVTarget</a> *target = <a href="../KVDBRun.html#KVDBRun:GetTarget" title="KVTarget* KVDBRun::GetTarget()">GetTarget</a>();
    <span class="keyword">if</span> (!target)
       <span class="keyword">return</span> 0;                 <span class="comment">//can't calculate X-section without knowing target characteristics</span>
 
@@ -80,9 +80,9 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
    <a href="../ListOfTypes.html#Double_t">Double_t</a> atom_cib = target-&gt;GetAtomsPerCM2();
 
    <span class="comment">//number of projectile nuclei during run</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> n_proj = <a href="../KVINDRADBRun.html#KVINDRADBRun:GetNIncidentIons" title="Double_t KVINDRADBRun::GetNIncidentIons(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetNIncidentIons</a>(Q_apres_cible, Coul_par_top);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> n_proj = <a href="../KVINDRADBRun.html#KVINDRADBRun:GetNIncidentIons" title="Double_t KVINDRADBRun::GetNIncidentIons(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetNIncidentIons</a>(Q_apres_cible, Coul_par_top);
 
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> temps_mort = <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTempsMort" title="Double_t KVINDRADBRun::GetTempsMort() const">GetTempsMort</a>();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> temps_mort = <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTempsMort" title="Double_t KVINDRADBRun::GetTempsMort()">GetTempsMort</a>();
    <span class="keyword">if</span> (temps_mort &gt;= 1)
       <span class="keyword">return</span> 0.;
 
@@ -91,29 +91,29 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
    <span class="keyword">return</span> sect_effic;
 }
 
-<a name="wh4ilB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTotalCrossSection" title="Double_t KVINDRADBRun::GetTotalCrossSection(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetTotalCrossSection</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Q_apres_cible,
+<a name="wh4ilB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTotalCrossSection" title="Double_t KVINDRADBRun::GetTotalCrossSection(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetTotalCrossSection</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Q_apres_cible,
                                             <a href="../ListOfTypes.html#Double_t">Double_t</a> Coul_par_top) <span class="keyword">const</span>
 {
    <span class="comment">//Calculate total cross-section (in millibarn) measured for this run from the calculated cross-section per event</span>
-   <span class="comment">//(see <a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetEventCrossSection</a>()) and the total number of measured events</span>
-   <span class="keyword">return</span> <a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetEventCrossSection</a>(Q_apres_cible, Coul_par_top) * <a href="../KVDBRun.html#KVDBRun:GetEvents" title="Int_t KVDBRun::GetEvents() const">GetEvents</a>();
+   <span class="comment">//(see <a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetEventCrossSection</a>()) and the total number of measured events</span>
+   <span class="keyword">return</span> <a href="../KVINDRADBRun.html#KVINDRADBRun:GetEventCrossSection" title="Double_t KVINDRADBRun::GetEventCrossSection(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetEventCrossSection</a>(Q_apres_cible, Coul_par_top) * <a href="../KVDBRun.html#KVDBRun:GetEvents" title="Int_t KVDBRun::GetEvents()">GetEvents</a>();
 }
 
-<a name="ypQwg"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTempsMort" title="Double_t KVINDRADBRun::GetTempsMort() const">GetTempsMort</a>() <span class="keyword">const</span>
+<a name="ypQwg"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTempsMort" title="Double_t KVINDRADBRun::GetTempsMort()">GetTempsMort</a>() <span class="keyword">const</span>
 {
    <span class="comment">//Calculate temps mort for run from values of Gene dir, Gene MRQ and Gene TM, according to:</span>
    <span class="comment">//      T.M. = Gene TM / (Gene dir - Gene MRQ)</span>
    <span class="comment">//If Gene dir = Gene MRQ, temps mort = 0.</span>
-   <span class="comment">//This can be compared to the value of <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTMpercent" title="Double_t KVINDRADBRun::GetTMpercent() const">GetTMpercent</a>() (if present) which is the percentage value filled in the runsheet</span>
+   <span class="comment">//This can be compared to the value of <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTMpercent" title="Double_t KVINDRADBRun::GetTMpercent()">GetTMpercent</a>() (if present) which is the percentage value filled in the runsheet</span>
    <span class="comment">//during the experimental run.</span>
-   <span class="keyword">if</span> (<a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name) const">GetScaler</a>(<span class="string">"Gene DIRECT"</span>) == <a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name) const">GetScaler</a>(<span class="string">"Gene MARQ"</span>)) {
+   <span class="keyword">if</span> (<a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name)">GetScaler</a>(<span class="string">"Gene DIRECT"</span>) == <a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name)">GetScaler</a>(<span class="string">"Gene MARQ"</span>)) {
       <span class="comment">//if Gene MRQ == Gene Dir, temps mort 0</span>
       <span class="keyword">return</span> 0;
    }
-   <span class="keyword">return</span> (<a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name) const">GetScaler</a>(<span class="string">"Gene TM"</span>) * 1.0 / (<a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name) const">GetScaler</a>(<span class="string">"Gene DIRECT"</span>) - <a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name) const">GetScaler</a>(<span class="string">"Gene MARQ"</span>)));
+   <span class="keyword">return</span> (<a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name)">GetScaler</a>(<span class="string">"Gene TM"</span>) * 1.0 / (<a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name)">GetScaler</a>(<span class="string">"Gene DIRECT"</span>) - <a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name)">GetScaler</a>(<span class="string">"Gene MARQ"</span>)));
 }
 
-<a name="d_EwpC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetNIncidentIons" title="Double_t KVINDRADBRun::GetNIncidentIons(Double_t Q_apres_cible, Double_t Coul_par_top = 1.0E-10) const">GetNIncidentIons</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Q_apres_cible,
+<a name="d_EwpC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetNIncidentIons" title="Double_t KVINDRADBRun::GetNIncidentIons(Double_t Q_apres_cible,Double_t Coul_par_top=1.e-10)">GetNIncidentIons</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> Q_apres_cible,
                                         <a href="../ListOfTypes.html#Double_t">Double_t</a> Coul_par_top) <span class="keyword">const</span>
 {
    <span class="comment">//Calculate total number of incident beam particles during run, based on measured integrated beam current</span>
@@ -125,7 +125,7 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
    <span class="comment">//***  Si l'oscillateur interne du trigger est a 169 Hz, on a 10**(-10) Cb/top.</span>
    <span class="comment">//***  si c'est 160 Hz, on a 1.0610*(10**(-10)).</span>
 
-   <span class="keyword">return</span> <a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name) const">GetScaler</a>(<span class="string">"Faraday 1"</span>) * Coul_par_top / (TMath::Qe() * Q_apres_cible);
+   <span class="keyword">return</span> <a href="../KVDBRun.html#KVDBRun:GetScaler" title="Int_t KVDBRun::GetScaler(const Char_t* name)">GetScaler</a>(<span class="string">"Faraday 1"</span>) * Coul_par_top / (TMath::Qe() * Q_apres_cible);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
@@ -137,28 +137,28 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
    <span class="comment">//list of associated runs.</span>
    
    <a href="../KVDBRun.html">KVDBRun</a>::<a href="../KVDBRun.html#KVDBRun:UnsetSystem" title="void KVDBRun::UnsetSystem()">UnsetSystem</a>();
-   <a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title = &quot;&quot;)">SetTitle</a>(<span class="string">"INDRA run"</span>);
+   <a href="../#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(<span class="string">"INDRA run"</span>);
 }
 
-<a name="VL7A_"></a><a href="../KVDBTape.html">KVDBTape</a> *<a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTape" title="KVDBTape* KVINDRADBRun::GetTape() const">GetTape</a>() <span class="keyword">const</span>
+<a name="VL7A_"></a><a href="../KVDBTape.html">KVDBTape</a> *<a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTape" title="KVDBTape* KVINDRADBRun::GetTape()">GetTape</a>() <span class="keyword">const</span>
 {
-   <span class="keyword">if</span> (<a href="../KVDBRecord.html#KVDBRecord:GetKey" title="KVDBKey* KVDBRecord::GetKey(const Char_t* key) const">GetKey</a>(<span class="string">"Tapes"</span>)) {
-      <span class="keyword">return</span> (<a href="../KVDBTape.html">KVDBTape</a> *) <a href="../KVDBRecord.html#KVDBRecord:GetKey" title="KVDBKey* KVDBRecord::GetKey(const Char_t* key) const">GetKey</a>(<span class="string">"Tapes"</span>)-><a href="../KVDBKey.html#KVDBKey:GetLinks" title="KVRList* KVDBKey::GetLinks() const">GetLinks</a>()-><a href="http://root.cern.ch/root/html/TRefArray.html#TRefArray:First" title="TObject* TRefArray::First() const">First</a>();
+   <span class="keyword">if</span> (<a href="../KVDBRecord.html#KVDBRecord:GetKey" title="KVDBKey* KVDBRecord::GetKey(const Char_t* key)">GetKey</a>(<span class="string">"Tapes"</span>)) {
+      <span class="keyword">return</span> (<a href="../KVDBTape.html">KVDBTape</a> *) <a href="../KVDBRecord.html#KVDBRecord:GetKey" title="KVDBKey* KVDBRecord::GetKey(const Char_t* key)">GetKey</a>(<span class="string">"Tapes"</span>)-><a href="../KVDBKey.html#KVDBKey:GetLinks" title="KVRList* KVDBKey::GetLinks()">GetLinks</a>()-><a href="../#TRefArray:First" title="TObject* TRefArray::First()">First</a>();
    }
    <span class="keyword">return</span> 0;
 }
 
-<a name="vLR3u"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTapeNumber" title="Int_t KVINDRADBRun::GetTapeNumber() const">GetTapeNumber</a>() <span class="keyword">const</span>
+<a name="vLR3u"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTapeNumber" title="Int_t KVINDRADBRun::GetTapeNumber()">GetTapeNumber</a>() <span class="keyword">const</span>
 {
-   <span class="keyword">if</span> (<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTape" title="KVDBTape* KVINDRADBRun::GetTape() const">GetTape</a>())
-      <span class="keyword">return</span> <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTape" title="KVDBTape* KVINDRADBRun::GetTape() const">GetTape</a>()-><a href="../KVDBRecord.html#KVDBRecord:GetNumber" title="Int_t KVDBRecord::GetNumber() const">GetNumber</a>();
+   <span class="keyword">if</span> (<a href="../KVINDRADBRun.html#KVINDRADBRun:GetTape" title="KVDBTape* KVINDRADBRun::GetTape()">GetTape</a>())
+      <span class="keyword">return</span> <a href="../KVINDRADBRun.html#KVINDRADBRun:GetTape" title="KVDBTape* KVINDRADBRun::GetTape()">GetTape</a>()-><a href="../KVDBRecord.html#KVDBRecord:GetNumber" title="Int_t KVDBRecord::GetNumber()">GetNumber</a>();
    <span class="keyword">else</span>
       <span class="keyword">return</span> 0;
 }
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="MevuEC"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetMeanPulser" title="Float_t KVINDRADBRun::GetMeanPulser(const Char_t*)">GetMeanPulser</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* param)
+<a name="MevuEC"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>::<a href="../KVINDRADBRun.html#KVINDRADBRun:GetMeanPulser" title="Float_t KVINDRADBRun::GetMeanPulser(const Char_t* )">GetMeanPulser</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* param)
 {
 	<span class="comment">// Return mean value of pulser/laser for this run.</span>
 	<span class="comment">//</span>
@@ -171,7 +171,7 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
 	<span class="comment">// Returns -1.0 if no data available for this parameter/run.</span>
 	
 	<span class="keyword">if</span>( <a href="../KVINDRADB.html">gIndraDB</a> &amp;&amp; <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetPulserData" title="KVINDRAPulserDataTree* KVINDRADB::GetPulserData()">GetPulserData</a>() )
-		<span class="keyword">return</span> <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetPulserData" title="KVINDRAPulserDataTree* KVINDRADB::GetPulserData()">GetPulserData</a>()-><a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetMean" title="Float_t KVINDRAPulserDataTree::GetMean(const Char_t*, Int_t)">GetMean</a>(param, <a href="../KVDBRecord.html#KVDBRecord:GetNumber" title="Int_t KVDBRecord::GetNumber() const">GetNumber</a>());
+		<span class="keyword">return</span> <a href="../KVINDRADB.html">gIndraDB</a>-><a href="../KVINDRADB.html#KVINDRADB:GetPulserData" title="KVINDRAPulserDataTree* KVINDRADB::GetPulserData()">GetPulserData</a>()-><a href="../KVINDRAPulserDataTree.html#KVINDRAPulserDataTree:GetMean" title="Float_t KVINDRAPulserDataTree::GetMean(const Char_t* ,Int_t )">GetMean</a>(param, <a href="../KVDBRecord.html#KVDBRecord:GetNumber" title="Int_t KVDBRecord::GetNumber()">GetNumber</a>());
 	<span class="keyword">return</span> -1.0;
 }
 </pre>
@@ -182,8 +182,8 @@ ClassImp(<a href="../KVINDRADBRun.html">KVINDRADBRun</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

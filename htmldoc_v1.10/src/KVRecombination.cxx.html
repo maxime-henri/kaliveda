@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:13 2015            -->
+<!--   Date: Thu Oct  1 17:52:21 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVRecombination - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Wed Aug 28 11:48:51 2013</span>
 <span class="comment">//Author: Guilain ADEMARD</span>
@@ -52,7 +52,7 @@ method SetZandA( Z, A).
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="qY0ZvB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x, Double_t* par)">PHDParlog</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> * x, <a href="../ListOfTypes.html#Double_t">Double_t</a> * par){
+<a name="qY0ZvB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x,Double_t* par)">PHDParlog</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> * x, <a href="../ListOfTypes.html#Double_t">Double_t</a> * par){
    	<span class="comment">//Returns Parlog PHD for given E, Z and A:</span>
    	<span class="comment">// </span>
    	<span class="comment">//      PHD(E) = 1/2 * Ed *( 1-1/X * ln|1+X| + X * ln|1+1/X| )</span>
@@ -65,7 +65,7 @@ method SetZandA( Z, A).
 
    	<a href="../ListOfTypes.html#Int_t">Int_t</a>    Z = par[0];
    	<a href="../ListOfTypes.html#Int_t">Int_t</a>    A = par[1];
-   	<a href="../ListOfTypes.html#Double_t">Double_t</a> a = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i) const">GetParameter</a>(0);
+   	<a href="../ListOfTypes.html#Double_t">Double_t</a> a = <a href="../KVCalibrator.html#KVCalibrator:GetParameter" title="Double_t KVCalibrator::GetParameter(UShort_t i)">GetParameter</a>(0);
    	<a href="../ListOfTypes.html#Double_t">Double_t</a> E = x[0] &gt; 0 ? x[0] : 0.000001;
    	<a href="../ListOfTypes.html#Double_t">Double_t</a> X = a*A*Z*Z/E;
 
@@ -78,18 +78,18 @@ method SetZandA( Z, A).
 <a name="LgNT0B"></a><span class="keyword">void</span> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:init" title="void KVRecombination::init()">init</a>(){
    	<span class="comment">//default initialisations</span>
    	<a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"Pulse Height Defect"</span>);
-   	<a href="../KVRecombination.html#KVRecombination:SetZandA" title="void KVRecombination::SetZandA(Int_t z, Int_t a)">SetZandA</a>(1,1);
+   	<a href="../KVRecombination.html#KVRecombination:SetZandA" title="void KVRecombination::SetZandA(Int_t z,Int_t a)">SetZandA</a>(1,1);
    	<a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a> = <a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a> = NULL;
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="aXL22B"></a><a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:KVRecombination" title="KVRecombination KVRecombination::KVRecombination() or overloads">KVRecombination</a>() : <a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(1){
+<a name="aXL22B"></a><a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:KVRecombination" title="KVRecombination KVRecombination::KVRecombination() or overloads">KVRecombination</a>() : KVCalibrator(1){
    	<span class="comment">// Default constructor</span>
    	<a href="../KVRecombination.html#KVRecombination:init" title="void KVRecombination::init()">init</a>();
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="aMMwiC"></a><a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:KVRecombination" title="KVRecombination KVRecombination::KVRecombination() or overloads">KVRecombination</a>(<a href="../KVDetector.html">KVDetector</a> *d) : <a href="../KVCalibrator.html#KVCalibrator:KVCalibrator" title="KVCalibrator KVCalibrator::KVCalibrator() or overloads">KVCalibrator</a>(1){
+<a name="aMMwiC"></a><a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:KVRecombination" title="KVRecombination KVRecombination::KVRecombination() or overloads">KVRecombination</a>(<a href="../KVDetector.html">KVDetector</a> *d) : KVCalibrator(1){
    	<span class="comment">//Associate PHD calculation to detector</span>
    	<a href="../KVRecombination.html#KVRecombination:init" title="void KVRecombination::init()">init</a>();
    	<a href="../KVCalibrator.html#KVCalibrator:SetDetector" title="void KVCalibrator::SetDetector(KVDetector* kvd)">SetDetector</a>(d);
@@ -101,27 +101,27 @@ method SetZandA( Z, A).
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="JwlZID"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:Compute" title="Double_t KVRecombination::Compute(Double_t E) const">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy) <span class="keyword">const</span>{
+<a name="JwlZID"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:Compute" title="Double_t KVRecombination::Compute(Double_t E)">Compute</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy) <span class="keyword">const</span>{
    	<span class="comment">//Calculate the pulse height defect (in MeV) for a given energy loss in the detector,</span>
-   	<span class="comment">//a given Z and a given A (Z and A  of the particle should be set first using method <a href="../KVRecombination.html#KVRecombination:SetZandA" title="void KVRecombination::SetZandA(Int_t z, Int_t a)">SetZandA</a>)</span>
+   	<span class="comment">//a given Z and a given A (Z and A  of the particle should be set first using method <a href="../KVRecombination.html#KVRecombination:SetZandA" title="void KVRecombination::SetZandA(Int_t z,Int_t a)">SetZandA</a>)</span>
    	<span class="comment">//The Parlog formula is used:</span>
    	<span class="comment">//</span>
    	<span class="comment">//      PHD(E) = 1/2 * Ed *( 1-1/X * ln|1+X| + X * ln|1+1/X| )</span>
    	<span class="comment">// with X      = a*A*Z**2/Ed</span>
    	<span class="comment">//      Ed     = energy lost by particle in detector (=E if particle stops)</span>
 
-   	<span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<a href="../KVRecombination.html">KVRecombination</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z, Int_t A)">GetParlogPHDFunction</a>(<a href="../KVRecombination.html#KVRecombination:GetZ" title="Int_t KVRecombination::GetZ() const">GetZ</a>(),<a href="../KVRecombination.html#KVRecombination:GetA" title="Int_t KVRecombination::GetA() const">GetA</a>())-&gt;Eval(energy);
+   	<span class="keyword">return</span> <span class="keyword">const_cast</span>&lt;<a href="../KVRecombination.html">KVRecombination</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z,Int_t A)">GetParlogPHDFunction</a>(<a href="../KVRecombination.html#KVRecombination:GetZ" title="Int_t KVRecombination::GetZ()">GetZ</a>(),<a href="../KVRecombination.html#KVRecombination:GetA" title="Int_t KVRecombination::GetA()">GetA</a>())-&gt;Eval(energy);
 }
 <span class="comment">//________________________________________________________________</span>
 
 <a name="QXRE3B"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<span class="keyword">operator</span>() (<a href="../ListOfTypes.html#Double_t">Double_t</a> energy){
-   	<span class="comment">//Same as <a href="../KVRecombination.html#KVRecombination:Compute" title="Double_t KVRecombination::Compute(Double_t E) const">Compute</a>()</span>
+   	<span class="comment">//Same as <a href="../KVRecombination.html#KVRecombination:Compute" title="Double_t KVRecombination::Compute(Double_t E)">Compute</a>()</span>
 
-   	<span class="keyword">return</span> <a href="../KVRecombination.html#KVRecombination:Compute" title="Double_t KVRecombination::Compute(Double_t E) const">Compute</a>(energy);
+   	<span class="keyword">return</span> <a href="../KVRecombination.html#KVRecombination:Compute" title="Double_t KVRecombination::Compute(Double_t E)">Compute</a>(energy);
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="OASi5C"></a>TF1* <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:GetELossFunction" title="TF1* KVRecombination::GetELossFunction(Int_t Z, Int_t A, Bool_t Wrong = kFALSE)">GetELossFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> Wrong){
+<a name="OASi5C"></a>TF1* <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:GetELossFunction" title="TF1* KVRecombination::GetELossFunction(Int_t Z,Int_t A,Bool_t Wrong=kFALSE)">GetELossFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> Wrong){
    	<span class="comment">// Return pointer to TF1 giving energy loss in active layer of detector minus</span>
    	<span class="comment">// the pulse height defect for a given nucleus (Z,A).</span>
     <span class="comment">//</span>
@@ -133,27 +133,27 @@ method SetZandA( Z, A).
     <a href="../KVRecombination.html#KVRecombination:wrong" title="Bool_t KVRecombination::wrong">wrong</a>=Wrong;
 
    	<span class="keyword">if</span>(!<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>){
-      	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"KVRecombination:%s:ELossActive"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()),
-           		<span class="keyword">this</span>, &amp;<a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:ELossActive" title="Double_t KVRecombination::ELossActive(Double_t* x, Double_t* par)">ELossActive</a>, 0., 1.e+04, 2, <span class="string">"KVRecombination"</span>, <span class="string">"ELossActive"</span>);
+      	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"KVRecombination:%s:ELossActive"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()),
+           		<span class="keyword">this</span>, &amp;<a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:ELossActive" title="Double_t KVRecombination::ELossActive(Double_t* x,Double_t* par)">ELossActive</a>, 0., 1.e+04, 2, <span class="string">"KVRecombination"</span>, <span class="string">"ELossActive"</span>);
       	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>-&gt;SetNpx( gEnv-&gt;GetValue(<span class="string">"KVPulseHeightDefect.EnergyLoss.Npx"</span>, 20) );
    	}
    	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameters" title="void KVCalibrator::SetParameters(Double_t val)">SetParameters</a>((<a href="../ListOfTypes.html#Double_t">Double_t</a>)Z, (<a href="../ListOfTypes.html#Double_t">Double_t</a>)A);
-   	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>-&gt;SetRange(0., <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetSmallestEmaxValid" title="Double_t KVDetector::GetSmallestEmaxValid(Int_t Z, Int_t A)">GetSmallestEmaxValid</a>(Z,A));
-   	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title = &quot;&quot;)">SetTitle</a>(Form(<span class="string">"PHD dependent energy loss [MeV] in detector %s for Z=%d A=%d"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(), Z, A));
-   	<a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z, Int_t A)">GetParlogPHDFunction</a>(Z,A);
+   	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>-&gt;SetRange(0., <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetSmallestEmaxValid" title="Double_t KVDetector::GetSmallestEmaxValid(Int_t Z,Int_t A)">GetSmallestEmaxValid</a>(Z,A));
+   	<a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>-&gt;<a href="../#TNamed:SetTitle" title="void TNamed::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(Form(<span class="string">"PHD dependent energy loss [MeV] in detector %s for Z=%d A=%d"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), Z, A));
+   	<a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z,Int_t A)">GetParlogPHDFunction</a>(Z,A);
    	<span class="keyword">return</span> <a href="../KVRecombination.html#KVRecombination:fDeltaEphd" title="TF1* KVRecombination::fDeltaEphd">fDeltaEphd</a>;
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="q5IrzB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:ELossActive" title="Double_t KVRecombination::ELossActive(Double_t* x, Double_t* par)">ELossActive</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *x, <a href="../ListOfTypes.html#Double_t">Double_t</a> *par){
+<a name="q5IrzB"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:ELossActive" title="Double_t KVRecombination::ELossActive(Double_t* x,Double_t* par)">ELossActive</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *x, <a href="../ListOfTypes.html#Double_t">Double_t</a> *par){
    	<span class="comment">// Calculate energy lost in active layer of detector minus the Parlog PHD</span>
    	<span class="comment">// x[0] = incident energy</span>
    	<span class="comment">// par[0] = Z</span>
    	<span class="comment">// par[1] = A</span>
 
    	<a href="../ListOfTypes.html#Double_t">Double_t</a> e = x[0];
-   	TIter next(<a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetListOfAbsorbers" title="KVList* KVDetector::GetListOfAbsorbers() const">GetListOfAbsorbers</a>()); <a href="../KVMaterial.html">KVMaterial</a>* mat;
-   	<span class="keyword">while</span>( (mat = (<a href="../KVMaterial.html">KVMaterial</a>*)next()) != <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetActiveLayer" title="KVMaterial* KVDetector::GetActiveLayer() const">GetActiveLayer</a>() ){
+   	TIter next(<a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetListOfAbsorbers" title="KVList* KVDetector::GetListOfAbsorbers()">GetListOfAbsorbers</a>()); <a href="../KVMaterial.html">KVMaterial</a>* mat;
+   	<span class="keyword">while</span>( (mat = (<a href="../KVMaterial.html">KVMaterial</a>*)next()) != <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../KVDetector.html#KVDetector:GetActiveLayer" title="KVMaterial* KVDetector::GetActiveLayer()">GetActiveLayer</a>() ){
       	<span class="comment">// calculate energy losses in absorbers before active layer</span>
         e = mat-&gt;GetERes(par[0], par[1], e);     <span class="comment">//residual energy after layer</span>
         <span class="keyword">if</span> (e &lt;= 0.)
@@ -163,33 +163,33 @@ method SetZandA( Z, A).
    	<a href="../ListOfTypes.html#Double_t">Double_t</a> dE = mat-&gt;GetDeltaE(par[0], par[1], e);
    	<span class="comment">// calculate Parlog PHD corresponding to energy lost in active layer</span>
    	<a href="../ListOfTypes.html#Double_t">Double_t</a> phd;
-   	<span class="keyword">if</span>(<a href="../KVRecombination.html#KVRecombination:wrong" title="Bool_t KVRecombination::wrong">wrong</a>) phd = <a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x, Double_t* par)">PHDParlog</a>(&amp;e, par);<span class="comment">//incorrect calculation using incident energy</span>
-   	<span class="keyword">else</span> phd = <a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x, Double_t* par)">PHDParlog</a>(&amp;dE, par);
+   	<span class="keyword">if</span>(<a href="../KVRecombination.html#KVRecombination:wrong" title="Bool_t KVRecombination::wrong">wrong</a>) phd = <a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x,Double_t* par)">PHDParlog</a>(&amp;e, par);<span class="comment">//incorrect calculation using incident energy</span>
+   	<span class="keyword">else</span> phd = <a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x,Double_t* par)">PHDParlog</a>(&amp;dE, par);
 
    	<span class="keyword">return</span> dE - phd; 
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="TW9IeC"></a>TF1* <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z, Int_t A)">GetParlogPHDFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A){
+<a name="TW9IeC"></a>TF1* <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z,Int_t A)">GetParlogPHDFunction</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> A){
     <span class="comment">// Create TF1* <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a> if not already done</span>
 
     <span class="keyword">if</span>(!<a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>) {
-        <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"ParlogPHD:%s"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector() const">GetDetector</a>()-><a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()),
-            	<span class="keyword">this</span>, &amp;<a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x, Double_t* par)">PHDParlog</a>, 0., 1.e+04, 1, <span class="string">"KVRecombination"</span>, <span class="string">"PHDParlog"</span>);
+        <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a> = <span class="keyword">new</span> TF1(Form(<span class="string">"ParlogPHD:%s"</span>, <a href="../KVCalibrator.html#KVCalibrator:GetDetector" title="KVDetector* KVCalibrator::GetDetector()">GetDetector</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()),
+            	<span class="keyword">this</span>, &amp;<a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:PHDParlog" title="Double_t KVRecombination::PHDParlog(Double_t* x,Double_t* par)">PHDParlog</a>, 0., 1.e+04, 1, <span class="string">"KVRecombination"</span>, <span class="string">"PHDParlog"</span>);
         <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;SetNpx(500);
     }
-    <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameter" title="void KVCalibrator::SetParameter(UShort_t i, Float_t par_val)">SetParameter</a>(0,Z);
-    <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameter" title="void KVCalibrator::SetParameter(UShort_t i, Float_t par_val)">SetParameter</a>(1,A);
+    <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameter" title="void KVCalibrator::SetParameter(UShort_t i,Float_t par_val)">SetParameter</a>(0,Z);
+    <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;<a href="../KVCalibrator.html#KVCalibrator:SetParameter" title="void KVCalibrator::SetParameter(UShort_t i,Float_t par_val)">SetParameter</a>(1,A);
     <span class="keyword">return</span> <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>;
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="DWLZb"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:Invert" title="Double_t KVRecombination::Invert(Double_t)">Invert</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy){
+<a name="DWLZb"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:Invert" title="Double_t KVRecombination::Invert(Double_t )">Invert</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> energy){
    	<span class="comment">//Given the PHD (in MeV) of a particle of charge Z and mass A</span>
-   	<span class="comment">//(set using <a href="../KVRecombination.html#KVRecombination:SetZandA" title="void KVRecombination::SetZandA(Int_t z, Int_t a)">SetZandA</a>() method), this method inverts the Parlog formula</span>
+   	<span class="comment">//(set using <a href="../KVRecombination.html#KVRecombination:SetZandA" title="void KVRecombination::SetZandA(Int_t z,Int_t a)">SetZandA</a>() method), this method inverts the Parlog formula</span>
    	<span class="comment">//in order to find the energy loss of the particle in the detector.</span>
 
-   	<span class="keyword">const_cast</span>&lt;<a href="../KVRecombination.html">KVRecombination</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z, Int_t A)">GetParlogPHDFunction</a>(<a href="../KVRecombination.html#KVRecombination:GetZ" title="Int_t KVRecombination::GetZ() const">GetZ</a>(),<a href="../KVRecombination.html#KVRecombination:GetA" title="Int_t KVRecombination::GetA() const">GetA</a>());
+   	<span class="keyword">const_cast</span>&lt;<a href="../KVRecombination.html">KVRecombination</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVRecombination.html#KVRecombination:GetParlogPHDFunction" title="TF1* KVRecombination::GetParlogPHDFunction(Int_t Z,Int_t A)">GetParlogPHDFunction</a>(<a href="../KVRecombination.html#KVRecombination:GetZ" title="Int_t KVRecombination::GetZ()">GetZ</a>(),<a href="../KVRecombination.html#KVRecombination:GetA" title="Int_t KVRecombination::GetA()">GetA</a>());
 	<a href="../ListOfTypes.html#Double_t">Double_t</a> xmin, xmax; <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;GetRange(xmin,xmax);
    	<span class="keyword">return</span> <a href="../KVRecombination.html#KVRecombination:fParlog" title="TF1* KVRecombination::fParlog">fParlog</a>-&gt;GetX(energy,xmin,xmax);
 }
@@ -201,8 +201,8 @@ method SetZandA( Z, A).
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

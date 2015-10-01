@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:29 2015            -->
+<!--   Date: Thu Oct  1 17:52:33 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVSimReader_SMF_asym - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Mon Jul  5 15:24:25 2010</span>
 <span class="comment">//Author: bonnet</span>
@@ -46,7 +46,7 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 {
    <a href="../KVSimReader_SMF_asym.html#KVSimReader_SMF_asym:init" title="void KVSimReader_SMF_asym::init()">init</a>();
 	<span class="keyword">if</span> (!<a href="../KVFileReader.html#KVFileReader:OpenFileToRead" title="Bool_t KVFileReader::OpenFileToRead(KVString filename)">OpenFileToRead</a>(filename)) <span class="keyword">return</span>;
-	<a href="../KVSimReader.html#KVSimReader:Run" title="void KVSimReader::Run(KVString filename = &quot;Output.root&quot;, Option_t* option = &quot;recreate&quot;)">Run</a>();
+	<a href="../KVSimReader.html#KVSimReader:Run" title="void KVSimReader::Run(KVString filename=&quot;Output.root&quot;,Option_t* option=&quot;recreate&quot;)">Run</a>();
 	<a href="../KVFileReader.html#KVFileReader:CloseFile" title="void KVFileReader::CloseFile()">CloseFile</a>();
 }
 
@@ -62,7 +62,7 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 		<span class="keyword">if</span> (<a href="../KVSimReader_SMF_asym.html#KVSimReader_SMF_asym:ReadHeader" title="Bool_t KVSimReader_SMF_asym::ReadHeader()">ReadHeader</a>()){
 			<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> nd=0; nd&lt;nv-&gt;GetIntValue(<span class="string">"ndes"</span>); nd+=1){
 				<span class="keyword">if</span> (<a href="../KVSimReader_SMF_asym.html#KVSimReader_SMF_asym:ReadEvent" title="Bool_t KVSimReader_SMF_asym::ReadEvent()">ReadEvent</a>()){
-					<span class="keyword">if</span> (nevt%1000==0) <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadFile"</span>,<span class="string">"%d evts lus"</span>,nevt);
+					<span class="keyword">if</span> (nevt%1000==0) <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadFile"</span>,<span class="string">"%d evts lus"</span>,nevt);
 					<span class="keyword">if</span> (<a href="../KVSimReader.html#KVSimReader:HasToFill" title="Bool_t KVSimReader::HasToFill()">HasToFill</a>()) <a href="../KVSimReader.html#KVSimReader:FillTree" title="void KVSimReader::FillTree()">FillTree</a>();
 				}
 			}
@@ -75,14 +75,14 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 <a name="kKK1mC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>::<a href="../KVSimReader_SMF_asym.html#KVSimReader_SMF_asym:ReadHeader" title="Bool_t KVSimReader_SMF_asym::ReadHeader()">ReadHeader</a>(){
 
 	<a href="../KVString.html">KVString</a> snom;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	<span class="keyword">case</span> 1:
 		snom.Form(<span class="string">"%s"</span>,<a href="../KVFileReader.html#KVFileReader:GetReadPar" title="TString KVFileReader::GetReadPar(Int_t pos)">GetReadPar</a>(0).Data());
 		snom.ReplaceAll(<span class="string">"evt_"</span>,<span class="string">""</span>);
-		<span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadHeader"</span>,<span class="string">"lecture %d"</span>,snom.Atoi());</span>
+		<span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadHeader"</span>,<span class="string">"lecture %d"</span>,snom.Atoi());</span>
 		nv-&gt;SetValue(<span class="string">"event_number"</span>,snom.Atoi());
 		
 		<span class="keyword">break</span>;
@@ -90,7 +90,7 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;	
 	}
 	
-	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
+	res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
@@ -110,10 +110,10 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 
 <a name="QH3gVE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>::<a href="../KVSimReader_SMF_asym.html#KVSimReader_SMF_asym:ReadEvent" title="Bool_t KVSimReader_SMF_asym::ReadEvent()">ReadEvent</a>(){
 
-	evt-&gt;<a href="../KVFileReader.html#KVFileReader:Clear" title="void KVFileReader::Clear(Option_t* = &quot;&quot;)">Clear</a>();
+	evt-&gt;<a href="../KVFileReader.html#KVFileReader:Clear" title="void KVFileReader::Clear(Option_t* =&quot;&quot;)">Clear</a>();
 	
 	<a href="../ListOfTypes.html#Int_t">Int_t</a> mult=0;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(1,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
@@ -143,10 +143,10 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 
 <a name="vAZmOD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>::<a href="../KVSimReader_SMF_asym.html#KVSimReader_SMF_asym:ReadNucleus" title="Bool_t KVSimReader_SMF_asym::ReadNucleus()">ReadNucleus</a>(){
 	
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect, const Char_t* pattern)">ReadLineAndCheck</a>(5,<span class="string">" "</span>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> res = <a href="../KVFileReader.html#KVFileReader:ReadLineAndCheck" title="Int_t KVFileReader::ReadLineAndCheck(Int_t nexpect,const Char_t* pattern)">ReadLineAndCheck</a>(5,<span class="string">" "</span>);
 	<span class="keyword">switch</span> (res){
 	<span class="keyword">case</span> 0:
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
+		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadNucleus"</span>,<span class="string">"case 0 line est vide"</span>); 
 		<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; 
 	
 	<span class="keyword">case</span> 1:
@@ -174,8 +174,8 @@ ClassImp(<a href="../KVSimReader_SMF_asym.html">KVSimReader_SMF_asym</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

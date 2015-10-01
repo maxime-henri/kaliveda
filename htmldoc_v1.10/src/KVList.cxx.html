@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:53 2015            -->
+<!--   Date: Thu Oct  1 17:52:08 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVList - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="cpp">#include "<a href="../KVList.h">KVList.h</a>"</span>
 
@@ -45,11 +45,11 @@ the same argument as TList::Sort().
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="dsJ9N"></a><a href="../KVList.html">KVList</a>::<a href="../KVList.html#KVList:KVList" title="KVList KVList::KVList(Bool_t owner = kTRUE) or overloads">KVList</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> owner) : <a href="../KVSeqCollection.html#KVSeqCollection:KVSeqCollection" title="KVSeqCollection KVSeqCollection::KVSeqCollection() or overloads">KVSeqCollection</a>(<span class="string">"TList"</span>)
+<a name="dsJ9N"></a><a href="../KVList.html">KVList</a>::<a href="../KVList.html#KVList:KVList" title="KVList KVList::KVList(Bool_t owner=kTRUE)">KVList</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> owner) : <a href="../KVSeqCollection.html#KVSeqCollection:KVSeqCollection" title="KVSeqCollection KVSeqCollection::KVSeqCollection() or overloads">KVSeqCollection</a>(<span class="string">"TList"</span>)
 {
     <span class="comment">// Default ctor.</span>
     <span class="comment">// By default, a <a href="../KVList.html">KVList</a> owns its objects.</span>
-    <a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable = kTRUE)">SetOwner</a>(owner);
+    <a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable=kTRUE)">SetOwner</a>(owner);
 }
 
 <a name="xhzI1"></a><a href="../KVList.html">KVList</a>::<a href="../KVList.html#KVList:_KVList" title="void KVList::~KVList()">~KVList</a>()
@@ -57,7 +57,7 @@ the same argument as TList::Sort().
 }
 
 <span class="cpp">#include "Riostream.h"</span>
-<a name="yBIF2D"></a><span class="keyword">void</span> <a href="../KVList.html">KVList</a>::<a href="../KVList.html#KVList:Streamer" title="void KVList::Streamer(TBuffer&amp;)">Streamer</a>(TBuffer &amp;R__b)
+<a name="yBIF2D"></a><span class="keyword">void</span> <a href="../KVList.html">KVList</a>::<a href="../KVList.html#KVList:Streamer" title="void KVList::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
 {
     <span class="comment">// Backwards-compatible streamer</span>
 
@@ -67,15 +67,15 @@ the same argument as TList::Sort().
         <span class="keyword">if</span> (R__v &lt; 3) {
             <span class="comment">// read in old <a href="../KVList.html">KVList</a> object which inherited from TList</span>
             TList list;
-            list.<a href="../KVList.html#KVList:Streamer" title="void KVList::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
+            list.<a href="../KVList.html#KVList:Streamer" title="void KVList::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
             TQObjSender fQObj;
-            fQObj.<a href="../KVList.html#KVList:Streamer" title="void KVList::Streamer(TBuffer&amp;)">Streamer</a>(R__b);
-            <a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable = kTRUE)">SetOwner</a>(list.<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:IsOwner" title="Bool_t TCollection::IsOwner() const">IsOwner</a>()); <span class="comment">// was list owner of objects ?</span>
-            list.<a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable = kTRUE)">SetOwner</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>); <span class="comment">// make sure old list doesn't delete objects when it goes out of scope</span>
+            fQObj.<a href="../KVList.html#KVList:Streamer" title="void KVList::Streamer(TBuffer&amp; )">Streamer</a>(R__b);
+            <a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable=kTRUE)">SetOwner</a>(list.<a href="../#TCollection:IsOwner" title="Bool_t TCollection::IsOwner()">IsOwner</a>()); <span class="comment">// was list owner of objects ?</span>
+            list.<a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable=kTRUE)">SetOwner</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>); <span class="comment">// make sure old list doesn't delete objects when it goes out of scope</span>
             TIter next(&amp;list);
-            <a href="http://root.cern.ch/root/html/TObject.html#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj;
+            <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj;
             <span class="keyword">while</span> ( (obj = next()) ) <a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(obj);
-            list.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+            list.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
         }
         <span class="keyword">else</span>
             R__b.ReadClassBuffer(<a href="../KVList.html">KVList</a>::<a href="../KVList.html#KVList:Class" title="TClass* KVList::Class()">Class</a>(),<span class="keyword">this</span>,R__v,R__s,R__c);
@@ -91,8 +91,8 @@ the same argument as TList::Sort().
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

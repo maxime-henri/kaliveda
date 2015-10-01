@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:32 2015            -->
+<!--   Date: Thu Oct  1 17:51:06 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVDatedFileManager - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVDatedFileManager.html">KVDatedFileManager</a>.cpp,v 1.3 2007/06/14 10:39:55 franklan Exp $
@@ -64,10 +64,10 @@ in the directory name.
    <span class="comment">//Read all versions of file with given basename in directory and put them</span>
    <span class="comment">//in a list sorted according to their timestamps</span>
    gSystem-&gt;ExpandPathName(<a href="../KVDatedFileManager.html#KVDatedFileManager:fDirectory" title="KVString KVDatedFileManager::fDirectory">fDirectory</a>);
-   TSystemDirectory DIR(<span class="string">"dir"</span>, <a href="../KVDatedFileManager.html#KVDatedFileManager:fDirectory" title="KVString KVDatedFileManager::fDirectory">fDirectory</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
+   TSystemDirectory DIR(<span class="string">"dir"</span>, <a href="../KVDatedFileManager.html#KVDatedFileManager:fDirectory" title="KVString KVDatedFileManager::fDirectory">fDirectory</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
    TList *files = DIR.GetListOfFiles();
    <span class="keyword">if</span>(!files){
-      Error(KV__ERROR(<a href="../KVDatedFileManager.html#KVDatedFileManager:ReadFiles" title="void KVDatedFileManager::ReadFiles()">ReadFiles</a>), <span class="string">"Cannot read directory %s"</span>, <a href="../KVDatedFileManager.html#KVDatedFileManager:fDirectory" title="KVString KVDatedFileManager::fDirectory">fDirectory</a>.<a href="http://root.cern.ch/root/html/TString.html#TString:Data" title="const char* TString::Data() const">Data</a>());
+      Error(KV__ERROR(<a href="../KVDatedFileManager.html#KVDatedFileManager:ReadFiles" title="void KVDatedFileManager::ReadFiles()">ReadFiles</a>), <span class="string">"Cannot read directory %s"</span>, <a href="../KVDatedFileManager.html#KVDatedFileManager:fDirectory" title="KVString KVDatedFileManager::fDirectory">fDirectory</a>.<a href="../#TString:Data" title="const char* TString::Data()">Data</a>());
       <span class="keyword">return</span>;
    }
    TIter next(files); TObject* file;
@@ -76,7 +76,7 @@ in the directory name.
       <span class="keyword">if</span>(nom.BeginsWith(<a href="../KVDatedFileManager.html#KVDatedFileManager:fBaseName" title="KVString KVDatedFileManager::fBaseName">fBaseName</a>)) <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>( <span class="keyword">new</span> <a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>(nom,<a href="../KVDatedFileManager.html#KVDatedFileManager:fBaseName" title="KVString KVDatedFileManager::fBaseName">fBaseName</a>) );
    }
    <span class="keyword">delete</span> files;
-   <span class="keyword">if</span>(<a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:GetEntries" title="Int_t TCollection::GetEntries() const">GetEntries</a>()) <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVList.html#KVList:Sort" title="void KVList::Sort(Bool_t order = kSortAscending)">Sort</a>();
+   <span class="keyword">if</span>(<a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>()) <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVList.html#KVList:Sort" title="void KVList::Sort(Bool_t order=kSortAscending)">Sort</a>();
 }
 
 <span class="comment">//__________________________________________________________________________________//</span>
@@ -89,18 +89,18 @@ in the directory name.
    <span class="comment">//</span>
    <span class="comment">//If no older version exists, returns empty string</span>
    
-   TObject* obj = <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) const or overloads">FindObject</a>(name);
+   TObject* obj = <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(name);
    <span class="keyword">if</span>( !obj ){
       Error(KV__ERROR(<a href="../KVDatedFileManager.html#KVDatedFileManager:GetPreviousVersion" title="const Char_t* KVDatedFileManager::GetPreviousVersion(const Char_t* name)">GetPreviousVersion</a>), <span class="string">"File %s does not exist"</span>, name);
       <span class="keyword">return</span> <span class="string">""</span>;
    }
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> index = <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="http://root.cern.ch/root/html/TSeqCollection.html#TSeqCollection:IndexOf" title="Int_t TSeqCollection::IndexOf(const TObject* obj) const">IndexOf</a>( obj );
-   <span class="keyword">if</span>( index == (<a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="http://root.cern.ch/root/html/TCollection.html#TCollection:GetEntries" title="Int_t TCollection::GetEntries() const">GetEntries</a>()-1) ){
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> index = <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../#TSeqCollection:IndexOf" title="Int_t TSeqCollection::IndexOf(const TObject* obj)">IndexOf</a>( obj );
+   <span class="keyword">if</span>( index == (<a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>()-1) ){
       <span class="comment">//file is already oldest version</span>
       Warning(KV__ERROR(<a href="../KVDatedFileManager.html#KVDatedFileManager:GetPreviousVersion" title="const Char_t* KVDatedFileManager::GetPreviousVersion(const Char_t* name)">GetPreviousVersion</a>), <span class="string">"File %s is oldest known version"</span>, name);
       <span class="keyword">return</span> <span class="string">""</span>;      
    }
-   <span class="keyword">return</span> <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx) const">At</a>( index+1 )-&gt;GetName();
+   <span class="keyword">return</span> <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:At" title="TObject* KVSeqCollection::At(Int_t idx)">At</a>( index+1 )-&gt;GetName();
 }
 
 <span class="comment">//__________________________________________________________________________________//</span>
@@ -108,7 +108,7 @@ in the directory name.
 <a name="d_z7YC"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVDatedFileManager.html">KVDatedFileManager</a>::<a href="../KVDatedFileManager.html#KVDatedFileManager:GetOldestVersion" title="const Char_t* KVDatedFileManager::GetOldestVersion()">GetOldestVersion</a>()
 {
    <span class="comment">//Returns name of file with earliest timestamp</span>
-   <span class="keyword">return</span> <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last() const">Last</a>()-&gt;GetName();
+   <span class="keyword">return</span> <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last()">Last</a>()-&gt;GetName();
 }
 
 <span class="comment">//__________________________________________________________________________________//</span>
@@ -116,7 +116,7 @@ in the directory name.
 <a name="m69tQC"></a><span class="keyword">void</span> <a href="../KVDatedFileManager.html">KVDatedFileManager</a>::<a href="../KVDatedFileManager.html#KVDatedFileManager:Update" title="void KVDatedFileManager::Update()">Update</a>()
 {
    <span class="comment">//Updates list of files</span>
-   <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+   <a href="../KVDatedFileManager.html#KVDatedFileManager:fFileList" title="KVList KVDatedFileManager::fFileList">fFileList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
    <a href="../KVDatedFileManager.html#KVDatedFileManager:ReadFiles" title="void KVDatedFileManager::ReadFiles()">ReadFiles</a>();
 }
 
@@ -153,7 +153,7 @@ ClassImp(<a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>)
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>::<a href="../KVSortableDatedFile.html#KVSortableDatedFile:Compare" title="Int_t KVSortableDatedFile::Compare(const TObject* obj) const">Compare</a>(<span class="keyword">const</span> TObject * obj) <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>::<a href="../KVSortableDatedFile.html#KVSortableDatedFile:Compare" title="Int_t KVSortableDatedFile::Compare(const TObject* obj)">Compare</a>(<span class="keyword">const</span> TObject * obj) <span class="keyword">const</span>
 {
    <span class="comment">// Compare two files according to their timestamp.</span>
    <span class="comment">// Used to sort lists, most recent files appear first</span>
@@ -165,7 +165,7 @@ ClassImp(<a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>)
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>::<a href="../KVSortableDatedFile.html#KVSortableDatedFile:IsEqual" title="Bool_t KVSortableDatedFile::IsEqual(const TObject* obj) const">IsEqual</a>(<span class="keyword">const</span> TObject * obj) <span class="keyword">const</span>
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>::<a href="../KVSortableDatedFile.html#KVSortableDatedFile:IsEqual" title="Bool_t KVSortableDatedFile::IsEqual(const TObject* obj)">IsEqual</a>(<span class="keyword">const</span> TObject * obj) <span class="keyword">const</span>
 {
    <span class="comment">//Two files are the same if they have the same basename and timestamp</span>
 
@@ -181,8 +181,8 @@ ClassImp(<a href="../KVSortableDatedFile.html">KVSortableDatedFile</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

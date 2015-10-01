@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:00 2015            -->
+<!--   Date: Thu Oct  1 17:52:13 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVNewGridRRMDialog - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>.cpp,v 1.5 2009/03/03 13:36:00 franklan Exp $
@@ -57,7 +57,7 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
          <span class="keyword">return</span>;
    }
    <span class="comment">//initialise dialog</span>
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:init_interface" title="void KVNewGridDialog::init_interface(const TGWindow* p, const TGWindow* main, UInt_t w, UInt_t h, Option_t* dialog_type)">init_interface</a>(p, main, w, h, dialog_type);
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:init_interface" title="void KVNewGridDialog::init_interface(const TGWindow* p,const TGWindow* main,UInt_t w,UInt_t h,Option_t* dialog_type)">init_interface</a>(p, main, w, h, dialog_type);
 
    <span class="comment">//for <span class="string">"New grid"</span>  dialog, add class list drop-down menu</span>
    <span class="keyword">if</span> (!strcmp(dialog_type, <span class="string">"New"</span>))
@@ -83,8 +83,8 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    <span class="comment">//Make sure selected grid is of right type i.e. inherits from <a href="../KVINDRARRMValidator.html">KVINDRARRMValidator</a>, otherwise return with error message</span>
    fSelectedGrid = g;
    <span class="keyword">if</span> (!g-&gt;InheritsFrom(<span class="string">"KVINDRARRMValidator"</span>)) {
-      cout &lt;&lt; <span class="string">"Error in KVNewGridRRMDialog ctor:"</span> &lt;&lt; endl;
-      cout &lt;&lt;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Error in KVNewGridRRMDialog ctor:"</span> &lt;&lt; endl;
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt;
           <span class="string">"This dialogue box can only be used with grids derived from KVINDRARRMValidator"</span>
           &lt;&lt; endl;
       fSelectedGrid = 0;        <span class="comment">// will force exit from base class ctor, dialogue box will not be built</span>
@@ -99,16 +99,16 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    <span class="comment">//for <span class="string">"edit"</span> and <span class="string">"copy"</span> dialog boxes, we add controls for setting scale factors, detector numbers, etc.</span>
 
    <span class="comment">//set state of interface from selected grid</span>
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_rings" title="void KVNewGridDialog::_set_choose_rings(Bool_t)">_set_choose_rings</a>(!<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRingList" title="KVNumberList&amp; KVINDRARRMValidator::GetRingList()">GetRingList</a>().<a href="../KVNumberList.html#KVNumberList:IsEmpty" title="Bool_t KVNumberList::IsEmpty() const">IsEmpty</a>());
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_mods" title="void KVNewGridDialog::_set_choose_mods(Bool_t)">_set_choose_mods</a>(!<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetModuleList" title="KVNumberList&amp; KVINDRARRMValidator::GetModuleList()">GetModuleList</a>().<a href="../KVNumberList.html#KVNumberList:IsEmpty" title="Bool_t KVNumberList::IsEmpty() const">IsEmpty</a>());
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_runs" title="void KVNewGridDialog::_set_choose_runs(Bool_t)">_set_choose_runs</a>(!<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRunList" title="KVNumberList&amp; KVINDRARRMValidator::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:IsEmpty" title="Bool_t KVNumberList::IsEmpty() const">IsEmpty</a>());
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_rings" title="void KVNewGridDialog::_set_choose_rings(Bool_t )">_set_choose_rings</a>(!<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRingList" title="KVNumberList&amp; KVINDRARRMValidator::GetRingList()">GetRingList</a>().<a href="../KVNumberList.html#KVNumberList:IsEmpty" title="Bool_t KVNumberList::IsEmpty()">IsEmpty</a>());
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_mods" title="void KVNewGridDialog::_set_choose_mods(Bool_t )">_set_choose_mods</a>(!<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetModuleList" title="KVNumberList&amp; KVINDRARRMValidator::GetModuleList()">GetModuleList</a>().<a href="../KVNumberList.html#KVNumberList:IsEmpty" title="Bool_t KVNumberList::IsEmpty()">IsEmpty</a>());
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_runs" title="void KVNewGridDialog::_set_choose_runs(Bool_t )">_set_choose_runs</a>(!<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRunList" title="KVNumberList&amp; KVINDRARRMValidator::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:IsEmpty" title="Bool_t KVNumberList::IsEmpty()">IsEmpty</a>());
    <span class="keyword">if</span> (fSelectedGrid-&gt;GetXScaleFactor() != 1.0
        || fSelectedGrid-&gt;GetYScaleFactor() != 1.0) {
-      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_scales" title="void KVNewGridDialog::_set_choose_scales(Bool_t)">_set_choose_scales</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
-      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_scale_x" title="void KVNewGridDialog::_set_scale_x(Double_t)">_set_scale_x</a>(fSelectedGrid-&gt;GetXScaleFactor());
-      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_scale_y" title="void KVNewGridDialog::_set_scale_y(Double_t)">_set_scale_y</a>(fSelectedGrid-&gt;GetYScaleFactor());
+      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_scales" title="void KVNewGridDialog::_set_choose_scales(Bool_t )">_set_choose_scales</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
+      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_scale_x" title="void KVNewGridDialog::_set_scale_x(Double_t )">_set_scale_x</a>(fSelectedGrid-&gt;GetXScaleFactor());
+      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_scale_y" title="void KVNewGridDialog::_set_scale_y(Double_t )">_set_scale_y</a>(fSelectedGrid-&gt;GetYScaleFactor());
    } <span class="keyword">else</span>
-      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_scales" title="void KVNewGridDialog::_set_choose_scales(Bool_t)">_set_choose_scales</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+      <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_scales" title="void KVNewGridDialog::_set_choose_scales(Bool_t )">_set_choose_scales</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
 
    fMatrixFrame = <span class="keyword">new</span> TGGroupFrame(fMain, <span class="string">"Grid parameters"</span>);
    <span class="comment">//**************Select run numbers************</span>
@@ -116,9 +116,9 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    fSetRuns = <span class="keyword">new</span> TGCheckButton(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFRuns" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFRuns">fHFRuns</a>, <span class="string">"Set runs :"</span>, CHK_BUT_RUNS);
    <span class="comment">//set checked according to last known state</span>
    fSetRuns-&gt;SetDown(<a href="../KVNewGridDialog.html#KVNewGridDialog:_choose_runs" title="Bool_t KVNewGridDialog::_choose_runs()">_choose_runs</a>());
-   fSetRuns-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
+   fSetRuns-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
                      <span class="string">"SelectRuns(Bool_t)"</span>);
-   <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRunList" title="TGTextEntry* KVNewGridRRMDialog::fRunList">fRunList</a> = <span class="keyword">new</span> TGTextEntry(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFRuns" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFRuns">fHFRuns</a>, <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRunList" title="KVNumberList&amp; KVINDRARRMValidator::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars = 0)">AsString</a>());
+   <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRunList" title="TGTextEntry* KVNewGridRRMDialog::fRunList">fRunList</a> = <span class="keyword">new</span> TGTextEntry(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFRuns" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFRuns">fHFRuns</a>, <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRunList" title="KVNumberList&amp; KVINDRARRMValidator::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars=0)">AsString</a>());
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRunList" title="TGTextEntry* KVNewGridRRMDialog::fRunList">fRunList</a>-&gt;
        SetToolTipText
        (<span class="string">"Enter a list of runs for which grid is valid, i.e. \"1000-1009, 1011, 984-999\""</span>,
@@ -136,10 +136,10 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    fSetRings = <span class="keyword">new</span> TGCheckButton(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFRings" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFRings">fHFRings</a>, <span class="string">"Set rings :"</span>, CHK_BUT_RINGS);
    <span class="comment">//set checked according to last known state</span>
    fSetRings-&gt;SetDown(<a href="../KVNewGridDialog.html#KVNewGridDialog:_choose_rings" title="Bool_t KVNewGridDialog::_choose_rings()">_choose_rings</a>());
-   fSetRings-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
+   fSetRings-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
                       <span class="string">"SelectRings(Bool_t)"</span>);
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRingList" title="TGTextEntry* KVNewGridRRMDialog::fRingList">fRingList</a> =
-       <span class="keyword">new</span> TGTextEntry(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFRings" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFRings">fHFRings</a>, <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRingList" title="KVNumberList&amp; KVINDRARRMValidator::GetRingList()">GetRingList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars = 0)">AsString</a>());
+       <span class="keyword">new</span> TGTextEntry(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFRings" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFRings">fHFRings</a>, <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetRingList" title="KVNumberList&amp; KVINDRARRMValidator::GetRingList()">GetRingList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars=0)">AsString</a>());
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRingList" title="TGTextEntry* KVNewGridRRMDialog::fRingList">fRingList</a>-&gt;
        SetToolTipText
        (<span class="string">"Enter a list of rings for which grid is valid, i.e. \"2-3, 5, 8-9\""</span>,
@@ -158,10 +158,10 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    fSetMods = <span class="keyword">new</span> TGCheckButton(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFModules" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFModules">fHFModules</a>, <span class="string">"Set mods :"</span>, CHK_BUT_MODS);
    <span class="comment">//set checked according to last known state</span>
    fSetMods-&gt;SetDown(<a href="../KVNewGridDialog.html#KVNewGridDialog:_choose_mods" title="Bool_t KVNewGridDialog::_choose_mods()">_choose_mods</a>());
-   fSetMods-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
+   fSetMods-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
                      <span class="string">"SelectMods(Bool_t)"</span>);
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fModList" title="TGTextEntry* KVNewGridRRMDialog::fModList">fModList</a> =
-       <span class="keyword">new</span> TGTextEntry(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFModules" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFModules">fHFModules</a>, <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetModuleList" title="KVNumberList&amp; KVINDRARRMValidator::GetModuleList()">GetModuleList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars = 0)">AsString</a>());
+       <span class="keyword">new</span> TGTextEntry(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFModules" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFModules">fHFModules</a>, <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRRMGrid" title="KVINDRARRMValidator* KVNewGridRRMDialog::fRRMGrid">fRRMGrid</a>-><a href="../KVINDRARRMValidator.html#KVINDRARRMValidator:GetModuleList" title="KVNumberList&amp; KVINDRARRMValidator::GetModuleList()">GetModuleList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars=0)">AsString</a>());
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fModList" title="TGTextEntry* KVNewGridRRMDialog::fModList">fModList</a>-&gt;
        SetToolTipText
        (<span class="string">"Enter a list of modules for which grid is valid, i.e. \"1-5, 11, 21-23\""</span>,
@@ -180,7 +180,7 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    fSetScales = <span class="keyword">new</span> TGCheckButton(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFScales" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFScales">fHFScales</a>, <span class="string">"Scaling :"</span>, CHK_BUT_SCALES);
    <span class="comment">//set checked according to last known state</span>
    fSetScales-&gt;SetDown(<a href="../KVNewGridDialog.html#KVNewGridDialog:_choose_scales" title="Bool_t KVNewGridDialog::_choose_scales()">_choose_scales</a>());
-   fSetScales-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig, const char* cl, void* rcvr, const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
+   fSetScales-&gt;<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:Connect" title="Bool_t KVNewGridRRMDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Toggled(Bool_t)"</span>, <span class="string">"KVNewGridRRMDialog"</span>, <span class="keyword">this</span>,
                        <span class="string">"SelectScales(Bool_t)"</span>);
    fScaleMinLabel = <span class="keyword">new</span> TGLabel(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFScales" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFScales">fHFScales</a>, <span class="string">"X factor"</span>);
    fScaleMaxLabel = <span class="keyword">new</span> TGLabel(<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fHFScales" title="TGHorizontalFrame* KVNewGridRRMDialog::fHFScales">fHFScales</a>, <span class="string">"Y factor"</span>);
@@ -213,12 +213,12 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
 }
 
 
-<a name="IYTvbD"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:SelectRuns" title="void KVNewGridRRMDialog::SelectRuns(Bool_t)">SelectRuns</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> yes)
+<a name="IYTvbD"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:SelectRuns" title="void KVNewGridRRMDialog::SelectRuns(Bool_t )">SelectRuns</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> yes)
 {
    <span class="comment">//connected to 'select runs for grid' check button 'Toggled(<a href="../ListOfTypes.html#Bool_t">Bool_t</a>)' signal</span>
    <span class="comment">//if yes==<a href="../ListOfTypes.html#Bool_t">kTRUE</a>, the text entry field for valid runs is activated</span>
    <span class="comment">//if yes==<a href="../ListOfTypes.html#Bool_t">kFALSE</a>, the text entry field for valid runs is deactivated</span>
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_runs" title="void KVNewGridDialog::_set_choose_runs(Bool_t)">_set_choose_runs</a>(yes);
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_runs" title="void KVNewGridDialog::_set_choose_runs(Bool_t )">_set_choose_runs</a>(yes);
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRunList" title="TGTextEntry* KVNewGridRRMDialog::fRunList">fRunList</a>-&gt;SetState(yes);
 }
 
@@ -228,12 +228,12 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRunListString" title="TString KVNewGridRRMDialog::fRunListString">fRunListString</a> = <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRunList" title="TGTextEntry* KVNewGridRRMDialog::fRunList">fRunList</a>-&gt;GetText();
 }
 
-<a name="IfoxQB"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:SelectRings" title="void KVNewGridRRMDialog::SelectRings(Bool_t)">SelectRings</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> yes)
+<a name="IfoxQB"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:SelectRings" title="void KVNewGridRRMDialog::SelectRings(Bool_t )">SelectRings</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> yes)
 {
    <span class="comment">//connected to 'select rings for grid' check button 'Toggled(<a href="../ListOfTypes.html#Bool_t">Bool_t</a>)' signal</span>
    <span class="comment">//if yes==<a href="../ListOfTypes.html#Bool_t">kTRUE</a>, the text entry field for valid rings is activated</span>
    <span class="comment">//if yes==<a href="../ListOfTypes.html#Bool_t">kFALSE</a>, the text entry field for valid rings is deactivated</span>
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_rings" title="void KVNewGridDialog::_set_choose_rings(Bool_t)">_set_choose_rings</a>(yes);
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_rings" title="void KVNewGridDialog::_set_choose_rings(Bool_t )">_set_choose_rings</a>(yes);
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRingList" title="TGTextEntry* KVNewGridRRMDialog::fRingList">fRingList</a>-&gt;SetState(yes);
 }
 
@@ -243,12 +243,12 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRingListString" title="TString KVNewGridRRMDialog::fRingListString">fRingListString</a> = <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fRingList" title="TGTextEntry* KVNewGridRRMDialog::fRingList">fRingList</a>-&gt;GetText();
 }
 
-<a name="UJy3hD"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:SelectMods" title="void KVNewGridRRMDialog::SelectMods(Bool_t)">SelectMods</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> yes)
+<a name="UJy3hD"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:SelectMods" title="void KVNewGridRRMDialog::SelectMods(Bool_t )">SelectMods</a>(<a href="../ListOfTypes.html#Bool_t">Bool_t</a> yes)
 {
    <span class="comment">//connected to 'select modules for grid' check button 'Toggled(<a href="../ListOfTypes.html#Bool_t">Bool_t</a>)' signal</span>
    <span class="comment">//if yes==<a href="../ListOfTypes.html#Bool_t">kTRUE</a>, the text entry field for valid modules is activated</span>
    <span class="comment">//if yes==<a href="../ListOfTypes.html#Bool_t">kFALSE</a>, the text entry field for valid modules is deactivated</span>
-   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_mods" title="void KVNewGridDialog::_set_choose_mods(Bool_t)">_set_choose_mods</a>(yes);
+   <a href="../KVNewGridDialog.html#KVNewGridDialog:_set_choose_mods" title="void KVNewGridDialog::_set_choose_mods(Bool_t )">_set_choose_mods</a>(yes);
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fModList" title="TGTextEntry* KVNewGridRRMDialog::fModList">fModList</a>-&gt;SetState(yes);
 }
 
@@ -258,7 +258,7 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
    <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fModListString" title="TString KVNewGridRRMDialog::fModListString">fModListString</a> = <a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:fModList" title="TGTextEntry* KVNewGridRRMDialog::fModList">fModList</a>-&gt;GetText();
 }
 
-<a name="QjQ0oC"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:ReadAndSetSelectedGridProperties" title="void KVNewGridRRMDialog::ReadAndSetSelectedGridProperties(KVIDGraph*)">ReadAndSetSelectedGridProperties</a>(<a href="../KVIDGraph.html">KVIDGraph</a> * grid)
+<a name="QjQ0oC"></a><span class="keyword">void</span> <a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>::<a href="../KVNewGridRRMDialog.html#KVNewGridRRMDialog:ReadAndSetSelectedGridProperties" title="void KVNewGridRRMDialog::ReadAndSetSelectedGridProperties(KVIDGraph* )">ReadAndSetSelectedGridProperties</a>(<a href="../KVIDGraph.html">KVIDGraph</a> * grid)
 {
    <a href="../KVINDRARRMValidator.html">KVINDRARRMValidator</a> *RRMGrid =
        <span class="keyword">dynamic_cast</span> &lt; <a href="../KVINDRARRMValidator.html">KVINDRARRMValidator</a> * &gt;(grid);
@@ -299,8 +299,8 @@ ClassImp(<a href="../KVNewGridRRMDialog.html">KVNewGridRRMDialog</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

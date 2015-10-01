@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:44:34 2015            -->
+<!--   Date: Thu Oct  1 17:52:36 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVTGIDFitter - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVTGIDFitter.html">KVTGIDFitter</a>.cpp,v 1.2 2009/03/03 14:27:15 franklan Exp $
@@ -130,14 +130,14 @@ The following is the documentation from Laurent's code.
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="HK2gb"></a><span class="keyword">void</span> <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:Fit" title="void KVTGIDFitter::Fit(KVIDGraph*)">Fit</a>(<a href="../KVIDGraph.html">KVIDGraph</a>* theGrid)
+<a name="HK2gb"></a><span class="keyword">void</span> <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:Fit" title="void KVTGIDFitter::Fit(KVIDGraph* )">Fit</a>(<a href="../KVIDGraph.html">KVIDGraph</a>* theGrid)
 {
-	<span class="comment">// <a href="../KVTGIDFitter.html#KVTGIDFitter:Fit" title="void KVTGIDFitter::Fit(KVIDGraph*)">Fit</a> the grid using the functional chosen with <a href="../KVTGIDFitter.html#KVTGIDFitter:SetType" title="void KVTGIDFitter::SetType(Int_t t)">SetType</a> and <a href="../KVTGIDFitter.html#KVTGIDFitter:SetLight" title="void KVTGIDFitter::SetLight(Int_t ih)">SetLight</a>.</span>
-	<span class="comment">// Status of fit after this call can be retrieved with <a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatus" title="Int_t KVTGIDFitter::GetFitStatus() const">GetFitStatus</a>().</span>
+	<span class="comment">// <a href="../KVTGIDFitter.html#KVTGIDFitter:Fit" title="void KVTGIDFitter::Fit(KVIDGraph* )">Fit</a> the grid using the functional chosen with <a href="../KVTGIDFitter.html#KVTGIDFitter:SetType" title="void KVTGIDFitter::SetType(Int_t t)">SetType</a> and <a href="../KVTGIDFitter.html#KVTGIDFitter:SetLight" title="void KVTGIDFitter::SetLight(Int_t ih)">SetLight</a>.</span>
+	<span class="comment">// Status of fit after this call can be retrieved with <a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatus" title="Int_t KVTGIDFitter::GetFitStatus()">GetFitStatus</a>().</span>
 
 	<span class="comment">// must inherit from <a href="../KVIDZAGrid.html">KVIDZAGrid</a>!</span>
-	<span class="keyword">if</span>( !theGrid-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) const or overloads">InheritsFrom</a>( <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:Class" title="TClass* KVIDZAGrid::Class()">Class</a>() ) ){
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"Fit(KVIDGraph*)"</span>,
+	<span class="keyword">if</span>( !theGrid-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>( <a href="../KVIDZAGrid.html">KVIDZAGrid</a>::<a href="../KVIDZAGrid.html#KVIDZAGrid:Class" title="TClass* KVIDZAGrid::Class()">Class</a>() ) ){
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Fit(KVIDGraph*)"</span>,
 				<span class="string">"Can only fit graphs inheriting from KVIDZAGrid"</span>);
 		fGrid = 0;
 		<span class="keyword">return</span>;
@@ -146,7 +146,7 @@ The following is the documentation from Laurent's code.
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fZorA" title="Int_t KVTGIDFitter::fZorA">fZorA</a> = (<a href="../ListOfTypes.html#Int_t">Int_t</a>)theGrid-&gt;OnlyZId();
 	<span class="comment">// prepare new parameter array and status array</span>
 	<span class="keyword">if</span>(<a href="../KVTGIDFitter.html#KVTGIDFitter:fPar" title="Float_t* KVTGIDFitter::fPar">fPar</a>) <span class="keyword">delete</span> [] <a href="../KVTGIDFitter.html#KVTGIDFitter:fPar" title="Float_t* KVTGIDFitter::fPar">fPar</a>;
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> npar = <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type, Int_t light)">GetNumberOfLTGParameters</a>(<a href="../KVTGIDFitter.html#KVTGIDFitter:fType" title="Int_t KVTGIDFitter::fType">fType</a>,<a href="../KVTGIDFitter.html#KVTGIDFitter:fLight" title="Int_t KVTGIDFitter::fLight">fLight</a>);
+	<a href="../ListOfTypes.html#Int_t">Int_t</a> npar = <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:GetNumberOfLTGParameters" title="Int_t KVTGID::GetNumberOfLTGParameters(Int_t type,Int_t light)">GetNumberOfLTGParameters</a>(<a href="../KVTGIDFitter.html#KVTGIDFitter:fType" title="Int_t KVTGIDFitter::fType">fType</a>,<a href="../KVTGIDFitter.html#KVTGIDFitter:fLight" title="Int_t KVTGIDFitter::fLight">fLight</a>);
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fPar" title="Float_t* KVTGIDFitter::fPar">fPar</a> = <span class="keyword">new</span> <a href="../ListOfTypes.html#Float_t">Float_t</a>[npar];
 	<span class="keyword">if</span>(<a href="../KVTGIDFitter.html#KVTGIDFitter:istate" title="Int_t* KVTGIDFitter::istate">istate</a>) <span class="keyword">delete</span> [] <a href="../KVTGIDFitter.html#KVTGIDFitter:istate" title="Int_t* KVTGIDFitter::istate">istate</a>;
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:istate" title="Int_t* KVTGIDFitter::istate">istate</a> = <span class="keyword">new</span> <a href="../ListOfTypes.html#Int_t">Int_t</a>[npar];
@@ -172,9 +172,9 @@ The following is the documentation from Laurent's code.
 			}
 		}
 	}
-	cout &lt;&lt; <span class="string">"Points to fit = "</span> &lt;&lt; npts &lt;&lt; endl;
+	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Points to fit = "</span> &lt;&lt; npts &lt;&lt; endl;
 	<span class="keyword">if</span>(npts&lt;2){
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"Fit(KVIDGraph*)"</span>,
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Fit(KVIDGraph*)"</span>,
 				<span class="string">"Too few points for fit"</span>);
 		<a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>=-2;
 		<span class="keyword">return</span>;
@@ -213,7 +213,7 @@ The following is the documentation from Laurent's code.
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="ekVw7C"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatus" title="Int_t KVTGIDFitter::GetFitStatus() const">GetFitStatus</a>() <span class="keyword">const</span>
+<a name="ekVw7C"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatus" title="Int_t KVTGIDFitter::GetFitStatus()">GetFitStatus</a>() <span class="keyword">const</span>
 {
 	<span class="comment">// Return status code of last fit.</span>
 	<span class="comment">//  0 -&gt; convergence reached</span>
@@ -225,9 +225,9 @@ The following is the documentation from Laurent's code.
 	<span class="keyword">return</span> <a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>;
 }
 
-<a name="Kgf7uC"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatusString" title="const Char_t* KVTGIDFitter::GetFitStatusString() const">GetFitStatusString</a>() <span class="keyword">const</span>
+<a name="Kgf7uC"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatusString" title="const Char_t* KVTGIDFitter::GetFitStatusString()">GetFitStatusString</a>() <span class="keyword">const</span>
 {
-	<span class="comment">// String with meaning of fit status codes (see <a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatus" title="Int_t KVTGIDFitter::GetFitStatus() const">GetFitStatus</a>)</span>
+	<span class="comment">// String with meaning of fit status codes (see <a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatus" title="Int_t KVTGIDFitter::GetFitStatus()">GetFitStatus</a>)</span>
 
 	<span class="keyword">static</span> TString message[] = {
 		<span class="string">"addressing problem between Fortran and C"</span>,
@@ -242,7 +242,7 @@ The following is the documentation from Laurent's code.
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="TfPvXC"></a><a href="../ListOfTypes.html#Int_t">Int_t</a>* <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:GetStatusOfParameters" title="Int_t* KVTGIDFitter::GetStatusOfParameters() const">GetStatusOfParameters</a>() <span class="keyword">const</span>
+<a name="TfPvXC"></a><a href="../ListOfTypes.html#Int_t">Int_t</a>* <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:GetStatusOfParameters" title="Int_t* KVTGIDFitter::GetStatusOfParameters()">GetStatusOfParameters</a>() <span class="keyword">const</span>
 {
 	<span class="comment">// Returns array containing status of each parameter:</span>
 	<span class="comment">//  =0 -&gt; free parameter</span>
@@ -261,7 +261,7 @@ The following is the documentation from Laurent's code.
 	<span class="keyword">if</span>(<a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>&lt;0 || <a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>&gt;1) <span class="keyword">return</span>;
 	<span class="keyword">if</span>(!fGrid) <span class="keyword">return</span>;
 
-	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a> = <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:MakeTGID" title="KVTGID* KVTGID::MakeTGID(const Char_t* name, Int_t type, Int_t light, Int_t ZorA, Int_t mass)">MakeTGID</a>(Form(<span class="string">"%s_fit"</span>,fGrid-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()), <a href="../KVTGIDFitter.html#KVTGIDFitter:fType" title="Int_t KVTGIDFitter::fType">fType</a>, <a href="../KVTGIDFitter.html#KVTGIDFitter:fLight" title="Int_t KVTGIDFitter::fLight">fLight</a>, <a href="../KVTGIDFitter.html#KVTGIDFitter:fZorA" title="Int_t KVTGIDFitter::fZorA">fZorA</a>,
+	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a> = <a href="../KVTGID.html">KVTGID</a>::<a href="../KVTGID.html#KVTGID:MakeTGID" title="KVTGID* KVTGID::MakeTGID(const Char_t* name,Int_t type,Int_t light,Int_t ZorA,Int_t mass)">MakeTGID</a>(Form(<span class="string">"%s_fit"</span>,fGrid-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <a href="../KVTGIDFitter.html#KVTGIDFitter:fType" title="Int_t KVTGIDFitter::fType">fType</a>, <a href="../KVTGIDFitter.html#KVTGIDFitter:fLight" title="Int_t KVTGIDFitter::fLight">fLight</a>, <a href="../KVTGIDFitter.html#KVTGIDFitter:fZorA" title="Int_t KVTGIDFitter::fZorA">fZorA</a>,
 			fGrid-&gt;GetMassFormula());
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetLTGParameters" title="void KVTGID::SetLTGParameters(Double_t* par) or overloads">SetLTGParameters</a>(<a href="../KVTGIDFitter.html#KVTGIDFitter:fPar" title="Float_t* KVTGIDFitter::fPar">fPar</a>);
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetIDmin" title="void KVTGID::SetIDmin(Double_t x)">SetIDmin</a>( ((<a href="../KVIDentifier.html">KVIDentifier</a>*)fGrid-&gt;GetIdentifiers()-&gt;First())-&gt;GetZ() );
@@ -269,12 +269,12 @@ The following is the documentation from Laurent's code.
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetValidRuns" title="void KVTGID::SetValidRuns(const KVNumberList&amp; r)">SetValidRuns</a>( fGrid-&gt;GetRuns() );
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetVarX" title="void KVTGID::SetVarX(const Char_t* x)">SetVarX</a>( fGrid-&gt;GetVarX() );
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetVarY" title="void KVTGID::SetVarY(const Char_t* x)">SetVarY</a>( fGrid-&gt;GetVarY() );
-	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetIDTelescopes" title="void KVTGID::SetIDTelescopes(const TCollection*)">SetIDTelescopes</a>( fGrid-&gt;GetIDTelescopes() );
+	<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>-><a href="../KVTGID.html#KVTGID:SetIDTelescopes" title="void KVTGID::SetIDTelescopes(const TCollection* )">SetIDTelescopes</a>( fGrid-&gt;GetIDTelescopes() );
 }
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="hACKMC"></a><span class="keyword">void</span> <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:FitPanel" title="void KVTGIDFitter::FitPanel(Int_t functional_type = 1, Bool_t with_csi_light_energy = kTRUE, Int_t first_Z = -1, Int_t last_Z = -1, Double_t xmin = 0., Double_t xmax = 0.)">FitPanel</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> functional_type, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> with_csi_light_energy,
+<a name="hACKMC"></a><span class="keyword">void</span> <a href="../KVTGIDFitter.html">KVTGIDFitter</a>::<a href="../KVTGIDFitter.html#KVTGIDFitter:FitPanel" title="void KVTGIDFitter::FitPanel(Int_t functional_type=1,Bool_t with_csi_light_energy=kTRUE,Int_t first_Z=-1,Int_t last_Z=-1,Double_t xmin=0.0,Double_t xmax=0.0)">FitPanel</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> functional_type, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> with_csi_light_energy,
 			<a href="../ListOfTypes.html#Int_t">Int_t</a> first_Z, <a href="../ListOfTypes.html#Int_t">Int_t</a> last_Z, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax)
 {
 	<span class="comment">// GUI method used to fit grid previously set with <a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:SetGrid" title="void KVVirtualIDFitter::SetGrid(KVIDGraph* g)">SetGrid</a>(<a href="../KVIDGraph.html">KVIDGraph</a>*).</span>
@@ -286,19 +286,19 @@ The following is the documentation from Laurent's code.
 	<span class="comment">//                     (default: use all points regardless of abscissa)</span>
 
 	<span class="keyword">if</span>(!fGrid){
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"FitPanel"</span>, <span class="string">"Set grid to fit with SetGrid(KVIDGraph*)"</span>);
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"FitPanel"</span>, <span class="string">"Set grid to fit with SetGrid(KVIDGraph*)"</span>);
 		<span class="keyword">return</span>;
 	}
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:SetType" title="void KVTGIDFitter::SetType(Int_t t)">SetType</a>(functional_type);
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:SetLight" title="void KVTGIDFitter::SetLight(Int_t ih)">SetLight</a>((<a href="../ListOfTypes.html#Int_t">Int_t</a>)with_csi_light_energy);
 	<a href="../KVTGIDFitter.html#KVTGIDFitter:fXmin" title="Double_t KVTGIDFitter::fXmin">fXmin</a>=xmin; <a href="../KVTGIDFitter.html#KVTGIDFitter:fXmax" title="Double_t KVTGIDFitter::fXmax">fXmax</a>=xmax;
-	<a href="../KVTGIDFitter.html#KVTGIDFitter:Fit" title="void KVTGIDFitter::Fit(KVIDGraph*)">Fit</a>(fGrid);
+	<a href="../KVTGIDFitter.html#KVTGIDFitter:Fit" title="void KVTGIDFitter::Fit(KVIDGraph* )">Fit</a>(fGrid);
    <span class="keyword">if</span>(<a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>&gt;1 || <a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>&lt;0) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"FitPanel"</span>, <span class="string">"Fit failed. Status of fit = %d"</span>, <a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>);
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"FitPanel"</span>, <span class="string">"Fit failed. Status of fit = %d"</span>, <a href="../KVTGIDFitter.html#KVTGIDFitter:irc" title="Int_t KVTGIDFitter::irc">irc</a>);
       <span class="keyword">return</span>;
    }
 	<span class="keyword">if</span>(!<a href="../KVTGIDFitter.html#KVTGIDFitter:fTGID" title="KVTGID* KVTGIDFitter::fTGID">fTGID</a>) {
-		<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"FitPanel"</span>, <span class="string">"Fit failed : %s"</span>, <a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatusString" title="const Char_t* KVTGIDFitter::GetFitStatusString() const">GetFitStatusString</a>());
+		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"FitPanel"</span>, <span class="string">"Fit failed : %s"</span>, <a href="../KVTGIDFitter.html#KVTGIDFitter:GetFitStatusString" title="const Char_t* KVTGIDFitter::GetFitStatusString()">GetFitStatusString</a>());
 		<span class="keyword">return</span>;
 	}
 
@@ -317,7 +317,7 @@ The following is the documentation from Laurent's code.
 	<span class="keyword">if</span>( fPad ){
 		<span class="comment">// draw fitted grid in same pad as original</span>
 		fPad-&gt;cd();
-		fitgr-&gt;<a href="http://root.cern.ch/root/html/TObject.html#TObject:Draw" title="void TObject::Draw(Option_t* option = &quot;&quot;)">Draw</a>();
+		fitgr-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>();
 		fPad-&gt;Modified();
 		fPad-&gt;Update();
 	}
@@ -330,8 +330,8 @@ The following is the documentation from Laurent's code.
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:44 </em><em>&raquo; Last generated: 2015-03-18 13:44</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

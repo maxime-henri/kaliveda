@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:54 2015            -->
+<!--   Date: Thu Oct  1 17:52:08 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVLogReader - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*******************************************************************************
 $Id: <a href="../KVLogReader.html">KVLogReader</a>.cpp,v 1.13 2008/12/08 14:07:37 franklan Exp $
@@ -33,7 +33,7 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
 <span class="comment">//////////////////////////////</span>
 <span class="comment">//For reading CCIN2P3 log files</span>
 <span class="comment">//</span>
-<a name="JMZE7B"></a>    <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:KVLogReader" title="KVLogReader KVLogReader::KVLogReader() or overloads">KVLogReader</a>()
+    <a href="../KVLogReader.html">KVLogReader</a>::KVLogReader()
 {
    <a href="../KVLogReader.html#KVLogReader:fFMT" title="TString KVLogReader::fFMT">fFMT</a> = <span class="string">"%d"</span>;
    <a href="../KVLogReader.html#KVLogReader:Reset" title="void KVLogReader::Reset()">Reset</a>();
@@ -57,21 +57,21 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
 
    <a href="../ListOfTypes.html#ifstream">ifstream</a> filestream(fname);
    <span class="keyword">if</span> (!filestream.good()) {
-      cout &lt;&lt; <span class="string">"Error in KVLogReader::ReadFile - cannot open file "</span> &lt;&lt; fname
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Error in KVLogReader::ReadFile - cannot open file "</span> &lt;&lt; fname
           &lt;&lt; endl;
       <span class="keyword">return</span>;
    }
    TString line;
-   line.<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line, Bool_t&amp;)">ReadLine</a>(filestream);
+   line.<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(filestream);
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    <span class="keyword">while</span> (filestream.good() &amp;&amp; ok) {
-      <a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line, Bool_t&amp;)">ReadLine</a>(line, ok);       <span class="comment">//perform action based on content of line</span>
-      line.<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line, Bool_t&amp;)">ReadLine</a>(filestream);
+      <a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(line, ok);       <span class="comment">//perform action based on content of line</span>
+      line.<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(filestream);
    }
    filestream.close();
 }
 
-<a name="tOQjw"></a><span class="keyword">void</span> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line, Bool_t&amp;)">ReadLine</a>(TString &amp; line, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> &amp; ok)
+<a name="tOQjw"></a><span class="keyword">void</span> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(TString &amp; line, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> &amp; ok)
 {
    <span class="comment">//analyse contents of line read from log file</span>
    <span class="comment">//if line contains <span class="string">"segmentation"</span> then we put ok=<a href="../ListOfTypes.html#Bool_t">kFALSE</a> to stop reading file</span>
@@ -99,7 +99,7 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
    }
 }
 
-<a name="xs1pSE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:GetCPUratio" title="Double_t KVLogReader::GetCPUratio() const">GetCPUratio</a>() <span class="keyword">const</span>
+<a name="xs1pSE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:GetCPUratio" title="Double_t KVLogReader::GetCPUratio()">GetCPUratio</a>() <span class="keyword">const</span>
 {
    <span class="comment">//calculate ratio of used CPU to requested CPU</span>
    <span class="keyword">return</span> (<a href="../KVLogReader.html#KVLogReader:fCPUreq" title="Double_t KVLogReader::fCPUreq">fCPUreq</a> ? <a href="../KVLogReader.html#KVLogReader:fCPUused" title="Double_t KVLogReader::fCPUused">fCPUused</a> / <a href="../KVLogReader.html#KVLogReader:fCPUreq" title="Double_t KVLogReader::fCPUreq">fCPUreq</a> : 0.);
@@ -132,7 +132,7 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
    <span class="keyword">delete</span> toks;
 }
 
-<a name="mHfp2"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:GetRunNumber" title="Int_t KVLogReader::GetRunNumber() const">GetRunNumber</a>() <span class="keyword">const</span>
+<a name="mHfp2"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:GetRunNumber" title="Int_t KVLogReader::GetRunNumber()">GetRunNumber</a>() <span class="keyword">const</span>
 {
    <span class="comment">//try to get run number from jobname using format string <a href="../KVLogReader.html#KVLogReader:fFMT" title="TString KVLogReader::fFMT">fFMT</a></span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> run;
@@ -140,7 +140,7 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
    <span class="keyword">return</span> run;
 }
 
-<a name="vMzZIC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:Incomplete" title="Bool_t KVLogReader::Incomplete() const">Incomplete</a>() <span class="keyword">const</span> {
+<a name="vMzZIC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:Incomplete" title="Bool_t KVLogReader::Incomplete()">Incomplete</a>() <span class="keyword">const</span> {
 	<span class="comment">// job considered incomplete if</span>
 	<span class="comment">//  - it was not 'killed'</span>
 	<span class="comment">//  - it did not end in segmentation fault/violation</span>
@@ -150,7 +150,7 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
 	<span class="comment">//  - OR the status indicates the job was incomplete</span>
 	
       <span class="keyword">return</span> (
-	(!<a href="../KVLogReader.html#KVLogReader:Killed" title="Bool_t KVLogReader::Killed() const">Killed</a>() &amp;&amp; !<a href="../KVLogReader.html#KVLogReader:SegFault" title="Bool_t KVLogReader::SegFault() const">SegFault</a>())
+	(!<a href="../KVLogReader.html#KVLogReader:Killed" title="Bool_t KVLogReader::Killed()">Killed</a>() &amp;&amp; !<a href="../KVLogReader.html#KVLogReader:SegFault" title="Bool_t KVLogReader::SegFault()">SegFault</a>())
 	&amp;&amp;
 	(
 		(!<a href="../KVLogReader.html#KVLogReader:fGotStatus" title="Bool_t KVLogReader::fGotStatus">fGotStatus</a>)
@@ -168,8 +168,8 @@ ClassImp(<a href="../KVLogReader.html">KVLogReader</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:52 </em><em>&raquo; Last generated: 2015-10-01 17:52</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

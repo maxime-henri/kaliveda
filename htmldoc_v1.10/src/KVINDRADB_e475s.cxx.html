@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:31 2015            -->
+<!--   Date: Thu Oct  1 17:51:52 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVINDRADB_e475s - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>.cpp,v 1.6 2009/04/09 09:23:20 ebonnet Exp $
@@ -61,7 +61,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 <span class="comment">//------------------------------</span>
 {
    <span class="comment">//Define duplicate run, create the tables of the database.</span>
-   cout &lt;&lt; <span class="string">"init de KVINDRADB_e475s"</span> &lt;&lt; endl;
+   <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"init de KVINDRADB_e475s"</span> &lt;&lt; endl;
 	
 	<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:fCalibrations" title="KVDBTable* KVINDRADB_e475s::fCalibrations">fCalibrations</a> = <a href="../KVDataBase.html#KVDataBase:AddTable" title="Bool_t KVDataBase::AddTable(KVDBTable* table) or overloads">AddTable</a>(<span class="string">"Calibrations"</span>, <span class="string">"List of available calibrations"</span>);
 				 
@@ -106,13 +106,13 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 {
 
    <a href="../ListOfTypes.html#ifstream">ifstream</a> finput;
-   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type, ifstream&amp; fs) const">OpenCalibFile</a>(<span class="string">"Pedestals"</span>, finput)) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadPedestalList()"</span>, <span class="string">"Could not open file %s"</span>,
-            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type) const">GetCalibFileName</a>(<span class="string">"Pedestals"</span>));
+   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type,ifstream&amp; fs)">OpenCalibFile</a>(<span class="string">"Pedestals"</span>, finput)) {
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadPedestalList()"</span>, <span class="string">"Could not open file %s"</span>,
+            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Pedestals"</span>));
       <span class="keyword">return</span>;
    }
    
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadPedestalList()"</span>,
+	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadPedestalList()"</span>,
         <span class="string">"Reading calibration parameters..."</span>);
 	
 	TString sline;
@@ -122,7 +122,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 		TString calib_det=<span class="string">""</span>,calib_acq=<span class="string">""</span>,calib_file=<span class="string">""</span>;
 		sline.ReadLine(finput);
 		<span class="keyword">if</span> (!sline.IsNull()){
-			cout &lt;&lt; sline &lt;&lt; endl;
+			<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; sline &lt;&lt; endl;
 			toks = sline.Tokenize(<span class="string">" "</span>);
 			<span class="keyword">if</span>  (toks-&gt;GetEntries()&gt;=1) {
 				calib_file = ((TObjString*)(*toks)[0])-&gt;GetString();
@@ -134,9 +134,9 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 				}
 			}
 			
-			stit.Form(<span class="string">"%s/%s"</span>,<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir() const">GetDataSetDir</a>(),calib_file.Data());
+			stit.Form(<span class="string">"%s/%s"</span>,<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir()">GetDataSetDir</a>(),calib_file.Data());
 			<a href="../ListOfTypes.html#ifstream">ifstream</a> fin(stit.Data());
-			<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadPedestalFile" title="void KVINDRADB_e475s::ReadPedestalFile(ifstream&amp; fin, TString, TString)">ReadPedestalFile</a>(fin,calib_det,calib_acq);
+			<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadPedestalFile" title="void KVINDRADB_e475s::ReadPedestalFile(ifstream&amp; fin,TString ,TString )">ReadPedestalFile</a>(fin,calib_det,calib_acq);
 			fin.close();
    	}
 	}
@@ -151,13 +151,13 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 {
 
    <a href="../ListOfTypes.html#ifstream">ifstream</a> finput;
-   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type, ifstream&amp; fs) const">OpenCalibFile</a>(<span class="string">"CalibFile"</span>, finput)) {
-      <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadCalibrations()"</span>, <span class="string">"Could not open file %s"</span>,
-            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type) const">GetCalibFileName</a>(<span class="string">"CalibFile"</span>));
+   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type,ifstream&amp; fs)">OpenCalibFile</a>(<span class="string">"CalibFile"</span>, finput)) {
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadCalibrations()"</span>, <span class="string">"Could not open file %s"</span>,
+            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"CalibFile"</span>));
       <span class="keyword">return</span>;
    }
    
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadCalibrations()"</span>,
+	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadCalibrations()"</span>,
         <span class="string">"Reading calibration parameters..."</span>);
 	
 	TString sline;
@@ -167,14 +167,14 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 	<span class="keyword">while</span> (finput.good()) {
 		sline.ReadLine(finput);
 		<span class="keyword">if</span> (!sline.IsNull()){
-			cout &lt;&lt; sline &lt;&lt; endl;
+			<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; sline &lt;&lt; endl;
 			toks = sline.Tokenize(<span class="string">" "</span>);
 			calib_det = ((TObjString*)(*toks)[0])-&gt;GetString();
 			calib_gain = ((TObjString*)(*toks)[1])-&gt;GetString();
 			calib_file = ((TObjString*)(*toks)[2])-&gt;GetString();
-			stit.Form(<span class="string">"%s/%s"</span>,<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir() const">GetDataSetDir</a>(),calib_file.Data());
+			stit.Form(<span class="string">"%s/%s"</span>,<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetDir" title="const Char_t* KVDataSet::GetDataSetDir()">GetDataSetDir</a>(),calib_file.Data());
 			<a href="../ListOfTypes.html#ifstream">ifstream</a> fin(stit.Data());
-			<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadCalibFile" title="void KVINDRADB_e475s::ReadCalibFile(ifstream&amp; fin, TString, TString)">ReadCalibFile</a>(fin,calib_det,calib_gain);
+			<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadCalibFile" title="void KVINDRADB_e475s::ReadCalibFile(ifstream&amp; fin,TString ,TString )">ReadCalibFile</a>(fin,calib_det,calib_gain);
 			fin.close();
    	}
 	}
@@ -183,9 +183,9 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 }
 
 <span class="comment">//------------------------------</span>
-<a name="EpcYcB"></a><span class="keyword">void</span> <a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>::<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadCalibFile" title="void KVINDRADB_e475s::ReadCalibFile(ifstream&amp; fin, TString, TString)">ReadCalibFile</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;fin,TString dettype,TString detgain){
+<a name="EpcYcB"></a><span class="keyword">void</span> <a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>::<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadCalibFile" title="void KVINDRADB_e475s::ReadCalibFile(ifstream&amp; fin,TString ,TString )">ReadCalibFile</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;fin,TString dettype,TString detgain){
 <span class="comment">//------------------------------</span>
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadCalibFile()"</span>,
+	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadCalibFile()"</span>,
         <span class="string">"Reading calibration parameters of file %s%s"</span>,dettype.Data(),detgain.Data());
 	
 	<a href="../KVDBParameterSet.html">KVDBParameterSet</a> *parset=NULL;
@@ -210,24 +210,24 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 				calib_type = sline;
 				sline.ReadLine(fin);
 				<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; Signal="</span>)) { 
-					sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Signal="</span>,<span class="string">""</span>); calib_signal = sline;	cout &lt;&lt; calib_signal &lt;&lt; endl; 
-					<span class="keyword">if</span> (calib_signal!=dettype+detgain) <a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadCalibFile()"</span>, <span class="string">"Erreur de synchro ..."</span>);
+					sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Signal="</span>,<span class="string">""</span>); calib_signal = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_signal &lt;&lt; endl; 
+					<span class="keyword">if</span> (calib_signal!=dettype+detgain) <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadCalibFile()"</span>, <span class="string">"Erreur de synchro ..."</span>);
 					sline.ReadLine(fin);
 					<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"++&lt;LIST&gt; Runs="</span>)){
-						sline.ReplaceAll(<span class="string">"++&lt;LIST&gt; Runs="</span>,<span class="string">""</span>); 	calib_runs = sline;	cout &lt;&lt; calib_runs &lt;&lt; endl;
+						sline.ReplaceAll(<span class="string">"++&lt;LIST&gt; Runs="</span>,<span class="string">""</span>); 	calib_runs = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_runs &lt;&lt; endl;
 						sline.ReadLine(fin);
 						list_record-&gt;RemoveAll();
 						<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; Rings="</span>)){
-							sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Rings="</span>,<span class="string">""</span>); 	calib_ring = sline;	cout &lt;&lt; calib_ring &lt;&lt; endl;
+							sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Rings="</span>,<span class="string">""</span>); 	calib_ring = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_ring &lt;&lt; endl;
 							sline.ReadLine(fin);
 							<span class="keyword">while</span> ( sline.BeginsWith(<span class="string">"&lt;LIST&gt; Modules="</span>) || sline.BeginsWith(<span class="string">"&lt;PARAMETER&gt; Function="</span>)){
 								<span class="keyword">if</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; Modules="</span>)) {
-									sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Modules="</span>,<span class="string">""</span>);	calib_mods = sline;	cout &lt;&lt; calib_mods &lt;&lt; endl;
+									sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Modules="</span>,<span class="string">""</span>);	calib_mods = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_mods &lt;&lt; endl;
 									<span class="comment">//sprintf(detname,<span class="string">"%s_%02d%02d_%s"</span>,dettype.Data(),calib_ring.Atoi(),calib_mods.Atoi(),detgain.Data());</span>
 									sprintf(detname,<span class="string">"%s_%02d%02d"</span>,dettype.Data(),calib_ring.Atoi(),calib_mods.Atoi());
 								}
 								<span class="keyword">else</span> {
-									sline.ReplaceAll(<span class="string">"&lt;PARAMETER&gt; Function="</span>,<span class="string">""</span>);	cout &lt;&lt; sline &lt;&lt; endl;
+									sline.ReplaceAll(<span class="string">"&lt;PARAMETER&gt; Function="</span>,<span class="string">""</span>);	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; sline &lt;&lt; endl;
 									toks = sline.Tokenize(<span class="string">":"</span>);
 									TF1 ff(Form(<span class="string">"f%s"</span>,detname),((TObjString*)(*toks)[0])-&gt;GetString().Data());
 									
@@ -235,7 +235,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 									<span class="keyword">delete</span> toks;
 									
 									tokspara = sparaline.Tokenize(<span class="string">" "</span>);
-									<span class="keyword">if</span> (tokspara-&gt;GetEntries()!=ff.GetNpar()) cout &lt;&lt; tokspara-&gt;GetEntries() &lt;&lt; <span class="string">" "</span> &lt;&lt; ff.GetNpar() &lt;&lt; endl;
+									<span class="keyword">if</span> (tokspara-&gt;GetEntries()!=ff.GetNpar()) <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; tokspara-&gt;GetEntries() &lt;&lt; <span class="string">" "</span> &lt;&lt; ff.GetNpar() &lt;&lt; endl;
 									<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> pp=0;pp&lt;ff.GetNpar();pp+=1){
 										ff.SetParameter(pp,((TObjString*)(*tokspara)[pp])-&gt;GetString().Atof());
 										printf(<span class="string">"%d %lf\n"</span>,pp,ff.GetParameter(pp));
@@ -252,7 +252,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 									parset-&gt;SetParameter(ff.GetNpar()+2,4096.); parset-&gt;SetParamName(ff.GetNpar()+2,<span class="string">"xmax"</span>);
 									
 									<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:fCalibrations" title="KVDBTable* KVINDRADB_e475s::fCalibrations">fCalibrations</a>-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
-									list_record-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
+									list_record-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
 									
 								}
 								sline.ReadLine(fin);	
@@ -263,8 +263,8 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 						<span class="keyword">while</span> (!nl.End()){
 							<a href="../ListOfTypes.html#Int_t">Int_t</a> run = nl.Next();
 							<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ll=0;ll&lt;list_record-&gt;GetEntries();ll+=1) 
-								<span class="keyword">if</span> ( !(((<a href="../KVDBRecord.html">KVDBRecord</a> *)list_record-&gt;At(ll))-&gt;AddLink(<span class="string">"Runs"</span>, <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run) const or overloads">GetRun</a>(run))) ) 
-									<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadCalibFile()"</span>, <span class="string">"Pb de chargements ..."</span>);
+								<span class="keyword">if</span> ( !(((<a href="../KVDBRecord.html">KVDBRecord</a> *)list_record-&gt;At(ll))-&gt;AddLink(<span class="string">"Runs"</span>, <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run))) ) 
+									<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadCalibFile()"</span>, <span class="string">"Pb de chargements ..."</span>);
 						}
 					}
 				}
@@ -274,15 +274,15 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
   
    fin.close();
 
-	list_record-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Clear" title="void TFolder::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+	list_record-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
 	<span class="keyword">delete</span> list_record;
 	
 }
 
 <span class="comment">//------------------------------</span>
-<a name="It3IoC"></a><span class="keyword">void</span> <a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>::<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadPedestalFile" title="void KVINDRADB_e475s::ReadPedestalFile(ifstream&amp; fin, TString, TString)">ReadPedestalFile</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;fin,TString dettype,TString detgain){
+<a name="It3IoC"></a><span class="keyword">void</span> <a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>::<a href="../KVINDRADB_e475s.html#KVINDRADB_e475s:ReadPedestalFile" title="void KVINDRADB_e475s::ReadPedestalFile(ifstream&amp; fin,TString ,TString )">ReadPedestalFile</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a> &amp;fin,TString dettype,TString detgain){
 <span class="comment">//------------------------------</span>
-	<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"ReadPedestalFile()"</span>,
+	<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadPedestalFile()"</span>,
         <span class="string">"Reading pedestal value of file %s - %s"</span>,dettype.Data(),detgain.Data());
 	
 	<a href="../KVDBParameterSet.html">KVDBParameterSet</a> *parset=NULL;
@@ -299,31 +299,31 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
       <span class="keyword">while</span> (sline.BeginsWith(<span class="string">"+KVCalibrator"</span>)){
 			sline.ReadLine(fin);
 			<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; Type="</span>)){
-				sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Type="</span>,<span class="string">""</span>); calib_type = sline;	cout &lt;&lt; calib_type &lt;&lt; endl;
+				sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Type="</span>,<span class="string">""</span>); calib_type = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_type &lt;&lt; endl;
 				sline.ReadLine(fin);
 				<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; KVDetector="</span>)) {
-					sline.ReplaceAll(<span class="string">"&lt;LIST&gt; KVDetector="</span>,<span class="string">""</span>); calib_det = sline;	cout &lt;&lt; calib_det &lt;&lt; endl; 
+					sline.ReplaceAll(<span class="string">"&lt;LIST&gt; KVDetector="</span>,<span class="string">""</span>); calib_det = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_det &lt;&lt; endl; 
 					sline.ReadLine(fin);
 					<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; KVACQParam="</span>)) {
-						sline.ReplaceAll(<span class="string">"&lt;LIST&gt; KVACQParam="</span>,<span class="string">""</span>); calib_acq = sline;	cout &lt;&lt; calib_acq &lt;&lt; endl; 
+						sline.ReplaceAll(<span class="string">"&lt;LIST&gt; KVACQParam="</span>,<span class="string">""</span>); calib_acq = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_acq &lt;&lt; endl; 
 						sline.ReadLine(fin);
 						<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"++&lt;LIST&gt; Runs="</span>)){
-							sline.ReplaceAll(<span class="string">"++&lt;LIST&gt; Runs="</span>,<span class="string">""</span>); 	calib_runs = sline;	cout &lt;&lt; calib_runs &lt;&lt; endl;
+							sline.ReplaceAll(<span class="string">"++&lt;LIST&gt; Runs="</span>,<span class="string">""</span>); 	calib_runs = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_runs &lt;&lt; endl;
 							sline.ReadLine(fin);
 							
 							list_record-&gt;RemoveAll();
 							<span class="keyword">while</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; Rings="</span>)){
-								sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Rings="</span>,<span class="string">""</span>); 	calib_ring = sline;	cout &lt;&lt; calib_ring &lt;&lt; endl;
+								sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Rings="</span>,<span class="string">""</span>); 	calib_ring = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_ring &lt;&lt; endl;
 								sline.ReadLine(fin);
 								<span class="keyword">while</span> ( sline.BeginsWith(<span class="string">"&lt;LIST&gt; Modules="</span>) || sline.BeginsWith(<span class="string">"&lt;PARAMETER&gt; Function="</span>)){
 									<span class="keyword">if</span> (sline.BeginsWith(<span class="string">"&lt;LIST&gt; Modules="</span>)) {
-										sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Modules="</span>,<span class="string">""</span>);	calib_mods = sline;	cout &lt;&lt; calib_mods &lt;&lt; endl;
+										sline.ReplaceAll(<span class="string">"&lt;LIST&gt; Modules="</span>,<span class="string">""</span>);	calib_mods = sline;	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; calib_mods &lt;&lt; endl;
 										<span class="comment">//sprintf(detname,<span class="string">"%s_%02d%02d_%s"</span>,dettype.Data(),calib_ring.Atoi(),calib_mods.Atoi(),detgain.Data());</span>
 										sprintf(detname,<span class="string">"%s_%02d%02d"</span>,calib_det.Data(),calib_ring.Atoi(),calib_mods.Atoi());
 									}
 									<span class="keyword">else</span> {
 										sline.ReplaceAll(<span class="string">"&lt;PARAMETER&gt; Function="</span>,<span class="string">""</span>);
-										cout &lt;&lt; sline &lt;&lt; endl;
+										<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; sline &lt;&lt; endl;
 										toks = sline.Tokenize(<span class="string">":"</span>);
 										TF1 ff(Form(<span class="string">"f%s"</span>,detname),((TObjString*)(*toks)[0])-&gt;GetString().Data());
 									
@@ -331,7 +331,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 										<span class="keyword">delete</span> toks;
 									
 										tokspara = sparaline.Tokenize(<span class="string">" "</span>);
-										<span class="keyword">if</span> (tokspara-&gt;GetEntries()!=ff.GetNpar()) cout &lt;&lt; tokspara-&gt;GetEntries() &lt;&lt; <span class="string">" "</span> &lt;&lt; ff.GetNpar() &lt;&lt; endl;
+										<span class="keyword">if</span> (tokspara-&gt;GetEntries()!=ff.GetNpar()) <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; tokspara-&gt;GetEntries() &lt;&lt; <span class="string">" "</span> &lt;&lt; ff.GetNpar() &lt;&lt; endl;
 										<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> pp=0;pp&lt;ff.GetNpar();pp+=1){
 											ff.SetParameter(pp,((TObjString*)(*tokspara)[pp])-&gt;GetString().Atof());
 											printf(<span class="string">"%d %lf\n"</span>,pp,ff.GetParameter(pp));
@@ -346,7 +346,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 										}
 										
 										fPedestals-&gt;AddRecord(parset);
-										list_record-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
+										list_record-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
 									
 									}
 									sline.ReadLine(fin);	
@@ -357,8 +357,8 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 							<span class="keyword">while</span> (!nl.End()){
 								<a href="../ListOfTypes.html#Int_t">Int_t</a> run = nl.Next();
 								<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ll=0;ll&lt;list_record-&gt;GetEntries();ll+=1) 
-									<span class="keyword">if</span> ( !(((<a href="../KVDBRecord.html">KVDBRecord</a> *)list_record-&gt;At(ll))-&gt;AddLink(<span class="string">"Runs"</span>, <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run) const or overloads">GetRun</a>(run))) ) 
-										<a href="http://root.cern.ch/root/html/TObject.html#TObject:Error" title="void TObject::Error(const char* method, const char* msgfmt) const">Error</a>(<span class="string">"ReadCalibFile()"</span>, <span class="string">"Pb de chargements ..."</span>);
+									<span class="keyword">if</span> ( !(((<a href="../KVDBRecord.html">KVDBRecord</a> *)list_record-&gt;At(ll))-&gt;AddLink(<span class="string">"Runs"</span>, <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run))) ) 
+										<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadCalibFile()"</span>, <span class="string">"Pb de chargements ..."</span>);
 							}
 						}
 					}
@@ -368,7 +368,7 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 	}
 	fin.close();
 
-	list_record-&gt;<a href="http://root.cern.ch/root/html/TFolder.html#TFolder:Clear" title="void TFolder::Clear(Option_t* option = &quot;&quot;)">Clear</a>();
+	list_record-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
 	<span class="keyword">delete</span> list_record;
 	
 }
@@ -380,8 +380,8 @@ ClassImp(<a href="../KVINDRADB_e475s.html">KVINDRADB_e475s</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

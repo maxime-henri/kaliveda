@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:42:55 2015            -->
+<!--   Date: Thu Oct  1 17:51:25 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVGeoNavigator - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Mon Apr 22 14:53:13 2013</span>
 <span class="comment">//Author: John Frankland,,,</span>
@@ -40,7 +40,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <span class="comment">// This is a base class for propagation of charged particles (<a href="../KVNucleus.html">KVNucleus</a>) in events (<a href="../KVEvent.html">KVEvent</a>)</span>
 <span class="comment">// through any TGeoManager ROOT geometry. Classes derived from this one can</span>
 <span class="comment">// override the method</span>
-<span class="comment">//     <a href="../KVGeoNavigator.html#KVGeoNavigator:ParticleEntersNewVolume" title="void KVGeoNavigator::ParticleEntersNewVolume(KVNucleus*)">ParticleEntersNewVolume</a>(<a href="../KVNucleus.html">KVNucleus</a>*)</span>
+<span class="comment">//     <a href="../KVGeoNavigator.html#KVGeoNavigator:ParticleEntersNewVolume" title="void KVGeoNavigator::ParticleEntersNewVolume(KVNucleus* )">ParticleEntersNewVolume</a>(<a href="../KVNucleus.html">KVNucleus</a>*)</span>
 <span class="comment">// in order to do something useful every time that a particle of the event</span>
 <span class="comment">// enters a new volume (absorber, detector, etc.) of the geometry.</span>
 <span class="comment">//</span>
@@ -48,7 +48,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <span class="comment">//</span>
 <span class="comment">//  MyGeoNavigator nav( gGeoManager );</span>
 <span class="comment">//  while( nevents-- ) {</span>
-<span class="comment">//       nav.<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateEvent" title="void KVGeoNavigator::PropagateEvent(KVEvent*, TVector3* TheOrigin = 0)">PropagateEvent</a>( event );</span>
+<span class="comment">//       nav.<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateEvent" title="void KVGeoNavigator::PropagateEvent(KVEvent* ,TVector3* TheOrigin=0)">PropagateEvent</a>( event );</span>
 <span class="comment">//  }</span>
 <span class="comment">//</span>
 <span class="comment">// RULES FOR CREATION OF GEOMETRY</span>
@@ -68,7 +68,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <span class="comment">//    <span class="string">"[structure type]_[structure number]"</span></span>
 <span class="comment">// This is the name that will be used by default for the structure.</span>
 <span class="comment">// However, this format can be change by calling method</span>
-<span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"[structure type]"</span>, <span class="string">"[format]"</span>)</span>
+<span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"[structure type]"</span>, <span class="string">"[format]"</span>)</span>
 <span class="comment">// where format can contain any of the following tokens:</span>
 <span class="comment">//    $type$         - will be replaced by the structure type name</span>
 <span class="comment">//    $type%[fmt]$   - will be replaced by the structure type name using given format</span>
@@ -76,7 +76,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <span class="comment">//    $number%[fmt]$ - will be replaced by the structure number using given format</span>
 <span class="comment">//</span>
 <span class="comment">// Example: to change the name of the block in the previous example to <span class="string">"B-02"</span>,</span>
-<span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$-$number%02d$"</span>)</span>
+<span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$-$number%02d$"</span>)</span>
 <span class="comment">//</span>
 <span class="comment">//    -- DETECTORS --</span>
 <span class="comment">// The default base names for detectors are taken from the node name by stripping off</span>
@@ -91,29 +91,29 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <span class="comment">//    $struc:[type]:name$    - will be replaced by the name of the parent structure of given type</span>
 <span class="comment">//    $struc:[type]:type$    - will be replaced by the type of the parent structure of given type</span>
 <span class="comment">//    $struc:[type]:number$  - will be replaced by the number of the parent structure of given type</span>
-<span class="comment">// plus additional formatting information as for <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a> (see above).</span>
+<span class="comment">// plus additional formatting information as for <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a> (see above).</span>
 <span class="comment">//</span>
 <span class="comment">// Example: to change the name of the <span class="string">"SI1-T1"</span> detector in the previous example to</span>
 <span class="comment">//  <span class="string">"SI1-T1-Q1-B2"</span>:</span>
 <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetDetectorNameFormat" title="void KVGeoNavigator::SetDetectorNameFormat(const Char_t* fmt)">SetDetectorNameFormat</a>(<span class="string">"$det:name$-Q$struc:QUARTET:number$-B$struc:BLOCK:number$"</span>)</span>
 <span class="comment">// Or if you also change the format of the structure names:</span>
-<span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
-<span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"QUARTET"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
+<span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
+<span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"QUARTET"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
 <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetDetectorNameFormat" title="void KVGeoNavigator::SetDetectorNameFormat(const Char_t* fmt)">SetDetectorNameFormat</a>(<span class="string">"$det:name$-$struc:QUARTET:name$-$struc:BLOCK:name$"</span>)</span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="doij7D"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:FormatStructureName" title="void KVGeoNavigator::FormatStructureName(const Char_t* type, Int_t number, KVString&amp; name)">FormatStructureName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *type, <a href="../ListOfTypes.html#Int_t">Int_t</a> number, <a href="../KVString.html">KVString</a> &amp;name)
+<a name="doij7D"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:FormatStructureName" title="void KVGeoNavigator::FormatStructureName(const Char_t* type,Int_t number,KVString&amp; name)">FormatStructureName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *type, <a href="../ListOfTypes.html#Int_t">Int_t</a> number, <a href="../KVString.html">KVString</a> &amp;name)
 {
     <span class="comment">// If a format for naming structures of given type has been defined by a call</span>
-    <span class="comment">// to <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *, const <a href="../ListOfTypes.html#Char_t">Char_t</a> *), we use it to</span>
+    <span class="comment">// to <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *, const <a href="../ListOfTypes.html#Char_t">Char_t</a> *), we use it to</span>
     <span class="comment">// format the name in the TString.</span>
     <span class="comment">// If no format was given, we use by default <span class="string">"[type]_[number]"</span></span>
-    <span class="comment">// If <a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t*) or overloads">SetNameCorrespondanceList</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *) was used, we use it to translate</span>
+    <span class="comment">// If <a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t* ) or overloads">SetNameCorrespondanceList</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *) was used, we use it to translate</span>
     <span class="comment">// any names resulting from this formatting to their final value.</span>
 
     name=<span class="string">""</span>;
-    <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:fStrucNameFmt" title="KVNameValueList KVGeoNavigator::fStrucNameFmt">fStrucNameFmt</a>.<a href="../KVNameValueList.html#KVNameValueList:HasParameter" title="Bool_t KVNameValueList::HasParameter(const Char_t* name) const">HasParameter</a>(type)){
-        <a href="../KVString.html">KVString</a> fmt = <a href="../KVGeoNavigator.html#KVGeoNavigator:fStrucNameFmt" title="KVNameValueList KVGeoNavigator::fStrucNameFmt">fStrucNameFmt</a>.<a href="../KVNameValueList.html#KVNameValueList:GetStringValue" title="const Char_t* KVNameValueList::GetStringValue(const Char_t* name) const or overloads">GetStringValue</a>(type);
+    <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:fStrucNameFmt" title="KVNameValueList KVGeoNavigator::fStrucNameFmt">fStrucNameFmt</a>.<a href="../KVNameValueList.html#KVNameValueList:HasParameter" title="Bool_t KVNameValueList::HasParameter(const Char_t* name)">HasParameter</a>(type)){
+        <a href="../KVString.html">KVString</a> fmt = <a href="../KVGeoNavigator.html#KVGeoNavigator:fStrucNameFmt" title="KVNameValueList KVGeoNavigator::fStrucNameFmt">fStrucNameFmt</a>.<a href="../KVNameValueList.html#KVNameValueList:GetStringValue" title="const Char_t* KVNameValueList::GetStringValue(const Char_t* name) or overloads">GetStringValue</a>(type);
         fmt.Begin(<span class="string">"$"</span>);
         <span class="keyword">while</span>(!fmt.End()){
             <a href="../KVString.html">KVString</a> bit = fmt.Next();
@@ -142,11 +142,11 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="keyword">else</span>
         name.Form(<span class="string">"%s_%d"</span>,type,number);
     TString tmp;
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:GetNameCorrespondance" title="Bool_t KVGeoNavigator::GetNameCorrespondance(const Char_t*, TString&amp;)">GetNameCorrespondance</a>(name.Data(),tmp);
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:GetNameCorrespondance" title="Bool_t KVGeoNavigator::GetNameCorrespondance(const Char_t* ,TString&amp; )">GetNameCorrespondance</a>(name.Data(),tmp);
     name=tmp;
 }
 
-<a name="vW37nB"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:FormatDetectorName" title="void KVGeoNavigator::FormatDetectorName(const Char_t* basename, KVString&amp; name)">FormatDetectorName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *basename, <a href="../KVString.html">KVString</a> &amp;name)
+<a name="vW37nB"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:FormatDetectorName" title="void KVGeoNavigator::FormatDetectorName(const Char_t* basename,KVString&amp; name)">FormatDetectorName</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *basename, <a href="../KVString.html">KVString</a> &amp;name)
 {
     <span class="comment">// If a format for naming detectors has been defined by a call</span>
     <span class="comment">// to <a href="../KVGeoNavigator.html#KVGeoNavigator:SetDetectorNameFormat" title="void KVGeoNavigator::SetDetectorNameFormat(const Char_t* fmt)">SetDetectorNameFormat</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *), we use it to</span>
@@ -154,7 +154,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="comment">// If no format was given we prefix the names of the parent structures</span>
     <span class="comment">// to the basename in order to generate the full name of the detector:</span>
     <span class="comment">//    [struc1-name]_[struc2-name]_..._[detector-basename]</span>
-    <span class="comment">// If <a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t*) or overloads">SetNameCorrespondanceList</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *) was used, we use it to translate</span>
+    <span class="comment">// If <a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t* ) or overloads">SetNameCorrespondanceList</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> *) was used, we use it to translate</span>
     <span class="comment">// any names resulting from this formatting to their final value.</span>
 
     name = <span class="string">""</span>;
@@ -167,7 +167,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
         <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>==<span class="string">""</span>){
             <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=0;i&lt;<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurStrucNumber" title="Int_t KVGeoNavigator::fCurStrucNumber">fCurStrucNumber</a>;i++){
                 <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>* el = (<a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>*)<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>[i];
-                name+=Form(<span class="string">"%s_"</span>,el-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+                name+=Form(<span class="string">"%s_"</span>,el-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
             }
             name+=basename;
         }
@@ -177,9 +177,9 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
             <span class="comment">//    $struc:[type]:name$    - will be replaced by the name of the parent structure of given type</span>
             <span class="comment">//    $struc:[type]:type$    - will be replaced by the type of the parent structure of given type</span>
             <span class="comment">//    $struc:[type]:number$  - will be replaced by the number of the parent structure of given type</span>
-            <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim) const">Begin</a>(<span class="string">"$"</span>);
-            <span class="keyword">while</span>(!<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End() const">End</a>()){
-                <a href="../KVString.html">KVString</a> bit = <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace = kFALSE) const">Next</a>();
+            <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">"$"</span>);
+            <span class="keyword">while</span>(!<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>()){
+                <a href="../KVString.html">KVString</a> bit = <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetNameFmt" title="KVString KVGeoNavigator::fDetNameFmt">fDetNameFmt</a>.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>();
                 <span class="keyword">if</span>(bit.Contains(<span class="string">":"</span>)){
                     bit.Begin(<span class="string">":"</span>);
                     <a href="../KVString.html">KVString</a> itbit = bit.Next();
@@ -200,7 +200,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
                         <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>* el=0;
                         <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=0;i&lt;<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurStrucNumber" title="Int_t KVGeoNavigator::fCurStrucNumber">fCurStrucNumber</a>;i++){
                             el = (<a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>*)<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>[i];
-                            <span class="keyword">if</span>(el-&gt;<a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ) const">IsType</a>(struc_typ)) <span class="keyword">break</span>;
+                            <span class="keyword">if</span>(el-&gt;<a href="../KVBase.html#KVBase:IsType" title="Bool_t KVBase::IsType(const Char_t* typ)">IsType</a>(struc_typ)) <span class="keyword">break</span>;
                         }
                         <span class="keyword">if</span>(el){
                             itbit=bit.Next();
@@ -208,28 +208,28 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
                                 <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> ind = itbit.Index(<span class="string">"%"</span>);
                                 <span class="keyword">if</span>(ind&gt;-1) {
                                     itbit.Remove(0,ind);
-                                    name+=Form(itbit.Data(),el-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>());
+                                    name+=Form(itbit.Data(),el-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
                                 }
                                 <span class="keyword">else</span>
-                                    name+=el-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+                                    name+=el-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
                             }
                             <span class="keyword">else</span> <span class="keyword">if</span>(itbit.BeginsWith(<span class="string">"type"</span>)){
                                 <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> ind = itbit.Index(<span class="string">"%"</span>);
                                 <span class="keyword">if</span>(ind&gt;-1) {
                                     itbit.Remove(0,ind);
-                                    name+=Form(itbit.Data(),el-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>());
+                                    name+=Form(itbit.Data(),el-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>());
                                 }
                                 <span class="keyword">else</span>
-                                    name+=el-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType() const">GetType</a>();
+                                    name+=el-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>();
                             }
                             <span class="keyword">else</span> <span class="keyword">if</span>(itbit.BeginsWith(<span class="string">"number"</span>)){
                                 <a href="../ListOfTypes.html#Ssiz_t">Ssiz_t</a> ind = itbit.Index(<span class="string">"%"</span>);
                                 <span class="keyword">if</span>(ind&gt;-1) {
                                     itbit.Remove(0,ind);
-                                    name+=Form(itbit.Data(),el-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>());
+                                    name+=Form(itbit.Data(),el-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>());
                                 }
                                 <span class="keyword">else</span>
-                                    name+=el-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber() const">GetNumber</a>();
+                                    name+=el-&gt;<a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
                             }
                         }
                     }
@@ -240,11 +240,11 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
         }
     }
     TString tmp;
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:GetNameCorrespondance" title="Bool_t KVGeoNavigator::GetNameCorrespondance(const Char_t*, TString&amp;)">GetNameCorrespondance</a>(name.Data(),tmp);
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:GetNameCorrespondance" title="Bool_t KVGeoNavigator::GetNameCorrespondance(const Char_t* ,TString&amp; )">GetNameCorrespondance</a>(name.Data(),tmp);
     name=tmp;
 }
 
-<a name="pvt09C"></a><a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:KVGeoNavigator" title="KVGeoNavigator KVGeoNavigator::KVGeoNavigator(TGeoManager*) or overloads">KVGeoNavigator</a>(TGeoManager *g)
+<a name="pvt09C"></a><a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:KVGeoNavigator" title="KVGeoNavigator KVGeoNavigator::KVGeoNavigator(TGeoManager* )">KVGeoNavigator</a>(TGeoManager *g)
     : <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>(<span class="string">"KVGeoStrucElement"</span>,50)
 {
     <span class="comment">// Constructor. Call with pointer to geometry.</span>
@@ -255,27 +255,27 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <a name="y_nv7B"></a><a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:_KVGeoNavigator" title="void KVGeoNavigator::~KVGeoNavigator()">~KVGeoNavigator</a>()
 {
     <span class="comment">// Destructor</span>
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>.<a href="http://root.cern.ch/root/html/TObject.html#TObject:Delete" title="void TObject::Delete(Option_t* option = &quot;&quot;)">Delete</a>();
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>.<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a>();
     SafeDelete(<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a>);
 }
 
-<a name="eC4rND"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *type, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *fmt)
+<a name="eC4rND"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *type, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *fmt)
 {
     <span class="comment">// The default names for structures are taken from the node name by stripping off</span>
     <span class="comment">// the <span class="string">"STRUCT_"</span> prefix. It is assumed that the remaining string is of the form</span>
     <span class="comment">//    <span class="string">"[structure type]_[structure number]"</span></span>
     <span class="comment">// This is the name that will be used by default for the structure.</span>
     <span class="comment">// However, this format can be change by calling method</span>
-    <span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"[structure type]"</span>, <span class="string">"[format]"</span>)</span>
+    <span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"[structure type]"</span>, <span class="string">"[format]"</span>)</span>
     <span class="comment">// where format can contain any of the following tokens:</span>
     <span class="comment">//    $type$         - will be replaced by the structure type name</span>
     <span class="comment">//    $type%[fmt]$   - will be replaced by the structure type name using given format</span>
     <span class="comment">//    $number$       - will be replaced by the structure number</span>
     <span class="comment">//    $number%[fmt]$ - will be replaced by the structure number using given format</span>
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:fStrucNameFmt" title="KVNameValueList KVGeoNavigator::fStrucNameFmt">fStrucNameFmt</a>.<a href="../KVNameValueList.html#KVNameValueList:SetValue" title="void KVNameValueList::SetValue(const Char_t* name, const Char_t* value) or overloads">SetValue</a>(type,fmt);
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:fStrucNameFmt" title="KVNameValueList KVGeoNavigator::fStrucNameFmt">fStrucNameFmt</a>.<a href="../KVNameValueList.html#KVNameValueList:SetValue" title="void KVNameValueList::SetValue(const Char_t* name,const Char_t* value) or overloads">SetValue</a>(type,fmt);
 }
 
-<a name="GwugZB"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t*) or overloads">SetNameCorrespondanceList</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *listfile)
+<a name="GwugZB"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t* ) or overloads">SetNameCorrespondanceList</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *listfile)
 {
     <span class="comment">// Allows to provide a list of <span class="string">"translations"</span> for naming structures/detectors</span>
     <span class="comment">// <span class="string">"listfile"</span> must be a file in 'TEnv' format, e.g.</span>
@@ -289,7 +289,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="comment">// SI_06_2_B1: SI_0703</span>
     <span class="comment">//</span>
     <span class="comment">// The name before <span class="string">':'</span> is the name of the detector or structure as deduced</span>
-    <span class="comment">// from the geometry, including any formatting due to <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a></span>
+    <span class="comment">// from the geometry, including any formatting due to <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a></span>
     <span class="comment">// or <a href="../KVGeoNavigator.html#KVGeoNavigator:SetDetectorNameFormat" title="void KVGeoNavigator::SetDetectorNameFormat(const Char_t* fmt)">SetDetectorNameFormat</a>.</span>
     <span class="comment">// The name after <span class="string">':'</span> is the name that will be used 'externally', e.g. by a</span>
     <span class="comment">// <a href="../KVMultiDetArray.html">KVMultiDetArray</a> created from the geometry using <a href="../KVGeoImport.html">KVGeoImport</a>.</span>
@@ -300,112 +300,112 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="comment">// $KVROOT/KVFiles/data, or in $HOME, or (finally) in $PWD.</span>
 
     TString fullpath;
-    <span class="keyword">if</span>(!<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name, TString&amp; fullpath, const Char_t* kvsubdir = &quot;&quot;)">SearchKVFile</a>(listfile, fullpath, <span class="string">"data"</span>)){
-        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Warning" title="void TObject::Warning(const char* method, const char* msgfmt) const">Warning</a>(<span class="string">"SetNameCorrespondanceList"</span>,<span class="string">"File %s not found"</span>, listfile);
+    <span class="keyword">if</span>(!<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(listfile, fullpath, <span class="string">"data"</span>)){
+        <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"SetNameCorrespondanceList"</span>,<span class="string">"File %s not found"</span>, listfile);
         <span class="keyword">return</span>;
     }
     <span class="keyword">if</span>(!<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a>) <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a> = <span class="keyword">new</span> TEnv;
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a>-&gt;ReadFile(fullpath, kEnvUser);
 }
 
-<a name="PL4HaC"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t*) or overloads">SetNameCorrespondanceList</a>(<span class="keyword">const</span> TEnv *list)
+<a name="PL4HaC"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t* ) or overloads">SetNameCorrespondanceList</a>(<span class="keyword">const</span> TEnv *list)
 {
     <span class="comment">// copy TEnv of name correspondances</span>
     SafeDelete(<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a>);
-    <span class="keyword">if</span>(list) <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a> = (TEnv*)list-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:Clone" title="TObject* TNamed::Clone(const char* newname = &quot;&quot;) const">Clone</a>();
+    <span class="keyword">if</span>(list) <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a> = (TEnv*)list-&gt;<a href="../#TNamed:Clone" title="TObject* TNamed::Clone(const char* newname=&quot;&quot;)">Clone</a>();
 }
 
-<a name="zbkZlB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetNameCorrespondance" title="Bool_t KVGeoNavigator::GetNameCorrespondance(const Char_t*, TString&amp;)">GetNameCorrespondance</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *name, TString &amp;tran)
+<a name="zbkZlB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetNameCorrespondance" title="Bool_t KVGeoNavigator::GetNameCorrespondance(const Char_t* ,TString&amp; )">GetNameCorrespondance</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *name, TString &amp;tran)
 {
-    <span class="comment">// IF name correspondance lists have been set with <a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t*) or overloads">SetNameCorrespondanceList</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a>*),</span>
+    <span class="comment">// IF name correspondance lists have been set with <a href="../KVGeoNavigator.html#KVGeoNavigator:SetNameCorrespondanceList" title="void KVGeoNavigator::SetNameCorrespondanceList(const Char_t* ) or overloads">SetNameCorrespondanceList</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a>*),</span>
     <span class="comment">// look up new name for 'name'. If found, returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> and 'tran' is the</span>
     <span class="comment">// 'translated' name, otherwise returns <a href="../ListOfTypes.html#Bool_t">kFALSE</a> and tran=name.</span>
 
-    <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"Looking for %s..."</span>, name);</span>
+    <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"Looking for %s..."</span>, name);</span>
     <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a>){
         tran = <a href="../KVGeoNavigator.html#KVGeoNavigator:fDetStrucNameCorrespList" title="TEnv* KVGeoNavigator::fDetStrucNameCorrespList">fDetStrucNameCorrespList</a>-&gt;GetValue(name,<span class="string">""</span>);
         <span class="keyword">if</span>(tran==<span class="string">""</span>){
             tran=name;
-            <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"...not found"</span>);</span>
+            <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"...not found"</span>);</span>
             <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
         }
-        <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"...found %s"</span>, tran.Data());</span>
+        <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"...found %s"</span>, tran.Data());</span>
         <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
     }
-    <span class="comment">//<a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"...not found"</span>);</span>
+    <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetNameCorrespondance"</span>,<span class="string">"...not found"</span>);</span>
     tran=name;
     <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 }
 
-<a name="f2rP3D"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateEvent" title="void KVGeoNavigator::PropagateEvent(KVEvent*, TVector3* TheOrigin = 0)">PropagateEvent</a>(<a href="../KVEvent.html">KVEvent</a> *TheEvent, TVector3 *TheOrigin)
+<a name="f2rP3D"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateEvent" title="void KVGeoNavigator::PropagateEvent(KVEvent* ,TVector3* TheOrigin=0)">PropagateEvent</a>(<a href="../KVEvent.html">KVEvent</a> *TheEvent, TVector3 *TheOrigin)
 {
     <span class="comment">// Propagate a set of particles through the geometry</span>
     <span class="comment">// By default, propagates particles from (0,0,0) (world coordinates),</span>
     <span class="comment">// unless a different origin is given.</span>
     <a href="../KVNucleus.html">KVNucleus</a>* part;
     <span class="keyword">while</span>( (part = TheEvent-&gt;GetNextParticle()) ){
-        <a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus*, TVector3* TheOrigin = 0)">PropagateParticle</a>(part, TheOrigin);
+        <a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>(part, TheOrigin);
     }
 }
 
-<a name="LTNzW"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:ParticleEntersNewVolume" title="void KVGeoNavigator::ParticleEntersNewVolume(KVNucleus*)">ParticleEntersNewVolume</a>(<a href="../KVNucleus.html">KVNucleus</a>*)
+<a name="LTNzW"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:ParticleEntersNewVolume" title="void KVGeoNavigator::ParticleEntersNewVolume(KVNucleus* )">ParticleEntersNewVolume</a>(<a href="../KVNucleus.html">KVNucleus</a>*)
 {
     <span class="comment">// User-overridable method, redefine in child classes</span>
     <span class="comment">// This method is called every time that a propagated particle enters a new volume</span>
     <span class="comment">// in the geometry.</span>
     <span class="comment">// The user then has access to the following informations:</span>
     <span class="comment">//</span>
-    <span class="comment">// - the TGeoVolume the particle is now entering (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>());</span>
-    <span class="comment">// - the node in the geometry this volume occupies (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>());</span>
+    <span class="comment">// - the TGeoVolume the particle is now entering (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>());</span>
+    <span class="comment">// - the node in the geometry this volume occupies (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>());</span>
     <span class="comment">// - the distance the particle will have to travel in this volume before</span>
-    <span class="comment">//    leaving it (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetStepSize" title="Double_t KVGeoNavigator::GetStepSize() const">GetStepSize</a>());</span>
+    <span class="comment">//    leaving it (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetStepSize" title="Double_t KVGeoNavigator::GetStepSize()">GetStepSize</a>());</span>
     <span class="comment">// - the position of the particle on the boundary as it enters this volume</span>
-    <span class="comment">//    (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint() const">GetEntryPoint</a>()).</span>
+    <span class="comment">//    (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>()).</span>
     <span class="comment">// - the position of the particle on the boundary as it leaves this volume</span>
-    <span class="comment">//    (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint() const">GetExitPoint</a>()).</span>
+    <span class="comment">//    (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>()).</span>
     <span class="comment">//</span>
     <span class="comment">// If required, propagation of the particle can be stopped at any time by calling</span>
-    <span class="comment">//      <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop = kTRUE)">SetStopPropagation</a>()</span>
+    <span class="comment">//      <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop=kTRUE)">SetStopPropagation</a>()</span>
 
-    <a href="http://root.cern.ch/root/html/TObject.html#TObject:AbstractMethod" title="void TObject::AbstractMethod(const char* method) const">AbstractMethod</a>(<span class="string">"ParticleEntersNewVolume"</span>);
+    <a href="../#TObject:AbstractMethod" title="void TObject::AbstractMethod(const char* method)">AbstractMethod</a>(<span class="string">"ParticleEntersNewVolume"</span>);
 }
 
-<a name="pThcvD"></a><span class="keyword">const</span> TGeoHMatrix *<a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix() const">GetCurrentMatrix</a>() <span class="keyword">const</span>
+<a name="pThcvD"></a><span class="keyword">const</span> TGeoHMatrix *<a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix()">GetCurrentMatrix</a>() <span class="keyword">const</span>
 {
     <span class="comment">// Returns pointer to internal copy of current global transformation matrix</span>
     <span class="keyword">return</span> &amp;<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>;
 }
 
-<a name="IMCRaE"></a>TGeoVolume *<a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentDetectorNameAndVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentDetectorNameAndVolume(KVString&amp;, Bool_t&amp;)">GetCurrentDetectorNameAndVolume</a>(<a href="../KVString.html">KVString</a> &amp;detector_name, <a href="../ListOfTypes.html#Bool_t">Bool_t</a>&amp; multilayer)
+<a name="IMCRaE"></a>TGeoVolume *<a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentDetectorNameAndVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentDetectorNameAndVolume(KVString&amp; ,Bool_t&amp; )">GetCurrentDetectorNameAndVolume</a>(<a href="../KVString.html">KVString</a> &amp;detector_name, <a href="../ListOfTypes.html#Bool_t">Bool_t</a>&amp; multilayer)
 {
     <span class="comment">// Returns the name of the current detector (if we are inside a detector)</span>
     <span class="comment">// and whether it is a multilayer or simple detector.</span>
     <span class="comment">// Returns 0x0 if we are not inside a detector volume.</span>
     <span class="comment">//</span>
     <span class="comment">// N.B. the returned volume corresponds to the *whole* detector (even if it has several layers).</span>
-    <span class="comment">// For a multilayer detector, <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>() returns the volume for the current layer.</span>
+    <span class="comment">// For a multilayer detector, <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>() returns the volume for the current layer.</span>
     <span class="comment">//</span>
-    <span class="comment">// See <a href="../KVGeoNavigator.html#KVGeoNavigator:ExtractDetectorNameFromPath" title="void KVGeoNavigator::ExtractDetectorNameFromPath(KVString&amp;)">ExtractDetectorNameFromPath</a>(<a href="../KVString.html">KVString</a>&amp;) for details on detector name formatting.</span>
+    <span class="comment">// See <a href="../KVGeoNavigator.html#KVGeoNavigator:ExtractDetectorNameFromPath" title="void KVGeoNavigator::ExtractDetectorNameFromPath(KVString&amp; )">ExtractDetectorNameFromPath</a>(<a href="../KVString.html">KVString</a>&amp;) for details on detector name formatting.</span>
 
-<span class="comment">//    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"GetCurrentDetectorNameAndVolume"</span>,<span class="string">"now i am in %s on node %s with path %s and matrix:"</span>,</span>
-<span class="comment">//         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
-<span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option = &quot;&quot;) const">Print</a>();</span>
+<span class="comment">//    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetCurrentDetectorNameAndVolume"</span>,<span class="string">"now i am in %s on node %s with path %s and matrix:"</span>,</span>
+<span class="comment">//         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
+<span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option=&quot;&quot;)">Print</a>();</span>
 
     multilayer=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentDetectorNode" title="TGeoNode* KVGeoNavigator::fCurrentDetectorNode">fCurrentDetectorNode</a>=0;
-    TString volNom = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>()-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+    TString volNom = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
     TGeoVolume* detector_volume=0;
     <span class="keyword">if</span>(volNom.BeginsWith(<span class="string">"DET_"</span>)){
         <span class="comment">// simple detector</span>
-        <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentDetectorNode" title="TGeoNode* KVGeoNavigator::fCurrentDetectorNode">fCurrentDetectorNode</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>();
-        detector_volume = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>();
+        <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentDetectorNode" title="TGeoNode* KVGeoNavigator::fCurrentDetectorNode">fCurrentDetectorNode</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>();
+        detector_volume = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>();
     }
     <span class="keyword">else</span>
     {
         <span class="comment">// have we hit 1 layer of a multilayer detector?</span>
-        TGeoVolume* mother_vol = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>()-&gt;GetMotherVolume();
+        TGeoVolume* mother_vol = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>()-&gt;GetMotherVolume();
         <span class="keyword">if</span>(mother_vol) {
-            TString mom = mother_vol-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+            TString mom = mother_vol-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
             <span class="keyword">if</span>(mom.BeginsWith(<span class="string">"DET_"</span>)){
                 <span class="comment">// it *is* a multilayer detector (youpi! :-)</span>
                 <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:fMotherNode" title="TGeoNode* KVGeoNavigator::fMotherNode">fMotherNode</a>) {<span class="comment">// this is the node corresponding to the whole detector,</span>
@@ -416,18 +416,18 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
             }
         }
     }
-    <span class="keyword">if</span>(detector_volume) <a href="../KVGeoNavigator.html#KVGeoNavigator:ExtractDetectorNameFromPath" title="void KVGeoNavigator::ExtractDetectorNameFromPath(KVString&amp;)">ExtractDetectorNameFromPath</a>(detector_name);
+    <span class="keyword">if</span>(detector_volume) <a href="../KVGeoNavigator.html#KVGeoNavigator:ExtractDetectorNameFromPath" title="void KVGeoNavigator::ExtractDetectorNameFromPath(KVString&amp; )">ExtractDetectorNameFromPath</a>(detector_name);
     <span class="keyword">return</span> detector_volume;
 }
 
-<a name="IIpFRB"></a>TGeoNode *<a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentDetectorNode" title="TGeoNode* KVGeoNavigator::GetCurrentDetectorNode() const">GetCurrentDetectorNode</a>() <span class="keyword">const</span>
+<a name="IIpFRB"></a>TGeoNode *<a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentDetectorNode" title="TGeoNode* KVGeoNavigator::GetCurrentDetectorNode()">GetCurrentDetectorNode</a>() <span class="keyword">const</span>
 {
     <span class="comment">// Returns the node corresponding to the current detector volume</span>
     <span class="comment">// N.B. the returned node corresponds to the *whole* detector (even if it has several layers).</span>
     <span class="keyword">return</span> <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentDetectorNode" title="TGeoNode* KVGeoNavigator::fCurrentDetectorNode">fCurrentDetectorNode</a>;
 }
 
-<a name="idnEmB"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:ExtractDetectorNameFromPath" title="void KVGeoNavigator::ExtractDetectorNameFromPath(KVString&amp;)">ExtractDetectorNameFromPath</a>(<a href="../KVString.html">KVString</a> &amp;detname)
+<a name="idnEmB"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:ExtractDetectorNameFromPath" title="void KVGeoNavigator::ExtractDetectorNameFromPath(KVString&amp; )">ExtractDetectorNameFromPath</a>(<a href="../KVString.html">KVString</a> &amp;detname)
 {
     <span class="comment">// We analyse the current path in order to construct the full (unique) name</span>
     <span class="comment">// of the detector, i.e. if the current path is</span>
@@ -457,7 +457,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="comment">// (the structure number is always taken after the last occurence of <span class="string">'_'</span> in the</span>
     <span class="comment">// node name). This is the name that will be used by default for the structure.</span>
     <span class="comment">// However, this format can be change by calling method</span>
-    <span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"[structure type]"</span>, <span class="string">"[format]"</span>)</span>
+    <span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"[structure type]"</span>, <span class="string">"[format]"</span>)</span>
     <span class="comment">// where format can contain any of the following tokens:</span>
     <span class="comment">//    $type$         - will be replaced by the structure type name</span>
     <span class="comment">//    $type%[fmt]$   - will be replaced by the structure type name using given format</span>
@@ -465,7 +465,7 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="comment">//    $number%[fmt]$ - will be replaced by the structure number using given format</span>
     <span class="comment">//</span>
     <span class="comment">// Example: to change the name of the block in the previous example to <span class="string">"B-02"</span>,</span>
-    <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$-$number%02d$"</span>)</span>
+    <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$-$number%02d$"</span>)</span>
     <span class="comment">//</span>
     <span class="comment">//    -- DETECTORS --</span>
     <span class="comment">// The default base names for detectors are taken from the node name by stripping off</span>
@@ -480,21 +480,21 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <span class="comment">//    $struc:[type]:name$    - will be replaced by the name of the parent structure of given type</span>
     <span class="comment">//    $struc:[type]:type$    - will be replaced by the type of the parent structure of given type</span>
     <span class="comment">//    $struc:[type]:number$  - will be replaced by the number of the parent structure of given type</span>
-    <span class="comment">// plus additional formatting information as for <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a> (see above).</span>
+    <span class="comment">// plus additional formatting information as for <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a> (see above).</span>
     <span class="comment">//</span>
     <span class="comment">// Example: to change the name of the <span class="string">"SI1-T1"</span> detector in the previous example to</span>
     <span class="comment">//  <span class="string">"SI1-T1-Q1-B2"</span>:</span>
     <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetDetectorNameFormat" title="void KVGeoNavigator::SetDetectorNameFormat(const Char_t* fmt)">SetDetectorNameFormat</a>(<span class="string">"$det:name$-Q$struc:QUARTET:number$-B$struc:BLOCK:number$"</span>)</span>
     <span class="comment">// Or if you also change the format of the structure names:</span>
-    <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
-    <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type, const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"QUARTET"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
+    <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"BLOCK"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
+    <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStructureNameFormat" title="void KVGeoNavigator::SetStructureNameFormat(const Char_t* type,const Char_t* fmt)">SetStructureNameFormat</a>(<span class="string">"QUARTET"</span>, <span class="string">"$type%.1s$$number$"</span>)</span>
     <span class="comment">//   <a href="../KVGeoNavigator.html#KVGeoNavigator:SetDetectorNameFormat" title="void KVGeoNavigator::SetDetectorNameFormat(const Char_t* fmt)">SetDetectorNameFormat</a>(<span class="string">"$det:name$-$struc:QUARTET:name$-$struc:BLOCK:name$"</span>)</span>
 
 
-    <a href="../KVString.html">KVString</a> path = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentPath" title="TString KVGeoNavigator::GetCurrentPath() const">GetCurrentPath</a>();
+    <a href="../KVString.html">KVString</a> path = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentPath" title="TString KVGeoNavigator::GetCurrentPath()">GetCurrentPath</a>();
     path.Begin(<span class="string">"/"</span>);
     detname=<span class="string">""</span>;
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>.<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt = &quot;&quot;)">Clear</a>(<span class="string">"C"</span>);
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentStructures" title="TClonesArray KVGeoNavigator::fCurrentStructures">fCurrentStructures</a>.<a href="../KVBase.html#KVBase:Clear" title="void KVBase::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<span class="string">"C"</span>);
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurStrucNumber" title="Int_t KVGeoNavigator::fCurStrucNumber">fCurStrucNumber</a>=0;
     <span class="keyword">while</span>(!path.End()){
         <a href="../KVString.html">KVString</a> elem = path.Next();
@@ -507,19 +507,19 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
             TString nums = struc_name(last_+1,struc_name.Length()-last_-1);
             <a href="../ListOfTypes.html#Int_t">Int_t</a> number = nums.Atoi();
             <a href="../KVString.html">KVString</a> name;
-            <a href="../KVGeoNavigator.html#KVGeoNavigator:FormatStructureName" title="void KVGeoNavigator::FormatStructureName(const Char_t* type, Int_t number, KVString&amp; name)">FormatStructureName</a>(type,number,name);
-            gel-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:SetNameTitle" title="void TNamed::SetNameTitle(const char* name, const char* title)">SetNameTitle</a>(name, type);
+            <a href="../KVGeoNavigator.html#KVGeoNavigator:FormatStructureName" title="void KVGeoNavigator::FormatStructureName(const Char_t* type,Int_t number,KVString&amp; name)">FormatStructureName</a>(type,number,name);
+            gel-&gt;<a href="../#TNamed:SetNameTitle" title="void TNamed::SetNameTitle(const char* name,const char* title)">SetNameTitle</a>(name, type);
             gel-&gt;<a href="../KVBase.html#KVBase:SetNumber" title="void KVBase::SetNumber(UInt_t num)">SetNumber</a>(number);
         }
         <span class="keyword">else</span> <span class="keyword">if</span>(elem.BeginsWith(<span class="string">"DET_"</span>)){
             <span class="comment">// detector name. strip off <span class="string">"DET_"</span> and use rest as basename</span>
             <a href="../KVString.html">KVString</a> basename(elem(4,elem.Length()-4));
-            <a href="../KVGeoNavigator.html#KVGeoNavigator:FormatDetectorName" title="void KVGeoNavigator::FormatDetectorName(const Char_t* basename, KVString&amp; name)">FormatDetectorName</a>(basename,detname);
+            <a href="../KVGeoNavigator.html#KVGeoNavigator:FormatDetectorName" title="void KVGeoNavigator::FormatDetectorName(const Char_t* basename,KVString&amp; name)">FormatDetectorName</a>(basename,detname);
         }
     }
 }
 
-<a name="avi9JC"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus*, TVector3* TheOrigin = 0)">PropagateParticle</a>(<a href="../KVNucleus.html">KVNucleus</a>*part, TVector3 *TheOrigin)
+<a name="avi9JC"></a><span class="keyword">void</span> <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>(<a href="../KVNucleus.html">KVNucleus</a>*part, TVector3 *TheOrigin)
 {
     <span class="comment">// Propagate a particle through the geometry in the direction of its momentum,</span>
     <span class="comment">// until we reach the boundary of the geometry, or until <a href="../KVGeoNavigator.html#KVGeoNavigator:fStopPropagation" title="Bool_t KVGeoNavigator::fStopPropagation">fStopPropagation</a> is set to <a href="../ListOfTypes.html#Bool_t">kFALSE</a>.</span>
@@ -535,29 +535,29 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;SetCurrentDirection(v.x(), v.y(), v.z());
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;FindNode();
 
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>();
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>();
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>();
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>();
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fMotherNode" title="TGeoNode* KVGeoNavigator::fMotherNode">fMotherNode</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetMother();
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a> = *(<a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix() const">GetCurrentMatrix</a>());
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a> = *(<a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix()">GetCurrentMatrix</a>());
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetPath();
     <span class="comment">// move along trajectory until we hit a new volume</span>
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;FindNextBoundaryAndStep();
     <a href="../KVGeoNavigator.html#KVGeoNavigator:fStepSize" title="Double_t KVGeoNavigator::fStepSize">fStepSize</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetStep();
-    TGeoVolume* newVol = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>();
-    TGeoNode* newNod = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>();
+    TGeoVolume* newVol = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>();
+    TGeoNode* newNod = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>();
     TGeoNode* newMom = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetMother();
-    TGeoHMatrix* newMatx = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix() const">GetCurrentMatrix</a>();
+    TGeoHMatrix* newMatx = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix()">GetCurrentMatrix</a>();
     TString newPath = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetPath();
 
     <a href="../ListOfTypes.html#Double_t">Double_t</a> XX,YY,ZZ;
     XX=YY=ZZ=0.;
 
     <span class="comment">// reset user flag for stopping propagation of particle</span>
-    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop = kTRUE)">SetStopPropagation</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
+    <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop=kTRUE)">SetStopPropagation</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
 
-<span class="comment">//    <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"Beginning: i am in %s on node %s with path %s, and matrix:"</span>,</span>
-<span class="comment">//         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
-<span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option = &quot;&quot;) const">Print</a>();</span>
+<span class="comment">//    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"Beginning: i am in %s on node %s with path %s, and matrix:"</span>,</span>
+<span class="comment">//         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
+<span class="comment">//    <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option=&quot;&quot;)">Print</a>();</span>
 
     <span class="comment">// track particle until we leave the geometry or until <a href="../KVGeoNavigator.html#KVGeoNavigator:fStopPropagation" title="Bool_t KVGeoNavigator::fStopPropagation">fStopPropagation</a></span>
     <span class="comment">// becomes <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
@@ -568,19 +568,19 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
         XX=posi[0];YY=posi[1];ZZ=posi[2];
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fExitPoint" title="TVector3 KVGeoNavigator::fExitPoint">fExitPoint</a>.SetXYZ(XX,YY,ZZ);
 
-        TString vn = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>()-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>();
+        TString vn = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
         <span class="keyword">if</span>(vn.BeginsWith(<span class="string">"DEADZONE"</span>)) {
-            part-&gt;GetParameters()-&gt;SetValue(<span class="string">"DEADZONE"</span>,Form(<span class="string">"%s/%s"</span>,<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>()-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>()-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>()));
+            part-&gt;GetParameters()-&gt;SetValue(<span class="string">"DEADZONE"</span>,Form(<span class="string">"%s/%s"</span>,<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()));
             <span class="keyword">break</span>;
         }
 
-<span class="comment">//        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"just before ParticleEntersNewVolume\nnow i am in %s on node %s with path %s and matrix:"</span>,</span>
-<span class="comment">//             <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
-<span class="comment">//        <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option = &quot;&quot;) const">Print</a>();</span>
+<span class="comment">//        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"just before ParticleEntersNewVolume\nnow i am in %s on node %s with path %s and matrix:"</span>,</span>
+<span class="comment">//             <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
+<span class="comment">//        <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option=&quot;&quot;)">Print</a>();</span>
 
-        <a href="../KVGeoNavigator.html#KVGeoNavigator:ParticleEntersNewVolume" title="void KVGeoNavigator::ParticleEntersNewVolume(KVNucleus*)">ParticleEntersNewVolume</a>(part);
+        <a href="../KVGeoNavigator.html#KVGeoNavigator:ParticleEntersNewVolume" title="void KVGeoNavigator::ParticleEntersNewVolume(KVNucleus* )">ParticleEntersNewVolume</a>(part);
 
-        <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:StopPropagation" title="Bool_t KVGeoNavigator::StopPropagation() const">StopPropagation</a>()) <span class="keyword">break</span>;
+        <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:StopPropagation" title="Bool_t KVGeoNavigator::StopPropagation()">StopPropagation</a>()) <span class="keyword">break</span>;
 
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a> = newVol;
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a> = newNod;
@@ -588,17 +588,17 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a> = *newMatx;
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a> = newPath;
 
-<span class="comment">//        <a href="http://root.cern.ch/root/html/TObject.html#TObject:Info" title="void TObject::Info(const char* method, const char* msgfmt) const">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"after ParticleEntersNewVolume\nnow i am in %s on node %s with path %s and matrix:"</span>,</span>
-<span class="comment">//             <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="http://root.cern.ch/root/html/TNamed.html#TNamed:GetName" title="const char* TNamed::GetName() const">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
-<span class="comment">//        <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option = &quot;&quot;) const">Print</a>();</span>
+<span class="comment">//        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"after ParticleEntersNewVolume\nnow i am in %s on node %s with path %s and matrix:"</span>,</span>
+<span class="comment">//             <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentVolume" title="TGeoVolume* KVGeoNavigator::fCurrentVolume">fCurrentVolume</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentNode" title="TGeoNode* KVGeoNavigator::fCurrentNode">fCurrentNode</a>-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),<a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentPath" title="TString KVGeoNavigator::fCurrentPath">fCurrentPath</a>.Data());</span>
+<span class="comment">//        <a href="../KVGeoNavigator.html#KVGeoNavigator:fCurrentMatrix" title="TGeoHMatrix KVGeoNavigator::fCurrentMatrix">fCurrentMatrix</a>.<a href="../KVBase.html#KVBase:Print" title="void KVBase::Print(Option_t* option=&quot;&quot;)">Print</a>();</span>
 
         <span class="comment">// move on to next volume crossed by trajectory</span>
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;FindNextBoundaryAndStep();
         <a href="../KVGeoNavigator.html#KVGeoNavigator:fStepSize" title="Double_t KVGeoNavigator::fStepSize">fStepSize</a> = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetStep();
-        newVol = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume() const">GetCurrentVolume</a>();
-        newNod = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode() const">GetCurrentNode</a>();
+        newVol = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>();
+        newNod = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>();
         newMom = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetMother();
-        newMatx = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix() const">GetCurrentMatrix</a>();
+        newMatx = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentMatrix" title="const TGeoHMatrix* KVGeoNavigator::GetCurrentMatrix()">GetCurrentMatrix</a>();
         newPath = <a href="../KVGeoNavigator.html#KVGeoNavigator:fGeometry" title="TGeoManager* KVGeoNavigator::fGeometry">fGeometry</a>-&gt;GetPath();
     }
 }
@@ -611,8 +611,8 @@ ClassImp(<a href="../KVGeoNavigator.html">KVGeoNavigator</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:42 </em><em>&raquo; Last generated: 2015-03-18 13:42</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>

@@ -2,22 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--                                             -->
-<!-- Author: ROOT team (rootdev@cern.ch)         -->
+<!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Wed Mar 18 13:43:40 2015            -->
+<!--   Date: Thu Oct  1 17:51:59 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>KVINDRARunListReader - source file</title>
 <meta name="rating" content="General" />
 <meta name="objecttype" content="Manual" />
-<meta name="keywords" content="software development, oo, object oriented, unix, x11, windows, c++, html, rene brun, fons rademakers, cern" />
-<meta name="description" content="ROOT - An Object Oriented Framework For Large Scale Data Analysis." />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
 <link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
-<body  onload="javascript:SetValuesFromCookie();"><div id="body_content">
-<div id="root_header"></div>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">/*
 $Id: <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>.cpp,v 1.8 2007/04/26 16:38:57 franklan Exp $
@@ -39,7 +39,7 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
 <span class="comment">//Use multiple inheritance with this class as one base class, then method <span class="string">"GoodRunLine"</span></span>
 <span class="comment">//can be overridden to perform implementation-specific tasks.</span>
 
-<a name="xV8HS"></a><a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:KVINDRARunListReader" title="KVINDRARunListReader KVINDRARunListReader::KVINDRARunListReader() or overloads">KVINDRARunListReader</a>()
+<a name="xV8HS"></a><a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:KVINDRARunListReader" title="KVINDRARunListReader KVINDRARunListReader::KVINDRARunListReader()">KVINDRARunListReader</a>()
 {
    <span class="comment">//Default ctor.</span>
    <span class="comment">//We set default values for recognising comment lines (<span class="string">'#'</span>) and the separator character (<span class="string">'|'</span>)</span>
@@ -63,7 +63,7 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    }
 }
 
-<a name="TzXJJB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t*)">OpenRLFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * filename)
+<a name="TzXJJB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t* )">OpenRLFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * filename)
 {
    <span class="comment">//Open file 'filename' for reading.</span>
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if file can be opened (info message), <a href="../ListOfTypes.html#Bool_t">kFALSE</a> if not (error message)</span>
@@ -72,12 +72,12 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsStream" title="ifstream KVINDRARunListReader::fRunsStream">fRunsStream</a>.open(filename);
    <span class="keyword">if</span> (<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsStream" title="ifstream KVINDRARunListReader::fRunsStream">fRunsStream</a>.is_open()) {
       <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsFile" title="TString KVINDRARunListReader::fRunsFile">fRunsFile</a> = filename;
-      Info(Form(<span class="string">"%s::OpenRLFile"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA() const">IsA</a>()-&gt;GetName()),
+      Info(Form(<span class="string">"%s::OpenRLFile"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA()">IsA</a>()-&gt;GetName()),
            <span class="string">"Opened file %s for reading"</span>, filename);
       <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fTrigger" title="Int_t KVINDRARunListReader::fTrigger">fTrigger</a> = -1;
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    }
-   Error(Form(<span class="string">"%s::OpenRLFile"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA() const">IsA</a>()-&gt;GetName()),
+   Error(Form(<span class="string">"%s::OpenRLFile"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA()">IsA</a>()-&gt;GetName()),
          <span class="string">"Cannot open file %s for reading"</span>, filename);
    <span class="comment">//reset <a href="../ListOfTypes.html#ifstream">ifstream</a> ready to try opening another file</span>
    <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsStream" title="ifstream KVINDRARunListReader::fRunsStream">fRunsStream</a>.close();
@@ -104,12 +104,12 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kFALSE</a> if <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a> has not been initialised</span>
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kFALSE</a> if line cannot be read / end of file is reached</span>
    <span class="keyword">if</span> (!<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsStream" title="ifstream KVINDRARunListReader::fRunsStream">fRunsStream</a>.is_open()) {
-      Error(Form(<span class="string">"%s::ReadRLLine"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA() const">IsA</a>()-&gt;GetName()),
+      Error(Form(<span class="string">"%s::ReadRLLine"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA()">IsA</a>()-&gt;GetName()),
             <span class="string">"No file open for reading"</span>);
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
    <span class="keyword">if</span> (!<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsStream" title="ifstream KVINDRARunListReader::fRunsStream">fRunsStream</a>.good()) {
-      Error(Form(<span class="string">"%s::ReadRLLine"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA() const">IsA</a>()-&gt;GetName()),
+      Error(Form(<span class="string">"%s::ReadRLLine"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA()">IsA</a>()-&gt;GetName()),
             <span class="string">"File %s is not good for reading"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsFile" title="TString KVINDRARunListReader::fRunsFile">fRunsFile</a>.Data());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
@@ -127,8 +127,8 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
       }
    }
    <span class="keyword">else</span> <span class="keyword">if</span> (!<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLine" title="TString KVINDRARunListReader::fLine">fLine</a>.BeginsWith(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fComment" title="Char_t KVINDRARunListReader::fComment">fComment</a>)) {
-      <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:SetLine" title="void KVRunListLine::SetLine(const Char_t*) or overloads">SetLine</a>(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLine" title="TString KVINDRARunListReader::fLine">fLine</a>);
-      <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char)">BreakLineIntoFields</a>(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fSeparator" title="Char_t KVINDRARunListReader::fSeparator">fSeparator</a>);
+      <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:SetLine" title="void KVRunListLine::SetLine(const Char_t* line) or overloads">SetLine</a>(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLine" title="TString KVINDRARunListReader::fLine">fLine</a>);
+      <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:BreakLineIntoFields" title="Int_t KVRunListLine::BreakLineIntoFields(const char )">BreakLineIntoFields</a>(<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fSeparator" title="Char_t KVINDRARunListReader::fSeparator">fSeparator</a>);
    } <span class="keyword">else</span> {
       <span class="comment">//comment line - reset line reader</span>
       <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:Clear" title="void KVRunListLine::Clear()">Clear</a>();
@@ -136,7 +136,7 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
 
-<a name="c0h5tC"></a><span class="keyword">void</span> <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:ReadRunList" title="void KVINDRARunListReader::ReadRunList(const Char_t* name = &quot;&quot;)">ReadRunList</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * t)
+<a name="c0h5tC"></a><span class="keyword">void</span> <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:ReadRunList" title="void KVINDRARunListReader::ReadRunList(const Char_t* name=&quot;&quot;)">ReadRunList</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * t)
 {
    <span class="comment">//This method will open the runlist file <span class="string">'t'</span> and read its entire contents, calling user-overridable method <span class="string">"GoodRunLine(KVRunListLine*)"</span></span>
    <span class="comment">//every time a line defining a new run is read from the file.</span>
@@ -146,9 +146,9 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    <span class="comment">//<a href="../KVINDRARunListReader.html#KVINDRARunListReader:SetRLCommentChar" title="void KVINDRARunListReader::SetRLCommentChar(Char_t c)">SetRLCommentChar</a>()/<a href="../KVINDRARunListReader.html#KVINDRARunListReader:SetRLSeparatorChar" title="void KVINDRARunListReader::SetRLSeparatorChar(Char_t c)">SetRLSeparatorChar</a>() if you want to override the default comment/separator characters.</span>
 
    <span class="keyword">if</span> (!strcmp(t, <span class="string">""</span>)) {
-      <span class="comment">//no filename given - file should have been opened by <a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t*)">OpenRLFile</a> - check !</span>
+      <span class="comment">//no filename given - file should have been opened by <a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t* )">OpenRLFile</a> - check !</span>
       <span class="keyword">if</span> (!<a href="../KVINDRARunListReader.html#KVINDRARunListReader:fRunsStream" title="ifstream KVINDRARunListReader::fRunsStream">fRunsStream</a>.is_open()) {
-         Error(Form(<span class="string">"%s::ReadRunList"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA() const">IsA</a>()-&gt;GetName()),
+         Error(Form(<span class="string">"%s::ReadRunList"</span>, <a href="../KVINDRARunListReader.html#KVINDRARunListReader:IsA" title="TClass* KVINDRARunListReader::IsA()">IsA</a>()-&gt;GetName()),
                <span class="string">"No runlist file open for reading"</span>);
          <span class="keyword">return</span>;
       }
@@ -156,8 +156,8 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
       <span class="comment">//open new file - check OK</span>
       <span class="comment">//close any previously opened file</span>
       <a href="../KVINDRARunListReader.html#KVINDRARunListReader:CloseRLFile" title="void KVINDRARunListReader::CloseRLFile()">CloseRLFile</a>();
-      <span class="keyword">if</span> (!<a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t*)">OpenRLFile</a>(t))
-         <span class="keyword">return</span>;                <span class="comment">//error message will be given by <a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t*)">OpenRLFile</a></span>
+      <span class="keyword">if</span> (!<a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t* )">OpenRLFile</a>(t))
+         <span class="keyword">return</span>;                <span class="comment">//error message will be given by <a href="../KVINDRARunListReader.html#KVINDRARunListReader:OpenRLFile" title="Bool_t KVINDRARunListReader::OpenRLFile(const Char_t* )">OpenRLFile</a></span>
    }
    <span class="comment">//reset last trigger read</span>
    <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fTrigger" title="Int_t KVINDRARunListReader::fTrigger">fTrigger</a> = -1;
@@ -183,10 +183,10 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    <span class="comment">//It is called every time that the <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a> finds a line which is a <span class="string">"good run line"</span> (see <a href="../KVRunListLine.html">KVRunListLine</a>::<a href="../KVRunListLine.html#KVRunListLine:GoodRunLine" title="Bool_t KVRunListLine::GoodRunLine()">GoodRunLine</a>()).</span>
    <span class="comment">//The default behaviour is just to print the breakdown of the line in question on the screen.</span>
 
-   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print() const">Print</a>();
+   <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print()">Print</a>();
 }
 
-<a name="e29x2C"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRunListTrigger" title="Int_t KVINDRARunListReader::GetRunListTrigger(const Char_t* field, const Char_t* fmt)">GetRunListTrigger</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * field,
+<a name="e29x2C"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>::<a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRunListTrigger" title="Int_t KVINDRARunListReader::GetRunListTrigger(const Char_t* field,const Char_t* fmt)">GetRunListTrigger</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * field,
                                               <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * fmt)
 {
    <span class="comment">//Get trigger multiplicity for current line.</span>
@@ -196,9 +196,9 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
    <span class="comment">//but one was given on a previous line, we assume that the previous value is valid until a new one is given.</span>
    <span class="comment">//A value <span class="string">"-1"</span> means no trigger has been set for any line in the file so far.</span>
 
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> trig = <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:GetTrigger" title="Int_t KVRunListLine::GetTrigger(const Char_t* field_name = &quot;Trigger&quot;, const Char_t* fmt = &quot;M&gt;=%d&quot;)">GetTrigger</a>(field, fmt);
-   <span class="keyword">if</span> (trig &lt; 0 &amp;&amp; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t*) const">HasFieldValue</a>(field))
-      cout &lt;&lt; <span class="string">"...apparently on line "</span> &lt;&lt; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRLLineNumber" title="Int_t KVINDRARunListReader::GetRLLineNumber() const">GetRLLineNumber</a>() &lt;&lt; endl;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> trig = <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:GetTrigger" title="Int_t KVRunListLine::GetTrigger(const Char_t* field_name=&quot;Trigger&quot;,const Char_t* fmt=&quot;M&gt;=%d&quot;)">GetTrigger</a>(field, fmt);
+   <span class="keyword">if</span> (trig &lt; 0 &amp;&amp; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fLineReader" title="KVRunListLine* KVINDRARunListReader::fLineReader">fLineReader</a>-><a href="../KVRunListLine.html#KVRunListLine:HasFieldValue" title="Bool_t KVRunListLine::HasFieldValue(const Char_t* fname)">HasFieldValue</a>(field))
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"...apparently on line "</span> &lt;&lt; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRLLineNumber" title="Int_t KVINDRARunListReader::GetRLLineNumber()">GetRLLineNumber</a>() &lt;&lt; endl;
    <span class="keyword">return</span> (trig &lt; 0 ? <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fTrigger" title="Int_t KVINDRARunListReader::fTrigger">fTrigger</a> : <a href="../KVINDRARunListReader.html#KVINDRARunListReader:fTrigger" title="Int_t KVINDRARunListReader::fTrigger">fTrigger</a> = trig);
 }
 </pre>
@@ -209,8 +209,8 @@ ClassImp(<a href="../KVINDRARunListReader.html">KVINDRARunListReader</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-03-18 13:43 </em><em>&raquo; Last generated: 2015-03-18 13:43</em><br />
-<em>This page has been automatically generated. For comments or suggestions regarding the documentation or ROOT in general please send a mail to <a href="mailto:rootdev@cern.ch">ROOT support</a>.</em>
+<em>&raquo; Last changed: 2015-10-01 17:51 </em><em>&raquo; Last generated: 2015-10-01 17:51</em><br />
+<em>This page has been automatically generated.</em>
 </div>
 </div>
 </body>
