@@ -49,4 +49,4 @@
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TQObject.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/TTime.h
 ./KVPathDef_cpp.so: /home/john/software/build/root-v5-34-00/include/cintdictversion.h /home/john/software/build/root-v5-34-00/include/RVersion.h
-KVPathDef_cpp__ROOTBUILDVERSION= 5.34/33
+KVPathDef_cpp__ROOTBUILDVERSION= 5.34/35

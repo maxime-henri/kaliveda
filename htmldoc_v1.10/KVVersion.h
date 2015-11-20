@@ -6,16 +6,16 @@
 #define KV_ROOT "/home/john/software/build/kaliveda/1.10_root-v5-34-00"
 
 /* String with version information */
-#define KV_VERSION "1.10/04"
+#define KV_VERSION "1.10/05"
 #define KV_MAJOR_VERSION 1
 #define KV_MINOR_VERSION 10
-#define KV_PATCH_VERSION 04
+#define KV_PATCH_VERSION 05
 
 /* Date when project was built */
-#define KV_BUILD_DATE "2015-10-05"
+#define KV_BUILD_DATE "2015-11-20"
 
 /* Time when project was built */
-#define KV_BUILD_TIME "12:10:29"
+#define KV_BUILD_TIME "15:03:25"
 
 /* Username of person who performed the build */
 #define KV_BUILD_USER "john"
@@ -30,7 +30,7 @@
 #define KV_BUILD_TYPE "RelWithDebInfo"
 
 /* String with ROOT version information */
-#define KV_ROOT_VERSION "5.34/33"
+#define KV_ROOT_VERSION "5.34/35"
 
 /* Directory with class templates */
 #define TEMPLATEDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda/templates

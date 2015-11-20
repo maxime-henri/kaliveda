@@ -49,4 +49,4 @@
 ./KVFileDef_cpp.so: /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda/KVString.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/Riostream.h
 ./KVFileDef_cpp.so: /home/john/software/build/root-v5-34-00/include/cintdictversion.h /home/john/software/build/root-v5-34-00/include/RVersion.h
-KVFileDef_cpp__ROOTBUILDVERSION= 5.34/33
+KVFileDef_cpp__ROOTBUILDVERSION= 5.34/35

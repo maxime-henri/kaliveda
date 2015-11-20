@@ -15,6 +15,7 @@
 #define WITH_BUILTIN_GRU
 /* #undef CCIN2P3_XRD */
 #define WITH_MULTICORE_CPU 4
+#define WITH_BOOST
 
 
 //-----------------------------------ROOT-version dependent compiler flags

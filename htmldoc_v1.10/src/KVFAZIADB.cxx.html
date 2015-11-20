@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Mon Oct  5 12:14:54 2015            -->
+<!--   Date: Fri Nov 20 15:14:16 2015            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -497,13 +497,13 @@ ClassImp(<a href="../KVFAZIADB.html">KVFAZIADB</a>)
 <span class="comment">//__________________________________________________________________________________________________________________</span>
 <a name="BXWAJC"></a><span class="keyword">void</span> <a href="../KVFAZIADB.html">KVFAZIADB</a>::<a href="../KVFAZIADB.html#KVFAZIADB:ReadExceptions" title="void KVFAZIADB::ReadExceptions()">ReadExceptions</a>()
 {
-	TString fp;
-	<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVFAZIADB.html#KVFAZIADB:GetCalibFileName" title="const Char_t* KVFAZIADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Exceptions"</span>),fp,<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-   
-	<span class="keyword">if</span> (fp==<span class="string">""</span>) {
-		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadExceptions()"</span>, <span class="string">"No file foud for Exceptions"</span>);
+    <span class="keyword">if</span> (!strcmp(<a href="../KVFAZIADB.html#KVFAZIADB:GetCalibFileName" title="const Char_t* KVFAZIADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Exceptions"</span>),<span class="string">""</span>)) {
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadExceptions()"</span>, <span class="string">"No file found for Exceptions"</span>);
       <span class="keyword">return</span>;
    }
+
+    TString fp;
+    <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVFAZIADB.html#KVFAZIADB:GetCalibFileName" title="const Char_t* KVFAZIADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Exceptions"</span>),fp,<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
 
 	<a href="../KVFileReader.html">KVFileReader</a> fr;
 	<span class="keyword">if</span> (!fr.OpenFileToRead(fp.Data())){
@@ -518,7 +518,7 @@ ClassImp(<a href="../KVFAZIADB.html">KVFAZIADB</a>)
 	
 	ll-&gt;<a href="../#TFolder:SetOwner" title="void TFolder::SetOwner(Bool_t owner=kTRUE)">SetOwner</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
 	<span class="keyword">while</span> (fr.IsOK())
-	{
+    {
 		fr.ReadLine(<span class="string">":"</span>);
 		<span class="keyword">if</span> (fr.GetNparRead()==2)
 		{
@@ -581,13 +581,13 @@ ClassImp(<a href="../KVFAZIADB.html">KVFAZIADB</a>)
 <a name="ha4B4E"></a><span class="keyword">void</span> <a href="../KVFAZIADB.html">KVFAZIADB</a>::<a href="../KVFAZIADB.html#KVFAZIADB:ReadComments" title="void KVFAZIADB::ReadComments()">ReadComments</a>()
 {
 	
-	TString fp;
-	<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVFAZIADB.html#KVFAZIADB:GetCalibFileName" title="const Char_t* KVFAZIADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Comments"</span>),fp,<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-   
-	<span class="keyword">if</span> (fp==<span class="string">""</span>) {
-		<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadRuns()"</span>, <span class="string">"No file foud for Comments"</span>);
+    <span class="keyword">if</span>(!strcmp(<a href="../KVFAZIADB.html#KVFAZIADB:GetCalibFileName" title="const Char_t* KVFAZIADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Comments"</span>),<span class="string">""</span>)) {
+        <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadComments()"</span>, <span class="string">"No file foud for Comments"</span>);
       <span class="keyword">return</span>;
    }
+    TString fp;
+	<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVFAZIADB.html#KVFAZIADB:GetCalibFileName" title="const Char_t* KVFAZIADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Comments"</span>),fp,<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+   
 
 	<a href="../KVFileReader.html">KVFileReader</a> fr;
 	<span class="keyword">if</span> (!fr.OpenFileToRead(fp.Data())){
@@ -664,7 +664,7 @@ ClassImp(<a href="../KVFAZIADB.html">KVFAZIADB</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-10-05 12:14 </em><em>&raquo; Last generated: 2015-10-05 12:14</em><br />
+<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
