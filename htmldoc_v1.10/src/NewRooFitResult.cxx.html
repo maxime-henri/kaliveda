@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:54 2015            -->
+<!--   Date: Fri Jan  8 15:15:12 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -67,24 +67,24 @@ ClassImp(<a href="../NewRooFitResult.html">NewRooFitResult</a>)
 
 <span class="comment">//_____________________________________________________________________________</span>
 <a name="kuW_ME"></a><a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:NewRooFitResult" title="NewRooFitResult NewRooFitResult::NewRooFitResult(const char* name=0,const char* title=0) or overloads">NewRooFitResult</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name, <span class="keyword">const</span> <span class="keyword">char</span>* title) : <a href="../#RooFitResult:RooFitResult" title="RooFitResult RooFitResult::RooFitResult(const char* name=0,const char* title=0) or overloads">RooFitResult</a>(name, title)
-{  
-  <span class="comment">// Constructor with name and title</span>
-  <span class="comment">// coverity[UNINIT_CTOR]</span>
+{
+   <span class="comment">// Constructor with name and title</span>
+   <span class="comment">// coverity[UNINIT_CTOR]</span>
 }
 
 
 <span class="comment">//_____________________________________________________________________________</span>
 <a name="ipJLw"></a><a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:NewRooFitResult" title="NewRooFitResult NewRooFitResult::NewRooFitResult(const char* name=0,const char* title=0) or overloads">NewRooFitResult</a>(<span class="keyword">const</span> <a href="../NewRooFitResult.html">NewRooFitResult</a>&amp; other) : <a href="../#RooFitResult:RooFitResult" title="RooFitResult RooFitResult::RooFitResult(const char* name=0,const char* title=0) or overloads">RooFitResult</a>(other)
 {
-  <span class="comment">// <a href="../#TNamed:Copy" title="void TNamed::Copy(TObject&amp; named)">Copy</a> constructor</span>
+   <span class="comment">// <a href="../#TNamed:Copy" title="void TNamed::Copy(TObject&amp; named)">Copy</a> constructor</span>
 }
 
 
 
 <span class="comment">//_____________________________________________________________________________</span>
-<a name="hEzXRE"></a><a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:_NewRooFitResult" title="void NewRooFitResult::~NewRooFitResult()">~NewRooFitResult</a>() 
+<a name="hEzXRE"></a><a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:_NewRooFitResult" title="void NewRooFitResult::~NewRooFitResult()">~NewRooFitResult</a>()
 {
-  <span class="comment">// Destructor</span>
+   <span class="comment">// Destructor</span>
 }
 
 
@@ -93,188 +93,188 @@ ClassImp(<a href="../NewRooFitResult.html">NewRooFitResult</a>)
 
 
 <span class="comment">//_____________________________________________________________________________</span>
-<a name="VohcU"></a><a href="../NewRooFitResult.html">NewRooFitResult</a>* <a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:lastMinuitFit" title="NewRooFitResult* NewRooFitResult::lastMinuitFit(const RooArgList&amp; varList=RooArgList())">lastMinuitFit</a>(<span class="keyword">const</span> RooArgList&amp; varList) 
+<a name="VohcU"></a><a href="../NewRooFitResult.html">NewRooFitResult</a>* <a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:lastMinuitFit" title="NewRooFitResult* NewRooFitResult::lastMinuitFit(const RooArgList&amp; varList=RooArgList())">lastMinuitFit</a>(<span class="keyword">const</span> RooArgList&amp; varList)
 {
-  <span class="comment">// Import the results of the last fit performed by gMinuit, interpreting</span>
-  <span class="comment">// the fit parameters as the given varList of parameters.</span>
+   <span class="comment">// Import the results of the last fit performed by gMinuit, interpreting</span>
+   <span class="comment">// the fit parameters as the given varList of parameters.</span>
 
-  <span class="comment">// Verify length of supplied varList</span>
-  <span class="keyword">if</span> (varList.getSize()&gt;0 &amp;&amp; varList.getSize()!=gMinuit-&gt;fNu) {
-    oocoutE((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)0,InputArguments) &lt;&lt; <span class="string">"NewRooFitResult::lastMinuitFit: ERROR: supplied variable list must be either empty "</span> &lt;&lt; endl 
-					&lt;&lt; <span class="string">"                             or match the number of variables of the last fit ("</span> &lt;&lt; gMinuit-&gt;fNu &lt;&lt; <span class="string">")"</span> &lt;&lt; endl ;
-    <span class="keyword">return</span> 0 ;
-  }
-
-  <span class="comment">// Verify that all members of varList are of type RooRealVar</span>
-  TIterator* iter = varList.createIterator() ;
-  RooAbsArg* arg  ;
-  <span class="keyword">while</span>((arg=(RooAbsArg*)iter-&gt;Next())) {
-    <span class="keyword">if</span> (!<span class="keyword">dynamic_cast</span>&lt;RooRealVar*&gt;(arg)) {
-      oocoutE((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)0,InputArguments) &lt;&lt; <span class="string">"NewRooFitResult::lastMinuitFit: ERROR: variable '"</span> &lt;&lt; arg-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"' is not of type RooRealVar"</span> &lt;&lt; endl ;
+   <span class="comment">// Verify length of supplied varList</span>
+   <span class="keyword">if</span> (varList.getSize() &gt; 0 &amp;&amp; varList.getSize() != gMinuit-&gt;fNu) {
+      oocoutE((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)0, InputArguments) &lt;&lt; <span class="string">"NewRooFitResult::lastMinuitFit: ERROR: supplied variable list must be either empty "</span> &lt;&lt; endl
+                                           &lt;&lt; <span class="string">"                             or match the number of variables of the last fit ("</span> &lt;&lt; gMinuit-&gt;fNu &lt;&lt; <span class="string">")"</span> &lt;&lt; endl ;
       <span class="keyword">return</span> 0 ;
-    }
-  }
-  <span class="keyword">delete</span> iter ;
+   }
 
-  <a href="../NewRooFitResult.html">NewRooFitResult</a>* r = <span class="keyword">new</span> <a href="../NewRooFitResult.html">NewRooFitResult</a>(<span class="string">"lastMinuitFit"</span>,<span class="string">"Last MINUIT fit"</span>) ;
+   <span class="comment">// Verify that all members of varList are of type RooRealVar</span>
+   TIterator* iter = varList.createIterator() ;
+   RooAbsArg* arg  ;
+   <span class="keyword">while</span> ((arg = (RooAbsArg*)iter-&gt;Next())) {
+      <span class="keyword">if</span> (!<span class="keyword">dynamic_cast</span>&lt;RooRealVar*&gt;(arg)) {
+         oocoutE((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)0, InputArguments) &lt;&lt; <span class="string">"NewRooFitResult::lastMinuitFit: ERROR: variable '"</span> &lt;&lt; arg-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"' is not of type RooRealVar"</span> &lt;&lt; endl ;
+         <span class="keyword">return</span> 0 ;
+      }
+   }
+   <span class="keyword">delete</span> iter ;
 
-  <span class="comment">// Extract names of fit parameters from MINUIT </span>
-  <span class="comment">// and construct corresponding RooRealVars</span>
-  RooArgList <a href="../#RooFitResult:constPars" title="const RooArgList&amp; RooFitResult::constPars()">constPars</a>(<span class="string">"constPars"</span>) ;
-  RooArgList floatPars(<span class="string">"floatPars"</span>) ;
+   <a href="../NewRooFitResult.html">NewRooFitResult</a>* r = <span class="keyword">new</span> <a href="../NewRooFitResult.html">NewRooFitResult</a>(<span class="string">"lastMinuitFit"</span>, <span class="string">"Last MINUIT fit"</span>) ;
 
-  <a href="../ListOfTypes.html#Int_t">Int_t</a> i ;
-  <span class="keyword">for</span> (i = 1; i &lt;= gMinuit-&gt;fNu; ++i) {
-    <span class="keyword">if</span> (gMinuit-&gt;fNvarl[i-1] &lt; 0) <span class="keyword">continue</span>;
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> l = gMinuit-&gt;fNiofex[i-1];
-    TString varName(gMinuit-&gt;fCpnam[i-1]) ;
-    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> isConst(l==0) ;
-    
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> xlo = gMinuit-&gt;fAlim[i-1];
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> xhi = gMinuit-&gt;fBlim[i-1];
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> xerr = gMinuit-&gt;fWerr[l-1];
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> xval = gMinuit-&gt;fU[i-1] ;
+   <span class="comment">// Extract names of fit parameters from MINUIT</span>
+   <span class="comment">// and construct corresponding RooRealVars</span>
+   RooArgList <a href="../#RooFitResult:constPars" title="const RooArgList&amp; RooFitResult::constPars()">constPars</a>(<span class="string">"constPars"</span>) ;
+   RooArgList floatPars(<span class="string">"floatPars"</span>) ;
 
-    RooRealVar* var ;
-    <span class="keyword">if</span> (varList.getSize()==0) {
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> i ;
+   <span class="keyword">for</span> (i = 1; i &lt;= gMinuit-&gt;fNu; ++i) {
+      <span class="keyword">if</span> (gMinuit-&gt;fNvarl[i - 1] &lt; 0) <span class="keyword">continue</span>;
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> l = gMinuit-&gt;fNiofex[i - 1];
+      TString varName(gMinuit-&gt;fCpnam[i - 1]) ;
+      <a href="../ListOfTypes.html#Bool_t">Bool_t</a> isConst(l == 0) ;
 
-      <span class="keyword">if</span> ((xlo&lt;xhi) &amp;&amp; !isConst) {
-	var = <span class="keyword">new</span> RooRealVar(varName,varName,xval,xlo,xhi) ;
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> xlo = gMinuit-&gt;fAlim[i - 1];
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> xhi = gMinuit-&gt;fBlim[i - 1];
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> xerr = gMinuit-&gt;fWerr[l - 1];
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> xval = gMinuit-&gt;fU[i - 1] ;
+
+      RooRealVar* var ;
+      <span class="keyword">if</span> (varList.getSize() == 0) {
+
+         <span class="keyword">if</span> ((xlo &lt; xhi) &amp;&amp; !isConst) {
+            var = <span class="keyword">new</span> RooRealVar(varName, varName, xval, xlo, xhi) ;
+         } <span class="keyword">else</span> {
+            var = <span class="keyword">new</span> RooRealVar(varName, varName, xval) ;
+         }
+         var-&gt;setConstant(isConst) ;
       } <span class="keyword">else</span> {
-	var = <span class="keyword">new</span> RooRealVar(varName,varName,xval) ;
-      }
-      var-&gt;setConstant(isConst) ;
-    } <span class="keyword">else</span> {
 
-      var = (RooRealVar*) varList.at(i-1)-&gt;<a href="../NewRooFitResult.html#NewRooFitResult:Clone" title="TObject* NewRooFitResult::Clone(const char* newname=0)">Clone</a>() ;
-      var-&gt;setConstant(isConst) ;
-      var-&gt;setVal(xval) ;
-      <span class="keyword">if</span> (xlo&lt;xhi) {
-	var-&gt;setRange(xlo,xhi) ;
-      }
-      <span class="keyword">if</span> (varName.CompareTo(var-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) {
-	oocoutI((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)0,Eval) &lt;&lt; <span class="string">"NewRooFitResult::lastMinuitFit: fit parameter '"</span> &lt;&lt; varName 
-				  &lt;&lt; <span class="string">"' stored in variable '"</span> &lt;&lt; var-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"'"</span> &lt;&lt; endl ;
+         var = (RooRealVar*) varList.at(i - 1)-&gt;<a href="../NewRooFitResult.html#NewRooFitResult:Clone" title="TObject* NewRooFitResult::Clone(const char* newname=0)">Clone</a>() ;
+         var-&gt;setConstant(isConst) ;
+         var-&gt;setVal(xval) ;
+         <span class="keyword">if</span> (xlo &lt; xhi) {
+            var-&gt;setRange(xlo, xhi) ;
+         }
+         <span class="keyword">if</span> (varName.CompareTo(var-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) {
+            oocoutI((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*)0, Eval) &lt;&lt; <span class="string">"NewRooFitResult::lastMinuitFit: fit parameter '"</span> &lt;&lt; varName
+                                       &lt;&lt; <span class="string">"' stored in variable '"</span> &lt;&lt; var-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"'"</span> &lt;&lt; endl ;
+         }
+
       }
 
-    }
+      <span class="keyword">if</span> (isConst) {
+         <a href="../#RooFitResult:constPars" title="const RooArgList&amp; RooFitResult::constPars()">constPars</a>.addOwned(*var) ;
+      } <span class="keyword">else</span> {
+         var-&gt;setError(xerr) ;
+         floatPars.addOwned(*var) ;
+      }
+   }
 
-    <span class="keyword">if</span> (isConst) {
-      <a href="../#RooFitResult:constPars" title="const RooArgList&amp; RooFitResult::constPars()">constPars</a>.addOwned(*var) ;
-    } <span class="keyword">else</span> {
-      var-&gt;setError(xerr) ;
-      floatPars.addOwned(*var) ;
-    }
-  }
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> icode, npari, nparx ;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> fmin, <a href="../#RooFitResult:edm" title="Double_t RooFitResult::edm()">edm</a>, errdef ;
+   gMinuit-&gt;mnstat(fmin, <a href="../#RooFitResult:edm" title="Double_t RooFitResult::edm()">edm</a>, errdef, npari, nparx, icode) ;
 
-  <a href="../ListOfTypes.html#Int_t">Int_t</a> icode,npari,nparx ;
-  <a href="../ListOfTypes.html#Double_t">Double_t</a> fmin,<a href="../#RooFitResult:edm" title="Double_t RooFitResult::edm()">edm</a>,errdef ;
-  gMinuit-&gt;mnstat(fmin,<a href="../#RooFitResult:edm" title="Double_t RooFitResult::edm()">edm</a>,errdef,npari,nparx,icode) ;
-  
-  r-&gt;<a href="../#RooFitResult:setConstParList" title="void RooFitResult::setConstParList(const RooArgList&amp; list)">setConstParList</a>(<a href="../#RooFitResult:constPars" title="const RooArgList&amp; RooFitResult::constPars()">constPars</a>) ;
-  r-&gt;<a href="../#RooFitResult:setInitParList" title="void RooFitResult::setInitParList(const RooArgList&amp; list)">setInitParList</a>(floatPars) ;
-  r-&gt;<a href="../#RooFitResult:setFinalParList" title="void RooFitResult::setFinalParList(const RooArgList&amp; list)">setFinalParList</a>(floatPars) ;
-  r-&gt;<a href="../#RooFitResult:setMinNLL" title="void RooFitResult::setMinNLL(Double_t val)">setMinNLL</a>(fmin) ;
-  r-&gt;<a href="../#RooFitResult:setEDM" title="void RooFitResult::setEDM(Double_t val)">setEDM</a>(<a href="../#RooFitResult:edm" title="Double_t RooFitResult::edm()">edm</a>) ; 
-  r-&gt;<a href="../#RooFitResult:setCovQual" title="void RooFitResult::setCovQual(Int_t val)">setCovQual</a>(icode) ;
-  r-&gt;<a href="../#RooFitResult:setStatus" title="void RooFitResult::setStatus(Int_t val)">setStatus</a>(gMinuit-&gt;fStatus) ;
-  r-&gt;<a href="../#RooFitResult:fillCorrMatrix" title="void RooFitResult::fillCorrMatrix() or overloads">fillCorrMatrix</a>() ;
+   r-&gt;<a href="../#RooFitResult:setConstParList" title="void RooFitResult::setConstParList(const RooArgList&amp; list)">setConstParList</a>(<a href="../#RooFitResult:constPars" title="const RooArgList&amp; RooFitResult::constPars()">constPars</a>) ;
+   r-&gt;<a href="../#RooFitResult:setInitParList" title="void RooFitResult::setInitParList(const RooArgList&amp; list)">setInitParList</a>(floatPars) ;
+   r-&gt;<a href="../#RooFitResult:setFinalParList" title="void RooFitResult::setFinalParList(const RooArgList&amp; list)">setFinalParList</a>(floatPars) ;
+   r-&gt;<a href="../#RooFitResult:setMinNLL" title="void RooFitResult::setMinNLL(Double_t val)">setMinNLL</a>(fmin) ;
+   r-&gt;<a href="../#RooFitResult:setEDM" title="void RooFitResult::setEDM(Double_t val)">setEDM</a>(<a href="../#RooFitResult:edm" title="Double_t RooFitResult::edm()">edm</a>) ;
+   r-&gt;<a href="../#RooFitResult:setCovQual" title="void RooFitResult::setCovQual(Int_t val)">setCovQual</a>(icode) ;
+   r-&gt;<a href="../#RooFitResult:setStatus" title="void RooFitResult::setStatus(Int_t val)">setStatus</a>(gMinuit-&gt;fStatus) ;
+   r-&gt;<a href="../#RooFitResult:fillCorrMatrix" title="void RooFitResult::fillCorrMatrix() or overloads">fillCorrMatrix</a>() ;
 
-  <span class="keyword">return</span> r ;
+   <span class="keyword">return</span> r ;
 }
 
 
 
 <span class="comment">//_____________________________________________________________________________</span>
-<a name="BRVTME"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:isIdentical" title="Bool_t NewRooFitResult::isIdentical(const NewRooFitResult&amp; other,Double_t tol=5e-5,Double_t tolCorr=1e-4,Bool_t verbose=kTRUE)">isIdentical</a>(<span class="keyword">const</span> <a href="../NewRooFitResult.html">NewRooFitResult</a>&amp; other, <a href="../ListOfTypes.html#Double_t">Double_t</a> tol, <a href="../ListOfTypes.html#Double_t">Double_t</a> tolCorr, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <span class="comment">/*verbose*/</span>) <span class="keyword">const</span> 
+<a name="BRVTME"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../NewRooFitResult.html">NewRooFitResult</a>::<a href="../NewRooFitResult.html#NewRooFitResult:isIdentical" title="Bool_t NewRooFitResult::isIdentical(const NewRooFitResult&amp; other,Double_t tol=5e-5,Double_t tolCorr=1e-4,Bool_t verbose=kTRUE)">isIdentical</a>(<span class="keyword">const</span> <a href="../NewRooFitResult.html">NewRooFitResult</a>&amp; other, <a href="../ListOfTypes.html#Double_t">Double_t</a> tol, <a href="../ListOfTypes.html#Double_t">Double_t</a> tolCorr, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <span class="comment">/*verbose*/</span>) <span class="keyword">const</span>
 {
-  <span class="comment">// Return <a href="../ListOfTypes.html#bool">true</a> if this fit result is identical to other within tolerance 'tol' on fitted values</span>
-  <span class="comment">// and tolerance 'tolCor' on <a href="../#RooFitResult:correlation" title="Double_t RooFitResult::correlation(const RooAbsArg&amp; par1,const RooAbsArg&amp; par2) or overloads">correlation</a> coefficients</span>
+   <span class="comment">// Return <a href="../ListOfTypes.html#bool">true</a> if this fit result is identical to other within tolerance 'tol' on fitted values</span>
+   <span class="comment">// and tolerance 'tolCor' on <a href="../#RooFitResult:correlation" title="Double_t RooFitResult::correlation(const RooAbsArg&amp; par1,const RooAbsArg&amp; par2) or overloads">correlation</a> coefficients</span>
 
-  <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ret = <a href="../ListOfTypes.html#Bool_t">kTRUE</a> ;
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ret = <a href="../ListOfTypes.html#Bool_t">kTRUE</a> ;
 
-  <span class="keyword">if</span> (fabs(_minNLL-other._minNLL)&gt;=tol) {
-    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: minimized value of -log(L) is different "</span> &lt;&lt; _minNLL &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; other._minNLL &lt;&lt; endl ;
-    ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-  }
+   <span class="keyword">if</span> (fabs(_minNLL - other._minNLL) &gt;= tol) {
+      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: minimized value of -log(L) is different "</span> &lt;&lt; _minNLL &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; other._minNLL &lt;&lt; endl ;
+      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+   }
 
-  <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=0 ; i&lt;_constPars-&gt;getSize() ; i++) {
-    RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._constPars-&gt;find(_constPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
-    <span class="keyword">if</span> (!ov) {
-      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find constant parameter "</span> &lt;&lt; _constPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
-      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-    }
-    <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_constPars-&gt;at(i))-&gt;getVal()-ov-&gt;getVal())&gt;=tol) {
-      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: constant parameter "</span> &lt;&lt; _constPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() 
-	   &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_constPars-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
-      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-    }
-  }
-
-  <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=0 ; i&lt;_initPars-&gt;getSize() ; i++) {
-    RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._initPars-&gt;find(_initPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
-    <span class="keyword">if</span> (!ov) {
-      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find initial parameter "</span> &lt;&lt; _initPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
-      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-    }
-    <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_initPars-&gt;at(i))-&gt;getVal()-ov-&gt;getVal())&gt;=tol) {
-      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: initial parameter "</span> &lt;&lt; _initPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() 
-	   &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_initPars-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
-      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-    }
-  }
-
-  <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=0 ; i&lt;_finalPars-&gt;getSize() ; i++) {
-    RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._finalPars-&gt;find(_finalPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
-    <span class="keyword">if</span> (!ov) {
-      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find final parameter "</span> &lt;&lt; _finalPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
-      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-    }
-    <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_finalPars-&gt;at(i))-&gt;getVal()-ov-&gt;getVal())&gt;=tol) {
-      <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: final parameter "</span> &lt;&lt; _finalPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() 
-	   &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_finalPars-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
-      ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-    }
-  }
-
-  <span class="comment">// Only examine correlations for cases with &gt;1 floating parameter</span>
-  <span class="keyword">if</span> (_finalPars-&gt;getSize()&gt;1) {
-    
-    <a href="../#RooFitResult:fillLegacyCorrMatrix" title="void RooFitResult::fillLegacyCorrMatrix()">fillLegacyCorrMatrix</a>() ;
-    other.<a href="../#RooFitResult:fillLegacyCorrMatrix" title="void RooFitResult::fillLegacyCorrMatrix()">fillLegacyCorrMatrix</a>() ;
-    
-    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=0 ; i&lt;_globalCorr-&gt;getSize() ; i++) {
-      RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._globalCorr-&gt;find(_globalCorr-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
+   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0 ; i &lt; _constPars-&gt;getSize() ; i++) {
+      RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._constPars-&gt;find(_constPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
       <span class="keyword">if</span> (!ov) {
-	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find global correlation coefficient "</span> &lt;&lt; _globalCorr-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
-	ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find constant parameter "</span> &lt;&lt; _constPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
+         ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
       }
-      <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_globalCorr-&gt;at(i))-&gt;getVal()-ov-&gt;getVal())&gt;=tolCorr) {
-	<a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: global correlation coefficient "</span> &lt;&lt; _globalCorr-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() 
-	     &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_globalCorr-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
-	ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+      <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_constPars-&gt;at(i))-&gt;getVal() - ov-&gt;getVal()) &gt;= tol) {
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: constant parameter "</span> &lt;&lt; _constPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()
+              &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_constPars-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
+         ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
       }
-    }
-    
-    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> j=0 ; j&lt;_corrMatrix.GetSize() ; j++) {
-      RooArgList* row = (RooArgList*) _corrMatrix.At(j) ;
-      RooArgList* orow = (RooArgList*) other._corrMatrix.At(j) ;
-      <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i=0 ; i&lt;row-&gt;getSize() ; i++) {
-	RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(orow-&gt;find(row-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
-	<span class="keyword">if</span> (!ov) {
-	  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find correlation coefficient "</span> &lt;&lt; row-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
-	  ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-	}
-	<span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(row-&gt;at(i))-&gt;getVal()-ov-&gt;getVal())&gt;=tolCorr) {
-	  <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: correlation coefficient "</span> &lt;&lt; row-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() 
-	       &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(row-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
-	  ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
-	}
-      }
-    }
-  }    
+   }
 
-  <span class="keyword">return</span> ret ;
+   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0 ; i &lt; _initPars-&gt;getSize() ; i++) {
+      RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._initPars-&gt;find(_initPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
+      <span class="keyword">if</span> (!ov) {
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find initial parameter "</span> &lt;&lt; _initPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
+         ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+      }
+      <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_initPars-&gt;at(i))-&gt;getVal() - ov-&gt;getVal()) &gt;= tol) {
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: initial parameter "</span> &lt;&lt; _initPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()
+              &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_initPars-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
+         ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+      }
+   }
+
+   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0 ; i &lt; _finalPars-&gt;getSize() ; i++) {
+      RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._finalPars-&gt;find(_finalPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
+      <span class="keyword">if</span> (!ov) {
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find final parameter "</span> &lt;&lt; _finalPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
+         ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+      }
+      <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_finalPars-&gt;at(i))-&gt;getVal() - ov-&gt;getVal()) &gt;= tol) {
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: final parameter "</span> &lt;&lt; _finalPars-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()
+              &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_finalPars-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
+         ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+      }
+   }
+
+   <span class="comment">// Only examine correlations for cases with &gt;1 floating parameter</span>
+   <span class="keyword">if</span> (_finalPars-&gt;getSize() &gt; 1) {
+
+      <a href="../#RooFitResult:fillLegacyCorrMatrix" title="void RooFitResult::fillLegacyCorrMatrix()">fillLegacyCorrMatrix</a>() ;
+      other.<a href="../#RooFitResult:fillLegacyCorrMatrix" title="void RooFitResult::fillLegacyCorrMatrix()">fillLegacyCorrMatrix</a>() ;
+
+      <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0 ; i &lt; _globalCorr-&gt;getSize() ; i++) {
+         RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(other._globalCorr-&gt;find(_globalCorr-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
+         <span class="keyword">if</span> (!ov) {
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find global correlation coefficient "</span> &lt;&lt; _globalCorr-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
+            ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+         }
+         <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_globalCorr-&gt;at(i))-&gt;getVal() - ov-&gt;getVal()) &gt;= tolCorr) {
+            <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: global correlation coefficient "</span> &lt;&lt; _globalCorr-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()
+                 &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(_globalCorr-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
+            ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+         }
+      }
+
+      <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> j = 0 ; j &lt; _corrMatrix.GetSize() ; j++) {
+         RooArgList* row = (RooArgList*) _corrMatrix.At(j) ;
+         RooArgList* orow = (RooArgList*) other._corrMatrix.At(j) ;
+         <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0 ; i &lt; row-&gt;getSize() ; i++) {
+            RooAbsReal* ov = <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(orow-&gt;find(row-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) ;
+            <span class="keyword">if</span> (!ov) {
+               <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: cannot find correlation coefficient "</span> &lt;&lt; row-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">" in reference"</span> &lt;&lt; endl ;
+               ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+            }
+            <span class="keyword">if</span> (ov &amp;&amp; fabs(<span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(row-&gt;at(i))-&gt;getVal() - ov-&gt;getVal()) &gt;= tolCorr) {
+               <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"NewRooFitResult::isIdentical: correlation coefficient "</span> &lt;&lt; row-&gt;at(i)-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()
+                    &lt;&lt; <span class="string">" differs in value: "</span> &lt;&lt; <span class="keyword">static_cast</span>&lt;RooAbsReal*&gt;(row-&gt;at(i))-&gt;getVal() &lt;&lt; <span class="string">" vs. "</span> &lt;&lt; ov-&gt;getVal() &lt;&lt; endl ;
+               ret = <a href="../ListOfTypes.html#Bool_t">kFALSE</a> ;
+            }
+         }
+      }
+   }
+
+   <span class="keyword">return</span> ret ;
 }
 
 </pre>
@@ -285,7 +285,7 @@ ClassImp(<a href="../NewRooFitResult.html">NewRooFitResult</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:15 </em><em>&raquo; Last generated: 2016-01-08 15:15</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

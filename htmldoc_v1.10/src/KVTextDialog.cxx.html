@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:40 2015            -->
+<!--   Date: Fri Jan  8 15:14:55 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -44,105 +44,105 @@ ClassImp(<a href="../KVTextDialog.html">KVTextDialog</a>)
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="zfJ4u"></a><a href="../KVTextDialog.html">KVTextDialog</a>::<a href="../KVTextDialog.html#KVTextDialog:KVTextDialog" title="KVTextDialog KVTextDialog::KVTextDialog(const TGWindow* main,const Char_t* question,const Char_t* default_value,TString* chosen,Bool_t* ok,const char* unit=&quot;&quot;)">KVTextDialog</a>(<span class="keyword">const</span> TGWindow * main, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * question, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * default_value, TString * chosen, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> * ok, <span class="keyword">const</span> <span class="keyword">char</span> *unit)
+<a name="SKGm8C"></a><a href="../KVTextDialog.html">KVTextDialog</a>::<a href="../KVTextDialog.html#KVTextDialog:KVTextDialog" title="KVTextDialog KVTextDialog::KVTextDialog(const TGWindow* main,const Char_t* question,const Char_t* default_value,TString* chosen,Bool_t* ok,const char* unit=&quot;&quot;)">KVTextDialog</a>(<span class="keyword">const</span> TGWindow* main, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* question, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* default_value, TString* chosen, <a href="../ListOfTypes.html#Bool_t">Bool_t</a>* ok, <span class="keyword">const</span> <span class="keyword">char</span>* unit)
 {
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a> = <span class="keyword">new</span> TGTransientFrame(gClient-&gt;GetDefaultRoot(), main, 200, 100);
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;CenterOnParent();
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"CloseWindow()"</span>, <span class="string">"KVDropDownDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;DontCallClose();      <span class="comment">// to avoid <a href="../ListOfTypes.html#double">double</a> deletions.</span>
-    <span class="comment">// use hierarchical cleaning</span>
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetCleanup(kDeepCleanup);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a> = <span class="keyword">new</span> TGTransientFrame(gClient-&gt;GetDefaultRoot(), main, 200, 100);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;CenterOnParent();
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"CloseWindow()"</span>, <span class="string">"KVDropDownDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;DontCallClose();      <span class="comment">// to avoid <a href="../ListOfTypes.html#double">double</a> deletions.</span>
+   <span class="comment">// use hierarchical cleaning</span>
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetCleanup(kDeepCleanup);
 
-    <a href="../KVTextDialog.html#KVTextDialog:fAnswer" title="TString* KVTextDialog::fAnswer">fAnswer</a> = chosen;
-    <a href="../KVTextDialog.html#KVTextDialog:fOK" title="Bool_t* KVTextDialog::fOK">fOK</a> = ok;
-    *<a href="../KVTextDialog.html#KVTextDialog:fOK" title="Bool_t* KVTextDialog::fOK">fOK</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;               <span class="comment">//initialise flag</span>
+   <a href="../KVTextDialog.html#KVTextDialog:fAnswer" title="TString* KVTextDialog::fAnswer">fAnswer</a> = chosen;
+   <a href="../KVTextDialog.html#KVTextDialog:fOK" title="Bool_t* KVTextDialog::fOK">fOK</a> = ok;
+   *<a href="../KVTextDialog.html#KVTextDialog:fOK" title="Bool_t* KVTextDialog::fOK">fOK</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;               <span class="comment">//initialise flag</span>
 
-     <span class="comment">// Add a label</span>
-    TGLabel *l = <span class="keyword">new</span> TGLabel(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>, question);
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;AddFrame(l, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsCenterX, 5, 5, 5, 0));
-    TGHorizontalFrame* hf1 = <span class="keyword">new</span> TGHorizontalFrame(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>);
+   <span class="comment">// Add a label</span>
+   TGLabel* l = <span class="keyword">new</span> TGLabel(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>, question);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;AddFrame(l, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsCenterX, 5, 5, 5, 0));
+   TGHorizontalFrame* hf1 = <span class="keyword">new</span> TGHorizontalFrame(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>);
 
-    <span class="comment">//Add text Entry</span>
-    <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a> = <span class="keyword">new</span> TGTextEntry(hf1,default_value);
-    <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>-&gt;Resize(70, 22);
-    <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"ReturnPressed()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"ReadAnswer()"</span>);
-    hf1-&gt;AddFrame(<a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsLeft, 5, 5, 5, 5));
+   <span class="comment">//Add text Entry</span>
+   <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a> = <span class="keyword">new</span> TGTextEntry(hf1, default_value);
+   <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>-&gt;Resize(70, 22);
+   <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"ReturnPressed()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"ReadAnswer()"</span>);
+   hf1-&gt;AddFrame(<a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsLeft, 5, 5, 5, 5));
 
-    l = <span class="keyword">new</span> TGLabel(hf1, unit);
-    hf1-&gt;AddFrame(l, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsRight, 5, 5, 5, 0));
+   l = <span class="keyword">new</span> TGLabel(hf1, unit);
+   hf1-&gt;AddFrame(l, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsRight, 5, 5, 5, 0));
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;AddFrame(hf1, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsCenterX, 5, 5, 5, 5));
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;AddFrame(hf1, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsCenterX, 5, 5, 5, 5));
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetWindowName(<span class="string">"KVTextDialog"</span>);
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetIconName(<span class="string">"KVTextDialog"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetWindowName(<span class="string">"KVTextDialog"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetIconName(<span class="string">"KVTextDialog"</span>);
 
-    <span class="comment">//--- create the OK, Apply and Cancel buttons</span>
+   <span class="comment">//--- create the OK, Apply and Cancel buttons</span>
 
-    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> nb = 0, width = 0, height = 0;
+   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> nb = 0, width = 0, height = 0;
 
-    TGHorizontalFrame *hf =
-        <span class="keyword">new</span> TGHorizontalFrame(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>, 60, 20, kFixedWidth);
-    TGLayoutHints *l1 =
-        <span class="keyword">new</span> TGLayoutHints(kLHintsCenterY | kLHintsExpandX, 5, 5, 0, 0);
+   TGHorizontalFrame* hf =
+      <span class="keyword">new</span> TGHorizontalFrame(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>, 60, 20, kFixedWidth);
+   TGLayoutHints* l1 =
+      <span class="keyword">new</span> TGLayoutHints(kLHintsCenterY | kLHintsExpandX, 5, 5, 0, 0);
 
-    <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a> = <span class="keyword">new</span> TGTextButton(hf, <span class="string">"&amp;OK"</span>, 1);
-    hf-&gt;AddFrame(<a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>, l1);
-    height = <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;GetDefaultHeight();
-    width = TMath::Max(width, <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;GetDefaultWidth());
-    ++nb;
-    <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"ReadAnswer()"</span>);
-    <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
-    <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"ReturnPressed()"</span>, <span class="string">"TGTextButton"</span>, <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>, <span class="string">"Clicked()"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a> = <span class="keyword">new</span> TGTextButton(hf, <span class="string">"&amp;OK"</span>, 1);
+   hf-&gt;AddFrame(<a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>, l1);
+   height = <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;GetDefaultHeight();
+   width = TMath::Max(width, <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;GetDefaultWidth());
+   ++nb;
+   <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"ReadAnswer()"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fTextEntry" title="TGTextEntry* KVTextDialog::fTextEntry">fTextEntry</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"ReturnPressed()"</span>, <span class="string">"TGTextButton"</span>, <a href="../KVTextDialog.html#KVTextDialog:fOKBut" title="TGTextButton* KVTextDialog::fOKBut">fOKBut</a>, <span class="string">"Clicked()"</span>);
 
-    <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a> = <span class="keyword">new</span> TGTextButton(hf, <span class="string">"&amp;Cancel"</span>, 3);
-    hf-&gt;AddFrame(<a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>, l1);
-    height = <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>-&gt;GetDefaultHeight();
-    width = TMath::Max(width, <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>-&gt;GetDefaultWidth());
-    ++nb;
-    <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
+   <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a> = <span class="keyword">new</span> TGTextButton(hf, <span class="string">"&amp;Cancel"</span>, 3);
+   hf-&gt;AddFrame(<a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>, l1);
+   height = <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>-&gt;GetDefaultHeight();
+   width = TMath::Max(width, <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>-&gt;GetDefaultWidth());
+   ++nb;
+   <a href="../KVTextDialog.html#KVTextDialog:fCancelBut" title="TGTextButton* KVTextDialog::fCancelBut">fCancelBut</a>-&gt;<a href="../KVTextDialog.html#KVTextDialog:Connect" title="Bool_t KVTextDialog::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVTextDialog"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
 
-    <span class="comment">// place buttons at the bottom</span>
-    l1 = <span class="keyword">new</span> TGLayoutHints(kLHintsBottom | kLHintsCenterX, 0, 0, 5, 5);
+   <span class="comment">// place buttons at the bottom</span>
+   l1 = <span class="keyword">new</span> TGLayoutHints(kLHintsBottom | kLHintsCenterX, 0, 0, 5, 5);
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;AddFrame(hf, l1);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;AddFrame(hf, l1);
 
-    <span class="comment">// keep the buttons centered and with the same width</span>
-    hf-&gt;Resize((width + 20) * nb, height);
+   <span class="comment">// keep the buttons centered and with the same width</span>
+   hf-&gt;Resize((width + 20) * nb, height);
 
-    <span class="comment">// map all widgets and calculate size of dialog</span>
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;MapSubwindows();
+   <span class="comment">// map all widgets and calculate size of dialog</span>
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;MapSubwindows();
 
-    width = <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;GetDefaultWidth();
-    height = <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;GetDefaultHeight();
+   width = <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;GetDefaultWidth();
+   height = <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;GetDefaultHeight();
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;Resize(width, height);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;Resize(width, height);
 
-    <span class="comment">// position relative to the parent's window</span>
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;CenterOnParent();
+   <span class="comment">// position relative to the parent's window</span>
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;CenterOnParent();
 
-    <span class="comment">// make the message box non-resizable</span>
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetWMSize(width, height);
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetWMSizeHints(width, height, width, height, 0, 0);
+   <span class="comment">// make the message box non-resizable</span>
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetWMSize(width, height);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetWMSizeHints(width, height, width, height, 0, 0);
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetMWMHints(kMWMDecorAll | kMWMDecorResizeH | kMWMDecorMaximize |
-                       kMWMDecorMinimize | kMWMDecorMenu,
-                       kMWMFuncAll | kMWMFuncResize | kMWMFuncMaximize |
-                       kMWMFuncMinimize, kMWMInputModeless);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;SetMWMHints(kMWMDecorAll | kMWMDecorResizeH | kMWMDecorMaximize |
+                      kMWMDecorMinimize | kMWMDecorMenu,
+                      kMWMFuncAll | kMWMFuncResize | kMWMFuncMaximize |
+                      kMWMFuncMinimize, kMWMInputModeless);
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;CenterOnParent();
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;CenterOnParent();
 
-    <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;MapWindow();
-    gClient-&gt;WaitFor(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>);
+   <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>-&gt;MapWindow();
+   gClient-&gt;WaitFor(<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>);
 }
 
 <span class="comment">//________________________________________________________________</span>
 <a name="JzVTlB"></a><a href="../KVTextDialog.html">KVTextDialog</a>::<a href="../KVTextDialog.html#KVTextDialog:_KVTextDialog" title="void KVTextDialog::~KVTextDialog()">~KVTextDialog</a>()
 {
    <span class="comment">// Destructor</span>
-    <span class="keyword">if</span> (<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>) {
-       <span class="keyword">delete</span> <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>;
-       <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a> = 0;
-    }
+   <span class="keyword">if</span> (<a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>) {
+      <span class="keyword">delete</span> <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a>;
+      <a href="../KVTextDialog.html#KVTextDialog:fMain" title="TGTransientFrame* KVTextDialog::fMain">fMain</a> = 0;
+   }
 }
 
 <span class="comment">//________________________________________________________________</span>
@@ -176,7 +176,7 @@ ClassImp(<a href="../KVTextDialog.html">KVTextDialog</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

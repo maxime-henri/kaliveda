@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:25 2015            -->
+<!--   Date: Fri Jan  8 15:13:26 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -41,42 +41,42 @@ ClassImp(<a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>)
    : <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>(), <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>(0), <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>(0)
 {
    <span class="comment">// default ctor</span>
-  <a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kBlack);
-  <a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkFac" title="Double_t KVGausGumDistribution::fkFac">fkFac</a> = 0.;
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> = 1./sqrt(2*TMath::Pi());
+   <a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kBlack);
+   <a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkFac" title="Double_t KVGausGumDistribution::fkFac">fkFac</a> = 0.;
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> = 1. / sqrt(2 * TMath::Pi());
 }
 
 <span class="comment">//________________________________________________________________</span>
 
 <a name="lsC3ND"></a><a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:KVGausGumDistribution" title="KVGausGumDistribution KVGausGumDistribution::KVGausGumDistribution() or overloads">KVGausGumDistribution</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <a href="../ListOfTypes.html#Int_t">Int_t</a> k, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmin, <a href="../ListOfTypes.html#Double_t">Double_t</a> xmax)
    : <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>(name, <span class="keyword">this</span>, &amp;<a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:GDk" title="Double_t KVGausGumDistribution::GDk(Double_t* x,Double_t* p)">GDk</a>, xmin, xmax, 5,
-     <span class="string">"KVGausGumDistribution"</span>, <span class="string">"GDk"</span>), <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>(0), <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>(0)
+         <span class="string">"KVGausGumDistribution"</span>, <span class="string">"GDk"</span>), <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>(0), <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>(0)
 {
    <span class="comment">// normalised sum of Gaussian distribution and Gumbel distribution of k-th rank</span>
    <span class="comment">// f = eta*Gauss(mean,sigma) + (1-eta)*Gumbel(a,b)</span>
    <span class="comment">// free parameters: gauss: (mean,sigma) gumbel: (a,b) eta</span>
    <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fRank" title="Int_t KVGausGumDistribution::fRank">fRank</a> = k;
-   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkFac" title="Double_t KVGausGumDistribution::fkFac">fkFac</a> = TMath::Power(k,k)/TMath::Factorial(k-1);
-   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> = 1./sqrt(2*TMath::Pi());
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkFac" title="Double_t KVGausGumDistribution::fkFac">fkFac</a> = TMath::Power(k, k) / TMath::Factorial(k - 1);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> = 1. / sqrt(2 * TMath::Pi());
    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(0, <span class="string">"#eta"</span>);
    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(1, <span class="string">"#mu"</span>);
    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(2, <span class="string">"#sigma"</span>);
    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(3, <span class="string">"#mu-a_{m}"</span>);
    <a href="../#TFormula:SetParName" title="void TFormula::SetParName(Int_t ipar,const char* name)">SetParName</a>(4, <span class="string">"b_{m}"</span>);
-   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(0,0.,1.);
-   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(1,<a href="../#TF1:GetXmin" title="Double_t TF1::GetXmin()">GetXmin</a>(),<a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
-   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(2,0.01,200.);
-   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(3,0.01,<a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
-   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(4,0.01,200.);
-  <a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kBlack);
-  <a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
-  
+   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(0, 0., 1.);
+   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(1, <a href="../#TF1:GetXmin" title="Double_t TF1::GetXmin()">GetXmin</a>(), <a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
+   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(2, 0.01, 200.);
+   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(3, 0.01, <a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
+   <a href="../#TF1:SetParLimits" title="void TF1::SetParLimits(Int_t ipar,Double_t parmin,Double_t parmax)">SetParLimits</a>(4, 0.01, 200.);
+   <a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kBlack);
+   <a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
+
 }
 
 <span class="comment">//________________________________________________________________</span>
 
-<a name="pcJRT"></a><a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:KVGausGumDistribution" title="KVGausGumDistribution KVGausGumDistribution::KVGausGumDistribution() or overloads">KVGausGumDistribution</a> (<span class="keyword">const</span> <a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>&amp; obj)  : <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>()
+<a name="Vj4Xe"></a><a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:KVGausGumDistribution" title="KVGausGumDistribution KVGausGumDistribution::KVGausGumDistribution() or overloads">KVGausGumDistribution</a>(<span class="keyword">const</span> <a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>&amp; obj)  : <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>()
 {
    <span class="comment">// <a href="../KVGausGumDistribution.html#KVGausGumDistribution:Copy" title="void KVGausGumDistribution::Copy(TObject&amp; )">Copy</a> constructor</span>
    <span class="comment">// This ctor is used to make a copy of an existing object (for example</span>
@@ -90,13 +90,13 @@ ClassImp(<a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>)
 <a name="NTaVvE"></a><a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:_KVGausGumDistribution" title="void KVGausGumDistribution::~KVGausGumDistribution()">~KVGausGumDistribution</a>()
 {
    <span class="comment">// Destructor</span>
-  SafeDelete(<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>);
-  SafeDelete(<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>);
+   SafeDelete(<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>);
+   SafeDelete(<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>);
 }
 
 <span class="comment">//________________________________________________________________</span>
 
-<a name="jBF3tD"></a><span class="keyword">void</span> <a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Copy" title="void KVGausGumDistribution::Copy(TObject&amp; )">Copy</a> (<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span>
+<a name="uY5YhC"></a><span class="keyword">void</span> <a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Copy" title="void KVGausGumDistribution::Copy(TObject&amp; )">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span>
 {
    <span class="comment">// This method copies the current state of 'this' object into 'obj'</span>
    <span class="comment">// You should add here any member variables, for example:</span>
@@ -117,26 +117,26 @@ ClassImp(<a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>)
 <a name="DsIzeB"></a><span class="keyword">void</span> <a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Paint" title="void KVGausGumDistribution::Paint(Option_t* option=&quot;&quot;)">Paint</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* option)
 {
    <span class="comment">// <a href="../#TF1:Draw" title="void TF1::Draw(Option_t* option=&quot;&quot;)">Draw</a> total distribution and the two component distributions</span>
-   
-  <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Paint" title="void KVGausGumDistribution::Paint(Option_t* option=&quot;&quot;)">Paint</a>(option);
-  <span class="keyword">if</span>(!<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a>) <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> = 1./sqrt(2*TMath::Pi());
-  
-  <span class="keyword">if</span>(!<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>)  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a> = <span class="keyword">new</span> <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>(<span class="string">"GaussComp"</span>,<span class="string">"[0]*exp(-0.5*((x-[1])/[2])**2)"</span>,<a href="../#TF1:GetXmin" title="Double_t TF1::GetXmin()">GetXmin</a>(),<a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
-  <span class="keyword">if</span>(!<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>) <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a> = <span class="keyword">new</span> <a href="../KVGumbelDistribution.html">KVGumbelDistribution</a>(<span class="string">"GumbelComp"</span>,<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fRank" title="Int_t KVGausGumDistribution::fRank">fRank</a>,<span class="keyword">false</span>,<a href="../#TF1:GetXmin" title="Double_t TF1::GetXmin()">GetXmin</a>(),<a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a>*<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(0)/<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(2),<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(1),<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(2));
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(1)-<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(3),<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(4),(1.-<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(0)));
-  
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kBlue);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TAttLine:SetLineStyle" title="void TAttLine::SetLineStyle(Style_t lstyle)">SetLineStyle</a>(9);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TAttLine:SetLineWidth" title="void TAttLine::SetLineWidth(Width_t lwidth)">SetLineWidth</a>(5);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
-  
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kRed);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TAttLine:SetLineWidth" title="void TAttLine::SetLineWidth(Width_t lwidth)">SetLineWidth</a>(5);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
-  
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Paint" title="void KVGausGumDistribution::Paint(Option_t* option=&quot;&quot;)">Paint</a>(<span class="string">"same"</span>);
-  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TF1:Paint" title="void TF1::Paint(Option_t* option=&quot;&quot;)">Paint</a>(<span class="string">"same"</span>);    
+
+   <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>::<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Paint" title="void KVGausGumDistribution::Paint(Option_t* option=&quot;&quot;)">Paint</a>(option);
+   <span class="keyword">if</span> (!<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a>) <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> = 1. / sqrt(2 * TMath::Pi());
+
+   <span class="keyword">if</span> (!<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>)  <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a> = <span class="keyword">new</span> <a href="../#TF1:TF1" title="TF1 TF1::TF1() or overloads">TF1</a>(<span class="string">"GaussComp"</span>, <span class="string">"[0]*exp(-0.5*((x-[1])/[2])**2)"</span>, <a href="../#TF1:GetXmin" title="Double_t TF1::GetXmin()">GetXmin</a>(), <a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
+   <span class="keyword">if</span> (!<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>) <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a> = <span class="keyword">new</span> <a href="../KVGumbelDistribution.html">KVGumbelDistribution</a>(<span class="string">"GumbelComp"</span>, <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fRank" title="Int_t KVGausGumDistribution::fRank">fRank</a>, <span class="keyword">false</span>, <a href="../#TF1:GetXmin" title="Double_t TF1::GetXmin()">GetXmin</a>(), <a href="../#TF1:GetXmax" title="Double_t TF1::GetXmax()">GetXmax</a>());
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> * <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(0) / <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(2), <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(1), <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(2));
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TFormula:SetParameters" title="void TFormula::SetParameters(const Double_t* params) or overloads">SetParameters</a>(<a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(1) - <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(3), <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(4), (1. - <a href="../#TFormula:GetParameter" title="Double_t TFormula::GetParameter(Int_t ipar) or overloads">GetParameter</a>(0)));
+
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kBlue);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TAttLine:SetLineStyle" title="void TAttLine::SetLineStyle(Style_t lstyle)">SetLineStyle</a>(9);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TAttLine:SetLineWidth" title="void TAttLine::SetLineWidth(Width_t lwidth)">SetLineWidth</a>(5);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
+
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TAttLine:SetLineColor" title="void TAttLine::SetLineColor(Color_t lcolor)">SetLineColor</a>(kRed);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TAttLine:SetLineWidth" title="void TAttLine::SetLineWidth(Width_t lwidth)">SetLineWidth</a>(5);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TF1:SetNpx" title="void TF1::SetNpx(Int_t npx=100)">SetNpx</a>(2000);
+
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGaussComp" title="TF1* KVGausGumDistribution::fGaussComp">fGaussComp</a>-&gt;<a href="../KVGausGumDistribution.html#KVGausGumDistribution:Paint" title="void KVGausGumDistribution::Paint(Option_t* option=&quot;&quot;)">Paint</a>(<span class="string">"same"</span>);
+   <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fGumbelComp" title="KVGumbelDistribution* KVGausGumDistribution::fGumbelComp">fGumbelComp</a>-><a href="../#TF1:Paint" title="void TF1::Paint(Option_t* option=&quot;&quot;)">Paint</a>(<span class="string">"same"</span>);
 }
 
 <span class="comment">//________________________________________________________________</span>
@@ -150,21 +150,21 @@ ClassImp(<a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>)
    <span class="comment">// par[2] = sigma</span>
    <span class="comment">// par[3] = distance between gaussian and gumbel &gt;=0</span>
    <span class="comment">// par[4] = b</span>
-   
-   <span class="keyword">if</span>(p[4]==0) <span class="keyword">return</span> 0;
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> am = p[1]-p[3];
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> s = (*x - am)/p[4];
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> gum = (<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkFac" title="Double_t KVGausGumDistribution::fkFac">fkFac</a>/p[4]);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> es = -<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fRank" title="Int_t KVGausGumDistribution::fRank">fRank</a>*(s + TMath::Exp(-s));
+
+   <span class="keyword">if</span> (p[4] == 0) <span class="keyword">return</span> 0;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> am = p[1] - p[3];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> s = (*x - am) / p[4];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> gum = (<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkFac" title="Double_t KVGausGumDistribution::fkFac">fkFac</a> / p[4]);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> es = -<a href="../KVGausGumDistribution.html#KVGausGumDistribution:fRank" title="Int_t KVGausGumDistribution::fRank">fRank</a> * (s + TMath::Exp(-s));
    gum *= TMath::Exp(es);
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> gau = <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a>/p[2];
-   s = (*x - p[1])/p[2];
-   s = TMath::Power(s,2.)/2.;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> gau = <a href="../KVGausGumDistribution.html#KVGausGumDistribution:fkGaussNor" title="Double_t KVGausGumDistribution::fkGaussNor">fkGaussNor</a> / p[2];
+   s = (*x - p[1]) / p[2];
+   s = TMath::Power(s, 2.) / 2.;
    gau *= TMath::Exp(-s);
-   
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> gg = p[0]*gau+(1.-p[0])*gum;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> gg = p[0] * gau + (1. - p[0]) * gum;
    <span class="keyword">return</span> gg;
 }
 </pre>
@@ -175,7 +175,7 @@ ClassImp(<a href="../KVGausGumDistribution.html">KVGausGumDistribution</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

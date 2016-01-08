@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:13 2015            -->
+<!--   Date: Fri Jan  8 15:13:12 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -61,7 +61,7 @@ ClassImp(<a href="../KVEnv.html">KVEnv</a>)
 <a name="uMBKsC"></a><a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:_KVEnv" title="void KVEnv::~KVEnv()">~KVEnv</a>()
 {
    <span class="comment">// Destructor</span>
-	<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.<a href="../#TObject:Clear" title="void TObject::Clear(Option_t* =&quot;&quot;)">Clear</a>();
+   <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.<a href="../#TObject:Clear" title="void TObject::Clear(Option_t* =&quot;&quot;)">Clear</a>();
 }
 
 <span class="comment">//________________________________________________________________</span>
@@ -81,69 +81,69 @@ ClassImp(<a href="../KVEnv.html">KVEnv</a>)
 <a name="QFNOsB"></a><span class="keyword">void</span> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:CopyTable" title="void KVEnv::CopyTable(TEnv&amp; env)">CopyTable</a>(<a href="../#TEnv:TEnv" title="TEnv TEnv::TEnv(const TEnv&amp; ) or overloads">TEnv</a>&amp; env)
 {
    <span class="comment">//<a href="../KVEnv.html#KVEnv:Copy" title="void KVEnv::Copy(TObject&amp; obj)">Copy</a> table of env to this</span>
-	THashList* hl=0;
-	<span class="keyword">if</span> ( (hl = env.<a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>()) ){
-		TIter next(hl);
-		TEnvRec* env_rec = 0;
-		<span class="keyword">while</span> ( (env_rec = (TEnvRec* )next.Next()) ){
-			<a href="../#TEnv:SetValue" title="void TEnv::SetValue(const char* name,const char* value,EEnvLevel level=kEnvChange,const char* type=0) or overloads">SetValue</a>(env_rec-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>(),env_rec-&gt;<a href="../#TEnv:GetValue" title="Int_t TEnv::GetValue(const char* name,Int_t dflt) or overloads">GetValue</a>());
-		}
-	}
+   THashList* hl = 0;
+   <span class="keyword">if</span> ((hl = env.<a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>())) {
+      TIter next(hl);
+      TEnvRec* env_rec = 0;
+      <span class="keyword">while</span> ((env_rec = (TEnvRec*)next.Next())) {
+         <a href="../#TEnv:SetValue" title="void TEnv::SetValue(const char* name,const char* value,EEnvLevel level=kEnvChange,const char* type=0) or overloads">SetValue</a>(env_rec-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>(), env_rec-&gt;<a href="../#TEnv:GetValue" title="Int_t TEnv::GetValue(const char* name,Int_t dflt) or overloads">GetValue</a>());
+      }
+   }
 
 }
 
 <span class="comment">//________________________________________________________________</span>
 <a name="Bf9PiE"></a><span class="keyword">void</span> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:AddCommentLine" title="void KVEnv::AddCommentLine(const Char_t* line)">AddCommentLine</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* line)
 {
-	<span class="comment">//Add a comment for the current <a href="../#TEnv:TEnv" title="TEnv TEnv::TEnv(const TEnv&amp; ) or overloads">TEnv</a></span>
-	<span class="comment">//the line will started with <span class="string">"# "</span> prefix and will</span>
-	<span class="comment">//be ended with <span class="string">"\n"</span> postfix</span>
-	<span class="comment">//</span>
-	<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.Add(<span class="keyword">new</span> TNamed(Form(<span class="string">"# %s\n"</span>,line),<span class="string">""</span>));
+   <span class="comment">//Add a comment for the current <a href="../#TEnv:TEnv" title="TEnv TEnv::TEnv(const TEnv&amp; ) or overloads">TEnv</a></span>
+   <span class="comment">//the line will started with <span class="string">"# "</span> prefix and will</span>
+   <span class="comment">//be ended with <span class="string">"\n"</span> postfix</span>
+   <span class="comment">//</span>
+   <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.Add(<span class="keyword">new</span> TNamed(Form(<span class="string">"# %s\n"</span>, line), <span class="string">""</span>));
 
 }
 
 <span class="comment">//________________________________________________________________</span>
 <a name="epstFE"></a><span class="keyword">void</span> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:AddComments" title="void KVEnv::AddComments(const Char_t* comments)">AddComments</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* comments)
 {
-	<span class="comment">//Add comments</span>
-	<span class="comment">//the comments can contains <span class="string">"\n"</span> character</span>
-	<span class="comment">//each line contained in the comments will</span>
-	<span class="comment">//begin with <span class="string">"# "</span> prefix and will</span>
-	<span class="comment">//be ended with <span class="string">"\n"</span> postfix</span>
-	
-	<a href="../KVString.html">KVString</a> st(comments);
-	st.Begin(<span class="string">"\n"</span>);
-	<span class="keyword">while</span> (!st.End()){
-		<a href="../KVEnv.html#KVEnv:AddCommentLine" title="void KVEnv::AddCommentLine(const Char_t* line)">AddCommentLine</a>(st.Next().Data());
-	}
+   <span class="comment">//Add comments</span>
+   <span class="comment">//the comments can contains <span class="string">"\n"</span> character</span>
+   <span class="comment">//each line contained in the comments will</span>
+   <span class="comment">//begin with <span class="string">"# "</span> prefix and will</span>
+   <span class="comment">//be ended with <span class="string">"\n"</span> postfix</span>
+
+   <a href="../KVString.html">KVString</a> st(comments);
+   st.Begin(<span class="string">"\n"</span>);
+   <span class="keyword">while</span> (!st.End()) {
+      <a href="../KVEnv.html#KVEnv:AddCommentLine" title="void KVEnv::AddCommentLine(const Char_t* line)">AddCommentLine</a>(st.Next().Data());
+   }
 }
 
 <span class="comment">//________________________________________________________________</span>
 <a name="QN_OHB"></a><span class="keyword">void</span> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:ClearComments" title="void KVEnv::ClearComments()">ClearComments</a>()
 {
-	<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.<a href="../#TObject:Clear" title="void TObject::Clear(Option_t* =&quot;&quot;)">Clear</a>();
+   <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.<a href="../#TObject:Clear" title="void TObject::Clear(Option_t* =&quot;&quot;)">Clear</a>();
 }
 
 <span class="comment">//________________________________________________________________</span>
 <a name="yATlDB"></a><span class="keyword">void</span> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:PrintComments" title="void KVEnv::PrintComments()">PrintComments</a>()
 {
-	<span class="comment">//print comments as they will be written</span>
-	<span class="comment">//in the file</span>
-	<span class="keyword">if</span> (<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.GetEntries()==0) {
-		printf(<span class="string">"No comments defined\n"</span>);
-		<span class="keyword">return</span>;
-	}
-	<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii=0;ii&lt;<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.GetEntries();ii+=1){
-		printf(<span class="string">"%s"</span>, <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.At(ii)-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
-	}
+   <span class="comment">//print comments as they will be written</span>
+   <span class="comment">//in the file</span>
+   <span class="keyword">if</span> (<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.GetEntries() == 0) {
+      printf(<span class="string">"No comments defined\n"</span>);
+      <span class="keyword">return</span>;
+   }
+   <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii = 0; ii &lt; <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.GetEntries(); ii += 1) {
+      printf(<span class="string">"%s"</span>, <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.At(ii)-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
+   }
 }
 
 <span class="comment">//________________________________________________________________</span>
-<a name="JHm3LB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:WriteFile" title="Int_t KVEnv::WriteFile(const char* fname,EEnvLevel level=kEnvAll)">WriteFile</a>(<span class="keyword">const</span> <span class="keyword">char</span> *fname, EEnvLevel level)
+<a name="NiD4LB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVEnv.html">KVEnv</a>::<a href="../KVEnv.html#KVEnv:WriteFile" title="Int_t KVEnv::WriteFile(const char* fname,EEnvLevel level=kEnvAll)">WriteFile</a>(<span class="keyword">const</span> <span class="keyword">char</span>* fname, EEnvLevel level)
 {
    <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> first comments associated to the current <a href="../#TEnv:TEnv" title="TEnv TEnv::TEnv(const TEnv&amp; ) or overloads">TEnv</a></span>
-	<span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> resourse records to file fname for a certain level. Use</span>
+   <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> resourse records to file fname for a certain level. Use</span>
    <span class="comment">// level kEnvAll to write all resources. Returns -1 on case of error,</span>
    <span class="comment">// 0 in case of success.</span>
 
@@ -157,22 +157,22 @@ ClassImp(<a href="../KVEnv.html">KVEnv</a>)
       <span class="keyword">return</span> -1;
    }
 
-   FILE *ofp;
+   FILE* ofp;
    <span class="keyword">if</span> ((ofp = fopen(fname, <span class="string">"w"</span>))) {
-      <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii=0;ii&lt;<a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.GetEntries();ii+=1){
-			fprintf(ofp, <span class="string">"%s"</span>, <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.At(ii)-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
-		}
-		
-		<span class="comment">//for (<a href="../ListOfTypes.html#Int_t">Int_t</a> jj=0;jj&lt;<a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>()-&gt;GetEntries();jj+=1){</span>
-		<span class="comment">//	TEnvRec *er = (TEnvRec*) <a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>()-&gt;At(jj);</span>
-		TIter next(<a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>());
-      TEnvRec *er;
+      <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii = 0; ii &lt; <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.GetEntries(); ii += 1) {
+         fprintf(ofp, <span class="string">"%s"</span>, <a href="../KVEnv.html#KVEnv:fComments" title="TList KVEnv::fComments">fComments</a>.At(ii)-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
+      }
+
+      <span class="comment">//for (<a href="../ListOfTypes.html#Int_t">Int_t</a> jj=0;jj&lt;<a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>()-&gt;GetEntries();jj+=1){</span>
+      <span class="comment">// TEnvRec *er = (TEnvRec*) <a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>()-&gt;At(jj);</span>
+      TIter next(<a href="../#TEnv:GetTable" title="THashList* TEnv::GetTable()">GetTable</a>());
+      TEnvRec* er;
       <span class="keyword">while</span> ((er = (TEnvRec*) next()))
          <span class="keyword">if</span> (er-&gt;GetLevel() == level || level == kEnvAll)
             fprintf(ofp, <span class="string">"%-40s %s\n"</span>, Form(<span class="string">"%s:"</span>, er-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>()),
                     er-&gt;<a href="../#TEnv:GetValue" title="Int_t TEnv::GetValue(const char* name,Int_t dflt) or overloads">GetValue</a>());
       <span class="comment">//}</span>
-		fclose(ofp);
+      fclose(ofp);
       <span class="keyword">return</span> 0;
    }
 
@@ -187,7 +187,7 @@ ClassImp(<a href="../KVEnv.html">KVEnv</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

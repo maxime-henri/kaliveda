@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:51 2015            -->
+<!--   Date: Fri Jan  8 15:13:58 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -24,7 +24,7 @@ $Id: <a href="../KVINDRADB4.html">KVINDRADB4</a>.cpp,v 1.18 2007/04/26 16:40:58 
                           <a href="../KVINDRADB4.html">KVINDRADB4</a>.cpp  -  description
                              -------------------
     begin                : mars 2004
-	copyright            : (C) 2004 by daniel cussol
+   copyright            : (C) 2004 by daniel cussol
     email                : cussol@in2p3.fr
  ***************************************************************************/</span>
 
@@ -52,15 +52,15 @@ ClassImp(<a href="../KVINDRADB4.html">KVINDRADB4</a>)
 <span class="comment">//   Cette base contiendra la liste:</span>
 <span class="comment">//         - des runs (unique)</span>
 <span class="comment">//         - des systemes (unique)</span>
-<span class="comment">//   </span>
+<span class="comment">//</span>
 <span class="comment">//    la mention (unique) signifie que 2 enregistrements ne peuvent avoir</span>
 <span class="comment">//    le meme nom</span>
-<span class="comment">//    Ce ne peut etre le cas des parametres de calibration puisque plusieurs </span>
+<span class="comment">//    Ce ne peut etre le cas des parametres de calibration puisque plusieurs</span>
 <span class="comment">//    peuvent exister pour un meme detecteur et que les parametres portent le nom</span>
 <span class="comment">//    du detecteur correspondant</span>
 <span class="comment">//</span>
 <span class="comment">//</span>
-<a name="RiSsq"></a><a href="../KVINDRADB4.html">KVINDRADB4</a>::<a href="../KVINDRADB4.html#KVINDRADB4:KVINDRADB4" title="KVINDRADB4 KVINDRADB4::KVINDRADB4() or overloads">KVINDRADB4</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name):<a href="../KVINDRADB.html#KVINDRADB:KVINDRADB" title="KVINDRADB KVINDRADB::KVINDRADB() or overloads">KVINDRADB</a>(name)
+<a name="JayLtE"></a><a href="../KVINDRADB4.html">KVINDRADB4</a>::<a href="../KVINDRADB4.html#KVINDRADB4:KVINDRADB4" title="KVINDRADB4 KVINDRADB4::KVINDRADB4() or overloads">KVINDRADB4</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name): <a href="../KVINDRADB.html#KVINDRADB:KVINDRADB" title="KVINDRADB KVINDRADB::KVINDRADB() or overloads">KVINDRADB</a>(name)
 {
    <span class="comment">//default ctor</span>
 }
@@ -101,14 +101,14 @@ ClassImp(<a href="../KVINDRADB4.html">KVINDRADB4</a>)
    <span class="comment">//      set properties of run objects</span>
    <span class="comment">//kFirstRun &amp; kLastRun are set</span>
 
-   <a href="../KVRunListLine.html">KVRunListLine</a> *csv_line = <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>();
+   <a href="../KVRunListLine.html">KVRunListLine</a>* csv_line = <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>();
 
    <span class="comment">//run number</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> run_n = csv_line-&gt;GetIntField(<span class="string">"RUN"</span>);
 
    <span class="keyword">if</span> (!run_n) {
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"run_n = 0 ?????????  line number ="</span> &lt;&lt; <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetRLLineNumber" title="Int_t KVINDRARunListReader::GetRLLineNumber()">GetRLLineNumber</a>() &lt;&lt;
-          endl;
+           endl;
       <a href="../KVINDRARunListReader.html#KVINDRARunListReader:GetLineReader" title="KVRunListLine* KVINDRARunListReader::GetLineReader()">GetLineReader</a>()-><a href="../KVRunListLine.html#KVRunListLine:Print" title="void KVRunListLine::Print()">Print</a>();
       <span class="keyword">return</span>;
    }
@@ -116,15 +116,15 @@ ClassImp(<a href="../KVINDRADB4.html">KVINDRADB4</a>)
    kFirstRun = TMath::Min(kFirstRun, run_n);
 
 
-        <span class="comment">/*********************************************
-		WE CREATE A NEW RUN AND ADD
-		IT TO THE DATABASE. WE SET ALL
-		AVAILABLE INFORMATIONS ON
-		RUN FROM THE FILE. ERROR IF
-		DBASE RUN ALREADY EXISTS =&gt;
-		SAME RUN APPEARS TWICE
-	*********************************************/</span>
-   <a href="../KVINDRADBRun.html">KVINDRADBRun</a> *run = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a> *) <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run_n);
+   <span class="comment">/*********************************************
+   WE CREATE A NEW RUN AND ADD
+    IT TO THE DATABASE. WE SET ALL
+    AVAILABLE INFORMATIONS ON
+    RUN FROM THE FILE. ERROR IF
+    DBASE RUN ALREADY EXISTS =&gt;
+    SAME RUN APPEARS TWICE
+   *********************************************/</span>
+   <a href="../KVINDRADBRun.html">KVINDRADBRun</a>* run = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a>*) <a href="../KVINDRADB.html#KVINDRADB:GetRun" title="KVINDRADBRun* KVINDRADB::GetRun(Int_t run)">GetRun</a>(run_n);
    <span class="keyword">if</span> (!run) {
 
       run = <span class="keyword">new</span> <a href="../KVINDRADBRun.html">KVINDRADBRun</a>(run_n);
@@ -155,7 +155,7 @@ ClassImp(<a href="../KVINDRADB4.html">KVINDRADB4</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

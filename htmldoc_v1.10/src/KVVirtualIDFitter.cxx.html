@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:48 2015            -->
+<!--   Date: Fri Jan  8 15:15:03 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -46,36 +46,36 @@ ClassImp(<a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>)
 <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>* <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>::<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a> = 0;
 <a name="ULfuGB"></a><a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>* <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>::<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:GetDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::GetDefaultFitter()">GetDefaultFitter</a>()
 {
-	<span class="comment">// Static method. Creates (if necessary) and returns pointer to</span>
-	<span class="comment">// static instanciation of default ID fitter object. The class of this</span>
-	<span class="comment">// object is defined by the variable</span>
-	<span class="comment">//</span>
-	<span class="comment">// <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>.DefaultFitter:    xxxxxxxxxxx</span>
-	<span class="comment">//</span>
-	<span class="comment">// which can be customised in the user's .kvrootrc. The class must be defined</span>
-	<span class="comment">// as a <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a> plugin and have a default ctor with no arguments:</span>
-	<span class="comment">//</span>
-	<span class="comment">// +Plugin.<a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>: MyFitter MyFitter MyFitter.cpp+ <span class="string">"MyFitter()"</span></span>
-	
-	<span class="keyword">if</span>(!<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a>){
-		TString df = gEnv-&gt;GetValue(<span class="string">"KVVirtualIDFitter.DefaultFitter"</span>,<span class="string">""</span>);
-		<span class="keyword">if</span>(df == <span class="string">""</span>){
-			::<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"KVVirtualIDFitter::GetDefaultFitter"</span>,
-					<span class="string">"No default fitter defined. Use variable KVVirtualIDFitter.DefaultFitter"</span>);
-			<span class="keyword">return</span> 0;
-		}
-		TPluginHandler *ph;
-		<span class="keyword">if</span>(!(ph = <a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVVirtualIDFitter"</span>, df.Data()))) <span class="keyword">return</span> 0;
-		<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a> = (<a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>*) ph-&gt;ExecPlugin(0);
-	}
-	<span class="keyword">return</span> <a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a>;
+   <span class="comment">// Static method. Creates (if necessary) and returns pointer to</span>
+   <span class="comment">// static instanciation of default ID fitter object. The class of this</span>
+   <span class="comment">// object is defined by the variable</span>
+   <span class="comment">//</span>
+   <span class="comment">// <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>.DefaultFitter:    xxxxxxxxxxx</span>
+   <span class="comment">//</span>
+   <span class="comment">// which can be customised in the user's .kvrootrc. The class must be defined</span>
+   <span class="comment">// as a <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a> plugin and have a default ctor with no arguments:</span>
+   <span class="comment">//</span>
+   <span class="comment">// +Plugin.<a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>: MyFitter MyFitter MyFitter.cpp+ <span class="string">"MyFitter()"</span></span>
+
+   <span class="keyword">if</span> (!<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a>) {
+      TString df = gEnv-&gt;GetValue(<span class="string">"KVVirtualIDFitter.DefaultFitter"</span>, <span class="string">""</span>);
+      <span class="keyword">if</span> (df == <span class="string">""</span>) {
+         ::<a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"KVVirtualIDFitter::GetDefaultFitter"</span>,
+                 <span class="string">"No default fitter defined. Use variable KVVirtualIDFitter.DefaultFitter"</span>);
+         <span class="keyword">return</span> 0;
+      }
+      TPluginHandler* ph;
+      <span class="keyword">if</span> (!(ph = <a href="../KVBase.html#KVBase:LoadPlugin" title="TPluginHandler* KVBase::LoadPlugin(const Char_t* base,const Char_t* uri=&quot;0&quot;)">LoadPlugin</a>(<span class="string">"KVVirtualIDFitter"</span>, df.Data()))) <span class="keyword">return</span> 0;
+      <a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a> = (<a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>*) ph-&gt;ExecPlugin(0);
+   }
+   <span class="keyword">return</span> <a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:gDefaultFitter" title="KVVirtualIDFitter* KVVirtualIDFitter::gDefaultFitter">gDefaultFitter</a>;
 }
 
 <a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>::KVVirtualIDFitter()
 {
    <span class="comment">// Default constructor</span>
-	<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:fGrid" title="KVIDGraph* KVVirtualIDFitter::fGrid">fGrid</a> = 0;
-	<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:fPad" title="TVirtualPad* KVVirtualIDFitter::fPad">fPad</a> = 0;
+   <a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:fGrid" title="KVIDGraph* KVVirtualIDFitter::fGrid">fGrid</a> = 0;
+   <a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:fPad" title="TVirtualPad* KVVirtualIDFitter::fPad">fPad</a> = 0;
 }
 
 <a name="Ibj3kB"></a><a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>::<a href="../KVVirtualIDFitter.html#KVVirtualIDFitter:_KVVirtualIDFitter" title="void KVVirtualIDFitter::~KVVirtualIDFitter()">~KVVirtualIDFitter</a>()
@@ -91,7 +91,7 @@ ClassImp(<a href="../KVVirtualIDFitter.html">KVVirtualIDFitter</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:15 </em><em>&raquo; Last generated: 2016-01-08 15:15</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

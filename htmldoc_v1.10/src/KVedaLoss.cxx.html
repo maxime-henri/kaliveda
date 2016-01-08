@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:52 2015            -->
+<!--   Date: Fri Jan  8 15:15:08 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -45,7 +45,7 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
 <span class="comment">// (usually 400MeV/u for Z&lt;3, 250MeV/u for Z&gt;3)</span>
 <span class="comment">// If higher energies are required, call static method <a href="../KVedaLoss.html">KVedaLoss</a>::<a href="../KVedaLoss.html#KVedaLoss:SetIgnoreEnergyLimits" title="void KVedaLoss::SetIgnoreEnergyLimits(Bool_t yes=kTRUE)">SetIgnoreEnergyLimits</a>()</span>
 <span class="comment">// BEFORE ANY MATERIALS ARE CREATED</span>
-<span class="comment">// in order to recalculate the Emax limits in such a way that: </span>
+<span class="comment">// in order to recalculate the Emax limits in such a way that:</span>
 <span class="comment">//     range function is always monotonically increasing function of Einc</span>
 <span class="comment">//     stopping power is concave (i.e. no minimum of stopping power followed by an increase)</span>
 <span class="comment">// at the most, the new limit will be 1 GeV/nucleon.</span>
@@ -63,17 +63,17 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
    <span class="comment">// where Emax is nominal max energy for which range tables are valid</span>
    <span class="comment">// (usually 400MeV/u for Z&lt;3, 250MeV/u for Z&gt;3)</span>
    <span class="comment">// If higher energies are required, call this static method in order to recalculate the Emax limits</span>
-   <span class="comment">// in such a way that: </span>
+   <span class="comment">// in such a way that:</span>
    <span class="comment">//     range function is always monotonically increasing function of Einc</span>
    <span class="comment">//     stopping power is concave (i.e. no minimum of stopping power followed by an increase)</span>
    <span class="comment">// at the most, the new limit will be 1 GeV/nucleon.</span>
    <span class="comment">// at the least, it will remain at the nominal (400 or 250 MeV/nucleon) level.</span>
    <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>::<a href="../KVedaLossMaterial.html#KVedaLossMaterial:SetNoLimits" title="void KVedaLossMaterial::SetNoLimits(Bool_t on=kTRUE)">SetNoLimits</a>(yes);
 };
-   
+
 <a name="KO7r9"></a><a href="../KVedaLoss.html">KVedaLoss</a>::<a href="../KVedaLoss.html#KVedaLoss:KVedaLoss" title="KVedaLoss KVedaLoss::KVedaLoss() or overloads">KVedaLoss</a>()
-      : <a href="../KVIonRangeTable.html">KVIonRangeTable</a>(<span class="string">"VEDALOSS"</span>,
-      <span class="string">"Calculation of range and energy loss of charged particles in matter using VEDALOSS range tables"</span>)
+   : <a href="../KVIonRangeTable.html">KVIonRangeTable</a>(<span class="string">"VEDALOSS"</span>,
+                     <span class="string">"Calculation of range and energy loss of charged particles in matter using VEDALOSS range tables"</span>)
 {
    <span class="comment">// Default constructor</span>
    <span class="keyword">if</span> (!<a href="../KVedaLoss.html#KVedaLoss:CheckMaterialsList" title="Bool_t KVedaLoss::CheckMaterialsList()">CheckMaterialsList</a>()) {
@@ -102,11 +102,11 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
    <a href="../KVedaLoss.html#KVedaLoss:fMaterials" title="KVHashList* KVedaLoss::fMaterials">fMaterials</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetOwner" title="void KVSeqCollection::SetOwner(Bool_t enable=kTRUE)">SetOwner</a>();
 
    TString DataFilePath;
-   <span class="keyword">if</span>(!<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(gEnv-&gt;GetValue(<span class="string">"KVedaLoss.RangeTables"</span>, <span class="string">"kvloss.data"</span>), DataFilePath, <span class="string">"data"</span>)) {
+   <span class="keyword">if</span> (!<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(gEnv-&gt;GetValue(<span class="string">"KVedaLoss.RangeTables"</span>, <span class="string">"kvloss.data"</span>), DataFilePath, <span class="string">"data"</span>)) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"init_materials()"</span>, <span class="string">"Range tables file %s not found"</span>, gEnv-&gt;GetValue(<span class="string">"KVedaLoss.RangeTables"</span>, <span class="string">"kvloss.data"</span>));
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
-      
+
    <a href="../ListOfTypes.html#Char_t">Char_t</a> name[25], gtype[25], state[10];
    <a href="../ListOfTypes.html#Float_t">Float_t</a> Amat = 0.;
    <a href="../ListOfTypes.html#Float_t">Float_t</a> Dens = 0.;
@@ -114,7 +114,7 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
    <a href="../ListOfTypes.html#Float_t">Float_t</a> Temp = 19.;
    <a href="../ListOfTypes.html#Float_t">Float_t</a> Zmat = 0.;
 
-   FILE *fp;
+   FILE* fp;
    <span class="keyword">if</span> (!(fp = fopen(DataFilePath.Data(), <span class="string">"r"</span>))) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"init_materials()"</span>, <span class="string">"Range tables file %s cannot be opened"</span>, DataFilePath.Data());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
@@ -132,25 +132,25 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
                <span class="keyword">if</span> (sscanf(line, <span class="string">"+ %s %s %s %f %f %f %f %f"</span>,
                           gtype, name, state, &amp;Dens, &amp;Zmat, &amp;Amat,
                           &amp;MoleWt, &amp;Temp)
-                   != 8) {
+                     != 8) {
                   <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"init_materials()"</span>, <span class="string">"Problem reading file %s"</span>, DataFilePath.Data());
                   fclose(fp);
                   <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
                }
 <span class="comment">//found a new material</span>
-               <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a> *tmp_mat = <span class="keyword">new</span> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>(<span class="keyword">this</span>, name, gtype, state, Dens,
-                                                                  Zmat, Amat, MoleWt);
+               <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>* tmp_mat = <span class="keyword">new</span> <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>(<span class="keyword">this</span>, name, gtype, state, Dens,
+                     Zmat, Amat, MoleWt);
                <a href="../KVedaLoss.html#KVedaLoss:fMaterials" title="KVHashList* KVedaLoss::fMaterials">fMaterials</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(tmp_mat);
                <span class="keyword">if</span> (!tmp_mat-&gt;ReadRangeTable(fp)) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
                tmp_mat-&gt;Initialize();
                ++mat_count;
                <a href="../ListOfTypes.html#Double_t">Double_t</a> rho = 0.;
-               <span class="keyword">if</span>(tmp_mat-&gt;IsGas()) tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:SetTemperatureAndPressure" title="void KVIonRangeTable::SetTemperatureAndPressure(const Char_t* ,Double_t temperature,Double_t pressure)">SetTemperatureAndPressure</a>(19., 1.*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:atm" title="const long double KVUnits::atm">atm</a>);
+               <span class="keyword">if</span> (tmp_mat-&gt;IsGas()) tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:SetTemperatureAndPressure" title="void KVIonRangeTable::SetTemperatureAndPressure(const Char_t* ,Double_t temperature,Double_t pressure)">SetTemperatureAndPressure</a>(19., 1.*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:atm" title="const long double KVUnits::atm">atm</a>);
                rho = tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetDensity" title="Double_t KVIonRangeTable::GetDensity(const Char_t* )">GetDensity</a>();
                printf(<span class="string">"\t*  %2d.  %-7s %-18s  Z=%2d A=%5.1f  rho=%6.3f g/cm**3    *\n"</span>,
-                           mat_count, tmp_mat-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>(), tmp_mat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
-                           (<span class="keyword">int</span>)tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetZ" title="Double_t KVIonRangeTable::GetZ(const Char_t* )">GetZ</a>(), tmp_mat-&gt;GetMass(),
-                           rho);
+                      mat_count, tmp_mat-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>(), tmp_mat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
+                      (<span class="keyword">int</span>)tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetZ" title="Double_t KVIonRangeTable::GetZ(const Char_t* )">GetZ</a>(), tmp_mat-&gt;GetMass(),
+                      rho);
                <span class="keyword">break</span>;
          }
       }
@@ -158,9 +158,9 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
    }
    printf(<span class="string">"\t*                                                                       *\n"</span>);
    printf(<span class="string">"\t*     TF1::Range::Npx = %4d            TF1::EnergyLoss::Npx = %4d     *\n"</span>,
-   	gEnv-&gt;GetValue(<span class="string">"KVedaLoss.Range.Npx"</span>,100), gEnv-&gt;GetValue(<span class="string">"KVedaLoss.EnergyLoss.Npx"</span>,100));
+          gEnv-&gt;GetValue(<span class="string">"KVedaLoss.Range.Npx"</span>, 100), gEnv-&gt;GetValue(<span class="string">"KVedaLoss.EnergyLoss.Npx"</span>, 100));
    printf(<span class="string">"\t*                      TF1::ResidualEnergy::Npx = %4d                  *\n"</span>,
-   		gEnv-&gt;GetValue(<span class="string">"KVedaLoss.ResidualEnergy.Npx"</span>,100));
+          gEnv-&gt;GetValue(<span class="string">"KVedaLoss.ResidualEnergy.Npx"</span>, 100));
    printf(<span class="string">"\t*                                                                       *\n"</span>);
    printf(<span class="string">"\t*                       INITIALISATION COMPLETE                         *\n"</span>);
    printf(<span class="string">"\t*************************************************************************\n"</span>);
@@ -191,13 +191,13 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
    <span class="comment">// Create and fill a list of all materials for which range tables exist.</span>
    <span class="comment">// Each entry is a <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> with the name and type (title) of the material.</span>
    <span class="comment">// User's responsibility to delete list after use (it owns its objects).</span>
-   
-   <span class="keyword">if</span>(<a href="../KVedaLoss.html#KVedaLoss:CheckMaterialsList" title="Bool_t KVedaLoss::CheckMaterialsList()">CheckMaterialsList</a>()){
+
+   <span class="keyword">if</span> (<a href="../KVedaLoss.html#KVedaLoss:CheckMaterialsList" title="Bool_t KVedaLoss::CheckMaterialsList()">CheckMaterialsList</a>()) {
       TObjArray* list = <span class="keyword">new</span> TObjArray(<a href="../KVedaLoss.html#KVedaLoss:fMaterials" title="KVHashList* KVedaLoss::fMaterials">fMaterials</a>-><a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>());
       list-&gt;SetOwner(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
       TIter next(<a href="../KVedaLoss.html#KVedaLoss:fMaterials" title="KVHashList* KVedaLoss::fMaterials">fMaterials</a>);
       <a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>* mat;
-      <span class="keyword">while</span>( (mat = (<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>*)next()) ){
+      <span class="keyword">while</span> ((mat = (<a href="../KVedaLossMaterial.html">KVedaLossMaterial</a>*)next())) {
          list-&gt;Add(<span class="keyword">new</span> <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>(mat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), mat-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>()));
       }
       <span class="keyword">return</span> list;
@@ -212,7 +212,7 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:15 </em><em>&raquo; Last generated: 2016-01-08 15:15</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

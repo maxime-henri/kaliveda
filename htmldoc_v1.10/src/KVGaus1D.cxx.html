@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:24 2015            -->
+<!--   Date: Fri Jan  8 15:13:25 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -39,11 +39,11 @@ ClassImp(<a href="../KVGaus1D.html">KVGaus1D</a>)
 <a name="j6I7CD"></a><a href="../KVGaus1D.html">KVGaus1D</a>::<a href="../KVGaus1D.html#KVGaus1D:KVGaus1D" title="KVGaus1D KVGaus1D::KVGaus1D() or overloads">KVGaus1D</a>()
 {
    <span class="comment">// Default constructor</span>
-	<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Gaus1D"</span>);
+   <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Gaus1D"</span>);
 }
 
 <span class="comment">//________________________________________________________________</span>
-<a name="ZFCHc"></a><a href="../KVGaus1D.html">KVGaus1D</a>::<a href="../KVGaus1D.html#KVGaus1D:KVGaus1D" title="KVGaus1D KVGaus1D::KVGaus1D() or overloads">KVGaus1D</a> (<span class="keyword">const</span> <a href="../KVGaus1D.html">KVGaus1D</a>&amp;)  : <a href="../KVAutoFit.html">KVAutoFit</a>()
+<a name="J.Xx8"></a><a href="../KVGaus1D.html">KVGaus1D</a>::<a href="../KVGaus1D.html#KVGaus1D:KVGaus1D" title="KVGaus1D KVGaus1D::KVGaus1D() or overloads">KVGaus1D</a>(<span class="keyword">const</span> <a href="../KVGaus1D.html">KVGaus1D</a>&amp;)  : <a href="../KVAutoFit.html">KVAutoFit</a>()
 {
    <span class="comment">// <a href="../KVAutoFit.html#KVAutoFit:Copy" title="void KVAutoFit::Copy(TObject&amp; )">Copy</a> constructor</span>
    <span class="comment">// This ctor is used to make a copy of an existing object (for example</span>
@@ -64,18 +64,18 @@ ClassImp(<a href="../KVGaus1D.html">KVGaus1D</a>)
 <a name="n0CGp"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVGaus1D.html">KVGaus1D</a>::<a href="../KVGaus1D.html#KVGaus1D:NewFunction_1D" title="Bool_t KVGaus1D::NewFunction_1D()">NewFunction_1D</a>()
 {
 
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> nf = lfunc-&gt;GetEntries();
-	
-	f1Dfit = <span class="keyword">new</span> TF1(Form(<span class="string">"func_%d"</span>,++nf),<span class="string">"gaus"</span>,Xmin,Xmax);
-	lfunc-&gt;Add(f1Dfit);
-		
-	hclone-&gt;GetXaxis()-&gt;SetRangeUser(Xmin,Xmax);
-	f1Dfit-&gt;SetParameters(
-		hclone-&gt;Integral(),
-		hclone-&gt;GetMean(),
-		hclone-&gt;GetRMS()
-	);
-	<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> nf = lfunc-&gt;GetEntries();
+
+   f1Dfit = <span class="keyword">new</span> TF1(Form(<span class="string">"func_%d"</span>, ++nf), <span class="string">"gaus"</span>, Xmin, Xmax);
+   lfunc-&gt;Add(f1Dfit);
+
+   hclone-&gt;GetXaxis()-&gt;SetRangeUser(Xmin, Xmax);
+   f1Dfit-&gt;SetParameters(
+      hclone-&gt;Integral(),
+      hclone-&gt;GetMean(),
+      hclone-&gt;GetRMS()
+   );
+   <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 
 }
 
@@ -83,50 +83,50 @@ ClassImp(<a href="../KVGaus1D.html">KVGaus1D</a>)
 <a name="PUeg4B"></a><span class="keyword">void</span> <a href="../KVGaus1D.html">KVGaus1D</a>::<a href="../KVGaus1D.html#KVGaus1D:Gather" title="void KVGaus1D::Gather()">Gather</a>()
 {
 
-<a href="../ListOfTypes.html#Int_t">Int_t</a> event = gPad-&gt;GetEvent();
-<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> *select = gPad-&gt;GetSelected();
-<span class="keyword">if</span> (!select) <span class="keyword">return</span>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> event = gPad-&gt;GetEvent();
+   <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* select = gPad-&gt;GetSelected();
+   <span class="keyword">if</span> (!select) <span class="keyword">return</span>;
 
-<span class="keyword">if</span> (event==kButton1Down){
-	<span class="keyword">if</span> ( !strcmp(<span class="string">"Gather"</span>,select-&gt;<a href="../#TNamed:GetTitle" title="const char* TNamed::GetTitle()">GetTitle</a>()) ){
-		<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">""</span>,<span class="string">"On fit tous les pics gaussiens"</span>);
-		
-		<a href="../ListOfTypes.html#Double_t">Double_t</a> xdeb = c1-&gt;GetFrame()-&gt;GetX1();
-		<a href="../ListOfTypes.html#Double_t">Double_t</a> xfin = c1-&gt;GetFrame()-&gt;GetX2();
-		<a href="../ListOfTypes.html#Int_t">Int_t</a> nfin=0;
-		TF1* f1;
-		TIter it(lfunc);
-		<span class="keyword">while</span> ( (f1 = (TF1* )it.Next()) ){
-			<span class="keyword">if</span> (xdeb&lt;=f1-&gt;GetParameter(1) &amp;&amp; f1-&gt;GetParameter(1)&lt;=xfin){
-				nfin+=1;
-			}
-		}
-		TString expr=<span class="string">""</span>;
-		TString ff=<span class="string">""</span>;
-		<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii=0; ii&lt;nfin; ii+=1){
-			ff.Form(<span class="string">"gaus(%d)"</span>,ii*3);
-			expr+=ff;
-			<span class="keyword">if</span> (ii&lt;nfin-1) 
-				expr+=<span class="string">"+"</span>;
-		}
-		
-		TF1* fsum = <span class="keyword">new</span> TF1(<span class="string">"sum"</span>,expr.Data(),xdeb,xfin);
-		<a href="../ListOfTypes.html#Int_t">Int_t</a> np=0;
-		it.Reset();
-		<span class="keyword">while</span> ( (f1 = (TF1* )it.Next()) ){
-			<span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii=0;ii&lt;f1-&gt;GetNpar();ii+=1){
-				fsum-&gt;SetParameter(np++,f1-&gt;GetParameter(ii));
-			}
-		}
-		hfit-&gt;Fit(fsum,<span class="string">"0N"</span>,<span class="string">""</span>,xdeb,xfin);
-		fsum-&gt;SetLineColor(4);
-		fsum-&gt;SetLineWidth(2);
-		fsum-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>(<span class="string">"same"</span>);
-		
-		lfunc-&gt;Add(fsum);
-		c1-&gt;Update();
-	}
-}
+   <span class="keyword">if</span> (event == kButton1Down) {
+      <span class="keyword">if</span> (!strcmp(<span class="string">"Gather"</span>, select-&gt;<a href="../#TNamed:GetTitle" title="const char* TNamed::GetTitle()">GetTitle</a>())) {
+         <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">""</span>, <span class="string">"On fit tous les pics gaussiens"</span>);
+
+         <a href="../ListOfTypes.html#Double_t">Double_t</a> xdeb = c1-&gt;GetFrame()-&gt;GetX1();
+         <a href="../ListOfTypes.html#Double_t">Double_t</a> xfin = c1-&gt;GetFrame()-&gt;GetX2();
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> nfin = 0;
+         TF1* f1;
+         TIter it(lfunc);
+         <span class="keyword">while</span> ((f1 = (TF1*)it.Next())) {
+            <span class="keyword">if</span> (xdeb &lt;= f1-&gt;GetParameter(1) &amp;&amp; f1-&gt;GetParameter(1) &lt;= xfin) {
+               nfin += 1;
+            }
+         }
+         TString expr = <span class="string">""</span>;
+         TString ff = <span class="string">""</span>;
+         <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii = 0; ii &lt; nfin; ii += 1) {
+            ff.Form(<span class="string">"gaus(%d)"</span>, ii * 3);
+            expr += ff;
+            <span class="keyword">if</span> (ii &lt; nfin - 1)
+               expr += <span class="string">"+"</span>;
+         }
+
+         TF1* fsum = <span class="keyword">new</span> TF1(<span class="string">"sum"</span>, expr.Data(), xdeb, xfin);
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> np = 0;
+         it.Reset();
+         <span class="keyword">while</span> ((f1 = (TF1*)it.Next())) {
+            <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii = 0; ii &lt; f1-&gt;GetNpar(); ii += 1) {
+               fsum-&gt;SetParameter(np++, f1-&gt;GetParameter(ii));
+            }
+         }
+         hfit-&gt;Fit(fsum, <span class="string">"0N"</span>, <span class="string">""</span>, xdeb, xfin);
+         fsum-&gt;SetLineColor(4);
+         fsum-&gt;SetLineWidth(2);
+         fsum-&gt;<a href="../#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>(<span class="string">"same"</span>);
+
+         lfunc-&gt;Add(fsum);
+         c1-&gt;Update();
+      }
+   }
 
 }
 </pre>
@@ -137,7 +137,7 @@ ClassImp(<a href="../KVGaus1D.html">KVGaus1D</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

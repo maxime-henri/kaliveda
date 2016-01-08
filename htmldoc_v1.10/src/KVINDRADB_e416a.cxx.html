@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:52 2015            -->
+<!--   Date: Fri Jan  8 15:13:58 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -44,7 +44,7 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="cnKTJC"></a><a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>::<a href="../KVINDRADB_e416a.html#KVINDRADB_e416a:KVINDRADB_e416a" title="KVINDRADB_e416a KVINDRADB_e416a::KVINDRADB_e416a() or overloads">KVINDRADB_e416a</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name):<a href="../KVINDRADB.html">KVINDRADB</a>(name)
+<a name="hMuywD"></a><a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>::<a href="../KVINDRADB_e416a.html#KVINDRADB_e416a:KVINDRADB_e416a" title="KVINDRADB_e416a KVINDRADB_e416a::KVINDRADB_e416a() or overloads">KVINDRADB_e416a</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name): <a href="../KVINDRADB.html">KVINDRADB</a>(name)
 {
    <span class="comment">//Default constructor</span>
    <a href="../KVINDRADB_e416a.html#KVINDRADB_e416a:fBICPressures" title="KVDBTable* KVINDRADB_e416a::fBICPressures">fBICPressures</a> = <a href="../KVDataBase.html#KVDataBase:AddTable" title="Bool_t KVDataBase::AddTable(KVDBTable* table) or overloads">AddTable</a>(<span class="string">"BIC Pressures"</span>, <span class="string">"Pressures of BIC"</span>);
@@ -93,33 +93,33 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> frun = 0, lrun = 0;
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> run_ranges[MAX_NUM_RUN_RANGES][2];
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> rr_number = 0;
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> prev_rr = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;     <span class="comment">//was the previous line a run range indication ? </span>
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> prev_rr = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;     <span class="comment">//was the previous line a run range indication ?</span>
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> read_pressure = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>; <span class="comment">// have we read any pressures recently ?</span>
 
-   <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a> *parset=0;
-   TList *par_list = <span class="keyword">new</span> TList();
+   <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a>* parset = 0;
+   TList* par_list = <span class="keyword">new</span> TList();
 
-         <span class="comment">//any ChIo not in list is assumed absent (pressure = 0)</span>
-         <a href="../ListOfTypes.html#Float_t">Float_t</a> pressure[3] = { 0, 0, 0 };
-         
+   <span class="comment">//any ChIo not in list is assumed absent (pressure = 0)</span>
+   <a href="../ListOfTypes.html#Float_t">Float_t</a> pressure[3] = { 0, 0, 0 };
+
    <span class="keyword">while</span> (fin.good()) {         <span class="comment">// parcours du fichier</span>
 
       sline.ReadLine(fin);
       <span class="keyword">if</span> (sline.BeginsWith(<span class="string">"Run Range :"</span>)) {    <span class="comment">// run range found</span>
          <span class="keyword">if</span> (!prev_rr) {        <span class="comment">// New set of run ranges to read</span>
-            
+
             <span class="comment">//have we just finished reading some pressures ?</span>
-            <span class="keyword">if</span> (read_pressure){
+            <span class="keyword">if</span> (read_pressure) {
                parset = <span class="keyword">new</span> <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a>(pressure);
                <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
-               par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);               
+               par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
                <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list,UInt_t rr_number,UInt_t run_ranges[][2])">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
                par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
-               <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> zz=0;zz&lt;3;zz++) pressure[zz]=0.;
-               read_pressure=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+               <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> zz = 0; zz &lt; 3; zz++) pressure[zz] = 0.;
+               read_pressure = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
             }
             rr_number = 0;
-            
+
          }
          <span class="keyword">if</span> (sscanf(sline.Data(), <span class="string">"Run Range : %u %u"</span>, &amp;frun, &amp;lrun) != 2) {
             <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"ReadBICPressures()"</span>,
@@ -138,33 +138,33 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
          }
       }                         <span class="comment">// Run Range found</span>
       <span class="keyword">if</span> (fin.eof()) {          <span class="comment">//fin du fichier</span>
-            <span class="comment">//have we just finished reading some pressures ?</span>
-            <span class="keyword">if</span> (read_pressure){
-               parset = <span class="keyword">new</span> <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a>(pressure);
-               <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
-               par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);               
-               <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list,UInt_t rr_number,UInt_t run_ranges[][2])">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
-               par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
-               <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> zz=0;zz&lt;3;zz++) pressure[zz]=0.;
-               read_pressure=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
-            }
+         <span class="comment">//have we just finished reading some pressures ?</span>
+         <span class="keyword">if</span> (read_pressure) {
+            parset = <span class="keyword">new</span> <a href="../KVDB_BIC_Pressures.html">KVDB_BIC_Pressures</a>(pressure);
+            <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"BIC Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
+            par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
+            <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRanges" title="void KVINDRADB::LinkListToRunRanges(TList* list,UInt_t rr_number,UInt_t run_ranges[][2])">LinkListToRunRanges</a>(par_list, rr_number, run_ranges);
+            par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
+            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> zz = 0; zz &lt; 3; zz++) pressure[zz] = 0.;
+            read_pressure = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+         }
       }
       <span class="keyword">if</span> (sline.BeginsWith(<span class="string">"BIC"</span>)) {  <span class="comment">//line with BIC pressure data</span>
-         
+
          prev_rr = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
-               
+
          <span class="comment">//split up BIC name and pressure</span>
          TObjArray* toks = sline.Tokenize(<span class="string">' '</span>);
          TString chio = ((TObjString*)(*toks)[0])-&gt;String();
          <a href="../KVString.html">KVString</a> press = ((TObjString*)(*toks)[1])-&gt;String();
          <span class="keyword">delete</span> toks;
-         
-         read_pressure=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
-         
-         <span class="keyword">if</span>( chio == <span class="string">"BIC_1"</span> ) pressure[0] = press.Atof();
-         <span class="keyword">else</span> <span class="keyword">if</span>( chio == <span class="string">"BIC_2"</span> ) pressure[1] = press.Atof();
-         <span class="keyword">else</span> <span class="keyword">if</span>( chio == <span class="string">"BIC_3"</span> ) pressure[2] = press.Atof();
-         <span class="keyword">else</span> read_pressure=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+
+         read_pressure = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+
+         <span class="keyword">if</span> (chio == <span class="string">"BIC_1"</span>) pressure[0] = press.Atof();
+         <span class="keyword">else</span> <span class="keyword">if</span> (chio == <span class="string">"BIC_2"</span>) pressure[1] = press.Atof();
+         <span class="keyword">else</span> <span class="keyword">if</span> (chio == <span class="string">"BIC_3"</span>) pressure[2] = press.Atof();
+         <span class="keyword">else</span> read_pressure = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 
       }                         <span class="comment">//line with BIC pressure data</span>
    }                            <span class="comment">//parcours du fichier</span>
@@ -180,7 +180,7 @@ ClassImp(<a href="../KVINDRADB_e416a.html">KVINDRADB_e416a</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

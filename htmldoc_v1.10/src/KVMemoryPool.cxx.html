@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:10 2015            -->
+<!--   Date: Fri Jan  8 15:14:20 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -39,61 +39,61 @@ ClassImp(<a href="../KVMemoryPool.html">KVMemoryPool</a>)
 {
    <span class="comment">// Create nchunks chunks each of size 'bytes'</span>
    <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = 0;
-   <span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;nchunks; i++){
-       <a href="../KVMemoryChunk.html">KVMemoryChunk</a> * chunk = <span class="keyword">new</span> <a href="../KVMemoryChunk.html">KVMemoryChunk</a>(bytes);
-       <span class="keyword">if</span>(!<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>) <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>=chunk;
-       <span class="keyword">if</span>(<a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>) <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:SetNext" title="void KVMemoryChunk::SetNext(KVMemoryChunk* n)">SetNext</a>( chunk );
-       <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a> = chunk;
+   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; nchunks; i++) {
+      <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* chunk = <span class="keyword">new</span> <a href="../KVMemoryChunk.html">KVMemoryChunk</a>(bytes);
+      <span class="keyword">if</span> (!<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>) <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a> = chunk;
+      <span class="keyword">if</span> (<a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>) <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:SetNext" title="void KVMemoryChunk::SetNext(KVMemoryChunk* n)">SetNext</a>(chunk);
+      <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a> = chunk;
    }
    <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
    <a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a> = bytes;
 }
- 
-<a name="cTbH0"></a><span class="keyword">void</span> *<a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:GetMemory" title="void* KVMemoryPool::GetMemory(size_t bytes)">GetMemory</a>(<a href="../ListOfTypes.html#size_t">size_t</a> bytes)
+
+<a name="A24C1"></a><span class="keyword">void</span>* <a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:GetMemory" title="void* KVMemoryPool::GetMemory(size_t bytes)">GetMemory</a>(<a href="../ListOfTypes.html#size_t">size_t</a> bytes)
 {
-    <span class="comment">// return pointer to memory of size 'bytes'</span>
-    <span class="keyword">void</span>* p=<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
-    <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
-    <span class="keyword">if</span>( !p ){
-    	<span class="comment">// search for first available chunk which can provide memory</span>
-        <span class="keyword">do</span> {
-            <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:Next" title="KVMemoryChunk* KVMemoryChunk::Next()">Next</a>();
-            <span class="keyword">if</span>(<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>) p = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
-        } <span class="keyword">while</span> (!p &amp;&amp; <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>);
-    }
-    <span class="keyword">if</span>( !p ){
-    	<span class="comment">// there are no chunks big enough to provide memory</span>
-    	<span class="comment">// add a bigger chunk</span>
-    	<a href="../ListOfTypes.html#size_t">size_t</a> new_chunk=<a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a>;
-    	<span class="keyword">while</span>(new_chunk &lt; bytes) new_chunk*=2;
-    	<a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a> = new_chunk;
-    	<a href="../KVMemoryChunk.html">KVMemoryChunk</a> * chunk = <span class="keyword">new</span> <a href="../KVMemoryChunk.html">KVMemoryChunk</a>( <a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a> );
-    	<a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:SetNext" title="void KVMemoryChunk::SetNext(KVMemoryChunk* n)">SetNext</a>(chunk);
-    	<a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>=chunk;
-    	<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = chunk;
-    	p=<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
-    }
-    <span class="keyword">return</span> p;
+   <span class="comment">// return pointer to memory of size 'bytes'</span>
+   <span class="keyword">void</span>* p = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
+   <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
+   <span class="keyword">if</span> (!p) {
+      <span class="comment">// search for first available chunk which can provide memory</span>
+      <span class="keyword">do</span> {
+         <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:Next" title="KVMemoryChunk* KVMemoryChunk::Next()">Next</a>();
+         <span class="keyword">if</span> (<a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>) p = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
+      } <span class="keyword">while</span> (!p &amp;&amp; <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>);
+   }
+   <span class="keyword">if</span> (!p) {
+      <span class="comment">// there are no chunks big enough to provide memory</span>
+      <span class="comment">// add a bigger chunk</span>
+      <a href="../ListOfTypes.html#size_t">size_t</a> new_chunk = <a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a>;
+      <span class="keyword">while</span> (new_chunk &lt; bytes) new_chunk *= 2;
+      <a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a> = new_chunk;
+      <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* chunk = <span class="keyword">new</span> <a href="../KVMemoryChunk.html">KVMemoryChunk</a>(<a href="../KVMemoryPool.html#KVMemoryPool:fChunkSize" title="size_t KVMemoryPool::fChunkSize">fChunkSize</a>);
+      <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:SetNext" title="void KVMemoryChunk::SetNext(KVMemoryChunk* n)">SetNext</a>(chunk);
+      <a href="../KVMemoryPool.html#KVMemoryPool:fLast" title="KVMemoryChunk* KVMemoryPool::fLast">fLast</a> = chunk;
+      <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a> = chunk;
+      p = <a href="../KVMemoryPool.html#KVMemoryPool:fLastChunkUsed" title="KVMemoryChunk* KVMemoryPool::fLastChunkUsed">fLastChunkUsed</a>-><a href="../KVMemoryChunk.html#KVMemoryChunk:GetMemory" title="void* KVMemoryChunk::GetMemory(size_t )">GetMemory</a>(bytes);
+   }
+   <span class="keyword">return</span> p;
 }
 
 <a name="e9r8GB"></a><a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:_KVMemoryPool" title="void KVMemoryPool::~KVMemoryPool()">~KVMemoryPool</a>()
 {
    <span class="comment">// Destructor</span>
-   <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* p=<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
+   <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* p = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
    <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* next;
-   <span class="keyword">while</span>(p){
-   		next = p-&gt;Next();
-   		<span class="keyword">delete</span> p;
-   		p=next;
+   <span class="keyword">while</span> (p) {
+      next = p-&gt;Next();
+      <span class="keyword">delete</span> p;
+      p = next;
    }
 }
 
 <a name="lOLxvD"></a><span class="keyword">void</span> <a href="../KVMemoryPool.html">KVMemoryPool</a>::<a href="../KVMemoryPool.html#KVMemoryPool:Print" title="void KVMemoryPool::Print()">Print</a>()
 {
-   <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* p=<a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
-   <span class="keyword">while</span>(p){
-   		p-&gt;<a href="../KVMemoryPool.html#KVMemoryPool:Print" title="void KVMemoryPool::Print()">Print</a>();
-   		p = p-&gt;Next();
+   <a href="../KVMemoryChunk.html">KVMemoryChunk</a>* p = <a href="../KVMemoryPool.html#KVMemoryPool:fFirst" title="KVMemoryChunk* KVMemoryPool::fFirst">fFirst</a>;
+   <span class="keyword">while</span> (p) {
+      p-&gt;<a href="../KVMemoryPool.html#KVMemoryPool:Print" title="void KVMemoryPool::Print()">Print</a>();
+      p = p-&gt;Next();
    }
 }
 </pre>
@@ -104,7 +104,7 @@ ClassImp(<a href="../KVMemoryPool.html">KVMemoryPool</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:06 2015            -->
+<!--   Date: Fri Jan  8 15:13:03 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -33,36 +33,36 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 <span class="comment">///////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">// KaliVeda DataBase Browser and Configuration Tool</span>
 <span class="comment">//////////////////////////////////////////////////////////////////////////////////////////////////////</span>
-<span class="comment">//______________________________________________________________________________________                                                                                                                                                                                                                                                                                                                                                                                                                                      </span>
-<a name="AiJ2.B"></a><a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:KVDataBaseBrowser" title="KVDataBaseBrowser KVDataBaseBrowser::KVDataBaseBrowser(const TGWindow* p,KVDataBase* d,UInt_t w,UInt_t h)">KVDataBaseBrowser</a>(<span class="keyword">const</span> <a href="../#TGWindow:TGWindow" title="TGWindow TGWindow::TGWindow(Window_t id) or overloads">TGWindow</a> * p,
-                                         <a href="../KVDataBase.html">KVDataBase</a> * d, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> w,
-                                         <a href="../ListOfTypes.html#UInt_t">UInt_t</a> h):<a href="../#TGMainFrame:TGMainFrame" title="TGMainFrame TGMainFrame::TGMainFrame(const TGMainFrame&amp; ) or overloads">TGMainFrame</a>(p, w, h)
+<span class="comment">//______________________________________________________________________________________</span>
+<a name="XeqOO"></a><a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:KVDataBaseBrowser" title="KVDataBaseBrowser KVDataBaseBrowser::KVDataBaseBrowser(const TGWindow* p,KVDataBase* d,UInt_t w,UInt_t h)">KVDataBaseBrowser</a>(<span class="keyword">const</span> <a href="../#TGWindow:TGWindow" title="TGWindow TGWindow::TGWindow(Window_t id) or overloads">TGWindow</a>* p,
+                                     <a href="../KVDataBase.html">KVDataBase</a>* d, <a href="../ListOfTypes.html#UInt_t">UInt_t</a> w,
+                                     <a href="../ListOfTypes.html#UInt_t">UInt_t</a> h): <a href="../#TGMainFrame:TGMainFrame" title="TGMainFrame TGMainFrame::TGMainFrame(const TGMainFrame&amp; ) or overloads">TGMainFrame</a>(p, w, h)
 {
 
-   <span class="comment">// pointer to DataBase under examination                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </span>
+   <span class="comment">// pointer to DataBase under examination</span>
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a> = d;
 <span class="comment">//_______________________________________________________________________________________</span>
 <span class="comment">// Create top level window.</span>
 <span class="comment">//______________________________________________________________________________________</span>
 
    <span class="comment">//combo box for showing all tables in database</span>
-   <a href="../KVWidget.html">KVWidget</a> *widg = <span class="keyword">new</span> <a href="../KVWidget.html">KVWidget</a>(<span class="keyword">this</span>, kDB_TABLE_LIST);
+   <a href="../KVWidget.html">KVWidget</a>* widg = <span class="keyword">new</span> <a href="../KVWidget.html">KVWidget</a>(<span class="keyword">this</span>, kDB_TABLE_LIST);
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a> = <span class="keyword">new</span> TGComboBox(<span class="keyword">this</span>, widg-&gt;GetID());
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;Associate(<span class="keyword">this</span>);
    widg-&gt;SetWidget(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>);
    <a href="../KVBrowser.html#KVBrowser:AddToWidgetList" title="void KVBrowser::AddToWidgetList(KVWidget* widg)">AddToWidgetList</a>(widg);
    <span class="comment">// fill list with all available tables</span>
    TIter next_tab(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables()">GetTables</a>());
-   <a href="../KVDBTable.html">KVDBTable</a> *tab;
+   <a href="../KVDBTable.html">KVDBTable</a>* tab;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0;
-   <span class="keyword">while</span> ((tab = (<a href="../KVDBTable.html">KVDBTable</a> *) next_tab())) {
+   <span class="keyword">while</span> ((tab = (<a href="../KVDBTable.html">KVDBTable</a>*) next_tab())) {
       <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;AddEntry(tab-&gt;<a href="../#TGWindow:GetName" title="const char* TGWindow::GetName()">GetName</a>(), i++);
    }
    <span class="comment">//highlight first table</span>
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;Select(0);
    <span class="comment">//layout</span>
-   TGLayoutHints *lay =
-       <span class="keyword">new</span> TGLayoutHints(kLHintsCenterX | kLHintsTop, 2, 2, 2, 2);
+   TGLayoutHints* lay =
+      <span class="keyword">new</span> TGLayoutHints(kLHintsCenterX | kLHintsTop, 2, 2, 2, 2);
    <a href="../#TGCompositeFrame:AddFrame" title="void TGCompositeFrame::AddFrame(TGFrame* f,TGLayoutHints* l=0)">AddFrame</a>(<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>, lay);
    <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Tables" title="TGComboBox* KVDataBaseBrowser::fCB_Tables">fCB_Tables</a>-&gt;<a href="../#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w=0,UInt_t h=0) or overloads">Resize</a>(150, 20);
    <a href="../KVBrowser.html#KVBrowser:AddToCleanupList" title="void KVBrowser::AddToCleanupList(TObject* obj)">AddToCleanupList</a>(lay);
@@ -81,7 +81,7 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
    <a href="../KVBrowser.html#KVBrowser:AddToCleanupList" title="void KVBrowser::AddToCleanupList(TObject* obj)">AddToCleanupList</a>(lay);
 
 <span class="comment">//______________________________________________________________________________________</span>
-   <span class="comment">// Display main window </span>
+   <span class="comment">// Display main window</span>
    <a href="../#TGCompositeFrame:MapSubwindows" title="void TGCompositeFrame::MapSubwindows()">MapSubwindows</a>();
    <a href="../#TGCompositeFrame:Layout" title="void TGCompositeFrame::Layout()">Layout</a>();
    <a href="../#TGFrame:Resize" title="void TGFrame::Resize(UInt_t w=0,UInt_t h=0) or overloads">Resize</a>(200, 200);
@@ -101,49 +101,49 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 <span class="comment">//________________________________________________________________________________</span>
 
 <a name="WkAMYB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>::<a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:ProcessMessage" title="Bool_t KVDataBaseBrowser::ProcessMessage(Long_t msg,Long_t parm1,Long_t )">ProcessMessage</a>(<a href="../ListOfTypes.html#Long_t">Long_t</a> msg, <a href="../ListOfTypes.html#Long_t">Long_t</a> parm1,
-                                         <a href="../ListOfTypes.html#Long_t">Long_t</a> parm2)
+      <a href="../ListOfTypes.html#Long_t">Long_t</a> parm2)
 {
    <span class="comment">// Handle messages send to the TestMainFrame object. E.g. all menu button</span>
    <span class="comment">// messages.</span>
 
    <span class="comment">// get associated widget from widget list using calling widget ID (parm1)</span>
-   <a href="../KVWidget.html">KVWidget</a> *widg = 0;
+   <a href="../KVWidget.html">KVWidget</a>* widg = 0;
    <span class="keyword">switch</span> (GET_MSG(msg)) {
 
-   <span class="keyword">case</span> kC_COMMAND:
-      <span class="keyword">switch</span> (GET_SUBMSG(msg)) {
+      <span class="keyword">case</span> kC_COMMAND:
+         <span class="keyword">switch</span> (GET_SUBMSG(msg)) {
 
-      <span class="keyword">case</span> kCM_BUTTON:
-         <span class="comment">//printf(<span class="string">"Button was pressed, id = %ld, widget action...\n"</span>, parm1);</span>
-         <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
-            widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
-         <span class="keyword">if</span> (widg)
-            widg-&gt;Action();
-         <span class="keyword">break</span>;
+            <span class="keyword">case</span> kCM_BUTTON:
+               <span class="comment">//printf(<span class="string">"Button was pressed, id = %ld, widget action...\n"</span>, parm1);</span>
+               <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
+                  widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
+               <span class="keyword">if</span> (widg)
+                  widg-&gt;Action();
+               <span class="keyword">break</span>;
 
-      <span class="keyword">case</span> kCM_COMBOBOX:
-         <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
-            widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
-         <span class="keyword">if</span> (widg)
-            widg-&gt;Action(parm2);
+            <span class="keyword">case</span> kCM_COMBOBOX:
+               <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
+                  widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
+               <span class="keyword">if</span> (widg)
+                  widg-&gt;Action(parm2);
+
+            <span class="keyword">default</span>:
+               <span class="keyword">break</span>;
+         }
+
+      <span class="keyword">case</span> kC_TEXTENTRY:
+         <span class="keyword">switch</span> (GET_SUBMSG(msg)) {
+
+            <span class="keyword">case</span> kTE_TEXTCHANGED:
+               <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"TEXTCHANGED"</span> &lt;&lt; endl;
+               <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
+                  widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
+               <span class="keyword">if</span> (widg)
+                  widg-&gt;Action();
+         }
 
       <span class="keyword">default</span>:
          <span class="keyword">break</span>;
-      }
-
-   <span class="keyword">case</span> kC_TEXTENTRY:
-      <span class="keyword">switch</span> (GET_SUBMSG(msg)) {
-
-      <span class="keyword">case</span> kTE_TEXTCHANGED:
-         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"TEXTCHANGED"</span> &lt;&lt; endl;
-         <span class="keyword">if</span> (<a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>())
-            widg = <a href="../KVBrowser.html#KVBrowser:GetWidgetList" title="KVWidgetList* KVBrowser::GetWidgetList()">GetWidgetList</a>()-><a href="../KVWidgetList.html#KVWidgetList:GetWidget" title="KVWidget* KVWidgetList::GetWidget(Long_t id)">GetWidget</a>(parm1);
-         <span class="keyword">if</span> (widg)
-            widg-&gt;Action();
-      }
-
-   <span class="keyword">default</span>:
-      <span class="keyword">break</span>;
    }
    <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
@@ -162,13 +162,13 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
       <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;RemoveEntries(0, n_records - 1);
 
    <span class="comment">//Get list of records for our table</span>
-   <a href="../KVDBTable.html">KVDBTable</a> *dbtab = (<a href="../KVDBTable.html">KVDBTable</a> *) <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables()">GetTables</a>()-&gt;At(table);
+   <a href="../KVDBTable.html">KVDBTable</a>* dbtab = (<a href="../KVDBTable.html">KVDBTable</a>*) <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fDbase" title="KVDataBase* KVDataBaseBrowser::fDbase">fDbase</a>-><a href="../KVDataBase.html#KVDataBase:GetTables" title="TList* KVDataBase::GetTables()">GetTables</a>()-&gt;At(table);
 
    <span class="comment">// fill list with all available tables</span>
    TIter next_rec(dbtab-&gt;GetRecords());
-   <a href="../KVDBRecord.html">KVDBRecord</a> *rec;
+   <a href="../KVDBRecord.html">KVDBRecord</a>* rec;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0;
-   <span class="keyword">while</span> ((rec = (<a href="../KVDBRecord.html">KVDBRecord</a> *) next_rec())) {
+   <span class="keyword">while</span> ((rec = (<a href="../KVDBRecord.html">KVDBRecord</a>*) next_rec())) {
       <a href="../KVDataBaseBrowser.html#KVDataBaseBrowser:fCB_Records" title="TGComboBox* KVDataBaseBrowser::fCB_Records">fCB_Records</a>-&gt;AddEntry(rec-&gt;<a href="../#TGWindow:GetName" title="const char* TGWindow::GetName()">GetName</a>(), i++);
    }
    <span class="comment">//highlight first table</span>
@@ -182,7 +182,7 @@ ClassImp(<a href="../KVDataBaseBrowser.html">KVDataBaseBrowser</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

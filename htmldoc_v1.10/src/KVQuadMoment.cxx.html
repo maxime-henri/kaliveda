@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:20 2015            -->
+<!--   Date: Fri Jan  8 15:14:30 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -97,20 +97,20 @@ ClassImp(<a href="../KVQuadMoment.html">KVQuadMoment</a>)
 <span class="comment">//_________________________________________________________________</span>
 <a name="rTArWD"></a><span class="keyword">void</span> <a href="../KVQuadMoment.html">KVQuadMoment</a>::<a href="../KVQuadMoment.html#KVQuadMoment:Reset" title="void KVQuadMoment::Reset()">Reset</a>(<span class="keyword">void</span>)
 {
-   <span class="keyword">for</span>(<span class="keyword">int</span> i=0;i&lt;3;i++) <span class="keyword">for</span>(<span class="keyword">int</span> j=0; j&lt;3; j++) <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[i][j]=0.;
+   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 3; i++) <span class="keyword">for</span> (<span class="keyword">int</span> j = 0; j &lt; 3; j++) <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[i][j] = 0.;
 }
 
-<a name="Q0yC0B"></a><span class="keyword">void</span> <a href="../KVQuadMoment.html">KVQuadMoment</a>::<a href="../KVQuadMoment.html#KVQuadMoment:Fill" title="void KVQuadMoment::Fill(KVNucleus* c)">Fill</a>(<a href="../KVNucleus.html">KVNucleus</a> * c)
+<a name="klwjNB"></a><span class="keyword">void</span> <a href="../KVQuadMoment.html">KVQuadMoment</a>::<a href="../KVQuadMoment.html#KVQuadMoment:Fill" title="void KVQuadMoment::Fill(KVNucleus* c)">Fill</a>(<a href="../KVNucleus.html">KVNucleus</a>* c)
 {
    <span class="comment">//Add the particle's contribution to the momentum tensor.</span>
 
    TVector3 P = c-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data())-&gt;GetMomentum();
    <a href="../ListOfTypes.html#Double_t">Double_t</a> P2 = P.Mag2();
-   <span class="keyword">for</span>(<span class="keyword">int</span> i=0;i&lt;3;i++){
-      <span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&lt;3; j++){
-         <span class="keyword">if</span>(i==j) <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[i][j] += 3.*P(i)*P(j) - P2;
-         <span class="keyword">else</span>{
-            <a href="../ListOfTypes.html#Double_t">Double_t</a> a = 3.*P(i)*P(j);
+   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 3; i++) {
+      <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; 3; j++) {
+         <span class="keyword">if</span> (i == j) <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[i][j] += 3.*P(i) * P(j) - P2;
+         <span class="keyword">else</span> {
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> a = 3.*P(i) * P(j);
             <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[i][j] += a;
             <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[j][i] += a;
          }
@@ -121,7 +121,7 @@ ClassImp(<a href="../KVQuadMoment.html">KVQuadMoment</a>)
 <span class="comment">//_________________________________________________________________</span>
 <a name="FgEyRC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVQuadMoment.html">KVQuadMoment</a>::<a href="../KVQuadMoment.html#KVQuadMoment:getvalue_void" title="Double_t KVQuadMoment::getvalue_void()">getvalue_void</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
-	<span class="comment">// Returns Qzz</span>
+   <span class="comment">// Returns Qzz</span>
    <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[2][2];
 }
 
@@ -133,14 +133,14 @@ ClassImp(<a href="../KVQuadMoment.html">KVQuadMoment</a>)
    <span class="comment">// i=2 : Qyy</span>
 
    <span class="keyword">switch</span> (i) {
-   <span class="keyword">case</span> 0:
-      <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[2][2];
-   <span class="keyword">case</span> 1:
-      <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[0][0];
-   <span class="keyword">case</span> 2:
-      <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[1][1];
-   <span class="keyword">default</span>:
-      <span class="keyword">break</span>;
+      <span class="keyword">case</span> 0:
+         <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[2][2];
+      <span class="keyword">case</span> 1:
+         <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[0][0];
+      <span class="keyword">case</span> 2:
+         <span class="keyword">return</span> <a href="../KVQuadMoment.html#KVQuadMoment:matrix" title="Double_t KVQuadMoment::matrix">matrix</a>[1][1];
+      <span class="keyword">default</span>:
+         <span class="keyword">break</span>;
    }
    <span class="keyword">return</span> 0;
 }
@@ -154,7 +154,7 @@ ClassImp(<a href="../KVQuadMoment.html">KVQuadMoment</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

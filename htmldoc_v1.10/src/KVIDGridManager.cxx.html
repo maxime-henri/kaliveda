@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:41 2015            -->
+<!--   Date: Fri Jan  8 15:13:45 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -46,7 +46,7 @@ $Id: <a href="../KVIDGridManager.html">KVIDGridManager</a>.cpp,v 1.13 2009/03/03
 
 <span class="keyword">using</span> <span class="keyword">namespace</span> std;
 
-ClassImp ( <a href="../KVIDGridManager.html">KVIDGridManager</a> )
+ClassImp(<a href="../KVIDGridManager.html">KVIDGridManager</a>)
 <span class="comment">//////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">//<a href="../KVIDGridManager.html">KVIDGridManager</a></span>
 <span class="comment">//</span>
@@ -55,7 +55,7 @@ ClassImp ( <a href="../KVIDGridManager.html">KVIDGridManager</a> )
 <span class="comment">//address is given to the telescope to use. In this way many IDTelescopes can use the same</span>
 <span class="comment">//grid without making multiple copies.</span>
 <span class="comment">//////////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a href="../KVIDGridManager.html">KVIDGridManager</a> *<a href="../KVIDGridManager.html">gIDGridManager</a>;
+<a href="../KVIDGridManager.html">KVIDGridManager</a>* <a href="../KVIDGridManager.html">gIDGridManager</a>;
 
 <a name="Jb84LD"></a><a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:KVIDGridManager" title="KVIDGridManager KVIDGridManager::KVIDGridManager()">KVIDGridManager</a>()
 {
@@ -64,8 +64,8 @@ ClassImp ( <a href="../KVIDGridManager.html">KVIDGridManager</a> )
    <span class="comment">//Create list for ID grids</span>
    <a href="../KVIDGridManager.html">gIDGridManager</a> = <span class="keyword">this</span>;
    <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a> = <span class="keyword">new</span> <a href="../KVList.html">KVList</a>;
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SendModifiedSignals" title="void KVSeqCollection::SendModifiedSignals(Bool_t yes=kTRUE)">SendModifiedSignals</a> ( <a href="../ListOfTypes.html#Bool_t">kTRUE</a> );
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a> ( <span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SendModifiedSignals" title="void KVSeqCollection::SendModifiedSignals(Bool_t yes=kTRUE)">SendModifiedSignals</a>(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
    <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetCleanup" title="void KVSeqCollection::SetCleanup(Bool_t enable=kTRUE)">SetCleanup</a>();
 }
 
@@ -74,108 +74,108 @@ ClassImp ( <a href="../KVIDGridManager.html">KVIDGridManager</a> )
    <span class="comment">//Destructor</span>
    <span class="comment">//Reset global pointer <a href="../KVIDGridManager.html">gIDGridManager</a></span>
    <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> list of ID grids (this deletes all the grids)</span>
-   <span class="keyword">if</span> ( <a href="../KVIDGridManager.html">gIDGridManager</a> == <span class="keyword">this</span> )
+   <span class="keyword">if</span> (<a href="../KVIDGridManager.html">gIDGridManager</a> == <span class="keyword">this</span>)
       <a href="../KVIDGridManager.html">gIDGridManager</a> = 0;
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a> ( <span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a>(<span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
    <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Delete" title="void KVSeqCollection::Delete(Option_t* option=&quot;&quot;)">Delete</a>();
    <span class="keyword">delete</span> <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>;
 }
 
-<a name="DCkGYD"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:AddGrid" title="void KVIDGridManager::AddGrid(KVIDGraph* )">AddGrid</a> ( <a href="../KVIDGraph.html">KVIDGraph</a> * grid )
+<a name="LcXyDB"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:AddGrid" title="void KVIDGridManager::AddGrid(KVIDGraph* )">AddGrid</a>(<a href="../KVIDGraph.html">KVIDGraph</a>* grid)
 {
    <span class="comment">// Add a grid to the collection. It will be deleted by the manager.</span>
 
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a> ( grid );
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(grid);
 }
 
-<a name="bl14zD"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:DeleteGrid" title="void KVIDGridManager::DeleteGrid(KVIDGraph* ,Bool_t update=kTRUE)">DeleteGrid</a> ( <a href="../KVIDGraph.html">KVIDGraph</a> * grid, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> update )
+<a name="bhjdBC"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:DeleteGrid" title="void KVIDGridManager::DeleteGrid(KVIDGraph* ,Bool_t update=kTRUE)">DeleteGrid</a>(<a href="../KVIDGraph.html">KVIDGraph</a>* grid, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> update)
 {
    <span class="comment">//Remove grid from manager's list and delete it</span>
    <span class="comment">//update flag allows to disable the emission of the '<a href="../KVIDGridManager.html#KVIDGridManager:Modified" title="void KVIDGridManager::Modified()">Modified</a>' signal in case the GUI</span>
    <span class="comment">//is deleting a list of grids - in this case we don't want to update until the end</span>
 
-   <span class="keyword">if</span> ( !update ) <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a> ( <span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Remove" title="TObject* KVSeqCollection::Remove(TObject* obj)">Remove</a> ( grid );
+   <span class="keyword">if</span> (!update) <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a>(<span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Remove" title="TObject* KVSeqCollection::Remove(TObject* obj)">Remove</a>(grid);
    <span class="keyword">delete</span> grid;
-   <span class="keyword">if</span> ( !update ) <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a> ( <span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
+   <span class="keyword">if</span> (!update) <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
 }
 
-<a name="l2qIEB"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:Clear" title="void KVIDGridManager::Clear(Option_t* opt=&quot;&quot;)">Clear</a> ( <a href="../ListOfTypes.html#Option_t">Option_t</a> * )
+<a name="MPKho"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:Clear" title="void KVIDGridManager::Clear(Option_t* opt=&quot;&quot;)">Clear</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>*)
 {
    <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> all grids and empty list, ready to start anew</span>
 
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a> ( <span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a>(<span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
    <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Delete" title="void KVSeqCollection::Delete(Option_t* option=&quot;&quot;)">Delete</a>();
    <a href="../KVIDGridManager.html#KVIDGridManager:Modified" title="void KVIDGridManager::Modified()">Modified</a>();                  <span class="comment">// emit signal to say something changed</span>
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a> ( <span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
 }
 
-<a name="DmDWI"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:ReadAsciiFile" title="Bool_t KVIDGridManager::ReadAsciiFile(const Char_t* filename)">ReadAsciiFile</a> ( <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * filename )
+<a name="y18CfE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:ReadAsciiFile" title="Bool_t KVIDGridManager::ReadAsciiFile(const Char_t* filename)">ReadAsciiFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* filename)
 {
    <span class="comment">//read file, create grids corresponding to information in file.</span>
    <span class="comment">//note: any existing grids are not destroyed, use <a href="../KVIDGridManager.html#KVIDGridManager:Clear" title="void KVIDGridManager::Clear(Option_t* opt=&quot;&quot;)">Clear</a>() beforehand if you want to</span>
    <span class="comment">//start afresh and anew (ais athat aOK?)</span>
 
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> is_it_ok = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
-   <a href="../ListOfTypes.html#ifstream">ifstream</a> gridfile ( filename );
-   <span class="keyword">if</span> ( !gridfile.good() ) {
-      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a> ( <span class="string">"ReadAsciiFile"</span>, <span class="string">"File %s cannot be opened"</span>, filename );
+   <a href="../ListOfTypes.html#ifstream">ifstream</a> gridfile(filename);
+   <span class="keyword">if</span> (!gridfile.good()) {
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadAsciiFile"</span>, <span class="string">"File %s cannot be opened"</span>, filename);
       <span class="keyword">return</span> is_it_ok;
    }
 
    <a href="../KVString.html">KVString</a> s;
 
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a> ( <span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
-   <span class="keyword">while</span> ( gridfile.good() ) {
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Disconnect" title="Bool_t KVSeqCollection::Disconnect(const char* sig=0,void* rcvr=0,const char* slt=0)">Disconnect</a>(<span class="string">"Modified()"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
+   <span class="keyword">while</span> (gridfile.good()) {
       <span class="comment">//read a line</span>
-      s.ReadLine ( gridfile );
-      <span class="keyword">if</span> ( s.BeginsWith ( <span class="string">"++"</span> ) ) {
+      s.ReadLine(gridfile);
+      <span class="keyword">if</span> (s.BeginsWith(<span class="string">"++"</span>)) {
          <span class="comment">//New grid</span>
          <span class="comment">//Get name of class by stripping off the <span class="string">'+'</span> at the start of the line</span>
-         s.Remove ( 0, 2 );
+         s.Remove(0, 2);
          <span class="comment">/************ BACKWARDS COMPATIBILITY FIX *************
            Old grid files may contain obsolete <a href="../KVIDZGrid.html">KVIDZGrid</a> class
            We replace by <a href="../KVIDZAGrid.html">KVIDZAGrid</a> with SetOnlyZId(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>)
          */</span>
          <span class="comment">//Make new grid using this class</span>
-         <a href="../KVIDGraph.html">KVIDGraph</a> *grid = 0;
+         <a href="../KVIDGraph.html">KVIDGraph</a>* grid = 0;
          <a href="../ListOfTypes.html#Bool_t">Bool_t</a> onlyz = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
-         <span class="keyword">if</span> ( s == <span class="string">"KVIDZGrid"</span> ) {
+         <span class="keyword">if</span> (s == <span class="string">"KVIDZGrid"</span>) {
             s = <span class="string">"KVIDZAGrid"</span>;
             onlyz = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
          }
-         TClass *clas = TClass::GetClass ( s.Data() );
-         grid = ( <a href="../KVIDGraph.html">KVIDGraph</a> * ) clas-&gt;New();
+         TClass* clas = TClass::GetClass(s.Data());
+         grid = (<a href="../KVIDGraph.html">KVIDGraph</a>*) clas-&gt;New();
          <span class="comment">//read grid</span>
-         grid-&gt;ReadFromAsciiFile ( gridfile );
-         <span class="keyword">if</span> ( onlyz ) grid-&gt;SetOnlyZId ( <a href="../ListOfTypes.html#Bool_t">kTRUE</a> );
+         grid-&gt;ReadFromAsciiFile(gridfile);
+         <span class="keyword">if</span> (onlyz) grid-&gt;SetOnlyZId(<a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
       }
    }
 
    gridfile.close();
    is_it_ok = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    <a href="../KVIDGridManager.html#KVIDGridManager:Modified" title="void KVIDGridManager::Modified()">Modified</a>();                  <span class="comment">// emit signal to say something changed</span>
-   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a> ( <span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span> );
+   <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Connect" title="Bool_t KVSeqCollection::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Modified()"</span>, <span class="string">"KVIDGridManager"</span>, <span class="keyword">this</span>, <span class="string">"Modified()"</span>);
    <span class="keyword">return</span> is_it_ok;
 }
 
-<a name="Cl4_Y"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:WriteAsciiFile" title="Int_t KVIDGridManager::WriteAsciiFile(const Char_t* filename,const TCollection* selection=0)">WriteAsciiFile</a> ( <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * filename, <span class="keyword">const</span> TCollection *selection )
+<a name="fGQCz"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:WriteAsciiFile" title="Int_t KVIDGridManager::WriteAsciiFile(const Char_t* filename,const TCollection* selection=0)">WriteAsciiFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* filename, <span class="keyword">const</span> TCollection* selection)
 {
    <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> grids in file 'filename'.</span>
    <span class="comment">// If selection=0 (default), write all grids.</span>
    <span class="comment">// If selection!=0, write only grids in list.</span>
    <span class="comment">// Returns number of grids written in file.</span>
 
-   <a href="../ListOfTypes.html#ofstream">ofstream</a> gridfile ( filename );
+   <a href="../ListOfTypes.html#ofstream">ofstream</a> gridfile(filename);
 
-   <span class="keyword">const</span> TCollection *list_of_grids = ( selection ? selection : <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a> );
-   TIter next ( list_of_grids );
-   <a href="../KVIDGraph.html">KVIDGraph</a> *grid = 0;
+   <span class="keyword">const</span> TCollection* list_of_grids = (selection ? selection : <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>);
+   TIter next(list_of_grids);
+   <a href="../KVIDGraph.html">KVIDGraph</a>* grid = 0;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> n_saved = 0;
-   <span class="keyword">while</span> ( ( grid = ( <a href="../KVIDGraph.html">KVIDGraph</a> * ) next() ) ) {
+   <span class="keyword">while</span> ((grid = (<a href="../KVIDGraph.html">KVIDGraph</a>*) next())) {
 
-      grid-&gt;WriteToAsciiFile ( gridfile );
-      <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a> ( <span class="string">"WriteAsciiFile"</span>, <span class="string">"%s saved"</span>, grid-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() );
+      grid-&gt;WriteToAsciiFile(gridfile);
+      <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"WriteAsciiFile"</span>, <span class="string">"%s saved"</span>, grid-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
       n_saved++;
 
    }
@@ -184,48 +184,48 @@ ClassImp ( <a href="../KVIDGridManager.html">KVIDGridManager</a> )
    <span class="keyword">return</span> n_saved;
 }
 
-<a name="LT7cr"></a><a href="../KVIDGraph.html">KVIDGraph</a> *<a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:GetGrid" title="KVIDGraph* KVIDGridManager::GetGrid(const Char_t* name)">GetGrid</a> ( <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name )
+<a name="gV6vAE"></a><a href="../KVIDGraph.html">KVIDGraph</a>* <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:GetGrid" title="KVIDGraph* KVIDGridManager::GetGrid(const Char_t* name)">GetGrid</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name)
 {
    <span class="comment">//Return pointer to grid with name <span class="string">"name"</span></span>
-   <span class="keyword">return</span> ( <a href="../KVIDGraph.html">KVIDGraph</a> * ) <a href="../KVIDGridManager.html#KVIDGridManager:GetGrids" title="KVList* KVIDGridManager::GetGrids()">GetGrids</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:FindObjectByName" title="TObject* KVSeqCollection::FindObjectByName(const Char_t* name)">FindObjectByName</a> ( name );
+   <span class="keyword">return</span> (<a href="../KVIDGraph.html">KVIDGraph</a>*) <a href="../KVIDGridManager.html#KVIDGridManager:GetGrids" title="KVList* KVIDGridManager::GetGrids()">GetGrids</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:FindObjectByName" title="TObject* KVSeqCollection::FindObjectByName(const Char_t* name)">FindObjectByName</a>(name);
 }
 
 <a name="LFYmZ"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:StartViewer" title="void KVIDGridManager::StartViewer()">StartViewer</a>() <span class="keyword">const</span>
 {
    <span class="comment">//Opens GUI for managing grids</span>
-   <span class="keyword">if</span> (gROOT-&gt;IsBatch()){
-		<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"StartViewer"</span>,<span class="string">"To launch graphical interface, you should not use ROOT in batch mode"</span>);
-		<span class="keyword">return</span>;
-	}
-	TClass* cl = TClass::GetClass(<span class="string">"KVIDGridManagerGUI"</span>);
-	cl-&gt;New();
+   <span class="keyword">if</span> (gROOT-&gt;IsBatch()) {
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"StartViewer"</span>, <span class="string">"To launch graphical interface, you should not use ROOT in batch mode"</span>);
+      <span class="keyword">return</span>;
+   }
+   TClass* cl = TClass::GetClass(<span class="string">"KVIDGridManagerGUI"</span>);
+   cl-&gt;New();
 }
 
-<a name="oDt7MB"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:GetListOfIDTelescopeLabels" title="void KVIDGridManager::GetListOfIDTelescopeLabels(KVString&amp; )">GetListOfIDTelescopeLabels</a> ( <a href="../KVString.html">KVString</a>&amp; list )
+<a name="wpvTMB"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:GetListOfIDTelescopeLabels" title="void KVIDGridManager::GetListOfIDTelescopeLabels(KVString&amp; )">GetListOfIDTelescopeLabels</a>(<a href="../KVString.html">KVString</a>&amp; list)
 {
    <span class="comment">// Replace contents of <a href="../KVString.html">KVString</a> with a comma-separated list of all</span>
    <span class="comment">// different labels of ID telescopes associated with current list of ID grids.</span>
 
    list = <span class="string">""</span>;
-   TIter next ( <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a> );
-   <a href="../KVIDGraph.html">KVIDGraph</a> *grid = 0;
+   TIter next(<a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>);
+   <a href="../KVIDGraph.html">KVIDGraph</a>* grid = 0;
    <a href="../KVString.html">KVString</a> lab;
-   <span class="keyword">while</span> ( ( grid = ( <a href="../KVIDGraph.html">KVIDGraph</a> * ) next() ) ) {
-      lab.Form ( <span class="string">"/%s/"</span>, grid-&gt;GetIDTelescopeLabel() );
-      <span class="keyword">if</span> ( !list.Contains ( lab ) ) list.Append ( lab );
+   <span class="keyword">while</span> ((grid = (<a href="../KVIDGraph.html">KVIDGraph</a>*) next())) {
+      lab.Form(<span class="string">"/%s/"</span>, grid-&gt;GetIDTelescopeLabel());
+      <span class="keyword">if</span> (!list.Contains(lab)) list.Append(lab);
    }
-   list.ReplaceAll(<span class="string">"//"</span>,<span class="string">","</span>);
-   list.ReplaceAll(<span class="string">"/"</span>,<span class="string">""</span>);
-   <span class="keyword">if</span>(list.EqualTo(<span class="string">","</span>)) list = <span class="string">""</span>;
+   list.ReplaceAll(<span class="string">"//"</span>, <span class="string">","</span>);
+   list.ReplaceAll(<span class="string">"/"</span>, <span class="string">""</span>);
+   <span class="keyword">if</span> (list.EqualTo(<span class="string">","</span>)) list = <span class="string">""</span>;
 }
 
-<a name="CNlxkE"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:Initialize" title="void KVIDGridManager::Initialize(Option_t* =&quot;&quot;)">Initialize</a> ( <a href="../ListOfTypes.html#Option_t">Option_t</a>* )
+<a name="MlTxb"></a><span class="keyword">void</span> <a href="../KVIDGridManager.html">KVIDGridManager</a>::<a href="../KVIDGridManager.html#KVIDGridManager:Initialize" title="void KVIDGridManager::Initialize(Option_t* =&quot;&quot;)">Initialize</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>*)
 {
    <span class="comment">// <a href="../KVIDGridManager.html#KVIDGridManager:Initialize" title="void KVIDGridManager::Initialize(Option_t* =&quot;&quot;)">Initialize</a> all grids in ID grid manager's list, i.e. we call the <a href="../KVIDGridManager.html#KVIDGridManager:Initialize" title="void KVIDGridManager::Initialize(Option_t* =&quot;&quot;)">Initialize</a>() method</span>
    <span class="comment">// of every grid/graph.</span>
-   TIter next ( <a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a> );
+   TIter next(<a href="../KVIDGridManager.html#KVIDGridManager:fGrids" title="KVList* KVIDGridManager::fGrids">fGrids</a>);
    <a href="../KVIDGraph.html">KVIDGraph</a>* gr = 0;
-   <span class="keyword">while</span> ( ( gr = ( <a href="../KVIDGraph.html">KVIDGraph</a>* ) next() ) ) gr-&gt;<a href="../KVIDGridManager.html#KVIDGridManager:Initialize" title="void KVIDGridManager::Initialize(Option_t* =&quot;&quot;)">Initialize</a>();
+   <span class="keyword">while</span> ((gr = (<a href="../KVIDGraph.html">KVIDGraph</a>*) next())) gr-&gt;<a href="../KVIDGridManager.html#KVIDGridManager:Initialize" title="void KVIDGridManager::Initialize(Option_t* =&quot;&quot;)">Initialize</a>();
 }
 
 </pre>
@@ -236,7 +236,7 @@ ClassImp ( <a href="../KVIDGridManager.html">KVIDGridManager</a> )
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

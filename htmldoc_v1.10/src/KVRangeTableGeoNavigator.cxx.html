@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:20 2015            -->
+<!--   Date: Fri Jan  8 15:14:31 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -121,76 +121,76 @@ ClassImp(<a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>
 
 <a name="yhviXD"></a><a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>::<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:_KVRangeTableGeoNavigator" title="void KVRangeTableGeoNavigator::~KVRangeTableGeoNavigator()">~KVRangeTableGeoNavigator</a>()
 {
-    <span class="comment">// Destructor</span>
+   <span class="comment">// Destructor</span>
 }
 
-<a name="Grr70E"></a><span class="keyword">void</span> <a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>::<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:ParticleEntersNewVolume" title="void KVRangeTableGeoNavigator::ParticleEntersNewVolume(KVNucleus* )">ParticleEntersNewVolume</a>(<a href="../KVNucleus.html">KVNucleus</a> *part)
+<a name="e9S70E"></a><span class="keyword">void</span> <a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>::<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:ParticleEntersNewVolume" title="void KVRangeTableGeoNavigator::ParticleEntersNewVolume(KVNucleus* )">ParticleEntersNewVolume</a>(<a href="../KVNucleus.html">KVNucleus</a>* part)
 {
-    <span class="comment">// Overrides method in <a href="../KVGeoNavigator.html">KVGeoNavigator</a> base class.</span>
-    <span class="comment">// Every time a particle enters a new volume, we check the material to see</span>
-    <span class="comment">// if it is known (i.e. contained in the range table <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fRangeTable" title="KVIonRangeTable* KVRangeTableGeoNavigator::fRangeTable">fRangeTable</a>).</span>
-    <span class="comment">// If so, then we calculate the energy loss of the particle in this volume,</span>
-    <span class="comment">// reduce the particle's energy accordingly, and, if the energy falls below</span>
-    <span class="comment">// a certain cut-off (default 1.e-3 MeV; can be modified with</span>
-    <span class="comment">// <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:SetCutOffKEForPropagation" title="void KVRangeTableGeoNavigator::SetCutOffKEForPropagation(Double_t e)">SetCutOffKEForPropagation</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>) ), we stop the propagation.</span>
+   <span class="comment">// Overrides method in <a href="../KVGeoNavigator.html">KVGeoNavigator</a> base class.</span>
+   <span class="comment">// Every time a particle enters a new volume, we check the material to see</span>
+   <span class="comment">// if it is known (i.e. contained in the range table <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fRangeTable" title="KVIonRangeTable* KVRangeTableGeoNavigator::fRangeTable">fRangeTable</a>).</span>
+   <span class="comment">// If so, then we calculate the energy loss of the particle in this volume,</span>
+   <span class="comment">// reduce the particle's energy accordingly, and, if the energy falls below</span>
+   <span class="comment">// a certain cut-off (default 1.e-3 MeV; can be modified with</span>
+   <span class="comment">// <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:SetCutOffKEForPropagation" title="void KVRangeTableGeoNavigator::SetCutOffKEForPropagation(Double_t e)">SetCutOffKEForPropagation</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>) ), we stop the propagation.</span>
 
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> de = 0;
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> e = part-&gt;GetEnergy();
-    <span class="keyword">if</span>(e&lt;=<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fCutOffEnergy" title="Double_t KVRangeTableGeoNavigator::fCutOffEnergy">fCutOffEnergy</a>) {
-        e=0.;
-        <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop=kTRUE)">SetStopPropagation</a>();<span class="comment">//propagation will stop after this step</span>
-        <span class="keyword">return</span>;
-    }
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> de = 0;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> e = part-&gt;GetEnergy();
+   <span class="keyword">if</span> (e &lt;= <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fCutOffEnergy" title="Double_t KVRangeTableGeoNavigator::fCutOffEnergy">fCutOffEnergy</a>) {
+      e = 0.;
+      <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop=kTRUE)">SetStopPropagation</a>();<span class="comment">//propagation will stop after this step</span>
+      <span class="keyword">return</span>;
+   }
 
-    <span class="comment">// calculate energy losses in known materials</span>
-    TGeoMaterial* material = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>()-&gt;GetMaterial();
-    <a href="../KVIonRangeTableMaterial.html">KVIonRangeTableMaterial</a>* irmat=0;
-    <span class="keyword">if</span> ( (irmat = <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fRangeTable" title="KVIonRangeTable* KVRangeTableGeoNavigator::fRangeTable">fRangeTable</a>-><a href="../KVIonRangeTable.html#KVIonRangeTable:GetMaterial" title="KVIonRangeTableMaterial* KVIonRangeTable::GetMaterial(const Char_t* material) or overloads">GetMaterial</a>(material)) ) {
-        de = irmat-&gt;GetLinearDeltaEOfIon(
-                    part-&gt;GetZ(), part-&gt;GetA(), e, <a href="../KVGeoNavigator.html#KVGeoNavigator:GetStepSize" title="Double_t KVGeoNavigator::GetStepSize()">GetStepSize</a>(), 0.,
-                    material-&gt;GetTemperature(),
-                    material-&gt;GetPressure());
-        e -= de;
-        <span class="keyword">if</span>(e&lt;=<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fCutOffEnergy" title="Double_t KVRangeTableGeoNavigator::fCutOffEnergy">fCutOffEnergy</a>) {
-            e=0.;
-            <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop=kTRUE)">SetStopPropagation</a>();<span class="comment">//propagation will stop after this step</span>
-        }
-        <span class="comment">//set flag to say that particle has been slowed down</span>
-        part-&gt;SetIsDetected();
-        <span class="comment">//If this is the first absorber that the particle crosses, we set a <span class="string">"reminder"</span> of its</span>
-        <span class="comment">//initial energy</span>
-        <span class="keyword">if</span> (!part-&gt;GetPInitial()) part-&gt;SetE0();
+   <span class="comment">// calculate energy losses in known materials</span>
+   TGeoMaterial* material = <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentVolume()">GetCurrentVolume</a>()-&gt;GetMaterial();
+   <a href="../KVIonRangeTableMaterial.html">KVIonRangeTableMaterial</a>* irmat = 0;
+   <span class="keyword">if</span> ((irmat = <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fRangeTable" title="KVIonRangeTable* KVRangeTableGeoNavigator::fRangeTable">fRangeTable</a>-><a href="../KVIonRangeTable.html#KVIonRangeTable:GetMaterial" title="KVIonRangeTableMaterial* KVIonRangeTable::GetMaterial(const Char_t* material) or overloads">GetMaterial</a>(material))) {
+      de = irmat-&gt;GetLinearDeltaEOfIon(
+              part-&gt;GetZ(), part-&gt;GetA(), e, <a href="../KVGeoNavigator.html#KVGeoNavigator:GetStepSize" title="Double_t KVGeoNavigator::GetStepSize()">GetStepSize</a>(), 0.,
+              material-&gt;GetTemperature(),
+              material-&gt;GetPressure());
+      e -= de;
+      <span class="keyword">if</span> (e &lt;= <a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:fCutOffEnergy" title="Double_t KVRangeTableGeoNavigator::fCutOffEnergy">fCutOffEnergy</a>) {
+         e = 0.;
+         <a href="../KVGeoNavigator.html#KVGeoNavigator:SetStopPropagation" title="void KVGeoNavigator::SetStopPropagation(Bool_t stop=kTRUE)">SetStopPropagation</a>();<span class="comment">//propagation will stop after this step</span>
+      }
+      <span class="comment">//set flag to say that particle has been slowed down</span>
+      part-&gt;SetIsDetected();
+      <span class="comment">//If this is the first absorber that the particle crosses, we set a <span class="string">"reminder"</span> of its</span>
+      <span class="comment">//initial energy</span>
+      <span class="keyword">if</span> (!part-&gt;GetPInitial()) part-&gt;SetE0();
 
-        <a href="../KVString.html">KVString</a> dname; <a href="../ListOfTypes.html#Bool_t">Bool_t</a> multi;
-        TString absorber_name;
-        <span class="keyword">if</span>(<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentDetectorNameAndVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentDetectorNameAndVolume(KVString&amp; ,Bool_t&amp; )">GetCurrentDetectorNameAndVolume</a>(dname,multi)){
-            <span class="keyword">if</span>(multi) absorber_name.Form(<span class="string">"%s/%s"</span>, dname.Data(), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-            <span class="keyword">else</span> absorber_name=dname;
-        }
-        <span class="keyword">else</span>
-            absorber_name=irmat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
+      <a href="../KVString.html">KVString</a> dname;
+      <a href="../ListOfTypes.html#Bool_t">Bool_t</a> multi;
+      TString absorber_name;
+      <span class="keyword">if</span> (<a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentDetectorNameAndVolume" title="TGeoVolume* KVGeoNavigator::GetCurrentDetectorNameAndVolume(KVString&amp; ,Bool_t&amp; )">GetCurrentDetectorNameAndVolume</a>(dname, multi)) {
+         <span class="keyword">if</span> (multi) absorber_name.Form(<span class="string">"%s/%s"</span>, dname.Data(), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetCurrentNode" title="TGeoNode* KVGeoNavigator::GetCurrentNode()">GetCurrentNode</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+         <span class="keyword">else</span> absorber_name = dname;
+      } <span class="keyword">else</span>
+         absorber_name = irmat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
 
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"DE:%s"</span>,absorber_name.Data()), de);
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Xin:%s"</span>,absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>().X());
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Yin:%s"</span>,absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>().Y());
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Zin:%s"</span>,absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>().Z());
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Xout:%s"</span>,absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>().X());
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Yout:%s"</span>,absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>().Y());
-        part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Zout:%s"</span>,absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>().Z());
-        part-&gt;SetEnergy(e);
-    }
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"DE:%s"</span>, absorber_name.Data()), de);
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Xin:%s"</span>, absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>().X());
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Yin:%s"</span>, absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>().Y());
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Zin:%s"</span>, absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetEntryPoint" title="const TVector3&amp; KVGeoNavigator::GetEntryPoint()">GetEntryPoint</a>().Z());
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Xout:%s"</span>, absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>().X());
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Yout:%s"</span>, absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>().Y());
+      part-&gt;GetParameters()-&gt;SetValue(Form(<span class="string">"Zout:%s"</span>, absorber_name.Data()), <a href="../KVGeoNavigator.html#KVGeoNavigator:GetExitPoint" title="const TVector3&amp; KVGeoNavigator::GetExitPoint()">GetExitPoint</a>().Z());
+      part-&gt;SetEnergy(e);
+   }
 }
 
-<a name="HyoLhC"></a><span class="keyword">void</span> <a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>::<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:PropagateParticle" title="void KVRangeTableGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>(<a href="../KVNucleus.html">KVNucleus</a> *part, TVector3 *TheOrigin)
+<a name="ePkQDE"></a><span class="keyword">void</span> <a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>::<a href="../KVRangeTableGeoNavigator.html#KVRangeTableGeoNavigator:PropagateParticle" title="void KVRangeTableGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>(<a href="../KVNucleus.html">KVNucleus</a>* part, TVector3* TheOrigin)
 {
-    <span class="comment">// Slight modification of <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>:</span>
-    <span class="comment">//   if particle hits a DEADZONE, set its energy to zero</span>
+   <span class="comment">// Slight modification of <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>:</span>
+   <span class="comment">//   if particle hits a DEADZONE, set its energy to zero</span>
 
-    <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>(part,TheOrigin);
-    <span class="keyword">if</span>(part-&gt;GetParameters()-&gt;HasParameter(<span class="string">"DEADZONE"</span>)){
-        <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"stopped in DEADZONE:%s"</span>,part-&gt;GetParameters()-&gt;GetStringValue(<span class="string">"DEADZONE"</span>));</span>
-        part-&gt;SetEnergy(0);
-    }
+   <a href="../KVGeoNavigator.html">KVGeoNavigator</a>::<a href="../KVGeoNavigator.html#KVGeoNavigator:PropagateParticle" title="void KVGeoNavigator::PropagateParticle(KVNucleus* ,TVector3* TheOrigin=0)">PropagateParticle</a>(part, TheOrigin);
+   <span class="keyword">if</span> (part-&gt;GetParameters()-&gt;HasParameter(<span class="string">"DEADZONE"</span>)) {
+      <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"PropagateParticle"</span>,<span class="string">"stopped in DEADZONE:%s"</span>,part-&gt;GetParameters()-&gt;GetStringValue(<span class="string">"DEADZONE"</span>));</span>
+      part-&gt;SetEnergy(0);
+   }
 }
 
 </pre>
@@ -201,7 +201,7 @@ ClassImp(<a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

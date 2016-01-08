@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:23 2015            -->
+<!--   Date: Fri Jan  8 15:14:34 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -40,17 +40,17 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">// Access to lists of available runfiles in remote data repository via HTTP</span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
-<a name="PoAloB"></a>    <a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</a>::<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:KVRemoteAvailableRunsFile" title="KVRemoteAvailableRunsFile KVRemoteAvailableRunsFile::KVRemoteAvailableRunsFile() or overloads">KVRemoteAvailableRunsFile</a>()
+<a name="PoAloB"></a><a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</a>::<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:KVRemoteAvailableRunsFile" title="KVRemoteAvailableRunsFile KVRemoteAvailableRunsFile::KVRemoteAvailableRunsFile() or overloads">KVRemoteAvailableRunsFile</a>()
 {
    <span class="comment">//default Constructor</span>
    <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:init" title="void KVRemoteAvailableRunsFile::init()">init</a>();
 }
 
-<a name="ea4wUE"></a><a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</a>::<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:KVRemoteAvailableRunsFile" title="KVRemoteAvailableRunsFile KVRemoteAvailableRunsFile::KVRemoteAvailableRunsFile() or overloads">KVRemoteAvailableRunsFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *
-                                                     type,
-                                                     <a href="../KVDataSet.html">KVDataSet</a> *
-                                                     ds):<a href="../KVAvailableRunsFile.html">KVAvailableRunsFile</a>
-    (type, ds)
+<a name="Kz7WUE"></a><a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</a>::<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:KVRemoteAvailableRunsFile" title="KVRemoteAvailableRunsFile KVRemoteAvailableRunsFile::KVRemoteAvailableRunsFile() or overloads">KVRemoteAvailableRunsFile</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*
+      type,
+      <a href="../KVDataSet.html">KVDataSet</a>*
+      ds): <a href="../KVAvailableRunsFile.html">KVAvailableRunsFile</a>
+   (type, ds)
 {
    <span class="comment">//Constructor with name of datatype</span>
    <span class="comment">//and pointer to parent dataset</span>
@@ -61,8 +61,8 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
 {
    <span class="comment">//Destructor</span>
    <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> the runlist file from the temp directory if it has been opened</span>
-   <span class="keyword">if</span> (<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:IsFileOpen" title="Bool_t KVAvailableRunsFile::IsFileOpen()">IsFileOpen</a>()){
-      <span class="keyword">if</span>(runlist_lock.Lock(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data())){
+   <span class="keyword">if</span> (<a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:IsFileOpen" title="Bool_t KVAvailableRunsFile::IsFileOpen()">IsFileOpen</a>()) {
+      <span class="keyword">if</span> (runlist_lock.Lock(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data())) {
          gSystem-&gt;Unlink(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>);
          runlist_lock.Release();
       }
@@ -104,11 +104,11 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
       fRunlist.seekg(0, <a href="../ListOfTypes.html#ios">ios</a>::beg);      <span class="comment">// set file buffer pointer to beginning of file</span>
       <span class="comment">//if we can get a lock on the file, all is well. if not, we need to fetch a new</span>
       <span class="comment">//copy</span>
-      <span class="keyword">if</span>(runlist_lock.Lock()) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+      <span class="keyword">if</span> (runlist_lock.Lock()) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    }
    TString http =
-       gEnv-&gt;GetValue(Form(<span class="string">"%s.DataRepository.RemoteAvailableRuns.url"</span>,
-                           <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository()">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <span class="string">""</span>);
+      gEnv-&gt;GetValue(Form(<span class="string">"%s.DataRepository.RemoteAvailableRuns.url"</span>,
+                          <a href="../KVAvailableRunsFile.html#KVAvailableRunsFile:GetDataSet" title="KVDataSet* KVAvailableRunsFile::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRepository" title="KVDataRepository* KVDataSet::GetRepository()">GetRepository</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()), <span class="string">""</span>);
    <span class="keyword">if</span> (http == <span class="string">""</span>) {
       <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"OpenAvailableRunsFile(ifstream&amp; runlist)"</span>,
               <span class="string">"%s.DataRepository.RemoteAvailableRuns.url is not defined. See $KVROOT/KVFiles/.kvrootrc"</span>,
@@ -125,7 +125,7 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
    cmd.Form(<span class="string">"%s -o%s %s"</span>, <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fCurl" title="TString KVRemoteAvailableRunsFile::fCurl">fCurl</a>.Data(), <a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data(), url.Data());
    <span class="comment">//lock temp file - just in case</span>
    runlist_lock.Lock(<a href="../KVRemoteAvailableRunsFile.html#KVRemoteAvailableRunsFile:fFilePath" title="TString KVRemoteAvailableRunsFile::fFilePath">fFilePath</a>.Data());
-   <span class="keyword">if</span> (gSystem-&gt;Exec(cmd.Data())){
+   <span class="keyword">if</span> (gSystem-&gt;Exec(cmd.Data())) {
       runlist_lock.Release();
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;            <span class="comment">// problem with curl</span>
    }
@@ -157,7 +157,7 @@ ClassImp(<a href="../KVRemoteAvailableRunsFile.html">KVRemoteAvailableRunsFile</
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

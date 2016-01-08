@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:13:50 2015            -->
+<!--   Date: Fri Jan  8 15:12:45 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -69,9 +69,9 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 <span class="comment">//The bombage can be set/modified using <a href="../KVBIC.html#KVBIC:SetBombage" title="void KVBIC::SetBombage(Float_t x)">SetBombage</a>(). The default value is 5mm.</span>
 <span class="comment">//The effective thickness of CF4 between the two mylar windows, <span class="string">"averaged"</span> over the whole surface of the</span>
 <span class="comment">//entry window, is then <span class="string">"estimated"</span> according to the formula (see <a href="../KVBIC.html#KVBIC:GetEffectiveEntryThickness" title="Float_t KVBIC::GetEffectiveEntryThickness()">GetEffectiveEntryThickness</a>() ):</span>
-<span class="comment">//      e = bombage/2 + 1.5  [mm] </span>
+<span class="comment">//      e = bombage/2 + 1.5  [mm]</span>
 <span class="comment">//With the default bombage of 5mm, this gives e=4mm.</span>
-<a name="YpPQRD"></a>    <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:KVBIC" title="KVBIC KVBIC::KVBIC() or overloads">KVBIC</a>()
+<a name="YpPQRD"></a><a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:KVBIC" title="KVBIC KVBIC::KVBIC() or overloads">KVBIC</a>()
 {
    <span class="comment">//default ctor</span>
    <span class="comment">//Segmentation index = 1</span>
@@ -84,7 +84,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="b3SBAB"></a><a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:KVBIC" title="KVBIC KVBIC::KVBIC() or overloads">KVBIC</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> pressure, <a href="../ListOfTypes.html#Float_t">Float_t</a> bomb):<a href="../KVChIo.html#KVChIo:KVChIo" title="KVChIo KVChIo::KVChIo() or overloads">KVChIo</a>()
+<a name="XNOmLD"></a><a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:KVBIC" title="KVBIC KVBIC::KVBIC() or overloads">KVBIC</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> pressure, <a href="../ListOfTypes.html#Float_t">Float_t</a> bomb): <a href="../KVChIo.html#KVChIo:KVChIo" title="KVChIo KVChIo::KVChIo() or overloads">KVChIo</a>()
 {
    <span class="comment">//BIC detector.</span>
    <span class="comment">//Give pressure in Torr</span>
@@ -101,18 +101,18 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
    <a href="../KVBIC.html#KVBIC:fBomb" title="Float_t KVBIC::fBomb">fBomb</a> = bomb;
    <span class="comment">//build detector</span>
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.5*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));     <span class="comment">//mylar entry window</span>
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.5 * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));   <span class="comment">//mylar entry window</span>
    <a href="../ListOfTypes.html#Float_t">Float_t</a> e = <a href="../KVBIC.html#KVBIC:GetEffectiveEntryThickness" title="Float_t KVBIC::GetEffectiveEntryThickness()">GetEffectiveEntryThickness</a>();
-   <a href="../KVMaterial.html">KVMaterial</a> *gas = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"CF4"</span>, e*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>, pressure);
+   <a href="../KVMaterial.html">KVMaterial</a>* gas = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"CF4"</span>, e * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>, pressure);
    <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(gas);            <span class="comment">//gas between two windows</span>
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.0*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));     <span class="comment">//interior window</span>
-   gas = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"CF4"</span>, 60*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>,pressure);
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.0 * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));   <span class="comment">//interior window</span>
+   gas = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"CF4"</span>, 60 * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>, pressure);
    <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(gas);            <span class="comment">//main body of gas</span>
    <a href="../KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a>(gas);         <span class="comment">//active layer - energy loss is measured</span>
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.0*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));     <span class="comment">//2nd interor window</span>
-   gas = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"CF4"</span>, e*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>, pressure);
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.0 * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));   <span class="comment">//2nd interor window</span>
+   gas = <span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"CF4"</span>, e * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:mm" title="const long double KVUnits::mm">mm</a>, pressure);
    <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(gas);            <span class="comment">//gas between two exit windows</span>
-   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.5*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));     <span class="comment">//exit window</span>
+   <a href="../KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(<span class="keyword">new</span> <a href="../KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>, 1.5 * <a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>));   <span class="comment">//exit window</span>
 
 }
 
@@ -124,7 +124,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="XlrA7B"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *<a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetArrayName" title="const Char_t* KVBIC::GetArrayName()">GetArrayName</a>()
+<a name="fMEoTC"></a><span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetArrayName" title="const Char_t* KVBIC::GetArrayName()">GetArrayName</a>()
 {
    <span class="comment">//Give name of detector as BIC_x with x=number of blocking telescope</span>
 
@@ -134,7 +134,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
 <span class="comment">//_______________________________________________________________________________</span>
 
-<a name="MojrLE"></a><span class="keyword">void</span> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:AddACQParam" title="void KVBIC::AddACQParam(const Char_t* )">AddACQParam</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * type)
+<a name="FGCDuB"></a><span class="keyword">void</span> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:AddACQParam" title="void KVBIC::AddACQParam(const Char_t* )">AddACQParam</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* type)
 {
    <span class="comment">//Add an acquisition parameter of given type to this detector</span>
    <span class="comment">//The parameters for the BIC in blocking telescopes 1, 2, and 3</span>
@@ -143,7 +143,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
    <span class="keyword">if</span> (!fACQParams)
       fACQParams = <span class="keyword">new</span> <a href="../KVList.html">KVList</a>();
-   <a href="../KVACQParam.html">KVACQParam</a> *par = <span class="keyword">new</span> <a href="../KVACQParam.html">KVACQParam</a>();
+   <a href="../KVACQParam.html">KVACQParam</a>* par = <span class="keyword">new</span> <a href="../KVACQParam.html">KVACQParam</a>();
    TString name;
    name.Form(<span class="string">"CI_16%02d_%s"</span>, <a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope()">GetTelescope</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>(), type);
    par-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(name);
@@ -154,7 +154,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
 <span class="comment">//________________________________________________________________________________</span>
 
-<a name="pDbKaE"></a><a href="../KVACQParam.html">KVACQParam</a> *<a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetACQParam" title="KVACQParam* KVBIC::GetACQParam(const Char_t* type)">GetACQParam</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * type)
+<a name="ypm_xD"></a><a href="../KVACQParam.html">KVACQParam</a>* <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetACQParam" title="KVACQParam* KVBIC::GetACQParam(const Char_t* type)">GetACQParam</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* type)
 {
    <span class="comment">//</span>
    <span class="comment">//Access acquisition parameter of given type</span>
@@ -166,7 +166,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
    }
    TString name;
    name.Form(<span class="string">"CI_16%02d_%s"</span>, <a href="../KVINDRADetector.html#KVINDRADetector:GetTelescope" title="KVINDRATelescope* KVINDRADetector::GetTelescope()">GetTelescope</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>(), type);
-   <span class="keyword">return</span> ((<a href="../KVACQParam.html">KVACQParam</a> *) fACQParams-&gt;FindObjectWithNameAndType(name, type));
+   <span class="keyword">return</span> ((<a href="../KVACQParam.html">KVACQParam</a>*) fACQParams-&gt;FindObjectWithNameAndType(name, type));
 }
 
 <span class="comment">//__________________________________________________________________________________</span>
@@ -182,7 +182,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
 <span class="comment">//__________________________________________________________________________________________________________________________</span>
 
-<a name="SUx5YC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetELossMylar" title="Double_t KVBIC::GetELossMylar(UInt_t z,UInt_t a,Double_t egas=-1.0)">GetELossMylar</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> , <a href="../ListOfTypes.html#UInt_t">UInt_t</a> , <a href="../ListOfTypes.html#Double_t">Double_t</a> )
+<a name="Co15YC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetELossMylar" title="Double_t KVBIC::GetELossMylar(UInt_t z,UInt_t a,Double_t egas=-1.0)">GetELossMylar</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> , <a href="../ListOfTypes.html#UInt_t">UInt_t</a> , <a href="../ListOfTypes.html#Double_t">Double_t</a>)
 {
    <span class="comment">//This returns zero.</span>
    <span class="comment">//It is so that the <a href="../KVChIo.html">KVChIo</a> method doesn't get used by accident</span>
@@ -191,7 +191,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 
 <span class="comment">//__________________________________________________________________________________________________________________________</span>
 
-<a name="sRl87"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetCorrectedEnergy" title="Double_t KVBIC::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.0,Bool_t transmit=kTRUE)">GetCorrectedEnergy</a>(<a href="../KVNucleus.html">KVNucleus</a> *nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> transmit)
+<a name="I_q.7"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetCorrectedEnergy" title="Double_t KVBIC::GetCorrectedEnergy(KVNucleus* ,Double_t e=-1.0,Bool_t transmit=kTRUE)">GetCorrectedEnergy</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> e, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> transmit)
 {
    <span class="comment">//For a particle which passes through the BIC (i.e. is stopped in SIB behind it)</span>
    <span class="comment">//this will give the total energy loss of the particle in the BIC, i.e. including all</span>
@@ -201,7 +201,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
    <span class="comment">//this function should not be called.</span>
    <span class="comment">//If argument 'egas' not given, <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:GetEnergy" title="Double_t KVBIC::GetEnergy()">GetEnergy</a>() is used</span>
 
-    <span class="keyword">if</span>(!transmit) <span class="keyword">return</span> 0.;
+   <span class="keyword">if</span> (!transmit) <span class="keyword">return</span> 0.;
 
    e = ((e &lt; 0.) ? <a href="../KVBIC.html#KVBIC:GetEnergy" title="Double_t KVBIC::GetEnergy()">GetEnergy</a>() : e);
 
@@ -211,15 +211,15 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> maxDE = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 
    <span class="comment">//egas &gt; max possible ?</span>
-   <span class="keyword">if</span> (e &gt; <a href="../KVDetector.html#KVDetector:GetMaxDeltaE" title="Double_t KVDetector::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(),nuc-&gt;GetA())) {
-       e = <a href="../KVDetector.html#KVDetector:GetMaxDeltaE" title="Double_t KVDetector::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(),nuc-&gt;GetA());
+   <span class="keyword">if</span> (e &gt; <a href="../KVDetector.html#KVDetector:GetMaxDeltaE" title="Double_t KVDetector::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(), nuc-&gt;GetA())) {
+      e = <a href="../KVDetector.html#KVDetector:GetMaxDeltaE" title="Double_t KVDetector::GetMaxDeltaE(Int_t Z,Int_t A)">GetMaxDeltaE</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(), nuc-&gt;GetA());
       maxDE = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    }
    <span class="comment">//calculate incident energy</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> e_inc = <a href="../KVDetector.html#KVDetector:GetIncidentEnergy" title="Double_t KVDetector::GetIncidentEnergy(Int_t Z,Int_t A,Double_t delta_e=-1.0,KVMaterial::SolType type=kEmax)">GetIncidentEnergy</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(),nuc-&gt;GetA(), e);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> e_inc = <a href="../KVDetector.html#KVDetector:GetIncidentEnergy" title="Double_t KVDetector::GetIncidentEnergy(Int_t Z,Int_t A,Double_t delta_e=-1.0,KVMaterial::SolType type=kEmax)">GetIncidentEnergy</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(), nuc-&gt;GetA(), e);
 
    <span class="comment">//calculate residual energy</span>
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> e_res = <a href="../KVDetector.html#KVDetector:GetERes" title="Double_t KVDetector::GetERes(Int_t Z,Int_t A,Double_t Einc)">GetERes</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(),nuc-&gt;GetA(), e_inc);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> e_res = <a href="../KVDetector.html#KVDetector:GetERes" title="Double_t KVDetector::GetERes(Int_t Z,Int_t A,Double_t Einc)">GetERes</a>(nuc-&gt;<a href="../KVMaterial.html#KVMaterial:GetZ" title="Double_t KVMaterial::GetZ()">GetZ</a>(), nuc-&gt;GetA(), e_inc);
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> eloss = e_inc - e_res;
    <span class="keyword">if</span> (maxDE)
@@ -267,12 +267,12 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
    <a href="../KVLinCal.html">KVLinCal</a>* cal = <span class="keyword">new</span> <a href="../KVLinCal.html">KVLinCal</a>(<span class="keyword">this</span>);
    cal-&gt;SetChannelParameter(<span class="string">"PG"</span>);
    cal-&gt;WithPedestalCorrection(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
-   <span class="keyword">if</span>(!<a href="../KVDetector.html#KVDetector:AddCalibrator" title="Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)">AddCalibrator</a>( cal )) <span class="keyword">delete</span> cal;
+   <span class="keyword">if</span> (!<a href="../KVDetector.html#KVDetector:AddCalibrator" title="Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)">AddCalibrator</a>(cal)) <span class="keyword">delete</span> cal;
 }
 
 <span class="comment">//______________________________________________________________________________</span>
 
-<a name="Q880T"></a><span class="keyword">void</span> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:Streamer" title="void KVBIC::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer &amp;R__b)
+<a name="ouL1T"></a><span class="keyword">void</span> <a href="../KVBIC.html">KVBIC</a>::<a href="../KVBIC.html#KVBIC:Streamer" title="void KVBIC::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer&amp; R__b)
 {
    <span class="comment">// Stream an object of class <a href="../KVBIC.html">KVBIC</a>.</span>
    <span class="comment">// We set the pointers to the calibrator objects</span>
@@ -319,7 +319,7 @@ ClassImp(<a href="../KVBIC.html">KVBIC</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:13 </em><em>&raquo; Last generated: 2015-11-20 15:13</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:12 </em><em>&raquo; Last generated: 2016-01-08 15:12</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

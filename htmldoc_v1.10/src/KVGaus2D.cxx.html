@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:24 2015            -->
+<!--   Date: Fri Jan  8 15:13:26 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -42,14 +42,14 @@ ClassImp(<a href="../KVGaus2D.html">KVGaus2D</a>)
 <a name="JYrYl"></a><a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:KVGaus2D" title="KVGaus2D KVGaus2D::KVGaus2D() or overloads">KVGaus2D</a>()
 {
    <span class="comment">// Default constructor</span>
-	<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Gaus2D"</span>);
-	is2D=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
-	
+   <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"Gaus2D"</span>);
+   is2D = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+
 }
 
 <span class="comment">//________________________________________________________________</span>
 
-<a name="BD9Lc"></a><a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:KVGaus2D" title="KVGaus2D KVGaus2D::KVGaus2D() or overloads">KVGaus2D</a> (<span class="keyword">const</span> <a href="../KVGaus2D.html">KVGaus2D</a>&amp;)  : <a href="../KVAutoFit.html">KVAutoFit</a>()
+<a name="l8Nz8"></a><a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:KVGaus2D" title="KVGaus2D KVGaus2D::KVGaus2D() or overloads">KVGaus2D</a>(<span class="keyword">const</span> <a href="../KVGaus2D.html">KVGaus2D</a>&amp;)  : <a href="../KVAutoFit.html">KVAutoFit</a>()
 {
    <span class="comment">// <a href="../KVAutoFit.html#KVAutoFit:Copy" title="void KVAutoFit::Copy(TObject&amp; )">Copy</a> constructor</span>
    <span class="comment">// This ctor is used to make a copy of an existing object (for example</span>
@@ -67,83 +67,83 @@ ClassImp(<a href="../KVGaus2D.html">KVGaus2D</a>)
 
 <span class="comment">//________________________________________________________________</span>
 <a name="JSFGp"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:NewFunction_2D" title="Bool_t KVGaus2D::NewFunction_2D()">NewFunction_2D</a>()
-{	
-	
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> nf = lfunc-&gt;GetEntries();
-	
-	f2Dfit = <span class="keyword">new</span> TF2(Form(<span class="string">"func_%d"</span>,++nf),
-		<span class="keyword">this</span>,
-		&amp;<a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:f2D" title="Double_t KVGaus2D::f2D(Double_t* xx,Double_t* para)">f2D</a>,
-		Xmin,
-		Xmax,
-		Ymin,
-		Ymax,
-		6,
-		<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
-		<span class="string">"f2D"</span>
-	);
-		
-	lfunc-&gt;Add(f2Dfit);
-	
-	hclone-&gt;GetXaxis()-&gt;SetRangeUser(Xmin,Xmax);
-	hclone-&gt;GetYaxis()-&gt;SetRangeUser(Ymin,Ymax);
-		
-	f2Dfit-&gt;SetParameters(
-		hclone-&gt;GetMean(1),
-		hclone-&gt;GetRMS(1),
-		hclone-&gt;GetMean(2),
-		hclone-&gt;GetRMS(2),
-		((TH2*)hclone)-&gt;GetCorrelationFactor(),
-		hclone-&gt;Integral()
-	);
+{
 
-	<span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> nf = lfunc-&gt;GetEntries();
+
+   f2Dfit = <span class="keyword">new</span> TF2(Form(<span class="string">"func_%d"</span>, ++nf),
+                    <span class="keyword">this</span>,
+                    &amp;<a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:f2D" title="Double_t KVGaus2D::f2D(Double_t* xx,Double_t* para)">f2D</a>,
+                    Xmin,
+                    Xmax,
+                    Ymin,
+                    Ymax,
+                    6,
+                    <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
+                    <span class="string">"f2D"</span>
+                   );
+
+   lfunc-&gt;Add(f2Dfit);
+
+   hclone-&gt;GetXaxis()-&gt;SetRangeUser(Xmin, Xmax);
+   hclone-&gt;GetYaxis()-&gt;SetRangeUser(Ymin, Ymax);
+
+   f2Dfit-&gt;SetParameters(
+      hclone-&gt;GetMean(1),
+      hclone-&gt;GetRMS(1),
+      hclone-&gt;GetMean(2),
+      hclone-&gt;GetRMS(2),
+      ((TH2*)hclone)-&gt;GetCorrelationFactor(),
+      hclone-&gt;Integral()
+   );
+
+   <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
 
 <span class="comment">//________________________________________________________________</span>
 <a name="jD_zSC"></a>TF1* <a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:ReloadFunction_2D" title="TF1* KVGaus2D::ReloadFunction_2D(const Char_t* ,Int_t )">ReloadFunction_2D</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* nom, <a href="../ListOfTypes.html#Int_t">Int_t</a> npar)
-{	
-	
-	TF2* f2 = <span class="keyword">new</span> TF2(nom,
-		<span class="keyword">this</span>,
-		&amp;<a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:f2D" title="Double_t KVGaus2D::f2D(Double_t* xx,Double_t* para)">f2D</a>,
-		0,1,0,1,
-		npar,
-		<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
-		<span class="string">"f2D"</span>
-	);
-		
-	<span class="keyword">return</span> f2;
+{
+
+   TF2* f2 = <span class="keyword">new</span> TF2(nom,
+                     <span class="keyword">this</span>,
+                     &amp;<a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:f2D" title="Double_t KVGaus2D::f2D(Double_t* xx,Double_t* para)">f2D</a>,
+                     0, 1, 0, 1,
+                     npar,
+                     <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
+                     <span class="string">"f2D"</span>
+                    );
+
+   <span class="keyword">return</span> f2;
 }
 
 <span class="comment">//________________________________________________________________</span>
-<a name="jfSpRE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a>	<a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:f2D" title="Double_t KVGaus2D::f2D(Double_t* xx,Double_t* para)">f2D</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *xx,<a href="../ListOfTypes.html#Double_t">Double_t</a> *para)
+<a name="ObpUo"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVGaus2D.html">KVGaus2D</a>::<a href="../KVGaus2D.html#KVGaus2D:f2D" title="Double_t KVGaus2D::f2D(Double_t* xx,Double_t* para)">f2D</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* xx, <a href="../ListOfTypes.html#Double_t">Double_t</a>* para)
 {
 
 <span class="comment">//Function gaussienne 2D</span>
 <span class="comment">//</span>
 <span class="comment">// E1 vs E2</span>
 
-userdefined = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   userdefined = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 
-<a href="../ListOfTypes.html#Double_t">Double_t</a> e2 = xx[0];
-<a href="../ListOfTypes.html#Double_t">Double_t</a> e1 = xx[1];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> e2 = xx[0];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> e1 = xx[1];
 
-<a href="../ListOfTypes.html#Double_t">Double_t</a> E2 	= 	para[0];
-<a href="../ListOfTypes.html#Double_t">Double_t</a> sigE2	=	para[1];
-<a href="../ListOfTypes.html#Double_t">Double_t</a> E1	= 	para[2];
-<a href="../ListOfTypes.html#Double_t">Double_t</a> sigE1	=	para[3];
-<a href="../ListOfTypes.html#Double_t">Double_t</a> rho 	= 	para[4];
-<a href="../ListOfTypes.html#Double_t">Double_t</a> norm 	=	para[5];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> E2    =  para[0];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> sigE2 =  para[1];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> E1 =  para[2];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> sigE1 =  para[3];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> rho   =  para[4];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> norm  =  para[5];
 
-<a href="../ListOfTypes.html#Double_t">Double_t</a> dE1 	= 	E1-e1;	
-<a href="../ListOfTypes.html#Double_t">Double_t</a> dE2 	= 	E2-e2;	
- 
-<a href="../ListOfTypes.html#Double_t">Double_t</a> A = -0.5/( (1.-TMath::Power(rho,2.))*TMath::Power(sigE1*sigE2,2.) )*( TMath::Power(dE1*sigE2,2.) + TMath::Power(dE2*sigE1,2.) - 2.*rho*dE1*dE2*sigE1*sigE2 );
-<a href="../ListOfTypes.html#Double_t">Double_t</a> det = (1.-TMath::Power(rho,2.))*TMath::Power(sigE1*sigE2,2.);
-<a href="../ListOfTypes.html#Double_t">Double_t</a> P = norm * 1./det*exp(A);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dE1   =  E1 - e1;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dE2   =  E2 - e2;
 
-<span class="keyword">return</span> P;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> A = -0.5 / ((1. - TMath::Power(rho, 2.)) * TMath::Power(sigE1 * sigE2, 2.)) * (TMath::Power(dE1 * sigE2, 2.) + TMath::Power(dE2 * sigE1, 2.) - 2.*rho * dE1 * dE2 * sigE1 * sigE2);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> det = (1. - TMath::Power(rho, 2.)) * TMath::Power(sigE1 * sigE2, 2.);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> P = norm * 1. / det * exp(A);
+
+   <span class="keyword">return</span> P;
 
 }
 </pre>
@@ -154,7 +154,7 @@ userdefined = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

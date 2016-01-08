@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:13:51 2015            -->
+<!--   Date: Fri Jan  8 15:12:45 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -48,15 +48,15 @@ ClassImp(<a href="../KVBQSLogReader.html">KVBQSLogReader</a>)
 }
 
 
-<a name="zuU4oD"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadLine" title="void KVBQSLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(TString &amp; line, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> &amp; ok)
+<a name="O3nvPB"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadLine" title="void KVBQSLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(TString&amp; line, <a href="../ListOfTypes.html#Bool_t">Bool_t</a>&amp; ok)
 {
    <span class="comment">//analyse contents of line read from log file</span>
    <span class="comment">//if line contains <span class="string">"segmentation"</span> then we put ok=<a href="../ListOfTypes.html#Bool_t">kFALSE</a> to stop reading file</span>
    <span class="comment">//status will equal the contents of the current line</span>
-	
-	<a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(line,ok);
-	<span class="keyword">if</span>(!ok) <span class="keyword">return</span>;
-	
+
+   <a href="../KVLogReader.html">KVLogReader</a>::<a href="../KVLogReader.html#KVLogReader:ReadLine" title="void KVLogReader::ReadLine(TString&amp; line,Bool_t&amp; )">ReadLine</a>(line, ok);
+   <span class="keyword">if</span> (!ok) <span class="keyword">return</span>;
+
    <span class="keyword">if</span> (line.Contains(<span class="string">"time limit"</span>))
       <a href="../KVBQSLogReader.html#KVBQSLogReader:ReadCPULimit" title="void KVBQSLogReader::ReadCPULimit(TString&amp; line)">ReadCPULimit</a>(line);
    <span class="keyword">else</span> <span class="keyword">if</span> (line.Contains(<span class="string">"SCRATCH:"</span>))
@@ -72,52 +72,52 @@ ClassImp(<a href="../KVBQSLogReader.html">KVBQSLogReader</a>)
 }
 
 
-<a name="oxuolE"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadCPULimit" title="void KVBQSLogReader::ReadCPULimit(TString&amp; line)">ReadCPULimit</a>(TString &amp; line)
+<a name="pdWdOC"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadCPULimit" title="void KVBQSLogReader::ReadCPULimit(TString&amp; line)">ReadCPULimit</a>(TString&amp; line)
 {
    <span class="comment">//read line of type <span class="string">"*     total normalized:    68:57:52 (time limit: 100:00:00)   *"</span></span>
    <span class="comment">//which contains total normalized used CPU time and the time limit from the job request</span>
-   TObjArray *toks = line.Tokenize(<span class="string">"(:) "</span>);
-   
+   TObjArray* toks = line.Tokenize(<span class="string">"(:) "</span>);
+
    <span class="comment">//get used CPU time (in seconds)</span>
-   KV__TOBJSTRING_TO_INT(toks,3,hrs)
-   KV__TOBJSTRING_TO_INT(toks,4,mins)
-   KV__TOBJSTRING_TO_INT(toks,5,sec)
+   KV__TOBJSTRING_TO_INT(toks, 3, hrs)
+   KV__TOBJSTRING_TO_INT(toks, 4, mins)
+   KV__TOBJSTRING_TO_INT(toks, 5, sec)
    fCPUused = 3600 * hrs + 60 * mins + sec;
    <span class="comment">//get requested CPU time (in seconds)</span>
-   KV__TOBJSTRING_TO_INT(toks,8,hrs_)
-   KV__TOBJSTRING_TO_INT(toks,9,mins_)
-   KV__TOBJSTRING_TO_INT(toks,10,sec_)
+   KV__TOBJSTRING_TO_INT(toks, 8, hrs_)
+   KV__TOBJSTRING_TO_INT(toks, 9, mins_)
+   KV__TOBJSTRING_TO_INT(toks, 10, sec_)
    fCPUreq = 3600 * hrs_ + 60 * mins_ + sec_;
    <span class="keyword">delete</span> toks;
 }
 
-<a name="kJfOMB"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadScratchUsed" title="void KVBQSLogReader::ReadScratchUsed(TString&amp; line)">ReadScratchUsed</a>(TString &amp; line)
+<a name="OCbGpD"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadScratchUsed" title="void KVBQSLogReader::ReadScratchUsed(TString&amp; line)">ReadScratchUsed</a>(TString&amp; line)
 {
    <span class="comment">//read line of type <span class="string">"* SCRATCH:                 1042 MB                            *"</span></span>
    <span class="comment">//corresponding to disk space used by job</span>
-   TObjArray *toks = line.Tokenize(<span class="string">"*: "</span>);
+   TObjArray* toks = line.Tokenize(<span class="string">"*: "</span>);
    <span class="comment">//value read is converted to KB, depending on units</span>
-   KV__TOBJSTRING_TO_INT(toks,1,ScratchKB_)
+   KV__TOBJSTRING_TO_INT(toks, 1, ScratchKB_)
    fScratchKB = ScratchKB_;
-   TString units = ((TObjString *) toks-&gt;At(2))-&gt;GetString();
+   TString units = ((TObjString*) toks-&gt;At(2))-&gt;GetString();
    fScratchKB *= <a href="../KVBQSLogReader.html#KVBQSLogReader:GetByteMultiplier" title="Int_t KVBQSLogReader::GetByteMultiplier(TString&amp; unit)">GetByteMultiplier</a>(units);
    <span class="keyword">delete</span> toks;
 }
 
-<a name="L.V.JC"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadMemUsed" title="void KVBQSLogReader::ReadMemUsed(TString&amp; line)">ReadMemUsed</a>(TString &amp; line)
+<a name="GkLu"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadMemUsed" title="void KVBQSLogReader::ReadMemUsed(TString&amp; line)">ReadMemUsed</a>(TString&amp; line)
 {
    <span class="comment">//read line of type <span class="string">"* VIRTUAL STORAGE:         103 MB                             *"</span></span>
    <span class="comment">//corresponding to memory used by job</span>
-   TObjArray *toks = line.Tokenize(<span class="string">"*: "</span>);
+   TObjArray* toks = line.Tokenize(<span class="string">"*: "</span>);
    <span class="comment">//value read is converted to KB, depending on units</span>
-   KV__TOBJSTRING_TO_INT(toks,2,MemKB_)
+   KV__TOBJSTRING_TO_INT(toks, 2, MemKB_)
    fMemKB = MemKB_;
-   TString units = ((TObjString *) toks-&gt;At(3))-&gt;GetString();
+   TString units = ((TObjString*) toks-&gt;At(3))-&gt;GetString();
    fMemKB *= <a href="../KVBQSLogReader.html#KVBQSLogReader:GetByteMultiplier" title="Int_t KVBQSLogReader::GetByteMultiplier(TString&amp; unit)">GetByteMultiplier</a>(units);
    <span class="keyword">delete</span> toks;
 }
 
-<a name="kS2xU"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:GetByteMultiplier" title="Int_t KVBQSLogReader::GetByteMultiplier(TString&amp; unit)">GetByteMultiplier</a>(TString &amp; unit)
+<a name="UQWKsE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:GetByteMultiplier" title="Int_t KVBQSLogReader::GetByteMultiplier(TString&amp; unit)">GetByteMultiplier</a>(TString&amp; unit)
 {
    <span class="comment">//unit = <span class="string">"KB"</span>, <span class="string">"MB"</span> or <span class="string">"GB"</span></span>
    <span class="comment">//value returned is 1, 2**10 or 2**20, respectively</span>
@@ -127,25 +127,25 @@ ClassImp(<a href="../KVBQSLogReader.html">KVBQSLogReader</a>)
    <span class="keyword">return</span> (unit == <span class="string">"KB"</span> ? KB : (unit == <span class="string">"MB"</span> ? MB : GB));
 }
 
-<a name="xJ9uyD"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadStatus" title="void KVBQSLogReader::ReadStatus(TString&amp; line)">ReadStatus</a>(TString &amp; line)
+<a name="V6QdCB"></a><span class="keyword">void</span> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadStatus" title="void KVBQSLogReader::ReadStatus(TString&amp; line)">ReadStatus</a>(TString&amp; line)
 {
    <span class="comment">//read line of type <span class="string">"* with status:             ENDED                              *"</span></span>
    <span class="comment">//with final status of job.</span>
    <span class="comment">//if status = <span class="string">"ENDED"</span> then <a href="../KVLogReader.html#KVLogReader:JobOK" title="Bool_t KVLogReader::JobOK()">JobOK</a>() will return <a href="../ListOfTypes.html#Bool_t">kTRUE</a></span>
    <span class="comment">//otherwise, <a href="../KVLogReader.html#KVLogReader:JobOK" title="Bool_t KVLogReader::JobOK()">JobOK</a>() will be <a href="../ListOfTypes.html#Bool_t">kFALSE</a></span>
 
-	fGotStatus = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
-   TObjArray *toks = line.Tokenize(<span class="string">"*: "</span>);
-   fStatus = ((TObjString *) toks-&gt;At(2))-&gt;GetString();
+   fGotStatus = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   TObjArray* toks = line.Tokenize(<span class="string">"*: "</span>);
+   fStatus = ((TObjString*) toks-&gt;At(2))-&gt;GetString();
    fOK = (fStatus == <span class="string">"ENDED"</span>);
    <span class="keyword">delete</span> toks;
 }
 
-<a name="r_kO2"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadStorage" title="Double_t KVBQSLogReader::ReadStorage(KVString&amp; stor)">ReadStorage</a>(<a href="../KVString.html">KVString</a> &amp; stor)
+<a name="cn4XDC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVBQSLogReader.html">KVBQSLogReader</a>::<a href="../KVBQSLogReader.html#KVBQSLogReader:ReadStorage" title="Double_t KVBQSLogReader::ReadStorage(KVString&amp; stor)">ReadStorage</a>(<a href="../KVString.html">KVString</a>&amp; stor)
 {
    <span class="comment">//'stor' is a string such as <span class="string">"200MB"</span>, <span class="string">"3GB"</span> etc.</span>
    <span class="comment">//value returned is corresponding storage space in KB</span>
-   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *units[] = { <span class="string">"KB"</span>, <span class="string">"MB"</span>, <span class="string">"GB"</span> };
+   <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* units[] = { <span class="string">"KB"</span>, <span class="string">"MB"</span>, <span class="string">"GB"</span> };
    <a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0, index = -1;
    <span class="keyword">while</span> ((index = stor.Index(units[i])) &lt; 0 &amp;&amp; i &lt; 2)
       i++;
@@ -164,7 +164,7 @@ ClassImp(<a href="../KVBQSLogReader.html">KVBQSLogReader</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:13 </em><em>&raquo; Last generated: 2015-11-20 15:13</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:12 </em><em>&raquo; Last generated: 2016-01-08 15:12</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

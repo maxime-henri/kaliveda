@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:13:49 2015            -->
+<!--   Date: Fri Jan  8 15:12:43 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -38,7 +38,7 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 <a name="JcNPFC"></a><a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:KVASGroup" title="KVASGroup KVASGroup::KVASGroup()">KVASGroup</a>()
 {
    <span class="comment">// Default constructor</span>
-    <a href="../KVASGroup.html#KVASGroup:init" title="void KVASGroup::init()">init</a>();
+   <a href="../KVASGroup.html#KVASGroup:init" title="void KVASGroup::init()">init</a>();
 }
 <a name="RO798C"></a><span class="keyword">void</span> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:init" title="void KVASGroup::init()">init</a>()
 {
@@ -49,27 +49,27 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a> = 0;
 }
 
-<a name="JIUzkE"></a><span class="keyword">void</span> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(<a href="../KVBase.html">KVBase</a> *b)
+<a name="Y0nfUD"></a><span class="keyword">void</span> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(<a href="../KVBase.html">KVBase</a>* b)
 {
-    <span class="comment">// Overrides <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a> method</span>
-    <span class="comment">// Only <a href="../KVTelescope.html">KVTelescope</a>-derived objects can be added to KVASGroups</span>
-    <span class="comment">// All detectors in the telescope are added to the group's list.</span>
+   <span class="comment">// Overrides <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a> method</span>
+   <span class="comment">// Only <a href="../KVTelescope.html">KVTelescope</a>-derived objects can be added to KVASGroups</span>
+   <span class="comment">// All detectors in the telescope are added to the group's list.</span>
 
-    <span class="keyword">if</span>(!b-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVTelescope"</span>)) <span class="keyword">return</span>;
-    <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(b);
-    <a href="../KVTelescope.html">KVTelescope</a>* tel = <span class="keyword">dynamic_cast</span>&lt;<a href="../KVTelescope.html">KVTelescope</a>*&gt;(b);
-    TIter next(tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
-    <a href="../KVDetector.html">KVDetector</a>* d;
-    <span class="keyword">while</span>( (d = (<a href="../KVDetector.html">KVDetector</a>*)next()) ) <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(d);
+   <span class="keyword">if</span> (!b-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVTelescope"</span>)) <span class="keyword">return</span>;
+   <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(b);
+   <a href="../KVTelescope.html">KVTelescope</a>* tel = <span class="keyword">dynamic_cast</span>&lt;<a href="../KVTelescope.html">KVTelescope</a>*&gt;(b);
+   TIter next(tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
+   <a href="../KVDetector.html">KVDetector</a>* d;
+   <span class="keyword">while</span> ((d = (<a href="../KVDetector.html">KVDetector</a>*)next())) <a href="../KVGeoStrucElement.html">KVGeoStrucElement</a>::<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(d);
 }
 
 <a name="RmbJ1D"></a><a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:_KVASGroup" title="void KVASGroup::~KVASGroup()">~KVASGroup</a>()
 {
    <span class="comment">// Destructor</span>
-    <a href="../KVASGroup.html#KVASGroup:fNumberOfLayers" title="UInt_t KVASGroup::fNumberOfLayers">fNumberOfLayers</a> = 0;
-    <a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a> = 0;
-    <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a> = 0;
-    fReconstructedNuclei = 0;
+   <a href="../KVASGroup.html#KVASGroup:fNumberOfLayers" title="UInt_t KVASGroup::fNumberOfLayers">fNumberOfLayers</a> = 0;
+   <a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a> = 0;
+   <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a> = 0;
+   fReconstructedNuclei = 0;
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
@@ -77,23 +77,23 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 <a name="RlNUxE"></a><span class="keyword">void</span> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:SetDimensions" title="void KVASGroup::SetDimensions(KVPosition* ,KVPosition* ) or overloads">SetDimensions</a>()
 {
    <span class="comment">//Set dimensions of group according to dimensions of all its telescopes.</span>
-   <a href="../KVTelescope.html">KVTelescope</a> *tel, *tel1;
+   <a href="../KVTelescope.html">KVTelescope</a>* tel, *tel1;
    TIter next(<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>());
-   tel = (<a href="../KVTelescope.html">KVTelescope</a> *) next();
+   tel = (<a href="../KVTelescope.html">KVTelescope</a>*) next();
    <span class="keyword">if</span> (!tel)
       <span class="keyword">return</span>;
-   tel1 = (<a href="../KVTelescope.html">KVTelescope</a> *) next();
+   tel1 = (<a href="../KVTelescope.html">KVTelescope</a>*) next();
    <span class="keyword">if</span> (!tel1)
       <span class="keyword">return</span>;
    <a href="../KVASGroup.html#KVASGroup:SetDimensions" title="void KVASGroup::SetDimensions(KVPosition* ,KVPosition* ) or overloads">SetDimensions</a>(tel, tel1);
-   <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a> *) next())) {
+   <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a>*) next())) {
       <a href="../KVASGroup.html#KVASGroup:SetDimensions" title="void KVASGroup::SetDimensions(KVPosition* ,KVPosition* ) or overloads">SetDimensions</a>(<span class="keyword">this</span>, tel);
    }
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="VXiqqE"></a><span class="keyword">void</span> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:SetDimensions" title="void KVASGroup::SetDimensions(KVPosition* ,KVPosition* ) or overloads">SetDimensions</a>(<a href="../KVPosition.html">KVPosition</a> * p1, <a href="../KVPosition.html">KVPosition</a> * p2)
+<a name="ZJy_DC"></a><span class="keyword">void</span> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:SetDimensions" title="void KVASGroup::SetDimensions(KVPosition* ,KVPosition* ) or overloads">SetDimensions</a>(<a href="../KVPosition.html">KVPosition</a>* p1, <a href="../KVPosition.html">KVPosition</a>* p2)
 {
    <span class="comment">//Adjust angular dimensions of group according to theta-min/max, phi-min/max</span>
    <span class="comment">//of p1 and p2, where p1 and p2 are either two telescopes or a group (most</span>
@@ -106,14 +106,14 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <a href="../ListOfTypes.html#Float_t">Float_t</a> theta_max = TMath::Max(p1-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>(), p2-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>());
    <a href="../KVPosition.html#KVPosition:SetPolarMinMax" title="void KVPosition::SetPolarMinMax(Double_t min,Double_t max)">SetPolarMinMax</a>(theta_min, theta_max);
 
-   <a href="../KVPosition.html">KVPosition</a> *pp[2];           <span class="comment">//array of pointers</span>
+   <a href="../KVPosition.html">KVPosition</a>* pp[2];           <span class="comment">//array of pointers</span>
    pp[0] = p1;
    pp[1] = p2;
    <a href="../ListOfTypes.html#Float_t">Float_t</a> max_width = 0.;
    <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 2; i++) {
       <span class="keyword">for</span> (<span class="keyword">int</span> j = 0; j &lt; 2; j++) {
          <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:GetAzimuthalWidth" title="Double_t KVPosition::GetAzimuthalWidth(Double_t phmin=-1.,Double_t phimax=-1.)">GetAzimuthalWidth</a>(pp[i]-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>(), pp[j]-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()) &gt;
-             max_width) {
+               max_width) {
             <a href="../KVPosition.html#KVPosition:SetAzimuthalMinMax" title="void KVPosition::SetAzimuthalMinMax(Double_t min,Double_t max)">SetAzimuthalMinMax</a>(pp[i]-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>(), pp[j]-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>());
             max_width = <a href="../KVPosition.html#KVPosition:GetAzimuthalWidth" title="Double_t KVPosition::GetAzimuthalWidth(Double_t phmin=-1.,Double_t phimax=-1.)">GetAzimuthalWidth</a>();
          }
@@ -133,67 +133,67 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 }
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="hMH0nE"></a><a href="../KVNameValueList.html">KVNameValueList</a>*  <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:DetectParticle" title="KVNameValueList* KVASGroup::DetectParticle(KVNucleus* part)">DetectParticle</a>(<a href="../KVNucleus.html">KVNucleus</a> * part)
+<a name="WYBu.C"></a><a href="../KVNameValueList.html">KVNameValueList</a>*  <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:DetectParticle" title="KVNameValueList* KVASGroup::DetectParticle(KVNucleus* part)">DetectParticle</a>(<a href="../KVNucleus.html">KVNucleus</a>* part)
 {
    <span class="comment">//Calculate energy losses of a charged particle traversing the telescopes of the group.</span>
-    <span class="comment">//This method return a list of <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> where each detector which is throught in the particle</span>
-    <span class="comment">//are written with the corrresponding energy loss</span>
-    <span class="comment">//WARNING : this <a href="../KVNameValueList.html">KVNameValueList</a> has to be deleted by the user</span>
-    <span class="comment">//				after use</span>
-    <span class="comment">//return 0 if no telescope are on the path of the particle (DEAD zone)</span>
-   TList *d = <a href="../KVASGroup.html#KVASGroup:GetTelescopesWithAngles" title="TList* KVASGroup::GetTelescopesWithAngles(Float_t theta,Float_t phi)">GetTelescopesWithAngles</a>(part-&gt;<a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>(), part-&gt;<a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>());
+   <span class="comment">//This method return a list of <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> where each detector which is throught in the particle</span>
+   <span class="comment">//are written with the corrresponding energy loss</span>
+   <span class="comment">//WARNING : this <a href="../KVNameValueList.html">KVNameValueList</a> has to be deleted by the user</span>
+   <span class="comment">//            after use</span>
+   <span class="comment">//return 0 if no telescope are on the path of the particle (DEAD zone)</span>
+   TList* d = <a href="../KVASGroup.html#KVASGroup:GetTelescopesWithAngles" title="TList* KVASGroup::GetTelescopesWithAngles(Float_t theta,Float_t phi)">GetTelescopesWithAngles</a>(part-&gt;<a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>(), part-&gt;<a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>());
    <span class="keyword">if</span> (d) {
       TIter nextd(d);
-      <a href="../KVTelescope.html">KVTelescope</a> *t = 0;
+      <a href="../KVTelescope.html">KVTelescope</a>* t = 0;
       <a href="../KVNameValueList.html">KVNameValueList</a>* nvl = <span class="keyword">new</span> <a href="../KVNameValueList.html">KVNameValueList</a>();
-        <span class="keyword">while</span> ((t = (<a href="../KVTelescope.html">KVTelescope</a> *) nextd())) {
-         t-&gt;<a href="../KVASGroup.html#KVASGroup:DetectParticle" title="KVNameValueList* KVASGroup::DetectParticle(KVNucleus* part)">DetectParticle</a>(part,nvl);
-         <span class="keyword">if</span> (part-&gt;GetEnergy() &lt;= 0.0){
-                <span class="keyword">delete</span> d;
-                <span class="keyword">return</span> nvl;
-            }
-        }
+      <span class="keyword">while</span> ((t = (<a href="../KVTelescope.html">KVTelescope</a>*) nextd())) {
+         t-&gt;<a href="../KVASGroup.html#KVASGroup:DetectParticle" title="KVNameValueList* KVASGroup::DetectParticle(KVNucleus* part)">DetectParticle</a>(part, nvl);
+         <span class="keyword">if</span> (part-&gt;GetEnergy() &lt;= 0.0) {
+            <span class="keyword">delete</span> d;
+            <span class="keyword">return</span> nvl;
+         }
+      }
       <span class="keyword">delete</span> d;
-    <span class="keyword">return</span> nvl;
-    }
-    <span class="keyword">return</span> 0;
+      <span class="keyword">return</span> nvl;
+   }
+   <span class="keyword">return</span> 0;
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="RbT_wE"></a>TList *<a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetTelescopesWithAngles" title="TList* KVASGroup::GetTelescopesWithAngles(Float_t theta,Float_t phi)">GetTelescopesWithAngles</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> theta, <a href="../ListOfTypes.html#Float_t">Float_t</a> phi) <span class="keyword">const</span>
+<a name="MwENiD"></a>TList* <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetTelescopesWithAngles" title="TList* KVASGroup::GetTelescopesWithAngles(Float_t theta,Float_t phi)">GetTelescopesWithAngles</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> theta, <a href="../ListOfTypes.html#Float_t">Float_t</a> phi) <span class="keyword">const</span>
 {
    <span class="comment">//Create and fill list of telescopes in group at position (theta,phi),</span>
    <span class="comment">//sorted according to distance from target (smallest layer number i.e. closest first).</span>
    <span class="comment">//User must delete list after use.</span>
 
-    TIter next(<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>());
-    <a href="../KVTelescope.html">KVTelescope</a> *t;
-    TList *list = 0;
-    <span class="keyword">while</span> ((t = (<a href="../KVTelescope.html">KVTelescope</a> *) next())) {
-       <span class="keyword">if</span> (t-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(theta) &amp;&amp; t-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(phi)) {
-          <span class="keyword">if</span> (!list)
-             list = <span class="keyword">new</span> TList;
-          list-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(t);
-       }
-    }
-    <span class="keyword">if</span> (list)
-       list-&gt;<a href="../KVASGroup.html#KVASGroup:Sort" title="void KVASGroup::Sort()">Sort</a>();
-    <span class="keyword">return</span> list;
+   TIter next(<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>());
+   <a href="../KVTelescope.html">KVTelescope</a>* t;
+   TList* list = 0;
+   <span class="keyword">while</span> ((t = (<a href="../KVTelescope.html">KVTelescope</a>*) next())) {
+      <span class="keyword">if</span> (t-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(theta) &amp;&amp; t-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(phi)) {
+         <span class="keyword">if</span> (!list)
+            list = <span class="keyword">new</span> TList;
+         list-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(t);
+      }
+   }
+   <span class="keyword">if</span> (list)
+      list-&gt;<a href="../KVASGroup.html#KVASGroup:Sort" title="void KVASGroup::Sort()">Sort</a>();
+   <span class="keyword">return</span> list;
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
 
-<a name="K8HG_B"></a>TList *<a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetTelescopesInLayer" title="TList* KVASGroup::GetTelescopesInLayer(UInt_t nlayer)">GetTelescopesInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> nlayer)
+<a name="Sq7F_B"></a>TList* <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetTelescopesInLayer" title="TList* KVASGroup::GetTelescopesInLayer(UInt_t nlayer)">GetTelescopesInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> nlayer)
 {
    <span class="comment">//Create and fill list of telescopes belonging to Layer number nlayer in the group.</span>
    <span class="comment">//User must delete list after use.</span>
 
    TIter next(<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>());
-   <a href="../KVTelescope.html">KVTelescope</a> *t;
-   TList *list = 0;
-   <span class="keyword">while</span> ((t = (<a href="../KVTelescope.html">KVTelescope</a> *) next())) {
-       <span class="keyword">if</span> (t-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() == nlayer) {
+   <a href="../KVTelescope.html">KVTelescope</a>* t;
+   TList* list = 0;
+   <span class="keyword">while</span> ((t = (<a href="../KVTelescope.html">KVTelescope</a>*) next())) {
+      <span class="keyword">if</span> (t-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() == nlayer) {
          <span class="keyword">if</span> (!list)
             list = <span class="keyword">new</span> TList;
          list-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(t);
@@ -214,9 +214,9 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a> = 0;
    <span class="keyword">if</span> (<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>()) {
       TIter ntel(<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>());
-      <a href="../KVTelescope.html">KVTelescope</a> *tel;
+      <a href="../KVTelescope.html">KVTelescope</a>* tel;
       <a href="../ListOfTypes.html#UInt_t">UInt_t</a> laynums[10];
-      <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a> *) ntel())) {
+      <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a>*) ntel())) {
          <span class="keyword">if</span> (<a href="../KVASGroup.html#KVASGroup:fNumberOfLayers" title="UInt_t KVASGroup::fNumberOfLayers">fNumberOfLayers</a>) {
             <a href="../ListOfTypes.html#Bool_t">Bool_t</a> found = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
             <span class="comment">//Check to make sure layer number not already in array</span>
@@ -231,7 +231,7 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
                }
                <span class="keyword">if</span> (tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() &gt; <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a>)
                   <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a> = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
-               <span class="keyword">if</span> (tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>()&lt; <a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a>)
+               <span class="keyword">if</span> (tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>() &lt; <a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a>)
                   <a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a> = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"RING"</span>)-><a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"LAYER"</span>)-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
             }
          } <span class="keyword">else</span> {
@@ -258,21 +258,21 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> imin = <a href="../KVASGroup.html#KVASGroup:GetLayerNearestTarget" title="UInt_t KVASGroup::GetLayerNearestTarget()">GetLayerNearestTarget</a>();
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> imax = <a href="../KVASGroup.html#KVASGroup:GetLayerFurthestTarget" title="UInt_t KVASGroup::GetLayerFurthestTarget()">GetLayerFurthestTarget</a>();
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> i = imin; i &lt;= imax; i++) {
-      TList *list = <a href="../KVASGroup.html#KVASGroup:GetTelescopesInLayer" title="TList* KVASGroup::GetTelescopesInLayer(UInt_t nlayer)">GetTelescopesInLayer</a>(i);
+      TList* list = <a href="../KVASGroup.html#KVASGroup:GetTelescopesInLayer" title="TList* KVASGroup::GetTelescopesInLayer(UInt_t nlayer)">GetTelescopesInLayer</a>(i);
       <span class="comment">//note we take the max number of detectors in telescopes of layer i</span>
-      <a href="../ListOfTypes.html#Int_t">Int_t</a> max=0;
-        <span class="keyword">if</span> (list) {
-        TIter it(list);
-            <a href="../KVTelescope.html">KVTelescope</a>* tel = 0;
-            <span class="keyword">while</span> ( (tel = (<a href="../KVTelescope.html">KVTelescope</a>* )it.Next()) )
-                <span class="keyword">if</span> (max&lt;tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>())
-                    max = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();
-            ndl+= max;
-        <span class="comment">//</span>
-        <span class="comment">//before it was assume that all telescopes in same layer are identically constructed</span>
-        <span class="comment">//	ndl += ((<a href="../KVTelescope.html">KVTelescope</a> *) list-&gt;At(0))-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();</span>
-      <span class="comment">//</span>
-           <span class="keyword">delete</span> list;
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> max = 0;
+      <span class="keyword">if</span> (list) {
+         TIter it(list);
+         <a href="../KVTelescope.html">KVTelescope</a>* tel = 0;
+         <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a>*)it.Next()))
+            <span class="keyword">if</span> (max &lt; tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>())
+               max = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();
+         ndl += max;
+         <span class="comment">//</span>
+         <span class="comment">//before it was assume that all telescopes in same layer are identically constructed</span>
+         <span class="comment">//  ndl += ((<a href="../KVTelescope.html">KVTelescope</a> *) list-&gt;At(0))-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();</span>
+         <span class="comment">//</span>
+         <span class="keyword">delete</span> list;
       }
    }
 
@@ -281,49 +281,49 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 
 <span class="comment">//_________________________________________________________________________________</span>
 
-<a name="u_Pz1B"></a>TList *<a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay)
+<a name="LmPz1B"></a>TList* <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay)
 {
    <span class="comment">//Creates and fills a list with all the detectors in the <span class="string">"detector layer"</span></span>
    <span class="comment">//lay. Detector layers are always numbered from 1 (nearest target) to</span>
    <span class="comment">//<a href="../KVASGroup.html#KVASGroup:GetNumberOfDetectorLayers" title="UInt_t KVASGroup::GetNumberOfDetectorLayers()">GetNumberOfDetectorLayers</a>().</span>
    <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> list after use.</span>
 
-    <span class="keyword">if</span> (lay &lt; 1)
+   <span class="keyword">if</span> (lay &lt; 1)
       <span class="keyword">return</span> 0;
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> ndl = 0;
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> imin = <a href="../KVASGroup.html#KVASGroup:GetLayerNearestTarget" title="UInt_t KVASGroup::GetLayerNearestTarget()">GetLayerNearestTarget</a>();
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> imax = <a href="../KVASGroup.html#KVASGroup:GetLayerFurthestTarget" title="UInt_t KVASGroup::GetLayerFurthestTarget()">GetLayerFurthestTarget</a>();
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> i = imin; i &lt;= imax; i++) {
-      TList *tlist = <a href="../KVASGroup.html#KVASGroup:GetTelescopesInLayer" title="TList* KVASGroup::GetTelescopesInLayer(UInt_t nlayer)">GetTelescopesInLayer</a>(i);
+      TList* tlist = <a href="../KVASGroup.html#KVASGroup:GetTelescopesInLayer" title="TList* KVASGroup::GetTelescopesInLayer(UInt_t nlayer)">GetTelescopesInLayer</a>(i);
       <span class="keyword">if</span> (tlist) {
          <span class="comment">//note we take the max number of detectors in telescopes of layer i</span>
-         <a href="../ListOfTypes.html#Int_t">Int_t</a> max=0;
-            TIter it(tlist);
-            <a href="../KVTelescope.html">KVTelescope</a>* tel = 0;
-            <span class="keyword">while</span> ( (tel = (<a href="../KVTelescope.html">KVTelescope</a>* )it.Next()) )
-                <span class="keyword">if</span> (max&lt;tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>())
-                    max = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();
-            ndl += max;
-            <span class="comment">//</span>
-            <span class="comment">//before it was assume that all telescopes in same layer are identically constructed</span>
-            <span class="comment">//ndl += ((<a href="../KVTelescope.html">KVTelescope</a> *) tlist-&gt;At(0))-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();</span>
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> max = 0;
+         TIter it(tlist);
+         <a href="../KVTelescope.html">KVTelescope</a>* tel = 0;
+         <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a>*)it.Next()))
+            <span class="keyword">if</span> (max &lt; tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>())
+               max = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();
+         ndl += max;
          <span class="comment">//</span>
-            <span class="keyword">if</span> (ndl &gt;= lay) {
+         <span class="comment">//before it was assume that all telescopes in same layer are identically constructed</span>
+         <span class="comment">//ndl += ((<a href="../KVTelescope.html">KVTelescope</a> *) tlist-&gt;At(0))-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>();</span>
+         <span class="comment">//</span>
+         <span class="keyword">if</span> (ndl &gt;= lay) {
             <span class="comment">//the required detector layer is in the telescopes in the list</span>
 
             <span class="comment">//calculate rank of detectors in telescopes</span>
             <a href="../ListOfTypes.html#UInt_t">UInt_t</a> rank = max - ndl + lay;
-                TIter next(tlist);
-            <a href="../KVTelescope.html">KVTelescope</a> *tel;
-            TList *list = <span class="keyword">new</span> TList;
-            <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a> *) next())) {
-               <span class="keyword">if</span> (rank&lt;=(<a href="../ListOfTypes.html#UInt_t">UInt_t</a>)tel-&gt;GetSize()){
-                	<a href="../KVDetector.html">KVDetector</a>* ddd = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(rank);
+            TIter next(tlist);
+            <a href="../KVTelescope.html">KVTelescope</a>* tel;
+            TList* list = <span class="keyword">new</span> TList;
+            <span class="keyword">while</span> ((tel = (<a href="../KVTelescope.html">KVTelescope</a>*) next())) {
+               <span class="keyword">if</span> (rank &lt;= (<a href="../ListOfTypes.html#UInt_t">UInt_t</a>)tel-&gt;GetSize()) {
+                  <a href="../KVDetector.html">KVDetector</a>* ddd = tel-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetector" title="KVDetector* KVGeoStrucElement::GetDetector(const Char_t* name)">GetDetector</a>(rank);
                   <span class="keyword">if</span> (ddd)
-                  	list-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(ddd);
+                     list-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(ddd);
                   <span class="keyword">else</span>
-                  	<a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetDetectorsInLayer"</span>,<span class="string">"pb d index pour GetDetector"</span>);  
-            	}
+                     <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetDetectorsInLayer"</span>, <span class="string">"pb d index pour GetDetector"</span>);
+               }
             }
             <span class="keyword">delete</span> tlist;
             <span class="keyword">return</span> list;
@@ -337,11 +337,11 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 
 <span class="comment">//_________________________________________________________________________________</span>
 
-<a name="nFVqqE"></a><a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetDetectorLayer" title="UInt_t KVASGroup::GetDetectorLayer(KVDetector* det)">GetDetectorLayer</a>(<a href="../KVDetector.html">KVDetector</a> * det)
+<a name="kLF_vB"></a><a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetDetectorLayer" title="UInt_t KVASGroup::GetDetectorLayer(KVDetector* det)">GetDetectorLayer</a>(<a href="../KVDetector.html">KVDetector</a>* det)
 {
    <span class="comment">//Find the <span class="string">"detector layer"</span> to which this detector belongs</span>
 
-   TList *list;
+   TList* list;
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> i = 1; i &lt;= <a href="../KVASGroup.html#KVASGroup:GetNumberOfDetectorLayers" title="UInt_t KVASGroup::GetNumberOfDetectorLayers()">GetNumberOfDetectorLayers</a>(); i++) {
       list = <a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(i);
       <span class="keyword">if</span> (list-&gt;<a href="../#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(det)) {
@@ -355,7 +355,7 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 
 <span class="comment">//_________________________________________________________________________________</span>
 
-<a name="pxHwZ"></a>TList *<a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetAlignedDetectors" title="TList* KVASGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>(<a href="../KVDetector.html">KVDetector</a> * det, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> dir)
+<a name="ik_LiB"></a>TList* <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:GetAlignedDetectors" title="TList* KVASGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>(<a href="../KVDetector.html">KVDetector</a>* det, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> dir)
 {
    <span class="comment">//Fill TList with all detectors aligned with <span class="string">"det"</span> which are closer to the target.</span>
    <span class="comment">//These are the detectors through which any particle stopping in <span class="string">"det"</span> will have</span>
@@ -365,38 +365,38 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <span class="comment">//</span>
    <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> TList after use.</span>
 
-   TList *tmp = <span class="keyword">new</span> TList;
+   TList* tmp = <span class="keyword">new</span> TList;
 
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> last_layer = <a href="../KVASGroup.html#KVASGroup:GetDetectorLayer" title="UInt_t KVASGroup::GetDetectorLayer(KVDetector* det)">GetDetectorLayer</a>(det);
    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> first_layer = 1;
 
    <span class="keyword">if</span> (dir == kForwards) {
       <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay = first_layer; lay &lt;= last_layer; lay++) {
-         TList *dets = <a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(lay);
+         TList* dets = <a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(lay);
          <span class="keyword">if</span> (dets) {
             TIter next(dets);
-            <a href="../KVDetector.html">KVDetector</a> *d2;
-            <span class="keyword">while</span> ((d2 = (<a href="../KVDetector.html">KVDetector</a> *) next())) {
+            <a href="../KVDetector.html">KVDetector</a>* d2;
+            <span class="keyword">while</span> ((d2 = (<a href="../KVDetector.html">KVDetector</a>*) next())) {
                <span class="keyword">if</span> (((<a href="../KVTelescope.html">KVTelescope</a>*)d2-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>))-&gt;<a href="../KVPosition.html#KVPosition:IsOverlappingWith" title="Bool_t KVPosition::IsOverlappingWith(KVPosition* pos)">IsOverlappingWith</a>(
-                           (<a href="../KVTelescope.html">KVTelescope</a>*)det-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>))) {
+                        (<a href="../KVTelescope.html">KVTelescope</a>*)det-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>))) {
                   tmp-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(d2);
                }
-                }
+            }
             <span class="keyword">delete</span> dets;
          }
       }
    } <span class="keyword">else</span> {
       <span class="keyword">for</span> (<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay = last_layer; lay &gt;= first_layer; lay--) {
-         TList *dets = <a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(lay);
+         TList* dets = <a href="../KVASGroup.html#KVASGroup:GetDetectorsInLayer" title="TList* KVASGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(lay);
          <span class="keyword">if</span> (dets) {
             TIter next(dets);
-            <a href="../KVDetector.html">KVDetector</a> *d2;
-            <span class="keyword">while</span> ((d2 = (<a href="../KVDetector.html">KVDetector</a> *) next())) {
+            <a href="../KVDetector.html">KVDetector</a>* d2;
+            <span class="keyword">while</span> ((d2 = (<a href="../KVDetector.html">KVDetector</a>*) next())) {
                <span class="keyword">if</span> (((<a href="../KVTelescope.html">KVTelescope</a>*)d2-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>))-&gt;
-                   <a href="../KVPosition.html#KVPosition:IsOverlappingWith" title="Bool_t KVPosition::IsOverlappingWith(KVPosition* pos)">IsOverlappingWith</a>((<a href="../KVTelescope.html">KVTelescope</a>*)det-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>))) {
+                     <a href="../KVPosition.html#KVPosition:IsOverlappingWith" title="Bool_t KVPosition::IsOverlappingWith(KVPosition* pos)">IsOverlappingWith</a>((<a href="../KVTelescope.html">KVTelescope</a>*)det-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetParentStructure" title="KVGeoStrucElement* KVGeoStrucElement::GetParentStructure(const Char_t* type,const Char_t* name=&quot;&quot;)">GetParentStructure</a>(<span class="string">"TELESCOPE"</span>))) {
                   tmp-&gt;<a href="../KVASGroup.html#KVASGroup:Add" title="void KVASGroup::Add(KVBase* )">Add</a>(d2);
                }
-                }
+            }
             <span class="keyword">delete</span> dets;
          }
       }
@@ -417,7 +417,7 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <span class="comment">//i.e. the layer with the smallest layer number</span>
    <span class="comment">//</span>
    <span class="keyword">if</span> (!<a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a>)
-      ((<a href="../KVGroup.html">KVGroup</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVASGroup.html#KVASGroup:CountLayers" title="void KVASGroup::CountLayers()">CountLayers</a>();
+      ((<a href="../KVGroup.html">KVGroup</a>*) <span class="keyword">this</span>)-&gt;<a href="../KVASGroup.html#KVASGroup:CountLayers" title="void KVASGroup::CountLayers()">CountLayers</a>();
    <span class="keyword">return</span> <a href="../KVASGroup.html#KVASGroup:fLayNumMin" title="UInt_t KVASGroup::fLayNumMin">fLayNumMin</a>;
 }
 
@@ -431,14 +431,14 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
    <span class="comment">//</span>
 
    <span class="keyword">if</span> (!<a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a>)
-      ((<a href="../KVGroup.html">KVGroup</a> *) <span class="keyword">this</span>)-&gt;<a href="../KVASGroup.html#KVASGroup:CountLayers" title="void KVASGroup::CountLayers()">CountLayers</a>();
+      ((<a href="../KVGroup.html">KVGroup</a>*) <span class="keyword">this</span>)-&gt;<a href="../KVASGroup.html#KVASGroup:CountLayers" title="void KVASGroup::CountLayers()">CountLayers</a>();
    <span class="keyword">return</span> <a href="../KVASGroup.html#KVASGroup:fLayNumMax" title="UInt_t KVASGroup::fLayNumMax">fLayNumMax</a>;
 }
 
-<a name="Bz5yPE"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:Contains" title="Bool_t KVASGroup::Contains(KVBase* name)">Contains</a>(<a href="../KVBase.html">KVBase</a> *name) <span class="keyword">const</span>
+<a name="gGmGME"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVASGroup.html">KVASGroup</a>::<a href="../KVASGroup.html#KVASGroup:Contains" title="Bool_t KVASGroup::Contains(KVBase* name)">Contains</a>(<a href="../KVBase.html">KVBase</a>* name) <span class="keyword">const</span>
 {
-    <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if telescope belongs to this group</span>
-    <span class="keyword">return</span> (<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(name)!=0);
+   <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if telescope belongs to this group</span>
+   <span class="keyword">return</span> (<a href="../KVASGroup.html#KVASGroup:GetTelescopes" title="const KVSeqCollection* KVASGroup::GetTelescopes()">GetTelescopes</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(name) != 0);
 }
 
 </pre>
@@ -449,7 +449,7 @@ ClassImp(<a href="../KVASGroup.html">KVASGroup</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:13 </em><em>&raquo; Last generated: 2015-11-20 15:13</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:12 </em><em>&raquo; Last generated: 2016-01-08 15:12</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

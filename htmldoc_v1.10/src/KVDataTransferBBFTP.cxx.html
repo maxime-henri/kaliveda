@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:09 2015            -->
+<!--   Date: Fri Jan  8 15:13:06 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -42,7 +42,7 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 <span class="comment">// File transfer between repositories using bbftp.</span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
-<a name="SaF8lE"></a>    <a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>::<a href="../KVDataTransferBBFTP.html#KVDataTransferBBFTP:KVDataTransferBBFTP" title="KVDataTransferBBFTP KVDataTransferBBFTP::KVDataTransferBBFTP() or overloads">KVDataTransferBBFTP</a>()
+<a name="SaF8lE"></a><a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>::<a href="../KVDataTransferBBFTP.html#KVDataTransferBBFTP:KVDataTransferBBFTP" title="KVDataTransferBBFTP KVDataTransferBBFTP::KVDataTransferBBFTP() or overloads">KVDataTransferBBFTP</a>()
 {
    <span class="comment">//Default constructor</span>
    <a href="../KVDataTransferBBFTP.html#KVDataTransferBBFTP:fServer" title="KVDataRepository* KVDataTransferBBFTP::fServer">fServer</a> = 0;
@@ -57,7 +57,7 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
 {
    <span class="comment">//Initialisation of data transfer.</span>
    <span class="comment">//A bbftp client must be installed on the user's machine, and the</span>
-   <span class="comment">//executable must be located within the user's PATH. </span>
+   <span class="comment">//executable must be located within the user's PATH.</span>
 
    <span class="comment">//Deduce from target and source repository properties which has the BBFTP server</span>
    <span class="keyword">if</span> (!strcmp(fSourceRep-&gt;GetFileTransferType(), <span class="string">"bbftp"</span>))
@@ -75,7 +75,7 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
    <a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:OpenTempFile" title="void KVBase::OpenTempFile(TString&amp; base,ofstream&amp; fp)">OpenTempFile</a>(fCmdFile, file);
 
    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; endl &lt;&lt; <span class="string">"Writing command file : "</span> &lt;&lt; fCmdFile.
-       Data() &lt;&lt; endl &lt;&lt; endl;
+        Data() &lt;&lt; endl &lt;&lt; endl;
 
    file &lt;&lt; <span class="string">"setoption remoterfio"</span> &lt;&lt; endl;
    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"setoption remoterfio"</span> &lt;&lt; endl;
@@ -90,7 +90,7 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
    <span class="comment">//loop over runs in runlist</span>
    fRunList.Begin();
    TString targ_file;
-   <span class="keyword">while</span>( !fRunList.End() ) {
+   <span class="keyword">while</span> (!fRunList.End()) {
 
       <a href="../ListOfTypes.html#Int_t">Int_t</a> run = fRunList.Next();      <span class="comment">// current run number</span>
 
@@ -99,37 +99,37 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
 
       <span class="comment">//source file name</span>
       file &lt;&lt; fSourceRep-&gt;GetFullPathToTransferFile(fDataSet,
-                                                    fDataType.Data(),
-                                                    fDataSet-&gt;
-                                                    GetRunfileName
-                                                    (fDataType.Data(),
-                                                     run)) &lt;&lt; <span class="string">" "</span>;
+            fDataType.Data(),
+            fDataSet-&gt;
+            GetRunfileName
+            (fDataType.Data(),
+             run)) &lt;&lt; <span class="string">" "</span>;
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; fSourceRep-&gt;GetFullPathToTransferFile(fDataSet,
-                                                    fDataType.Data(),
-                                                    fDataSet-&gt;
-                                                    GetRunfileName
-                                                    (fDataType.Data(),
-                                                     run)) &lt;&lt; <span class="string">" "</span>;
+            fDataType.Data(),
+            fDataSet-&gt;
+            GetRunfileName
+            (fDataType.Data(),
+             run)) &lt;&lt; <span class="string">" "</span>;
 
       <span class="comment">//target file name</span>
       <span class="comment">//target repository dataset pointer</span>
-      <a href="../KVDataSet.html">KVDataSet</a> *targ_ds =
-          fTargetRep-&gt;GetDataSetManager()-&gt;<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataSet" title="KVDataSet* KVDataAnalyser::GetDataSet()">GetDataSet</a>(fDataSet-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
+      <a href="../KVDataSet.html">KVDataSet</a>* targ_ds =
+         fTargetRep-&gt;GetDataSetManager()-&gt;<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataSet" title="KVDataSet* KVDataAnalyser::GetDataSet()">GetDataSet</a>(fDataSet-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
       targ_file = fDataSet-&gt;GetRunfileName(fDataType.Data(), run);
-      <span class="comment">//if the target repository is the local repository, </span>
+      <span class="comment">//if the target repository is the local repository,</span>
       <span class="comment">//we have to replace illegal characters like <span class="string">":"</span> in the target file name</span>
       <span class="comment">//to avoid problems due to the meaning of the <span class="string">":"</span> character for some</span>
       <span class="comment">//systems (MacOsX, Windows, some Linux distributions)</span>
       <span class="keyword">if</span> (!fTargetRep-&gt;IsRemote())
          targ_file.ReplaceAll(<span class="string">":"</span>, <span class="string">"_"</span>);
       file &lt;&lt; fTargetRep-&gt;GetFullPathToTransferFile(targ_ds,
-                                                    fDataType.Data(),
-                                                    targ_file.
-                                                    Data()) &lt;&lt; endl;
+            fDataType.Data(),
+            targ_file.
+            Data()) &lt;&lt; endl;
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; fTargetRep-&gt;GetFullPathToTransferFile(targ_ds,
-                                                    fDataType.Data(),
-                                                    targ_file.
-                                                    Data()) &lt;&lt; endl;
+            fDataType.Data(),
+            targ_file.
+            Data()) &lt;&lt; endl;
    }
 
    file.close();
@@ -142,7 +142,7 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
    <span class="comment">//</span>
    <span class="comment">// [bbftp command] -i [command file name] -u [user] [server]</span>
    <span class="comment">//</span>
-   <span class="comment">// where </span>
+   <span class="comment">// where</span>
    <span class="comment">//</span>
    <span class="comment">// [bbftp command] = result of searching for 'bbftp' in user's PATH</span>
    <span class="comment">// [command file name] = name of file written by <a href="../KVDataTransferBBFTP.html#KVDataTransferBBFTP:WriteTransferScript" title="void KVDataTransferBBFTP::WriteTransferScript()">WriteTransferScript</a>()</span>
@@ -167,7 +167,7 @@ ClassImp(<a href="../KVDataTransferBBFTP.html">KVDataTransferBBFTP</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

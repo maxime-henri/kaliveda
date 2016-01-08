@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:13:41 2015            -->
+<!--   Date: Fri Jan  8 15:12:36 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -41,8 +41,8 @@ ClassImp(<a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Gener
 <a name="Nc1j4B"></a>   <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>::<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>()
    {
       <span class="comment">// Default constructor</span>
-      <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:theModel" title="RooAbsPdf* BackTrack::GenericPDFModel::theModel">theModel</a>=0;
-      <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:fNGen" title="Int_t BackTrack::GenericPDFModel::fNGen">fNGen</a>=1000;
+      <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:theModel" title="RooAbsPdf* BackTrack::GenericPDFModel::theModel">theModel</a> = 0;
+      <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:fNGen" title="Int_t BackTrack::GenericPDFModel::fNGen">fNGen</a> = 1000;
    }
 
 <a name="mOjclB"></a>   <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>::<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:_GenericPDFModel" title="void BackTrack::GenericPDFModel::~GenericPDFModel()">~GenericPDFModel</a>()
@@ -51,25 +51,25 @@ ClassImp(<a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Gener
       SafeDelete(<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:theModel" title="RooAbsPdf* BackTrack::GenericPDFModel::theModel">theModel</a>);
    }
 
-<a name="r9MvLC"></a>   RooDataSet*<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>::<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenerateDataSet" title="RooDataSet* BackTrack::GenericPDFModel::GenerateDataSet(RooAbsPdf&amp; parDist,const RooArgList* params=0)">GenerateDataSet</a>(RooAbsPdf&amp; parDist, <span class="keyword">const</span> RooArgList* params)
+<a name="YrkLxD"></a>   RooDataSet* <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>::<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenerateDataSet" title="RooDataSet* BackTrack::GenericPDFModel::GenerateDataSet(RooAbsPdf&amp; parDist,const RooArgList* params=0)">GenerateDataSet</a>(RooAbsPdf&amp; parDist, <span class="keyword">const</span> RooArgList* params)
    {
       <span class="comment">// Generate dataset for the observables using the given parameter probability distribution</span>
       <span class="comment">// If optional parameter list params is given, it is used instead of the default</span>
       <span class="comment">// defined parameter list of the model</span>
 
-      <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GenerateDataSet"</span>,<span class="string">"Generating %d datapoints with parameter distribution %s"</span>,
+      <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GenerateDataSet"</span>, <span class="string">"Generating %d datapoints with parameter distribution %s"</span>,
            <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GetNumGen" title="Int_t BackTrack::GenericPDFModel::GetNumGen()">GetNumGen</a>(), parDist.<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-      RooProdPdf Multimodel(<span class="string">"Multimodel"</span>,<span class="string">"observables for parameter distributions"</span>, parDist,
-                            Conditional(*<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:theModel" title="RooAbsPdf* BackTrack::GenericPDFModel::theModel">theModel</a>,<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservables" title="const RooArgList&amp; BackTrack::GenericModel::GetObservables()">GetObservables</a>()));
+      RooProdPdf Multimodel(<span class="string">"Multimodel"</span>, <span class="string">"observables for parameter distributions"</span>, parDist,
+                            Conditional(*<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:theModel" title="RooAbsPdf* BackTrack::GenericPDFModel::theModel">theModel</a>, <a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservables" title="const RooArgList&amp; BackTrack::GenericModel::GetObservables()">GetObservables</a>()));
       <span class="comment">// get marginalized distributions model for observables</span>
-      <span class="keyword">if</span>(!params) params = &amp;<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParameters" title="const RooArgList&amp; BackTrack::GenericModel::GetParameters()">GetParameters</a>();
+      <span class="keyword">if</span> (!params) params = &amp;<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetParameters" title="const RooArgList&amp; BackTrack::GenericModel::GetParameters()">GetParameters</a>();
       RooAbsPdf* margin = Multimodel.createProjection(*params);
-      RooDataSet* data = margin-&gt;generate(<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservables" title="const RooArgList&amp; BackTrack::GenericModel::GetObservables()">GetObservables</a>(),<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:fNGen" title="Int_t BackTrack::GenericPDFModel::fNGen">fNGen</a>);
+      RooDataSet* data = margin-&gt;generate(<a href="../BackTrack__GenericModel.html#BackTrack__GenericModel:GetObservables" title="const RooArgList&amp; BackTrack::GenericModel::GetObservables()">GetObservables</a>(), <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:fNGen" title="Int_t BackTrack::GenericPDFModel::fNGen">fNGen</a>);
       <span class="keyword">delete</span> margin;
       <span class="keyword">return</span> data;
    }
 
-<a name="jJSATB"></a>   RooDataSet*<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>::<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GetModelDataSet" title="RooDataSet* BackTrack::GenericPDFModel::GetModelDataSet(RooArgList&amp; par)">GetModelDataSet</a>(RooArgList&amp; par)
+<a name="z.4D5"></a>   RooDataSet* <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenericPDFModel" title="BackTrack::GenericPDFModel BackTrack::GenericPDFModel::GenericPDFModel()">GenericPDFModel</a>::<a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GetModelDataSet" title="RooDataSet* BackTrack::GenericPDFModel::GetModelDataSet(RooArgList&amp; par)">GetModelDataSet</a>(RooArgList&amp; par)
    {
       <span class="comment">// Generate dataset for model using the parameter definitions in the list.</span>
       <span class="comment">// We assume that this method is called with each parameter having its</span>
@@ -79,7 +79,7 @@ ClassImp(<a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Gener
       <span class="comment">// given ranges.</span>
 
       <span class="comment">// uniform distribution of parameters</span>
-      RooUniform uni(<span class="string">"uni"</span>,<span class="string">"uniform parameter distribution"</span>,par);
+      RooUniform uni(<span class="string">"uni"</span>, <span class="string">"uniform parameter distribution"</span>, par);
       <span class="keyword">return</span> <a href="../BackTrack__GenericPDFModel.html#BackTrack__GenericPDFModel:GenerateDataSet" title="RooDataSet* BackTrack::GenericPDFModel::GenerateDataSet(RooAbsPdf&amp; parDist,const RooArgList* params=0)">GenerateDataSet</a>(uni, &amp;par);
    }
 
@@ -92,7 +92,7 @@ ClassImp(<a href="../BackTrack.html">BackTrack</a>::<a href="../BackTrack__Gener
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:13 </em><em>&raquo; Last generated: 2015-11-20 15:13</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:12 </em><em>&raquo; Last generated: 2016-01-08 15:12</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

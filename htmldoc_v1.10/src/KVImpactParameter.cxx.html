@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:04 2015            -->
+<!--   Date: Fri Jan  8 15:14:12 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -81,7 +81,7 @@ END_HTML
    <a href="../KVImpactParameter.html#KVImpactParameter:fEvol" title="TString KVImpactParameter::fEvol">fEvol</a> = evol;
    <a href="../KVImpactParameter.html#KVImpactParameter:fIPScale" title="TGraph* KVImpactParameter::fIPScale">fIPScale</a> = 0;
    <a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a> = 0;
-   <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a>= 1.0;
+   <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a> = 1.0;
 }
 
 <a name="pX8FeB"></a><a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:_KVImpactParameter" title="void KVImpactParameter::~KVImpactParameter()">~KVImpactParameter</a>()
@@ -97,53 +97,53 @@ END_HTML
    <span class="comment">// whose distribution is contained in the histogram <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>.</span>
    <span class="comment">// For a given value X of the observable x, the reduced impact parameter</span>
    <span class="comment">// b_hat is calculated from the distribution of x, Y(x), using the following formula:</span>
-	<span class="comment">/*
-BEGIN_LATEX
-\hat{b}^{2} = \int^{\infty}_{x=X} Y(x) dx #divide  \int_{0}^{\infty} Y(x) dx
-END_LATEX
-	*/</span>
+   <span class="comment">/*
+   BEGIN_LATEX
+   \hat{b}^{2} = \int^{\infty}_{x=X} Y(x) dx #divide  \int_{0}^{\infty} Y(x) dx
+   END_LATEX
+   */</span>
    <span class="comment">// npoints = number of points for which to calculate the impact parameter.</span>
    <span class="comment">// The greater the number of points, the more accurate the results.</span>
    <span class="comment">// Default value is 100. Maximum value is number of bins in histogram of observable, <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>.</span>
    <span class="comment">// bmax is the maximum reduced impact parameter for the data.</span>
    <span class="comment">// To obtain absolute values of impact parameter/cross-section,</span>
    <span class="comment">// use <a href="../KVImpactParameter.html#KVImpactParameter:MakeAbsoluteScale" title="void KVImpactParameter::MakeAbsoluteScale(Int_t npoints=100,Double_t bmax=1.0)">MakeAbsoluteScale</a>.</span>
-   
-   <span class="keyword">if</span>(bmax&gt;1.0){
-      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"MakeScale"</span>,<span class="string">"called with bmax&gt;1.0 - calling MakeAbsoluteScale for absolute impact parameters"</span>);
-      <a href="../KVImpactParameter.html#KVImpactParameter:MakeAbsoluteScale" title="void KVImpactParameter::MakeAbsoluteScale(Int_t npoints=100,Double_t bmax=1.0)">MakeAbsoluteScale</a>(npoints,bmax);
+
+   <span class="keyword">if</span> (bmax &gt; 1.0) {
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"MakeScale"</span>, <span class="string">"called with bmax&gt;1.0 - calling MakeAbsoluteScale for absolute impact parameters"</span>);
+      <a href="../KVImpactParameter.html#KVImpactParameter:MakeAbsoluteScale" title="void KVImpactParameter::MakeAbsoluteScale(Int_t npoints=100,Double_t bmax=1.0)">MakeAbsoluteScale</a>(npoints, bmax);
       <span class="keyword">return</span>;
    }
-   <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a>=bmax;
-   <a href="../KVImpactParameter.html#KVImpactParameter:Smax" title="Double_t KVImpactParameter::Smax">Smax</a>=pow(bmax,2.);<span class="comment">//total reduced X-section</span>
+   <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a> = bmax;
+   <a href="../KVImpactParameter.html#KVImpactParameter:Smax" title="Double_t KVImpactParameter::Smax">Smax</a> = pow(bmax, 2.); <span class="comment">//total reduced X-section</span>
    <a href="../KVImpactParameter.html#KVImpactParameter:make_scale" title="void KVImpactParameter::make_scale(Int_t npoints)">make_scale</a>(npoints);
 }
 
 <a name="CqmRQ"></a><span class="keyword">void</span> <a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:make_scale" title="void KVImpactParameter::make_scale(Int_t npoints)">make_scale</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> npoints)
 {
-   TH1*cumul = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:CumulatedHisto" title="TH1* KVHistoManipulator::CumulatedHisto(TH1* hh,TString direction=&quot;C&quot;,Int_t bmin=-1,Int_t bmax=-1,Option_t* norm=&quot;surf&quot;) or overloads">CumulatedHisto</a>(<a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>, <a href="../KVImpactParameter.html#KVImpactParameter:fEvol" title="TString KVImpactParameter::fEvol">fEvol</a>.Data() ,-1,-1,<span class="string">"max"</span>);
+   TH1* cumul = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:CumulatedHisto" title="TH1* KVHistoManipulator::CumulatedHisto(TH1* hh,TString direction=&quot;C&quot;,Int_t bmin=-1,Int_t bmax=-1,Option_t* norm=&quot;surf&quot;) or overloads">CumulatedHisto</a>(<a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>, <a href="../KVImpactParameter.html#KVImpactParameter:fEvol" title="TString KVImpactParameter::fEvol">fEvol</a>.Data() , -1, -1, <span class="string">"max"</span>);
    <a href="../ListOfTypes.html#Int_t">Int_t</a> nbins = cumul-&gt;GetNbinsX();
    <a href="../ListOfTypes.html#Int_t">Int_t</a> first_bin = 1;
    <a href="../ListOfTypes.html#Int_t">Int_t</a> last_bin = nbins;
-   npoints = TMath::Min(nbins,npoints);
+   npoints = TMath::Min(nbins, npoints);
    <a href="../KVImpactParameter.html#KVImpactParameter:fIPScale" title="TGraph* KVImpactParameter::fIPScale">fIPScale</a> = <span class="keyword">new</span> TGraph(npoints);
    <a href="../KVImpactParameter.html#KVImpactParameter:fXSecScale" title="TGraph* KVImpactParameter::fXSecScale">fXSecScale</a> = <span class="keyword">new</span> TGraph(npoints);
-   <a href="../ListOfTypes.html#Double_t">Double_t</a> delta_bin = 1.*(last_bin-first_bin)/(npoints-1.);
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> delta_bin = 1.*(last_bin - first_bin) / (npoints - 1.);
    <a href="../ListOfTypes.html#Int_t">Int_t</a> bin;
-   <span class="keyword">for</span>(<span class="keyword">int</span> i=0;i&lt;npoints;i++){
-      bin = first_bin + i*delta_bin;
+   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; npoints; i++) {
+      bin = first_bin + i * delta_bin;
       <a href="../ListOfTypes.html#Double_t">Double_t</a> et12 = cumul-&gt;GetBinCenter(bin);
       <a href="../ListOfTypes.html#Double_t">Double_t</a> b = <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a> * sqrt(cumul-&gt;GetBinContent(bin));
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> sigma = <a href="../KVImpactParameter.html#KVImpactParameter:Smax" title="Double_t KVImpactParameter::Smax">Smax</a>*cumul-&gt;GetBinContent(bin);
-      <a href="../KVImpactParameter.html#KVImpactParameter:fIPScale" title="TGraph* KVImpactParameter::fIPScale">fIPScale</a>-&gt;SetPoint(i,et12,b);
-      <a href="../KVImpactParameter.html#KVImpactParameter:fXSecScale" title="TGraph* KVImpactParameter::fXSecScale">fXSecScale</a>-&gt;SetPoint(i,et12,sigma);
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> sigma = <a href="../KVImpactParameter.html#KVImpactParameter:Smax" title="Double_t KVImpactParameter::Smax">Smax</a> * cumul-&gt;GetBinContent(bin);
+      <a href="../KVImpactParameter.html#KVImpactParameter:fIPScale" title="TGraph* KVImpactParameter::fIPScale">fIPScale</a>-&gt;SetPoint(i, et12, b);
+      <a href="../KVImpactParameter.html#KVImpactParameter:fXSecScale" title="TGraph* KVImpactParameter::fXSecScale">fXSecScale</a>-&gt;SetPoint(i, et12, sigma);
    }
    <span class="keyword">delete</span> cumul;
 
    <a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a> = <span class="keyword">new</span> TF1(<span class="string">"fObsTransform"</span>, <span class="keyword">this</span>, &amp;<a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:BTransform" title="Double_t KVImpactParameter::BTransform(Double_t* ,Double_t* )">BTransform</a>,
                            <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>-&gt;GetXaxis()-&gt;GetXmin(), <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>-&gt;GetXaxis()-&gt;GetXmax(), 0, <span class="string">"KVImpactParameter"</span>, <span class="string">"BTransform"</span>);
    <a href="../KVImpactParameter.html#KVImpactParameter:fObsTransformXSec" title="TF1* KVImpactParameter::fObsTransformXSec">fObsTransformXSec</a> = <span class="keyword">new</span> TF1(<span class="string">"fObsTransformXSec"</span>, <span class="keyword">this</span>, &amp;<a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:XTransform" title="Double_t KVImpactParameter::XTransform(Double_t* ,Double_t* )">XTransform</a>,
-                           <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>-&gt;GetXaxis()-&gt;GetXmin(), <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>-&gt;GetXaxis()-&gt;GetXmax(), 0, <span class="string">"KVImpactParameter"</span>, <span class="string">"XTransform"</span>);
+                               <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>-&gt;GetXaxis()-&gt;GetXmin(), <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>-&gt;GetXaxis()-&gt;GetXmax(), 0, <span class="string">"KVImpactParameter"</span>, <span class="string">"XTransform"</span>);
 }
 
 <a name="lV8q0"></a><span class="keyword">void</span> <a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:MakeAbsoluteScale" title="void KVImpactParameter::MakeAbsoluteScale(Int_t npoints=100,Double_t bmax=1.0)">MakeAbsoluteScale</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="../ListOfTypes.html#Double_t">Double_t</a> bmax)
@@ -153,23 +153,23 @@ END_LATEX
    <span class="comment">// whose distribution is contained in the histogram <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>.</span>
    <span class="comment">// For a given value X of the observable x, the reduced impact parameter</span>
    <span class="comment">// b_hat is calculated from the distribution of x, Y(x), using the following formula:</span>
-        <span class="comment">/*
-BEGIN_LATEX
-\hat{b}^{2} = \int^{\infty}_{x=X} Y(x) dx #divide  \int_{0}^{\infty} Y(x) dx
-END_LATEX
-        */</span>
+   <span class="comment">/*
+   BEGIN_LATEX
+   \hat{b}^{2} = \int^{\infty}_{x=X} Y(x) dx #divide  \int_{0}^{\infty} Y(x) dx
+   END_LATEX
+   */</span>
    <span class="comment">// npoints = number of points for which to calculate the impact parameter.</span>
    <span class="comment">// The greater the number of points, the more accurate the results.</span>
    <span class="comment">// Default value is 100. Maximum value is number of bins in histogram of observable, <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a>.</span>
    <span class="comment">// bmax is the maximum absolute impact parameter for the data in [fm].</span>
    <span class="comment">// To obtain values of reduced impact parameter/cross-section, use <a href="../KVImpactParameter.html#KVImpactParameter:MakeScale" title="void KVImpactParameter::MakeScale(Int_t npoints=100,Double_t bmax=1.0)">MakeScale</a>.</span>
 
-   <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a>=bmax;
-   <a href="../KVImpactParameter.html#KVImpactParameter:Smax" title="Double_t KVImpactParameter::Smax">Smax</a>=<a href="../KVImpactParameter.html#KVImpactParameter:GetXSecFromIP" title="Double_t KVImpactParameter::GetXSecFromIP(Double_t bmax)">GetXSecFromIP</a>(bmax);<span class="comment">//total X-section in [mb]</span>
+   <a href="../KVImpactParameter.html#KVImpactParameter:Bmax" title="Double_t KVImpactParameter::Bmax">Bmax</a> = bmax;
+   <a href="../KVImpactParameter.html#KVImpactParameter:Smax" title="Double_t KVImpactParameter::Smax">Smax</a> = <a href="../KVImpactParameter.html#KVImpactParameter:GetXSecFromIP" title="Double_t KVImpactParameter::GetXSecFromIP(Double_t bmax)">GetXSecFromIP</a>(bmax); <span class="comment">//total X-section in [mb]</span>
    <a href="../KVImpactParameter.html#KVImpactParameter:make_scale" title="void KVImpactParameter::make_scale(Int_t npoints)">make_scale</a>(npoints);
 }
 
-<a name="zm1yhE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:BTransform" title="Double_t KVImpactParameter::BTransform(Double_t* ,Double_t* )">BTransform</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *x, <a href="../ListOfTypes.html#Double_t">Double_t</a> *)
+<a name="bE4nhE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:BTransform" title="Double_t KVImpactParameter::BTransform(Double_t* ,Double_t* )">BTransform</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* x, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
 {
    <span class="comment">// Function using the TGraph calculated with <a href="../KVImpactParameter.html#KVImpactParameter:MakeScale" title="void KVImpactParameter::MakeScale(Int_t npoints=100,Double_t bmax=1.0)">MakeScale</a>/<a href="../KVImpactParameter.html#KVImpactParameter:MakeAbsoluteScale" title="void KVImpactParameter::MakeAbsoluteScale(Int_t npoints=100,Double_t bmax=1.0)">MakeAbsoluteScale</a> in order to</span>
    <span class="comment">// transform distributions of the observable histogrammed in <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a></span>
@@ -179,7 +179,7 @@ END_LATEX
    <span class="keyword">return</span> <a href="../KVImpactParameter.html#KVImpactParameter:fIPScale" title="TGraph* KVImpactParameter::fIPScale">fIPScale</a>-&gt;Eval(*x);
 }
 
-<a name="j6zyhE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:XTransform" title="Double_t KVImpactParameter::XTransform(Double_t* ,Double_t* )">XTransform</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> *x, <a href="../ListOfTypes.html#Double_t">Double_t</a> *)
+<a name="LY2nhE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVImpactParameter.html">KVImpactParameter</a>::<a href="../KVImpactParameter.html#KVImpactParameter:XTransform" title="Double_t KVImpactParameter::XTransform(Double_t* ,Double_t* )">XTransform</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>* x, <a href="../ListOfTypes.html#Double_t">Double_t</a>*)
 {
    <span class="comment">// Function using the TGraph calculated with <a href="../KVImpactParameter.html#KVImpactParameter:MakeScale" title="void KVImpactParameter::MakeScale(Int_t npoints=100,Double_t bmax=1.0)">MakeScale</a>/<a href="../KVImpactParameter.html#KVImpactParameter:MakeAbsoluteScale" title="void KVImpactParameter::MakeAbsoluteScale(Int_t npoints=100,Double_t bmax=1.0)">MakeAbsoluteScale</a> in order to</span>
    <span class="comment">// transform distributions of the observable histogrammed in <a href="../KVImpactParameter.html#KVImpactParameter:fData" title="TH1* KVImpactParameter::fData">fData</a></span>
@@ -196,11 +196,11 @@ END_LATEX
    <span class="comment">// User's responsibility to delete histo.</span>
    <span class="comment">//</span>
    <span class="comment">// nbinx = number of bins in I.P. histo (default = 100)</span>
-        <span class="comment">//  norm = <span class="string">""</span> (default) : no adjustment is made for the change in bin width due to the transformation</span>
-        <span class="comment">//  norm = <span class="string">"width"</span> : bin contents are adjusted for width change, so that the integral of the histogram</span>
-        <span class="comment">//                   contents taking into account the bin width (i.e. TH1::Integral(<span class="string">"width"</span>)) is the same.</span>
+   <span class="comment">//  norm = <span class="string">""</span> (default) : no adjustment is made for the change in bin width due to the transformation</span>
+   <span class="comment">//  norm = <span class="string">"width"</span> : bin contents are adjusted for width change, so that the integral of the histogram</span>
+   <span class="comment">//                   contents taking into account the bin width (i.e. TH1::Integral(<span class="string">"width"</span>)) is the same.</span>
 
-   <span class="keyword">if</span>(!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a>){
+   <span class="keyword">if</span> (!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a>) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetIPDistribution"</span>, <span class="string">"Call MakeScale first to calculate correspondance observable&lt;-&gt;i.p."</span>);
       <span class="keyword">return</span> 0;
    }
@@ -217,11 +217,11 @@ END_LATEX
    <span class="comment">// If the impact parameter observable is on the Y-axis of obscor, use axis=<span class="string">"X"</span></span>
    <span class="comment">// (by default axis=<span class="string">"Y"</span>, i.e. we assume that the I.P. observable is on the x axis).</span>
 
-   <span class="keyword">if</span>(!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a>){
+   <span class="keyword">if</span> (!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a>) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetIPEvolution"</span>, <span class="string">"Call MakeScale first to calculate correspondance observable&lt;-&gt;i.p."</span>);
       <span class="keyword">return</span> 0;
    }
-   TGraphErrors *gre = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:GetMomentEvolution" title="TGraphErrors* KVHistoManipulator::GetMomentEvolution(TH2* hh,TString momentx,TString momenty,TString axis=&quot;Y&quot;)">GetMomentEvolution</a>(obscor,moment,<span class="string">""</span>,axis);
+   TGraphErrors* gre = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:GetMomentEvolution" title="TGraphErrors* KVHistoManipulator::GetMomentEvolution(TH2* hh,TString momentx,TString momenty,TString axis=&quot;Y&quot;)">GetMomentEvolution</a>(obscor, moment, <span class="string">""</span>, axis);
    TGraph* gr = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:ScaleGraph" title="TGraph* KVHistoManipulator::ScaleGraph(TGraph* hh,TF1* fx,TF1* fy)">ScaleGraph</a>(gre, <a href="../KVImpactParameter.html#KVImpactParameter:fObsTransform" title="TF1* KVImpactParameter::fObsTransform">fObsTransform</a>, 0);
    <span class="keyword">delete</span> gre;
    <span class="keyword">return</span> gr;
@@ -235,11 +235,11 @@ END_LATEX
    <span class="comment">// User's responsibility to delete histo.</span>
    <span class="comment">//</span>
    <span class="comment">// nbinx = number of bins in I.P. histo (default = 100)</span>
-        <span class="comment">//  norm = <span class="string">""</span> (default) : no adjustment is made for the change in bin width due to the transformation</span>
-        <span class="comment">//  norm = <span class="string">"width"</span> : bin contents are adjusted for width change, so that the integral of the histogram</span>
-        <span class="comment">//                   contents taking into account the bin width (i.e. TH1::Integral(<span class="string">"width"</span>)) is the same.</span>
+   <span class="comment">//  norm = <span class="string">""</span> (default) : no adjustment is made for the change in bin width due to the transformation</span>
+   <span class="comment">//  norm = <span class="string">"width"</span> : bin contents are adjusted for width change, so that the integral of the histogram</span>
+   <span class="comment">//                   contents taking into account the bin width (i.e. TH1::Integral(<span class="string">"width"</span>)) is the same.</span>
 
-   <span class="keyword">if</span>(!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransformXSec" title="TF1* KVImpactParameter::fObsTransformXSec">fObsTransformXSec</a>){
+   <span class="keyword">if</span> (!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransformXSec" title="TF1* KVImpactParameter::fObsTransformXSec">fObsTransformXSec</a>) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetXSecDistribution"</span>, <span class="string">"Call MakeScale first to calculate correspondance observable&lt;-&gt;i.p."</span>);
       <span class="keyword">return</span> 0;
    }
@@ -256,11 +256,11 @@ END_LATEX
    <span class="comment">// If the impact parameter observable is on the Y-axis of obscor, use axis=<span class="string">"X"</span></span>
    <span class="comment">// (by default axis=<span class="string">"Y"</span>, i.e. we assume that the I.P. observable is on the x axis).</span>
 
-   <span class="keyword">if</span>(!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransformXSec" title="TF1* KVImpactParameter::fObsTransformXSec">fObsTransformXSec</a>){
+   <span class="keyword">if</span> (!<a href="../KVImpactParameter.html#KVImpactParameter:fObsTransformXSec" title="TF1* KVImpactParameter::fObsTransformXSec">fObsTransformXSec</a>) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetXSecEvolution"</span>, <span class="string">"Call MakeScale first to calculate correspondance observable&lt;-&gt;i.p."</span>);
       <span class="keyword">return</span> 0;
    }
-   TGraphErrors *gre = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:GetMomentEvolution" title="TGraphErrors* KVHistoManipulator::GetMomentEvolution(TH2* hh,TString momentx,TString momenty,TString axis=&quot;Y&quot;)">GetMomentEvolution</a>(obscor,moment,<span class="string">""</span>,axis);
+   TGraphErrors* gre = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:GetMomentEvolution" title="TGraphErrors* KVHistoManipulator::GetMomentEvolution(TH2* hh,TString momentx,TString momenty,TString axis=&quot;Y&quot;)">GetMomentEvolution</a>(obscor, moment, <span class="string">""</span>, axis);
    TGraph* gr = <a href="../KVImpactParameter.html#KVImpactParameter:HM" title="KVHistoManipulator KVImpactParameter::HM">HM</a>.<a href="../KVHistoManipulator.html#KVHistoManipulator:ScaleGraph" title="TGraph* KVHistoManipulator::ScaleGraph(TGraph* hh,TF1* fx,TF1* fy)">ScaleGraph</a>(gre, <a href="../KVImpactParameter.html#KVImpactParameter:fObsTransformXSec" title="TF1* KVImpactParameter::fObsTransformXSec">fObsTransformXSec</a>, 0);
    <span class="keyword">delete</span> gre;
    <span class="keyword">return</span> gr;
@@ -274,7 +274,7 @@ END_LATEX
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

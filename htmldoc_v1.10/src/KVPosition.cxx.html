@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:18 2015            -->
+<!--   Date: Fri Jan  8 15:14:28 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -45,10 +45,10 @@ $Id: <a href="../KVPosition.html">KVPosition</a>.cpp,v 1.21 2008/12/17 13:01:26 
 <span class="cpp">#include "TGeoBBox.h"</span>
 
 <span class="cpp">#define ROOT_GEO_DO_NOT_USE(method,retval) \</span>
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){ \
-       ::Warning(method, <span class="string">"Does not work with ROOT geometries. Do not use."</span>); \
-       <span class="keyword">return</span> retval; \
-    }
+   <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){ \
+      ::Warning(method, <span class="string">"Does not work with ROOT geometries. Do not use."</span>); \
+      <span class="keyword">return</span> retval; \
+   }
 
 ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 
@@ -70,8 +70,8 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 <span class="comment">//</span>
 <span class="comment">//               phi=0</span>
 <span class="comment">//    (x) beam    |</span>
-<span class="comment">//                | </span>
-<span class="comment">//                |  </span>
+<span class="comment">//                |</span>
+<span class="comment">//                |</span>
 <span class="comment">//                +------- phi=90</span>
 <span class="comment">//</span>
 <span class="comment">//All angles are in degrees.</span>
@@ -122,10 +122,10 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 
 <a name="IE_MqB"></a><a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:_KVPosition" title="void KVPosition::~KVPosition()">~KVPosition</a>()
 {
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>){
-        <span class="keyword">delete</span> <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>;
-        <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a> = 0;
-    }
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>) {
+      <span class="keyword">delete</span> <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>;
+      <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a> = 0;
+   }
 }
 
 <a name="GaKBKC"></a><a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:KVPosition" title="KVPosition KVPosition::KVPosition() or overloads">KVPosition</a>()
@@ -187,9 +187,9 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
    <span class="comment">//Set theta_min and theta_max from width (in degrees).</span>
    <span class="comment">//If theta is already known, use to set theta_min and theta_max.</span>
    <span class="comment">//If not, keep relative values (negative) of theta_min and theta_max,</span>
-   <span class="comment">//to be used when theta is set </span>
+   <span class="comment">//to be used when theta is set</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"SetPolarWidth"</span>,)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"SetPolarWidth"</span>,)
 
    <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:fTheta" title="Double_t KVPosition::fTheta">fTheta</a> &gt; -1.0) {
       <a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> = <a href="../KVPosition.html#KVPosition:fTheta" title="Double_t KVPosition::fTheta">fTheta</a> - .5 * pw;
@@ -205,7 +205,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 {
    <span class="comment">//Set min and max polar angles and calculate (mean) theta</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"SetPolarMinMax"</span>,)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"SetPolarMinMax"</span>,)
    <a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> = min;
    <a href="../KVPosition.html#KVPosition:fTheta_max" title="Double_t KVPosition::fTheta_max">fTheta_max</a> = max;
    <a href="../KVPosition.html#KVPosition:fTheta" title="Double_t KVPosition::fTheta">fTheta</a> = .5 * (min + max);
@@ -217,9 +217,9 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
    <span class="comment">//Set phi_min and phi_max from width (in degrees)</span>
    <span class="comment">//  If phi is already known, use to set phi_min and phi_max</span>
    <span class="comment">//  If not, keep relative values (negative) of phi_min and phi_max,</span>
-   <span class="comment">//  to be used when phi is set </span>
+   <span class="comment">//  to be used when phi is set</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"SetAzimuthalWidth"</span>,)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"SetAzimuthalWidth"</span>,)
    <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:fPhi" title="Double_t KVPosition::fPhi">fPhi</a> &gt; -1.0) {
       <a href="../KVPosition.html#KVPosition:fPhi_min" title="Double_t KVPosition::fPhi_min">fPhi_min</a> = <a href="../KVPosition.html#KVPosition:fPhi" title="Double_t KVPosition::fPhi">fPhi</a> - .5 * aw;
       <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:fPhi_min" title="Double_t KVPosition::fPhi_min">fPhi_min</a> &lt; 0.)
@@ -238,7 +238,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 {
    <span class="comment">//Set min and max azimuthal angles and calculate (mean) phi</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"SetAzimuthalMinMax"</span>,)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"SetAzimuthalMinMax"</span>,)
    <a href="../KVPosition.html#KVPosition:fPhi_min" title="Double_t KVPosition::fPhi_min">fPhi_min</a> = min;
    <a href="../KVPosition.html#KVPosition:fPhi_max" title="Double_t KVPosition::fPhi_max">fPhi_max</a> = max;
    <span class="keyword">if</span> (min &gt; max)
@@ -249,78 +249,78 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="OAsxuB"></a>TVector3 <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetRandomDirection" title="TVector3 KVPosition::GetRandomDirection(Option_t* t=&quot;isotropic&quot;)">GetRandomDirection</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a> * t)
+<a name="NT2Z.B"></a>TVector3 <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetRandomDirection" title="TVector3 KVPosition::GetRandomDirection(Option_t* t=&quot;isotropic&quot;)">GetRandomDirection</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* t)
 {
-    <span class="comment">// Returns a unit vector in a random direction corresponding to this detector.</span>
-    <span class="comment">// Depending on the optional option string, the direction is either drawn at</span>
-    <span class="comment">// <span class="string">"random"</span> among the corresponding angles, or <span class="string">"isotropic"</span>.</span>
-    <span class="comment">// By default, the direction is <span class="string">"isotropic"</span>.</span>
-    <span class="comment">//</span>
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Direction corresponds to a random position on the detector's entrance window.</span>
-    <span class="comment">// The <span class="string">"isotropic"</span> option has no effect.</span>
+   <span class="comment">// Returns a unit vector in a random direction corresponding to this detector.</span>
+   <span class="comment">// Depending on the optional option string, the direction is either drawn at</span>
+   <span class="comment">// <span class="string">"random"</span> among the corresponding angles, or <span class="string">"isotropic"</span>.</span>
+   <span class="comment">// By default, the direction is <span class="string">"isotropic"</span>.</span>
+   <span class="comment">//</span>
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Direction corresponds to a random position on the detector's entrance window.</span>
+   <span class="comment">// The <span class="string">"isotropic"</span> option has no effect.</span>
 
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        <span class="comment">// * ROOT Geometry *</span>
-        TVector3 r = <a href="../KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>();
-        <span class="keyword">return</span> r.Unit();
-    }
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      <span class="comment">// * ROOT Geometry *</span>
+      TVector3 r = <a href="../KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>();
+      <span class="keyword">return</span> r.Unit();
+   }
 
-    <a href="../ListOfTypes.html#Double_t">Double_t</a>  dtor = TMath::DegToRad();
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> th,ph;
-    <a href="../KVPosition.html#KVPosition:GetRandomAngles" title="void KVPosition::GetRandomAngles(Double_t&amp; th,Double_t&amp; ph,Option_t* t=&quot;isotropic&quot;)">GetRandomAngles</a>(th,ph,t);
-    TVector3 dummy;
-    dummy.SetMagThetaPhi(1.0,th*dtor,ph*dtor); <span class="comment">// a unit vector</span>
+   <a href="../ListOfTypes.html#Double_t">Double_t</a>  dtor = TMath::DegToRad();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> th, ph;
+   <a href="../KVPosition.html#KVPosition:GetRandomAngles" title="void KVPosition::GetRandomAngles(Double_t&amp; th,Double_t&amp; ph,Option_t* t=&quot;isotropic&quot;)">GetRandomAngles</a>(th, ph, t);
+   TVector3 dummy;
+   dummy.SetMagThetaPhi(1.0, th * dtor, ph * dtor); <span class="comment">// a unit vector</span>
 
-    <span class="keyword">return</span> dummy;
+   <span class="keyword">return</span> dummy;
 }
 <span class="comment">//___________________________________________________________________________</span>
-<a name="qA0cCC"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetRandomAngles" title="void KVPosition::GetRandomAngles(Double_t&amp; th,Double_t&amp; ph,Option_t* t=&quot;isotropic&quot;)">GetRandomAngles</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> &amp;th,<a href="../ListOfTypes.html#Double_t">Double_t</a> &amp;ph, <a href="../ListOfTypes.html#Option_t">Option_t</a> * t)
+<a name="o3eNAD"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetRandomAngles" title="void KVPosition::GetRandomAngles(Double_t&amp; th,Double_t&amp; ph,Option_t* t=&quot;isotropic&quot;)">GetRandomAngles</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a>&amp; th, <a href="../ListOfTypes.html#Double_t">Double_t</a>&amp; ph, <a href="../ListOfTypes.html#Option_t">Option_t</a>* t)
 {
-    <span class="comment">// Set th and ph to random values between the max and min limits defining the</span>
-    <span class="comment">// solid angle element.</span>
-    <span class="comment">// Depending on the optional option string, the direction is either drawn at</span>
-    <span class="comment">// <span class="string">"random"</span> among the corresponding angles, or <span class="string">"isotropic"</span>.</span>
-    <span class="comment">// By default, the direction is <span class="string">"isotropic"</span>.</span>
-    <span class="comment">//</span>
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// th and ph correspond to a random position on the detector's entrance window.</span>
-    <span class="comment">// The <span class="string">"isotropic"</span> option has no effect.</span>
+   <span class="comment">// Set th and ph to random values between the max and min limits defining the</span>
+   <span class="comment">// solid angle element.</span>
+   <span class="comment">// Depending on the optional option string, the direction is either drawn at</span>
+   <span class="comment">// <span class="string">"random"</span> among the corresponding angles, or <span class="string">"isotropic"</span>.</span>
+   <span class="comment">// By default, the direction is <span class="string">"isotropic"</span>.</span>
+   <span class="comment">//</span>
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// th and ph correspond to a random position on the detector's entrance window.</span>
+   <span class="comment">// The <span class="string">"isotropic"</span> option has no effect.</span>
 
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> dtor = TMath::DegToRad();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dtor = TMath::DegToRad();
 
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        <span class="comment">// * ROOT Geometry *</span>
-        TVector3 r = <a href="../KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>();
-        th = r.Theta()/dtor;
-        ph = r.Phi()/dtor;
-        <span class="keyword">if</span>(ph&lt;0) ph+=360.;
-        <span class="keyword">return</span>;
-    }
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      <span class="comment">// * ROOT Geometry *</span>
+      TVector3 r = <a href="../KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>();
+      th = r.Theta() / dtor;
+      ph = r.Phi() / dtor;
+      <span class="keyword">if</span> (ph &lt; 0) ph += 360.;
+      <span class="keyword">return</span>;
+   }
 
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> phmin = <a href="../KVPosition.html#KVPosition:fPhi_min" title="Double_t KVPosition::fPhi_min">fPhi_min</a>;     <span class="comment">//phimin in radians</span>
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> phmax = <a href="../KVPosition.html#KVPosition:fPhi_max" title="Double_t KVPosition::fPhi_max">fPhi_max</a>;     <span class="comment">//phimax in radians</span>
-    <span class="keyword">if</span> (phmax &lt; phmin)
-        phmax += 360;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> phmin = <a href="../KVPosition.html#KVPosition:fPhi_min" title="Double_t KVPosition::fPhi_min">fPhi_min</a>;     <span class="comment">//phimin in radians</span>
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> phmax = <a href="../KVPosition.html#KVPosition:fPhi_max" title="Double_t KVPosition::fPhi_max">fPhi_max</a>;     <span class="comment">//phimax in radians</span>
+   <span class="keyword">if</span> (phmax &lt; phmin)
+      phmax += 360;
 
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> dphi = phmax - phmin;
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> thmin, thmax, dtheta;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dphi = phmax - phmin;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> thmin, thmax, dtheta;
 
-    <span class="keyword">if</span> (!strcmp(t, <span class="string">"random"</span>)) {
-        thmin = <a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> * dtor;
-        thmax = <a href="../KVPosition.html#KVPosition:fTheta_max" title="Double_t KVPosition::fTheta_max">fTheta_max</a> * dtor;
-        dtheta = thmax - thmin;
-        th = gRandom-&gt;Uniform(dtheta) + thmin;
-    } <span class="keyword">else</span> {
-        thmin = TMath::Cos(<a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> * dtor);
-        thmax = TMath::Cos(<a href="../KVPosition.html#KVPosition:fTheta_max" title="Double_t KVPosition::fTheta_max">fTheta_max</a> * dtor);
-        dtheta = thmin - thmax;
-        th = TMath::ACos(gRandom-&gt;Uniform(dtheta) + thmax);
-    }
-    ph = gRandom-&gt;Uniform(dphi) + phmin;
-    <span class="keyword">if</span> (ph &gt; 360)
-        ph -= 360;
-    th/=dtor;
+   <span class="keyword">if</span> (!strcmp(t, <span class="string">"random"</span>)) {
+      thmin = <a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> * dtor;
+      thmax = <a href="../KVPosition.html#KVPosition:fTheta_max" title="Double_t KVPosition::fTheta_max">fTheta_max</a> * dtor;
+      dtheta = thmax - thmin;
+      th = gRandom-&gt;Uniform(dtheta) + thmin;
+   } <span class="keyword">else</span> {
+      thmin = TMath::Cos(<a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> * dtor);
+      thmax = TMath::Cos(<a href="../KVPosition.html#KVPosition:fTheta_max" title="Double_t KVPosition::fTheta_max">fTheta_max</a> * dtor);
+      dtheta = thmin - thmax;
+      th = TMath::ACos(gRandom-&gt;Uniform(dtheta) + thmax);
+   }
+   ph = gRandom-&gt;Uniform(dphi) + phmin;
+   <span class="keyword">if</span> (ph &gt; 360)
+      ph -= 360;
+   th /= dtor;
 
 }
 
@@ -330,7 +330,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
    <span class="comment">//<a href="../ListOfTypes.html#Bool_t">kTRUE</a> if given angle phi is within the azimuthal range of this solid</span>
    <span class="comment">//angle element</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"IsInPhiRange"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"IsInPhiRange"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a> phimintest = <a href="../KVPosition.html#KVPosition:fPhi_min" title="Double_t KVPosition::fPhi_min">fPhi_min</a>;
    <a href="../ListOfTypes.html#Double_t">Double_t</a> phimaxtest = <a href="../KVPosition.html#KVPosition:fPhi_max" title="Double_t KVPosition::fPhi_max">fPhi_max</a>;
@@ -351,7 +351,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 {
    <span class="comment">//<a href="../ListOfTypes.html#Bool_t">kTRUE</a> if given angle theta is within the polar range of this solid angle element</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"IsInPolarRange"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"IsInPolarRange"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
 
    <span class="keyword">if</span> (theta &gt;= <a href="../KVPosition.html#KVPosition:fTheta_min" title="Double_t KVPosition::fTheta_min">fTheta_min</a> &amp;&amp; theta &lt;= <a href="../KVPosition.html#KVPosition:fTheta_max" title="Double_t KVPosition::fTheta_max">fTheta_max</a>)
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
@@ -360,11 +360,11 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 }
 
 <span class="comment">//_____________________________________________________________________________________</span>
-<a name="q3sRrD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsSmallerThan" title="Bool_t KVPosition::IsSmallerThan(KVPosition* pos)">IsSmallerThan</a>(<a href="../KVPosition.html">KVPosition</a> * pos)
+<a name="XtcyKB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsSmallerThan" title="Bool_t KVPosition::IsSmallerThan(KVPosition* pos)">IsSmallerThan</a>(<a href="../KVPosition.html">KVPosition</a>* pos)
 {
    <span class="comment">// <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if <span class="string">"this"</span> is entirely contained within <span class="string">"pos"</span></span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"IsSmallerThan"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"IsSmallerThan"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
    <span class="keyword">return</span> (pos-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
            &amp;&amp; pos-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>())
            &amp;&amp; pos-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
@@ -372,54 +372,54 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="qXdrKB"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsAlignedWith" title="Bool_t KVPosition::IsAlignedWith(KVPosition* pos)">IsAlignedWith</a>(<a href="../KVPosition.html">KVPosition</a> * pos)
+<a name="PX3arD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsAlignedWith" title="Bool_t KVPosition::IsAlignedWith(KVPosition* pos)">IsAlignedWith</a>(<a href="../KVPosition.html">KVPosition</a>* pos)
 {
    <span class="comment">//<a href="../ListOfTypes.html#Bool_t">kTRUE</a> if one of the two solid angle elements is completely contained within the other.</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"IsAlignedWith"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"IsAlignedWith"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
    <span class="keyword">return</span> (<a href="../KVPosition.html#KVPosition:IsSmallerThan" title="Bool_t KVPosition::IsSmallerThan(KVPosition* pos)">IsSmallerThan</a>(pos) || pos-&gt;<a href="../KVPosition.html#KVPosition:IsSmallerThan" title="Bool_t KVPosition::IsSmallerThan(KVPosition* pos)">IsSmallerThan</a>(<span class="keyword">this</span>));
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="oL3lzD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsOverlappingWith" title="Bool_t KVPosition::IsOverlappingWith(KVPosition* pos)">IsOverlappingWith</a>(<a href="../KVPosition.html">KVPosition</a> * other)
+<a name="u4hVJC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsOverlappingWith" title="Bool_t KVPosition::IsOverlappingWith(KVPosition* pos)">IsOverlappingWith</a>(<a href="../KVPosition.html">KVPosition</a>* other)
 {
    <span class="comment">//<a href="../ListOfTypes.html#Bool_t">kTRUE</a> if there is at least partial overlap between two solid angle elements</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"IsOverlappingWith"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"IsOverlappingWith"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
    <span class="keyword">return</span> (
              <span class="comment">//overlapping corners - case 1</span>
              (<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
               || <a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
              &amp;&amp; (<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
                  || <a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
-       ) || (
-               <span class="comment">//overlapping corners - case 2</span>
-               (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
-                || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
-               &amp;&amp; (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
-                   || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
-       ) || (
-               <span class="comment">//case where this is phi-contained by the other, but the other is theta-contained by this</span>
-               (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
-                || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
-               &amp;&amp; (<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
-                   || <a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
-       ) || (
-               <span class="comment">//case where this is phi-contained by the other, but the other is theta-contained by this</span>
-               (<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
-                || <a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
-               &amp;&amp; (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
-                   || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
-       );
+          ) || (
+             <span class="comment">//overlapping corners - case 2</span>
+             (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
+              || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
+             &amp;&amp; (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
+                 || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
+          ) || (
+             <span class="comment">//case where this is phi-contained by the other, but the other is theta-contained by this</span>
+             (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
+              || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
+             &amp;&amp; (<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
+                 || <a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
+          ) || (
+             <span class="comment">//case where this is phi-contained by the other, but the other is theta-contained by this</span>
+             (<a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>())
+              || <a href="../KVPosition.html#KVPosition:IsInPolarRange" title="Bool_t KVPosition::IsInPolarRange(const Double_t theta)">IsInPolarRange</a>(other-&gt;<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()))
+             &amp;&amp; (other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>())
+                 || other-&gt;<a href="../KVPosition.html#KVPosition:IsInPhiRange" title="Bool_t KVPosition::IsInPhiRange(const Double_t phi)">IsInPhiRange</a>(<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()))
+          );
 }
 
 <span class="comment">//___________________________________________________________________________</span>
-<a name="GkfoQC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsAzimuthallyWiderThan" title="Bool_t KVPosition::IsAzimuthallyWiderThan(KVPosition* pos)">IsAzimuthallyWiderThan</a>(<a href="../KVPosition.html">KVPosition</a> * pos)
+<a name="VAf1ED"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:IsAzimuthallyWiderThan" title="Bool_t KVPosition::IsAzimuthallyWiderThan(KVPosition* pos)">IsAzimuthallyWiderThan</a>(<a href="../KVPosition.html">KVPosition</a>* pos)
 {
    <span class="comment">//<a href="../ListOfTypes.html#Bool_t">kTRUE</a> if <span class="string">"this"</span> has larger azimuthal width than <span class="string">"pos"</span>.</span>
    <span class="comment">//Takes care of cases where the solid angle straddles 0 degrees</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"IsAzimuthallyWiderThan"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"IsAzimuthallyWiderThan"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)
    <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:GetAzimuthalWidth" title="Double_t KVPosition::GetAzimuthalWidth(Double_t phmin=-1.,Double_t phimax=-1.)">GetAzimuthalWidth</a>() &gt; pos-&gt;<a href="../KVPosition.html#KVPosition:GetAzimuthalWidth" title="Double_t KVPosition::GetAzimuthalWidth(Double_t phmin=-1.,Double_t phimax=-1.)">GetAzimuthalWidth</a>())
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
    <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
@@ -431,7 +431,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
    <span class="comment">//Returns a unit vector corresponding to the direction of <a href="../KVPosition.html#KVPosition:fTheta" title="Double_t KVPosition::fTheta">fTheta</a>, <a href="../KVPosition.html#KVPosition:fPhi" title="Double_t KVPosition::fPhi">fPhi</a></span>
    <span class="comment">//i.e. the centre of the solid angle element.</span>
 
-   TVector3 tmp(1.0,0.0,0.0);
+   TVector3 tmp(1.0, 0.0, 0.0);
    tmp.<a href="../KVPosition.html#KVPosition:SetTheta" title="void KVPosition::SetTheta(Double_t t)">SetTheta</a>(<a href="../KVPosition.html#KVPosition:fTheta" title="Double_t KVPosition::fTheta">fTheta</a> * TMath::Pi() / 180.);
    tmp.<a href="../KVPosition.html#KVPosition:SetPhi" title="void KVPosition::SetPhi(Double_t p)">SetPhi</a>(<a href="../KVPosition.html#KVPosition:fPhi" title="Double_t KVPosition::fPhi">fPhi</a> * TMath::Pi() / 180.);
    <span class="keyword">return</span> tmp;
@@ -439,86 +439,86 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="xme2sD"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3* ,Double_t =0)">GetCornerCoordinates</a>(TVector3 * corners, <a href="../ListOfTypes.html#Double_t">Double_t</a> depth)
+<a name="fEa3L"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3* ,Double_t =0)">GetCornerCoordinates</a>(TVector3* corners, <a href="../ListOfTypes.html#Double_t">Double_t</a> depth)
 {
    <span class="comment">// Fill the array (TVector3 corner[4]) with the coordinates of the 4 'corners' of the solid angle element.</span>
-	<span class="comment">//</span>
-	<span class="comment">// These 'corners' are the points of intersection between the plane defined by the normal</span>
-	<span class="comment">// to the centre of the solid angle (direction: theta,phi), at a distance <a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a> [cm] from the</span>
-	<span class="comment">// origin, and the four lines starting at the origin with directions (thetamin,phimin),</span>
-	<span class="comment">// (thetamax,phimin), (thetamax,phimax), (thetamin,phimax).</span>
-	<span class="comment">//</span>
-	<span class="comment">// If optional argument 'depth' [cm] is given, the coordinates are calculated for the plane</span>
-	<span class="comment">// situated at distance (<a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a>+depth) from the origin.</span>
+   <span class="comment">//</span>
+   <span class="comment">// These 'corners' are the points of intersection between the plane defined by the normal</span>
+   <span class="comment">// to the centre of the solid angle (direction: theta,phi), at a distance <a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a> [cm] from the</span>
+   <span class="comment">// origin, and the four lines starting at the origin with directions (thetamin,phimin),</span>
+   <span class="comment">// (thetamax,phimin), (thetamax,phimax), (thetamin,phimax).</span>
+   <span class="comment">//</span>
+   <span class="comment">// If optional argument 'depth' [cm] is given, the coordinates are calculated for the plane</span>
+   <span class="comment">// situated at distance (<a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a>+depth) from the origin.</span>
    <span class="comment">//</span>
    <span class="comment">// The order of the 4 corners is as follows:</span>
    <span class="comment">//       corners[3] : theta-min, phi-min</span>
    <span class="comment">//       corners[2] : theta-max, phi-min</span>
    <span class="comment">//       corners[1] : theta-max, phi-max</span>
    <span class="comment">//       corners[0] : theta-min, phi-max</span>
-	<span class="comment">//</span>
-	<span class="comment">// Coordinates are in CENTIMETRES</span>
-	
-    ROOT_GEO_DO_NOT_USE(<span class="string">"GetCornerCoordinates"</span>,)
+   <span class="comment">//</span>
+   <span class="comment">// Coordinates are in CENTIMETRES</span>
 
-    <span class="comment">// calculate unit vector normal to solid angle</span>
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> pthR = <a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>()*TMath::DegToRad();
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> pphR = <a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>()*TMath::DegToRad();
-	TVector3 normal_to_plane(sin(pthR)*cos(pphR), sin(pthR)*sin(pphR), cos(pthR));
-	
-	<span class="comment">// the four directions/lines</span>
-	corners[3].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>() );
-	corners[2].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>() );
-	corners[1].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>() );
-	corners[0].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>() );
-	
-	<span class="comment">// calculate intersection points</span>
-	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=0; i&lt;4; i++){
-		<a href="../ListOfTypes.html#Double_t">Double_t</a> t = corners[i] * normal_to_plane;
-		<span class="keyword">if</span>( t &lt;= 0.0 ) corners[i].SetXYZ(0,0,0);
-        <span class="keyword">else</span> corners[i] *= (<a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a> + depth)/t;
-	}
+   ROOT_GEO_DO_NOT_USE(<span class="string">"GetCornerCoordinates"</span>,)
+
+   <span class="comment">// calculate unit vector normal to solid angle</span>
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> pthR = <a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>() * TMath::DegToRad();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> pphR = <a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>() * TMath::DegToRad();
+   TVector3 normal_to_plane(sin(pthR)*cos(pphR), sin(pthR)*sin(pphR), cos(pthR));
+
+   <span class="comment">// the four directions/lines</span>
+   corners[3].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>());
+   corners[2].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>());
+   corners[1].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>());
+   corners[0].SetMagThetaPhi(1.0, TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>(), TMath::DegToRad()*<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>());
+
+   <span class="comment">// calculate intersection points</span>
+   <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = 0; i &lt; 4; i++) {
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> t = corners[i] * normal_to_plane;
+      <span class="keyword">if</span> (t &lt;= 0.0) corners[i].SetXYZ(0, 0, 0);
+      <span class="keyword">else</span> corners[i] *= (<a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a> + depth) / t;
+   }
 }
 
 <span class="comment">//___________________________________________________________________________</span>
 
-<a name="LTFLDC"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetCornerCoordinatesInOwnFrame" title="void KVPosition::GetCornerCoordinatesInOwnFrame(TVector3* ,Double_t =0)">GetCornerCoordinatesInOwnFrame</a>(TVector3 * corners, <a href="../ListOfTypes.html#Double_t">Double_t</a> depth)
+<a name="njVQeC"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetCornerCoordinatesInOwnFrame" title="void KVPosition::GetCornerCoordinatesInOwnFrame(TVector3* ,Double_t =0)">GetCornerCoordinatesInOwnFrame</a>(TVector3* corners, <a href="../ListOfTypes.html#Double_t">Double_t</a> depth)
 {
-	<span class="comment">// Like <a href="../KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3* ,Double_t =0)">GetCornerCoordinates</a>(), except that the coordinates correspond to a reference frame</span>
-	<span class="comment">// in which the +ve z-axis goes through the centre of the solid angle</span>
+   <span class="comment">// Like <a href="../KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3* ,Double_t =0)">GetCornerCoordinates</a>(), except that the coordinates correspond to a reference frame</span>
+   <span class="comment">// in which the +ve z-axis goes through the centre of the solid angle</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"GetCornerCoordinatesInOwnFrame"</span>,)
-    <a href="../KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3* ,Double_t =0)">GetCornerCoordinates</a>(corners,depth);
-	TRotation rot_to_frame;
-	rot_to_frame.SetYEulerAngles( -<a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>()*TMath::DegToRad(), -<a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>()*TMath::DegToRad(), 0. );
-    TVector3 displZ(0,0,<a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a>+depth);
-	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=0;i&lt;4;i++){
-		corners[i] = rot_to_frame*corners[i] - displZ;
-	}
+   ROOT_GEO_DO_NOT_USE(<span class="string">"GetCornerCoordinatesInOwnFrame"</span>,)
+   <a href="../KVPosition.html#KVPosition:GetCornerCoordinates" title="void KVPosition::GetCornerCoordinates(TVector3* ,Double_t =0)">GetCornerCoordinates</a>(corners, depth);
+   TRotation rot_to_frame;
+   rot_to_frame.SetYEulerAngles(-<a href="../KVPosition.html#KVPosition:GetPhi" title="Double_t KVPosition::GetPhi()">GetPhi</a>()*TMath::DegToRad(), -<a href="../KVPosition.html#KVPosition:GetTheta" title="Double_t KVPosition::GetTheta()">GetTheta</a>()*TMath::DegToRad(), 0.);
+   TVector3 displZ(0, 0, <a href="../KVPosition.html#KVPosition:fDistance" title="Double_t KVPosition::fDistance">fDistance</a> + depth);
+   <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = 0; i &lt; 4; i++) {
+      corners[i] = rot_to_frame * corners[i] - displZ;
+   }
 }
 
 <span class="comment">//___________________________________________________________________________</span>
 <a name="bquFIC"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetSolidAngle" title="Double_t KVPosition::GetSolidAngle()">GetSolidAngle</a>(<span class="keyword">void</span>)
 {
-    <span class="comment">// Return values of the solid angle (in msr) seen by the geometric ensemble</span>
-    <span class="comment">// For simple geometries defined by theta_min/max etc., this is exact.</span>
-    <span class="comment">// For ROOT geometries we calculate the area of the entrance window and divide</span>
-    <span class="comment">// it by the square of the distance to the detector.</span>
-	
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:fSolidAngle" title="Double_t KVPosition::fSolidAngle">fSolidAngle</a>;
-    }
+   <span class="comment">// Return values of the solid angle (in msr) seen by the geometric ensemble</span>
+   <span class="comment">// For simple geometries defined by theta_min/max etc., this is exact.</span>
+   <span class="comment">// For ROOT geometries we calculate the area of the entrance window and divide</span>
+   <span class="comment">// it by the square of the distance to the detector.</span>
 
-    <span class="keyword">return</span> (-1.*cos(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()*TMath::DegToRad())+
-            cos(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>()*TMath::DegToRad()))
-            *(<a href="../KVPosition.html#KVPosition:GetAzimuthalWidth" title="Double_t KVPosition::GetAzimuthalWidth(Double_t phmin=-1.,Double_t phimax=-1.)">GetAzimuthalWidth</a>()*TMath::DegToRad())*1.e3;
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:fSolidAngle" title="Double_t KVPosition::fSolidAngle">fSolidAngle</a>;
+   }
+
+   <span class="keyword">return</span> (-1.*cos(<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>() * TMath::DegToRad()) +
+           cos(<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>() * TMath::DegToRad()))
+          * (<a href="../KVPosition.html#KVPosition:GetAzimuthalWidth" title="Double_t KVPosition::GetAzimuthalWidth(Double_t phmin=-1.,Double_t phimax=-1.)">GetAzimuthalWidth</a>() * TMath::DegToRad()) * 1.e3;
 
 }
 
 <a name="TXl.3C"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>() <span class="keyword">const</span>
 {
-    <span class="comment">// Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if ROOT geometry is used, <a href="../ListOfTypes.html#Bool_t">kFALSE</a> if not</span>
-    <span class="keyword">return</span> (<a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a> &amp;&amp; <a href="../KVPosition.html#KVPosition:fShape" title="TGeoBBox* KVPosition::fShape">fShape</a>);
+   <span class="comment">// Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if ROOT geometry is used, <a href="../ListOfTypes.html#Bool_t">kFALSE</a> if not</span>
+   <span class="keyword">return</span> (<a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a> &amp;&amp; <a href="../KVPosition.html#KVPosition:fShape" title="TGeoBBox* KVPosition::fShape">fShape</a>);
 }
 
 <span class="comment">//_________________________________________________________________________________________</span>
@@ -529,7 +529,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
    <span class="comment">//If no arguments are given, width calculated for this object</span>
    <span class="comment">//Otherwise, width calculated for given phi-min and phi-max</span>
 
-    ROOT_GEO_DO_NOT_USE(<span class="string">"GetAzimuthalWidth"</span>,0.)
+   ROOT_GEO_DO_NOT_USE(<span class="string">"GetAzimuthalWidth"</span>, 0.)
 
    <span class="keyword">if</span> (phmin == -1.)
       phmin = <a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>();
@@ -554,173 +554,173 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
       <span class="keyword">return</span>;
    }
    <a href="../ListOfTypes.html#Double_t">Double_t</a> d__th =
-       2. * TMath::RadToDeg() * TMath::ATan(lin_dim /
-                                            (2. * <a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>()));
+      2. * TMath::RadToDeg() * TMath::ATan(lin_dim /
+                                           (2. * <a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>()));
    <a href="../ListOfTypes.html#Double_t">Double_t</a> d__ph =
-       TMath::RadToDeg() * lin_dim / (<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>() * <a href="../KVPosition.html#KVPosition:GetSinTheta" title="Double_t KVPosition::GetSinTheta()">GetSinTheta</a>());
+      TMath::RadToDeg() * lin_dim / (<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>() * <a href="../KVPosition.html#KVPosition:GetSinTheta" title="Double_t KVPosition::GetSinTheta()">GetSinTheta</a>());
    <a href="../KVPosition.html#KVPosition:SetPolarWidth" title="void KVPosition::SetPolarWidth(Double_t pw)">SetPolarWidth</a>(d__th);
    <a href="../KVPosition.html#KVPosition:SetAzimuthalWidth" title="void KVPosition::SetAzimuthalWidth(Double_t aw)">SetAzimuthalWidth</a>(d__ph);
 }
-   
+
 <a name="Q1Rg0B"></a>TRotation <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetRandomIsotropicRotation" title="TRotation KVPosition::GetRandomIsotropicRotation()">GetRandomIsotropicRotation</a>()
 {
    <span class="comment">// Generates a rotation which, if applied to a unit vector in the Z-direction,</span>
    <span class="comment">// will transform it into an isotropically-distributed vector in this</span>
    <span class="comment">// angular range.</span>
-   
-    TRotation rr2;
-    ROOT_GEO_DO_NOT_USE(<span class="string">"GetRandomIsotropicRotation"</span>,rr2)
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> a1min,a1max,a2min,a2max,a3min,a3max;
-    a1min=0;
-    a1max=2*TMath::Pi();
-    a2min=<a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>()*TMath::DegToRad();
-    a2max=<a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>()*TMath::DegToRad();
-    a3min=<a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>()*TMath::DegToRad();
-    a3max=<a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>()*TMath::DegToRad();
-    a3min+=TMath::Pi()/2.;
-    a3max+=TMath::Pi()/2.;
-    rr2.SetXEulerAngles(gRandom-&gt;Uniform(a1min,a1max),
-          TMath::ACos(gRandom-&gt;Uniform(cos(a2max),cos(a2min))),
-          gRandom-&gt;Uniform(a3min,a3max));
-    <span class="keyword">return</span> rr2;
+
+   TRotation rr2;
+   ROOT_GEO_DO_NOT_USE(<span class="string">"GetRandomIsotropicRotation"</span>, rr2)
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> a1min, a1max, a2min, a2max, a3min, a3max;
+   a1min = 0;
+   a1max = 2 * TMath::Pi();
+   a2min = <a href="../KVPosition.html#KVPosition:GetThetaMin" title="Double_t KVPosition::GetThetaMin()">GetThetaMin</a>() * TMath::DegToRad();
+   a2max = <a href="../KVPosition.html#KVPosition:GetThetaMax" title="Double_t KVPosition::GetThetaMax()">GetThetaMax</a>() * TMath::DegToRad();
+   a3min = <a href="../KVPosition.html#KVPosition:GetPhiMin" title="Double_t KVPosition::GetPhiMin()">GetPhiMin</a>() * TMath::DegToRad();
+   a3max = <a href="../KVPosition.html#KVPosition:GetPhiMax" title="Double_t KVPosition::GetPhiMax()">GetPhiMax</a>() * TMath::DegToRad();
+   a3min += TMath::Pi() / 2.;
+   a3max += TMath::Pi() / 2.;
+   rr2.SetXEulerAngles(gRandom-&gt;Uniform(a1min, a1max),
+                       TMath::ACos(gRandom-&gt;Uniform(cos(a2max), cos(a2min))),
+                       gRandom-&gt;Uniform(a3min, a3max));
+   <span class="keyword">return</span> rr2;
 }
 
 <span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
 
-<a name="dW33ND"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:SetMatrix" title="void KVPosition::SetMatrix(const TGeoHMatrix* )">SetMatrix</a>(<span class="keyword">const</span> TGeoHMatrix *m)
+<a name="bl23ND"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:SetMatrix" title="void KVPosition::SetMatrix(const TGeoHMatrix* )">SetMatrix</a>(<span class="keyword">const</span> TGeoHMatrix* m)
 {
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Set the global transformation matrix for this detector</span>
-    <span class="comment">// If shape has been set, we set the (theta,phi) angles</span>
-    <span class="comment">// corresponding to the centre of the entrance window, and</span>
-    <span class="comment">// the distance from the target.</span>
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Set the global transformation matrix for this detector</span>
+   <span class="comment">// If shape has been set, we set the (theta,phi) angles</span>
+   <span class="comment">// corresponding to the centre of the entrance window, and</span>
+   <span class="comment">// the distance from the target.</span>
 
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>) <span class="keyword">delete</span> <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>;
-    <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a> = <span class="keyword">new</span> TGeoHMatrix(*m);
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        TVector3 centre = <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
-        <a href="../KVPosition.html#KVPosition:SetTheta" title="void KVPosition::SetTheta(Double_t t)">SetTheta</a>(centre.Theta()*TMath::RadToDeg());
-        <a href="../KVPosition.html#KVPosition:SetPhi" title="void KVPosition::SetPhi(Double_t p)">SetPhi</a>(centre.Phi()*TMath::RadToDeg());
-        <a href="../KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>(centre.Mag());
-        <a href="../ListOfTypes.html#Double_t">Double_t</a> area = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetFacetArea(1);
-        <a href="../KVPosition.html#KVPosition:fSolidAngle" title="Double_t KVPosition::fSolidAngle">fSolidAngle</a> = area/pow(<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>(),2.)*1.e3;
-    }
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>) <span class="keyword">delete</span> <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>;
+   <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a> = <span class="keyword">new</span> TGeoHMatrix(*m);
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      TVector3 centre = <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
+      <a href="../KVPosition.html#KVPosition:SetTheta" title="void KVPosition::SetTheta(Double_t t)">SetTheta</a>(centre.Theta()*TMath::RadToDeg());
+      <a href="../KVPosition.html#KVPosition:SetPhi" title="void KVPosition::SetPhi(Double_t p)">SetPhi</a>(centre.Phi()*TMath::RadToDeg());
+      <a href="../KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>(centre.Mag());
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> area = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetFacetArea(1);
+      <a href="../KVPosition.html#KVPosition:fSolidAngle" title="Double_t KVPosition::fSolidAngle">fSolidAngle</a> = area / pow(<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>(), 2.) * 1.e3;
+   }
 }
 
-<a name="P5mKNB"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:SetShape" title="void KVPosition::SetShape(TGeoBBox* )">SetShape</a>(TGeoBBox *b)
+<a name="yMTedC"></a><span class="keyword">void</span> <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:SetShape" title="void KVPosition::SetShape(TGeoBBox* )">SetShape</a>(TGeoBBox* b)
 {
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Set the shape of this detector</span>
-    <span class="comment">// If matrix has been set, we set the (theta,phi) angles</span>
-    <span class="comment">// corresponding to the centre of the entrance window, and</span>
-    <span class="comment">// the distance from the target.</span>
-    <a href="../KVPosition.html#KVPosition:fShape" title="TGeoBBox* KVPosition::fShape">fShape</a> = b;
-    <span class="keyword">if</span>(<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        TVector3 centre = <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
-        <a href="../KVPosition.html#KVPosition:SetTheta" title="void KVPosition::SetTheta(Double_t t)">SetTheta</a>(centre.Theta()*TMath::RadToDeg());
-        <a href="../KVPosition.html#KVPosition:SetPhi" title="void KVPosition::SetPhi(Double_t p)">SetPhi</a>(centre.Phi()*TMath::RadToDeg());
-        <a href="../KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>(centre.Mag());
-        <a href="../ListOfTypes.html#Double_t">Double_t</a> area = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetFacetArea(1);
-        <a href="../KVPosition.html#KVPosition:fSolidAngle" title="Double_t KVPosition::fSolidAngle">fSolidAngle</a> = area/pow(<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>(),2.)*1.e3;
-    }
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Set the shape of this detector</span>
+   <span class="comment">// If matrix has been set, we set the (theta,phi) angles</span>
+   <span class="comment">// corresponding to the centre of the entrance window, and</span>
+   <span class="comment">// the distance from the target.</span>
+   <a href="../KVPosition.html#KVPosition:fShape" title="TGeoBBox* KVPosition::fShape">fShape</a> = b;
+   <span class="keyword">if</span> (<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      TVector3 centre = <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
+      <a href="../KVPosition.html#KVPosition:SetTheta" title="void KVPosition::SetTheta(Double_t t)">SetTheta</a>(centre.Theta()*TMath::RadToDeg());
+      <a href="../KVPosition.html#KVPosition:SetPhi" title="void KVPosition::SetPhi(Double_t p)">SetPhi</a>(centre.Phi()*TMath::RadToDeg());
+      <a href="../KVPosition.html#KVPosition:SetDistance" title="void KVPosition::SetDistance(Double_t d)">SetDistance</a>(centre.Mag());
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> area = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetFacetArea(1);
+      <a href="../KVPosition.html#KVPosition:fSolidAngle" title="Double_t KVPosition::fSolidAngle">fSolidAngle</a> = area / pow(<a href="../KVPosition.html#KVPosition:GetDistance" title="Double_t KVPosition::GetDistance()">GetDistance</a>(), 2.) * 1.e3;
+   }
 }
 
-<a name="tcLP1E"></a>TGeoHMatrix *<a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>() <span class="keyword">const</span>
+<a name="LbLP1E"></a>TGeoHMatrix* <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>() <span class="keyword">const</span>
 {
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Return global transformation matrix for this detector</span>
-    <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>;
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Return global transformation matrix for this detector</span>
+   <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:fMatrix" title="TGeoHMatrix* KVPosition::fMatrix">fMatrix</a>;
 }
 
-<a name="ObvD4B"></a>TGeoBBox *<a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>() <span class="keyword">const</span>
+<a name="im1D4B"></a>TGeoBBox* <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>() <span class="keyword">const</span>
 {
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Return shape of this detector</span>
-    <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:fShape" title="TGeoBBox* KVPosition::fShape">fShape</a>;
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Return shape of this detector</span>
+   <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:fShape" title="TGeoBBox* KVPosition::fShape">fShape</a>;
 }
 
 <a name="uFFiAE"></a>TVector3 <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetRandomPoint" title="TVector3 KVPosition::GetRandomPoint()">GetRandomPoint</a>() <span class="keyword">const</span>
 {
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Generate a vector in the world (laboratory) frame from the origin</span>
-    <span class="comment">// to a random point on the entrance window of the detector.</span>
-    <span class="comment">//</span>
-    <span class="comment">// It is assumed that the detector volume was defined in such a way</span>
-    <span class="comment">// that the entrance window corresponds to the facet in the X-Y plane</span>
-    <span class="comment">// placed at -dZ.</span>
-    <span class="comment">//</span>
-    <span class="comment">// NOTE: we force the use of TGeoBBox::GetPointsOnFacet.</span>
-    <span class="comment">// For TGeoArb8, the method has been overridden and does nothing.</span>
-    <span class="comment">// We use the TGeoBBox method, and then use TGeoShape::Contains</span>
-    <span class="comment">// to check that the point does actually correspond to the TGeoArb8.</span>
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Generate a vector in the world (laboratory) frame from the origin</span>
+   <span class="comment">// to a random point on the entrance window of the detector.</span>
+   <span class="comment">//</span>
+   <span class="comment">// It is assumed that the detector volume was defined in such a way</span>
+   <span class="comment">// that the entrance window corresponds to the facet in the X-Y plane</span>
+   <span class="comment">// placed at -dZ.</span>
+   <span class="comment">//</span>
+   <span class="comment">// NOTE: we force the use of TGeoBBox::GetPointsOnFacet.</span>
+   <span class="comment">// For TGeoArb8, the method has been overridden and does nothing.</span>
+   <span class="comment">// We use the TGeoBBox method, and then use TGeoShape::Contains</span>
+   <span class="comment">// to check that the point does actually correspond to the TGeoArb8.</span>
 
-    <span class="keyword">if</span>(!<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        ::Error(<span class="string">"KVPosition::GetRandomPointOnEntranceWindow"</span>,
-                <span class="string">"ROOT Geometry has not been initialised"</span>);
-        <span class="keyword">return</span> TVector3();
-    }
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> master[3*50];
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> points[3*50];
-    <span class="keyword">const</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>* origin = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetOrigin();
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> dz = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetDZ();
-    <span class="comment">// This will generate a point on the (-DZ) face of the bounding box of the shape</span>
-    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok1 = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;TGeoBBox::GetPointsOnFacet(1,50,points);
-    <span class="comment">// We move the point slightly inside the volume to test if it actually corresponds</span>
-    <span class="comment">// to a point on the shape's facet</span>
-    points[2]+=dz/100.;
-    <span class="comment">// Correct for offset of centre of shape</span>
-    <span class="keyword">for</span>(<span class="keyword">int</span> i=0;i&lt;3;i++) points[i]+=origin[i];
-    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok2 = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;Contains(points);
-    <span class="keyword">if</span>(!ok1){
-        ::Error(<span class="string">"KVPosition::GetRandomPoint"</span>,
-                <span class="string">"TGeoBBox::GetPointsOnFacet returns kFALSE for shape %s. Returning coordinates of centre."</span>, <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;ClassName());
-        <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
-    }
-    <a href="../ListOfTypes.html#Int_t">Int_t</a> np=0;
-    <span class="keyword">if</span>(!ok2){
-       <span class="comment">// try to find a point that works</span>
-       np++;
-       <span class="keyword">while</span>(np&lt;50){
-          <a href="../ListOfTypes.html#Double_t">Double_t</a>* npoint = points+3*np;
-          npoint[2]+=dz/100.;
-          <span class="comment">// Correct for offset of centre of shape</span>
-          <span class="keyword">for</span>(<span class="keyword">int</span> i=0;i&lt;3;i++) npoint[i]+=origin[i];
-          ok2=<a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;Contains(npoint);
-          <span class="keyword">if</span>(ok2) <span class="keyword">break</span>;
-          np++;
-       }
-       <span class="keyword">if</span>(!ok2){
-        ::Error(<span class="string">"KVPosition::GetRandomPoint"</span>,
-                <span class="string">"Cannot generate points for shape %s. Returning coordinates of centre."</span>, <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;ClassName());
-        <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
-       }
-    }
-    <a href="../ListOfTypes.html#Double_t">Double_t</a>* npoint = points+3*np;
-    npoint[2]-=dz/100.;
-    <a href="../KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>()-&gt;LocalToMaster(npoint, master);
-    <span class="keyword">return</span> TVector3(master);
+   <span class="keyword">if</span> (!<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      ::Error(<span class="string">"KVPosition::GetRandomPointOnEntranceWindow"</span>,
+              <span class="string">"ROOT Geometry has not been initialised"</span>);
+      <span class="keyword">return</span> TVector3();
+   }
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> master[3 * 50];
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> points[3 * 50];
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>* origin = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetOrigin();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dz = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetDZ();
+   <span class="comment">// This will generate a point on the (-DZ) face of the bounding box of the shape</span>
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok1 = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;TGeoBBox::GetPointsOnFacet(1, 50, points);
+   <span class="comment">// We move the point slightly inside the volume to test if it actually corresponds</span>
+   <span class="comment">// to a point on the shape's facet</span>
+   points[2] += dz / 100.;
+   <span class="comment">// Correct for offset of centre of shape</span>
+   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 3; i++) points[i] += origin[i];
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok2 = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;Contains(points);
+   <span class="keyword">if</span> (!ok1) {
+      ::Error(<span class="string">"KVPosition::GetRandomPoint"</span>,
+              <span class="string">"TGeoBBox::GetPointsOnFacet returns kFALSE for shape %s. Returning coordinates of centre."</span>, <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;ClassName());
+      <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
+   }
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> np = 0;
+   <span class="keyword">if</span> (!ok2) {
+      <span class="comment">// try to find a point that works</span>
+      np++;
+      <span class="keyword">while</span> (np &lt; 50) {
+         <a href="../ListOfTypes.html#Double_t">Double_t</a>* npoint = points + 3 * np;
+         npoint[2] += dz / 100.;
+         <span class="comment">// Correct for offset of centre of shape</span>
+         <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 3; i++) npoint[i] += origin[i];
+         ok2 = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;Contains(npoint);
+         <span class="keyword">if</span> (ok2) <span class="keyword">break</span>;
+         np++;
+      }
+      <span class="keyword">if</span> (!ok2) {
+         ::Error(<span class="string">"KVPosition::GetRandomPoint"</span>,
+                 <span class="string">"Cannot generate points for shape %s. Returning coordinates of centre."</span>, <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;ClassName());
+         <span class="keyword">return</span> <a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>();
+      }
+   }
+   <a href="../ListOfTypes.html#Double_t">Double_t</a>* npoint = points + 3 * np;
+   npoint[2] -= dz / 100.;
+   <a href="../KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>()-&gt;LocalToMaster(npoint, master);
+   <span class="keyword">return</span> TVector3(master);
 }
 
 <a name="KT7cUC"></a>TVector3 <a href="../KVPosition.html">KVPosition</a>::<a href="../KVPosition.html#KVPosition:GetCentre" title="TVector3 KVPosition::GetCentre()">GetCentre</a>() <span class="keyword">const</span>
 {
-    <span class="comment">// * ROOT Geometry *</span>
-    <span class="comment">// Generate a vector in the world (laboratory) frame from the origin</span>
-    <span class="comment">// to the centre of the entrance window of the detector.</span>
-    <span class="comment">//</span>
-    <span class="comment">// It is assumed that the detector volume was defined in such a way</span>
-    <span class="comment">// that the entrance window corresponds to the facet in the X-Y plane</span>
-    <span class="comment">// placed at -dZ.</span>
+   <span class="comment">// * ROOT Geometry *</span>
+   <span class="comment">// Generate a vector in the world (laboratory) frame from the origin</span>
+   <span class="comment">// to the centre of the entrance window of the detector.</span>
+   <span class="comment">//</span>
+   <span class="comment">// It is assumed that the detector volume was defined in such a way</span>
+   <span class="comment">// that the entrance window corresponds to the facet in the X-Y plane</span>
+   <span class="comment">// placed at -dZ.</span>
 
-    <span class="keyword">if</span>(!<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()){
-        ::Error(<span class="string">"KVPosition::GetCentreOfSurface"</span>,
-                <span class="string">"ROOT Geometry has not been initialised"</span>);
-        <span class="keyword">return</span> TVector3();
-    }
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> master[3];
-    <span class="keyword">const</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>* origin = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetOrigin();
-    <a href="../ListOfTypes.html#Double_t">Double_t</a> points[]={origin[0],origin[1],origin[2]-<a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetDZ()};
-    <a href="../KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>()-&gt;LocalToMaster(points, master);
-    <span class="keyword">return</span> TVector3(master);
+   <span class="keyword">if</span> (!<a href="../KVPosition.html#KVPosition:ROOTGeo" title="Bool_t KVPosition::ROOTGeo()">ROOTGeo</a>()) {
+      ::Error(<span class="string">"KVPosition::GetCentreOfSurface"</span>,
+              <span class="string">"ROOT Geometry has not been initialised"</span>);
+      <span class="keyword">return</span> TVector3();
+   }
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> master[3];
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>* origin = <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetOrigin();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> points[] = {origin[0], origin[1], origin[2] - <a href="../KVPosition.html#KVPosition:GetShape" title="TGeoBBox* KVPosition::GetShape()">GetShape</a>()-&gt;GetDZ()};
+   <a href="../KVPosition.html#KVPosition:GetMatrix" title="TGeoHMatrix* KVPosition::GetMatrix()">GetMatrix</a>()-&gt;LocalToMaster(points, master);
+   <span class="keyword">return</span> TVector3(master);
 }
 
 </pre>
@@ -731,7 +731,7 @@ ClassImp(<a href="../KVPosition.html">KVPosition</a>);
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:14 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

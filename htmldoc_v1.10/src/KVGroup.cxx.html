@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:27 2015            -->
+<!--   Date: Fri Jan  8 15:13:29 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -42,8 +42,8 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 
 <a name="AORL6D"></a><span class="keyword">void</span> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:init" title="void KVGroup::init()">init</a>()
 {
-    <span class="comment">// Default initialisation</span>
-    <span class="comment">// <a href="../KVGroup.html">KVGroup</a> does not own the structures which it groups together</span>
+   <span class="comment">// Default initialisation</span>
+   <span class="comment">// <a href="../KVGroup.html">KVGroup</a> does not own the structures which it groups together</span>
 
    <a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a> = 0;
    <a href="../KVBase.html#KVBase:SetType" title="void KVBase::SetType(const Char_t* str)">SetType</a>(<span class="string">"GROUP"</span>);
@@ -64,33 +64,33 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 
 <a name="sVGDGC"></a><a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:GetNumberOfDetectorLayers" title="UInt_t KVGroup::GetNumberOfDetectorLayers()">GetNumberOfDetectorLayers</a>()
 {
-    <span class="comment">// The number of detector layers is the maximum number of detectors in the</span>
-    <span class="comment">// group which are placed one in front of the other, i.e. we interrogate</span>
-    <span class="comment">// each detector as to how many detectors there are in front of it</span>
+   <span class="comment">// The number of detector layers is the maximum number of detectors in the</span>
+   <span class="comment">// group which are placed one in front of the other, i.e. we interrogate</span>
+   <span class="comment">// each detector as to how many detectors there are in front of it</span>
 
-    <a href="../ListOfTypes.html#UInt_t">UInt_t</a> max = 0;
-    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
-    <a href="../KVDetector.html">KVDetector</a>* d;
-    <span class="keyword">while</span>( (d = (<a href="../KVDetector.html">KVDetector</a>*)next()) ){
-        <a href="../ListOfTypes.html#UInt_t">UInt_t</a> e = d-&gt;<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>()-&gt;GetEntries();
-        <span class="keyword">if</span>(e&gt;max) max=e;
-    }
-    <span class="keyword">return</span> max;
+   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> max = 0;
+   TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
+   <a href="../KVDetector.html">KVDetector</a>* d;
+   <span class="keyword">while</span> ((d = (<a href="../KVDetector.html">KVDetector</a>*)next())) {
+      <a href="../ListOfTypes.html#UInt_t">UInt_t</a> e = d-&gt;<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>()-&gt;GetEntries();
+      <span class="keyword">if</span> (e &gt; max) max = e;
+   }
+   <span class="keyword">return</span> max;
 }
 
-<a name="fcLYkB"></a>TList *<a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:GetDetectorsInLayer" title="TList* KVGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay)
+<a name="rr8mVC"></a>TList* <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:GetDetectorsInLayer" title="TList* KVGroup::GetDetectorsInLayer(UInt_t lay)">GetDetectorsInLayer</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> lay)
 {
-    <span class="comment">// lay=1 : create and fill list with detectors closest to target</span>
-    <span class="comment">// lay=<a href="../KVGroup.html#KVGroup:GetNumberOfDetectorLayers" title="UInt_t KVGroup::GetNumberOfDetectorLayers()">GetNumberOfDetectorLayers</a>() : detectors furthest from target</span>
+   <span class="comment">// lay=1 : create and fill list with detectors closest to target</span>
+   <span class="comment">// lay=<a href="../KVGroup.html#KVGroup:GetNumberOfDetectorLayers" title="UInt_t KVGroup::GetNumberOfDetectorLayers()">GetNumberOfDetectorLayers</a>() : detectors furthest from target</span>
 
-    TList* dets = <span class="keyword">new</span> TList;
-    TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
-    <a href="../KVDetector.html">KVDetector</a>* d;
+   TList* dets = <span class="keyword">new</span> TList;
+   TIter next(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
+   <a href="../KVDetector.html">KVDetector</a>* d;
 
-    <span class="keyword">while</span>( (d = (<a href="../KVDetector.html">KVDetector</a>*)next()) ){
-        <span class="keyword">if</span>(lay == (<a href="../ListOfTypes.html#UInt_t">UInt_t</a>)d-&gt;<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>()-&gt;GetEntries()) dets-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(d);
-    }
-    <span class="keyword">return</span> dets;
+   <span class="keyword">while</span> ((d = (<a href="../KVDetector.html">KVDetector</a>*)next())) {
+      <span class="keyword">if</span> (lay == (<a href="../ListOfTypes.html#UInt_t">UInt_t</a>)d-&gt;<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>()-&gt;GetEntries()) dets-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(d);
+   }
+   <span class="keyword">return</span> dets;
 }
 
 <span class="comment">//______________________________________________________________________________</span>
@@ -99,7 +99,7 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 {
    <span class="comment">//<a href="../KVGroup.html#KVGroup:Reset" title="void KVGroup::Reset()">Reset</a> the group, i.e. wipe the list of reconstructed nuclei and call <span class="string">"Clear"</span> method of</span>
    <span class="comment">//each and every detector in the group.</span>
-	<span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Reset"</span>,<span class="string">"Call %s"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+   <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Reset"</span>,<span class="string">"Call %s"</span>,<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
    <span class="keyword">if</span> (<a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a> &amp;&amp; <a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>-><a href="../KVSeqCollection.html#KVSeqCollection:GetSize" title="Int_t KVSeqCollection::GetSize()">GetSize</a>()) {
       <a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
    }
@@ -110,7 +110,7 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 
 <span class="comment">//_________________________________________________________________________________</span>
 
-<a name="EZD.t"></a><span class="keyword">void</span> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:AddHit" title="void KVGroup::AddHit(KVNucleus* kvd)">AddHit</a>(<a href="../KVNucleus.html">KVNucleus</a> * kvd)
+<a name="PjfRkC"></a><span class="keyword">void</span> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:AddHit" title="void KVGroup::AddHit(KVNucleus* kvd)">AddHit</a>(<a href="../KVNucleus.html">KVNucleus</a>* kvd)
 {
    <span class="keyword">if</span> (!<a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a>) {
       <a href="../KVGroup.html#KVGroup:fReconstructedNuclei" title="KVList* KVGroup::fReconstructedNuclei">fReconstructedNuclei</a> = <span class="keyword">new</span> <a href="../KVList.html">KVList</a>(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
@@ -121,7 +121,7 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 
 <span class="comment">//_________________________________________________________________________________</span>
 
-<a name="aeTpoD"></a><span class="keyword">void</span> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:RemoveHit" title="void KVGroup::RemoveHit(KVNucleus* kvd)">RemoveHit</a>(<a href="../KVNucleus.html">KVNucleus</a> * kvd)
+<a name="dz5CuE"></a><span class="keyword">void</span> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:RemoveHit" title="void KVGroup::RemoveHit(KVNucleus* kvd)">RemoveHit</a>(<a href="../KVNucleus.html">KVNucleus</a>* kvd)
 {
    <span class="comment">//<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Remove" title="void KVGeoStrucElement::Remove(KVBase* )">Remove</a> reconstructed nucleus from group's list of reconstructed</span>
    <span class="comment">//particles.</span>
@@ -136,7 +136,7 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
    }
 }
 
-<a name="nXw86"></a>TList *<a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>(<a href="../KVDetector.html">KVDetector</a> * det, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> dir)
+<a name="LzWkjC"></a>TList* <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:GetAlignedDetectors" title="TList* KVGroup::GetAlignedDetectors(KVDetector* ,UChar_t dir=kBackwards)">GetAlignedDetectors</a>(<a href="../KVDetector.html">KVDetector</a>* det, <a href="../ListOfTypes.html#UChar_t">UChar_t</a> dir)
 {
    <span class="comment">//Fill TList with all detectors aligned with <span class="string">"det"</span> which are closer to the target.</span>
    <span class="comment">//These are the detectors through which any particle stopping in <span class="string">"det"</span> will have</span>
@@ -146,29 +146,29 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
    <span class="comment">//</span>
    <span class="comment">//<a href="../#TObject:Delete" title="void TObject::Delete(Option_t* option=&quot;&quot;)">Delete</a> TList after use.</span>
 
-   TList *tmp = <span class="keyword">new</span> TList;
+   TList* tmp = <span class="keyword">new</span> TList;
 
-   <span class="keyword">while</span>(det){
-       tmp-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(det);
-       <a href="../KVGeoDetectorNode.html">KVGeoDetectorNode</a>* node = det-&gt;GetNode();
-       <a href="../KVSeqCollection.html">KVSeqCollection</a>* infront = node-&gt;GetDetectorsInFront();
-       <span class="keyword">if</span>(!infront) <span class="keyword">break</span>;
-       <span class="keyword">if</span>(infront-&gt;GetEntries()&gt;1){
-           <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetAlignedDetectors"</span>,
-                   <span class="string">"No unique solution. There are %d detectors in front of %s."</span>,
-                   infront-&gt;GetEntries(), det-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-           infront-&gt;<a href="../#TNamed:ls" title="void TNamed::ls(Option_t* option=&quot;&quot;)">ls</a>();
-       }
-       det = (<a href="../KVDetector.html">KVDetector</a>*)infront-&gt;First();
+   <span class="keyword">while</span> (det) {
+      tmp-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(det);
+      <a href="../KVGeoDetectorNode.html">KVGeoDetectorNode</a>* node = det-&gt;GetNode();
+      <a href="../KVSeqCollection.html">KVSeqCollection</a>* infront = node-&gt;GetDetectorsInFront();
+      <span class="keyword">if</span> (!infront) <span class="keyword">break</span>;
+      <span class="keyword">if</span> (infront-&gt;GetEntries() &gt; 1) {
+         <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"GetAlignedDetectors"</span>,
+                 <span class="string">"No unique solution. There are %d detectors in front of %s."</span>,
+                 infront-&gt;GetEntries(), det-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+         infront-&gt;<a href="../#TNamed:ls" title="void TNamed::ls(Option_t* option=&quot;&quot;)">ls</a>();
+      }
+      det = (<a href="../KVDetector.html">KVDetector</a>*)infront-&gt;First();
    }
 
    <span class="keyword">if</span> (dir == <a href="../KVGroup.html#KVGroup:kForwards" title="const enum KVGroup:: KVGroup::kForwards">kForwards</a>) {
-       TIter next(tmp, <a href="../ListOfTypes.html#Bool_t">kIterBackward</a> );
-       TList* tmp2 = <span class="keyword">new</span> TList;
-       <span class="keyword">while</span>( (det = (<a href="../KVDetector.html">KVDetector</a>*)next()) ) tmp2-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(det);
-       <span class="keyword">delete</span> tmp;
-       tmp=tmp2;
-    }
+      TIter next(tmp, <a href="../ListOfTypes.html#Bool_t">kIterBackward</a>);
+      TList* tmp2 = <span class="keyword">new</span> TList;
+      <span class="keyword">while</span> ((det = (<a href="../KVDetector.html">KVDetector</a>*)next())) tmp2-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:Add" title="void KVGeoStrucElement::Add(KVBase* )">Add</a>(det);
+      <span class="keyword">delete</span> tmp;
+      tmp = tmp2;
+   }
    <span class="keyword">return</span> tmp;
 }
 
@@ -178,9 +178,9 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 
 <a name="HkERZ"></a><span class="keyword">void</span> <a href="../KVGroup.html">KVGroup</a>::<a href="../KVGroup.html#KVGroup:ClearHitDetectors" title="void KVGroup::ClearHitDetectors()">ClearHitDetectors</a>()
 {
-	<span class="comment">// Loop over all detectors in group and clear their list of 'hits'</span>
-	<span class="comment">// i.e. the lists of particles which hit each detector</span>
-    <span class="keyword">const_cast</span>&lt;<a href="../KVSeqCollection.html">KVSeqCollection</a>*&gt;(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>())->R__FOR_EACH(<a href="../KVDetector.html">KVDetector</a>, ClearHits)();
+   <span class="comment">// Loop over all detectors in group and clear their list of 'hits'</span>
+   <span class="comment">// i.e. the lists of particles which hit each detector</span>
+   <span class="keyword">const_cast</span>&lt;<a href="../KVSeqCollection.html">KVSeqCollection</a>*&gt;(<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>())->R__FOR_EACH(<a href="../KVDetector.html">KVDetector</a>, ClearHits)();
 }
 
 
@@ -192,7 +192,7 @@ ClassImp(<a href="../KVGroup.html">KVGroup</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:14 2015            -->
+<!--   Date: Fri Jan  8 15:14:24 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/05</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/06</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/05</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/06</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_PARTICLES_Index.html">PARTICLES</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVNuclDataTable</a>
@@ -68,30 +68,29 @@ return false;}
 <h4>ABC for nuclear table</h4>
 General methods:
 <ul>
-	<li>Bool_t IsInTable(Int_t zz, Int_t aa) - returns kTRUE for nuclei which appear in
-	the read table, kFALSE for others</li>
-	
+   <li>Bool_t IsInTable(Int_t zz, Int_t aa) - returns kTRUE for nuclei which appear in
+   the read table, kFALSE for others</li>
 Specific implementations must define the methods:
 <ul>
-	<li>Initialize() - called once to initialize mass table, for example by
-	reading in values from a file</li>
-	<li>Double_t GetValue(Int_t zz, Int_t aa) - returns value of the tabulated quantity</li>
-	<li>CreateTable(Int_t ntot) - Create table where for each nucleus, a pointeur of the class will be stored</li>
-	<li>CreateElement(Int_t idx)- Create element which correspond to the class pointeur associated to the nucleus</li>
-	For example : 
-	If we consider a class KVLifeTime where is stored the value of life time of a nucleus
-	_____________
-	void KVNuclDataTable::CreateTable(Int_t ntot)
-	{
-		theTable = new KVLifeTime*[ntot];
-	}
-	__________________
-	void KVNuclDataTable::CreateElement(Int_t idx)
-	{
-		current_idx = idx;
-		theTable[idx] = new KVLifeTime();
-	}
-	For further detail see the KVLifeTimeTable and KVLifeTime class
+   <li>Initialize() - called once to initialize mass table, for example by
+   reading in values from a file</li>
+   <li>Double_t GetValue(Int_t zz, Int_t aa) - returns value of the tabulated quantity</li>
+   <li>CreateTable(Int_t ntot) - Create table where for each nucleus, a pointeur of the class will be stored</li>
+   <li>CreateElement(Int_t idx)- Create element which correspond to the class pointeur associated to the nucleus</li>
+   For example :
+   If we consider a class KVLifeTime where is stored the value of life time of a nucleus
+   _____________
+   void KVNuclDataTable::CreateTable(Int_t ntot)
+   {
+      theTable = new KVLifeTime*[ntot];
+   }
+   __________________
+   void KVNuclDataTable::CreateElement(Int_t idx)
+   {
+      current_idx = idx;
+      theTable[idx] = new KVLifeTime();
+   }
+   For further detail see the KVLifeTimeTable and KVLifeTime class
 </ul>
 <!-- */
  --> 
@@ -193,6 +192,7 @@ Specific implementations must define the methods:
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:SetTitle"><span class="baseclass">TNamed::</span>SetTitle</a>(<span class="keyword">const</span> <span class="keyword">char</span>* title = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVNuclDataTable:SetValue">SetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa, <a href="./ListOfTypes.html#Double_t">Double_t</a> val)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVNuclDataTable:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Sizeof"><span class="baseclass">TNamed::</span>Sizeof</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVNuclDataTable:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
@@ -281,7 +281,7 @@ Specific implementations must define the methods:
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVNuclDataTable:init" href="src/KVNuclDataTable.cxx.html#o1vtB">init</a>()</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVNuclDataTable:GiveIndexToNucleus" href="src/KVNuclDataTable.cxx.html#zyY3eC">GiveIndexToNucleus</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa, <a href="./ListOfTypes.html#Int_t">Int_t</a> ntot)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVNuclDataTable:GiveIndexToNucleus" href="src/KVNuclDataTable.cxx.html#YqtHdB">GiveIndexToNucleus</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa, <a href="./ListOfTypes.html#Int_t">Int_t</a> ntot)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname">NDT::value* <a class="funcname" name="KVNuclDataTable:getNDTvalue" href="src/KVNuclDataTable.cxx.html#EtygSE">getNDTvalue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa) const</span><br />
 <div class="funccomm"><pre> Return NDT::value object pointer stored at map position (Z,A).
@@ -298,6 +298,8 @@ returns 0 if no such object is present
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVNuclDataTable:GetValue" href="src/KVNuclDataTable.cxx.html#TLO61">GetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa) const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVNuclDataTable:SetValue" href="src/KVNuclDataTable.cxx.html#Vtj1tC">SetValue</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa, <a href="./ListOfTypes.html#Double_t">Double_t</a> val)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVNuclDataTable:GetUnit" href="src/KVNuclDataTable.cxx.html#kQCoSE">GetUnit</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> zz, <a href="./ListOfTypes.html#Int_t">Int_t</a> aa) const</span><br />
 </div>
@@ -329,7 +331,7 @@ returns 0 if no such object is present
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?bonnet"> bonnet</a> </em><em>&raquo; Created  by KVClassFactory on Wed Feb  9 11:06:42 2011</em><br />
-<em>&raquo; Last changed: Fri Nov 20 15:15:14 2015 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: Fri Jan  8 15:14:24 2016 </em><em>&raquo; Last generated: 2016-01-08 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

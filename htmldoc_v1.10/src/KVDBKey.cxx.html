@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:14:01 2015            -->
+<!--   Date: Fri Jan  8 15:12:57 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -46,7 +46,7 @@ $Id: <a href="../KVDBKey.html">KVDBKey</a>.cpp,v 1.23 2007/04/19 12:41:54 frankl
 ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////////////////////////////////</span>
-<span class="comment">//   </span>
+<span class="comment">//</span>
 <span class="comment">//   A key holds a list of cross-references to <a href="../KVDBRecord.html">KVDBRecord</a> objects</span>
 <span class="comment">//The name of the key is the name of the table, prefixed by <span class="string">"Key:"</span></span>
 <span class="comment">//The title of the key is the name of the record</span>
@@ -62,9 +62,9 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
 }
 
 <span class="comment">//_____________________________________________________________________________</span>
-<a name="B0jG0B"></a><a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:KVDBKey" title="KVDBKey KVDBKey::KVDBKey() or overloads">KVDBKey</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * title,
-                 <a href="../KVDBRecord.html">KVDBRecord</a> * parent)
-:<a href="../KVBase.html">KVBase</a>(name, title)
+<a name="NW077"></a><a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:KVDBKey" title="KVDBKey KVDBKey::KVDBKey() or overloads">KVDBKey</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* title,
+                 <a href="../KVDBRecord.html">KVDBRecord</a>* parent)
+   : <a href="../KVBase.html">KVBase</a>(name, title)
 {
    <a href="../KVDBKey.html#KVDBKey:fIsUnique" title="Bool_t KVDBKey::fIsUnique">fIsUnique</a> = <a href="../KVDBKey.html#KVDBKey:fSingle" title="Bool_t KVDBKey::fSingle">fSingle</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <a href="../KVDBKey.html#KVDBKey:fRecord" title="TRef KVDBKey::fRecord">fRecord</a> = 0;
@@ -88,27 +88,27 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
 }
 
 <span class="comment">//_____________________________________________________________________________</span>
-<a name="ZZQrb"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:LinkTo" title="Bool_t KVDBKey::LinkTo(KVDBRecord* rec,Bool_t linkback=kTRUE)">LinkTo</a>(<a href="../KVDBRecord.html">KVDBRecord</a> * rec, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> linkback)
+<a name="vsVU9B"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:LinkTo" title="Bool_t KVDBKey::LinkTo(KVDBRecord* rec,Bool_t linkback=kTRUE)">LinkTo</a>(<a href="../KVDBRecord.html">KVDBRecord</a>* rec, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> linkback)
 {
 <span class="comment">// This function adds a record to the list of cross-references</span>
-<span class="comment">// if <a href="../KVDBKey.html#KVDBKey:fIsUnique" title="Bool_t KVDBKey::fIsUnique">fIsUnique</a> is <a href="../ListOfTypes.html#Bool_t">kTRUE</a> we check if there is already an object with the same name: </span>
+<span class="comment">// if <a href="../KVDBKey.html#KVDBKey:fIsUnique" title="Bool_t KVDBKey::fIsUnique">fIsUnique</a> is <a href="../ListOfTypes.html#Bool_t">kTRUE</a> we check if there is already an object with the same name:</span>
 <span class="comment">//    if so we return <a href="../ListOfTypes.html#Bool_t">kFALSE</a> otherwise the record is added and <a href="../ListOfTypes.html#Bool_t">kTRUE</a> is returned.</span>
 <span class="comment">// if <a href="../KVDBKey.html#KVDBKey:fSingle" title="Bool_t KVDBKey::fSingle">fSingle</a> is <a href="../ListOfTypes.html#Bool_t">kTRUE</a> the list can handle only one object:</span>
 <span class="comment">//    if the list is empty the record is added and <a href="../ListOfTypes.html#Bool_t">kTRUE</a> is returned, otherwise <a href="../ListOfTypes.html#Bool_t">kFALSE</a>.</span>
-   
+
    <span class="comment">// check if more than one object is allowed</span>
    <span class="keyword">if</span> (<a href="../KVDBKey.html#KVDBKey:fSingle" title="Bool_t KVDBKey::fSingle">fSingle</a> &amp;&amp; (<a href="../KVDBKey.html#KVDBKey:GetLinks" title="KVRList* KVDBKey::GetLinks()">GetLinks</a>()-><a href="../KVRList.html#KVRList:GetSize" title="Int_t KVRList::GetSize()">GetSize</a>() &gt; 0) &amp;&amp; (<a href="../KVDBKey.html#KVDBKey:GetLinks" title="KVRList* KVDBKey::GetLinks()">GetLinks</a>()-><a href="../#TRefArray:First" title="TObject* TRefArray::First()">First</a>())) {
       <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"LinkTo(KVDBRecord*)"</span>,
-                       <span class="string">"%s : Only one cross-reference allowed.\nCurrent cross-reference is:%s\nCan't add new record \"%s\" in list"</span>,
-            <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVDBKey.html#KVDBKey:GetLinks" title="KVRList* KVDBKey::GetLinks()">GetLinks</a>()-><a href="../#TRefArray:First" title="TObject* TRefArray::First()">First</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+              <span class="string">"%s : Only one cross-reference allowed.\nCurrent cross-reference is:%s\nCan't add new record \"%s\" in list"</span>,
+              <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../KVDBKey.html#KVDBKey:GetLinks" title="KVRList* KVDBKey::GetLinks()">GetLinks</a>()-><a href="../#TRefArray:First" title="TObject* TRefArray::First()">First</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
       <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    }
    <span class="comment">// check if identical names are allowed</span>
    <span class="keyword">if</span> (<a href="../KVDBKey.html#KVDBKey:fIsUnique" title="Bool_t KVDBKey::fIsUnique">fIsUnique</a>) {
       <span class="keyword">if</span> (<a href="../KVDBKey.html#KVDBKey:fLinks" title="KVRList* KVDBKey::fLinks">fLinks</a>-><a href="../KVRList.html#KVRList:FindObject" title="KVBase* KVRList::FindObject(const Char_t* name,const Char_t* type) or overloads">FindObject</a>(rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>())) {
          <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"LinkTo(KVDBRecord*)"</span>,
-                          <span class="string">"%s : Cross-references must have different names.\nA record named %s already exists.\nCan't add new record \"%s\" in list"</span>,
-                          <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+                 <span class="string">"%s : Cross-references must have different names.\nA record named %s already exists.\nCan't add new record \"%s\" in list"</span>,
+                 <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
          <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
       }
    }
@@ -125,9 +125,9 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
          <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"LinkTo"</span>, <span class="string">"Parent table not set for key %s"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
          <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
       }
-      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *table_name = <a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>()-><a href="../KVDBRecord.html#KVDBRecord:GetTable" title="KVDBTable* KVDBRecord::GetTable()">GetTable</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
+      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* table_name = <a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>()-><a href="../KVDBRecord.html#KVDBRecord:GetTable" title="KVDBTable* KVDBRecord::GetTable()">GetTable</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
 
-      <a href="../KVDBKey.html">KVDBKey</a> *key = rec-&gt;GetKey(table_name);
+      <a href="../KVDBKey.html">KVDBKey</a>* key = rec-&gt;GetKey(table_name);
       <span class="keyword">if</span> (!key)
          key = rec-&gt;AddKey(table_name, <a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
       key-&gt;<a href="../KVDBKey.html#KVDBKey:LinkTo" title="Bool_t KVDBKey::LinkTo(KVDBRecord* rec,Bool_t linkback=kTRUE)">LinkTo</a>(<a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>(), kFALSE); <span class="comment">//linkback=<a href="../ListOfTypes.html#Bool_t">kFALSE</a> otherwise infinite circular linkage results !!!</span>
@@ -137,7 +137,7 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
 
 <span class="comment">//_____________________________________________________________________________</span>
 
-<a name="CW5dtE"></a><span class="keyword">void</span> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:Unlink" title="void KVDBKey::Unlink(KVDBRecord* rec,Bool_t linkback=kTRUE)">Unlink</a>(<a href="../KVDBRecord.html">KVDBRecord</a> * rec, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> linkback)
+<a name="nR1IqE"></a><span class="keyword">void</span> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:Unlink" title="void KVDBKey::Unlink(KVDBRecord* rec,Bool_t linkback=kTRUE)">Unlink</a>(<a href="../KVDBRecord.html">KVDBRecord</a>* rec, <a href="../ListOfTypes.html#Bool_t">Bool_t</a> linkback)
 {
    <span class="comment">//This function removes a record from the list of cross-references</span>
    <span class="comment">//if linkback is <a href="../ListOfTypes.html#Bool_t">kTRUE</a> then the reference in record <span class="string">"rec"</span> is also removed.</span>
@@ -151,9 +151,9 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
          <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Unlink"</span>, <span class="string">"Parent not set for key %s"</span>, <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
          <span class="keyword">return</span>;
       }
-      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> *table_name = <a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>()-><a href="../KVDBRecord.html#KVDBRecord:GetTable" title="KVDBTable* KVDBRecord::GetTable()">GetTable</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
+      <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* table_name = <a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>()-><a href="../KVDBRecord.html#KVDBRecord:GetTable" title="KVDBTable* KVDBRecord::GetTable()">GetTable</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>();
 
-      <a href="../KVDBKey.html">KVDBKey</a> *key = rec-&gt;GetKey(table_name);
+      <a href="../KVDBKey.html">KVDBKey</a>* key = rec-&gt;GetKey(table_name);
       <span class="keyword">if</span> (key) key-&gt;<a href="../KVDBKey.html#KVDBKey:Unlink" title="void KVDBKey::Unlink(KVDBRecord* rec,Bool_t linkback=kTRUE)">Unlink</a>(<a href="../KVDBKey.html#KVDBKey:GetParent" title="KVDBRecord* KVDBKey::GetParent()">GetParent</a>(), kFALSE); <span class="comment">//linkback=<a href="../ListOfTypes.html#Bool_t">kFALSE</a> otherwise infinite circular linkage results !!!</span>
    }
 }
@@ -166,9 +166,9 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
    <span class="comment">//This function recursively removes all cross-references</span>
    <span class="comment">//The corresponding references to the owner of this key in all of the referecnced</span>
    <span class="comment">//objects will also be removed.</span>
-   
-   <a href="../KVDBRecord.html">KVDBRecord</a> *rec = (<a href="../KVDBRecord.html">KVDBRecord</a>*)<a href="../KVDBKey.html#KVDBKey:fLinks" title="KVRList* KVDBKey::fLinks">fLinks</a>-><a href="../#TRefArray:Last" title="TObject* TRefArray::Last()">Last</a>();
-   <span class="keyword">if</span>(rec){
+
+   <a href="../KVDBRecord.html">KVDBRecord</a>* rec = (<a href="../KVDBRecord.html">KVDBRecord</a>*)<a href="../KVDBKey.html#KVDBKey:fLinks" title="KVRList* KVDBKey::fLinks">fLinks</a>-><a href="../#TRefArray:Last" title="TObject* TRefArray::Last()">Last</a>();
+   <span class="keyword">if</span> (rec) {
       <a href="../KVDBKey.html#KVDBKey:Unlink" title="void KVDBKey::Unlink(KVDBRecord* rec,Bool_t linkback=kTRUE)">Unlink</a>(rec);
       <a href="../KVDBKey.html#KVDBKey:UnlinkAll" title="void KVDBKey::UnlinkAll()">UnlinkAll</a>();
    }
@@ -177,14 +177,14 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
 
 <span class="comment">//_____________________________________________________________________________</span>
 
-<a name="VfQk6D"></a><span class="keyword">void</span> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:AddLink" title="void KVDBKey::AddLink(KVDBRecord* rec)">AddLink</a>(<a href="../KVDBRecord.html">KVDBRecord</a> * rec)
+<a name="HjQfp"></a><span class="keyword">void</span> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:AddLink" title="void KVDBKey::AddLink(KVDBRecord* rec)">AddLink</a>(<a href="../KVDBRecord.html">KVDBRecord</a>* rec)
 {
    <span class="comment">//Add a link to the list of links</span>
 
    <a href="../KVDBKey.html#KVDBKey:fLinks" title="KVRList* KVDBKey::fLinks">fLinks</a>-><a href="../#TRefArray:Add" title="void TRefArray::Add(TObject* obj)">Add</a>(rec);
 }
 
-<a name="iDvy6D"></a><span class="keyword">void</span> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:RemoveLink" title="void KVDBKey::RemoveLink(KVDBRecord* rec)">RemoveLink</a>(<a href="../KVDBRecord.html">KVDBRecord</a> * rec)
+<a name="yN7rK"></a><span class="keyword">void</span> <a href="../KVDBKey.html">KVDBKey</a>::<a href="../KVDBKey.html#KVDBKey:RemoveLink" title="void KVDBKey::RemoveLink(KVDBRecord* rec)">RemoveLink</a>(<a href="../KVDBRecord.html">KVDBRecord</a>* rec)
 {
    <span class="comment">//Remove a link from the list of links</span>
 
@@ -198,7 +198,7 @@ ClassImp(<a href="../KVDBKey.html">KVDBKey</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:14 </em><em>&raquo; Last generated: 2015-11-20 15:14</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:12 </em><em>&raquo; Last generated: 2016-01-08 15:12</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

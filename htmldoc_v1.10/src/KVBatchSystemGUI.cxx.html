@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:13:52 2015            -->
+<!--   Date: Fri Jan  8 15:12:46 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -62,129 +62,129 @@ ClassImp(<a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>)
 <span class="comment">//disable automatic refreshing.</span>
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
-<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fOpen" title="Bool_t KVBatchSystemGUI::fOpen">fOpen</a>=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+<a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fOpen" title="Bool_t KVBatchSystemGUI::fOpen">fOpen</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 
 <a name="yucodE"></a><a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:KVBatchSystemGUI" title="KVBatchSystemGUI KVBatchSystemGUI::KVBatchSystemGUI()">KVBatchSystemGUI</a>()
 {
    <span class="comment">// Default constructor</span>
-   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fOpen" title="Bool_t KVBatchSystemGUI::fOpen">fOpen</a>=<a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
-   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a>=0;
-   
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a> = <span class="keyword">new</span> TGMainFrame(gClient-&gt;GetRoot(),10,10,kMainFrame | kVerticalFrame);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"BatchSystem GUI"</span>);
-    TGHorizontalFrame *hf = <span class="keyword">new</span> TGHorizontalFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>,10,10,kHorizontalFrame);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a> = <span class="keyword">new</span> TGPictureButton(hf,gClient-&gt;GetPicture(<span class="string">"refresh2.xpm"</span>));
-    hf-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsLeft | kLHintsTop,2,2,2,2));
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>-&gt;Resize(40,40);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>-&gt;SetToolTipText(<span class="string">"Update"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"Refresh()"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a> = <span class="keyword">new</span> TGPictureButton(hf,gClient-&gt;GetPicture(<span class="string">"bld_edit_s.png"</span>));
-    hf-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsLeft | kLHintsTop,2,2,2,2));
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>-&gt;Resize(40,40);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>-&gt;SetToolTipText(<span class="string">"Alter job(s) resources"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"AlterJobs()"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a> = <span class="keyword">new</span> TGPictureButton(hf,gClient-&gt;GetPicture(<span class="string">"mb_stop_s.xpm"</span>));
-    hf-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsLeft | kLHintsTop,2,2,2,2));
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>-&gt;Resize(40,40);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>-&gt;SetToolTipText(<span class="string">"Kill job(s)"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"KillJobs()"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;AddFrame(hf, <span class="keyword">new</span> TGLayoutHints(kLHintsTop|kLHintsExpandX,2,2,2,2));
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a> = <span class="keyword">new</span> <a href="../KVListView.html">KVListView</a>(<a href="../KVBatchJob.html">KVBatchJob</a>::<a href="../KVBatchJob.html#KVBatchJob:Class" title="TClass* KVBatchJob::Class()">Class</a>(), <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>, 900, 400);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumns" title="void KVListView::SetDataColumns(Int_t ncolumns)">SetDataColumns</a>(11);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(0, <span class="string">"JobID"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(1, <span class="string">"Name"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(2, <span class="string">"Status"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(3, <span class="string">"Submitted"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:GetDataColumn" title="KVLVColumnData* KVListView::GetDataColumn(Int_t index)">GetDataColumn</a>(3)-><a href="../KVLVColumnData.html#KVLVColumnData:SetIsDateTime" title="void KVLVColumnData::SetIsDateTime(KVDatime::EKVDateFormat fmt=KVDatime::kCTIME,Bool_t with_reference=kTRUE)">SetIsDateTime</a>(<a href="../KVDatime.html">KVDatime</a>::<a href="../KVDatime.html#KVDatime:kSQL" title="const KVDatime::EKVDateFormat KVDatime::kSQL">kSQL</a>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(4, <span class="string">"Complete [%]"</span>, <span class="string">"GetPercentageComplete"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(5, <span class="string">"CPUusage"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(6, <span class="string">"CPUmax"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(7, <span class="string">"MemUsed"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(8, <span class="string">"MemMax"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(9, <span class="string">"DiskUsed"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(10, <span class="string">"DiskMax"</span>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:ActivateSortButtons" title="void KVListView::ActivateSortButtons()">ActivateSortButtons</a>();
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fOpen" title="Bool_t KVBatchSystemGUI::fOpen">fOpen</a> = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a> = 0;
 
-    <span class="keyword">if</span>(!<a href="../KVBatchSystemManager.html">gBatchSystemManager</a>) <span class="keyword">new</span> <a href="../KVBatchSystemManager.html">KVBatchSystemManager</a>;
-    <span class="keyword">if</span>(!<a href="../KVBatchSystem.html">gBatchSystem</a>) <a href="../KVBatchSystemManager.html">gBatchSystemManager</a>-><a href="../KVBatchSystemManager.html#KVBatchSystemManager:GetDefaultBatchSystem" title="KVBatchSystem* KVBatchSystemManager::GetDefaultBatchSystem()">GetDefaultBatchSystem</a>()-><a href="../KVBatchSystem.html#KVBatchSystem:cd" title="void KVBatchSystem::cd()">cd</a>();
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a> = <span class="keyword">new</span> TGMainFrame(gClient-&gt;GetRoot(), 10, 10, kMainFrame | kVerticalFrame);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(<span class="string">"BatchSystem GUI"</span>);
+   TGHorizontalFrame* hf = <span class="keyword">new</span> TGHorizontalFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>, 10, 10, kHorizontalFrame);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a> = <span class="keyword">new</span> TGPictureButton(hf, gClient-&gt;GetPicture(<span class="string">"refresh2.xpm"</span>));
+   hf-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsLeft | kLHintsTop, 2, 2, 2, 2));
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>-&gt;Resize(40, 40);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>-&gt;SetToolTipText(<span class="string">"Update"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BrefreshDir" title="TGPictureButton* KVBatchSystemGUI::BrefreshDir">BrefreshDir</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"Refresh()"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a> = <span class="keyword">new</span> TGPictureButton(hf, gClient-&gt;GetPicture(<span class="string">"bld_edit_s.png"</span>));
+   hf-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsLeft | kLHintsTop, 2, 2, 2, 2));
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>-&gt;Resize(40, 40);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>-&gt;SetToolTipText(<span class="string">"Alter job(s) resources"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BalterJobs" title="TGPictureButton* KVBatchSystemGUI::BalterJobs">BalterJobs</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"AlterJobs()"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a> = <span class="keyword">new</span> TGPictureButton(hf, gClient-&gt;GetPicture(<span class="string">"mb_stop_s.xpm"</span>));
+   hf-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsLeft | kLHintsTop, 2, 2, 2, 2));
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>-&gt;Resize(40, 40);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>-&gt;SetToolTipText(<span class="string">"Kill job(s)"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:BremDir" title="TGPictureButton* KVBatchSystemGUI::BremDir">BremDir</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Clicked()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"KillJobs()"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;AddFrame(hf, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsExpandX, 2, 2, 2, 2));
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a> = <span class="keyword">new</span> <a href="../KVListView.html">KVListView</a>(<a href="../KVBatchJob.html">KVBatchJob</a>::<a href="../KVBatchJob.html#KVBatchJob:Class" title="TClass* KVBatchJob::Class()">Class</a>(), <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>, 900, 400);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumns" title="void KVListView::SetDataColumns(Int_t ncolumns)">SetDataColumns</a>(11);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(0, <span class="string">"JobID"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(1, <span class="string">"Name"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(2, <span class="string">"Status"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(3, <span class="string">"Submitted"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:GetDataColumn" title="KVLVColumnData* KVListView::GetDataColumn(Int_t index)">GetDataColumn</a>(3)-><a href="../KVLVColumnData.html#KVLVColumnData:SetIsDateTime" title="void KVLVColumnData::SetIsDateTime(KVDatime::EKVDateFormat fmt=KVDatime::kCTIME,Bool_t with_reference=kTRUE)">SetIsDateTime</a>(<a href="../KVDatime.html">KVDatime</a>::<a href="../KVDatime.html#KVDatime:kSQL" title="const KVDatime::EKVDateFormat KVDatime::kSQL">kSQL</a>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(4, <span class="string">"Complete [%]"</span>, <span class="string">"GetPercentageComplete"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(5, <span class="string">"CPUusage"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(6, <span class="string">"CPUmax"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(7, <span class="string">"MemUsed"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(8, <span class="string">"MemMax"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(9, <span class="string">"DiskUsed"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:SetDataColumn" title="void KVListView::SetDataColumn(Int_t index,const Char_t* name,const Char_t* method=&quot;&quot;,Int_t mode=kTextCenterX)">SetDataColumn</a>(10, <span class="string">"DiskMax"</span>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:ActivateSortButtons" title="void KVListView::ActivateSortButtons()">ActivateSortButtons</a>();
 
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a> = 0;
+   <span class="keyword">if</span> (!<a href="../KVBatchSystemManager.html">gBatchSystemManager</a>) <span class="keyword">new</span> <a href="../KVBatchSystemManager.html">KVBatchSystemManager</a>;
+   <span class="keyword">if</span> (!<a href="../KVBatchSystem.html">gBatchSystem</a>) <a href="../KVBatchSystemManager.html">gBatchSystemManager</a>-><a href="../KVBatchSystemManager.html#KVBatchSystemManager:GetDefaultBatchSystem" title="KVBatchSystem* KVBatchSystemManager::GetDefaultBatchSystem()">GetDefaultBatchSystem</a>()-><a href="../KVBatchSystem.html#KVBatchSystem:cd" title="void KVBatchSystem::cd()">cd</a>();
 
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>();
-    
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>=0;
-    <span class="comment">// automatic update every N second</span>
-    <span class="keyword">if</span>(gEnv-&gt;GetValue(<span class="string">"KVBatchSystemGUI.AutoUpdate"</span>,<a href="../ListOfTypes.html#Bool_t">kFALSE</a>)){
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a> = 0;
+
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>();
+
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a> = 0;
+   <span class="comment">// automatic update every N second</span>
+   <span class="keyword">if</span> (gEnv-&gt;GetValue(<span class="string">"KVBatchSystemGUI.AutoUpdate"</span>, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)) {
       <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a> = <span class="keyword">new</span> TTimer;
-	   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Timeout()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"Refresh()"</span>);
-	   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>-&gt;Start(1000*(gEnv-&gt;GetValue(<span class="string">"KVBatchSystemGUI.RefreshInterval"</span>,30)));
-    }
+      <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"Timeout()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"Refresh()"</span>);
+      <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>-&gt;Start(1000 * (gEnv-&gt;GetValue(<span class="string">"KVBatchSystemGUI.RefreshInterval"</span>, 30)));
+   }
 
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsTop|kLHintsExpandX|kLHintsExpandY,5,5,10,10));
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;SetMWMHints(kMWMDecorAll,
-                         kMWMFuncAll,
-                         kMWMInputModeless);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;MapSubwindows();
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;AddFrame(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>, <span class="keyword">new</span> TGLayoutHints(kLHintsTop | kLHintsExpandX | kLHintsExpandY, 5, 5, 10, 10));
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;SetMWMHints(kMWMDecorAll,
+                          kMWMFuncAll,
+                          kMWMInputModeless);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;MapSubwindows();
 
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;Resize(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;GetDefaultSize());
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;MapWindow();
-    
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;Resize(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;GetDefaultSize());
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;MapWindow();
+
    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Connect" title="Bool_t KVBatchSystemGUI::Connect(const char* sig,const char* cl,void* rcvr,const char* slt)">Connect</a>(<span class="string">"CloseWindow()"</span>, <span class="string">"KVBatchSystemGUI"</span>, <span class="keyword">this</span>, <span class="string">"DoClose()"</span>);
    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>-&gt;DontCallClose();      <span class="comment">// to avoid <a href="../ListOfTypes.html#double">double</a> deletions.</span>
 }
 
 <a name="bwIBr"></a><a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:_KVBatchSystemGUI" title="void KVBatchSystemGUI::~KVBatchSystemGUI()">~KVBatchSystemGUI</a>()
 {
-    <span class="comment">// Destructor</span>
-   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fOpen" title="Bool_t KVBatchSystemGUI::fOpen">fOpen</a>=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
-    SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
-    <span class="keyword">if</span>(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>)<span class="keyword">delete</span> <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>;
-    <span class="keyword">delete</span> <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>;
-    SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a>);
+   <span class="comment">// Destructor</span>
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fOpen" title="Bool_t KVBatchSystemGUI::fOpen">fOpen</a> = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
+   <span class="keyword">if</span> (<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>)<span class="keyword">delete</span> <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fTimer" title="TTimer* KVBatchSystemGUI::fTimer">fTimer</a>;
+   <span class="keyword">delete</span> <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>;
+   SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a>);
 }
 
 <a name="UbWpoD"></a><span class="keyword">void</span> <a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>()
 {
    <a href="../KVDatime.html">KVDatime</a> now;
-   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Refresh"</span>, <span class="string">"Updating... [%s]"</span>,now.AsSQLString());
-    <span class="keyword">if</span>(!<a href="../KVBatchSystemManager.html">gBatchSystemManager</a>) <span class="keyword">new</span> <a href="../KVBatchSystemManager.html">KVBatchSystemManager</a>;
-    <span class="keyword">if</span>(!<a href="../KVBatchSystem.html">gBatchSystem</a>) <a href="../KVBatchSystemManager.html">gBatchSystemManager</a>-><a href="../KVBatchSystemManager.html#KVBatchSystemManager:GetDefaultBatchSystem" title="KVBatchSystem* KVBatchSystemManager::GetDefaultBatchSystem()">GetDefaultBatchSystem</a>()-><a href="../KVBatchSystem.html#KVBatchSystem:cd" title="void KVBatchSystem::cd()">cd</a>();
-    <a href="../KVList.html">KVList</a>* newjobs = <a href="../KVBatchSystem.html">gBatchSystem</a>-><a href="../KVBatchSystem.html#KVBatchSystem:GetListOfJobs" title="KVList* KVBatchSystem::GetListOfJobs()">GetListOfJobs</a>();
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:Display" title="void KVListView::Display(const TCollection* l)">Display</a>(newjobs);
-    SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a>=newjobs;
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Refresh"</span>, <span class="string">"Updating... [%s]"</span>, now.AsSQLString());
+   <span class="keyword">if</span> (!<a href="../KVBatchSystemManager.html">gBatchSystemManager</a>) <span class="keyword">new</span> <a href="../KVBatchSystemManager.html">KVBatchSystemManager</a>;
+   <span class="keyword">if</span> (!<a href="../KVBatchSystem.html">gBatchSystem</a>) <a href="../KVBatchSystemManager.html">gBatchSystemManager</a>-><a href="../KVBatchSystemManager.html#KVBatchSystemManager:GetDefaultBatchSystem" title="KVBatchSystem* KVBatchSystemManager::GetDefaultBatchSystem()">GetDefaultBatchSystem</a>()-><a href="../KVBatchSystem.html#KVBatchSystem:cd" title="void KVBatchSystem::cd()">cd</a>();
+   <a href="../KVList.html">KVList</a>* newjobs = <a href="../KVBatchSystem.html">gBatchSystem</a>-><a href="../KVBatchSystem.html#KVBatchSystem:GetListOfJobs" title="KVList* KVBatchSystem::GetListOfJobs()">GetListOfJobs</a>();
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:Display" title="void KVListView::Display(const TCollection* l)">Display</a>(newjobs);
+   SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:jobs" title="KVList* KVBatchSystemGUI::jobs">jobs</a> = newjobs;
 }
 
 <a name="up5trE"></a><span class="keyword">void</span> <a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:KillJobs" title="void KVBatchSystemGUI::KillJobs()">KillJobs</a>()
 {
-    SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a> = <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:GetSelectedObjects" title="TList* KVListView::GetSelectedObjects()">GetSelectedObjects</a>();
-    <span class="keyword">if</span>(!<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>-&gt;GetEntries()) <span class="keyword">return</span>;
-    TIter next(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
-    <a href="../KVBatchJob.html">KVBatchJob</a>* job;
-    <span class="keyword">while</span>( (job = (<a href="../KVBatchJob.html">KVBatchJob</a>*)next())) job-&gt;DeleteJob();
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>();
+   SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a> = <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:GetSelectedObjects" title="TList* KVListView::GetSelectedObjects()">GetSelectedObjects</a>();
+   <span class="keyword">if</span> (!<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>-&gt;GetEntries()) <span class="keyword">return</span>;
+   TIter next(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
+   <a href="../KVBatchJob.html">KVBatchJob</a>* job;
+   <span class="keyword">while</span> ((job = (<a href="../KVBatchJob.html">KVBatchJob</a>*)next())) job-&gt;DeleteJob();
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>();
 }
 
 <a name="VhytfD"></a><span class="keyword">void</span> <a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:AlterJobs" title="void KVBatchSystemGUI::AlterJobs()">AlterJobs</a>()
 {
-    SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a> = <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:GetSelectedObjects" title="TList* KVListView::GetSelectedObjects()">GetSelectedObjects</a>();
-    <span class="keyword">if</span>(!<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>-&gt;GetEntries()) <span class="keyword">return</span>;
-    
-    <span class="comment">//<a href="../KVBatchSystem.html">gBatchSystem</a>-><a href="../KVBatchSystem.html#KVBatchSystem:AlterJobs" title="void KVBatchSystem::AlterJobs(TGWindow* ,TList* )">AlterJobs</a>(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>, <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);</span>
+   SafeDelete(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a> = <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:fLVJobs" title="KVListView* KVBatchSystemGUI::fLVJobs">fLVJobs</a>-><a href="../KVListView.html#KVListView:GetSelectedObjects" title="TList* KVListView::GetSelectedObjects()">GetSelectedObjects</a>();
+   <span class="keyword">if</span> (!<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>-&gt;GetEntries()) <span class="keyword">return</span>;
+
+   <span class="comment">//<a href="../KVBatchSystem.html">gBatchSystem</a>-><a href="../KVBatchSystem.html#KVBatchSystem:AlterJobs" title="void KVBatchSystem::AlterJobs(TGWindow* ,TList* )">AlterJobs</a>(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>, <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);</span>
    <a href="../KVGEBatchJob.html">KVGEBatchJob</a>* j1 = (<a href="../KVGEBatchJob.html">KVGEBatchJob</a>*)<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>-&gt;First();
    TString resources = j1-&gt;GetResources();
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok=<a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    <span class="keyword">new</span> <a href="../KVInputDialog.html">KVInputDialog</a>(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:MainFrame" title="TGMainFrame* KVBatchSystemGUI::MainFrame">MainFrame</a>, <span class="string">"Modify the currently-set resources for theses jobs ?"</span>, &amp;resources, &amp;ok,
-         <span class="string">"Change the resources you want to modify; leave the other ones as they are"</span>);
-   <span class="keyword">if</span>(ok){
-    TIter next(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
-    <a href="../KVGEBatchJob.html">KVGEBatchJob</a>* job;
-    <span class="keyword">while</span>( (job = (<a href="../KVGEBatchJob.html">KVGEBatchJob</a>*)next()) ) job-&gt;AlterResources(resources);
+                     <span class="string">"Change the resources you want to modify; leave the other ones as they are"</span>);
+   <span class="keyword">if</span> (ok) {
+      TIter next(<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:selected_jobs" title="TList* KVBatchSystemGUI::selected_jobs">selected_jobs</a>);
+      <a href="../KVGEBatchJob.html">KVGEBatchJob</a>* job;
+      <span class="keyword">while</span> ((job = (<a href="../KVGEBatchJob.html">KVGEBatchJob</a>*)next())) job-&gt;AlterResources(resources);
    }
-    
-    <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>();
+
+   <a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:Refresh" title="void KVBatchSystemGUI::Refresh()">Refresh</a>();
 }
 
 <a name="p4Uj5E"></a><span class="keyword">void</span> <a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>::<a href="../KVBatchSystemGUI.html#KVBatchSystemGUI:DoClose" title="void KVBatchSystemGUI::DoClose()">DoClose</a>()
@@ -205,7 +205,7 @@ ClassImp(<a href="../KVBatchSystemGUI.html">KVBatchSystemGUI</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:13 </em><em>&raquo; Last generated: 2015-11-20 15:13</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:12 </em><em>&raquo; Last generated: 2016-01-08 15:12</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

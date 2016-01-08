@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 20 15:15:47 2015            -->
+<!--   Date: Fri Jan  8 15:15:02 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -20,11 +20,11 @@
 <img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//</span>
-<span class="comment">//Author: Daniel Cussol </span>
+<span class="comment">//Author: Daniel Cussol</span>
 <span class="comment">//</span>
 <span class="comment">// 16/02/2004:</span>
 <span class="comment">// Creation d'une classe Variable Globale pour KaliVeda.</span>
-<span class="comment">// Elle est utilisee dans les analyses ROOT. </span>
+<span class="comment">// Elle est utilisee dans les analyses ROOT.</span>
 <span class="comment">//</span>
 
 <span class="cpp">#include "<a href="../KVVarGlob.h">KVVarGlob.h</a>"</span>
@@ -52,16 +52,16 @@ creation &amp; initialisation:
 
       <a href="../KVVarGlob.html">KVVarGlob</a>* VG = new KV...;
       VG-&gt;<a href="../KVVarGlob.html#KVVarGlob:Init" title="void KVVarGlob::Init()">Init</a>(); // perform any necessary initialisations
-      
+
 treatment of 1 event:
 
       VG-&gt;<a href="../KVVarGlob.html#KVVarGlob:Reset" title="void KVVarGlob::Reset()">Reset</a>(); // reinitialise prior to analysis
       while( [loop over particles in event] ){
-      
+
           VG-&gt;<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>( [particle] ); // calculate contribution of particle to variable
       }
       <a href="../ListOfTypes.html#Double_t">Double_t</a> valueOfVG = VG-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(); // retrieve value of global variable for event
-      
+
 Global variables can be of different types:
 
      One-body global variable     (type = <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:kOneBody" title="const enum KVVarGlob:: KVVarGlob::kOneBody">kOneBody</a>)
@@ -78,8 +78,8 @@ Derived global variable classes of 2-body or N-body type must set the <a href=".
 to the appropriate type (<a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="const enum KVVarGlob:: KVVarGlob::kTwoBody">kTwoBody</a> or <a href="../KVVarGlob.html#KVVarGlob:kNBody" title="const enum KVVarGlob:: KVVarGlob::kNBody">kNBody</a>) and define the <a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>(<a href="../KVNucleus.html">KVNucleus</a>*,<a href="../KVNucleus.html">KVNucleus</a>*)
 method (for 2-body variables) or the <a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="../KVEvent.html">KVEvent</a>*) method (for N-body variables).
 This is handled semi-automatically when using method
-	<a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> * classname, const <a href="../ListOfTypes.html#Char_t">Char_t</a> * classdesc, <a href="../ListOfTypes.html#int">int</a> type)
-to generate a skeleton '.h' and '.cpp' file for the implementation of a new global variable class. 
+   <a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a> * classname, const <a href="../ListOfTypes.html#Char_t">Char_t</a> * classdesc, <a href="../ListOfTypes.html#int">int</a> type)
+to generate a skeleton '.h' and '.cpp' file for the implementation of a new global variable class.
 By default, global variables are 1-body and must define the <a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>(<a href="../KVNucleus.html">KVNucleus</a>*) method.
 
 begin_html&lt;h2&gt;Global variable lists&lt;/h2&gt;end_html
@@ -94,12 +94,12 @@ creation &amp; initialisation:
       VGlist-&gt;Add( new KV...(<span class="string">"var3"</span>) ); // add variable
       ...
       VGlist-&gt;<a href="../KVVarGlob.html#KVVarGlob:Init" title="void KVVarGlob::Init()">Init</a>(); // initialise all variables
-      
+
 treatment of 1 event:
 
       VGlist-&gt;<a href="../KVVarGlob.html#KVVarGlob:Reset" title="void KVVarGlob::Reset()">Reset</a>(); // reinitialise all variables prior to analysis
       while( [loop over particles in event] ){
-      
+
           VGlist-&gt;<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>( [particle] ); // calculate contribution of particle to each variable
       }
       <a href="../ListOfTypes.html#Double_t">Double_t</a> valueOfvar1 = VGlist-&gt;GetGV(<span class="string">"var1"</span>)-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>(); // retrieve value of <span class="string">"var1"</span> for event
@@ -142,7 +142,7 @@ provide the methods
 
    <a href="../ListOfTypes.html#void">void</a>           <a href="../KVVarGlob.html#KVVarGlob:SetFrame" title="void KVVarGlob::SetFrame(const Char_t* )">SetFrame</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a>*)
    const <a href="../ListOfTypes.html#Char_t">Char_t</a>*  <a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>()
-   
+
 which allow to change the reference frame used for the calculation of the variable
 (depending on the implementation of the specific class).
 */</span>
@@ -162,20 +162,20 @@ which allow to change the reference frame used for the calculation of the variab
    <a href="../KVVarGlob.html#KVVarGlob:nb" title="Int_t KVVarGlob::nb">nb</a>++;
    <a href="../KVVarGlob.html#KVVarGlob:nb_crea" title="Int_t KVVarGlob::nb_crea">nb_crea</a>++;
    <a href="../KVVarGlob.html#KVVarGlob:nameList" title="KVNameValueList KVVarGlob::nameList">nameList</a>.<a href="../KVNameValueList.html#KVNameValueList:Clear" title="void KVNameValueList::Clear(Option_t* opt=&quot;&quot;)">Clear</a>();
-   <a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a>=0;
+   <a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a> = 0;
    <span class="comment">// one-body variable by default</span>
    <a href="../KVVarGlob.html#KVVarGlob:fType" title="Int_t KVVarGlob::fType">fType</a> = <a href="../KVVarGlob.html#KVVarGlob:kOneBody" title="const enum KVVarGlob:: KVVarGlob::kOneBody">kOneBody</a>;
-   <a href="../KVVarGlob.html#KVVarGlob:fValueType" title="Char_t KVVarGlob::fValueType">fValueType</a>=<span class="string">'D'</span>;
-   <a href="../KVVarGlob.html#KVVarGlob:fMaxNumBranches" title="Int_t KVVarGlob::fMaxNumBranches">fMaxNumBranches</a>=-1;
+   <a href="../KVVarGlob.html#KVVarGlob:fValueType" title="Char_t KVVarGlob::fValueType">fValueType</a> = <span class="string">'D'</span>;
+   <a href="../KVVarGlob.html#KVVarGlob:fMaxNumBranches" title="Int_t KVVarGlob::fMaxNumBranches">fMaxNumBranches</a> = -1;
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="ky.OeE"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:KVVarGlob" title="KVVarGlob KVVarGlob::KVVarGlob() or overloads">KVVarGlob</a>(<span class="keyword">void</span>):<a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>()
+<a name="QKQnkC"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:KVVarGlob" title="KVVarGlob KVVarGlob::KVVarGlob() or overloads">KVVarGlob</a>(<span class="keyword">void</span>): <a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>()
 {
 <span class="comment">//</span>
 <span class="comment">// Createur par default</span>
 <span class="comment">//</span>
-   <a href="../ListOfTypes.html#Char_t">Char_t</a> *nom = <span class="keyword">new</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>[80];
+   <a href="../ListOfTypes.html#Char_t">Char_t</a>* nom = <span class="keyword">new</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>[80];
 
    <a href="../KVVarGlob.html#KVVarGlob:init" title="void KVVarGlob::init()">init</a>();
    sprintf(nom, <span class="string">"KVVarGlob_%d"</span>, <a href="../KVVarGlob.html#KVVarGlob:nb_crea" title="Int_t KVVarGlob::nb_crea">nb_crea</a>);
@@ -188,7 +188,7 @@ which allow to change the reference frame used for the calculation of the variab
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="Coqli"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:KVVarGlob" title="KVVarGlob KVVarGlob::KVVarGlob() or overloads">KVVarGlob</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * nom):<a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>(nom)
+<a name="AovwoD"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:KVVarGlob" title="KVVarGlob KVVarGlob::KVVarGlob() or overloads">KVVarGlob</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* nom): <a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>(nom)
 {
 <span class="comment">//</span>
 <span class="comment">// Constructeur avec un nom</span>
@@ -200,7 +200,7 @@ which allow to change the reference frame used for the calculation of the variab
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="DYSTyC"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:KVVarGlob" title="KVVarGlob KVVarGlob::KVVarGlob() or overloads">KVVarGlob</a>(<span class="keyword">const</span> <a href="../KVVarGlob.html">KVVarGlob</a> &amp; a) : <a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>()
+<a name="pMb0b"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:KVVarGlob" title="KVVarGlob KVVarGlob::KVVarGlob() or overloads">KVVarGlob</a>(<span class="keyword">const</span> <a href="../KVVarGlob.html">KVVarGlob</a>&amp; a) : <a href="../KVBase.html#KVBase:KVBase" title="KVBase KVBase::KVBase() or overloads">KVBase</a>()
 {
 <span class="comment">// Contructeur par copie</span>
 
@@ -208,7 +208,7 @@ which allow to change the reference frame used for the calculation of the variab
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
    a.<a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#else</span>
-   ((<a href="../KVVarGlob.html">KVVarGlob</a> &amp;) a).<a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(*<span class="keyword">this</span>);
+   ((<a href="../KVVarGlob.html">KVVarGlob</a>&amp;) a).<a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#endif</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlob</span>
    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <a href="../KVVarGlob.html#KVVarGlob:nb" title="Int_t KVVarGlob::nb">nb</a> &lt;&lt; <span class="string">" crees...(copie) "</span> &lt;&lt; endl;
@@ -218,7 +218,7 @@ which allow to change the reference frame used for the calculation of the variab
 <span class="comment">//_________________________________________________________________</span>
 <a name="BZiMlE"></a><a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:_KVVarGlob" title="void KVVarGlob::~KVVarGlob()">~KVVarGlob</a>(<span class="keyword">void</span>)
 {
-<span class="comment">// </span>
+<span class="comment">//</span>
 <span class="comment">// Destructeur</span>
 <span class="comment">//</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlob</span>
@@ -232,7 +232,7 @@ which allow to change the reference frame used for the calculation of the variab
 
 
 <span class="comment">//_________________________________________________________________</span>
-<a href="../KVVarGlob.html">KVVarGlob</a> &amp; <a href="../KVVarGlob.html">KVVarGlob</a>::<span class="keyword">operator</span> =(<span class="keyword">const</span> <a href="../KVVarGlob.html">KVVarGlob</a> &amp; a)
+<a href="../KVVarGlob.html">KVVarGlob</a>&amp; <a href="../KVVarGlob.html">KVVarGlob</a>::<span class="keyword">operator</span> =(<span class="keyword">const</span> <a href="../KVVarGlob.html">KVVarGlob</a>&amp; a)
 {
 <span class="comment">//</span>
 <span class="comment">// Operateur =</span>
@@ -243,7 +243,7 @@ which allow to change the reference frame used for the calculation of the variab
 <span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(3,4,0)</span>
    a.<a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#else</span>
-   ((<a href="../KVVarGlob.html">KVVarGlob</a> &amp;) a).<a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(*<span class="keyword">this</span>);
+   ((<a href="../KVVarGlob.html">KVVarGlob</a>&amp;) a).<a href="../KVBase.html#KVBase:Copy" title="void KVBase::Copy(TObject&amp; )">Copy</a>(*<span class="keyword">this</span>);
 <span class="cpp">#endif</span>
 <span class="cpp">#ifdef DEBUG_KVVarGlob</span>
    <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Nom de la copie par egalite: "</span> &lt;&lt; <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; endl;
@@ -252,7 +252,7 @@ which allow to change the reference frame used for the calculation of the variab
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="sEBOTD"></a><a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> *<a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:GetObject" title="TObject* KVVarGlob::GetObject()">GetObject</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
+<a name="IhAOTD"></a><a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:GetObject" title="TObject* KVVarGlob::GetObject()">GetObject</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
 {
    <span class="comment">//</span>
    <span class="comment">// Retourne un object</span>
@@ -262,7 +262,7 @@ which allow to change the reference frame used for the calculation of the variab
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="ktDos"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * classname, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * classdesc, <span class="keyword">int</span> type)
+<a name="K7rfUD"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* classname, <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* classdesc, <span class="keyword">int</span> type)
 {
    <span class="comment">// Creates skeleton '.h' and '.cpp' files for a new global variable class which</span>
    <span class="comment">// inherits from this class. Give a name for the new class and a <a href="../ListOfTypes.html#short">short</a> description</span>
@@ -274,24 +274,24 @@ which allow to change the reference frame used for the calculation of the variab
    <span class="comment">// A skeleton <a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>(<a href="../KVNucleus.html">KVNucleus</a>*,<a href="../KVNucleus.html">KVNucleus</a>*) method will be generated.</span>
    <span class="comment">// For a N-body variable, call <a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a> with type = <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:kNBody" title="const enum KVVarGlob:: KVVarGlob::kNBody">kNBody</a>.</span>
    <span class="comment">// A skeleton <a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>(<a href="../KVEvent.html">KVEvent</a>*) method will be generated.</span>
-   
+
    <span class="comment">// basic class template</span>
    <a href="../KVClassFactory.html">KVClassFactory</a> cf(classname, classdesc, <span class="string">"KVVarGlob"</span>, <a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
-   
+
    <a href="../KVString.html">KVString</a> body;
-   
+
    <span class="comment">// add '<a href="../KVVarGlob.html#KVVarGlob:init" title="void KVVarGlob::init()">init</a>' method</span>
    <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddInitMethod" title="void KVVarGlob::AddInitMethod(const Char_t* classname,KVClassFactory&amp; cf,KVString&amp; body,int type)">AddInitMethod</a>(classname, cf, body, type);
-   
+
    <span class="comment">// add '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
    <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethod" title="void KVVarGlob::AddFillMethod(KVClassFactory&amp; cf,int type)">AddFillMethod</a>(cf, type);
-   
+
    <span class="comment">// body of '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
    <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:FillMethodBody" title="void KVVarGlob::FillMethodBody(KVString&amp; body,int type)">FillMethodBody</a>(body, type);
-   
+
    <span class="comment">// add body of method</span>
    <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethodBody" title="void KVVarGlob::AddFillMethodBody(KVClassFactory&amp; cf,KVString&amp; body,int type)">AddFillMethodBody</a>(cf, body, type);
-      
+
    cf.GenerateCode();
 }
 
@@ -299,14 +299,14 @@ which allow to change the reference frame used for the calculation of the variab
 {
    <span class="comment">// PRIVATE method used by <a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>.</span>
    <span class="comment">// body of '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
-   <span class="keyword">switch</span>(type){
+   <span class="keyword">switch</span> (type) {
       <span class="keyword">case</span> <a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="const enum KVVarGlob:: KVVarGlob::kTwoBody">kTwoBody</a>:
          body = <span class="string">"   // Calculation of contribution to 2-body global variable of pair (n1,n2) of nuclei.\n"</span>;
-         body+= <span class="string">"   // NOTE: this method will be called for EVERY pair of nuclei in the event\n"</span>;
-         body+= <span class="string">"   // (i.e. n1-n2 and n2-n1), including pairs of identical nuclei (n1 = n2).\n"</span>;
-         body+= <span class="string">"   // If you want to calculate a global variable using only each non-identical pair once,\n"</span>;
-         body+= <span class="string">"   // then make sure in your implementation that you check n1!=n2 and divide the\n"</span>;
-         body+= <span class="string">"   // contribution to any sum by 2 to avoid double-counting.\n"</span>;
+         body += <span class="string">"   // NOTE: this method will be called for EVERY pair of nuclei in the event\n"</span>;
+         body += <span class="string">"   // (i.e. n1-n2 and n2-n1), including pairs of identical nuclei (n1 = n2).\n"</span>;
+         body += <span class="string">"   // If you want to calculate a global variable using only each non-identical pair once,\n"</span>;
+         body += <span class="string">"   // then make sure in your implementation that you check n1!=n2 and divide the\n"</span>;
+         body += <span class="string">"   // contribution to any sum by 2 to avoid double-counting.\n"</span>;
          <span class="keyword">break</span>;
       <span class="keyword">case</span> <a href="../KVVarGlob.html#KVVarGlob:kNBody" title="const enum KVVarGlob:: KVVarGlob::kNBody">kNBody</a>:
          body = <span class="string">"   // Calculation of contribution to N-body global variable of particles in event e.\n"</span>;
@@ -315,39 +315,39 @@ which allow to change the reference frame used for the calculation of the variab
          body = <span class="string">"   // Calculation of contribution to 1-body global variable of nucleus n\n"</span>;
    }
 }
-   
-<a name="iprYiB"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddInitMethod" title="void KVVarGlob::AddInitMethod(const Char_t* classname,KVClassFactory&amp; cf,KVString&amp; body,int type)">AddInitMethod</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* classname, <a href="../KVClassFactory.html">KVClassFactory</a> &amp;cf, <a href="../KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)
+
+<a name="eu2JiB"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddInitMethod" title="void KVVarGlob::AddInitMethod(const Char_t* classname,KVClassFactory&amp; cf,KVString&amp; body,int type)">AddInitMethod</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* classname, <a href="../KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="../KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)
 {
    <span class="comment">// PRIVATE method used by <a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>.</span>
    <span class="comment">// add '<a href="../KVVarGlob.html#KVVarGlob:init" title="void KVVarGlob::init()">init</a>' method</span>
    cf.AddMethod(Form(<span class="string">"init_%s"</span>, classname), <span class="string">"void"</span>, <span class="string">"private"</span>);
    body = <span class="string">"   // Private initialisation method called by all constructors.\n"</span>;
-   body+= <span class="string">"   // All member initialisations should be done here.\n"</span>;
-   body+= <span class="string">"   //\n"</span>;
-   body+= <span class="string">"   // You should also (if your variable calculates several different quantities)\n"</span>;
-   body+= <span class="string">"   // set up a correspondance between named values and index number\n"</span>;
-   body+= <span class="string">"   // using method SetNameIndex(const Char_t*,Int_t)\n"</span>;
-   body+= <span class="string">"   // in order for GetValue(const Char_t*) to work correctly.\n"</span>;
-   body+= <span class="string">"   // The index numbers should be the same as in your getvalue_int(Int_t) method.\n"</span>;
-   body+= <span class="string">"\n"</span>;
-   <span class="keyword">switch</span>(type){
+   body += <span class="string">"   // All member initialisations should be done here.\n"</span>;
+   body += <span class="string">"   //\n"</span>;
+   body += <span class="string">"   // You should also (if your variable calculates several different quantities)\n"</span>;
+   body += <span class="string">"   // set up a correspondance between named values and index number\n"</span>;
+   body += <span class="string">"   // using method SetNameIndex(const Char_t*,Int_t)\n"</span>;
+   body += <span class="string">"   // in order for GetValue(const Char_t*) to work correctly.\n"</span>;
+   body += <span class="string">"   // The index numbers should be the same as in your getvalue_int(Int_t) method.\n"</span>;
+   body += <span class="string">"\n"</span>;
+   <span class="keyword">switch</span> (type) {
       <span class="keyword">case</span> <a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="const enum KVVarGlob:: KVVarGlob::kTwoBody">kTwoBody</a>:
-         body+= <span class="string">"   fType = KVVarGlob::kTwoBody; // this is a 2-body variable\n"</span>;
+         body += <span class="string">"   fType = KVVarGlob::kTwoBody; // this is a 2-body variable\n"</span>;
          <span class="keyword">break</span>;
       <span class="keyword">case</span> <a href="../KVVarGlob.html#KVVarGlob:kNBody" title="const enum KVVarGlob:: KVVarGlob::kNBody">kNBody</a>:
-         body+= <span class="string">"   fType = KVVarGlob::kNBody; // this is a N-body variable\n"</span>;
+         body += <span class="string">"   fType = KVVarGlob::kNBody; // this is a N-body variable\n"</span>;
          <span class="keyword">break</span>;
       <span class="keyword">default</span>:
-         body+= <span class="string">"   fType = KVVarGlob::kOneBody; // this is a 1-body variable\n"</span>;
+         body += <span class="string">"   fType = KVVarGlob::kOneBody; // this is a 1-body variable\n"</span>;
    }
    cf.AddMethodBody(Form(<span class="string">"init_%s"</span>, classname), body);
-}   
+}
 
-<a name="XZP9jC"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethod" title="void KVVarGlob::AddFillMethod(KVClassFactory&amp; cf,int type)">AddFillMethod</a>(<a href="../KVClassFactory.html">KVClassFactory</a> &amp;cf, <span class="keyword">int</span> type)
+<a name="PjFLlC"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethod" title="void KVVarGlob::AddFillMethod(KVClassFactory&amp; cf,int type)">AddFillMethod</a>(<a href="../KVClassFactory.html">KVClassFactory</a>&amp; cf, <span class="keyword">int</span> type)
 {
    <span class="comment">// PRIVATE method used by <a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>.</span>
    <span class="comment">// add '<a href="../KVVarGlob.html#KVVarGlob:Fill" title="void KVVarGlob::Fill(KVNucleus* c)">Fill</a>', '<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>', or '<a href="../KVVarGlob.html#KVVarGlob:FillN" title="void KVVarGlob::FillN(KVEvent* e)">FillN</a>' method</span>
-   <span class="keyword">switch</span>(type){
+   <span class="keyword">switch</span> (type) {
       <span class="keyword">case</span> <a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="const enum KVVarGlob:: KVVarGlob::kTwoBody">kTwoBody</a>:
          cf.AddMethod(<span class="string">"Fill2"</span>, <span class="string">"void"</span>);
          cf.AddMethodArgument(<span class="string">"Fill2"</span>, <span class="string">"KVNucleus*"</span>, <span class="string">"n1"</span>);
@@ -362,13 +362,13 @@ which allow to change the reference frame used for the calculation of the variab
          cf.AddMethod(<span class="string">"Fill"</span>, <span class="string">"void"</span>);
          cf.AddMethodArgument(<span class="string">"Fill"</span>, <span class="string">"KVNucleus*"</span>, <span class="string">"n"</span>);
    }
-}   
-   
-<a name="sdzHWE"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethodBody" title="void KVVarGlob::AddFillMethodBody(KVClassFactory&amp; cf,KVString&amp; body,int type)">AddFillMethodBody</a>(<a href="../KVClassFactory.html">KVClassFactory</a> &amp;cf, <a href="../KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)
+}
+
+<a name="ws0HWE"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:AddFillMethodBody" title="void KVVarGlob::AddFillMethodBody(KVClassFactory&amp; cf,KVString&amp; body,int type)">AddFillMethodBody</a>(<a href="../KVClassFactory.html">KVClassFactory</a>&amp; cf, <a href="../KVString.html">KVString</a>&amp; body, <span class="keyword">int</span> type)
 {
    <span class="comment">// PRIVATE method used by <a href="../KVVarGlob.html#KVVarGlob:MakeClass" title="void KVVarGlob::MakeClass(const Char_t* classname,const Char_t* classdesc,int type=kOneBody)">MakeClass</a>.</span>
    <span class="comment">// add body of fill method</span>
-   <span class="keyword">switch</span>(type){
+   <span class="keyword">switch</span> (type) {
       <span class="keyword">case</span> <a href="../KVVarGlob.html#KVVarGlob:kTwoBody" title="const enum KVVarGlob:: KVVarGlob::kTwoBody">kTwoBody</a>:
          cf.AddMethodBody(<span class="string">"Fill2"</span>, body);
          <span class="keyword">break</span>;
@@ -381,7 +381,7 @@ which allow to change the reference frame used for the calculation of the variab
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="d1ggEB"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name, <a href="../ListOfTypes.html#Int_t">Int_t</a> index)
+<a name="ggwRdD"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:SetNameIndex" title="void KVVarGlob::SetNameIndex(const Char_t* name,Int_t index)">SetNameIndex</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name, <a href="../ListOfTypes.html#Int_t">Int_t</a> index)
 {
    <span class="comment">// Make the link between a variable name and an index</span>
    <span class="keyword">if</span> (!(<a href="../KVVarGlob.html#KVVarGlob:nameList" title="KVNameValueList KVVarGlob::nameList">nameList</a>.<a href="../KVNameValueList.html#KVNameValueList:HasParameter" title="Bool_t KVNameValueList::HasParameter(const Char_t* name)">HasParameter</a>(name))) {
@@ -394,7 +394,7 @@ which allow to change the reference frame used for the calculation of the variab
 }
 
 <span class="comment">//_________________________________________________________________</span>
-<a name="rg1D7"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:GetNameIndex" title="Int_t KVVarGlob::GetNameIndex(const Char_t* name)">GetNameIndex</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a> * name)
+<a name="EQY.H"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:GetNameIndex" title="Int_t KVVarGlob::GetNameIndex(const Char_t* name)">GetNameIndex</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name)
 {
    <span class="comment">// return the index corresponding to name</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> index = 0;
@@ -437,7 +437,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="CaZvDD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:IsOptionGiven" title="Bool_t KVVarGlob::IsOptionGiven(const Char_t* option)">IsOptionGiven</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* opt)
 {
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if the option 'opt' has been set</span>
-   
+
    <span class="keyword">return</span> <a href="../KVVarGlob.html#KVVarGlob:fOptions" title="KVNameValueList KVVarGlob::fOptions">fOptions</a>.<a href="../KVNameValueList.html#KVNameValueList:HasParameter" title="Bool_t KVNameValueList::HasParameter(const Char_t* name)">HasParameter</a>(opt);
 }
 
@@ -446,7 +446,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="oqEzIE"></a><span class="keyword">const</span> TString&amp; <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:GetOptionString" title="const TString&amp; KVVarGlob::GetOptionString(const Char_t* option)">GetOptionString</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* opt) <span class="keyword">const</span>
 {
    <span class="comment">//Returns the value of the option</span>
-   
+
    <span class="keyword">return</span> <a href="../KVVarGlob.html#KVVarGlob:fOptions" title="KVNameValueList KVVarGlob::fOptions">fOptions</a>.<a href="../KVNameValueList.html#KVNameValueList:GetTStringValue" title="const TString&amp; KVNameValueList::GetTStringValue(const Char_t* name) or overloads">GetTStringValue</a>(opt);
 }
 
@@ -455,7 +455,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="rzCNkB"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:UnsetOption" title="void KVVarGlob::UnsetOption(const Char_t* opt)">UnsetOption</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* opt)
 {
    <span class="comment">//Removes the option 'opt' from the internal lists, as if it had never been set</span>
-   
+
    <a href="../KVVarGlob.html#KVVarGlob:fOptions" title="KVNameValueList KVVarGlob::fOptions">fOptions</a>.<a href="../KVNameValueList.html#KVNameValueList:RemoveParameter" title="void KVNameValueList::RemoveParameter(const Char_t* name)">RemoveParameter</a>(opt);
 }
 
@@ -464,7 +464,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="jmlCDE"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:SetParameter" title="void KVVarGlob::SetParameter(const Char_t* par,Double_t value)">SetParameter</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* par, <a href="../ListOfTypes.html#Double_t">Double_t</a> value)
 {
    <span class="comment">//Set the value for a parameter</span>
-   <a href="../KVVarGlob.html#KVVarGlob:fParameters" title="KVNameValueList KVVarGlob::fParameters">fParameters</a>.<a href="../KVNameValueList.html#KVNameValueList:SetValue" title="void KVNameValueList::SetValue(const Char_t* name,const Char_t* value) or overloads">SetValue</a>(par,value);
+   <a href="../KVVarGlob.html#KVVarGlob:fParameters" title="KVNameValueList KVVarGlob::fParameters">fParameters</a>.<a href="../KVNameValueList.html#KVNameValueList:SetValue" title="void KVNameValueList::SetValue(const Char_t* name,const Char_t* value) or overloads">SetValue</a>(par, value);
 }
 
 <span class="comment">//_________________________________________________________________</span>
@@ -472,7 +472,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="Rw1TnC"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:IsParameterSet" title="Bool_t KVVarGlob::IsParameterSet(const Char_t* par)">IsParameterSet</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* par)
 {
    <span class="comment">//Returns <a href="../ListOfTypes.html#Bool_t">kTRUE</a> if the parameter 'par' has been set</span>
-   
+
    <span class="keyword">return</span> <a href="../KVVarGlob.html#KVVarGlob:fParameters" title="KVNameValueList KVVarGlob::fParameters">fParameters</a>.<a href="../KVNameValueList.html#KVNameValueList:HasParameter" title="Bool_t KVNameValueList::HasParameter(const Char_t* name)">HasParameter</a>(par);
 }
 
@@ -481,7 +481,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="JBUoTE"></a><a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:GetParameter" title="Double_t KVVarGlob::GetParameter(const Char_t* par)">GetParameter</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* par)
 {
    <span class="comment">//Returns the value of the parameter 'par'</span>
-   
+
    <span class="keyword">return</span> <a href="../KVVarGlob.html#KVVarGlob:fParameters" title="KVNameValueList KVVarGlob::fParameters">fParameters</a>.<a href="../KVNameValueList.html#KVNameValueList:GetDoubleValue" title="Double_t KVNameValueList::GetDoubleValue(const Char_t* name) or overloads">GetDoubleValue</a>(par);
 }
 
@@ -490,7 +490,7 @@ which allow to change the reference frame used for the calculation of the variab
 <a name="UqZ5zB"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:UnsetParameter" title="void KVVarGlob::UnsetParameter(const Char_t* par)">UnsetParameter</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* par)
 {
    <span class="comment">//Removes the parameter 'par' from the internal lists, as if it had never been set</span>
-   
+
    <a href="../KVVarGlob.html#KVVarGlob:fParameters" title="KVNameValueList KVVarGlob::fParameters">fParameters</a>.<a href="../KVNameValueList.html#KVNameValueList:RemoveParameter" title="void KVNameValueList::RemoveParameter(const Char_t* name)">RemoveParameter</a>(par);
 }
 
@@ -501,7 +501,7 @@ which allow to change the reference frame used for the calculation of the variab
    <span class="comment">//Use this method to define the conditions which will be applied to select</span>
    <span class="comment">//particles to contribute to the global variable.</span>
    <span class="comment">//See <a href="../KVParticleCondition.html">KVParticleCondition</a> class.</span>
-   <span class="keyword">if</span>(!<a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a>) <a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a> = <span class="keyword">new</span> <a href="../KVParticleCondition.html">KVParticleCondition</a>(sel);
+   <span class="keyword">if</span> (!<a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a>) <a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a> = <span class="keyword">new</span> <a href="../KVParticleCondition.html">KVParticleCondition</a>(sel);
    <span class="keyword">else</span> *<a href="../KVVarGlob.html#KVVarGlob:fSelection" title="KVParticleCondition* KVVarGlob::fSelection">fSelection</a> = sel;
 }
 
@@ -516,7 +516,7 @@ which allow to change the reference frame used for the calculation of the variab
 
 <span class="comment">//_________________________________________________________________</span>
 
-<a name="F0QfFB"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>(<a href="../KVNucleus.html">KVNucleus</a>*,<a href="../KVNucleus.html">KVNucleus</a>*)
+<a name="YvDh2E"></a><span class="keyword">void</span> <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:Fill2" title="void KVVarGlob::Fill2(KVNucleus* n1,KVNucleus* n2)">Fill2</a>(<a href="../KVNucleus.html">KVNucleus</a>*, <a href="../KVNucleus.html">KVNucleus</a>*)
 {
    <span class="comment">// virtual method which must be overriden in child classes</span>
    <span class="comment">// describing two-body global variables.</span>
@@ -545,7 +545,7 @@ which allow to change the reference frame used for the calculation of the variab
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2015-11-20 15:15 </em><em>&raquo; Last generated: 2015-11-20 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-08 15:15 </em><em>&raquo; Last generated: 2016-01-08 15:15</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

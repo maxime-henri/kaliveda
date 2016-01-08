@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: KaliVeda Development team           -->
+<!--                                             -->
+<!--   Date: Fri Jan  8 15:13:10 2016            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVElasticCountRate</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVElasticCountRate','libKVMultiDetexp_events','KVElasticCountRates.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/06</a>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVElasticCountRate.h.html">header file</a>
+<a class="descrheadentry" href="src/KVElasticCountRate.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVElasticCountRates.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/exp_events/KVElasticCountRates.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVElasticCountRate:description">class description</a> 
+<a class="descrheadentry" href="#KVElasticCountRate:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVElasticCountRate:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVElasticCountRate:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/06</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EXP_EVENTS_Index.html">EXP_EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVElasticCountRate</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVElasticCountRate:description"></a>class KVElasticCountRate</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVElasticCountRates</h2>
+<h4>Calculate elastic scattering count rates in multidetector arrays</h4>
+<p>
+Use this class to calculate the count rates & energy losses of elastically scattered nuclei
+in the detectors of a multidetector array. It is assumed that the following
+global pointers have been initialised before using this class:
+</p>
+<ul>
+   <li><pre><a href="KVMultiDetArray.html">gMultiDetArray</a></pre> - points to object describing multidetector array</li>
+   <li><pre><a href="KVDataBase.html">gDataBase</a></pre> - points to database of run-dependent information for experimental dataset</li>
+</ul>
+<p>
+In other words, we assume that the user has chosen a dataset on which she wants
+to work:
+</p>
+<pre><a href="KVDataSetManager.html">gDataSetManager</a>-><a href="KVDataSetManager.html#KVDataSetManager:GetDataSet">GetDataSet</a>("name_of_dataset")-><a href="KVDataSet.html#KVDataSet:cd">cd</a>()</pre>
+<p>
+and then initialised the description of the experimental configuration for the dataset:
+</p>
+<pre><a href="KVMultiDetArray.html">KVMultiDetArray</a>::<a href="KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector">MakeMultiDetector</a>(gDataSet->GetName())</pre>
+<h3>Setting up the calculation</h3>
+<p>Create a new elastic scattering object defining angular range in which to perform calculation:</p>
+<pre>KVElasticCountRates ecr(2,45,0,360)</pre>
+<p>
+Then call the following methods in any order in order to set up the calculation:</p>
+<ul>
+   <li><pre>ecr.<a href="#KVElasticCountRates:SetProjectile">SetProjectile</a>(...)</pre></li>
+   <li><pre>ecr.<a href="#KVElasticCountRates:SetRun">SetRun</a>(...)</pre></li>
+</ul>
+<p>
+The SetRun(...) method uses the experimental database in order to determine the target
+for the run, detector state (gas pressures etc.).
+</p>
+<h3>Multilayer targets</h3>
+<p>
+When multilayer targets are used, the user can restrict the scattering calculation to one
+specific component of the target, i.e. the scattering takes place between the projectile
+and one of the nuclei of the specified layer. Energy losses before and after the scattering
+in the other layers of the target are of course still taken into account. To set the part of
+the target where scattering takes place use
+</p>
+<pre>ecr.<a href="#KVElasticCountRates:SetTargetScatteringLayer">SetTargetScatteringLayer</a>(...)</pre>
+<p>
+with the name of the layer you require (this is normally the name of the element
+making up the layer - see <a href="KVTarget.html">KVTarget</a> for details).
+</p>
+<h3>Inelastic scattering</h3>
+<p>
+Calculations can also be performed for inelastic scattering i.e. when the target nucleus is left
+in an excited state (N.B. we still use the Rutherford elastic scattering cross-section for
+weighting the energy loss distributions). In order to do this, call
+</p>
+<pre>ecr.<a href="#KVElasticCountRates:SetTargetExcitedState">SetTargetExcitedState</a>(...)</pre>
+<p>
+with the energy of the excited state of the target after scattering.
+</p>
+<h3>Running the calculation, obtaining the results</h3>
+<p>To perform the calculation, do:</p>
+<pre>ecr.CaclulateScattering(10000)</pre>
+<p>Make sure the number of sampled points (default=10000) is large enough for accurate determination of count rates.
+At the end of calculation, we print infos for all detectors hit by elastic particles, these are the count rates for
+a nominal beam intensity of 10**7 particles per second, and the mean energy loss in the detector:</p>
+<pre>
+kaliveda [3] esa.CalculateScattering(10000)
+SI_0112 : N=2.493e+00/sec.  <E>=1.659e+03 MeV
+SI_0101 : N=1.572e+01/sec.  <E>=1.659e+03 MeV
+SI_0102 : N=2.559e+00/sec.  <E>=1.659e+03 MeV
+SI_0223 : N=1.148e+00/sec.  <E>=1.457e+03 MeV
+CI_0223 : N=1.821e+00/sec.  <E>=8.248e+01 MeV
+SI_0201 : N=5.757e+00/sec.  <E>=1.457e+03 MeV
+CI_0201 : N=9.863e+00/sec.  <E>=8.247e+01 MeV
+CI_0203 : N=1.286e+00/sec.  <E>=8.248e+01 MeV
+SI_0203 : N=6.760e-01/sec.  <E>=1.456e+03 MeV
+SI_0324 : N=5.157e-01/sec.  <E>=1.449e+03 MeV
+</pre>
+<p>If you want to see the count rates for a different beam intensity, call</p>
+<pre>ecr.PrintResults(5.e+06)</pr>
+<p>For each detector hit we fill three histograms:</p>
+<pre>
+ OBJ: TH1F  SI_0223  Eloss in SI_0223 : 0 at: 0x10898980
+ OBJ: TH1F  SI_0223_dW  Solid angle of SI_0223 : 0 at: 0x10899540
+ OBJ: TH2F  SI_0223_map Map of SI_0223 : 0 at: 0x10e2e7d0
+</pre>
+<p>Each histogram can be obtained using</p>
+<pre>ecr.GetHistos().FindObject("SI_0223_map")</pre>
+<p>The count rate and mean energy loss in each detector can be obtained using</p>
+<pre>
+kaliveda [7] ecr.GetDetector("SI_0201").count_rate
+(double)5.75694360395366100e+00
+kaliveda [8] ecr.GetDetector("SI_0201").mean_energy
+(double)1.45679832635920388e+03
+</pre>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVElasticCountRate:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:KVElasticCountRate@1">KVElasticCountRate</a>(<span class="keyword">const</span> <a href="./KVElasticCountRate.html">KVElasticCountRate</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:KVElasticCountRate">KVElasticCountRate</a>(<span class="keyword">double</span> c = 0, <span class="keyword">double</span> e = 0, <span class="keyword">double</span> f = 0, <span class="keyword">double</span> d = 0)</td></tr>
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:_KVElasticCountRate">~KVElasticCountRate</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVElasticCountRate.html">KVElasticCountRate</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVElasticCountRate.html">KVElasticCountRate</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRate:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVElasticCountRate:Data_Members"></a>Data Members</h2>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="data"><td class="datatype"><span class="keyword">double</span></td><td class="dataname"><a name="KVElasticCountRate:count_rate"></a>count_rate</td><td></td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">double</span></td><td class="dataname"><a name="KVElasticCountRate:dissipation"></a>dissipation</td><td class="datadesc">MeV/sec./cm**2</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">double</span></td><td class="dataname"><a name="KVElasticCountRate:fluence"></a>fluence</td><td class="datadesc">ions/sec./cm**2</td></tr>
+<tr class="data"><td class="datatype"><span class="keyword">double</span></td><td class="dataname"><a name="KVElasticCountRate:mean_energy"></a>mean_energy</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVElasticCountRate:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVElasticCountRate_Lib" id="MapKVElasticCountRate_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="232,377,266,391"/>
+</map>
+<div class="tabs">
+<a id="imgKVElasticCountRate_Inh" class="tabsel" href="inh/KVElasticCountRate_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVElasticCountRate_Inh.png');">Inheritance</a>
+<a id="imgKVElasticCountRate_InhMem" class="tab" href="inhmem/KVElasticCountRate_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVElasticCountRate_InhMem.png');">Inherited Members</a>
+<a id="imgKVElasticCountRate_Incl" class="tab" href="incl/KVElasticCountRate_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVElasticCountRate_Incl.png');">Includes</a>
+<a id="imgKVElasticCountRate_Lib" class="tab" href="lib/KVElasticCountRate_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVElasticCountRate_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVElasticCountRate_Inh" src="inh/KVElasticCountRate_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVElasticCountRate:KVElasticCountRate" href="src/KVElasticCountRate.h.html#O6WUj">KVElasticCountRate</a>(<span class="keyword">double</span> c = 0, <span class="keyword">double</span> e = 0, <span class="keyword">double</span> f = 0, <span class="keyword">double</span> d = 0)</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">virtual</span> <a class="funcname" name="KVElasticCountRate:_KVElasticCountRate" href="src/KVElasticCountRate.h.html#ubV1T">~KVElasticCountRate</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+<em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?John+Frankland"> John Frankland</a> </em><em>&raquo; Created  by KVClassFactory on Fri Nov 20 2015</em><br />
+<em>&raquo; Last changed: Fri Jan  8 15:13:10 2016 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
+<em>This page has been automatically generated.</em>
+</div>
+</div>
+</body>
+</html>

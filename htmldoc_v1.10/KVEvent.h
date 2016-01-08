@@ -62,7 +62,10 @@ class KVEvent:public KVBase {
 	KVNucleus *AddParticle();
    KVNucleus *GetParticle(Int_t npart) const;
    virtual Int_t GetMult(Option_t * opt = "");
-	virtual Double_t GetSum(const Char_t* KVNucleus_method,Option_t * opt = "");
+   Int_t GetMultiplicity(Int_t Z, Int_t A=0, Option_t * opt = "");
+   void GetMultiplicities(Int_t mult[], const TString& species);
+	Double_t GetSum(const Char_t* KVNucleus_method,Option_t * opt = "");
+	Double_t GetSum(const Char_t* KVNucleus_method,const Char_t* method_prototype,const Char_t* args,Option_t * opt = "");
    virtual void Clear(Option_t * opt = "");
    virtual void Print(Option_t * t = "") const;
    virtual void ls(Option_t * t = "") const { Print(t); }
@@ -84,42 +87,42 @@ class KVEvent:public KVBase {
    
 	void SetFrame(const Char_t * frame, const TVector3 & boost, Bool_t beta =
                  kFALSE);
-   void SetFrame(const Char_t * frame, const TLorentzRotation & rot);
-   void SetFrame(const Char_t * frame, const TRotation & rot);
+   void SetFrame(const Char_t* frame, const TLorentzRotation& rot);
+   void SetFrame(const Char_t* frame, const TRotation& rot);
    void SetFrame(const Char_t * frame, const TVector3 & boost, TRotation & rot,
                  Bool_t beta = kFALSE);
 
    void SetFrame(const Char_t * newframe, const Char_t * oldframe,
                  const TVector3 & boost, Bool_t beta = kFALSE);
    void SetFrame(const Char_t * newframe, const Char_t * oldframe,
-                 const TLorentzRotation & rot);
+                 const TLorentzRotation& rot);
    void SetFrame(const Char_t * newframe, const Char_t * oldframe,
-                 const TRotation & rot);
+                 const TRotation& rot);
    void SetFrame(const Char_t * newframe, const Char_t * oldframe,
                  const TVector3 & boost, TRotation & rot, Bool_t beta = kFALSE);
 	
-   virtual void FillArraysP(Int_t& mult, Int_t* Z, Int_t* A, Double_t* px, Double_t* py, Double_t* pz, const TString& frame ="", const TString& selection="");
-   virtual void FillArraysV(Int_t& mult, Int_t* Z, Int_t* A, Double_t* vx, Double_t* vy, Double_t* vz, const TString& frame ="", const TString& selection="");
-   virtual void FillArraysEThetaPhi(Int_t& mult, Int_t* Z, Int_t* A, Double_t* E, Double_t* Theta, Double_t* Phi, const TString& frame ="", const TString& selection="");
-   virtual void FillArraysPtRapPhi(Int_t& mult, Int_t* Z, Int_t* A, Double_t* Pt, Double_t* Rap, Double_t* Phi, const TString& frame ="", const TString& selection="");
+   virtual void FillArraysP(Int_t& mult, Int_t* Z, Int_t* A, Double_t* px, Double_t* py, Double_t* pz, const TString& frame = "", const TString& selection = "");
+   virtual void FillArraysV(Int_t& mult, Int_t* Z, Int_t* A, Double_t* vx, Double_t* vy, Double_t* vz, const TString& frame = "", const TString& selection = "");
+   virtual void FillArraysEThetaPhi(Int_t& mult, Int_t* Z, Int_t* A, Double_t* E, Double_t* Theta, Double_t* Phi, const TString& frame = "", const TString& selection = "");
+   virtual void FillArraysPtRapPhi(Int_t& mult, Int_t* Z, Int_t* A, Double_t* Pt, Double_t* Rap, Double_t* Phi, const TString& frame = "", const TString& selection = "");
 
-   virtual void FillIntegerList(KVIntegerList*,Option_t* opt);
+	virtual void FillIntegerList(KVIntegerList*,Option_t* opt);
 
    virtual void GetMasses(Double_t*);
    virtual void GetGSMasses(Double_t*);
    Double_t GetChannelQValue() const;
    Double_t GetGSChannelQValue() const;
-	const Char_t* GetPartitionName();
-   
-   static void MakeEventBranch(TTree* tree, const TString& branchname, const TString& classname, void* event, Int_t bufsize=10000000)
+   const Char_t* GetPartitionName();
+
+   static void MakeEventBranch(TTree* tree, const TString& branchname, const TString& classname, void* event, Int_t bufsize = 10000000)
    {
       // Use this method when adding a branch to a TTree to store KVEvent-derived objects.
       // If (*e) points to a valid KVEvent-derived object, we use the name of the class of the object.
       // Otherwise we use the value of classname (default = "KVEvent")
-   
-      tree->Branch(branchname,classname,event,bufsize,0)->SetAutoDelete(kFALSE);
+
+      tree->Branch(branchname, classname, event, bufsize, 0)->SetAutoDelete(kFALSE);
    }
-	
+
    ClassDef(KVEvent, 4)         //Base class for all types of multiparticle event
 };
 
