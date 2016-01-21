@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan  8 15:13:31 2016            -->
+<!--   Date: Thu Jan 21 17:03:55 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -161,11 +161,11 @@ ClassImp(<a href="../KVHarpeeSi.html">KVHarpeeSi</a>)
    <span class="comment">// Returns 0 if calibration not ready or time ACQ parameter not fired.</span>
    <span class="comment">// (we require that the acquisition parameter has a value</span>
    <span class="comment">// greater than the current pedestal value).</span>
-   <span class="comment">// The reference time T0 used for the calibration is the one of the</span>
+   <span class="comment">// The reference time T0 used for the calibration is the one of this</span>
+   <span class="comment">// detector if it is fired otherwise T0 is the one of the</span>
    <span class="comment">// fired silicon detector of Harpee which stopped the time.</span>
 
-
-   <a href="../KVHarpeeSi.html">KVHarpeeSi</a>* firedSi = <a href="../KVHarpeeSi.html#KVHarpeeSi:GetFiredHarpeeSi" title="KVHarpeeSi* KVHarpeeSi::GetFiredHarpeeSi(Option_t* opt=&quot;Pany&quot;)">GetFiredHarpeeSi</a>();
+   <a href="../KVHarpeeSi.html">KVHarpeeSi</a>* firedSi = (<a href="../KVVAMOSDetector.html#KVVAMOSDetector:Fired" title="Bool_t KVVAMOSDetector::Fired(Option_t* opt,Option_t* optP) or overloads">Fired</a>(<span class="string">"Pany"</span>) ? <span class="keyword">this</span> : <a href="../KVHarpeeSi.html#KVHarpeeSi:GetFiredHarpeeSi" title="KVHarpeeSi* KVHarpeeSi::GetFiredHarpeeSi(Option_t* opt=&quot;Pany&quot;)">GetFiredHarpeeSi</a>());
    <span class="keyword">if</span> (!firedSi) <span class="keyword">return</span> 0;
 
    <a href="../KVFunctionCal.html">KVFunctionCal</a>* cal = <a href="../KVVAMOSDetector.html#KVVAMOSDetector:GetTCalibrator" title="KVFunctionCal* KVVAMOSDetector::GetTCalibrator(const Char_t* type)">GetTCalibrator</a>(type);
@@ -315,7 +315,7 @@ ClassImp(<a href="../KVHarpeeSi.html">KVHarpeeSi</a>)
 {
    <span class="comment">// Returns <a href="../ListOfTypes.html#bool">true</a> if all the conditions to access to the particle position</span>
    <span class="comment">// are verified. In this case the position is given by the method</span>
-   <span class="comment">// <a href="../KVSpectroDetector.html#KVSpectroDetector:GetPosition" title="UChar_t KVSpectroDetector::GetPosition(Double_t* XYZf,Int_t idx=0)">GetPosition</a>(...).</span>
+   <span class="comment">// <a href="../KVSpectroDetector.html#KVSpectroDetector:GetPosition" title="UChar_t KVSpectroDetector::GetPosition(Double_t* XYZf,Char_t dir=0,Int_t idx=0)">GetPosition</a>(...).</span>
    <span class="comment">// The conditions are:</span>
    <span class="comment">//   -the multiplicity of fired ( <span class="string">"Pany"</span> option of <a href="../KVVAMOSDetector.html#KVVAMOSDetector:Fired" title="Bool_t KVVAMOSDetector::Fired(Option_t* opt,Option_t* optP) or overloads">Fired</a>() ) Harpee Si</span>
    <span class="comment">//    detectors must be equal to one;</span>
@@ -410,9 +410,9 @@ ClassImp(<a href="../KVHarpeeSi.html">KVHarpeeSi</a>)
       TIter next(<a href="../KVDetector.html#KVDetector:GetListOfCalibrators" title="KVList* KVDetector::GetListOfCalibrators()">GetListOfCalibrators</a>());
       <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* cal = NULL;
       <span class="keyword">while</span> ((cal = next())) {
-         <span class="keyword">if</span> (cal-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVRecombination"</span>))
+         <span class="keyword">if</span> (cal-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<a href="../KVRecombination.html">KVRecombination</a>::<a href="../KVRecombination.html#KVRecombination:Class" title="TClass* KVRecombination::Class()">Class</a>()))
             <a href="../KVHarpeeSi.html#KVHarpeeSi:fPHD" title="KVRecombination* KVHarpeeSi::fPHD">fPHD</a>  = (<a href="../KVRecombination.html">KVRecombination</a>*)cal;
-         <span class="keyword">else</span> <span class="keyword">if</span> (cal-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVFunctionCal"</span>))
+         <span class="keyword">else</span> <span class="keyword">if</span> (cal-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<a href="../KVFunctionCal.html">KVFunctionCal</a>::<a href="../KVFunctionCal.html#KVFunctionCal:Class" title="TClass* KVFunctionCal::Class()">Class</a>()))
             <a href="../KVHarpeeSi.html#KVHarpeeSi:fCanalE" title="KVFunctionCal* KVHarpeeSi::fCanalE">fCanalE</a> = (<a href="../KVFunctionCal.html">KVFunctionCal</a>*)cal;
       }
    } <span class="keyword">else</span> {
@@ -427,7 +427,7 @@ ClassImp(<a href="../KVHarpeeSi.html">KVHarpeeSi</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-01-08 15:13 </em><em>&raquo; Last generated: 2016-01-08 15:13</em><br />
+<em>&raquo; Last changed: 2016-01-21 17:03 </em><em>&raquo; Last generated: 2016-01-21 17:03</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

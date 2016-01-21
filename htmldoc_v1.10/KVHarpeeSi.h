@@ -55,7 +55,6 @@ public:
 
    virtual KVString& GetACQParamTypes();
    virtual KVString& GetPositionTypes();
-   Float_t  GetRawE();
 
    ClassDef(KVHarpeeSi, 1) //Silicon detectors of Harpee, used at the focal plan of VAMOS
 };
@@ -68,10 +67,6 @@ inline KVString& KVHarpeeSi::GetACQParamTypes()
 inline KVString& KVHarpeeSi::GetPositionTypes()
 {
    return fPositionTypes;
-}
-inline Float_t   KVHarpeeSi::GetRawE()
-{
-   return GetACQData(GetEBaseName());
 }
 
 #endif

@@ -38,7 +38,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "libraries")
   foreach(file
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1.10.06"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1.10.07"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so"
       )
@@ -50,12 +50,12 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "librari
     endif()
   endforeach()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES
-    "/home/john/software/build/kaliveda-build/1.10_R5/lib/libMicroStatweights.so.1.10.06"
+    "/home/john/software/build/kaliveda-build/1.10_R5/lib/libMicroStatweights.so.1.10.07"
     "/home/john/software/build/kaliveda-build/1.10_R5/lib/libMicroStatweights.so.1"
     "/home/john/software/build/kaliveda-build/1.10_R5/lib/libMicroStatweights.so"
     )
   foreach(file
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1.10.06"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1.10.07"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1"
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so"
       )

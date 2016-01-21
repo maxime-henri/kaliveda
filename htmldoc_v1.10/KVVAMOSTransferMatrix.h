@@ -7,6 +7,8 @@
 #include "Riostream.h"
 #include "KVBase.h"
 #include "KVVAMOSReconTrajectory.h"
+#include "KVMacros.h" // 'UNUSED' macro
+
 using namespace std;
 
 class KVVAMOSTransferMatrix : public KVBase {
@@ -63,6 +65,7 @@ public:
    void CompressArrays();
    virtual void Print(Option_t* option = "") const;
    Bool_t ReconstructFPtoLab(KVVAMOSReconTrajectory* traj);
+   Bool_t ReconstructFPtoLab(Double_t x_f, Double_t y_f, Double_t theta_f, Double_t phi_f, Double_t& brho, Double_t& path, Double_t& theta_v, Double_t& phi_v);
    Bool_t ReconstructLabToFP(KVVAMOSReconTrajectory* traj);
 
    void SetCoef(EReconParam par, UShort_t i, UShort_t j, UShort_t k, UShort_t l, Double_t coef);

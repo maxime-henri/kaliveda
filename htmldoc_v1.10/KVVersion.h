@@ -6,16 +6,16 @@
 #define KV_ROOT "/home/john/software/build/kaliveda/1.10_root-v5-34-00"
 
 /* String with version information */
-#define KV_VERSION "1.10/06"
+#define KV_VERSION "1.10/07"
 #define KV_MAJOR_VERSION 1
 #define KV_MINOR_VERSION 10
-#define KV_PATCH_VERSION 06
+#define KV_PATCH_VERSION 07
 
 /* Date when project was built */
-#define KV_BUILD_DATE "2016-01-08"
+#define KV_BUILD_DATE "2016-01-21"
 
 /* Time when project was built */
-#define KV_BUILD_TIME "15:10:23"
+#define KV_BUILD_TIME "16:54:29"
 
 /* Username of person who performed the build */
 #define KV_BUILD_USER "john"

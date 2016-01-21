@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan  8 15:15:11 2016            -->
+<!--   Date: Thu Jan 21 17:05:41 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -35,79 +35,79 @@
 <span class="cpp">#include "<a href="../KVNuclData.h">KVNuclData.h</a>"</span>
 
 
-<span class="keyword">namespace</span> NDT
-{
-	<span class="keyword">class</span> <a href="../NDT__key.html#NDT__key:key" title="NDT::key NDT::key::key(int z,int a) or overloads">key</a> : <span class="keyword">public</span> <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
-	{
-		<span class="keyword">public</span>:
-<a name="DiyZ8D"></a>		<a href="../NDT__key.html#NDT__key:key" title="NDT::key NDT::key::key(int z,int a) or overloads">key</a>(<span class="keyword">int</span> z,<span class="keyword">int</span> a) {
-			<a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(Form(<span class="string">"%d:%d"</span>,z,a));
-		};
-<a name="NhZLrD"></a>		<span class="keyword">virtual</span> <a href="../NDT__key.html#NDT__key:_key" title="void NDT::key::~key()">~key</a>(){};
-		ClassDef(<a href="../NDT__key.html#NDT__key:key" title="NDT::key NDT::key::key(int z,int a) or overloads">key</a>,0)
-	};
-	<span class="keyword">class</span> value : <span class="keyword">public</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>
-	{
-		<span class="keyword">int</span> idx;
-		<span class="keyword">public</span>:
-		value(<span class="keyword">int</span> i) : idx(i) {};
-		<span class="keyword">virtual</span> ~value(){};
-		<span class="keyword">int</span> Index() <span class="keyword">const</span>
-		{
-			<span class="keyword">return</span> idx;
-		};
-		ClassDef(value,0)
-	};
+<span class="keyword">namespace</span> NDT {
+   <span class="keyword">class</span> <a href="../NDT__key.html#NDT__key:key" title="NDT::key NDT::key::key(int z,int a) or overloads">key</a> : <span class="keyword">public</span> <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> {
+   <span class="keyword">public</span>:
+<a name="xrXlcE"></a>      <a href="../NDT__key.html#NDT__key:key" title="NDT::key NDT::key::key(int z,int a) or overloads">key</a>(<span class="keyword">int</span> z, <span class="keyword">int</span> a)
+      {
+         <a href="../#TNamed:SetName" title="void TNamed::SetName(const char* name)">SetName</a>(Form(<span class="string">"%d:%d"</span>, z, a));
+      };
+<a name="Rc13MC"></a>      <span class="keyword">virtual</span> <a href="../NDT__key.html#NDT__key:_key" title="void NDT::key::~key()">~key</a>() {};
+      ClassDef(<a href="../NDT__key.html#NDT__key:key" title="NDT::key NDT::key::key(int z,int a) or overloads">key</a>, 0)
+   };
+   <span class="keyword">class</span> value : <span class="keyword">public</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a> {
+      <span class="keyword">int</span> idx;
+   <span class="keyword">public</span>:
+      value(<span class="keyword">int</span> i) : idx(i) {};
+      <span class="keyword">virtual</span> ~value() {};
+      <span class="keyword">int</span> Index() <span class="keyword">const</span>
+      {
+         <span class="keyword">return</span> idx;
+      };
+      ClassDef(value, 0)
+   };
 };
 
-<span class="keyword">class</span> <a href="../KVNuclDataTable.html">KVNuclDataTable</a> : <span class="keyword">public</span> <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>
-{
-	
-	<span class="keyword">protected</span>:
-	
-	TClass* cl;				<span class="comment">//pointeur pour gerer les heritages de classes de <a href="../KVNuclData.html">KVNuclData</a></span>
-	TMap *nucMap;			<span class="comment">//mapping (Z,A) -&gt; nucleus index</span>
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> current_idx;	<span class="comment">//current index</span>
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> NbNuc;			<span class="comment">//nbre de noyaux presents dans la table</span>
-	
-	<a href="../KVString.html">KVString</a> kcomments; 	<span class="comment">//Commentaire provenant de la lecture fichier</span>
-	<a href="../KVString.html">KVString</a> kclassname;
-	
-	<span class="comment">//<a href="../KVNumberList.html">KVNumberList</a> plageZ;</span>
-	
-	TObjArray* tobj;	<span class="comment">//! array where all nucldata objects are</span>
-	<span class="comment">//TObjArray* tobj_rangeA;	//! array where range of A associated to each Z is stored via <a href="../KVIntegerList.html">KVIntegerList</a></span>
-	
-	<a href="../KVNuclData.html">KVNuclData</a>* GetCurrent() <span class="keyword">const</span> { <span class="keyword">return</span> (<a href="../KVNuclData.html">KVNuclData</a>* )tobj-&gt;At(current_idx); }
-	<span class="keyword">void</span> CreateTable(<a href="../ListOfTypes.html#Int_t">Int_t</a> ntot);	<span class="comment">//Creation of the table</span>
-	<span class="keyword">void</span> CreateElement(<a href="../ListOfTypes.html#Int_t">Int_t</a> idx);<span class="comment">//a new <a href="../KVNuclData.html">KVNuclData</a> pointeur is created and added</span>
-	<span class="keyword">void</span> InfoOnMeasured() <span class="keyword">const</span>;
-	
+<span class="keyword">class</span> <a href="../KVNuclDataTable.html">KVNuclDataTable</a> : <span class="keyword">public</span> <a href="../#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a> {
+
+<span class="keyword">protected</span>:
+
+   TClass* cl;          <span class="comment">//pointeur pour gerer les heritages de classes de <a href="../KVNuclData.html">KVNuclData</a></span>
+   TMap* nucMap;        <span class="comment">//mapping (Z,A) -&gt; nucleus index</span>
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> current_idx;   <span class="comment">//current index</span>
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> NbNuc;         <span class="comment">//nbre de noyaux presents dans la table</span>
+
+   <a href="../KVString.html">KVString</a> kcomments;  <span class="comment">//Commentaire provenant de la lecture fichier</span>
+   <a href="../KVString.html">KVString</a> kclassname;
+
+   <span class="comment">//<a href="../KVNumberList.html">KVNumberList</a> plageZ;</span>
+
+   TObjArray* tobj;  <span class="comment">//! array where all nucldata objects are</span>
+   <span class="comment">//TObjArray* tobj_rangeA;  //! array where range of A associated to each Z is stored via <a href="../KVIntegerList.html">KVIntegerList</a></span>
+
+   <a href="../KVNuclData.html">KVNuclData</a>* GetCurrent() <span class="keyword">const</span>
+   {
+      <span class="keyword">return</span> (<a href="../KVNuclData.html">KVNuclData</a>*)tobj-&gt;At(current_idx);
+   }
+   <span class="keyword">void</span> CreateTable(<a href="../ListOfTypes.html#Int_t">Int_t</a> ntot); <span class="comment">//Creation of the table</span>
+   <span class="keyword">void</span> CreateElement(<a href="../ListOfTypes.html#Int_t">Int_t</a> idx);<span class="comment">//a new <a href="../KVNuclData.html">KVNuclData</a> pointeur is created and added</span>
+   <span class="keyword">void</span> InfoOnMeasured() <span class="keyword">const</span>;
+
    <span class="keyword">virtual</span> NDT::value* getNDTvalue(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
-   
-	<span class="keyword">public</span>:
+
+<span class="keyword">public</span>:
    <a href="../KVNuclDataTable.html">KVNuclDataTable</a>();
    <a href="../KVNuclDataTable.html">KVNuclDataTable</a>(<a href="../KVString.html">KVString</a> classname);
-	<span class="keyword">virtual</span> ~KVNuclDataTable();
-	<span class="keyword">void</span> init();
-   <span class="keyword">virtual</span> <span class="keyword">void</span> Initialize()=0;	
-	
-	<span class="keyword">virtual</span> <span class="keyword">void</span> GiveIndexToNucleus(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz,<a href="../ListOfTypes.html#Int_t">Int_t</a> aa,<a href="../ListOfTypes.html#Int_t">Int_t</a> ntot);
+   <span class="keyword">virtual</span> ~KVNuclDataTable();
+   <span class="keyword">void</span> init();
+   <span class="keyword">virtual</span> <span class="keyword">void</span> Initialize() = 0;
+
+   <span class="keyword">virtual</span> <span class="keyword">void</span> GiveIndexToNucleus(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa, <a href="../ListOfTypes.html#Int_t">Int_t</a> ntot);
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> IsInTable(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
-	
-	<a href="../KVNuclData.html">KVNuclData</a>* GetData(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
-	<a href="../ListOfTypes.html#Double_t">Double_t</a> GetValue(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa)	<span class="keyword">const</span>;
-        <span class="keyword">void</span> SetValue(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa, <a href="../ListOfTypes.html#Double_t">Double_t</a> val);
-	<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*  GetUnit(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
-	<a href="../ListOfTypes.html#Bool_t">Bool_t</a>  IsMeasured(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
-	
-	<a href="../ListOfTypes.html#Int_t">Int_t</a> GetNumberOfNuclei() <span class="keyword">const</span>;
-	<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*   GetReadFileName() <span class="keyword">const</span>;
-	<a href="../KVString.html">KVString</a> GetCommentsFromFile() <span class="keyword">const</span>;
-   
-	ClassDef(<a href="../KVNuclDataTable.html">KVNuclDataTable</a>,1)<span class="comment">//Store information on nuclei</span>
-		
-};	
+
+   <a href="../KVNuclData.html">KVNuclData</a>* GetData(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> GetValue(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa)  <span class="keyword">const</span>;
+   <span class="keyword">void</span> SetValue(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa, <a href="../ListOfTypes.html#Double_t">Double_t</a> val);
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*  GetUnit(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a>  IsMeasured(<a href="../ListOfTypes.html#Int_t">Int_t</a> zz, <a href="../ListOfTypes.html#Int_t">Int_t</a> aa) <span class="keyword">const</span>;
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> GetNumberOfNuclei() <span class="keyword">const</span>;
+   <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>*   GetReadFileName() <span class="keyword">const</span>;
+   <a href="../KVString.html">KVString</a> GetCommentsFromFile() <span class="keyword">const</span>;
+
+   ClassDef(<a href="../KVNuclDataTable.html">KVNuclDataTable</a>, 1) <span class="comment">//Store information on nuclei</span>
+
+};
 
 <span class="cpp">#endif</span>
 </pre>
@@ -118,7 +118,7 @@
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-01-08 15:15 </em><em>&raquo; Last generated: 2016-01-08 15:15</em><br />
+<em>&raquo; Last changed: 2016-01-21 17:05 </em><em>&raquo; Last generated: 2016-01-21 17:05</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

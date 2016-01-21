@@ -7,6 +7,8 @@
 #include "KVSpectroDetector.h"
 #include "KVVAMOS.h"
 #include "KVFunctionCal.h"
+#include "KVDataSet.h"
+#include "KVMacros.h" // 'UNUSED' macro
 
 class KVVAMOSDetector : public KVSpectroDetector {
 
@@ -14,13 +16,14 @@ private:
 
    static KVString fACQParamTypes; //!types of available Acquision parameters
    static KVString fPositionTypes; //!types of available positions
-   static TString fKVVAMOSDetectorFiredACQParameterListFormatString;
 
 
 protected:
 
    TList*         fT0list; //! list of T0 saved in a KVNamedParameter
    TList*         fTlist;  //! list of Time ACQ parameters
+   Int_t         fNmeasX;  // number of measured X positions
+   Int_t         fNmeasY;  // number of measured Y positions
 
    void init();
    virtual Bool_t Fired(Option_t* opt, Option_t* optP);
@@ -39,7 +42,11 @@ public:
    virtual void   SetCalibrators();
    virtual KVFunctionCal* GetECalibrator() const;
    virtual Bool_t GetPositionInVamos(Double_t& X, Double_t& Y);
-   virtual UChar_t GetRawPosition(Double_t* XYZf);
+   virtual UChar_t  GetRawPosition(Double_t* XYZf);
+   virtual Double_t GetRawPosition(Char_t dir = 'X', Int_t num = 0);
+   virtual UChar_t GetRawPositionError(Double_t* EXYZf);
+   virtual Double_t GetRawPositionError(Char_t dir = 'X', Int_t num = 0);
+
    KVFunctionCal* GetTCalibrator(const Char_t* type) const;
 
 
@@ -51,11 +58,7 @@ public:
    Bool_t   IsTCalibrated(const Char_t* type) const;
    Bool_t   IsStartForT(const Char_t* type) const;
    Bool_t   IsStopForT(const Char_t* type) const;
-   void     SetFiredBitmask(KVString&);
-   const Char_t* GetFiredACQParameterListFormatString() const
-   {
-      return fKVVAMOSDetectorFiredACQParameterListFormatString.Data();
-   }
+   void     SetFiredBitmask(KVString& lpar_dummy);
    void     SetT0(const Char_t* type, Double_t t0 = 0.);
 
    virtual const Char_t* GetEBaseName() const;
@@ -118,6 +121,20 @@ public:
    inline Bool_t IsUsedToMeasure(const Char_t* type)
    {
       return KVVAMOS::IsUsedToMeasure(type, this);
+   }
+
+   inline Int_t GetNMeasuredX() const
+   {
+      return fNmeasX;
+   }
+   inline Int_t GetNMeasuredY() const
+   {
+      return fNmeasY;
+   }
+
+   inline Float_t  GetRawE()
+   {
+      return GetACQData(GetEBaseName());
    }
 
    ClassDef(KVVAMOSDetector, 1) //Detectors of VAMOS spectrometer

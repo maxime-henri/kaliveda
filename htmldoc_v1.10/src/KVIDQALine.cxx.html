@@ -1,0 +1,714 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: KaliVeda Development team           -->
+<!--                                             -->
+<!--   Date: Thu Jan 21 17:04:13 2016            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVIDQALine - source file</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
+<link rel="stylesheet" type="text/css" href="../ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="../ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
+<div id="codeAndLineNumbers"><pre class="listing">
+<span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Fri Jun 20 12:07:39 2014</span>
+<span class="comment">//Author: Guilain ADEMARD</span>
+
+<span class="cpp">#include "<a href="../KVIDQALine.h">KVIDQALine.h</a>"</span>
+<span class="cpp">#include "TClass.h"</span>
+<span class="cpp">#include "TPad.h"</span>
+<span class="cpp">#include "TROOT.h"</span>
+<span class="cpp">#include "TCanvas.h"</span>
+<span class="cpp">#include "TSpectrum.h"</span>
+<span class="cpp">#include "<a href="../KVIDQAGrid.h">KVIDQAGrid.h</a>"</span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;
+
+ClassImp(<a href="../KVIDQALine.html">KVIDQALine</a>)
+
+<span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="comment">// BEGIN_HTML &lt;!--</span>
+/* --&gt;
+&lt;h2&gt;KVIDQALine&lt;/h2&gt;
+&lt;h4&gt;Base class for identification ridge lines and spots corresponding to different charge states and masses respectively&lt;/h4&gt;
+&lt;!-- */
+// --&gt; END_HTML<span class="comment"></span>
+<span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
+
+<a name="Je.J3C"></a><a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:KVIDQALine" title="KVIDQALine KVIDQALine::KVIDQALine()">KVIDQALine</a>()
+{
+   <span class="comment">// Default constructor</span>
+   <a href="../KVIDQALine.html#KVIDQALine:init" title="void KVIDQALine::init()">init</a>();
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="c.yoL"></a><a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:_KVIDQALine" title="void KVIDQALine::~KVIDQALine()">~KVIDQALine</a>()
+{
+   <span class="comment">// Destructor</span>
+
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Delete" title="void KVSeqCollection::Delete(Option_t* option=&quot;&quot;)">Delete</a>();
+   SafeDelete(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="udUTvC"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:init" title="void KVIDQALine::init()">init</a>()
+{
+   <span class="comment">// Initialization, used by constructors.</span>
+   <span class="comment">// Marker width is set to zero.</span>
+
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a> = <span class="keyword">new</span> <a href="../KVList.html">KVList</a>;
+
+   <span class="comment">//-----------------------</span>
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> iMarker = 0;
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../#TCollection:SetName" title="void TCollection::SetName(const char* name)">SetName</a>(Form(<span class="string">"fMarkers%d__%p"</span>, iMarker++, <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>));
+   <span class="comment">//-----------------------</span>
+
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:SetCleanup" title="void KVSeqCollection::SetCleanup(Bool_t enable=kTRUE)">SetCleanup</a>();
+   <a href="../KVIDQALine.html#KVIDQALine:fNextA" title="Int_t KVIDQALine::fNextA">fNextA</a> = 1;
+   <a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a> = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+
+   <span class="comment">//no draw points of this line, just draw its KVIDQAMarkers</span>
+   <a href="../#TAttMarker:SetMarkerStyle" title="void TAttMarker::SetMarkerStyle(Style_t mstyle=1)">SetMarkerStyle</a>(1);
+   <a href="../KVIDZALine.html#KVIDZALine:SetWidth" title="void KVIDZALine::SetWidth(Double_t w)">SetWidth</a>(0.);
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="Aah0VE"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:Copy" title="void KVIDQALine::Copy(TObject&amp; obj)">Copy</a>(<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span>
+{
+   <span class="comment">// This method copies the current state of 'this' object into 'obj'</span>
+   <span class="comment">// You should add here any member variables, for example:</span>
+   <span class="comment">//    (supposing a member variable <a href="../KVIDQALine.html">KVIDQALine</a>::fToto)</span>
+   <span class="comment">//    CastedObj.fToto = fToto;</span>
+   <span class="comment">// or</span>
+   <span class="comment">//    CastedObj.SetToto( GetToto() );</span>
+
+   <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDZALine.html#KVIDZALine:Copy" title="void KVIDZALine::Copy(TObject&amp; obj)">Copy</a>(obj);
+   <a href="../KVIDQALine.html">KVIDQALine</a>&amp; CastedObj = (<a href="../KVIDQALine.html">KVIDQALine</a>&amp;)obj;
+   CastedObj.<a href="../KVIDQALine.html#KVIDQALine:fNextA" title="Int_t KVIDQALine::fNextA">fNextA</a> = <a href="../KVIDQALine.html#KVIDQALine:fNextA" title="Int_t KVIDQALine::fNextA">fNextA</a>;
+   CastedObj.<a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a> = <a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a>;
+   CastedObj.fWidth = fWidth;
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Copy" title="void KVSeqCollection::Copy(TObject&amp; obj)">Copy</a>((<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;)(*CastedObj.<a href="../KVIDQALine.html#KVIDQALine:GetMarkers" title="KVList* KVIDQALine::GetMarkers()">GetMarkers</a>()));
+   CastedObj.<a href="../KVIDQALine.html#KVIDQALine:GetMarkers" title="KVList* KVIDQALine::GetMarkers()">GetMarkers</a>()->R__FOR_EACH(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>, <a href="../KVIDentifier.html#KVIDentifier:SetParent" title="void KVIDentifier::SetParent(KVIDGraph* )">SetParent</a>)((&amp;CastedObj));
+
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="KnDTeD"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:Draw" title="void KVIDQALine::Draw(Option_t* chopt=&quot;&quot;)">Draw</a>(<a href="../ListOfTypes.html#Option_t">Option_t</a>* chopt)
+{
+<span class="comment">//<a href="../KVIDQALine.html#KVIDQALine:Draw" title="void KVIDQALine::Draw(Option_t* chopt=&quot;&quot;)">Draw</a> all KVIDQAMarkers in line on the current display, if one exists: i.e. in order to superimpose the grid</span>
+   <span class="comment">//If the line is already displayed (i.e. if fParent-&gt;GetPad()!=0), we call <a href="../KVIDQALine.html#KVIDQALine:UnDraw" title="void KVIDQALine::UnDraw()">UnDraw</a>() in order to remove them from the display.</span>
+   <span class="comment">//This is so that <a href="../ListOfTypes.html#double">double</a>-clicking a graph in the IDGridManagerGUI list makes them disappear if they are already drawn.</span>
+   <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../#TGraph:Draw" title="void TGraph::Draw(Option_t* chopt=&quot;&quot;)">Draw</a>(chopt);
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>->R__FOR_EACH(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>, <a href="../KVIDQALine.html#KVIDQALine:Draw" title="void KVIDQALine::Draw(Option_t* chopt=&quot;&quot;)">Draw</a>)();
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="Zwgn8D"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:UnDraw" title="void KVIDQALine::UnDraw()">UnDraw</a>()
+{
+   <span class="comment">//Make the line and their markers disappear from the current canvas/pad</span>
+   <span class="comment">//In case any objects have (accidentally) been drawn more than once, we keep calling</span>
+   <span class="comment">//gPad-&gt;GetListOfPrimitives()-&gt;Remove() as <a href="../ListOfTypes.html#long">long</a> as gPad-&gt;GetListOfPrimitives()-&gt;<a href="../#TGraph:FindObject" title="TObject* TGraph::FindObject(const char* name) or overloads">FindObject</a>()</span>
+
+   <span class="keyword">if</span> (fParent &amp;&amp; fParent-&gt;GetPad()) {
+      <span class="comment">//remove the rest of the markers of the line</span>
+      TIter next_mk(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+      <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* mk;
+      <span class="keyword">while</span> ((mk = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*) next_mk())) {
+         <span class="keyword">while</span> (fParent-&gt;GetPad()-&gt;GetListOfPrimitives()-&gt;<a href="../#TGraph:FindObject" title="TObject* TGraph::FindObject(const char* name) or overloads">FindObject</a>(mk))
+            fParent-&gt;GetPad()-&gt;GetListOfPrimitives()-&gt;Remove(mk);
+      }
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="PNTb4D"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:ExecuteEvent" title="void KVIDQALine::ExecuteEvent(Int_t event,Int_t px,Int_t py)">ExecuteEvent</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> event, <a href="../ListOfTypes.html#Int_t">Int_t</a> px, <a href="../ListOfTypes.html#Int_t">Int_t</a> py)
+{
+
+   <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDLine.html#KVIDLine:ExecuteEvent" title="void KVIDLine::ExecuteEvent(Int_t event,Int_t px,Int_t py)">ExecuteEvent</a>(event, px, py);
+
+   <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> motion = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   <span class="keyword">switch</span> (event) {
+      <span class="keyword">case</span> kButton1Motion:
+         motion = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+         <span class="keyword">break</span>;
+      <span class="keyword">case</span> kButton1Up:
+         <span class="keyword">if</span> (motion) {
+            motion = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+            <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>->R__FOR_EACH(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>, UpdateXandY)();
+         }
+         <span class="keyword">break</span>;
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="jwlaAE"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:IdentA" title="void KVIDQALine::IdentA(Double_t x,Double_t y,Int_t&amp; A,Double_t&amp; realA,Int_t&amp; code)">IdentA</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp; A, <a href="../ListOfTypes.html#Double_t">Double_t</a>&amp; realA, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp; code) <span class="keyword">const</span>
+{
+
+   <span class="comment">// Default values</span>
+   A     = -1;
+   realA = -1.;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dist, dist_r, dist_l;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a>     idx,  idx_r,  idx_l;
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* closest_mk = <span class="keyword">const_cast</span>&lt;<a href="../KVIDQALine.html">KVIDQALine</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVIDQALine.html#KVIDQALine:FindNearestIDMarker" title="KVIDQAMarker* KVIDQALine::FindNearestIDMarker(Double_t x,Double_t y,Int_t&amp; idx,Int_t&amp; idx_low,Int_t&amp; idx_up,Double_t&amp; dist,Double_t&amp; dist_low,Double_t&amp; dist_up)">FindNearestIDMarker</a>(x, y, idx, idx_l, idx_r, dist, dist_l, dist_r);
+
+   <span class="keyword">if</span> (!closest_mk) {
+      <span class="comment">//no marker corresponding to point was found</span>
+      <span class="comment">//we assume that realA = Q * A/Q and set kICODE0</span>
+      realA = x * <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>();
+      code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE0" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE0">kICODE0</a>;
+   } <span class="keyword">else</span> {
+      <span class="comment">//the closest marker is found</span>
+      <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"IdentA"</span>,<span class="string">"ID marker found: %s"</span>,closest_mk-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+
+      <span class="comment">//marker at the left of the point</span>
+      <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* l_mk = <a href="../KVIDQALine.html#KVIDQALine:GetMarkerAt" title="KVIDQAMarker* KVIDQALine::GetMarkerAt(Int_t index)">GetMarkerAt</a>(idx_l);
+
+      <span class="comment">//marker at the right of the point</span>
+      <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* r_mk = <a href="../KVIDQALine.html#KVIDQALine:GetMarkerAt" title="KVIDQAMarker* KVIDQALine::GetMarkerAt(Int_t index)">GetMarkerAt</a>(idx_r);
+
+      <span class="comment">// WARNING: the method <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:FindNearestIDMarker" title="KVIDQAMarker* KVIDQALine::FindNearestIDMarker(Double_t x,Double_t y,Int_t&amp; idx,Int_t&amp; idx_low,Int_t&amp; idx_up,Double_t&amp; dist,Double_t&amp; dist_low,Double_t&amp; dist_up)">FindNearestIDMarker</a> always find</span>
+      <span class="comment">// 2 nearest markers even for point left (right) the first (last) marker.</span>
+      <span class="comment">// we have to remove the second found marker for these points</span>
+
+      <span class="keyword">if</span> ((closest_mk == <a href="../KVIDQALine.html#KVIDQALine:GetMarkers" title="KVList* KVIDQALine::GetMarkers()">GetMarkers</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:First" title="TObject* KVSeqCollection::First()">First</a>()) &amp;&amp; !<a href="../KVIDQALine.html#KVIDQALine:ProjIsBetween" title="Bool_t KVIDQALine::ProjIsBetween(Double_t x,Double_t y,KVIDQAMarker* m1,KVIDQAMarker* m2)">ProjIsBetween</a>(x, y, l_mk, r_mk))
+         r_mk = NULL;
+      <span class="keyword">else</span> <span class="keyword">if</span> (closest_mk == <a href="../KVIDQALine.html#KVIDQALine:GetMarkers" title="KVList* KVIDQALine::GetMarkers()">GetMarkers</a>()-><a href="../KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last()">Last</a>() &amp;&amp; !<a href="../KVIDQALine.html#KVIDQALine:ProjIsBetween" title="Bool_t KVIDQALine::ProjIsBetween(Double_t x,Double_t y,KVIDQAMarker* m1,KVIDQAMarker* m2)">ProjIsBetween</a>(x, y, l_mk, r_mk))
+         l_mk = NULL;
+
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> deltaA = 0.;
+
+      <span class="comment">// case where 2 embracing markers are found</span>
+      <span class="keyword">if</span> (l_mk &amp;&amp; r_mk &amp;&amp; (l_mk != r_mk)) {
+         <span class="keyword">if</span> (dist &gt; closest_mk-&gt;<a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth()">GetWidth</a>() / 2.) {
+            <span class="keyword">if</span> (closest_mk == l_mk) code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE1" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE1">kICODE1</a>;  <span class="comment">// <span class="string">"slight ambiguity of A, which could be larger"</span></span>
+            <span class="keyword">else</span> code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE2" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE2">kICODE2</a>; <span class="comment">// <span class="string">"slight ambiguity of A, which could be smaller"</span></span>
+         } <span class="keyword">else</span> code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE0" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE0">kICODE0</a>; <span class="comment">// ok</span>
+
+      }
+      <span class="comment">// case where only 1 embracing marker is found.</span>
+      <span class="comment">// in this case, the distance between the point and the marker</span>
+      <span class="comment">// has to be lower than the marker width</span>
+      <span class="keyword">else</span> {
+         <span class="keyword">if</span> (dist &gt; closest_mk-&gt;<a href="../KVIDZALine.html#KVIDZALine:GetWidth" title="Double_t KVIDZALine::GetWidth()">GetWidth</a>() / 2.) {
+            <span class="comment">// the distance from the closest marker is to high</span>
+            <span class="keyword">if</span> (closest_mk == l_mk) code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE6" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE6">kICODE6</a>;  <span class="comment">// <span class="string">"(x,y) is below first marker in line"</span></span>
+            <span class="keyword">else</span> code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE7" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE7">kICODE7</a>; <span class="comment">// <span class="string">"(x,y) is above last marker in line"</span></span>
+         } <span class="keyword">else</span> {
+            code = <a href="../KVIDQAGrid.html">KVIDQAGrid</a>::<a href="../KVIDQAGrid.html#KVIDQAGrid:kICODE3" title="const enum KVIDQAGrid:: KVIDQAGrid::kICODE3">kICODE3</a>; <span class="comment">// <span class="string">"slight ambiguity of A, which could be larger or smaller"</span></span>
+         }
+      }
+
+      deltaA = (x - closest_mk-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>()) * <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>();
+      realA = closest_mk-&gt;<a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>() + deltaA;
+   }
+   A     = TMath::Nint(realA);   <span class="comment">// since some A-markers are missing in the line</span>
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="Czp8nE"></a><a href="../KVIDQAMarker.html">KVIDQAMarker</a>* <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:FindNearestIDMarker" title="KVIDQAMarker* KVIDQALine::FindNearestIDMarker(Double_t x,Double_t y,Int_t&amp; idx,Int_t&amp; idx_low,Int_t&amp; idx_up,Double_t&amp; dist,Double_t&amp; dist_low,Double_t&amp; dist_up)">FindNearestIDMarker</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp; idx, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp; idx_low, <a href="../ListOfTypes.html#Int_t">Int_t</a>&amp; idx_up, <a href="../ListOfTypes.html#Double_t">Double_t</a>&amp; dist, <a href="../ListOfTypes.html#Double_t">Double_t</a>&amp; dist_low, <a href="../ListOfTypes.html#Double_t">Double_t</a>&amp; dist_up) <span class="keyword">const</span>
+{
+   <span class="comment">// the list of Markers has to be sorted before to use this method</span>
+
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> n_mk = <a href="../KVIDQALine.html#KVIDQALine:GetNumberOfMasses" title="Int_t KVIDQALine::GetNumberOfMasses()">GetNumberOfMasses</a>();
+   <span class="keyword">if</span> (n_mk == 0) <span class="keyword">return</span> NULL;
+
+   idx_low = 0;       <span class="comment">// minimum index</span>
+   idx_up = n_mk - 1; <span class="comment">// maximum index</span>
+
+   <span class="keyword">while</span> (idx_up &gt; idx_low + 1) {
+      dist_low = <a href="../KVIDQALine.html#KVIDQALine:GetMarkerAt" title="KVIDQAMarker* KVIDQALine::GetMarkerAt(Int_t index)">GetMarkerAt</a>(idx_low)-><a href="../KVIDQAMarker.html#KVIDQAMarker:DistanceToMarker" title="Double_t KVIDQAMarker::DistanceToMarker(Double_t px,Double_t py)">DistanceToMarker</a>(x, y);
+      dist_up  = <a href="../KVIDQALine.html#KVIDQALine:GetMarkerAt" title="KVIDQAMarker* KVIDQALine::GetMarkerAt(Int_t index)">GetMarkerAt</a>(idx_up)-><a href="../KVIDQAMarker.html#KVIDQAMarker:DistanceToMarker" title="Double_t KVIDQAMarker::DistanceToMarker(Double_t px,Double_t py)">DistanceToMarker</a>(x, y);
+
+      <span class="keyword">if</span> (dist_low &lt; dist_up) {
+         <span class="comment">//deacrease index of idx_max</span>
+         idx_up -= (<a href="../ListOfTypes.html#Int_t">Int_t</a>)((idx_up - idx_low) / 2 + 0.5);
+      } <span class="keyword">else</span> {
+         <span class="comment">//increase index</span>
+         idx_low += (<a href="../ListOfTypes.html#Int_t">Int_t</a>)((idx_up - idx_low) / 2 + 0.5);
+      }
+   }
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* mk_low = <a href="../KVIDQALine.html#KVIDQALine:GetMarkerAt" title="KVIDQAMarker* KVIDQALine::GetMarkerAt(Int_t index)">GetMarkerAt</a>(idx_low);
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* mk_up  = <a href="../KVIDQALine.html#KVIDQALine:GetMarkerAt" title="KVIDQAMarker* KVIDQALine::GetMarkerAt(Int_t index)">GetMarkerAt</a>(idx_up);
+
+   <span class="comment">// calculate distance of point (x,y) to the two closest markers</span>
+   dist_low = mk_low-&gt;DistanceToMarker(x, y);
+   dist_up  = mk_up-&gt;DistanceToMarker(x, y);
+
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* nearest = NULL;
+   <span class="keyword">if</span> (dist_low &lt; dist_up) {
+      dist    = dist_low;
+      idx     = idx_low;
+      nearest = mk_low;
+   } <span class="keyword">else</span> {
+      dist    = dist_up;
+      idx     = idx_up;
+      nearest = mk_up;
+   }
+
+   <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"FindNearestIDMarker"</span>,<span class="string">"X %f, Y %f: low %s, dist_low %f, up %s, dist_up %f: nearest %s"</span>,x,y,mk_low-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),dist_low,mk_up-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),dist_up,nearest-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());</span>
+
+
+   <span class="keyword">return</span> nearest;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="tzEnjE"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:InsertMarker" title="Int_t KVIDQALine::InsertMarker(Int_t A=0)">InsertMarker</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> a)
+{
+   <span class="comment">// Insert a new Q-A identification marker at the mouse position</span>
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> idx = <a href="../KVIDQALine.html#KVIDQALine:InsertPoint" title="Int_t KVIDQALine::InsertPoint() or overloads">InsertPoint</a>();
+   <span class="keyword">if</span> (idx &gt;= 0) {
+      <span class="keyword">if</span> ((<a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a> ? 1 : -1) * (a - <a href="../KVIDQALine.html#KVIDQALine:fNextA" title="Int_t KVIDQALine::fNextA">fNextA</a>) &lt; 0) <a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a> = !<a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a>;
+      <a href="../KVIDQALine.html#KVIDQALine:fNextA" title="Int_t KVIDQALine::fNextA">fNextA</a> = a + (<a href="../KVIDQALine.html#KVIDQALine:fNextAinc" title="Bool_t KVIDQALine::fNextAinc">fNextAinc</a> ? 1 : -1);
+
+      <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = <span class="keyword">new</span> <a href="../KVIDQAMarker.html">KVIDQAMarker</a>(<span class="keyword">this</span>, a);
+      <a href="../KVIDQALine.html#KVIDQALine:AddMarker" title="void KVIDQALine::AddMarker(KVIDQAMarker* marker)">AddMarker</a>(m);
+      m-&gt;SetPointIndex(idx);
+      m-&gt;<a href="../KVIDQALine.html#KVIDQALine:Draw" title="void KVIDQALine::Draw(Option_t* chopt=&quot;&quot;)">Draw</a>();
+   }
+   <span class="keyword">return</span> idx;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="JwL5eB"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:RemoveMarker" title="Int_t KVIDQALine::RemoveMarker(Int_t a=0)">RemoveMarker</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> a)
+{
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> idx = -1;
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = NULL;
+   TIter next(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+
+   <span class="comment">// look for a marker with <span class="string">'a'</span></span>
+   <span class="keyword">if</span> (a &gt; 0) {
+      <span class="keyword">while</span> ((m = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)next())) {
+         <span class="keyword">if</span> (a == m-&gt;<a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>()) <span class="keyword">break</span>;
+      }
+   }
+   <span class="comment">// look for a marker at mouse position</span>
+   <span class="keyword">else</span> {
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> px = gPad-&gt;GetEventX();
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> py = gPad-&gt;GetEventY();
+
+      <span class="comment">//localize makrer to be deleted</span>
+      <span class="comment">// start with a small window (in case the mouse is very close to one marker)</span>
+      <span class="keyword">while</span> ((m = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)next())) {
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> dpx = px - gPad-&gt;XtoAbsPixel(gPad-&gt;XtoPad(m-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>()));
+         <a href="../ListOfTypes.html#Int_t">Int_t</a> dpy = py - gPad-&gt;YtoAbsPixel(gPad-&gt;YtoPad(m-&gt;<a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>()));
+         <span class="keyword">if</span> (dpx * dpx + dpy * dpy &lt; 100) <span class="keyword">break</span>;
+      }
+   }
+
+   <span class="comment">// if a marker is found ...</span>
+   <span class="keyword">if</span> (m) {
+      <span class="comment">//... remove it from the marker list</span>
+      <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Remove" title="TObject* KVSeqCollection::Remove(TObject* obj)">Remove</a>(m);
+      <span class="keyword">delete</span> m;
+   }
+   <span class="keyword">return</span> idx;
+};
+<span class="comment">//________________________________________________________________</span>
+
+<a name="owg3LC"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:InsertPoint" title="Int_t KVIDQALine::InsertPoint() or overloads">InsertPoint</a>()
+{
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> i = <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDentifier.html#KVIDentifier:InsertPoint" title="Int_t KVIDentifier::InsertPoint()">InsertPoint</a>();
+   <span class="keyword">if</span> (i &gt;= 0) <a href="../KVIDQALine.html#KVIDQALine:IncrementPtIdxOfMarkers" title="void KVIDQALine::IncrementPtIdxOfMarkers(Int_t idx,Int_t ival=1)">IncrementPtIdxOfMarkers</a>(i);
+<span class="comment">// <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InsertPoint"</span>,<span class="string">"Point %d inserted at X=%f, Y=%f"</span>,i,fX[i],fY[i]);</span>
+   <span class="keyword">return</span> i;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="Se4k_"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:InsertPoint" title="Int_t KVIDQALine::InsertPoint() or overloads">InsertPoint</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> i, <a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../ListOfTypes.html#Double_t">Double_t</a> x_prev)
+{
+
+   <span class="keyword">if</span> ((i &lt; 0) || (i &gt; fNpoints)) <span class="keyword">return</span> -1;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> y_prev = <a href="../#TGraph:Eval" title="Double_t TGraph::Eval(Double_t x,TSpline* spline=0,Option_t* option=&quot;&quot;)">Eval</a>(x_prev);
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a>** ps = <a href="../#TGraph:ExpandAndCopy" title="Double_t** TGraph::ExpandAndCopy(Int_t size,Int_t iend)">ExpandAndCopy</a>(fNpoints + 1, i);
+   <a href="../#TGraph:CopyAndRelease" title="void TGraph::CopyAndRelease(Double_t** newarrays,Int_t ibegin,Int_t iend,Int_t obegin)">CopyAndRelease</a>(ps, i, fNpoints++, i + 1);
+
+   <span class="comment">// To avoid redefenitions in descendant classes</span>
+   <a href="../#TGraph:FillZero" title="void TGraph::FillZero(Int_t begin,Int_t end,Bool_t from_ctor=kTRUE)">FillZero</a>(i, i + 1);
+
+   fX[i] = x_prev;
+   fY[i] = y_prev;
+   <a href="../KVIDQALine.html#KVIDQALine:IncrementPtIdxOfMarkers" title="void KVIDQALine::IncrementPtIdxOfMarkers(Int_t idx,Int_t ival=1)">IncrementPtIdxOfMarkers</a>(i);
+<span class="comment">// <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InsertPoint"</span>,<span class="string">"Point %d inserted at X=%f, Y=%f"</span>,i,fX[i],fY[i]);</span>
+   fX[i] = x;
+   fY[i] = y;
+
+   <span class="keyword">return</span> i;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="Plm64D"></a><a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:RemovePoint" title="Int_t KVIDQALine::RemovePoint(Int_t i)">RemovePoint</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> i)
+{
+   <span class="comment">// <a href="../KVIDentifier.html#KVIDentifier:Delete" title="void KVIDentifier::Delete(Option_t* option=&quot;&quot;)">Delete</a> point number ipoint and the associated ID marker</span>
+   <span class="comment">// if it has one.</span>
+
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = NULL;
+   TIter next(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+   <span class="keyword">while</span> ((m = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)next())) {
+      <span class="keyword">if</span> ((i == m-&gt;GetPointIndex()) &amp;&amp; !m-&gt;GetDelta()) <span class="keyword">break</span>;
+   }
+   <span class="keyword">if</span> (m) {
+      <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Remove" title="TObject* KVSeqCollection::Remove(TObject* obj)">Remove</a>(m);
+      <span class="keyword">delete</span> m;
+   } <span class="keyword">else</span> {
+      i = <a href="../KVIDZALine.html">KVIDZALine</a>::<a href="../KVIDentifier.html#KVIDentifier:RemovePoint" title="Int_t KVIDentifier::RemovePoint() or overloads">RemovePoint</a>(i);
+      <span class="keyword">if</span> (i &gt;= 0) <a href="../KVIDQALine.html#KVIDQALine:IncrementPtIdxOfMarkers" title="void KVIDQALine::IncrementPtIdxOfMarkers(Int_t idx,Int_t ival=1)">IncrementPtIdxOfMarkers</a>(i, -1);
+   }
+   <span class="keyword">return</span> i;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="rUxBW"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:IncrementPtIdxOfMarkers" title="void KVIDQALine::IncrementPtIdxOfMarkers(Int_t idx,Int_t ival=1)">IncrementPtIdxOfMarkers</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> idx, <a href="../ListOfTypes.html#Int_t">Int_t</a> ival)
+{
+   TIter next(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = NULL;
+   <span class="keyword">while</span> ((m = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)next())) {
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    idx_m;
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> delta_m;
+      m-&gt;GetPointIndexAndDelta(idx_m, delta_m);
+
+      <span class="keyword">if</span> ((idx - 1) &lt;= idx_m) {
+
+         <a href="../ListOfTypes.html#Double_t">Double_t</a> delta = 0;
+         <span class="keyword">if</span> ((idx_m == (idx - 1)) &amp;&amp; (delta_m)) {
+            <span class="comment">//vector givent by the initial low and up neighbour points</span>
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> xi = fX[idx - 1] - fX[idx + 1];
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> yi = fY[idx - 1] - fY[idx + 1];
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> li = TMath::Sqrt(TMath::Power(xi, 2) + TMath::Power(yi, 2));
+
+            <span class="comment">//vector givent by the final low and up points</span>
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> xf = fX[idx - 1] - fX[idx];
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> yf = fY[idx - 1] - fY[idx];
+            <a href="../ListOfTypes.html#Double_t">Double_t</a> lf = TMath::Sqrt(TMath::Power(xf, 2) + TMath::Power(yf, 2));
+
+            <span class="keyword">if</span> (delta_m * li &lt; lf) {
+               delta = delta_m * li / lf;
+            } <span class="keyword">else</span> {
+               delta = (delta_m * li - lf) / (li - lf);
+               idx_m += ival;
+            }
+         } <span class="keyword">else</span> <span class="keyword">if</span> (idx &lt;= idx_m) {
+            delta  = delta_m;
+            idx_m += ival;
+         }
+
+         <span class="keyword">if</span> (idx_m &lt; 0) {
+            idx_m = 0;
+            delta = 0.;
+         }
+         <span class="keyword">if</span> (idx_m &gt; fNpoints - 2) {
+            idx_m = fNpoints - 2;
+            delta = 1.;
+         }
+
+         m-&gt;SetPointIndex(idx_m, delta);
+      }
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="uWqPHE"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:Streamer" title="void KVIDQALine::Streamer(TBuffer&amp; )">Streamer</a>(TBuffer&amp; R__b)
+{
+   <span class="comment">// Stream an object of class <a href="../KVIDQALine.html">KVIDQALine</a>.</span>
+   <span class="comment">// Resets the 'fParent' pointer of each <a href="../KVIDQAMarker.html">KVIDQAMarker</a> after reading them in.</span>
+   <span class="comment">//</span>
+   <span class="keyword">if</span> (R__b.IsReading()) {
+      R__b.ReadClassBuffer(<a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:Class" title="TClass* KVIDQALine::Class()">Class</a>(), <span class="keyword">this</span>);
+      <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>->R__FOR_EACH(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>, <a href="../KVIDentifier.html#KVIDentifier:SetParent" title="void KVIDentifier::SetParent(KVIDGraph* )">SetParent</a>)((<span class="keyword">this</span>));
+   } <span class="keyword">else</span> {
+      R__b.WriteClassBuffer(<a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:Class" title="TClass* KVIDQALine::Class()">Class</a>(), <span class="keyword">this</span>);
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="rKjGFE"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:FindAMarkers" title="void KVIDQALine::FindAMarkers(TH1* h)">FindAMarkers</a>(TH1* h)
+{
+
+   <span class="comment">//find mass peaks in histogram h.</span>
+   <span class="comment">//Use TSpectrum to find the peak candidates.</span>
+   <span class="comment">//Build <a href="../KVIDQAMarker.html">KVIDQAMarker</a> for each peak found.</span>
+
+   TSpectrum s(60);
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> nfound = s.Search(h, 2, <span class="string">"goff"</span>);
+
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"FindAMarkers"</span>, <span class="string">"%d masses found in histogram %s for %s line"</span>, nfound, h-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+
+   <span class="comment">// <a href="../#TNamed:Clear" title="void TNamed::Clear(Option_t* option=&quot;&quot;)">Clear</a> list of IDQAMarkers to build a new one</span>
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Clear" title="void KVSeqCollection::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
+
+   <span class="comment">// Build new IDQAMarkers</span>
+<span class="cpp">#if ROOT_VERSION_CODE &gt;= ROOT_VERSION(6,0,0)</span>
+   <a href="../ListOfTypes.html#Double_t">Double_t</a>* xpeaks = s.GetPositionX();
+<span class="cpp">#else</span>
+   <a href="../ListOfTypes.html#Float_t">Float_t</a>* xpeaks = s.GetPositionX();
+<span class="cpp">#endif</span>
+   <span class="keyword">for</span> (<span class="keyword">int</span> p = 0; p &lt; nfound; p++) {
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> x = xpeaks[p];
+      <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = <span class="keyword">new</span> <a href="../KVIDQAMarker.html">KVIDQAMarker</a>;
+      m-&gt;<a href="../KVIDentifier.html#KVIDentifier:SetParent" title="void KVIDentifier::SetParent(KVIDGraph* )">SetParent</a>(<span class="keyword">this</span>);
+      m-&gt;SetX(x);
+      <a href="../KVIDQALine.html#KVIDQALine:AddMarker" title="void KVIDQALine::AddMarker(KVIDQAMarker* marker)">AddMarker</a>(m);
+   }
+
+   <span class="comment">// sort <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a> list from X coordinate</span>
+   <a href="../KVIDQALine.html#KVIDQALine:SortMarkers" title="void KVIDQALine::SortMarkers()">SortMarkers</a>();
+
+   <span class="comment">// find neighbours simply looping  all points</span>
+   <span class="comment">// and find also the 2 adjacent points: (low2 &lt; low &lt; x &lt; up &lt; up2 )</span>
+   <span class="comment">// needed in case x is outside the graph ascissa interval</span>
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> low  = -1;
+   TIter next(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = NULL;
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> a = 0; <span class="comment">// we assum that xpeaks gives A/Q</span>
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> stop = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   <a href="../KVList.html">KVList</a> del_list;
+   <span class="keyword">while</span> ((m = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)next())) {
+
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> x = m-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>();
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> tmp = TMath::Nint(x * <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>());
+      <span class="keyword">if</span> (a &lt;= tmp) a = tmp;
+
+      m-&gt;<a href="../KVIDentifier.html#KVIDentifier:SetA" title="void KVIDentifier::SetA(Int_t atnum)">SetA</a>(a++);
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> up  = -1;
+
+      <span class="keyword">if</span> (!stop) {
+         <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = (low &gt; -1 ? low : 0); i &lt; fNpoints; ++i) {
+            <span class="keyword">if</span> (fX[i] &lt; x) {
+               <span class="keyword">if</span> ((low == -1) || (fX[i] &gt; fX[low])) low = i;
+            } <span class="keyword">else</span> <span class="keyword">if</span> (fX[i] &gt; x) {
+               <span class="keyword">if</span> ((up  == -1) || (fX[i] &lt; fX[up])) up = i;
+            } <span class="keyword">else</span> { <span class="comment">// case x == fX[i]</span>
+               low = up = i;
+               <span class="keyword">break</span>;
+            }
+         }
+      }
+
+      <span class="comment">// treat cases when x is outside line min max abscissa</span>
+      <span class="keyword">if</span> ((up == -1) || (low == -1)) {
+         <span class="comment">// list the markers which are outside line to be deleted</span>
+         del_list.Add(m);
+         <span class="keyword">if</span> (up == -1) stop = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+         <span class="keyword">continue</span>;
+      }
+
+      <span class="comment">// set index and the X coordinate to the marker</span>
+      <span class="keyword">if</span> (low == up) m-&gt;SetPointIndex(low);
+      <span class="keyword">else</span> m-&gt;SetPointIndexAndX(low, x);
+
+      <span class="comment">// draw the new marker if its parent Q-line is already drawn in the</span>
+      <span class="comment">// current pad</span>
+      <span class="keyword">if</span> (gPad &amp;&amp; gPad-&gt;GetListOfPrimitives()-&gt;<a href="../#TGraph:FindObject" title="TObject* TGraph::FindObject(const char* name) or overloads">FindObject</a>(<span class="keyword">this</span>)) m-&gt;<a href="../KVIDQALine.html#KVIDQALine:Draw" title="void KVIDQALine::Draw(Option_t* chopt=&quot;&quot;)">Draw</a>();
+   }
+
+   <span class="keyword">if</span> (del_list.GetEntries()) {
+      <a href="../#TObject:Warning" title="void TObject::Warning(const char* method,const char* msgfmt)">Warning</a>(<span class="string">"FindAMarkers"</span>, <span class="string">"%d markers will be deleted (outside of %s-line)"</span>, del_list.GetEntries(), <a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+      del_list.<a href="../#TNamed:ls" title="void TNamed::ls(Option_t* option=&quot;&quot;)">ls</a>();
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="PL7NVB"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:WriteAsciiFile_extras" title="void KVIDQALine::WriteAsciiFile_extras(ofstream&amp; ,const Char_t* name_prefix=&quot;&quot;)">WriteAsciiFile_extras</a>(<a href="../ListOfTypes.html#ofstream">ofstream</a>&amp; file,
+                                       <span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name_prefix)
+{
+   <span class="comment">// <a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> each <a href="../KVIDQAMarker.html">KVIDQAMarker</a> listed in <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a></span>
+
+   <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:WriteAsciiFile_extras" title="void KVIDentifier::WriteAsciiFile_extras(ofstream&amp; ,const Char_t* =&quot;&quot;)">WriteAsciiFile_extras</a>(file, name_prefix);
+   file &lt;&lt; <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>() &lt;&lt; <span class="string">"\t"</span> &lt;&lt; <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../#TCollection:GetEntries" title="Int_t TCollection::GetEntries()">GetEntries</a>() &lt;&lt; endl;
+   <span class="keyword">if</span> (<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:First" title="TObject* KVSeqCollection::First()">First</a>()) {
+      file &lt;&lt; <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:First" title="TObject* KVSeqCollection::First()">First</a>()-&gt;<a href="../#TObject:ClassName" title="const char* TObject::ClassName()">ClassName</a>() &lt;&lt; endl;
+      <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>->R__FOR_EACH(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>, <a href="../KVIDentifier.html#KVIDentifier:WriteAsciiFile" title="void KVIDentifier::WriteAsciiFile(ofstream&amp; ,const Char_t* name_prefix=&quot;&quot;)">WriteAsciiFile</a>)(file);
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="COCts"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:ReadAsciiFile_extras" title="void KVIDQALine::ReadAsciiFile_extras(ifstream&amp; )">ReadAsciiFile_extras</a>(<a href="../ListOfTypes.html#ifstream">ifstream</a>&amp; file)
+{
+   <span class="comment">// <a href="../#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> all KVQAMarker's and set them in the list <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a></span>
+
+   <a href="../KVIDLine.html">KVIDLine</a>::<a href="../KVIDentifier.html#KVIDentifier:ReadAsciiFile_extras" title="void KVIDentifier::ReadAsciiFile_extras(ifstream&amp; )">ReadAsciiFile_extras</a>(file);
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> q, a;
+   file &gt;&gt; q &gt;&gt; a;
+   <a href="../KVIDQALine.html#KVIDQALine:SetQ" title="void KVIDQALine::SetQ(Int_t qtnum)">SetQ</a>(q);
+   <span class="keyword">if</span> (a &gt; 0) {
+      <a href="../KVString.html">KVString</a> cl;
+      cl.ReadLine(file);
+      <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> i = 0; i &lt; a; i++) {
+         <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = <a href="../KVIDQALine.html#KVIDQALine:New" title="KVIDQAMarker* KVIDQALine::New(const Char_t* )">New</a>(cl.Data());
+         <a href="../KVIDQALine.html#KVIDQALine:AddMarker" title="void KVIDQALine::AddMarker(KVIDQAMarker* marker)">AddMarker</a>(m);
+         m-&gt;<a href="../KVIDentifier.html#KVIDentifier:ReadAsciiFile" title="void KVIDentifier::ReadAsciiFile(ifstream&amp; )">ReadAsciiFile</a>(file);
+      }
+   }
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="L3MgqB"></a><a href="../KVIDQAMarker.html">KVIDQAMarker</a>* <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:New" title="KVIDQAMarker* KVIDQALine::New(const Char_t* )">New</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* m_class)
+{
+   <span class="comment">//Create new object of class <span class="string">"m_class"</span> which derives from <a href="../KVIDQAMarker.html">KVIDQAMarker</a></span>
+
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m = 0;
+   TClass* clas = TClass::GetClass(m_class);
+   <span class="keyword">if</span> (!clas) {
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"New"</span>,
+            <span class="string">"%s is not a valid classname. No known class."</span>, m_class);
+   } <span class="keyword">else</span> {
+      <span class="keyword">if</span> (!clas-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>::<a href="../KVIDQAMarker.html#KVIDQAMarker:Class" title="TClass* KVIDQAMarker::Class()">Class</a>())) {
+         <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"New"</span>,
+               <span class="string">"%s is not a valid class deriving from KVIDQAMarker"</span>,
+               m_class);
+      } <span class="keyword">else</span> {
+         m = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*) clas-&gt;<a href="../KVIDQALine.html#KVIDQALine:New" title="KVIDQAMarker* KVIDQALine::New(const Char_t* )">New</a>();
+      }
+   }
+   <span class="keyword">return</span> m;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="ZHTeqE"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:Initialize" title="void KVIDQALine::Initialize()">Initialize</a>()
+{
+   <span class="comment">// General initialisation method for Q-A identification line.</span>
+   <span class="comment">// This method MUST be called once before using the line for identifications.</span>
+   <span class="comment">// The ID markers are sorted.</span>
+   <span class="comment">// The natural marker widths of all ID markers are calculated.</span>
+   <a href="../KVIDQALine.html#KVIDQALine:SortMarkers" title="void KVIDQALine::SortMarkers()">SortMarkers</a>();
+   <a href="../KVIDQALine.html#KVIDQALine:CalculateMarkerWidths" title="void KVIDQALine::CalculateMarkerWidths()">CalculateMarkerWidths</a>();
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="ghP_wE"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:CalculateMarkerWidths" title="void KVIDQALine::CalculateMarkerWidths()">CalculateMarkerWidths</a>()
+{
+<span class="comment">//Calculate natural <span class="string">"width"</span> of each ID markers in the line.</span>
+   <span class="comment">//The markers in the line have first to sorted so that they are in order of ascending <span class="string">'X'</span></span>
+   <span class="comment">//i.e. first markers has lower A, last line is the heaviest mass .</span>
+   <span class="comment">//</span>
+   <span class="comment">// The width is supposed to be the distance between the first and the</span>
+   <span class="comment">// last marker divided by the difference of A of both markers.</span>
+
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* first = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:First" title="TObject* KVSeqCollection::First()">First</a>();
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* last  = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>-><a href="../KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last()">Last</a>();
+   <span class="keyword">if</span> ((!last) || (!first)) <span class="keyword">return</span>;
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> width = first-&gt;DistanceToMarker(last-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>(), last-&gt;<a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>());
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> dA   = last-&gt;<a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>() - first-&gt;<a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>();
+   width = TMath::Abs(width / dA);
+   <a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>->R__FOR_EACH(<a href="../KVIDQAMarker.html">KVIDQAMarker</a>, <a href="../KVIDZALine.html#KVIDZALine:SetWidth" title="void KVIDZALine::SetWidth(Double_t w)">SetWidth</a>)(width);
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="ojKziD"></a><a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:ProjIsBetween" title="Bool_t KVIDQALine::ProjIsBetween(Double_t x,Double_t y,KVIDQAMarker* m1,KVIDQAMarker* m2)">ProjIsBetween</a>(<a href="../ListOfTypes.html#Double_t">Double_t</a> x, <a href="../ListOfTypes.html#Double_t">Double_t</a> y, <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m1, <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* m2) <span class="keyword">const</span>
+{
+   <span class="comment">//Given a line segment defined by 2 markers m1 and m2 test if the</span>
+   <span class="comment">//  projection of the point P(x,y) is between both markers.</span>
+   <span class="comment">//</span>
+   <span class="comment">//      m1 x---------------------------------------x m2</span>
+   <span class="comment">//                                          |</span>
+   <span class="comment">//                                          |</span>
+   <span class="comment">//                                          |</span>
+   <span class="comment">//                                          x</span>
+   <span class="comment">//                                          P (x,y)</span>
+   <span class="comment">//</span>
+   <span class="comment">// returns <a href="../ListOfTypes.html#Bool_t">kFALSE</a> if the projection is outside the segment given</span>
+   <span class="comment">// by both markers.</span>
+
+   <span class="keyword">if</span> (!m1 || !m2) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> x1 = m1-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> x2 = m2-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> y1 = m1-&gt;<a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> y2 = m2-&gt;<a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>();
+   <span class="comment">// scale Y coordinate to A/Q</span>
+
+   <span class="keyword">if</span> (<a href="../KVIDQALine.html#KVIDQALine:IsAvsAoQ" title="Bool_t KVIDQALine::IsAvsAoQ()">IsAvsAoQ</a>()) {
+      <span class="keyword">if</span> (<a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>()) {
+         y  /= <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>();
+         y1 /= <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>();
+         y2 /= <a href="../KVIDQALine.html#KVIDQALine:GetQ" title="Int_t KVIDQALine::GetQ()">GetQ</a>();
+      } <span class="keyword">else</span> <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   } <span class="keyword">else</span> {
+      <span class="keyword">if</span> (y &gt; 0 &amp;&amp; y1 &gt; 0 &amp;&amp; y2 &gt; 0) {
+         y  = <a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>() / y;
+         y1 = <a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>() / y1;
+         y2 = <a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>() / y2;
+      } <span class="keyword">else</span> <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   }
+   TVector2 P1P2(x2 - x1, y2 - y1);
+   <span class="keyword">if</span> (P1P2.Mod2() == 0) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+   TVector2 P1M(x - x1, y - y1);
+
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> proj = (P1M * P1P2) / P1P2.Mod();
+   <span class="comment">//<a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ProjIsBetween"</span>,<span class="string">"P1M %f, P1P2 %f, proj %f"</span>,P1M.Mod(), P1P2.Mod(), proj);</span>
+   <span class="keyword">if</span> ((0 &lt;= proj) &amp;&amp; (proj &lt;= P1P2.Mod())) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+   <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+}
+<span class="comment">//________________________________________________________________</span>
+
+<a name="JPM1EB"></a><span class="keyword">void</span> <a href="../KVIDQALine.html">KVIDQALine</a>::<a href="../KVIDQALine.html#KVIDQALine:IncrementAMarkers" title="void KVIDQALine::IncrementAMarkers(Int_t val=1,Option_t* dir=&quot;all&quot;)">IncrementAMarkers</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> val, <a href="../ListOfTypes.html#Option_t">Option_t</a>* dir)
+{
+   <span class="comment">// Increment A value of A-markers from the mouse position.</span>
+   <span class="comment">// In option 'dir', set the direction of the A-marker to be incremented.</span>
+   <span class="comment">//   dir -- left, rigth, above, below, all</span>
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> px = gPad-&gt;GetEventX();
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> py = gPad-&gt;GetEventY();
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> x = gPad-&gt;PadtoX(gPad-&gt;AbsPixeltoX(px));
+   <a href="../ListOfTypes.html#Double_t">Double_t</a> y = gPad-&gt;PadtoY(gPad-&gt;AbsPixeltoY(py));
+
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> opt = 0;
+   <span class="keyword">if</span> (!strcmp(dir, <span class="string">"right"</span>)) opt = 1;
+   <span class="keyword">else</span> <span class="keyword">if</span> (!strcmp(dir, <span class="string">"left"</span>)) opt = 2;
+   <span class="keyword">else</span> <span class="keyword">if</span> (!strcmp(dir, <span class="string">"above"</span>)) opt = 3;
+   <span class="keyword">else</span> <span class="keyword">if</span> (!strcmp(dir, <span class="string">"below"</span>)) opt = 4;
+
+   TIter next(<a href="../KVIDQALine.html#KVIDQALine:fMarkers" title="KVList* KVIDQALine::fMarkers">fMarkers</a>);
+   <a href="../KVIDQAMarker.html">KVIDQAMarker</a>* mk = NULL;
+   <span class="keyword">while</span> ((mk = (<a href="../KVIDQAMarker.html">KVIDQAMarker</a>*)next())) {
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> a = mk-&gt;<a href="../KVIDQALine.html#KVIDQALine:GetA" title="Int_t KVIDQALine::GetA()">GetA</a>() + val;
+      <a href="../ListOfTypes.html#Bool_t">Bool_t</a> inc = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
+      <span class="keyword">switch</span> (opt) {
+         <span class="keyword">case</span> 0:
+            inc = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+            <span class="keyword">break</span>;
+         <span class="keyword">case</span> 1:
+            <span class="keyword">if</span> (mk-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>() &gt;= x) inc = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+            <span class="keyword">break</span>;
+         <span class="keyword">case</span> 2:
+            <span class="keyword">if</span> (mk-&gt;<a href="../#TGraph:GetX" title="Double_t* TGraph::GetX()">GetX</a>() &lt;= x) inc = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+            <span class="keyword">break</span>;
+         <span class="keyword">case</span> 3:
+            <span class="keyword">if</span> (mk-&gt;<a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>() &gt;= y) inc = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+            <span class="keyword">break</span>;
+         <span class="keyword">case</span> 4:
+            <span class="keyword">if</span> (mk-&gt;<a href="../#TGraph:GetY" title="Double_t* TGraph::GetY()">GetY</a>() &lt;= y) inc = <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
+            <span class="keyword">break</span>;
+      }
+      <span class="keyword">if</span> (inc) mk-&gt;<a href="../KVIDentifier.html#KVIDentifier:SetA" title="void KVIDentifier::SetA(Int_t atnum)">SetA</a>(a);
+   }
+}
+</pre>
+<div id="linenums"><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="1" href="#1" class="ln">1</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="2" href="#2" class="ln">2</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="3" href="#3" class="ln">3</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="4" href="#4" class="ln">4</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="5" href="#5" class="ln">5</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="6" href="#6" class="ln">6</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="7" href="#7" class="ln">7</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="8" href="#8" class="ln">8</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="9" href="#9" class="ln">9</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="10" href="#10" class="ln">10</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="11" href="#11" class="ln">11</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="12" href="#12" class="ln">12</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="13" href="#13" class="ln">13</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="14" href="#14" class="ln">14</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="15" href="#15" class="ln">15</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="16" href="#16" class="ln">16</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="17" href="#17" class="ln">17</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="18" href="#18" class="ln">18</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="19" href="#19" class="ln">19</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="20" href="#20" class="ln">20</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="21" href="#21" class="ln">21</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="22" href="#22" class="ln">22</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="23" href="#23" class="ln">23</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="24" href="#24" class="ln">24</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="25" href="#25" class="ln">25</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="26" href="#26" class="ln">26</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="27" href="#27" class="ln">27</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="28" href="#28" class="ln">28</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="29" href="#29" class="ln">29</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="30" href="#30" class="ln">30</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="31" href="#31" class="ln">31</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="32" href="#32" class="ln">32</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="33" href="#33" class="ln">33</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="34" href="#34" class="ln">34</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="35" href="#35" class="ln">35</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="36" href="#36" class="ln">36</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="37" href="#37" class="ln">37</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="38" href="#38" class="ln">38</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="39" href="#39" class="ln">39</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="40" href="#40" class="ln">40</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="41" href="#41" class="ln">41</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="42" href="#42" class="ln">42</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="43" href="#43" class="ln">43</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="44" href="#44" class="ln">44</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="45" href="#45" class="ln">45</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="46" href="#46" class="ln">46</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="47" href="#47" class="ln">47</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="48" href="#48" class="ln">48</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="49" href="#49" class="ln">49</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="50" href="#50" class="ln">50</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="51" href="#51" class="ln">51</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="52" href="#52" class="ln">52</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="53" href="#53" class="ln">53</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="54" href="#54" class="ln">54</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="55" href="#55" class="ln">55</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="56" href="#56" class="ln">56</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="57" href="#57" class="ln">57</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="58" href="#58" class="ln">58</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="59" href="#59" class="ln">59</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="60" href="#60" class="ln">60</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="61" href="#61" class="ln">61</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="62" href="#62" class="ln">62</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="63" href="#63" class="ln">63</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="64" href="#64" class="ln">64</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="65" href="#65" class="ln">65</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="66" href="#66" class="ln">66</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="67" href="#67" class="ln">67</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="68" href="#68" class="ln">68</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="69" href="#69" class="ln">69</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="70" href="#70" class="ln">70</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="71" href="#71" class="ln">71</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="72" href="#72" class="ln">72</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="73" href="#73" class="ln">73</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="74" href="#74" class="ln">74</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="75" href="#75" class="ln">75</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="76" href="#76" class="ln">76</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="77" href="#77" class="ln">77</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="78" href="#78" class="ln">78</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="79" href="#79" class="ln">79</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="80" href="#80" class="ln">80</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="81" href="#81" class="ln">81</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="82" href="#82" class="ln">82</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="83" href="#83" class="ln">83</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="84" href="#84" class="ln">84</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="85" href="#85" class="ln">85</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="86" href="#86" class="ln">86</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="87" href="#87" class="ln">87</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="88" href="#88" class="ln">88</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="89" href="#89" class="ln">89</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="90" href="#90" class="ln">90</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="91" href="#91" class="ln">91</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="92" href="#92" class="ln">92</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="93" href="#93" class="ln">93</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="94" href="#94" class="ln">94</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="95" href="#95" class="ln">95</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="96" href="#96" class="ln">96</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="97" href="#97" class="ln">97</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="98" href="#98" class="ln">98</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="99" href="#99" class="ln">99</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="100" href="#100" class="ln">100</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="101" href="#101" class="ln">101</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="102" href="#102" class="ln">102</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="103" href="#103" class="ln">103</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="104" href="#104" class="ln">104</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="105" href="#105" class="ln">105</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="106" href="#106" class="ln">106</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="107" href="#107" class="ln">107</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="108" href="#108" class="ln">108</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="109" href="#109" class="ln">109</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="110" href="#110" class="ln">110</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="111" href="#111" class="ln">111</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="112" href="#112" class="ln">112</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="113" href="#113" class="ln">113</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="114" href="#114" class="ln">114</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="115" href="#115" class="ln">115</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="116" href="#116" class="ln">116</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="117" href="#117" class="ln">117</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="118" href="#118" class="ln">118</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="119" href="#119" class="ln">119</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="120" href="#120" class="ln">120</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="121" href="#121" class="ln">121</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="122" href="#122" class="ln">122</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="123" href="#123" class="ln">123</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="124" href="#124" class="ln">124</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="125" href="#125" class="ln">125</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="126" href="#126" class="ln">126</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="127" href="#127" class="ln">127</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="128" href="#128" class="ln">128</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="129" href="#129" class="ln">129</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="130" href="#130" class="ln">130</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="131" href="#131" class="ln">131</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="132" href="#132" class="ln">132</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="133" href="#133" class="ln">133</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="134" href="#134" class="ln">134</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="135" href="#135" class="ln">135</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="136" href="#136" class="ln">136</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="137" href="#137" class="ln">137</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="138" href="#138" class="ln">138</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="139" href="#139" class="ln">139</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="140" href="#140" class="ln">140</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="141" href="#141" class="ln">141</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="142" href="#142" class="ln">142</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="143" href="#143" class="ln">143</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="144" href="#144" class="ln">144</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="145" href="#145" class="ln">145</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="146" href="#146" class="ln">146</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="147" href="#147" class="ln">147</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="148" href="#148" class="ln">148</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="149" href="#149" class="ln">149</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="150" href="#150" class="ln">150</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="151" href="#151" class="ln">151</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="152" href="#152" class="ln">152</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="153" href="#153" class="ln">153</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="154" href="#154" class="ln">154</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="155" href="#155" class="ln">155</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="156" href="#156" class="ln">156</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="157" href="#157" class="ln">157</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="158" href="#158" class="ln">158</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="159" href="#159" class="ln">159</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="160" href="#160" class="ln">160</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="161" href="#161" class="ln">161</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="162" href="#162" class="ln">162</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="163" href="#163" class="ln">163</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="164" href="#164" class="ln">164</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="165" href="#165" class="ln">165</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="166" href="#166" class="ln">166</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="167" href="#167" class="ln">167</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="168" href="#168" class="ln">168</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="169" href="#169" class="ln">169</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="170" href="#170" class="ln">170</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="171" href="#171" class="ln">171</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="172" href="#172" class="ln">172</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="173" href="#173" class="ln">173</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="174" href="#174" class="ln">174</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="175" href="#175" class="ln">175</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="176" href="#176" class="ln">176</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="177" href="#177" class="ln">177</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="178" href="#178" class="ln">178</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="179" href="#179" class="ln">179</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="180" href="#180" class="ln">180</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="181" href="#181" class="ln">181</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="182" href="#182" class="ln">182</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="183" href="#183" class="ln">183</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="184" href="#184" class="ln">184</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="185" href="#185" class="ln">185</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="186" href="#186" class="ln">186</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="187" href="#187" class="ln">187</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="188" href="#188" class="ln">188</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="189" href="#189" class="ln">189</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="190" href="#190" class="ln">190</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="191" href="#191" class="ln">191</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="192" href="#192" class="ln">192</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="193" href="#193" class="ln">193</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="194" href="#194" class="ln">194</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="195" href="#195" class="ln">195</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="196" href="#196" class="ln">196</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="197" href="#197" class="ln">197</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="198" href="#198" class="ln">198</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="199" href="#199" class="ln">199</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="200" href="#200" class="ln">200</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="201" href="#201" class="ln">201</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="202" href="#202" class="ln">202</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="203" href="#203" class="ln">203</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="204" href="#204" class="ln">204</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="205" href="#205" class="ln">205</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="206" href="#206" class="ln">206</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="207" href="#207" class="ln">207</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="208" href="#208" class="ln">208</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="209" href="#209" class="ln">209</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="210" href="#210" class="ln">210</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="211" href="#211" class="ln">211</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="212" href="#212" class="ln">212</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="213" href="#213" class="ln">213</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="214" href="#214" class="ln">214</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="215" href="#215" class="ln">215</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="216" href="#216" class="ln">216</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="217" href="#217" class="ln">217</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="218" href="#218" class="ln">218</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="219" href="#219" class="ln">219</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="220" href="#220" class="ln">220</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="221" href="#221" class="ln">221</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="222" href="#222" class="ln">222</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="223" href="#223" class="ln">223</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="224" href="#224" class="ln">224</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="225" href="#225" class="ln">225</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="226" href="#226" class="ln">226</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="227" href="#227" class="ln">227</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="228" href="#228" class="ln">228</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="229" href="#229" class="ln">229</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="230" href="#230" class="ln">230</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="231" href="#231" class="ln">231</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="232" href="#232" class="ln">232</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="233" href="#233" class="ln">233</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="234" href="#234" class="ln">234</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="235" href="#235" class="ln">235</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="236" href="#236" class="ln">236</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="237" href="#237" class="ln">237</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="238" href="#238" class="ln">238</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="239" href="#239" class="ln">239</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="240" href="#240" class="ln">240</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="241" href="#241" class="ln">241</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="242" href="#242" class="ln">242</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="243" href="#243" class="ln">243</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="244" href="#244" class="ln">244</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="245" href="#245" class="ln">245</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="246" href="#246" class="ln">246</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="247" href="#247" class="ln">247</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="248" href="#248" class="ln">248</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="249" href="#249" class="ln">249</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="250" href="#250" class="ln">250</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="251" href="#251" class="ln">251</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="252" href="#252" class="ln">252</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="253" href="#253" class="ln">253</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="254" href="#254" class="ln">254</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="255" href="#255" class="ln">255</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="256" href="#256" class="ln">256</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="257" href="#257" class="ln">257</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="258" href="#258" class="ln">258</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="259" href="#259" class="ln">259</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="260" href="#260" class="ln">260</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="261" href="#261" class="ln">261</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="262" href="#262" class="ln">262</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="263" href="#263" class="ln">263</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="264" href="#264" class="ln">264</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="265" href="#265" class="ln">265</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="266" href="#266" class="ln">266</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="267" href="#267" class="ln">267</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="268" href="#268" class="ln">268</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="269" href="#269" class="ln">269</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="270" href="#270" class="ln">270</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="271" href="#271" class="ln">271</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="272" href="#272" class="ln">272</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="273" href="#273" class="ln">273</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="274" href="#274" class="ln">274</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="275" href="#275" class="ln">275</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="276" href="#276" class="ln">276</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="277" href="#277" class="ln">277</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="278" href="#278" class="ln">278</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="279" href="#279" class="ln">279</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="280" href="#280" class="ln">280</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="281" href="#281" class="ln">281</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="282" href="#282" class="ln">282</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="283" href="#283" class="ln">283</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="284" href="#284" class="ln">284</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="285" href="#285" class="ln">285</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="286" href="#286" class="ln">286</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="287" href="#287" class="ln">287</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="288" href="#288" class="ln">288</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="289" href="#289" class="ln">289</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="290" href="#290" class="ln">290</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="291" href="#291" class="ln">291</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="292" href="#292" class="ln">292</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="293" href="#293" class="ln">293</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="294" href="#294" class="ln">294</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="295" href="#295" class="ln">295</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="296" href="#296" class="ln">296</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="297" href="#297" class="ln">297</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="298" href="#298" class="ln">298</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="299" href="#299" class="ln">299</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="300" href="#300" class="ln">300</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="301" href="#301" class="ln">301</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="302" href="#302" class="ln">302</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="303" href="#303" class="ln">303</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="304" href="#304" class="ln">304</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="305" href="#305" class="ln">305</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="306" href="#306" class="ln">306</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="307" href="#307" class="ln">307</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="308" href="#308" class="ln">308</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="309" href="#309" class="ln">309</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="310" href="#310" class="ln">310</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="311" href="#311" class="ln">311</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="312" href="#312" class="ln">312</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="313" href="#313" class="ln">313</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="314" href="#314" class="ln">314</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="315" href="#315" class="ln">315</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="316" href="#316" class="ln">316</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="317" href="#317" class="ln">317</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="318" href="#318" class="ln">318</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="319" href="#319" class="ln">319</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="320" href="#320" class="ln">320</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="321" href="#321" class="ln">321</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="322" href="#322" class="ln">322</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="323" href="#323" class="ln">323</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="324" href="#324" class="ln">324</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="325" href="#325" class="ln">325</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="326" href="#326" class="ln">326</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="327" href="#327" class="ln">327</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="328" href="#328" class="ln">328</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="329" href="#329" class="ln">329</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="330" href="#330" class="ln">330</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="331" href="#331" class="ln">331</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="332" href="#332" class="ln">332</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="333" href="#333" class="ln">333</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="334" href="#334" class="ln">334</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="335" href="#335" class="ln">335</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="336" href="#336" class="ln">336</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="337" href="#337" class="ln">337</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="338" href="#338" class="ln">338</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="339" href="#339" class="ln">339</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="340" href="#340" class="ln">340</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="341" href="#341" class="ln">341</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="342" href="#342" class="ln">342</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="343" href="#343" class="ln">343</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="344" href="#344" class="ln">344</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="345" href="#345" class="ln">345</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="346" href="#346" class="ln">346</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="347" href="#347" class="ln">347</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="348" href="#348" class="ln">348</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="349" href="#349" class="ln">349</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="350" href="#350" class="ln">350</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="351" href="#351" class="ln">351</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="352" href="#352" class="ln">352</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="353" href="#353" class="ln">353</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="354" href="#354" class="ln">354</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="355" href="#355" class="ln">355</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="356" href="#356" class="ln">356</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="357" href="#357" class="ln">357</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="358" href="#358" class="ln">358</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="359" href="#359" class="ln">359</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="360" href="#360" class="ln">360</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="361" href="#361" class="ln">361</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="362" href="#362" class="ln">362</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="363" href="#363" class="ln">363</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="364" href="#364" class="ln">364</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="365" href="#365" class="ln">365</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="366" href="#366" class="ln">366</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="367" href="#367" class="ln">367</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="368" href="#368" class="ln">368</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="369" href="#369" class="ln">369</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="370" href="#370" class="ln">370</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="371" href="#371" class="ln">371</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="372" href="#372" class="ln">372</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="373" href="#373" class="ln">373</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="374" href="#374" class="ln">374</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="375" href="#375" class="ln">375</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="376" href="#376" class="ln">376</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="377" href="#377" class="ln">377</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="378" href="#378" class="ln">378</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="379" href="#379" class="ln">379</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="380" href="#380" class="ln">380</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="381" href="#381" class="ln">381</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="382" href="#382" class="ln">382</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="383" href="#383" class="ln">383</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="384" href="#384" class="ln">384</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="385" href="#385" class="ln">385</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="386" href="#386" class="ln">386</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="387" href="#387" class="ln">387</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="388" href="#388" class="ln">388</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="389" href="#389" class="ln">389</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="390" href="#390" class="ln">390</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="391" href="#391" class="ln">391</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="392" href="#392" class="ln">392</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="393" href="#393" class="ln">393</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="394" href="#394" class="ln">394</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="395" href="#395" class="ln">395</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="396" href="#396" class="ln">396</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="397" href="#397" class="ln">397</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="398" href="#398" class="ln">398</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="399" href="#399" class="ln">399</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="400" href="#400" class="ln">400</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="401" href="#401" class="ln">401</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="402" href="#402" class="ln">402</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="403" href="#403" class="ln">403</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="404" href="#404" class="ln">404</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="405" href="#405" class="ln">405</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="406" href="#406" class="ln">406</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="407" href="#407" class="ln">407</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="408" href="#408" class="ln">408</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="409" href="#409" class="ln">409</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="410" href="#410" class="ln">410</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="411" href="#411" class="ln">411</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="412" href="#412" class="ln">412</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="413" href="#413" class="ln">413</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="414" href="#414" class="ln">414</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="415" href="#415" class="ln">415</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="416" href="#416" class="ln">416</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="417" href="#417" class="ln">417</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="418" href="#418" class="ln">418</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="419" href="#419" class="ln">419</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="420" href="#420" class="ln">420</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="421" href="#421" class="ln">421</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="422" href="#422" class="ln">422</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="423" href="#423" class="ln">423</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="424" href="#424" class="ln">424</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="425" href="#425" class="ln">425</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="426" href="#426" class="ln">426</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="427" href="#427" class="ln">427</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="428" href="#428" class="ln">428</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="429" href="#429" class="ln">429</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="430" href="#430" class="ln">430</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="431" href="#431" class="ln">431</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="432" href="#432" class="ln">432</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="433" href="#433" class="ln">433</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="434" href="#434" class="ln">434</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="435" href="#435" class="ln">435</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="436" href="#436" class="ln">436</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="437" href="#437" class="ln">437</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="438" href="#438" class="ln">438</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="439" href="#439" class="ln">439</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="440" href="#440" class="ln">440</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="441" href="#441" class="ln">441</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="442" href="#442" class="ln">442</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="443" href="#443" class="ln">443</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="444" href="#444" class="ln">444</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="445" href="#445" class="ln">445</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="446" href="#446" class="ln">446</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="447" href="#447" class="ln">447</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="448" href="#448" class="ln">448</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="449" href="#449" class="ln">449</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="450" href="#450" class="ln">450</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="451" href="#451" class="ln">451</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="452" href="#452" class="ln">452</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="453" href="#453" class="ln">453</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="454" href="#454" class="ln">454</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="455" href="#455" class="ln">455</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="456" href="#456" class="ln">456</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="457" href="#457" class="ln">457</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="458" href="#458" class="ln">458</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="459" href="#459" class="ln">459</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="460" href="#460" class="ln">460</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="461" href="#461" class="ln">461</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="462" href="#462" class="ln">462</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="463" href="#463" class="ln">463</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="464" href="#464" class="ln">464</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="465" href="#465" class="ln">465</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="466" href="#466" class="ln">466</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="467" href="#467" class="ln">467</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="468" href="#468" class="ln">468</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="469" href="#469" class="ln">469</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="470" href="#470" class="ln">470</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="471" href="#471" class="ln">471</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="472" href="#472" class="ln">472</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="473" href="#473" class="ln">473</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="474" href="#474" class="ln">474</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="475" href="#475" class="ln">475</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="476" href="#476" class="ln">476</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="477" href="#477" class="ln">477</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="478" href="#478" class="ln">478</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="479" href="#479" class="ln">479</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="480" href="#480" class="ln">480</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="481" href="#481" class="ln">481</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="482" href="#482" class="ln">482</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="483" href="#483" class="ln">483</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="484" href="#484" class="ln">484</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="485" href="#485" class="ln">485</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="486" href="#486" class="ln">486</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="487" href="#487" class="ln">487</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="488" href="#488" class="ln">488</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="489" href="#489" class="ln">489</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="490" href="#490" class="ln">490</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="491" href="#491" class="ln">491</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="492" href="#492" class="ln">492</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="493" href="#493" class="ln">493</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="494" href="#494" class="ln">494</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="495" href="#495" class="ln">495</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="496" href="#496" class="ln">496</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="497" href="#497" class="ln">497</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="498" href="#498" class="ln">498</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="499" href="#499" class="ln">499</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="500" href="#500" class="ln">500</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="501" href="#501" class="ln">501</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="502" href="#502" class="ln">502</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="503" href="#503" class="ln">503</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="504" href="#504" class="ln">504</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="505" href="#505" class="ln">505</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="506" href="#506" class="ln">506</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="507" href="#507" class="ln">507</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="508" href="#508" class="ln">508</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="509" href="#509" class="ln">509</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="510" href="#510" class="ln">510</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="511" href="#511" class="ln">511</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="512" href="#512" class="ln">512</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="513" href="#513" class="ln">513</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="514" href="#514" class="ln">514</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="515" href="#515" class="ln">515</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="516" href="#516" class="ln">516</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="517" href="#517" class="ln">517</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="518" href="#518" class="ln">518</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="519" href="#519" class="ln">519</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="520" href="#520" class="ln">520</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="521" href="#521" class="ln">521</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="522" href="#522" class="ln">522</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="523" href="#523" class="ln">523</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="524" href="#524" class="ln">524</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="525" href="#525" class="ln">525</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="526" href="#526" class="ln">526</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="527" href="#527" class="ln">527</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="528" href="#528" class="ln">528</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="529" href="#529" class="ln">529</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="530" href="#530" class="ln">530</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="531" href="#531" class="ln">531</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="532" href="#532" class="ln">532</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="533" href="#533" class="ln">533</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="534" href="#534" class="ln">534</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="535" href="#535" class="ln">535</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="536" href="#536" class="ln">536</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="537" href="#537" class="ln">537</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="538" href="#538" class="ln">538</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="539" href="#539" class="ln">539</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="540" href="#540" class="ln">540</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="541" href="#541" class="ln">541</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="542" href="#542" class="ln">542</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="543" href="#543" class="ln">543</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="544" href="#544" class="ln">544</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="545" href="#545" class="ln">545</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="546" href="#546" class="ln">546</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="547" href="#547" class="ln">547</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="548" href="#548" class="ln">548</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="549" href="#549" class="ln">549</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="550" href="#550" class="ln">550</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="551" href="#551" class="ln">551</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="552" href="#552" class="ln">552</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="553" href="#553" class="ln">553</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="554" href="#554" class="ln">554</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="555" href="#555" class="ln">555</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="556" href="#556" class="ln">556</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="557" href="#557" class="ln">557</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="558" href="#558" class="ln">558</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="559" href="#559" class="ln">559</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="560" href="#560" class="ln">560</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="561" href="#561" class="ln">561</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="562" href="#562" class="ln">562</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="563" href="#563" class="ln">563</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="564" href="#564" class="ln">564</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="565" href="#565" class="ln">565</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="566" href="#566" class="ln">566</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="567" href="#567" class="ln">567</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="568" href="#568" class="ln">568</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="569" href="#569" class="ln">569</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="570" href="#570" class="ln">570</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="571" href="#571" class="ln">571</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="572" href="#572" class="ln">572</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="573" href="#573" class="ln">573</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="574" href="#574" class="ln">574</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="575" href="#575" class="ln">575</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="576" href="#576" class="ln">576</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="577" href="#577" class="ln">577</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="578" href="#578" class="ln">578</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="579" href="#579" class="ln">579</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="580" href="#580" class="ln">580</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="581" href="#581" class="ln">581</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="582" href="#582" class="ln">582</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="583" href="#583" class="ln">583</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="584" href="#584" class="ln">584</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="585" href="#585" class="ln">585</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="586" href="#586" class="ln">586</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="587" href="#587" class="ln">587</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="588" href="#588" class="ln">588</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="589" href="#589" class="ln">589</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="590" href="#590" class="ln">590</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="591" href="#591" class="ln">591</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="592" href="#592" class="ln">592</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="593" href="#593" class="ln">593</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="594" href="#594" class="ln">594</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="595" href="#595" class="ln">595</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="596" href="#596" class="ln">596</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="597" href="#597" class="ln">597</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="598" href="#598" class="ln">598</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="599" href="#599" class="ln">599</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="600" href="#600" class="ln">600</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="601" href="#601" class="ln">601</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="602" href="#602" class="ln">602</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="603" href="#603" class="ln">603</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="604" href="#604" class="ln">604</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="605" href="#605" class="ln">605</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="606" href="#606" class="ln">606</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="607" href="#607" class="ln">607</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="608" href="#608" class="ln">608</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="609" href="#609" class="ln">609</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="610" href="#610" class="ln">610</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="611" href="#611" class="ln">611</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="612" href="#612" class="ln">612</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="613" href="#613" class="ln">613</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="614" href="#614" class="ln">614</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="615" href="#615" class="ln">615</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="616" href="#616" class="ln">616</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="617" href="#617" class="ln">617</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="618" href="#618" class="ln">618</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="619" href="#619" class="ln">619</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="620" href="#620" class="ln">620</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="621" href="#621" class="ln">621</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="622" href="#622" class="ln">622</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="623" href="#623" class="ln">623</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="624" href="#624" class="ln">624</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="625" href="#625" class="ln">625</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="626" href="#626" class="ln">626</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="627" href="#627" class="ln">627</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="628" href="#628" class="ln">628</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="629" href="#629" class="ln">629</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="630" href="#630" class="ln">630</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="631" href="#631" class="ln">631</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="632" href="#632" class="ln">632</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="633" href="#633" class="ln">633</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="634" href="#634" class="ln">634</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="635" href="#635" class="ln">635</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="636" href="#636" class="ln">636</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="637" href="#637" class="ln">637</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="638" href="#638" class="ln">638</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="639" href="#639" class="ln">639</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="640" href="#640" class="ln">640</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="641" href="#641" class="ln">641</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="642" href="#642" class="ln">642</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="643" href="#643" class="ln">643</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="644" href="#644" class="ln">644</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="645" href="#645" class="ln">645</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="646" href="#646" class="ln">646</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="647" href="#647" class="ln">647</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="648" href="#648" class="ln">648</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="649" href="#649" class="ln">649</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="650" href="#650" class="ln">650</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="651" href="#651" class="ln">651</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="652" href="#652" class="ln">652</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="653" href="#653" class="ln">653</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="654" href="#654" class="ln">654</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="655" href="#655" class="ln">655</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="656" href="#656" class="ln">656</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="657" href="#657" class="ln">657</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="658" href="#658" class="ln">658</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="659" href="#659" class="ln">659</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="660" href="#660" class="ln">660</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="661" href="#661" class="ln">661</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="662" href="#662" class="ln">662</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="663" href="#663" class="ln">663</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="664" href="#664" class="ln">664</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="665" href="#665" class="ln">665</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="666" href="#666" class="ln">666</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="667" href="#667" class="ln">667</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="668" href="#668" class="ln">668</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="669" href="#669" class="ln">669</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="670" href="#670" class="ln">670</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="671" href="#671" class="ln">671</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="672" href="#672" class="ln">672</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="673" href="#673" class="ln">673</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="674" href="#674" class="ln">674</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="675" href="#675" class="ln">675</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="676" href="#676" class="ln">676</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="677" href="#677" class="ln">677</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="678" href="#678" class="ln">678</a></div><div class="ln">&nbsp;<span class="lnfile">KVIDQALine.cpp:</span><a name="679" href="#679" class="ln">679</a></div></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: 2016-01-21 17:04 </em><em>&raquo; Last generated: 2016-01-21 17:04</em><br />
+<em>This page has been automatically generated.</em>
+</div>
+</div>
+</body>
+</html>
