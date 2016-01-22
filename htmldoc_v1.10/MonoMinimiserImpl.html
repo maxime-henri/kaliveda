@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Jan 21 17:05:40 2016            -->
+<!--   Date: Fri Jan 22 10:25:20 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -60,7 +60,42 @@ return false;}
 </div>
 <div class="dropshadow"><div class="withshadow"><h1><a name="MonoMinimiserImpl:description"></a>class MonoMinimiserImpl</h1>
 <div class="classdescr">
-</div>
+<pre>
+ <a href="./MonoMinimiserImpl.html">MonoMinimiserImpl</a>.cpp
+
+ Description
+
+ Standard implementation of the silicon energy minimiser. This class
+ implements the minimisation by using two while loops operating in different
+ directions (in terms of A value), both starting from the same initial ansatz
+ that A is most likely to be around to 2Z. It is essentially the single
+ threaded version of the <a href="./ThreadedMassEstimator.html">ThreadedMassEstimator</a>, operating to reduce the
+ difference between the observed and simulated silicon detector energies in
+ order to determine the most likely value for A.
+
+ The bisection method previously used has been replaced by this <span class="string">"brute force"</span>
+ method. The reasoning behind this decision is that the bisection method
+ relies upon the function being well behaved and passing through delta = 0
+ with positive values on one side of the minimum and negative ones on the
+ other. However due to the large A range being used, this does not seem to be
+ guaranteed.  For example if one takes a value in A which is too large, the
+ energy calculation can result in something quite extreme and using the
+ bisection method you will lose 1/2 of the available solution space from this
+ single error.
+
+ On my desktop this algorithm processes at about 85 events/s compared with
+ 120 events/s for the threaded version (<a href="./ThreadedMassEstimator.html">ThreadedMassEstimator</a>).
+
+ Note: It is important that you keep the public interface (public member
+ functions) of the implementation classes in agreement with those in this
+ class, as all functions are simple passed off to the implementation class.
+ For example <a href="./SiliconEnergyMinimiser.html">SiliconEnergyMinimiser</a>::<a href="./SiliconEnergyMinimiser.html#SiliconEnergyMinimiser:SetIDTelescope" title="Bool_t SiliconEnergyMinimiser::SetIDTelescope(const TString&amp; telescope_name)">SetIDTelescope</a>() simply calls
+ <a href="./MonoMinimiserImpl.html">MonoMinimiserImpl</a>::<a href="./MonoMinimiserImpl.html#MonoMinimiserImpl:SetIDTelescope" title="Bool_t MonoMinimiserImpl::SetIDTelescope(const TString&amp; telescope_name)">SetIDTelescope</a>().
+
+ Peter C. Wigg &lt;peter.wigg.314159@gmail.com&gt;
+ Sun 17 Jan 20:43:44  2016
+
+</pre></div>
 </div></div>
 
 <div id="functions">
@@ -145,8 +180,8 @@ return false;}
 <br />
 <!--SIGNATURE-->
 <div id="footer">
-
-<em>&raquo; Last changed: Thu Jan 21 17:05:40 2016 </em><em>&raquo; Last generated: 2016-01-21 17:05</em><br />
+<em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?Peter+C.+Wigg"> Peter C. Wigg</a> </em><em>&raquo; Created  Sun 17 Jan 20:43:44  2016</em><br />
+<em>&raquo; Last changed: Fri Jan 22 10:25:21 2016 </em><em>&raquo; Last generated: 2016-01-22 10:25</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
