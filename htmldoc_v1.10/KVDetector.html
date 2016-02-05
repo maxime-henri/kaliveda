@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 22 10:23:18 2016            -->
+<!--   Date: Fri Feb  5 18:29:21 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -73,7 +73,7 @@ is set as <span class="string">"active"</span> (by default it is the last added 
       <a href="./KVDetector.html">KVDetector</a> chio(<span class="string">"Myl"</span>, 2.5*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);                       //first layer - 2.5 micron mylar window
       <a href="./KVMaterial.html">KVMaterial</a> *gas = new <a href="./KVMaterial.html">KVMaterial</a>(<span class="string">"C3F8"</span>, 5.*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:cm" title="const long double KVUnits::cm">cm</a>, 50.0*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:mbar" title="const long double KVUnits::mbar">mbar</a>);
       chio.<a href="./KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(gas);                                         //second layer - 5cm of C3F8 gas at 50mbar pressure and 19 deg. C
-      chio.<a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a>(gas);                                      //make gas layer <span class="string">"active"</span>
+      chio.<a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* actif)">SetActiveLayer</a>(gas);                                      //make gas layer <span class="string">"active"</span>
       <a href="./KVMaterial.html">KVMaterial</a> *win = new <a href="./KVMaterial.html">KVMaterial</a>(<span class="string">"Myl"</span>,2.5*<a href="./KVUnits.html">KVUnits</a>::<a href="./KVUnits.html#KVUnits:um" title="const long double KVUnits::um">um</a>);       //exit window
       chio.<a href="./KVDetector.html#KVDetector:AddAbsorber" title="void KVDetector::AddAbsorber(KVMaterial* )">AddAbsorber</a>(win);
 
@@ -383,8 +383,7 @@ detector is increased, e.g.:
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:SearchKVFile"><span class="baseclass">KVBase::</span>SearchKVFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name, TString&amp; fullpath, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsubdir = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVMaterial.html#KVMaterial:SetAbsGeoVolume"><span class="baseclass">KVMaterial::</span>SetAbsGeoVolume</a>(TGeoVolume* v)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetACQParams">SetACQParams</a>()</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetActiveLayer">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>*)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetActiveLayer@1">SetActiveLayer</a>(<a href="./ListOfTypes.html#Short_t">Short_t</a> actif)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetActiveLayer">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>* actif)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetActiveLayerMatrix">SetActiveLayerMatrix</a>(<span class="keyword">const</span> TGeoHMatrix*)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetActiveLayerShape">SetActiveLayerShape</a>(TGeoBBox*)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDetector:SetAnalysed">SetAnalysed</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> b = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
@@ -521,13 +520,14 @@ detector is increased, e.g.:
 <tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KVDetector:fRangeF"></a>fRangeF</td><td class="datadesc">! parametric function range of particles in detector</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#UShort_t">UShort_t</a></td><td class="dataname"><a name="KVDetector:fSegment"></a>fSegment</td><td class="datadesc">used in particle reconstruction</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDetector:fSimMode"></a>fSimMode</td><td class="datadesc">! =kTRUE when using to simulate detector response, =kFALSE when analysing data</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVDetector:fSingleLayer"></a>fSingleLayer</td><td class="datadesc">! =kTRUE if detector has a single absorber layer</td></tr>
 <tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVDetector:fTotThickness"></a>fTotThickness</td><td class="datadesc">! used to store value calculated by GetTotalThicknessInCM</td></tr>
 
 </table></div>
 <div class="access" id="datapriv"><b>private:</b>
 <table class="data" id="tabdatapriv" cellspacing="0">
-<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Short_t">Short_t</a></td><td class="dataname"><a name="KVDetector:fActiveLayer"></a>fActiveLayer</td><td class="datadesc">The active absorber in the detector</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVMaterial.html">KVMaterial</a>*</td><td class="dataname"><a name="KVDetector:fActiveLayer"></a>fActiveLayer</td><td class="datadesc">! The active absorber in the detector</td></tr>
 <tr class="data"><td class="datatype">static <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVDetector:fDetCounter"></a>fDetCounter</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVPosition.html">KVPosition</a></td><td class="dataname"><a name="KVDetector:fEWPosition"></a>fEWPosition</td><td class="datadesc">position of entrance window</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVDetector:fIDTelAlign"></a>fIDTelAlign</td><td class="datadesc">-&gt;list of ID telescopes made of this detector and all aligned detectors placed in front of it</td></tr>
@@ -737,13 +737,7 @@ i.e. if
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:AddAbsorber" href="src/KVDetector.cxx.html#lwF99">AddAbsorber</a>(<a href="./KVMaterial.html">KVMaterial</a>* )</span><br />
 <div class="funccomm"><pre> Add a layer of absorber material to the detector
  By default, the first layer added is set as the <span class="string">"Active"</span> layer.
- Call <a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* ) or overloads">SetActiveLayer</a> to change this.
-</pre></div>
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetActiveLayer" href="src/KVDetector.cxx.html#ynDnYB">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>* )</span><br />
-<div class="funccomm"><pre>Set reference to the <span class="string">"active"</span> layer in the detector,
-i.e. the one in which energy losses are measured
-By default the active layer is the first layer added
+ Call <a href="./KVDetector.html#KVDetector:SetActiveLayer" title="void KVDetector::SetActiveLayer(KVMaterial* actif)">SetActiveLayer</a> to change this.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVMaterial.html">KVMaterial</a>* <a class="funcname" name="KVDetector:GetAbsorber" href="src/KVDetector.cxx.html#NrjW8C">GetAbsorber</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
@@ -1231,13 +1225,13 @@ and have a value greater than their pedestal value
 </div>
 <div class="funcdoc"><span class="funcname">TGeoBBox* <a class="funcname" name="KVDetector:GetShape" href="src/KVDetector.h.html#uHnNKE">GetShape</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetActiveLayer" href="src/KVDetector.h.html#CVlxFC">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>* )</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:SetActiveLayer" href="src/KVDetector.h.html#xzHVjD">SetActiveLayer</a>(<a href="./KVMaterial.html">KVMaterial</a>* actif)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVMaterial.html">KVMaterial</a>* <a class="funcname" name="KVDetector:GetActiveLayer" href="src/KVDetector.h.html#aEyCeB">GetActiveLayer</a>() const</span><br />
 <div class="funccomm"><pre>Get pointer to the <span class="string">"active"</span> layer in the detector, i.e. the one in which energy losses are measured
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">return</span> <a class="funcname" name="KVDetector:GetAbsorber" href="src/KVDetector.h.html#Cl1C1E">GetAbsorber</a>(<a href="./KVDetector.html#KVDetector:fActiveLayer" title="Short_t KVDetector::fActiveLayer">fActiveLayer</a>)</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./KVMaterial.html">KVMaterial</a>* <a class="funcname" name="KVDetector:GetAbsorber" href="src/KVDetector.h.html#VTVZzD">GetAbsorber</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i) const</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a>* <a class="funcname" name="KVDetector:GetListOfAbsorbers" href="src/KVDetector.h.html#X2ToT">GetListOfAbsorbers</a>() const</span><br />
 </div>
@@ -1360,7 +1354,7 @@ and all aligned detectors placed in front of it
 <div class="funccomm"><pre>return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if detector is here and working
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:DeduceACQParameters" href="src/KVDetector.h.html#PTvlkE">DeduceACQParameters</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>  = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a>  = -1)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDetector:DeduceACQParameters" href="src/KVDetector.h.html#c0VDHC">DeduceACQParameters</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>  = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a>  = -1)</span><br />
 
 <div class="code"><code class="inlinecode">{}</code></div>
 <div style="clear:both;"></div>
@@ -1372,7 +1366,7 @@ and all aligned detectors placed in front of it
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jan 22 10:23:19 2016 </em><em>&raquo; Last generated: 2016-01-22 10:23</em><br />
+<em>&raquo; Last changed: Fri Feb  5 18:29:22 2016 </em><em>&raquo; Last generated: 2016-02-05 18:29</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

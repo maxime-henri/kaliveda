@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: KaliVeda Development team           -->
+<!--                                             -->
+<!--   Date: Fri Feb  5 18:29:25 2016            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVEvent::Iterator</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVEvent::Iterator','libKVMultiDetevents','KVEvent.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/07</a>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVEvent__Iterator.h.html">header file</a>
+<a class="descrheadentry" href="src/KVEvent__Iterator.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/events/KVEvent.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/events/KVEvent.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVEvent__Iterator:description">class description</a> 
+<a class="descrheadentry" href="#KVEvent__Iterator:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVEvent__Iterator:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVEvent__Iterator:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/07</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_EVENTS_Index.html">EVENTS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVEvent::Iterator</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVEvent__Iterator:description"></a>class KVEvent::Iterator: public iterator&lt;input_iterator_tag,KVNucleus,long,KVNucleus*,KVNucleus&amp;&gt;</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVEvent</h2>
+<h4>Base class for all types of multiparticle event consisting of KVNucleus objects</h4>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+Particles are stored in a TClonesArray and <a href="./KVEvent.html">KVEvent</a> provides some basic
+functionality for accessing and manipulating the list.
+
+Events can be built using any class derived from <a href="./KVNucleus.html">KVNucleus</a> to represent particles.
+These classes can allocate memory in their default ctor: when filling events in a loop,
+the same 'particle' objects are re-used for each new event, the ctor of each object will
+only be called once when the object is first created (e.g. in the first event).
+The particle class Clear() method will be called before each new event.
+Therefore the cycle of use of the particle objects in a loop over many events is:
+
+&lt;particle ctor&gt;
+   Building 1st event
+   &lt;particle Clear()&gt;
+   Building 2nd event
+   &lt;particle Clear()&gt;
+   ...
+   Building last event
+&lt;particle dtor&gt;
+
+When writing events in a TTree, it is very important to call the TBranch::SetAutoDelete(<a href="./ListOfTypes.html#Bool_t">kFALSE</a>)
+method of the branch which is used to store the event object.
+If not, when the events are read back, the <a href="./KVEvent.html">KVEvent</a> constructor and destructor will be called
+every time an event is read from the TTRee!! Leading to very slow reading times (&amp; probably
+memory leaks).
+For this reason we provide the method:
+    <a href="./ListOfTypes.html#void">void</a> MakeEventBranch(TTree*, const TString&amp;, const TString&amp;, <a href="./ListOfTypes.html#void">void</a>*)
+which should be used whenever it is required to stock <a href="./KVEvent.html">KVEvent</a>-derived objects in a TTree.
+
+:
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVEvent__Iterator:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:_Iterator">~Iterator</a>()</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret">static <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:End">End</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:IsIterating">IsIterating</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Iterator">Iterator</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Iterator@1">Iterator</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; i)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Iterator@2">Iterator</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>* e, <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type t = <a href="./KVEvent__Iterator.html#KVEvent__Iterator:All" title="const KVEvent::Iterator::Type KVEvent::Iterator::All">All</a>, TString grp = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Iterator@3">Iterator</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>&amp; e, <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type t = <a href="./KVEvent__Iterator.html#KVEvent__Iterator:All" title="const KVEvent::Iterator::Type KVEvent::Iterator::All">All</a>, TString grp = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:operator!_">operator!=</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; it) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:operator*">operator*</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:operator++">operator++</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:operator++@1">operator++</a>(<span class="keyword">int</span>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp;</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:operator_">operator=</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; rhs)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:operator__">operator==</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; it) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Reset">Reset</a>(<a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type t = <a href="./KVEvent__Iterator.html#KVEvent__Iterator:Null" title="const KVEvent::Iterator::Type KVEvent::Iterator::Null">Null</a>, TString grp = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:SetIsIterating">SetIsIterating</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> on = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:AcceptableIteration">AcceptableIteration</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVNucleus.html">KVNucleus</a>*</td><td class="funcname"><a class="funcname" href="#KVEvent__Iterator:current">current</a>() <span class="keyword">const</span></td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVEvent__Iterator:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="data"><td class="datatype">enum Type { </td><td class="dataname"><a name="KVEvent__Iterator:Null"></a>Null</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVEvent__Iterator:All"></a>All</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVEvent__Iterator:OK"></a>OK</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVEvent__Iterator:Group"></a>Group</td><td></td></tr>
+<tr class="data"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVEvent__Iterator:fGroup"></a>fGroup</td><td class="datadesc">groupname for group iterations</td></tr>
+<tr class="data"><td class="datatype">TIter</td><td class="dataname"><a name="KVEvent__Iterator:fIter"></a>fIter</td><td class="datadesc">iterator over TClonesArray</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVEvent__Iterator:fIterating"></a>fIterating</td><td class="datadesc">=kTRUE when iteration in progress</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type</td><td class="dataname"><a name="KVEvent__Iterator:fType"></a>fType</td><td class="datadesc">iterator type</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVEvent__Iterator:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVEvent__Iterator_Lib" id="MapKVEvent__Iterator_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="251,374,297,394"/>
+</map>
+<div class="tabs">
+<a id="imgKVEvent__Iterator_Inh" class="tabsel" href="inh/KVEvent__Iterator_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVEvent__Iterator_Inh.png');">Inheritance</a>
+<a id="imgKVEvent__Iterator_InhMem" class="tab" href="inhmem/KVEvent__Iterator_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVEvent__Iterator_InhMem.png');">Inherited Members</a>
+<a id="imgKVEvent__Iterator_Incl" class="tab" href="incl/KVEvent__Iterator_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVEvent__Iterator_Incl.png');">Includes</a>
+<a id="imgKVEvent__Iterator_Lib" class="tab" href="lib/KVEvent__Iterator_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVEvent__Iterator_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVEvent__Iterator_Inh" src="inh/KVEvent__Iterator_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEvent__Iterator:AcceptableIteration" href="src/KVEvent__Iterator.h.html#oYdQuE">AcceptableIteration</a>()</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the <a href="./KVEvent__Iterator.html#KVEvent__Iterator:current" title="KVNucleus* KVEvent::Iterator::current()">current</a> particle in the iteration
+ corresponds to the selection criteria (if any)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">return</span> <a class="funcname" name="KVEvent__Iterator:current" href="src/KVEvent__Iterator.h.html#QOUX8B">current</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVEvent__Iterator:Iterator" href="src/KVEvent__Iterator.h.html#C.JIKE">Iterator</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVEvent__Iterator:Iterator@1" href="src/KVEvent__Iterator.h.html#sQkvyC">Iterator</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; i)</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVEvent__Iterator:Iterator@2" href="src/KVEvent__Iterator.h.html#zFZVRE">Iterator</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>* e, <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type t = <a href="./KVEvent__Iterator.html#KVEvent__Iterator:All" title="const KVEvent::Iterator::Type KVEvent::Iterator::All">All</a>, TString grp = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Construct an iterator object to read in sequence the particles in event *e.
+ By default, opt=<span class="string">""</span> and all particles are included in the iteration.
+ opt is a case-insensitive option controlling the iteration:
+   opt=<span class="string">"ok"</span>/<span class="string">"OK"</span>:  only particles whose <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:IsOK" title="Bool_t KVParticle::IsOK()">IsOK</a>() method returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+                   are iterated over
+   opt=any other non-empty string:  only particles belonging to the given group
+                                    i.e. <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:BelongsToGroup" title="Bool_t KVParticle::BelongsToGroup(const Char_t* groupname)">BelongsToGroup</a>(opt) returns
+                                    <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVEvent__Iterator:Iterator@3" href="src/KVEvent__Iterator.h.html#DFZVRE">Iterator</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>&amp; e, <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type t = <a href="./KVEvent__Iterator.html#KVEvent__Iterator:All" title="const KVEvent::Iterator::Type KVEvent::Iterator::All">All</a>, TString grp = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Construct an iterator object to read in sequence the particles in event *e.
+ By default, opt=<span class="string">""</span> and all particles are included in the iteration.
+ opt is a case-insensitive option controlling the iteration:
+   opt=<span class="string">"ok"</span>/<span class="string">"OK"</span>:  only particles whose <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:IsOK" title="Bool_t KVParticle::IsOK()">IsOK</a>() method returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+                   are iterated over
+   opt=any other non-empty string:  only particles belonging to the given group
+                                    i.e. <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:BelongsToGroup" title="Bool_t KVParticle::BelongsToGroup(const Char_t* groupname)">BelongsToGroup</a>(opt) returns
+                                    <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVNucleus.html">KVNucleus</a>&amp; <a class="funcname" name="KVEvent__Iterator:operator*" href="src/KVEvent__Iterator.h.html#CqaGFB">operator*</a>() const</span><br />
+<div class="funccomm"><pre> Returns pointer to <a href="./KVEvent__Iterator.html#KVEvent__Iterator:current" title="KVNucleus* KVEvent::Iterator::current()">current</a> particle in iteration
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEvent__Iterator:operator!_" href="src/KVEvent__Iterator.h.html#TY8BAC">operator!=</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; it) const</span><br />
+<div class="funccomm"><pre> returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the 2 iterators are not pointing to the same particle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEvent__Iterator:operator__" href="src/KVEvent__Iterator.h.html#zwjanC">operator==</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; it) const</span><br />
+<div class="funccomm"><pre> returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the 2 iterators are pointing to the same particle
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVEvent__Iterator.html#KVEvent__Iterator:Iterator" title="KVEvent::Iterator KVEvent::Iterator::Iterator() or overloads">Iterator</a>&amp; <a class="funcname" name="KVEvent__Iterator:operator++" href="src/KVEvent__Iterator.h.html#yATbEC">operator++</a>()</span><br />
+<div class="funccomm"><pre> Prefix ++ operator
+ Advance iterator to next particle in event compatible with selection
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVEvent__Iterator.html#KVEvent__Iterator:Iterator" title="KVEvent::Iterator KVEvent::Iterator::Iterator() or overloads">Iterator</a> <a class="funcname" name="KVEvent__Iterator:operator++@1" href="src/KVEvent__Iterator.h.html#lFBoaC">operator++</a>(<span class="keyword">int</span> )</span><br />
+<div class="funccomm"><pre> Postfix ++ operator
+ Advance iterator to next particle in event compatible with selection
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVEvent__Iterator.html#KVEvent__Iterator:Iterator" title="KVEvent::Iterator KVEvent::Iterator::Iterator() or overloads">Iterator</a>&amp; <a class="funcname" name="KVEvent__Iterator:operator_" href="src/KVEvent__Iterator.h.html#CTvSXD">operator=</a>(<span class="keyword">const</span> <a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>&amp; rhs)</span><br />
+<div class="funccomm"><pre> copy-assignment operator
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVEvent__Iterator.html#KVEvent__Iterator:Iterator" title="KVEvent::Iterator KVEvent::Iterator::Iterator() or overloads">Iterator</a> <a class="funcname" name="KVEvent__Iterator:End" href="src/KVEvent__Iterator.h.html#bVE9.B">End</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">virtual</span> <a class="funcname" name="KVEvent__Iterator:_Iterator" href="src/KVEvent__Iterator.h.html#Po03rC">~Iterator</a>()</span><br />
+
+<div class="code"><code class="inlinecode">{}</code></div>
+<div style="clear:both;"></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEvent__Iterator:Reset" href="src/KVEvent__Iterator.h.html#qZLSzB">Reset</a>(<a href="./KVEvent.html">KVEvent</a>::<a href="./KVEvent__Iterator.html">Iterator</a>::Type t = <a href="./KVEvent__Iterator.html#KVEvent__Iterator:Null" title="const KVEvent::Iterator::Type KVEvent::Iterator::Null">Null</a>, TString grp = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Reuse iterator, start iteration again
+ <a href="./KVEvent__Iterator.html#KVEvent__Iterator:Reset" title="void KVEvent::Iterator::Reset(KVEvent::Iterator::Type t=Null,TString grp=&quot;&quot;)">Reset</a>() - use same selection criteria
+ <a href="./KVEvent__Iterator.html#KVEvent__Iterator:Reset" title="void KVEvent::Iterator::Reset(KVEvent::Iterator::Type t=Null,TString grp=&quot;&quot;)">Reset</a>(Type t[, TString gr]) - change selection criteria
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVEvent__Iterator:IsIterating" href="src/KVEvent__Iterator.h.html#vDzflE">IsIterating</a>() const</span><br />
+<div class="funccomm"><pre> returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if iteration is in progress
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEvent__Iterator:SetIsIterating" href="src/KVEvent__Iterator.h.html#eB5ouE">SetIsIterating</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> on = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> set <a href="./KVEvent__Iterator.html#KVEvent__Iterator:fIterating" title="Bool_t KVEvent::Iterator::fIterating">fIterating</a> flag
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Fri Feb  5 18:29:26 2016 </em><em>&raquo; Last generated: 2016-02-05 18:29</em><br />
+<em>This page has been automatically generated.</em>
+</div>
+</div>
+</body>
+</html>

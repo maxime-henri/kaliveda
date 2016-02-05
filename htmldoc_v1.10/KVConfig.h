@@ -17,6 +17,16 @@
 #define WITH_MULTICORE_CPU 4
 #define WITH_BOOST
 
+// Info on C++ standard used to compile code
+#if __cplusplus > 199711L
+#define WITH_CPP11
+#if __cplusplus > 201103L
+#define WITH_CPP14
+#if __cplusplus > 201402L
+#define WITH_CPP17
+#endif
+#endif
+#endif
 
 //-----------------------------------ROOT-version dependent compiler flags
 //-----------------------------------to handle backwards compatibility

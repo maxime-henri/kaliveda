@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 22 10:23:15 2016            -->
+<!--   Date: Fri Feb  5 18:29:19 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -161,7 +161,7 @@ the data repository named "default" if there is one; or the last one defined in 
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Clear"><span class="baseclass">KVBase::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CommitFile">CommitFile</a>(TFile* file)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CommitFile">CommitFile</a>(TFile* file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <a href="./KVDataSet.html">KVDataSet</a>* dataset)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Copy"><span class="baseclass">KVBase::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">int</span></td><td class="funcname"><a class="funcname" href="#KVDataRepository:CopyFile">CopyFile</a>(<span class="keyword">const</span> <span class="keyword">char</span>* f, <span class="keyword">const</span> <span class="keyword">char</span>* t, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> overwrite = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
@@ -547,10 +547,10 @@ If the subdirectory for 'datatype' does not exist, it will be created.
 
 In fact, if the repository is not one in which files can be created and written
 directly (i.e. if <a href="./KVDataRepository.html#KVDataRepository:CanWrite" title="Bool_t KVDataRepository::CanWrite()">CanWrite</a>() = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>), the file will be created in the local working
-directory, and only copied into the repository when <a href="./KVDataRepository.html#KVDataRepository:CommitFile" title="void KVDataRepository::CommitFile(TFile* file)">CommitFile</a> is called.
+directory, and only copied into the repository when <a href="./KVDataRepository.html#KVDataRepository:CommitFile" title="void KVDataRepository::CommitFile(TFile* file,const Char_t* datatype,KVDataSet* dataset)">CommitFile</a> is called.
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:CommitFile" href="src/KVDataRepository.cxx.html#n66sPB">CommitFile</a>(TFile* file)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVDataRepository:CommitFile" href="src/KVDataRepository.cxx.html#Fk56JC">CommitFile</a>(TFile* file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* datatype, <a href="./KVDataSet.html">KVDataSet</a>* dataset)</span><br />
 <div class="funccomm"><pre>Add this file (previously created by a call to <a href="./KVDataRepository.html#KVDataRepository:CreateNewFile" title="TFile* KVDataRepository::CreateNewFile(KVDataSet* dataset,const Char_t* datatype,const Char_t* filename)">CreateNewFile</a>) to the repository.
 Any objects should be written to the file before calling this method, either by
 calling the <a href="./#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a>() method of each object, or by calling file-&gt;<a href="./#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a>().
@@ -682,7 +682,7 @@ in the repository configuration (see $KVROOT/KVFiles/.kvrootrc)
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?franklan"> franklan</a> </em><em>&raquo; Created  by KVClassFactory on Wed Apr 26 16:17:37 2006</em><br />
-<em>&raquo; Last changed: Fri Jan 22 10:23:15 2016 </em><em>&raquo; Last generated: 2016-01-22 10:23</em><br />
+<em>&raquo; Last changed: Fri Feb  5 18:29:19 2016 </em><em>&raquo; Last generated: 2016-02-05 18:29</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

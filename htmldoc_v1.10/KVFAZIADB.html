@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 22 10:23:25 2016            -->
+<!--   Date: Fri Feb  5 18:29:28 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -90,7 +90,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TFolder:Browse"><span class="baseclass">TFolder::</span>Browse</a>(TBrowser* b)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADB:Build">Build</a>()</td></tr>
-<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADB:BuildQuickAndDirtyDataBase">BuildQuickAndDirtyDataBase</a>(TString)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADB:BuildQuickAndDirtyDataBase">BuildQuickAndDirtyDataBase</a>(TString)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADB:cd">cd</a>()</td></tr>
 <tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVFAZIADB:Class">Class</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
@@ -280,7 +280,7 @@ return false;}
 <area shape="rect" id="clust10" href="./KVDataBase.html" title="KVDataBase" alt="" coords="635,16,933,209"/>
 </map>
 <map name="MapKVFAZIADB_Lib" id="MapKVFAZIADB_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="234,375,277,393"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="226,375,267,393"/>
 </map>
 <div class="tabs">
 <a id="imgKVFAZIADB_Inh" class="tabsel" href="inh/KVFAZIADB_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVFAZIADB_Inh.png');">Inheritance</a>
@@ -414,7 +414,9 @@ These are virtual methods redefined by child classes of <a href="./KVFAZIADBRun.
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADB:Build" href="src/KVFAZIADB.cxx.html#Pq76rB">Build</a>()</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADB:ReadNewRunList" href="src/KVFAZIADB.cxx.html#gXZk1E">ReadNewRunList</a>()</span><br />
-<div class="funccomm"><pre><a href="./#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> new-style runlist (written using <a href="./KVFAZIADBRun.html">KVFAZIADBRun</a> v.10 or later)
+<div class="funccomm"><pre><a href="./#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> first runlist.dat file if exists
+and then read
+runsheets
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADB:ReadDBFile" href="src/KVFAZIADB.cxx.html#WJRFfE">ReadDBFile</a>(TString file)</span><br />
@@ -442,6 +444,26 @@ These are virtual methods redefined by child classes of <a href="./KVFAZIADBRun.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADB:BuildQuickAndDirtyDataBase" href="src/KVFAZIADB.cxx.html#gCWk6B">BuildQuickAndDirtyDataBase</a>(TString )</span><br />
+<div class="funccomm"><pre>
+
+   Use this method in order to read runs written on disk
+   during the experiment
+   File is produced with main information for each run :
+      number of files
+      size
+      starting date
+   Information on runs has to completed after reading acquisition file
+   specially information on trigger and deatdime
+
+   usage : acqfiles_dir is the repository where acquisition files are written
+
+   2 output files are written
+   - runlist.dat containing all runs
+   - database.log giving a summarize of stored data
+   the two file names are set by default in .kvrootrc
+
+
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADB:AddSystem" href="src/KVFAZIADB.h.html#M8zc3E">AddSystem</a>(<a href="./KVDBSystem.html">KVDBSystem</a>* r)</span><br />
 <div class="funccomm"><pre>   virtual <a href="./ListOfTypes.html#void">void</a> GoodRunLine();
@@ -475,8 +497,8 @@ These are virtual methods redefined by child classes of <a href="./KVFAZIADBRun.
 <br />
 <!--SIGNATURE-->
 <div id="footer">
-<em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?E.+Bonnet"> E. Bonnet</a>, <a href="http://consult.cern.ch/xwho/people?"></a>, <a href="http://consult.cern.ch/xwho/people?"></a> </em><em>&raquo; Created  by KVClassFactory on Tue Jan 20 11:52:49 2015</em><br />
-<em>&raquo; Last changed: Fri Jan 22 10:23:25 2016 </em><em>&raquo; Last generated: 2016-01-22 10:23</em><br />
+<em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?E.+Bonnet"> E. Bonnet</a> </em><em>&raquo; Created  by KVClassFactory on Tue Jan 20 11:52:49 2015</em><br />
+<em>&raquo; Last changed: Fri Feb  5 18:29:28 2016 </em><em>&raquo; Last generated: 2016-02-05 18:29</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

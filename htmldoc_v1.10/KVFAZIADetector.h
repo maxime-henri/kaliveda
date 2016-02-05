@@ -16,17 +16,22 @@ protected:
    Int_t fQuartet;
    Int_t fTelescope;
    Int_t fIdentifier;   //to difference SI1 SI2 CSI detectors
+   Int_t fIndex;   //!100*block+10*quartet+telescope
+   Bool_t fIsRutherford;   //!
 
-   Double_t fCharge;
+   Double_t fChannel;
+   Double_t fVolt;
 
 
    //values defined for SI1 detectors
+
    Double_t fAmplitudeQL1;
    Double_t fRawAmplitudeQL1;
    Double_t fBaseLineQL1;
    Double_t fSigmaBaseLineQL1;
    Double_t fRiseTimeQL1;
 
+   Double_t fFPGAEnergyQH1;   //from FPGA
    Double_t fAmplitudeQH1;
    Double_t fRawAmplitudeQH1;
    Double_t fBaseLineQH1;
@@ -39,6 +44,7 @@ protected:
    Double_t fSigmaBaseLineI1;
 
    //values defined for SI2 detectors
+   Double_t fFPGAEnergyQ2; //from FPGA
    Double_t fAmplitudeQ2;
    Double_t fRawAmplitudeQ2;
    Double_t fBaseLineQ2;
@@ -51,6 +57,8 @@ protected:
    Double_t fSigmaBaseLineI2;
 
    //values defined for CSI detectors
+   Double_t fFPGAEnergyQ3; //from FPGA
+   Double_t fFastFPGAEnergyQ3;   //from FPGA
    Double_t fAmplitudeQ3;
    Double_t fRawAmplitudeQ3;
    Double_t fFastAmplitudeQ3;
@@ -58,7 +66,9 @@ protected:
    Double_t fSigmaBaseLineQ3;
    Double_t fRiseTimeQ3;
 
-   KVFAZIACalibrator* fChargeToEnergy;//!To obtain energy
+   KVFAZIACalibrator* fChannelToEnergy;//!To obtain energy from charge
+   KVFAZIACalibrator* fChannelToVolt;//!To obtain volt from channel
+   KVFAZIACalibrator* fVoltToEnergy;//!To obtain energy from volt
 
    void init();   //initialisatino method called by the constructors
    Bool_t SetProperties();
@@ -68,7 +78,8 @@ public:
    enum {                       //determine identification of the detector
       kSI1,
       kSI2,
-      kCSI
+      kCSI,
+      kOTHER
    };
    KVFAZIADetector();
    KVFAZIADetector(const Char_t* type, const Float_t thick = 0.0);
@@ -82,6 +93,7 @@ public:
    virtual Bool_t Fired(Option_t* opt = "any");
    Double_t GetCalibratedEnergy();
    Double_t GetEnergy();
+   Double_t GetCalibratedVolt();
 
    void SetSignal(KVSignal* signal, const Char_t* type);
    Bool_t HasSignal() const;
@@ -99,6 +111,16 @@ public:
    {
       return fBlock;
    }
+   Int_t GetIndex() const
+   {
+      return fIndex;
+   }
+
+   Bool_t IsRutherford() const
+   {
+      return fIsRutherford;
+   }
+
    Int_t GetQuartetNumber() const
    {
       return fQuartet;
@@ -153,7 +175,7 @@ public:
    {
       fAmplitudeQH1 = value;
       if (fIdentifier == kSI1)
-         fCharge = value;
+         fChannel = value;
    }
    Double_t GetQH1Amplitude() const
    {
@@ -229,7 +251,7 @@ public:
    {
       fAmplitudeQ2 = value;
       if (fIdentifier == kSI2)
-         fCharge = value;
+         fChannel = value;
    }
    Double_t GetQ2Amplitude() const
    {
@@ -305,7 +327,7 @@ public:
    {
       fAmplitudeQ3 = value;
       if (fIdentifier == kCSI)
-         fCharge = value;
+         fChannel = value;
    }
    Double_t GetQ3Amplitude() const
    {
@@ -326,6 +348,10 @@ public:
    Double_t GetQ3FastAmplitude() const
    {
       return fFastAmplitudeQ3;
+   }
+   Double_t GetQ3SlowAmplitude() const
+   {
+      return GetQ3Amplitude() - 0.8 * GetQ3FastAmplitude();
    }
    void SetQ3BaseLine(Double_t value)
    {
@@ -350,6 +376,43 @@ public:
    Double_t GetQ3RiseTime() const
    {
       return fRiseTimeQ3;
+   }
+
+   //coming from FPGA
+   void SetQH1FPGAEnergy(Double_t value)
+   {
+      fFPGAEnergyQH1 = value;
+   }
+   Double_t GetQH1FPGAEnergy() const
+   {
+      return fFPGAEnergyQH1;
+   }
+
+   void SetQ2FPGAEnergy(Double_t value)
+   {
+      fFPGAEnergyQ2 = value;
+   }
+   Double_t GetQ2FPGAEnergy() const
+   {
+      return fFPGAEnergyQ2;
+   }
+
+   void SetQ3FPGAEnergy(Double_t value)
+   {
+      fFPGAEnergyQ3 = value;
+   }
+   Double_t GetQ3FPGAEnergy() const
+   {
+      return fFPGAEnergyQ3;
+   }
+
+   void SetQ3FastFPGAEnergy(Double_t value)
+   {
+      fFastFPGAEnergyQ3 = value;
+   }
+   Double_t GetQ3FastFPGAEnergy() const
+   {
+      return fFastFPGAEnergyQ3;
    }
 
 
