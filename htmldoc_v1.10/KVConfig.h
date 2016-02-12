@@ -16,6 +16,7 @@
 /* #undef CCIN2P3_XRD */
 #define WITH_MULTICORE_CPU 4
 #define WITH_BOOST
+/* #undef CCIN2P3_BUILD */
 
 // Info on C++ standard used to compile code
 #if __cplusplus > 199711L

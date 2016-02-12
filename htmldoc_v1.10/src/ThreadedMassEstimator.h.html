@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Feb  5 18:31:19 2016            -->
+<!--   Date: Fri Feb 12 15:53:29 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -19,105 +19,112 @@
 <body  onload="javascript:SetValuesFromCookie();">
 <img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
-<span class="comment">//Author: Peter C. Wigg</span>
-<span class="comment">//Created Wed 20 Jan 15:19:33  2016</span>
+<span class="comment">// Author: Peter C. Wigg</span>
+<span class="comment">// Created Wed 20 Jan 15:19:33  2016</span>
 
-<span class="comment">///</span>
-<span class="comment">/// @file <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>.h</span>
-<span class="comment">///</span>
-<span class="comment">/// @section Description</span>
-<span class="comment">///</span>
-<span class="comment">/// This class estimates the A value of a fragment detected in the</span>
-<span class="comment">/// Si:Isobutane:CsI detector stack, given the experimentally measured data</span>
-<span class="comment">/// (Z, Silicon Energy, CsI Light).</span>
-<span class="comment">///</span>
-<span class="comment">/// It achieves this by minimising the absolute magnitude of the difference</span>
-<span class="comment">/// between the experimentally measured silicon energy and the silicon energy</span>
-<span class="comment">/// simulated in a set of test nuclei (with fixed Z) to determine which nucleus</span>
-<span class="comment">/// (A value) provides the closest match.</span>
-<span class="comment">///</span>
-<span class="comment">/// @author Peter C. Wigg &lt;peter.wigg.314159@gmail.com&gt;</span>
-<span class="comment">/// @date Wed 20 Jan 15:19:33  2016</span>
-<span class="comment">///</span>
+<span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
+<span class="comment">//</span>
+<span class="comment">// <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>.h</span>
+<span class="comment">//</span>
+<span class="comment">// Description</span>
+<span class="comment">//</span>
+<span class="comment">// This class estimates the A value of a fragment detected in the</span>
+<span class="comment">// Si:Isobutane:CsI detector stack, given the experimentally measured data (Z,</span>
+<span class="comment">// Silicon Energy, CsI Light).</span>
+<span class="comment">//</span>
+<span class="comment">// It achieves this by minimising the absolute magnitude of the difference</span>
+<span class="comment">// between the experimentally measured silicon energy and the silicon energy</span>
+<span class="comment">// simulated in a set of test nuclei (with fixed Z) to determine which nucleus</span>
+<span class="comment">// (A value) provides the closest match.</span>
+<span class="comment">//</span>
+<span class="comment">// Peter C. Wigg &lt;peter.wigg.314159@gmail.com&gt;</span>
+<span class="comment">// Wed 20 Jan 15:19:33  2016</span>
+<span class="comment">//</span>
+<span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
 
 <span class="cpp">#ifndef __THREADED_MASS_ESTIMATOR__</span>
 <span class="cpp">#define __THREADED_MASS_ESTIMATOR__</span>
 
-<span class="comment">// C</span>
 <span class="cpp">#include &lt;cassert&gt;</span>
 
-<span class="comment">// CINT can't parse pthread.h</span>
 <span class="cpp">#ifndef __CINT__</span>
+<span class="comment">// CINT can't parse pthread.h</span>
 <span class="cpp">#include "pthread.h"</span>
 <span class="cpp">#else</span>
 <span class="keyword">struct</span> pthread_mutex_t;
 <span class="cpp">#endif</span>
 
-<span class="comment">// KaliVeda (VAMOS)</span>
 <span class="cpp">#include "<a href="../MEDetectorStack.h">MEDetectorStack.h</a>"</span>
 
-<span class="comment">/// @brief Mass estimator namespace (me) to prevent polluting the global</span>
-<span class="comment">/// namespace with our generic naming conventions.</span>
+<span class="comment">// Mass estimator namespace (me) to prevent polluting the global namespace with</span>
+<span class="comment">// our generic naming conventions.</span>
 <span class="keyword">namespace</span> me {
 
-<span class="comment">/// @brief Struct used for passing in the estimator inputs as a single</span>
-<span class="comment">/// argument.</span>
+   <span class="comment">// Struct used for passing in the estimator inputs as a single argument.</span>
    <span class="keyword">struct</span> EstimatorInput {
-      <a href="../ListOfTypes.html#Int_t">Int_t</a> z;            <span class="comment">///&lt; Measured Z value</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> si_energy; <span class="comment">///&lt; Measured silicon energy</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> csi_light; <span class="comment">///&lt; Measured caesium iodide light</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> z;            <span class="comment">// Measured Z value</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> si_energy; <span class="comment">// Measured silicon energy</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> csi_light; <span class="comment">// Measured caesium iodide light</span>
    };
 
-<span class="comment">/// @brief Struct used to store the thread status codes</span>
+   <span class="comment">// Struct used to store the thread status codes</span>
    <span class="keyword">struct</span> ThreadStatus {
-      <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> kThreadStop;     <span class="comment">///&lt; Stop processing this thread</span>
-      <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> kThreadContinue; <span class="comment">///&lt; Continue processing this thread</span>
+      <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> kThreadStop;     <span class="comment">// Stop processing this thread</span>
+      <span class="keyword">static</span> <span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> kThreadContinue; <span class="comment">// Continue processing this thread</span>
    };
 
-<span class="comment">/// @brief Struct used to pass in data to each thread</span>
-<span class="comment">///</span>
-<span class="comment">/// Having a local copy of the possible A values removes the need for high</span>
-<span class="comment">/// frequency thread locking (mutexes) as we need to access this vector every</span>
-<span class="comment">/// iteration of each thread. We also get a speed increase as the iterators can</span>
-<span class="comment">/// simply increment/decrement without jumping around  (as we iterate in</span>
-<span class="comment">/// different directions in each thread)</span>
+   <span class="comment">// Struct used to pass in data to each thread</span>
+   <span class="comment">//</span>
+   <span class="comment">// Having a local copy of the possible A values removes the need for high</span>
+   <span class="comment">// frequency thread locking (mutexes) as we need to access this vector every</span>
+   <span class="comment">// iteration of each thread. We also get a speed increase as the iterators can</span>
+   <span class="comment">// simply increment/decrement without jumping around  (as we iterate in</span>
+   <span class="comment">// different directions in each thread)</span>
+   <span class="comment">//</span>
+   <span class="comment">// Note: You must initialise the detector_stack pointer before thread execution!</span>
    <span class="keyword">struct</span> ThreadData {
 
-      <span class="comment">/// @brief A list of possible A values for the given Z value</span>
+<span class="cpp">#if __cplusplus &lt; 201103L</span>
+      <a href="../MEDetectorStack.html">MEDetectorStack</a>* detector_stack;
+<span class="cpp">#else</span>
+      std::unique_ptr&lt;<a href="../MEDetectorStack.html">MEDetectorStack</a>&gt; detector_stack;
+<span class="cpp">#endif</span>
+
+      <span class="comment">// A list of possible A values for the given Z value</span>
       std::vector&lt;<a href="../ListOfTypes.html#Int_t">Int_t</a>&gt; possible_a_values;
 
-      <span class="comment">/// @brief Specifies the iteration direction for the thread. Either</span>
-      <span class="comment">/// increasing or decreasing A values.</span>
+      <span class="comment">// Specifies the iteration direction for the thread. Either increasing or</span>
+      <span class="comment">// decreasing A values.</span>
       <a href="../ListOfTypes.html#Bool_t">Bool_t</a> kForwardIterator;
 
       <span class="comment">// Experimental data</span>
-      <a href="../ListOfTypes.html#Int_t">Int_t</a>    z_value_expt;   <span class="comment">///&lt; Measured Z value</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> si_energy_expt; <span class="comment">///&lt; Mesured silicon energy</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> csi_light_expt; <span class="comment">///&lt; Measured caesium iodide light</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    z_value_expt;   <span class="comment">// Measured Z value</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> si_energy_expt; <span class="comment">// Mesured silicon energy</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> csi_light_expt; <span class="comment">// Measured caesium iodide light</span>
 
       <span class="comment">// Thread Storage</span>
-      <a href="../ListOfTypes.html#Int_t">Int_t</a>    current_a;      <span class="comment">///&lt; Current estimate for A</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> current_delta;  <span class="comment">///&lt; Current value for delta</span>
-      <a href="../ListOfTypes.html#Int_t">Int_t</a>    minimum_a;      <span class="comment">///&lt; Best estimate for A</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> minimum_delta;  <span class="comment">///&lt; Best value for delta</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    current_a;      <span class="comment">// Current estimate for A</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> current_delta;  <span class="comment">// Current value for delta</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    minimum_a;      <span class="comment">// Best estimate for A</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> minimum_delta;  <span class="comment">// Best value for delta</span>
 
-      <span class="comment">/// @brief Struct used to store the results of simulations.</span>
-      <span class="comment">/// @see <a href="../MEDetectorStack.html">MEDetectorStack</a>::<a href="../MEDetectorStack.html#MEDetectorStack:Simulate" title="Bool_t MEDetectorStack::Simulate(const me::SimulationParameters *const parameters,me::SimulationResult *const result)">Simulate</a></span>
-      <span class="comment">/// @see me::SimulationResult</span>
+      <span class="comment">// Struct used to store the results of simulations.</span>
+      <span class="comment">// See <a href="../MEDetectorStack.html">MEDetectorStack</a>::<a href="../MEDetectorStack.html#MEDetectorStack:Simulate" title="Bool_t MEDetectorStack::Simulate(const me::SimulationParameters *const parameters,me::SimulationResult *const result)">Simulate</a></span>
+      <span class="comment">// See me::SimulationResult</span>
       <span class="keyword">struct</span> me::SimulationResult sim_result;
 
-      <a href="../ListOfTypes.html#UInt_t">UInt_t</a> counter;        <span class="comment">///&lt; Iteration counter</span>
-      <a href="../ListOfTypes.html#UInt_t">UInt_t</a> max_iterations; <span class="comment">///&lt; Maximum number of iterations allowed</span>
+      <a href="../ListOfTypes.html#UInt_t">UInt_t</a> counter;        <span class="comment">// Iteration counter</span>
+      <a href="../ListOfTypes.html#UInt_t">UInt_t</a> max_iterations; <span class="comment">// Maximum number of iterations allowed</span>
    };
 
-<span class="comment">/// @brief Struct used to store the results of the minimisation process.</span>
+   <span class="comment">// Struct used to store the results of the minimisation process.</span>
    <span class="keyword">struct</span> EstimatorResult {
-      <a href="../ListOfTypes.html#Int_t">Int_t</a>    z_value;          <span class="comment">///&lt; Z value</span>
-      <a href="../ListOfTypes.html#Int_t">Int_t</a>    a_value;          <span class="comment">///&lt; Best value determined for A</span>
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> delta;            <span class="comment">///&lt; Best value determined for delta</span>
-      <a href="../ListOfTypes.html#UInt_t">UInt_t</a>    forward_counter;  <span class="comment">///&lt; Forward thread iterations</span>
-      <a href="../ListOfTypes.html#UInt_t">UInt_t</a>    backward_counter; <span class="comment">///&lt; Backward thread iterations</span>
-      <a href="../ListOfTypes.html#Int_t">Int_t</a>    status;           <span class="comment">///&lt; Status flag to signify errors</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    z_value;           <span class="comment">// Z value</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    a_value;           <span class="comment">// Best value determined for A</span>
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> delta;             <span class="comment">// Best value determined for delta</span>
+      <a href="../ListOfTypes.html#UInt_t">UInt_t</a>    forward_counter;  <span class="comment">// Forward thread iterations</span>
+      <a href="../ListOfTypes.html#UInt_t">UInt_t</a>    backward_counter; <span class="comment">// Backward thread iterations</span>
+      <a href="../ListOfTypes.html#Int_t">Int_t</a>    status;            <span class="comment">// Status flag to signify errors</span>
    };
 
 } <span class="comment">// namespace me</span>
@@ -126,90 +133,86 @@
 
 <span class="keyword">public</span>:
 
-   <span class="comment">/// @brief Default constructor.</span>
+   <span class="comment">// Default constructor.</span>
 <a name="LGy2uB"></a>   <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>();
 
-   <span class="comment">/// @brief Default destructor.</span>
+   <span class="comment">// Destructor.</span>
    <span class="keyword">virtual</span> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:_ThreadedMassEstimator" title="void ThreadedMassEstimator::~ThreadedMassEstimator()">~ThreadedMassEstimator</a>();
 
-   <span class="comment">/// @brief Initialise the estimator.</span>
-   <span class="comment">/// @note To be called immediately post-construction.</span>
+   <span class="comment">// Initialise the estimator.</span>
+   <span class="comment">// Note: To be called immediately post-construction.</span>
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:Init" title="Bool_t ThreadedMassEstimator::Init()">Init</a>();
 
-   <span class="comment">/// @brief Public accessor used to evaluate the initialisation status.</span>
+   <span class="comment">// Public accessor used to evaluate the initialisation status.</span>
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:IsInitialised" title="Bool_t ThreadedMassEstimator::IsInitialised()">IsInitialised</a>() <span class="keyword">const</span>;
 
-   <span class="comment">/// @brief Set the identification telescope to imitate.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// Simply a pass-through function to call <a href="../MEDetectorStack.html">MEDetectorStack</a>::<a href="../MEDetectorStack.html#MEDetectorStack:SetIDTelescope" title="Bool_t MEDetectorStack::SetIDTelescope(const TString&amp; name)">SetIDTelescope</a></span>
-   <span class="comment">/// on the private detector stack.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @param name The ID telescope name as it is returned by</span>
-   <span class="comment">/// <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @note Not thread-safe (If using threads you need to wrap each call with</span>
-   <span class="comment">/// a mutex lock)</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @see <a href="../MEDetectorStack.html">MEDetectorStack</a>::<a href="../MEDetectorStack.html#MEDetectorStack:SetIDTelescope" title="Bool_t MEDetectorStack::SetIDTelescope(const TString&amp; name)">SetIDTelescope</a></span>
-   <span class="comment">///</span>
-   <span class="comment">/// @return Boolean status indicating whether or not the telescope has been</span>
-   <span class="comment">/// set correctly.</span>
+   <span class="comment">// Set the identification telescope to imitate.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Simply a pass-through function to call <a href="../MEDetectorStack.html">MEDetectorStack</a>::<a href="../MEDetectorStack.html#MEDetectorStack:SetIDTelescope" title="Bool_t MEDetectorStack::SetIDTelescope(const TString&amp; name)">SetIDTelescope</a></span>
+   <span class="comment">// on the private detector stack.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Parameter: name - The ID telescope name as it is returned by</span>
+   <span class="comment">// <a href="../KVIDTelescope.html">KVIDTelescope</a>::<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Note: Not thread-safe (If using threads you need to wrap each call with</span>
+   <span class="comment">// a mutex lock)</span>
+   <span class="comment">//</span>
+   <span class="comment">// See: <a href="../MEDetectorStack.html">MEDetectorStack</a>::<a href="../MEDetectorStack.html#MEDetectorStack:SetIDTelescope" title="Bool_t MEDetectorStack::SetIDTelescope(const TString&amp; name)">SetIDTelescope</a></span>
+   <span class="comment">//</span>
+   <span class="comment">// Return: Boolean status indicating whether or not the telescope has been</span>
+   <span class="comment">// set correctly.</span>
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:SetIDTelescope" title="Bool_t ThreadedMassEstimator::SetIDTelescope(const TString&amp; name)">SetIDTelescope</a>(<span class="keyword">const</span> TString&amp; name);
 
-   <span class="comment">/// @brief Populate a vector with all possible A values for a given Z.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// The only stipulation for a nucleus to be considered <span class="string">"possible"</span> is that</span>
-   <span class="comment">/// it has a positive lifetime when it is constructed by KaliVeda.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @param z_value Z value of the nucleus</span>
-   <span class="comment">/// @param results Vector in which to store the results (it will be cleared</span>
-   <span class="comment">/// and then grown as needed)</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @note Not thread-safe (If using threads you need to wrap each call with</span>
-   <span class="comment">/// a mutex lock)</span>
-   <span class="comment">///</span>
+   <span class="comment">// Populate a vector with all possible A values for a given Z.</span>
+   <span class="comment">//</span>
+   <span class="comment">// The only stipulation for a nucleus to be considered <span class="string">"possible"</span> is that</span>
+   <span class="comment">// it has a positive lifetime when it is constructed by KaliVeda.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Parameter: z_value - Z value of the nucleus</span>
+   <span class="comment">// Parameter: results - Vector in which to store the results (it will be</span>
+   <span class="comment">// cleared and then grown as needed)</span>
+   <span class="comment">//</span>
+   <span class="comment">// Note: Not thread-safe (If using threads you need to wrap each call with a</span>
+   <span class="comment">// mutex lock)</span>
+   <span class="comment">//</span>
    <span class="keyword">void</span> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:GetPossibleAValues" title="void ThreadedMassEstimator::GetPossibleAValues(const Int_t z_value,vector&lt;Int_t&gt;* results)">GetPossibleAValues</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> z_value, std::vector&lt;<a href="../ListOfTypes.html#Int_t">Int_t</a>&gt;* results);
 
-   <span class="comment">/// @brief Estimate the A value of a nucleus given Z, SIE and CSIL.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// This function calculates an estimate of the A value of a nucleus from</span>
-   <span class="comment">/// its Z, silicon energy, and caesium iodide light.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @param input Struct containing the input data required for the</span>
-   <span class="comment">/// estimator.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @param possible_a_values Vector of possible A values for the supplied Z</span>
-   <span class="comment">/// value.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @param result Struct into which we will write the results.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @see me::EstimatorInput</span>
-   <span class="comment">/// @see me::EstimatorResult</span>
-   <span class="comment">/// @see <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:GetPossibleAValues" title="void ThreadedMassEstimator::GetPossibleAValues(const Int_t z_value,vector&lt;Int_t&gt;* results)">GetPossibleAValues</a></span>
-   <span class="comment">///</span>
-   <span class="comment">/// @return Boolean value indicating success or failure of the estimation.</span>
-   <span class="comment">///</span>
+   <span class="comment">// Estimate the A value of a nucleus given Z, SIE and CSIL.</span>
+   <span class="comment">//</span>
+   <span class="comment">// This function calculates an estimate of the A value of a nucleus from</span>
+   <span class="comment">// its Z, silicon energy, and caesium iodide light.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Parameter: input - Struct containing the input data required for the</span>
+   <span class="comment">// estimator.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Parameter: possible_a_values - Vector of possible A values for the</span>
+   <span class="comment">// supplied Z value.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Parameter: result - Struct into which we will write the results.</span>
+   <span class="comment">//</span>
+   <span class="comment">// See me::EstimatorInput</span>
+   <span class="comment">// See me::EstimatorResult</span>
+   <span class="comment">// See <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:GetPossibleAValues" title="void ThreadedMassEstimator::GetPossibleAValues(const Int_t z_value,vector&lt;Int_t&gt;* results)">GetPossibleAValues</a></span>
+   <span class="comment">//</span>
+   <span class="comment">// Return: Boolean value indicating success or failure of the estimation.</span>
+   <span class="comment">//</span>
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:EstimateA" title="Bool_t ThreadedMassEstimator::EstimateA(const me::EstimatorInput *const input,const vector&lt;Int_t&gt; *const possible_a_values,me::EstimatorResult *const result)">EstimateA</a>(
       <span class="keyword">const</span> <span class="keyword">struct</span> me::EstimatorInput* <span class="keyword">const</span> input,
       <span class="keyword">const</span> std::vector&lt;<a href="../ListOfTypes.html#Int_t">Int_t</a>&gt;* <span class="keyword">const</span> possible_a_values,
       <span class="keyword">struct</span> me::EstimatorResult* <span class="keyword">const</span> result
    );
 
-   <span class="comment">/// @brief Public accessor to retrieve the load balance value</span>
-   <a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:get_load_balance" title="Float_t ThreadedMassEstimator::get_load_balance()">get_load_balance</a>() <span class="keyword">const</span>;
+   <span class="keyword">void</span> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:SetLoadBalance" title="void ThreadedMassEstimator::SetLoadBalance(Float_t load_balance)">SetLoadBalance</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> load_balance);
+   <span class="keyword">void</span> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:SetMaximumIterations" title="void ThreadedMassEstimator::SetMaximumIterations(UInt_t iterations)">SetMaximumIterations</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> iterations);
 
-   <span class="comment">/// @brief Set the load balance value</span>
-   <span class="keyword">void</span> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:set_load_balance" title="void ThreadedMassEstimator::set_load_balance(Float_t load_balance)">set_load_balance</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> load_balance);
+   <a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:GetLoadBalance" title="Float_t ThreadedMassEstimator::GetLoadBalance()">GetLoadBalance</a>() <span class="keyword">const</span>;
+   <a href="../ListOfTypes.html#UInt_t">UInt_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:GetMaximumIterations" title="UInt_t ThreadedMassEstimator::GetMaximumIterations()">GetMaximumIterations</a>() <span class="keyword">const</span>;
 
-   <span class="comment">/// @brief Set the maximum number of iterations per thread</span>
-   <span class="keyword">void</span> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:set_max_iterations" title="void ThreadedMassEstimator::set_max_iterations(UInt_t iterations)">set_max_iterations</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> iterations);
-
-   <span class="comment">/// @brief Enum containing the minimisation status codes.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// Negative values indicate error states, positive values provide</span>
-   <span class="comment">/// information, and 0 should never occur (used as an initialisation value).</span>
+   <span class="comment">// Enum containing the minimisation status codes.</span>
+   <span class="comment">//</span>
+   <span class="comment">// Negative values indicate error states, positive values provide</span>
+   <span class="comment">// information, and 0 should never occur (used as an initialisation value).</span>
    <span class="keyword">enum</span> ResultStatus {
-      <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:kCalibrationRangeError" title="const ThreadedMassEstimator::ResultStatus ThreadedMassEstimator::kCalibrationRangeError">kCalibrationRangeError</a>  = -2,
       <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:kNoResultFound" title="const ThreadedMassEstimator::ResultStatus ThreadedMassEstimator::kNoResultFound">kNoResultFound</a>          = -1,
       <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:kEqualDeltas" title="const ThreadedMassEstimator::ResultStatus ThreadedMassEstimator::kEqualDeltas">kEqualDeltas</a>            =  1,
       <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:kThreadOneResult" title="const ThreadedMassEstimator::ResultStatus ThreadedMassEstimator::kThreadOneResult">kThreadOneResult</a>        =  2,
@@ -218,52 +221,49 @@
 
 <span class="keyword">private</span>:
 
-   <span class="comment">/// @brief Si-Isobutane-CsI detector stack used to simulate particle</span>
-   <span class="comment">/// passage.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @see <a href="../MEDetectorStack.html">MEDetectorStack</a></span>
-<span class="cpp">#if __cplusplus &lt; 201103L</span>
-   <span class="keyword">static</span> <a href="../MEDetectorStack.html">MEDetectorStack</a>* <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:medetector_stack_" title="MEDetectorStack* ThreadedMassEstimator::medetector_stack_">medetector_stack_</a>;
-<span class="cpp">#else</span>
-   <span class="keyword">static</span> std::unique_ptr&lt;<a href="../MEDetectorStack.html">MEDetectorStack</a>&gt; <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:medetector_stack_" title="MEDetectorStack* ThreadedMassEstimator::medetector_stack_">medetector_stack_</a>;
-<span class="cpp">#endif</span>
 
-   <span class="comment">/// @brief Mutex used for locking the console (stdout)</span>
+   <span class="comment">// Mutex used for locking the console (stdout)</span>
    <span class="keyword">static</span> pthread_mutex_t <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:io_mutex_" title="pthread_mutex_t ThreadedMassEstimator::io_mutex_">io_mutex_</a>;
-   <span class="comment">/// @brief Mutex used for locking the detector stack.</span>
-   <span class="keyword">static</span> pthread_mutex_t <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:medetector_mutex_" title="pthread_mutex_t ThreadedMassEstimator::medetector_mutex_">medetector_mutex_</a>;
 
-   <span class="comment">/// @brief Thread execution function (Called when each thread is run)</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @param data Thread input data</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @see me::ThreadData</span>
+   <span class="comment">// Thread execution function (Called when each thread is run)</span>
+   <span class="comment">//</span>
+   <span class="comment">// Parameter: data - Thread input data</span>
+   <span class="comment">//</span>
+   <span class="comment">// See me::ThreadData</span>
    <span class="keyword">static</span> <span class="keyword">void</span>* <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:ThreadExec" title="void* ThreadedMassEstimator::ThreadExec(void* data)">ThreadExec</a>(<span class="keyword">void</span>* data);
 
-   <span class="comment">/// @brief Thread Processing Method (Called from <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:ThreadExec" title="void* ThreadedMassEstimator::ThreadExec(void* data)">ThreadExec</a>).</span>
-   <span class="comment">///</span>
-   <span class="comment">/// This function takes care of calculating the delta values and determining</span>
-   <span class="comment">/// the state of the minimisation for each thread.  The return value</span>
-   <span class="comment">/// determines whether the current thread will stop or continue processing.</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @see me::ThreadStatus</span>
-   <span class="comment">///</span>
-   <span class="comment">/// @return Status code used to continue or halt processing in the current</span>
-   <span class="comment">/// thread</span>
+   <span class="comment">// Thread Processing Method (Called from <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:ThreadExec" title="void* ThreadedMassEstimator::ThreadExec(void* data)">ThreadExec</a>).</span>
+   <span class="comment">//</span>
+   <span class="comment">// This function takes care of calculating the delta values and determining</span>
+   <span class="comment">// the state of the minimisation for each thread.  The return value</span>
+   <span class="comment">// determines whether the current thread will stop or continue processing.</span>
+   <span class="comment">//</span>
+   <span class="comment">// See me::ThreadStatus</span>
+   <span class="comment">//</span>
+   <span class="comment">// Return: Status code used to continue or halt processing in the current</span>
+   <span class="comment">// thread</span>
    <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:ThreadProcess" title="Int_t ThreadedMassEstimator::ThreadProcess(me::ThreadData *const data,const me::SimulationParameters *const parameters)">ThreadProcess</a>(
       <span class="keyword">struct</span> me::ThreadData* <span class="keyword">const</span> data,
       <span class="keyword">const</span> <span class="keyword">struct</span> me::SimulationParameters* <span class="keyword">const</span> parameters
    );
 
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:kInitialised_" title="Bool_t ThreadedMassEstimator::kInitialised_">kInitialised_</a>;  <span class="comment">///&lt; Initialisation status</span>
-   <a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:load_balance_" title="Float_t ThreadedMassEstimator::load_balance_">load_balance_</a>; <span class="comment">///&lt; Load balance factor</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:max_iterations_" title="Int_t ThreadedMassEstimator::max_iterations_">max_iterations_</a>; <span class="comment">///&lt; Maximum number of iterations allowed per thread</span>
+   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:kInitialised_" title="Bool_t ThreadedMassEstimator::kInitialised_">kInitialised_</a>;  <span class="comment">// Initialisation status</span>
+   <a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:load_balance_" title="Float_t ThreadedMassEstimator::load_balance_">load_balance_</a>; <span class="comment">// Load balance factor</span>
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:max_iterations_" title="Int_t ThreadedMassEstimator::max_iterations_">max_iterations_</a>; <span class="comment">// Maximum number of iterations allowed per thread</span>
 
-   <span class="comment">/// @brief Copy constructor (Declared private to prevent copying as it is</span>
-   <span class="comment">/// not worth implementing yet).</span>
+<span class="cpp">#if __cplusplus &lt; 201103L</span>
+   <span class="keyword">struct</span> me::ThreadData* <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:thread_data_" title="me::ThreadData* ThreadedMassEstimator::thread_data_">thread_data_</a>;
+   <a href="../MEDetectorStack.html">MEDetectorStack</a>* <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:detector_stack_" title="MEDetectorStack* ThreadedMassEstimator::detector_stack_">detector_stack_</a>; <span class="comment">// Stack used for initial calculation only!</span>
+<span class="cpp">#else</span>
+   std::unique_ptr&lt;<span class="keyword">struct</span> me::ThreadData[]&gt; <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:thread_data_" title="me::ThreadData* ThreadedMassEstimator::thread_data_">thread_data_</a>;
+   std::unique_ptr&lt;<a href="../MEDetectorStack.html">MEDetectorStack</a>&gt; <a href="../ThreadedMassEstimator.html#ThreadedMassEstimator:detector_stack_" title="MEDetectorStack* ThreadedMassEstimator::detector_stack_">detector_stack_</a>;
+<span class="cpp">#endif</span>
+
+   <span class="comment">// Copy constructor (Declared private to prevent copying as it is not worth</span>
+   <span class="comment">// implementing yet).</span>
    <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>(<span class="keyword">const</span> <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>&amp;);
-   <span class="comment">/// @brief Assignment operator (Declared private to prevent copying as it is</span>
-   <span class="comment">/// not worth implementing yet).</span>
+   <span class="comment">// Assignment operator (Declared private to prevent copying as it is not</span>
+   <span class="comment">// worth implementing yet).</span>
 <a name="zCapvB"></a>   <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>&amp;);
 
    ClassDef(<a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a>, 1); <span class="comment">// <a href="../ThreadedMassEstimator.html">ThreadedMassEstimator</a></span>
@@ -280,7 +280,7 @@
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-02-05 18:31 </em><em>&raquo; Last generated: 2016-02-05 18:31</em><br />
+<em>&raquo; Last changed: 2016-02-12 15:53 </em><em>&raquo; Last generated: 2016-02-12 15:53</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -6,16 +6,16 @@
 #define KV_ROOT "/home/john/software/build/kaliveda/1.10_root-v5-34-00"
 
 /* String with version information */
-#define KV_VERSION "1.10/07"
+#define KV_VERSION "1.10/08"
 #define KV_MAJOR_VERSION 1
 #define KV_MINOR_VERSION 10
-#define KV_PATCH_VERSION 07
+#define KV_PATCH_VERSION 08
 
 /* Date when project was built */
-#define KV_BUILD_DATE "2016-02-05"
+#define KV_BUILD_DATE "2016-02-12"
 
 /* Time when project was built */
-#define KV_BUILD_TIME "18:24:09"
+#define KV_BUILD_TIME "15:46:03"
 
 /* Username of person who performed the build */
 #define KV_BUILD_USER "john"
@@ -24,7 +24,7 @@
 #define KV_SOURCE_DIR "/home/john/software/sources/kaliveda.git"
 
 /* Directory used for the build */
-#define KV_BUILD_DIR "/home/john/software/build/kaliveda-build/1.10_R5"
+#define KV_BUILD_DIR "/home/john/software/build/kaliveda-build/1.10_root-v5-34-00"
 
 /* CMake build type (Release, Debug, RelWithDebInfo, ...) */
 #define KV_BUILD_TYPE "RelWithDebInfo"
