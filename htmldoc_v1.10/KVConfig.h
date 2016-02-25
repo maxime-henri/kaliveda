@@ -5,13 +5,13 @@
 // depending on available external software
 #define WITH_GIT_INFOS
 /* #undef WITH_BZR_INFOS */
-#define WITH_GNU_INSTALL
+/* #undef WITH_GNU_INSTALL */
 /* #undef WITH_RANGE_YANEZ */
 /* #undef WITH_MODIFIED_RANGE_YANEZ */
-#define WITH_GEMINI
+/* #undef WITH_GEMINI */
 #define WITH_OPENGL
 /* #undef WITH_GRULIB */
-#define WITH_FITLTG
+/* #undef WITH_FITLTG */
 #define WITH_BUILTIN_GRU
 /* #undef CCIN2P3_XRD */
 #define WITH_MULTICORE_CPU 4

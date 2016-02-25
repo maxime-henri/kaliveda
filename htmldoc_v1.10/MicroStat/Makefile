@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/john/software/sources/kaliveda.git
+CMAKE_SOURCE_DIR = /home/bonnet/softwares/kaliveda
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/john/software/build/kaliveda-build/1.10_root-v5-34-00
+CMAKE_BINARY_DIR = /home/bonnet/compil/kv
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -63,7 +63,7 @@ install/strip/fast: install/strip
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -113,14 +113,14 @@ install/local/fast: install/local
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_root-v5-34-00/CMakeFiles /home/john/software/build/kaliveda-build/1.10_root-v5-34-00/MicroStat/CMakeFiles/progress.marks
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/john/software/build/kaliveda-build/1.10_root-v5-34-00/CMakeFiles 0
+	cd /home/bonnet/compil/kv && $(CMAKE_COMMAND) -E cmake_progress_start /home/bonnet/compil/kv/CMakeFiles /home/bonnet/compil/kv/MicroStat/CMakeFiles/progress.marks
+	cd /home/bonnet/compil/kv && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bonnet/compil/kv/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/clean
+	cd /home/bonnet/compil/kv && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/clean
 .PHONY : clean
 
 # The main clean target
@@ -129,22 +129,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/preinstall
+	cd /home/bonnet/compil/kv && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/preinstall
+	cd /home/bonnet/compil/kv && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/bonnet/compil/kv && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/rule
+	cd /home/bonnet/compil/kv && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/rule
 .PHONY : MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/rule
 
 # Convenience name for target.
@@ -153,12 +153,12 @@ MicroStatMicroStat_example: MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/
 
 # fast build rule for target.
 MicroStatMicroStat_example/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build
 .PHONY : MicroStatMicroStat_example/fast
 
 # Convenience name for target.
 MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/rule:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/rule
+	cd /home/bonnet/compil/kv && $(MAKE) -f CMakeFiles/Makefile2 MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/rule
 .PHONY : MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/rule
 
 # Convenience name for target.
@@ -167,7 +167,7 @@ MicroStatMicroStat_example2: MicroStat/CMakeFiles/MicroStatMicroStat_example2.di
 
 # fast build rule for target.
 MicroStatMicroStat_example2/fast:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build
 .PHONY : MicroStatMicroStat_example2/fast
 
 examples/MicroStat_example.o: examples/MicroStat_example.C.o
@@ -175,7 +175,7 @@ examples/MicroStat_example.o: examples/MicroStat_example.C.o
 
 # target to build an object file
 examples/MicroStat_example.C.o:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/examples/MicroStat_example.C.o
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/examples/MicroStat_example.C.o
 .PHONY : examples/MicroStat_example.C.o
 
 examples/MicroStat_example.i: examples/MicroStat_example.C.i
@@ -183,7 +183,7 @@ examples/MicroStat_example.i: examples/MicroStat_example.C.i
 
 # target to preprocess a source file
 examples/MicroStat_example.C.i:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/examples/MicroStat_example.C.i
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/examples/MicroStat_example.C.i
 .PHONY : examples/MicroStat_example.C.i
 
 examples/MicroStat_example.s: examples/MicroStat_example.C.s
@@ -191,7 +191,7 @@ examples/MicroStat_example.s: examples/MicroStat_example.C.s
 
 # target to generate assembly for a file
 examples/MicroStat_example.C.s:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/examples/MicroStat_example.C.s
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example.dir/examples/MicroStat_example.C.s
 .PHONY : examples/MicroStat_example.C.s
 
 examples/MicroStat_example2.o: examples/MicroStat_example2.C.o
@@ -199,7 +199,7 @@ examples/MicroStat_example2.o: examples/MicroStat_example2.C.o
 
 # target to build an object file
 examples/MicroStat_example2.C.o:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/examples/MicroStat_example2.C.o
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/examples/MicroStat_example2.C.o
 .PHONY : examples/MicroStat_example2.C.o
 
 examples/MicroStat_example2.i: examples/MicroStat_example2.C.i
@@ -207,7 +207,7 @@ examples/MicroStat_example2.i: examples/MicroStat_example2.C.i
 
 # target to preprocess a source file
 examples/MicroStat_example2.C.i:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/examples/MicroStat_example2.C.i
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/examples/MicroStat_example2.C.i
 .PHONY : examples/MicroStat_example2.C.i
 
 examples/MicroStat_example2.s: examples/MicroStat_example2.C.s
@@ -215,7 +215,7 @@ examples/MicroStat_example2.s: examples/MicroStat_example2.C.s
 
 # target to generate assembly for a file
 examples/MicroStat_example2.C.s:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/examples/MicroStat_example2.C.s
+	cd /home/bonnet/compil/kv && $(MAKE) -f MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/build.make MicroStat/CMakeFiles/MicroStatMicroStat_example2.dir/examples/MicroStat_example2.C.s
 .PHONY : examples/MicroStat_example2.C.s
 
 # Help Target
@@ -249,6 +249,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/john/software/build/kaliveda-build/1.10_root-v5-34-00 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/bonnet/compil/kv && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

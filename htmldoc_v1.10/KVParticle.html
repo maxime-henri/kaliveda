@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Feb 12 15:52:37 2016            -->
+<!--   Date: Thu Feb 25 11:59:00 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -232,6 +232,7 @@ or with the usual 'Set' methods:
 <tr class="func"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#KVParticle:GetVelocity">GetVelocity</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:GetVpar">GetVpar</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:GetVperp">GetVperp</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:GetWaveLength">GetWaveLength</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:GetXYZT"><span class="baseclass">TLorentzVector::</span>GetXYZT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* carray) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:GetXYZT@1"><span class="baseclass">TLorentzVector::</span>GetXYZT</a>(<a href="./ListOfTypes.html#Float_t">Float_t</a>* carray) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
@@ -524,12 +525,11 @@ a velocity in the positive z-direction
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:Copy" href="src/KVParticle.cxx.html#dAUqFE">Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; ) const</span><br />
-<div class="funccomm"><pre><a href="./KVParticle.html#KVParticle:Copy" title="void KVParticle::Copy(TObject&amp; )">Copy</a> this to obj
-l'operateur d assignation est celui du <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>
-avec un rajout pour le champs <a href="./KVParticle.html#KVParticle:fE0" title="TVector3* KVParticle::fE0">fE0</a>
-La <a href="./KVList.html">KVList</a> des <a href="./KVParticle.html">KVParticle</a> deduite de la methode <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>
-n est pas copiee
-<a href="./#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Copy"</span>,<span class="string">"je rentre"</span>);
+<div class="funccomm"><pre> <a href="./KVParticle.html#KVParticle:Copy" title="void KVParticle::Copy(TObject&amp; )">Copy</a> this to obj
+ Particle kinematics are copied using operator=(const <a href="./KVParticle.html">KVParticle</a>&amp;)
+ List of particle's groups is copied
+ The particle's name is copied
+ The list of parameters associated with the particle is copied
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:Clear" href="src/KVParticle.cxx.html#Pe254C">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
@@ -827,6 +827,8 @@ sign is +ve if py&gt;=0, -ve if py&lt;0
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetE" href="src/KVParticle.h.html#RRSitE">GetE</a>() const</span><br />
 </div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetWaveLength" href="src/KVParticle.h.html#Ks8HH">GetWaveLength</a>() const</span><br />
+</div>
 <div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVParticle:GetV" href="src/KVParticle.h.html#HoXlQC">GetV</a>() const</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetVpar" href="src/KVParticle.h.html#i5stdE">GetVpar</a>() const</span><br />
@@ -862,7 +864,7 @@ sign is +ve if py&gt;=0, -ve if py&lt;0
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Feb 12 15:52:38 2016 </em><em>&raquo; Last generated: 2016-02-12 15:52</em><br />
+<em>&raquo; Last changed: Thu Feb 25 11:59:00 2016 </em><em>&raquo; Last generated: 2016-02-25 11:59</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

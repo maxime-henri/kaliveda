@@ -1,8 +1,8 @@
-# Install script for directory: /home/john/software/sources/kaliveda.git/MicroStat/weights
+# Install script for directory: /home/bonnet/softwares/kaliveda/MicroStat/weights
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/john/software/build/kaliveda/1.10_root-v5-34-00")
+  set(CMAKE_INSTALL_PREFIX "/home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,7 +33,7 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "libraries")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "/home/john/software/build/kaliveda-build/1.10_root-v5-34-00/lib/libMicroStatweights.rootmap")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "/home/bonnet/compil/kv/lib/libMicroStatweights.rootmap")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "libraries")
@@ -50,9 +50,9 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "librari
     endif()
   endforeach()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES
-    "/home/john/software/build/kaliveda-build/1.10_root-v5-34-00/lib/libMicroStatweights.so.1.10.08"
-    "/home/john/software/build/kaliveda-build/1.10_root-v5-34-00/lib/libMicroStatweights.so.1"
-    "/home/john/software/build/kaliveda-build/1.10_root-v5-34-00/lib/libMicroStatweights.so"
+    "/home/bonnet/compil/kv/lib/libMicroStatweights.so.1.10.08"
+    "/home/bonnet/compil/kv/lib/libMicroStatweights.so.1"
+    "/home/bonnet/compil/kv/lib/libMicroStatweights.so"
     )
   foreach(file
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libMicroStatweights.so.1.10.08"
@@ -71,10 +71,10 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "librari
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "dev")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/kaliveda" TYPE FILE FILES
-    "/home/john/software/sources/kaliveda.git/MicroStat/weights/mcweight.h"
-    "/home/john/software/sources/kaliveda.git/MicroStat/weights/StatWeight.h"
-    "/home/john/software/sources/kaliveda.git/MicroStat/weights/mdweight.h"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
+    "/home/bonnet/softwares/kaliveda/MicroStat/weights/mdweight.h"
+    "/home/bonnet/softwares/kaliveda/MicroStat/weights/StatWeight.h"
+    "/home/bonnet/softwares/kaliveda/MicroStat/weights/mcweight.h"
     )
 endif()
 
