@@ -11,7 +11,7 @@
 /* #undef WITH_GEMINI */
 #define WITH_OPENGL
 /* #undef WITH_GRULIB */
-/* #undef WITH_FITLTG */
+#define WITH_FITLTG
 #define WITH_BUILTIN_GRU
 /* #undef CCIN2P3_XRD */
 #define WITH_MULTICORE_CPU 4

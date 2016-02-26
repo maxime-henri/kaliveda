@@ -12,10 +12,10 @@
 #define KV_PATCH_VERSION 08
 
 /* Date when project was built */
-#define KV_BUILD_DATE "2016-02-25"
+#define KV_BUILD_DATE "2016-02-26"
 
 /* Time when project was built */
-#define KV_BUILD_TIME "11:18:07"
+#define KV_BUILD_TIME "15:16:42"
 
 /* Username of person who performed the build */
 #define KV_BUILD_USER "bonnet"

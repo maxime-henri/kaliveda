@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Feb 25 11:58:49 2016            -->
+<!--   Date: Fri Feb 26 17:05:12 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -66,10 +66,10 @@ ClassImp(<a href="../KVIVUpDater.html">KVIVUpDater</a>)
 
 <a name="HDy9BE"></a><span class="keyword">void</span> <a href="../KVIVUpDater.html">KVIVUpDater</a>::<a href="../KVIVUpDater.html#KVIVUpDater:SetIDGrids" title="void KVIVUpDater::SetIDGrids(UInt_t )">SetIDGrids</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> run)
 {
-   <span class="comment">// Set identification grid or identification function (KVTGID)</span>
+   <span class="comment">// Set identification grid or identification function (<a href="../KVTGID.html">KVTGID</a>)</span>
    <span class="comment">// for all ID telescopes for this run.</span>
    <span class="comment">// The global ID grid manager <a href="../KVIDGridManager.html">gIDGridManager</a> is used to set the</span>
-   <span class="comment">// grids. The static function KVRTGIDManager::SetIDFuncInTelescopes</span>
+   <span class="comment">// grids. The static function <a href="../KVRTGIDManager.html">KVRTGIDManager</a>::<a href="../KVRTGIDManager.html#KVRTGIDManager:SetIDFuncInTelescopes" title="void KVRTGIDManager::SetIDFuncInTelescopes(UInt_t run)">SetIDFuncInTelescopes</a></span>
    <span class="comment">//  is used to set the ID functions. First, any previously set grids/functions are removed.</span>
    <span class="comment">// Then all grids/functions for current run are set in the associated ID telescopes.</span>
 
@@ -78,14 +78,14 @@ ClassImp(<a href="../KVIVUpDater.html">KVIVUpDater</a>)
 
    <a href="../KVIDTelescope.html">KVIDTelescope</a>*  idt    = NULL;
 <span class="cpp">#ifdef WITH_FITLTG</span>
-   KVRTGIDManager* rtgidm = NULL;
+   <a href="../KVRTGIDManager.html">KVRTGIDManager</a>* rtgidm = NULL;
 <span class="cpp">#endif</span>
 
    <span class="keyword">while</span> ((idt = (<a href="../KVIDTelescope.html">KVIDTelescope</a>*) next_idt())) {
       idt-&gt;RemoveGrids();
 <span class="cpp">#ifdef WITH_FITLTG</span>
       <span class="keyword">if</span> (idt-&gt;InheritsFrom(<span class="string">"KVRTGIDManager"</span>)) {
-         rtgidm = (KVRTGIDManager*)idt-&gt;<a href="../KVIVUpDater.html#KVIVUpDater:IsA" title="TClass* KVIVUpDater::IsA()">IsA</a>()-&gt;DynamicCast(KVRTGIDManager::<a href="../KVIVUpDater.html#KVIVUpDater:Class" title="TClass* KVIVUpDater::Class()">Class</a>(), idt);
+         rtgidm = (<a href="../KVRTGIDManager.html">KVRTGIDManager</a>*)idt-&gt;<a href="../KVIVUpDater.html#KVIVUpDater:IsA" title="TClass* KVIVUpDater::IsA()">IsA</a>()-&gt;DynamicCast(<a href="../KVRTGIDManager.html">KVRTGIDManager</a>::<a href="../KVRTGIDManager.html#KVRTGIDManager:Class" title="TClass* KVRTGIDManager::Class()">Class</a>(), idt);
          rtgidm-&gt;RemoveAllTGID();
       }
 <span class="cpp">#endif</span>
@@ -93,7 +93,7 @@ ClassImp(<a href="../KVIVUpDater.html">KVIVUpDater</a>)
    }
    <a href="../KVMultiDetArray.html">gMultiDetArray</a>-><a href="../KVMultiDetArray.html#KVMultiDetArray:SetGridsInTelescopes" title="void KVMultiDetArray::SetGridsInTelescopes(UInt_t run)">SetGridsInTelescopes</a>(run);
 <span class="cpp">#ifdef WITH_FITLTG</span>
-   KVRTGIDManager::SetIDFuncInTelescopes(run);
+   <a href="../KVRTGIDManager.html">KVRTGIDManager</a>::<a href="../KVRTGIDManager.html#KVRTGIDManager:SetIDFuncInTelescopes" title="void KVRTGIDManager::SetIDFuncInTelescopes(UInt_t run)">SetIDFuncInTelescopes</a>(run);
 <span class="cpp">#endif</span>
 }
 <span class="comment">//________________________________________________________________</span>
@@ -456,7 +456,7 @@ ClassImp(<a href="../KVIVUpDater.html">KVIVUpDater</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-02-25 11:58 </em><em>&raquo; Last generated: 2016-02-25 11:58</em><br />
+<em>&raquo; Last changed: 2016-02-26 17:05 </em><em>&raquo; Last generated: 2016-02-26 17:05</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
