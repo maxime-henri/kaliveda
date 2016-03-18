@@ -1,8 +1,8 @@
-# Install script for directory: /home/bonnet/softwares/kaliveda/MicroStat
+# Install script for directory: /home/john/software/sources/kaliveda.git/MicroStat
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34")
+  set(CMAKE_INSTALL_PREFIX "/home/john/software/build/kaliveda/1.10_root-v5-34-00")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,13 +33,13 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/./examples/MicroStat" TYPE DIRECTORY FILES "/home/bonnet/softwares/kaliveda/MicroStat/examples/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/doc/kaliveda/examples/MicroStat" TYPE DIRECTORY FILES "/home/john/software/sources/kaliveda.git/MicroStat/examples/")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/bonnet/compil/kv/MicroStat/montecarlo/cmake_install.cmake")
-  include("/home/bonnet/compil/kv/MicroStat/weights/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_root-v5-34-00/MicroStat/weights/cmake_install.cmake")
+  include("/home/john/software/build/kaliveda-build/1.10_root-v5-34-00/MicroStat/montecarlo/cmake_install.cmake")
 
 endif()
 

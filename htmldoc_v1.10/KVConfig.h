@@ -5,10 +5,10 @@
 // depending on available external software
 #define WITH_GIT_INFOS
 /* #undef WITH_BZR_INFOS */
-/* #undef WITH_GNU_INSTALL */
+#define WITH_GNU_INSTALL
 /* #undef WITH_RANGE_YANEZ */
 /* #undef WITH_MODIFIED_RANGE_YANEZ */
-/* #undef WITH_GEMINI */
+#define WITH_GEMINI
 #define WITH_OPENGL
 /* #undef WITH_GRULIB */
 #define WITH_FITLTG
@@ -28,6 +28,13 @@
 #endif
 #endif
 #endif
+
+// allow use of unique_ptr with C++98
+#include <memory>
+#ifndef WITH_CPP11
+#define unique_ptr auto_ptr
+#endif
+using std::unique_ptr;
 
 //-----------------------------------ROOT-version dependent compiler flags
 //-----------------------------------to handle backwards compatibility

@@ -3,52 +3,52 @@
 */
 
 /* Root directory of installation */
-#define KV_ROOT "/home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34"
+#define KV_ROOT "/home/john/software/build/kaliveda/1.10_root-v5-34-00"
 
 /* String with version information */
-#define KV_VERSION "1.10/08"
+#define KV_VERSION "1.10/09"
 #define KV_MAJOR_VERSION 1
 #define KV_MINOR_VERSION 10
-#define KV_PATCH_VERSION 08
+#define KV_PATCH_VERSION 09
 
 /* Date when project was built */
-#define KV_BUILD_DATE "2016-02-26"
+#define KV_BUILD_DATE "2016-03-18"
 
 /* Time when project was built */
-#define KV_BUILD_TIME "15:16:42"
+#define KV_BUILD_TIME "16:34:23"
 
 /* Username of person who performed the build */
-#define KV_BUILD_USER "bonnet"
+#define KV_BUILD_USER "john"
 
 /* Directory containing the sources for the build */
-#define KV_SOURCE_DIR "/home/bonnet/softwares/kaliveda"
+#define KV_SOURCE_DIR "/home/john/software/sources/kaliveda.git"
 
 /* Directory used for the build */
-#define KV_BUILD_DIR "/home/bonnet/compil/kv"
+#define KV_BUILD_DIR "/home/john/software/build/kaliveda-build/1.10_root-v5-34-00"
 
 /* CMake build type (Release, Debug, RelWithDebInfo, ...) */
 #define KV_BUILD_TYPE "RelWithDebInfo"
 
 /* String with ROOT version information */
-#define KV_ROOT_VERSION "5.34/34"
+#define KV_ROOT_VERSION "5.34/35"
 
 /* Directory with class templates */
-#define TEMPLATEDIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/KVFiles
+#define TEMPLATEDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda/templates
 
 /* Directory with configuration files */
-#define ETCDIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/etc
+#define ETCDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda/etc
 
 /* Directory with data files used by classes */
-#define DATADIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/KVFiles
+#define DATADIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda
 
 /* Directory containing class libraries */
-#define LIBDIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/lib
+#define LIBDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/lib
 
 /* Directory containing header files */
-#define INCDIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/include
+#define INCDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/include/kaliveda
 
 /* Directory containing executables */
-#define BINDIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/bin
+#define BINDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/bin
 
 /* Directory containing dataset files */
-#define DATASETDIR /home/bonnet/execs/.kvroot-1.10_gcc-5.2.1_x86_64_root-5.34/KVFiles
+#define DATASETDIR /home/john/software/build/kaliveda/1.10_root-v5-34-00/share/kaliveda

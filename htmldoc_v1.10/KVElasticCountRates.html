@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Feb 26 17:04:20 2016            -->
+<!--   Date: Fri Mar 18 17:36:45 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/08</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/09</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/08</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/09</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_EXP_EVENTS_Index.html">EXP_EVENTS</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVElasticCountRates</a>
@@ -125,19 +125,15 @@ with the energy of the excited state of the target after scattering.
 <pre>ecr.CaclulateScattering(10000)</pre>
 <p>Make sure the number of sampled points (default=10000) is large enough for accurate determination of count rates.
 At the end of calculation, we print infos for all detectors hit by elastic particles, these are the count rates for
-a nominal beam intensity of 10**7 particles per second, and the mean energy loss in the detector:</p>
+a nominal beam intensity of 10**7 particles per second, the mean energy loss in the detector,
+the total integrated cross-section per detector in barn, the number of particles per second per unit area hitting
+each detector, and the total energy per second per unit area deposited in each detector:</p>
 <pre>
 kaliveda [3] esa.CalculateScattering(10000)
-SI_0112 : N=2.493e+00/sec.  <E>=1.659e+03 MeV
-SI_0101 : N=1.572e+01/sec.  <E>=1.659e+03 MeV
-SI_0102 : N=2.559e+00/sec.  <E>=1.659e+03 MeV
-SI_0223 : N=1.148e+00/sec.  <E>=1.457e+03 MeV
-CI_0223 : N=1.821e+00/sec.  <E>=8.248e+01 MeV
-SI_0201 : N=5.757e+00/sec.  <E>=1.457e+03 MeV
-CI_0201 : N=9.863e+00/sec.  <E>=8.247e+01 MeV
-CI_0203 : N=1.286e+00/sec.  <E>=8.248e+01 MeV
-SI_0203 : N=6.760e-01/sec.  <E>=1.456e+03 MeV
-SI_0324 : N=5.157e-01/sec.  <E>=1.449e+03 MeV
+SI_0101  :  N=  204.42/sec.    <E>=  890.3 MeV   Tot.Xsec=6.687E+01 barn    fluence=2.711E+01/sec./cm**2     dissip.=2.413E+04 MeV/sec./cm**2
+SI_0201  :  N=   61.37/sec.    <E>=  709.7 MeV   Tot.Xsec=2.008E+01 barn    fluence=1.413E+01/sec./cm**2     dissip.=1.002E+04 MeV/sec./cm**2
+SI_0301  :  N=   15.29/sec.    <E>=  706.4 MeV   Tot.Xsec=5.002E+00 barn    fluence=2.390E+00/sec./cm**2     dissip.=1.688E+03 MeV/sec./cm**2
+SI_0401  :  N=    6.33/sec.    <E>=  699.2 MeV   Tot.Xsec=2.070E+00 barn    fluence=1.582E+00/sec./cm**2     dissip.=1.106E+03 MeV/sec./cm**2
 </pre>
 <p>If you want to see the count rates for a different beam intensity, call</p>
 <pre>ecr.PrintResults(5.e+06)</pr>
@@ -149,13 +145,19 @@ SI_0324 : N=5.157e-01/sec.  <E>=1.449e+03 MeV
 </pre>
 <p>Each histogram can be obtained using</p>
 <pre>ecr.GetHistos().FindObject("SI_0223_map")</pre>
-<p>The count rate and mean energy loss in each detector can be obtained using</p>
+<p>The different informations for each detector can be obtained using</p>
 <pre>
 kaliveda [7] ecr.GetDetector("SI_0201").count_rate
-(double)5.75694360395366100e+00
+(double)6.13702995974404857e+01
 kaliveda [8] ecr.GetDetector("SI_0201").mean_energy
-(double)1.45679832635920388e+03
+(double)7.09659910827807721e+02
+kaliveda [9] ecr.GetDetector("SI_0201").intXsec
+(double)2.00758282694385635e+01
 </pre>
+<p>
+See <a href="KVElasticCountRate.html">KVElasticCountRate</a> for details.
+Warning: the values returned correspond to the last beam intensity value given to PrintResults().
+</p>
 <!-- */
  --> 
 <!-- TDocHtmlDirective end --><pre>
@@ -179,6 +181,7 @@ kaliveda [8] ecr.GetDetector("SI_0201").mean_energy
 <tr class="func"><td class="funcret">TH1F*</td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:GetTheta">GetTheta</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:PrintResults">PrintResults</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> beam_intensity = 1.e+07)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:PutResultsInList">PutResultsInList</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> beam_intensity = 1.e+07)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:SetEbinning">SetEbinning</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nbins = 500)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:SetProjectile">SetProjectile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* nuc, <a href="./ListOfTypes.html#Double_t">Double_t</a> e_sur_a)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVElasticCountRates:SetRun">SetRun</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run)</td></tr>
@@ -221,7 +224,7 @@ kaliveda [8] ecr.GetDetector("SI_0201").mean_energy
 </div>
 <h2><a id="KVElasticCountRates:Class_Charts"></a>Class Charts</h2>
 <map name="MapKVElasticCountRates_Lib" id="MapKVElasticCountRates_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="334,374,384,394"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="307,374,353,394"/>
 </map>
 <div class="tabs">
 <a id="imgKVElasticCountRates_Inh" class="tabsel" href="inh/KVElasticCountRates_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVElasticCountRates_Inh.png');">Inheritance</a>
@@ -278,6 +281,10 @@ for a beam intensity of 10**7 pps
 <div class="funccomm"><pre> Print mean energy deposit &amp; counting rate for given beam intensity in particles per second
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><a href="./KVNameValueList.html">KVNameValueList</a> <a class="funcname" name="KVElasticCountRates:PutResultsInList" href="src/KVElasticCountRates.cxx.html#LE7.kC">PutResultsInList</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> beam_intensity = 1.e+07)</span><br />
+<div class="funccomm"><pre> Print mean energy deposit &amp; counting rate for given beam intensity in particles per second
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVElasticCountRates:SetTargetExcitedState" href="src/KVElasticCountRates.h.html#Qno1AC">SetTargetExcitedState</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> ex)</span><br />
 <div class="funccomm"><pre>To simulate inelastic scattering i.e. where the target nucleus is left in
 an excited state, use this method to set the excitation energy (in MeV).
@@ -306,7 +313,7 @@ Use <a href="./KVElasticCountRates.html#KVElasticCountRates:SetTargetExcitedStat
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?John+Frankland"> John Frankland</a> </em><em>&raquo; Created  by KVClassFactory on Fri Nov 20 2015</em><br />
-<em>&raquo; Last changed: Fri Feb 26 17:04:20 2016 </em><em>&raquo; Last generated: 2016-02-26 17:04</em><br />
+<em>&raquo; Last changed: Fri Mar 18 17:36:45 2016 </em><em>&raquo; Last generated: 2016-03-18 17:36</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

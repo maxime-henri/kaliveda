@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Feb 26 17:04:48 2016            -->
+<!--   Date: Fri Mar 18 17:37:21 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/08</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/09</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/08</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/09</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_GUI_Index.html">GUI</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVIDGridEditor</a>
@@ -413,7 +413,7 @@ Presentation de l'editeur : <a href="http://indra.in2p3.fr/KaliVedaDoc/images/Jo
 <area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,464"/>
 </map>
 <map name="MapKVIDGridEditor_Lib" id="MapKVIDGridEditor_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="301,374,351,394"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="288,374,336,394"/>
 </map>
 <div class="tabs">
 <a id="imgKVIDGridEditor_Inh" class="tabsel" href="inh/KVIDGridEditor_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVIDGridEditor_Inh.png');">Inheritance</a>
@@ -478,182 +478,19 @@ Presentation de l'editeur : <a href="http://indra.in2p3.fr/KaliVedaDoc/images/Jo
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDGridEditor:AddGridOption" href="src/KVIDGridEditor.cxx.html#S13pWB">AddGridOption</a>(TString label, <a href="./KVHashList.html">KVHashList</a>* thelist)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname">TString <a class="funcname" name="KVIDGridEditor:ListOfHistogramInMemory" href="src/KVIDGridEditor.cxx.html#KOrOlB">ListOfHistogramInMemory</a>()</span><br />
-<div class="funccomm"><pre>  if(!gFile) return <span class="string">""</span>;
+<div class="funccomm"><pre> Fill a TString with the names of all histograms in
+   - ROOT memory (gROOT)
+   - all open files
+   - all canvases
+   - any instance of <a href="./KVTreeAnalyzer.html">KVTreeAnalyzer</a>
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname">TString <a class="funcname" name="KVIDGridEditor:PreselectHistogram" href="src/KVIDGridEditor.cxx.html#AHb0aD">PreselectHistogram</a>(TString ListOfName, <a href="./ListOfTypes.html#Int_t">Int_t</a> ipert = 0)</span><br />
+<div class="funccomm"><pre> Look in list of histogram names for one containing the name of
+ the current grid. If found, return it.
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDGridEditor:SetHisto" href="src/KVIDGridEditor.cxx.html#JQtGV">SetHisto</a>(TH2* hh)</span><br />
-<div class="funccomm"><pre>    if(!hh)
-    {
-        TString Listo   = <a href="./KVIDGridEditor.html#KVIDGridEditor:ListOfHistogramInMemory" title="TString KVIDGridEditor::ListOfHistogramInMemory()">ListOfHistogramInMemory</a>();
-        TString Select  = <a href="./KVIDGridEditor.html#KVIDGridEditor:PreselectHistogram" title="TString KVIDGridEditor::PreselectHistogram(TString ListOfName,Int_t ipert=0)">PreselectHistogram</a>(Listo);
-
-        TString Choices;
-        TString Default;
-        Choices = <span class="string">"Dummy "</span>;
-        if(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>)
-        {
-            Default = <span class="string">"Current"</span>;
-            Choices += <span class="string">"Current "</span>;
-        }
-        else Default = <span class="string">"Dummy"</span>;
-
-        if(!strcmp(Listo.Data(),<span class="string">""</span>))
-        {
-        }
-        else if(!strcmp(Select.Data(),<span class="string">""</span>))
-        {
-            Choices += Listo;
-        }
-        else
-        {
-            Default = Select;
-            Choices += Select.Data();
-            Choices += <span class="string">" "</span>;
-            Choices += Listo.ReplaceAll(Select.Data(),<span class="string">""</span>);
-        }
-
-        TString Answer;
-        <a href="./ListOfTypes.html#Bool_t">Bool_t</a> okpressed;
-
-        if(Choices.Contains(<span class="string">" "</span>))
-        {
-            new <a href="./KVDropDownDialog.html">KVDropDownDialog</a>(gClient-&gt;GetDefaultRoot(), <span class="string">"Choose an histogram :"</span>, Choices.Data(), Default.Data(), &amp;Answer, &amp;okpressed);
-            if(!okpressed)
-            {
-                Answer = <span class="string">"Current"</span>;
-                return;
-            }
-        }
-        else Answer = Default;
-
-        if(!Answer.Contains(<span class="string">"Current"</span>)&amp;&amp;<a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a>)
-        {
-            delete <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>;
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = 0;
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a> = <a href="./ListOfTypes.html#bool">false</a>;
-        }
-
-        if((!Answer.Contains(<span class="string">"Current"</span>))&amp;&amp;(!Answer.Contains(<span class="string">"Dummy"</span>)))
-        {
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a> = 0;
-            if((<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>=(TH2*)gFile-&gt;Get(Answer.Data()))) <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>;
-            else if((<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>=(TH2*)gFile-&gt;FindObjectAnyFile(Answer.Data()))) <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>;
-            else if(<a href="./KVTreeAnalyzer.html">gTreeAnalyzer</a>&amp;&amp;(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>=(TH2*)<a href="./KVTreeAnalyzer.html">gTreeAnalyzer</a>-><a href="./KVTreeAnalyzer.html#KVTreeAnalyzer:GetHistoList" title="const KVList* KVTreeAnalyzer::GetHistoList()">GetHistoList</a>()-><a href="./KVSeqCollection.html#KVSeqCollection:FindObject" title="TObject* KVSeqCollection::FindObject(const char* name) or overloads">FindObject</a>(Answer.Data()))) <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>;
-            else Answer = <span class="string">"Dummy"</span>;
-        }
-
-        if(Answer.Contains(<span class="string">"Dummy"</span>))
-        {
-            TString hname = Form(<span class="string">"%sDefaultHistogram"</span>,<a href="./#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-            <a href="./ListOfTypes.html#Double_t">Double_t</a> Xmax = 4096.;
-            <a href="./ListOfTypes.html#Double_t">Double_t</a> Ymax = 4096;
-            if(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>)
-            {
-                <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:Initialize" title="void KVIDGraph::Initialize()">Initialize</a>();
-                // pour pouvoir utiliser un pointeur <a href="./KVIDGraph.html">KVIDGraph</a>* au lieu de <a href="./KVIDZAGrid.html">KVIDZAGrid</a>*
-                //           Xmax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>->GetZmaxLine()-&gt;GetXaxis()-&gt;GetXmax();
-                //             Ymax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>->GetZmaxLine()-&gt;GetYaxis()-&gt;GetXmax();
-                <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:FindAxisLimits" title="void KVIDGraph::FindAxisLimits()">FindAxisLimits</a>();
-                Xmax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:GetXmax" title="Axis_t KVIDGraph::GetXmax()">GetXmax</a>();
-                Ymax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:GetYmax" title="Axis_t KVIDGraph::GetYmax()">GetYmax</a>();
-            }
-            TH2* TmpH = 0;
-            if((TmpH=(TH2*)gROOT-&gt;<a href="./#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(hname.Data()))) delete TmpH;
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = new TH2F(hname.Data(),hname.Data(),2048,0,Xmax,2048,0,Ymax);
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a> = <a href="./ListOfTypes.html#bool">true</a>;
-        }
-    }
-    else if(!hh-&gt;<a href="./#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"TH2"</span>))
-    {
-        <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"ERROR: KVIDGridEditor::SetHisto(): '"</span> &lt;&lt; hh-&gt;<a href="./#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>() &lt;&lt; <span class="string">"' must be a 2D histogram !"</span> &lt;&lt; endl;
-        return;
-    }
-    else
-    {
-        if((<a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a>)&amp;&amp;(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>))
-        {
-            delete <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>;
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = 0;
-        }
-        <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = hh;
-        <a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a> = <a href="./ListOfTypes.html#bool">false</a>;
-    }
-
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; TREE
-    if(!<a href="./KVIDGridEditor.html#KVIDGridEditor:IsClosed" title="Bool_t KVIDGridEditor::IsClosed()">IsClosed</a>()&amp;&amp;(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>))
-    {
-        <a href="./KVIDGridEditor.html#KVIDGridEditor:fPad" title="TVirtualPad* KVIDGridEditor::fPad">fPad</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:fCanvas" title="KVIDGridEditorCanvas* KVIDGridEditor::fCanvas">fCanvas</a>-><a href="./#TCanvas:cd" title="TVirtualPad* TCanvas::cd(Int_t subpadnumber=0)">cd</a>();//au cas ou il y a plusieurs canvas ouverts
-        <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>-&gt;<a href="./#TObject:Draw" title="void TObject::Draw(Option_t* option=&quot;&quot;)">Draw</a>(<span class="string">"col"</span>);
-        <a href="./KVIDGridEditor.html#KVIDGridEditor:fPad" title="TVirtualPad* KVIDGridEditor::fPad">fPad</a>-&gt;<a href="./KVIDGridEditor.html#KVIDGridEditor:SetLogz" title="void KVIDGridEditor::SetLogz()">SetLogz</a>(<a href="./ListOfTypes.html#bool">true</a>);
-        <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>-&gt;SetMinimum(1);
-
-    if(Choices.Contains(<span class="string">" "</span>))
-      {
-      new <a href="./KVDropDownDialog.html">KVDropDownDialog</a>(gClient-&gt;GetDefaultRoot(), <span class="string">"Choose an histogram :"</span>, Choices.Data(), Default.Data(), &amp;Answer, &amp;okpressed);
-      if(!okpressed)
-        {
- Answer = <span class="string">"Current"</span>;
-        return;
-        }
-      }
-    else Answer = Default;
-
-    if(!Answer.Contains(<span class="string">"Current"</span>)&amp;&amp;<a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a>)
-      {
-      delete <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a>;
-      <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = 0;
-      <a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a> = <a href="./ListOfTypes.html#bool">false</a>;
-      }
-
-    if((!Answer.Contains(<span class="string">"Current"</span>))&amp;&amp;(!Answer.Contains(<span class="string">"Dummy"</span>)))
-      {
-      <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a> = 0;
-      if((<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>=(TH2*)gFile-&gt;Get(Answer.Data()))) <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>;
-      else if((<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>=(TH2*)gFile-&gt;FindObjectAnyFile(Answer.Data()))) <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>;
-      else if(<a href="./KVTreeAnalyzer.html">gTreeAnalyzer</a>&amp;&amp;(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>=(TH2*)<a href="./KVTreeAnalyzer.html">gTreeAnalyzer</a>-><a href="./KVTreeAnalyzer.html#KVTreeAnalyzer:GetHistogram" title="TH1* KVTreeAnalyzer::GetHistogram(const Char_t* name)">GetHistogram</a>(Answer.Data()))) <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHistoChoice" title="TH2* KVIDGridEditor::TheHistoChoice">TheHistoChoice</a>;
-      else Answer = <span class="string">"Dummy"</span>;
-      }
-
-    if(Answer.Contains(<span class="string">"Dummy"</span>))
-      {
-      TString hname = Form(<span class="string">"%sDefaultHistogram"</span>,<a href="./#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
-      <a href="./ListOfTypes.html#Double_t">Double_t</a> Xmax = 4096.;
-      <a href="./ListOfTypes.html#Double_t">Double_t</a> Ymax = 4096;
-      if(<a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>)
-        {
-          <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:Initialize" title="void KVIDGraph::Initialize()">Initialize</a>();
-            // pour pouvoir utiliser un pointeur <a href="./KVIDGraph.html">KVIDGraph</a>* au lieu de <a href="./KVIDZAGrid.html">KVIDZAGrid</a>*
-           Xmax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>->GetZmaxLine()-&gt;GetXaxis()-&gt;GetXmax();
-             Ymax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>->GetZmaxLine()-&gt;GetYaxis()-&gt;GetXmax();
-            <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:FindAxisLimits" title="void KVIDGraph::FindAxisLimits()">FindAxisLimits</a>();
-            Xmax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:GetXmax" title="Axis_t KVIDGraph::GetXmax()">GetXmax</a>();
-            Ymax = <a href="./KVIDGridEditor.html#KVIDGridEditor:TheGrid" title="KVIDGraph* KVIDGridEditor::TheGrid">TheGrid</a>-><a href="./KVIDGraph.html#KVIDGraph:GetYmax" title="Axis_t KVIDGraph::GetYmax()">GetYmax</a>();
-       }
-      TH2* TmpH = 0;
-      if((TmpH=(TH2*)gROOT-&gt;<a href="./#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(hname.Data()))) delete TmpH;
-      <a href="./KVIDGridEditor.html#KVIDGridEditor:TheHisto" title="TH2* KVIDGridEditor::TheHisto">TheHisto</a> = new TH2F(hname.Data(),hname.Data(),2048,0,Xmax,2048,0,Ymax);
-      <a href="./KVIDGridEditor.html#KVIDGridEditor:ownhisto" title="Bool_t KVIDGridEditor::ownhisto">ownhisto</a> = <a href="./ListOfTypes.html#bool">true</a>;
-      }
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; MERGE-SOURCE
-    }
-    <a href="./KVIDGridEditor.html#KVIDGridEditor:DrawAtt" title="void KVIDGridEditor::DrawAtt(Bool_t piv)">DrawAtt</a>(<a href="./ListOfTypes.html#bool">true</a>);
-    return;
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname">TH2* <a class="funcname" name="KVIDGridEditor:FindInCanvases" href="src/KVIDGridEditor.cxx.html#yBTpjE">FindInCanvases</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
 </div>
@@ -807,7 +644,7 @@ Presentation de l'editeur : <a href="http://indra.in2p3.fr/KaliVedaDoc/images/Jo
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?dgruyer"> dgruyer</a> </em><em>&raquo; Created  by KVClassFactory on Fri Feb 17 11:05:30 2012</em><br />
-<em>&raquo; Last changed: Fri Feb 26 17:04:48 2016 </em><em>&raquo; Last generated: 2016-02-26 17:04</em><br />
+<em>&raquo; Last changed: Fri Mar 18 17:37:21 2016 </em><em>&raquo; Last generated: 2016-03-18 17:37</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
