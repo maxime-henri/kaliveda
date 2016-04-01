@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Mar 18 17:36:49 2016            -->
+<!--   Date: Fri Apr  1 11:08:09 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -26,6 +26,8 @@
 <span class="cpp">#include "<a href="../KVDataSetManager.h">KVDataSetManager.h</a>"</span>
 <span class="cpp">#include "TClass.h"</span>
 
+<span class="cpp">#include &lt;<a href="../KVRangeTableGeoNavigator.h">KVRangeTableGeoNavigator.h</a>&gt;</span>
+
 ClassImp(<a href="../KVExpSetUp.html">KVExpSetUp</a>)
 
 <span class="comment">////////////////////////////////////////////////////////////////////////////////</span>
@@ -39,17 +41,12 @@ ClassImp(<a href="../KVExpSetUp.html">KVExpSetUp</a>)
 
 <a name="rMIw4D"></a><span class="keyword">void</span> <a href="../KVExpSetUp.html">KVExpSetUp</a>::<a href="../KVExpSetUp.html#KVExpSetUp:init" title="void KVExpSetUp::init()">init</a>()
 {
-
-
    fCloseGeometryNow = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
    fBuildTarget = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
 
    <span class="comment">//modification of the owner mode compare to Mother classes</span>
    fStructures.SetOwner(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
    fIDTelescopes-&gt;SetOwner(<a href="../ListOfTypes.html#Bool_t">kFALSE</a>);
-
-   <a href="../KVMultiDetArray.html">gMultiDetArray</a> = <span class="keyword">this</span>;
-
 }
 
 
@@ -57,8 +54,6 @@ ClassImp(<a href="../KVExpSetUp.html">KVExpSetUp</a>)
 {
    <span class="comment">// Default constructor</span>
    <a href="../KVExpSetUp.html#KVExpSetUp:init" title="void KVExpSetUp::init()">init</a>();
-
-
 }
 
 <a name="Zc8hzB"></a><a href="../KVExpSetUp.html">KVExpSetUp</a>::<a href="../KVExpSetUp.html#KVExpSetUp:_KVExpSetUp" title="void KVExpSetUp::~KVExpSetUp()">~KVExpSetUp</a>()
@@ -71,31 +66,36 @@ ClassImp(<a href="../KVExpSetUp.html">KVExpSetUp</a>)
 <a name="XExGm"></a><span class="keyword">void</span> <a href="../KVExpSetUp.html">KVExpSetUp</a>::<a href="../KVExpSetUp.html#KVExpSetUp:Build" title="void KVExpSetUp::Build(Int_t run=-1)">Build</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a>)
 {
    <span class="comment">// <a href="../KVExpSetUp.html#KVExpSetUp:Build" title="void KVExpSetUp::Build(Int_t run=-1)">Build</a> the combined arrays</span>
+
+   <span class="comment">// default ROOT geometry for all arrays</span>
+   gEnv-&gt;SetValue(<span class="string">"KVMultiDetArray.ROOTGeometry"</span>, <span class="string">"yes"</span>);
+
    <a href="../KVMultiDetArray.html#KVMultiDetArray:CreateGeoManager" title="void KVMultiDetArray::CreateGeoManager(Double_t dx=500,Double_t dy=500,Double_t dz=500)">CreateGeoManager</a>();
 
-   <a href="../KVGeoNavigator.html">KVGeoNavigator</a>* nav = 0;
-   <a href="../KVMultiDetArray.html">KVMultiDetArray</a>* tmp = 0;
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Build"</span>, <span class="string">"navigator=%p"</span>, <a href="../KVMultiDetArray.html#KVMultiDetArray:GetNavigator" title="KVGeoNavigator* KVMultiDetArray::GetNavigator()">GetNavigator</a>());
+
+   <a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>* gnl = <span class="keyword">new</span> <a href="../KVRangeTableGeoNavigator.html">KVRangeTableGeoNavigator</a>(gGeoManager, <a href="../KVMaterial.html">KVMaterial</a>::<a href="../KVMaterial.html#KVMaterial:GetRangeTable" title="KVIonRangeTable* KVMaterial::GetRangeTable()">GetRangeTable</a>());
+   <a href="../KVMultiDetArray.html#KVMultiDetArray:SetNavigator" title="void KVMultiDetArray::SetNavigator(KVGeoNavigator* geo)">SetNavigator</a>(gnl);
+
+   <a href="../KVMultiDetArray.html">KVMultiDetArray</a>* tmp(nullptr);
    <a href="../KVExpSetUp.html#KVExpSetUp:lmultidetarrayclasses" title="KVString KVExpSetUp::lmultidetarrayclasses">lmultidetarrayclasses</a> =
       <a href="../KVDataSetManager.html">gDataSetManager</a>-><a href="../KVDataSetManager.html#KVDataSetManager:GetDataSet" title="KVDataSet* KVDataSetManager::GetDataSet(Int_t ) or overloads">GetDataSet</a>(fDataSet)-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(<span class="string">"DataSet.ExpSetUp.ClassList"</span>, <a href="../KVExpSetUp.html#KVExpSetUp:IsA" title="TClass* KVExpSetUp::IsA()">IsA</a>()-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
    <a href="../KVExpSetUp.html#KVExpSetUp:lmultidetarrayclasses" title="KVString KVExpSetUp::lmultidetarrayclasses">lmultidetarrayclasses</a>.<a href="../KVString.html#KVString:Begin" title="void KVString::Begin(TString delim)">Begin</a>(<span class="string">" "</span>);
    <span class="keyword">while</span> (!<a href="../KVExpSetUp.html#KVExpSetUp:lmultidetarrayclasses" title="KVString KVExpSetUp::lmultidetarrayclasses">lmultidetarrayclasses</a>.<a href="../KVString.html#KVString:End" title="Bool_t KVString::End()">End</a>()) {
       <a href="../KVString.html">KVString</a> sname = <a href="../KVExpSetUp.html#KVExpSetUp:lmultidetarrayclasses" title="KVString KVExpSetUp::lmultidetarrayclasses">lmultidetarrayclasses</a>.<a href="../KVString.html#KVString:Next" title="KVString KVString::Next(Bool_t strip_whitespace=kFALSE)">Next</a>();
       <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Build"</span>, <span class="string">"Build %s %s\n"</span>, <a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), sname.Data());
+      <a href="../KVMultiDetArray.html">gMultiDetArray</a> = nullptr; <span class="comment">//otherwise <a href="../KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector" title="KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name,Int_t run=-1,TString classname=&quot;KVMultiDetArray&quot;)">MakeMultiDetector</a> will delete any previously built array</span>
       tmp = <a href="../KVMultiDetArray.html#KVMultiDetArray:MakeMultiDetector" title="KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name,Int_t run=-1,TString classname=&quot;KVMultiDetArray&quot;)">MakeMultiDetector</a>(<a href="../KVDataSet.html">gDataSet</a>-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), -1, sname.Data());
       <span class="keyword">if</span> (tmp) {
-         <span class="keyword">if</span> (nav) {
-            <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Build"</span>, <span class="string">"KVGeoNavigator already set ..."</span>);
-            tmp-&gt;<a href="../KVMultiDetArray.html#KVMultiDetArray:SetNavigator" title="void KVMultiDetArray::SetNavigator(KVGeoNavigator* geo)">SetNavigator</a>(nav);
-         }
-         <span class="comment">// make sure array is using ROOT geometry</span>
-         tmp-&gt;<a href="../KVMultiDetArray.html#KVMultiDetArray:CheckROOTGeometry" title="void KVMultiDetArray::CheckROOTGeometry()">CheckROOTGeometry</a>();
 
          <a href="../KVExpSetUp.html#KVExpSetUp:fMDAList" title="KVList KVExpSetUp::fMDAList">fMDAList</a>.<a href="../KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(tmp);
          fDetectors.AddAll((<a href="../KVUniqueNameList.html">KVUniqueNameList</a>*)tmp-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetDetectors" title="const KVSeqCollection* KVGeoStrucElement::GetDetectors()">GetDetectors</a>());
          fStructures.AddAll((<a href="../KVUniqueNameList.html">KVUniqueNameList</a>*)tmp-&gt;<a href="../KVGeoStrucElement.html#KVGeoStrucElement:GetStructures" title="const KVSeqCollection* KVGeoStrucElement::GetStructures()">GetStructures</a>());
          fIDTelescopes-&gt;AddAll(tmp-&gt;<a href="../KVMultiDetArray.html#KVMultiDetArray:GetListOfIDTelescopes" title="KVSeqCollection* KVMultiDetArray::GetListOfIDTelescopes()">GetListOfIDTelescopes</a>());
 
-         nav = tmp-&gt;<a href="../KVMultiDetArray.html#KVMultiDetArray:GetNavigator" title="KVGeoNavigator* KVMultiDetArray::GetNavigator()">GetNavigator</a>();
+         <span class="comment">// retrieve correspondance list node path&lt;-&gt;detector</span>
+         gnl-&gt;AbsorbDetectorPaths(tmp-&gt;<a href="../KVMultiDetArray.html#KVMultiDetArray:GetNavigator" title="KVGeoNavigator* KVMultiDetArray::GetNavigator()">GetNavigator</a>());
+
       } <span class="keyword">else</span> {
          <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"Build"</span>, <span class="string">"NULL pointer returned by MakeMultiDetector"</span>);
       }
@@ -103,7 +103,7 @@ ClassImp(<a href="../KVExpSetUp.html">KVExpSetUp</a>)
 
    gGeoManager-&gt;DefaultColors();
    gGeoManager-&gt;CloseGeometry();
-   <a href="../KVMultiDetArray.html#KVMultiDetArray:SetNavigator" title="void KVMultiDetArray::SetNavigator(KVGeoNavigator* geo)">SetNavigator</a>(nav);
+
    <a href="../KVMultiDetArray.html#KVMultiDetArray:SetGeometry" title="void KVMultiDetArray::SetGeometry(TGeoManager* )">SetGeometry</a>(gGeoManager);
 
    <a href="../KVMultiDetArray.html">gMultiDetArray</a> = <span class="keyword">this</span>;
@@ -117,7 +117,7 @@ ClassImp(<a href="../KVExpSetUp.html">KVExpSetUp</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-03-18 17:36 </em><em>&raquo; Last generated: 2016-03-18 17:36</em><br />
+<em>&raquo; Last changed: 2016-04-01 11:08 </em><em>&raquo; Last generated: 2016-04-01 11:08</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Mar 18 17:36:51 2016            -->
+<!--   Date: Fri Apr  1 11:08:10 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -222,6 +222,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">TGeoHMatrix*</td><td class="funcname"><a class="funcname" href="./KVPosition.html#KVPosition:GetMatrix"><span class="baseclass">KVPosition::</span>GetMatrix</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:GetMaxDeltaE"><span class="baseclass">KVDetector::</span>GetMaxDeltaE</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TNamed:GetName"><span class="baseclass">TNamed::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVFAZIADetector:GetNewName">GetNewName</a>(<a href="./KVString.html">KVString</a> oldname)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:GetNHits"><span class="baseclass">KVDetector::</span>GetNHits</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./KVGeoDetectorNode.html">KVGeoDetectorNode</a>*</td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:GetNode"><span class="baseclass">KVDetector::</span>GetNode</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> TVector3&amp;</td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:GetNormal"><span class="baseclass">KVDetector::</span>GetNormal</a>()</td></tr>
@@ -486,6 +487,7 @@ return false;}
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADetector:init">init</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:RangeDet"><span class="baseclass">KVDetector::</span>RangeDet</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a>* x, <a href="./ListOfTypes.html#Double_t">Double_t</a>* par)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:SetKVDetectorFiredACQParameterListFormatString"><span class="baseclass">KVDetector::</span>SetKVDetectorFiredACQParameterListFormatString</a>()</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVFAZIADetector:SetProperties">SetProperties</a>()</td></tr>
 
 </table></div>
@@ -612,7 +614,7 @@ return false;}
 <area shape="rect" id="clust11" href="./KVDetector.html" alt="" coords="1099,47,1165,240"/>
 <area shape="rect" id="clust13" href="./KVDetector.html" alt="" coords="944,47,1011,240"/>
 <area shape="rect" id="clust14" href="./KVDetector.html" alt="" coords="1131,241,1133,244"/>
-<area shape="rect" id="clust15" href="./KVDetector.html" alt="" coords="1099,245,1165,963"/>
+<area shape="rect" id="clust15" href="./KVDetector.html" alt="" coords="1099,245,1165,979"/>
 <area shape="rect" id="clust16" href="./KVDetector.html" alt="" coords="1021,243,1088,992"/>
 <area shape="rect" id="clust17" href="./KVDetector.html" alt="" coords="944,243,1011,992"/>
 <area shape="rect" id="clust10" href="./KVDetector.html" title="KVDetector" alt="" coords="944,16,1165,992"/>
@@ -705,11 +707,16 @@ return false;}
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVFAZIADetector:SetProperties" href="src/KVFAZIADetector.cxx.html#h4jbHE">SetProperties</a>()</span><br />
 <div class="funccomm"><pre> detector name are assumed to be defined as
- SI2-T2-Q2-B001
- CSI-T2-Q2-B001
- SI1-T1-Q1-B001
+ label-xxx
+ where xxx is computed as follow :
+ 100*block number+10*quartet number+telescope number
+ and label can be SI1, SI2 or CSI
+ For example SI1-123 is the Silicon Si1 of the block 1, the quartet 2 and the telescope 3
+
 
 </pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVFAZIADetector:GetNewName" href="src/KVFAZIADetector.cxx.html#ZxDvgB">GetNewName</a>(<a href="./KVString.html">KVString</a> oldname)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVFAZIADetector:Fired" href="src/KVFAZIADetector.cxx.html#xcD_7B">Fired</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"any"</span>)</span><br />
 <div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if detector was hit (fired) in an event
@@ -890,8 +897,8 @@ return false;}
 <br />
 <!--SIGNATURE-->
 <div id="footer">
-<em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?"> </a> </em><em>&raquo; Created  by KVClassFactory on Fri Jan 23 18:44:27 2015</em><br />
-<em>&raquo; Last changed: Fri Mar 18 17:36:51 2016 </em><em>&raquo; Last generated: 2016-03-18 17:36</em><br />
+<em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?"> </a>, <a href="http://consult.cern.ch/xwho/people?"></a>, <a href="http://consult.cern.ch/xwho/people?"></a> </em><em>&raquo; Created  by KVClassFactory on Fri Jan 23 18:44:27 2015</em><br />
+<em>&raquo; Last changed: Fri Apr  1 11:08:11 2016 </em><em>&raquo; Last generated: 2016-04-01 11:08</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

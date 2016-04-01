@@ -31,9 +31,9 @@ extern void G__set_cpp_environmentG__MicroStatweights();
 
 #include "TObject.h"
 #include "TMemberInspector.h"
-#include "mcweight.h"
-#include "StatWeight.h"
 #include "mdweight.h"
+#include "StatWeight.h"
+#include "mcweight.h"
 #include <algorithm>
 namespace std { }
 using namespace std;
@@ -80,8 +80,8 @@ extern G__linked_taginfo G__G__MicroStatweightsLN_KVEvent;
 extern G__linked_taginfo G__G__MicroStatweightsLN_iteratorlEinput_iterator_tagcOKVNucleuscOlongcOKVNucleusmUcOKVNucleusaNgR;
 extern G__linked_taginfo G__G__MicroStatweightsLN_MicroStat;
 extern G__linked_taginfo G__G__MicroStatweightsLN_MicroStatcLcLStatWeight;
-extern G__linked_taginfo G__G__MicroStatweightsLN_MicroStatcLcLmcweight;
 extern G__linked_taginfo G__G__MicroStatweightsLN_TF1;
 extern G__linked_taginfo G__G__MicroStatweightsLN_MicroStatcLcLmdweight;
+extern G__linked_taginfo G__G__MicroStatweightsLN_MicroStatcLcLmcweight;
 
 /* STUB derived class for protected member access */
