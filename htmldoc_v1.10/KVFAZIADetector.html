@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Apr 22 15:00:41 2016            -->
+<!--   Date: Fri Jun  3 09:59:15 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/09</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/10</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/09</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/10</a>
  &#187; <a class="locationlevel" href="./FAZIA_Index.html">FAZIA</a>
  &#187; <a class="locationlevel" href="./FAZIA_GEOMETRY_Index.html">GEOMETRY</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVFAZIADetector</a>
@@ -70,6 +70,14 @@ return false;}
  --> 
 <!-- TDocHtmlDirective end --><pre>
 
+ DETECTOR NAMES
+
+ Detector names are assumed to be defined as
+ label-xxx
+ where xxx is computed as follows (see <a href="./KVFAZIADetector.html">KVFAZIADetector</a>::<a href="./KVFAZIADetector.html#KVFAZIADetector:GetIndex" title="Int_t KVFAZIADetector::GetIndex()">GetIndex</a>) :
+ 100*block number+10*quartet number+telescope number
+ and label can be SI1, SI2 or CSI
+ For example SI1-123 is the Silicon Si1 of the block 1, the quartet 2 and the telescope 3
 </pre></div>
 </div></div>
 
@@ -101,6 +109,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TNamed:Clone"><span class="baseclass">TNamed::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADetector:ComputePSA">ComputePSA</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVFAZIADetector:Copy">Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; obj) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVDetector.html#KVDetector:DeduceACQParameters"><span class="baseclass">KVDetector::</span>DeduceACQParameters</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> = -1, <a href="./ListOfTypes.html#Int_t">Int_t</a> = -1)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
@@ -663,7 +672,7 @@ return false;}
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVFAZIADetector:KVFAZIADetector@1" href="src/KVFAZIADetector.cxx.html#CZESuB">KVFAZIADetector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type, <span class="keyword">const</span> <a href="./ListOfTypes.html#Float_t">Float_t</a> thick = 0.0)</span><br />
-<div class="funccomm"><pre> <a href="./#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> your code here
+<div class="funccomm"><pre> Create detector of given material type and thickness (in centimetres)
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVFAZIADetector:_KVFAZIADetector" href="src/KVFAZIADetector.cxx.html#bA9DFC">~KVFAZIADetector</a>()</span><br />
@@ -676,6 +685,8 @@ return false;}
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADetector:SetCalibrators" href="src/KVFAZIADetector.cxx.html#p8hpN">SetCalibrators</a>()</span><br />
 <div class="funccomm"><pre>Set up calibrators for this detector. Call once name has been set.
+test to check that there is not already defined calibrators
+
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVFAZIADetector:IsCalibrated" href="src/KVFAZIADetector.cxx.html#ZHtcnC">IsCalibrated</a>() const</span><br />
@@ -689,9 +700,7 @@ i.e. if
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVFAZIADetector:GetEnergy" href="src/KVFAZIADetector.cxx.html#Xm5JQC">GetEnergy</a>()</span><br />
-<div class="funccomm"><pre>
- Returns energy lost in active layer by particles.
-
+<div class="funccomm"><pre> Returns energy lost in active layer by particles.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVFAZIADetector:GetCalibratedVolt" href="src/KVFAZIADetector.cxx.html#QtICaC">GetCalibratedVolt</a>()</span><br />
@@ -723,6 +732,9 @@ i.e. if
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVFAZIADetector:GetNewName" href="src/KVFAZIADetector.cxx.html#ZxDvgB">GetNewName</a>(<a href="./KVString.html">KVString</a> oldname)</span><br />
+<div class="funccomm"><pre> Translate an old-style FAZIA detector name (e.g. <span class="string">"SI1-T1-Q2-B001"</span>)
+ to the new format (<span class="string">"SI1-121"</span>)
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVFAZIADetector:Fired" href="src/KVFAZIADetector.cxx.html#xcD_7B">Fired</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"any"</span>)</span><br />
 <div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if detector was hit (fired) in an event
@@ -740,24 +752,49 @@ i.e. if
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADetector:SetSignal" href="src/KVFAZIADetector.cxx.html#SWgKCD">SetSignal</a>(<a href="./KVSignal.html">KVSignal</a>* signal, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVFAZIADetector:HasSignal" href="src/KVFAZIADetector.cxx.html#G9_VVE">HasSignal</a>() const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if detector has at least 1 associated signal
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVSignal.html">KVSignal</a>* <a class="funcname" name="KVFAZIADetector:GetSignal" href="src/KVFAZIADetector.cxx.html#PEssCB">GetSignal</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+<div class="funccomm"><pre> Access detector signal by name, i.e. as in FAZIA raw data
+ e.g. <span class="string">"T1-Q3-B001-QL1"</span>
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVSignal.html">KVSignal</a>* <a class="funcname" name="KVFAZIADetector:GetSignalByType" href="src/KVFAZIADetector.cxx.html#tcafqE">GetSignalByType</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type) const</span><br />
+<div class="funccomm"><pre> Access detector signal of given type: <span class="string">"I1"</span>, <span class="string">"I2"</span>, <span class="string">"Q2"</span>, <span class="string">"Q3"</span>, <span class="string">"QH1"</span>, <span class="string">"QL1"</span>
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVSignal.html">KVSignal</a>* <a class="funcname" name="KVFAZIADetector:GetSignal@1" href="src/KVFAZIADetector.cxx.html#jMsiLD">GetSignal</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> idx) const</span><br />
+<div class="funccomm"><pre> Access signal with given index in list of detector's signals
+ 0 &lt;= idx &lt; <a href="./KVFAZIADetector.html">KVFAZIADetector</a>::<a href="./KVFAZIADetector.html#KVFAZIADetector:GetNumberOfSignals" title="Int_t KVFAZIADetector::GetNumberOfSignals()">GetNumberOfSignals</a>()
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVFAZIADetector:GetNumberOfSignals" href="src/KVFAZIADetector.cxx.html#j37iDE">GetNumberOfSignals</a>() const</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a>* <a class="funcname" name="KVFAZIADetector:GetListOfSignals" href="src/KVFAZIADetector.cxx.html#j.XwqB">GetListOfSignals</a>() const</span><br />
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVFAZIADetector:ComputePSA" href="src/KVFAZIADetector.cxx.html#WtodOD">ComputePSA</a>()</span><br />
+<div class="funccomm"><pre> Perform Pulse Shape Analysis on all signals
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVFAZIADetector:GetIdentifier" href="src/KVFAZIADetector.h.html#ORbbiD">GetIdentifier</a>() const</span><br />
+<div class="funccomm"><pre> Return the identifier of the detector. This is one of
+   <a href="./KVFAZIADetector.html">KVFAZIADetector</a>::<a href="./KVFAZIADetector.html#KVFAZIADetector:kSI1" title="const enum KVFAZIADetector:: KVFAZIADetector::kSI1">kSI1</a>
+   <a href="./KVFAZIADetector.html">KVFAZIADetector</a>::<a href="./KVFAZIADetector.html#KVFAZIADetector:kSI2" title="const enum KVFAZIADetector:: KVFAZIADetector::kSI2">kSI2</a>
+   <a href="./KVFAZIADetector.html">KVFAZIADetector</a>::<a href="./KVFAZIADetector.html#KVFAZIADetector:kCSI" title="const enum KVFAZIADetector:: KVFAZIADetector::kCSI">kCSI</a>
+   <a href="./KVFAZIADetector.html">KVFAZIADetector</a>::<a href="./KVFAZIADetector.html#KVFAZIADetector:kOTHER" title="const enum KVFAZIADetector:: KVFAZIADetector::kOTHER">kOTHER</a>
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVFAZIADetector:GetBlockNumber" href="src/KVFAZIADetector.h.html#HxWYx">GetBlockNumber</a>() const</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVFAZIADetector:GetIndex" href="src/KVFAZIADetector.h.html#FL31yB">GetIndex</a>() const</span><br />
+<div class="funccomm"><pre> Return index of detector, defined as
+   100*block+10*quartet+telescope
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVFAZIADetector:IsRutherford" href="src/KVFAZIADetector.h.html#YzHvfB">IsRutherford</a>() const</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if detector is part of elastic scattering monitor telescope
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVFAZIADetector:GetQuartetNumber" href="src/KVFAZIADetector.h.html#JQTf.C">GetQuartetNumber</a>() const</span><br />
 </div>
@@ -904,7 +941,7 @@ i.e. if
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?"> </a> </em><em>&raquo; Created  by KVClassFactory on Fri Jan 23 18:44:27 2015</em><br />
-<em>&raquo; Last changed: Fri Apr 22 15:00:41 2016 </em><em>&raquo; Last generated: 2016-04-22 15:00</em><br />
+<em>&raquo; Last changed: Fri Jun  3 09:59:16 2016 </em><em>&raquo; Last generated: 2016-06-03 09:59</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
