@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jun  3 09:59:11 2016            -->
+<!--   Date: Fri Aug  5 14:46:39 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -142,6 +142,8 @@ which should be used whenever it is required to stock <a href="./KVEvent.html">K
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:FillArraysPtRapPhi">FillArraysPtRapPhi</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; mult, <a href="./ListOfTypes.html#Int_t">Int_t</a>* Z, <a href="./ListOfTypes.html#Int_t">Int_t</a>* A, <a href="./ListOfTypes.html#Double_t">Double_t</a>* Pt, <a href="./ListOfTypes.html#Double_t">Double_t</a>* Rap, <a href="./ListOfTypes.html#Double_t">Double_t</a>* Phi, <span class="keyword">const</span> TString&amp; frame = <span class="string">""</span>, <span class="keyword">const</span> TString&amp; selection = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:FillArraysV">FillArraysV</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>&amp; mult, <a href="./ListOfTypes.html#Int_t">Int_t</a>* Z, <a href="./ListOfTypes.html#Int_t">Int_t</a>* A, <a href="./ListOfTypes.html#Double_t">Double_t</a>* vx, <a href="./ListOfTypes.html#Double_t">Double_t</a>* vy, <a href="./ListOfTypes.html#Double_t">Double_t</a>* vz, <span class="keyword">const</span> TString&amp; frame = <span class="string">""</span>, <span class="keyword">const</span> TString&amp; selection = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:FillBuffer"><span class="baseclass">TNamed::</span>FillBuffer</a>(<span class="keyword">char</span>*&amp; buffer)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:FillHisto">FillHisto</a>(TH1* h, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* KVNucleus_method, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:FillHisto@1">FillHisto</a>(TH1* h, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* KVNucleus_method, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* method_prototype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* args, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEvent:FillIntegerList">FillIntegerList</a>(<a href="./KVIntegerList.html">KVIntegerList</a>*, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindClassSourceFiles"><span class="baseclass">KVBase::</span>FindClassSourceFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <a href="./KVString.html">KVString</a>&amp; imp_file, <a href="./KVString.html">KVString</a>&amp; dec_file, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dir_name = <span class="string">"."</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:FindExecutable"><span class="baseclass">KVBase::</span>FindExecutable</a>(TString&amp; exec, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path = <span class="string">"$(PATH)"</span>)</td></tr>
@@ -452,6 +454,29 @@ If opt = <span class="string">"name"</span> only particles with <a href="./#TNam
 
 IN ANY CASE, YOU MUST NOT USE THIS METHOD INSIDE A LOOP
 OVER THE EVENT USING GETNEXTPARTICLE() !!!
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEvent:FillHisto" href="src/KVEvent.cxx.html#D_U7xB">FillHisto</a>(TH1* h, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* KVNucleus_method, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Fill histogram with values of the observable given by the indicated KVNucleus_method.
+ For example: if  the method is called this way - <a href="./KVEvent.html#KVEvent:GetSum" title="Double_t KVEvent::GetSum(const Char_t* KVNucleus_method,Option_t* opt=&quot;&quot;) or overloads">GetSum</a>(<span class="string">"GetZ"</span>) - it fills histogram
+ with the charge of all particles in the current event.
+
+ If opt = <span class="string">"ok"</span> only particles with <a href="./KVEvent.html#KVEvent:IsOK" title="Bool_t KVEvent::IsOK()">IsOK</a>()==<a href="./ListOfTypes.html#Bool_t">kTRUE</a> are considered.
+ If opt = <span class="string">"name"</span> only particles with <a href="./#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()==<span class="string">"name"</span> are considered.
+
+ IN ANY CASE, YOU MUST NOT USE THIS METHOD INSIDE A LOOP
+ OVER THE EVENT USING GETNEXTPARTICLE() !!!
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEvent:FillHisto@1" href="src/KVEvent.cxx.html#DoqnfC">FillHisto</a>(TH1* h, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* KVNucleus_method, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* method_prototype, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* args, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> Fill histogram with values of given method with given prototype (e.g. method_prototype=<span class="string">"int,int"</span>) and argument values
+ e.g. args=<span class="string">"2,4"</span>) for each particle in event.
+
+ If opt = <span class="string">"ok"</span> only particles with <a href="./KVEvent.html#KVEvent:IsOK" title="Bool_t KVEvent::IsOK()">IsOK</a>()==<a href="./ListOfTypes.html#Bool_t">kTRUE</a> are considered.
+ If opt = <span class="string">"name"</span> only particles with <a href="./#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>()==<span class="string">"name"</span> are considered.
+
+ IN ANY CASE, YOU MUST NOT USE THIS METHOD INSIDE A LOOP
+ OVER THE EVENT USING GETNEXTPARTICLE() !!!
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVEvent:GetMultiplicity" href="src/KVEvent.cxx.html#hfEWbB">GetMultiplicity</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a> A = 0, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</span><br />
@@ -778,7 +803,7 @@ return list of isotopes of the event with the format :
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jun  3 09:59:11 2016 </em><em>&raquo; Last generated: 2016-06-03 09:59</em><br />
+<em>&raquo; Last changed: Fri Aug  5 14:46:39 2016 </em><em>&raquo; Last generated: 2016-08-05 14:46</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

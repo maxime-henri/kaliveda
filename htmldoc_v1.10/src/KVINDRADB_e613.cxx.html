@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jun  3 10:00:14 2016            -->
+<!--   Date: Fri Aug  5 14:47:47 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -92,7 +92,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
       <a href="../KVINDRADB.html#KVINDRADB:ReadNewRunList" title="void KVINDRADB::ReadNewRunList()">ReadNewRunList</a>();
    };
 
-   <a href="../KVINDRADB.html#KVINDRADB:ReadSystemList" title="void KVINDRADB::ReadSystemList()">ReadSystemList</a>();
+   <a href="../KVExpDB.html#KVExpDB:ReadSystemList" title="void KVExpDB::ReadSystemList()">ReadSystemList</a>();
    <a href="../KVINDRADB_e613.html#KVINDRADB_e613:ReadChIoPressures" title="void KVINDRADB_e613::ReadChIoPressures()">ReadChIoPressures</a>();
    <a href="../KVINDRADB_e613.html#KVINDRADB_e613:ReadGainList" title="void KVINDRADB_e613::ReadGainList()">ReadGainList</a>();
    <a href="../KVINDRADB_e613.html#KVINDRADB_e613:ReadPedestalList" title="void KVINDRADB_e613::ReadPedestalList()">ReadPedestalList</a>();
@@ -106,7 +106,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
 
    <span class="comment">// read all available mean pulser data and store in tree</span>
    <span class="keyword">if</span> (!fPulserData) fPulserData = <span class="keyword">new</span> <a href="../KVINDRAPulserDataTree.html">KVINDRAPulserDataTree</a>;
-   fPulserData-&gt;SetRunList(<a href="../KVINDRADB.html#KVINDRADB:GetRuns" title="KVSeqCollection* KVINDRADB::GetRuns()">GetRuns</a>());
+   fPulserData-&gt;SetRunList(<a href="../KVExpDB.html#KVExpDB:GetRuns" title="KVSeqCollection* KVExpDB::GetRuns()">GetRuns</a>());
    fPulserData-&gt;<a href="../KVINDRADB_e613.html#KVINDRADB_e613:Build" title="void KVINDRADB_e613::Build()">Build</a>();
 
    <a href="../KVINDRADB.html#KVINDRADB:ReadCsITotalLightGainCorrections" title="void KVINDRADB::ReadCsITotalLightGainCorrections()">ReadCsITotalLightGainCorrections</a>();
@@ -130,9 +130,9 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
    <span class="comment">//Pressures (of C3F8) are given in mbar).</span>
 
    <a href="../ListOfTypes.html#ifstream">ifstream</a> fin;
-   <span class="keyword">if</span> (!<a href="../KVINDRADB.html#KVINDRADB:OpenCalibFile" title="Bool_t KVINDRADB::OpenCalibFile(const Char_t* type,ifstream&amp; fs)">OpenCalibFile</a>(<span class="string">"Pressures"</span>, fin)) {
+   <span class="keyword">if</span> (!<a href="../KVExpDB.html#KVExpDB:OpenCalibFile" title="Bool_t KVExpDB::OpenCalibFile(const Char_t* type,ifstream&amp; fs)">OpenCalibFile</a>(<span class="string">"Pressures"</span>, fin)) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadChIoPressures()"</span>, <span class="string">"Could not open file %s"</span>,
-            <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Pressures"</span>));
+            <a href="../KVExpDB.html#KVExpDB:GetCalibFileName" title="const Char_t* KVExpDB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Pressures"</span>));
       <span class="keyword">return</span>;
    }
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"ReadChIoPressures()"</span>, <span class="string">"Reading ChIo pressures parameters..."</span>);
@@ -162,7 +162,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
                parset = <span class="keyword">new</span> <a href="../KVDBChIoPressures.html">KVDBChIoPressures</a>(pressure);
                <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"ChIo Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
                par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
-               <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRange" title="void KVINDRADB::LinkListToRunRange(TList* list,KVNumberList nl)">LinkListToRunRange</a>(par_list, nl);
+               <a href="../KVExpDB.html#KVExpDB:LinkListToRunRange" title="void KVExpDB::LinkListToRunRange(TList* list,KVNumberList nl)">LinkListToRunRange</a>(par_list, nl);
                par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
                <span class="keyword">for</span> (<span class="keyword">int</span> zz = 0; zz &lt; 5; zz++) pressure[zz] = 0.;
                read_pressure = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
@@ -185,7 +185,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
             parset = <span class="keyword">new</span> <a href="../KVDBChIoPressures.html">KVDBChIoPressures</a>(pressure);
             <a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"ChIo Pressures"</span>)-><a href="../KVDBTable.html#KVDBTable:AddRecord" title="Bool_t KVDBTable::AddRecord(KVDBRecord* add)">AddRecord</a>(parset);
             par_list-&gt;<a href="../#TFolder:Add" title="void TFolder::Add(TObject* obj)">Add</a>(parset);
-            <a href="../KVINDRADB.html#KVINDRADB:LinkListToRunRange" title="void KVINDRADB::LinkListToRunRange(TList* list,KVNumberList nl)">LinkListToRunRange</a>(par_list, nl);
+            <a href="../KVExpDB.html#KVExpDB:LinkListToRunRange" title="void KVExpDB::LinkListToRunRange(TList* list,KVNumberList nl)">LinkListToRunRange</a>(par_list, nl);
             par_list-&gt;<a href="../#TFolder:Clear" title="void TFolder::Clear(Option_t* option=&quot;&quot;)">Clear</a>();
             <span class="keyword">for</span> (<span class="keyword">int</span> zz = 0; zz &lt; 5; zz++) pressure[zz] = 0.;
             read_pressure = <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
@@ -240,8 +240,8 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
 
    <a href="../KVFileReader.html">KVFileReader</a> flist;
    TString fp;
-   <span class="keyword">if</span> (!<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Gains"</span>), fp, fDataSet.Data())) {
-      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadGainList"</span>, <span class="string">"Fichier %s, inconnu au bataillon"</span>, <a href="../KVINDRADB.html#KVINDRADB:GetCalibFileName" title="const Char_t* KVINDRADB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Gains"</span>));
+   <span class="keyword">if</span> (!<a href="../KVBase.html">KVBase</a>::<a href="../KVBase.html#KVBase:SearchKVFile" title="Bool_t KVBase::SearchKVFile(const Char_t* name,TString&amp; fullpath,const Char_t* kvsubdir=&quot;&quot;)">SearchKVFile</a>(<a href="../KVExpDB.html#KVExpDB:GetCalibFileName" title="const Char_t* KVExpDB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Gains"</span>), fp, fDataSet.Data())) {
+      <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ReadGainList"</span>, <span class="string">"Fichier %s, inconnu au bataillon"</span>, <a href="../KVExpDB.html#KVExpDB:GetCalibFileName" title="const Char_t* KVExpDB::GetCalibFileName(const Char_t* type)">GetCalibFileName</a>(<span class="string">"Gains"</span>));
       <span class="keyword">return</span>;
    }
 
@@ -307,7 +307,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
                         par = <span class="keyword">new</span> <a href="../KVDBParameterSet.html">KVDBParameterSet</a>(obj-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <span class="string">"Gains"</span>, 1);
                         par-&gt;SetParameter(gain);
                         fGains-&gt;AddRecord(par);
-                        <a href="../KVINDRADB.html#KVINDRADB:LinkRecordToRunRange" title="void KVINDRADB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, nl);
+                        <a href="../KVExpDB.html#KVExpDB:LinkRecordToRunRange" title="void KVExpDB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, nl);
                      }
                   }
                }
@@ -364,7 +364,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
                   par = <span class="keyword">new</span> <a href="../KVDBParameterSet.html">KVDBParameterSet</a>(rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <span class="string">"Piedestal"</span>, 1);
                   par-&gt;SetParameter(env-&gt;GetValue(rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), 0.0));
                   fPedestals-&gt;AddRecord(par);
-                  <a href="../KVINDRADB.html#KVINDRADB:LinkRecordToRunRange" title="void KVINDRADB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, default_run_list);
+                  <a href="../KVExpDB.html#KVExpDB:LinkRecordToRunRange" title="void KVExpDB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, default_run_list);
                }
             }
             <span class="keyword">delete</span> env;
@@ -492,7 +492,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
                         par-&gt;SetParameters(a0, a1, a2, gain, dum2);
 
                         fChanVolt-&gt;AddRecord(par);
-                        <a href="../KVINDRADB.html#KVINDRADB:LinkRecordToRunRange" title="void KVINDRADB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, default_run_list);
+                        <a href="../KVExpDB.html#KVExpDB:LinkRecordToRunRange" title="void KVExpDB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, default_run_list);
                      }
                   } <span class="keyword">else</span> {
                      a0 = a1 = a2 = gain = 0;
@@ -560,7 +560,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
                par = <span class="keyword">new</span> <a href="../KVDBParameterSet.html">KVDBParameterSet</a>(rec-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(), <span class="string">"Volt-Energy"</span>, 3);
                par-&gt;SetParameters(a0, a1, chi);
                fVoltMeVChIoSi-&gt;AddRecord(par);
-               <a href="../KVINDRADB.html#KVINDRADB:LinkRecordToRunRange" title="void KVINDRADB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, default_run_list);
+               <a href="../KVExpDB.html#KVExpDB:LinkRecordToRunRange" title="void KVExpDB::LinkRecordToRunRange(KVDBRecord* rec,UInt_t first_run,UInt_t last_run) or overloads">LinkRecordToRunRange</a>(par, default_run_list);
 
             }
             <span class="keyword">delete</span> env;
@@ -578,7 +578,7 @@ ClassImp(<a href="../KVINDRADB_e613.html">KVINDRADB_e613</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-06-03 10:00 </em><em>&raquo; Last generated: 2016-06-03 10:00</em><br />
+<em>&raquo; Last changed: 2016-08-05 14:47 </em><em>&raquo; Last generated: 2016-08-05 14:47</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

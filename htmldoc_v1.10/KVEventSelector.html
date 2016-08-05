@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jun  3 09:59:12 2016            -->
+<!--   Date: Fri Aug  5 14:46:41 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -147,6 +147,7 @@ return false;}
 <tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVEventSelector:KVEventSelector">KVEventSelector</a>(TTree* = 0)</td></tr>
 <tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVEventSelector:_KVEventSelector">~KVEventSelector</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:Abort"><span class="baseclass">TSelector::</span>Abort</a>(<span class="keyword">const</span> <span class="keyword">char</span>* why, <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort what = kAbortProcess)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:AbortProcessingLoop">AbortProcessingLoop</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> now = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVEventSelector:AddGV">AddGV</a>(<a href="./KVVarGlob.html">KVVarGlob</a>* vg)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./KVVarGlob.html">KVVarGlob</a>*</td><td class="funcname"><a class="funcname" href="#KVEventSelector:AddGV@1">AddGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
@@ -342,6 +343,7 @@ return false;}
 <tr class="datainh"><td class="datatype"><a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="#TSelector:fAbort"><span class="baseclass">TSelector::</span>fAbort</a></td><td class="datadesc">Abort status</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVEventSelector:fBranchName"></a>fBranchName</td><td class="datadesc">name of branch which contains events to analyse</td></tr>
 <tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="KVEventSelector:fChain"></a>fChain</td><td class="datadesc">!pointer to the analyzed TTree or TChain</td></tr>
+<tr class="data"><td class="datatype">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVEventSelector:fCleanAbort"></a>fCleanAbort</td><td class="datadesc">flag to force abort of processing, (Slave)Terminate() will be called</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVEventSelector:fCombinedOutputFile"></a>fCombinedOutputFile</td><td class="datadesc">optional name for single results file with trees and histos</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVEventSelector:fEventsRead"></a>fEventsRead</td><td class="datadesc">number of events read</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVEventSelector:fEventsReadInterval"></a>fEventsReadInterval</td><td class="datadesc">interval at which to print number of events read</td></tr>
@@ -415,7 +417,8 @@ return false;}
  simple or elaborate selection criteria, run algorithms on the data
  of the event and typically fill histograms.
 
- The processing can be stopped by calling <a href="./#TSelector:Abort" title="void TSelector::Abort(const char* why,TSelector::EAbort what=kAbortProcess)">Abort</a>().
+ Processing will abort cleanly if static flag <a href="./KVEventSelector.html#KVEventSelector:fCleanAbort" title="Bool_t KVEventSelector::fCleanAbort">fCleanAbort</a> has been set
+ by some external controlling process.
 
  Use fStatus to set the return value of TTree::<a href="./KVEventSelector.html#KVEventSelector:Process" title="Bool_t KVEventSelector::Process(Long64_t entry)">Process</a>().
 
@@ -601,6 +604,10 @@ if no sname=<span class="string">""</span>, all trees in the list is filled
  user if needed. The return value is currently not used.
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVEventSelector:AbortProcessingLoop" href="src/KVEventSelector.h.html#dcHHTD">AbortProcessingLoop</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> now = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Set flag to force a clean abort of the processing loop
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVEventSelector:KVEventSelector" href="src/KVEventSelector.h.html#ee4zEE">KVEventSelector</a>(TTree*  = 0)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">virtual</span> <a class="funcname" name="KVEventSelector:_KVEventSelector" href="src/KVEventSelector.h.html#ec7zR">~KVEventSelector</a>()</span><br />
@@ -676,7 +683,7 @@ This is equivalent to <a href="./KVEventSelector.html#KVEventSelector:GetGVList"
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jun  3 09:59:13 2016 </em><em>&raquo; Last generated: 2016-06-03 09:59</em><br />
+<em>&raquo; Last changed: Fri Aug  5 14:46:41 2016 </em><em>&raquo; Last generated: 2016-08-05 14:46</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
