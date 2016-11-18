@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Aug  5 14:48:41 2016            -->
+<!--   Date: Fri Nov 18 14:27:53 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -940,7 +940,7 @@ ClassImp(<a href="../KVSignal.html">KVSignal</a>)
             <span class="keyword">break</span>;
       }
    }
-   h-&gt;<a href="../#TGraph:GetXaxis" title="TAxis* TGraph::GetXaxis()">GetXaxis</a>()-&gt;<a href="../#TGraph:SetTitle" title="void TGraph::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(<span class="string">"Frequency"</span>);
+<span class="comment">//   h-&gt;<a href="../#TGraph:GetXaxis" title="TAxis* TGraph::GetXaxis()">GetXaxis</a>()-&gt;<a href="../#TGraph:SetTitle" title="void TGraph::SetTitle(const char* title=&quot;&quot;)">SetTitle</a>(<span class="string">"Frequency"</span>);</span>
    <span class="keyword">delete</span> [] re;
    <span class="keyword">delete</span> [] im;
 
@@ -1155,10 +1155,10 @@ ClassImp(<a href="../KVSignal.html">KVSignal</a>)
    <span class="keyword">const</span> <span class="keyword">int</span> Nsa = <a href="../KVSignal.html#KVSignal:fAdc" title="TArrayF KVSignal::fAdc">fAdc</a>.GetSize();
    <span class="keyword">const</span> <span class="keyword">double</span> tau = <a href="../KVSignal.html#KVSignal:fChannelWidth" title="Double_t KVSignal::fChannelWidth">fChannelWidth</a>;
 
-   <a href="../KVSignal.html">KVSignal</a>* coeff = <span class="keyword">new</span> <a href="../KVSignal.html">KVSignal</a>();
-   <span class="keyword">this</span>-&gt;<a href="../KVSignal.html#KVSignal:ApplyModifications" title="void KVSignal::ApplyModifications(TGraph* newSignal=0,Int_t nsa=-1)">ApplyModifications</a>(coeff);
-   coeff-&gt;<a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>();
-   <span class="keyword">if</span> (coeff-&gt;<a href="../KVSignal.html#KVSignal:FIR_ApplySmoothingSpline" title="int KVSignal::FIR_ApplySmoothingSpline(double l,int nbits=-1)">FIR_ApplySmoothingSpline</a>(l, nbits) != 0) <span class="keyword">return</span>;
+   <a href="../KVSignal.html">KVSignal</a> coeff;
+   <span class="keyword">this</span>-&gt;<a href="../KVSignal.html#KVSignal:ApplyModifications" title="void KVSignal::ApplyModifications(TGraph* newSignal=0,Int_t nsa=-1)">ApplyModifications</a>(&amp;coeff);
+   coeff.<a href="../KVSignal.html#KVSignal:SetADCData" title="void KVSignal::SetADCData()">SetADCData</a>();
+   <span class="keyword">if</span> (coeff.<a href="../KVSignal.html#KVSignal:FIR_ApplySmoothingSpline" title="int KVSignal::FIR_ApplySmoothingSpline(double l,int nbits=-1)">FIR_ApplySmoothingSpline</a>(l, nbits) != 0) <span class="keyword">return</span>;
 
    <a href="../KVSignal.html#KVSignal:fChannelWidthInt" title="Double_t KVSignal::fChannelWidthInt">fChannelWidthInt</a> = taufinal;
    TArrayF interpo;
@@ -1168,7 +1168,7 @@ ClassImp(<a href="../KVSignal.html">KVSignal</a>)
    <span class="keyword">if</span> (nlast &lt;= 0) <span class="keyword">return</span>;
 
 <span class="comment">//   for (<a href="../ListOfTypes.html#int">int</a> i = 0; i &lt; interpo.GetSize()-3*tau; i++) interpo.AddAt(<a href="../KVSignal.html#KVSignal:GetDataSmoothingSplineLTI" title="double KVSignal::GetDataSmoothingSplineLTI(double t)">GetDataSmoothingSplineLTI</a>(i * taufinal), i);</span>
-   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; interpo.GetSize() - (<span class="keyword">int</span>)(53 * tau / taufinal); i++) interpo.AddAt(coeff-&gt;<a href="../KVSignal.html#KVSignal:GetDataSmoothingSplineLTI" title="double KVSignal::GetDataSmoothingSplineLTI(double t)">GetDataSmoothingSplineLTI</a>(i * taufinal), i);
+   <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; interpo.GetSize() - (<span class="keyword">int</span>)(53 * tau / taufinal); i++) interpo.AddAt(coeff.<a href="../KVSignal.html#KVSignal:GetDataSmoothingSplineLTI" title="double KVSignal::GetDataSmoothingSplineLTI(double t)">GetDataSmoothingSplineLTI</a>(i * taufinal), i);
    <a href="../KVSignal.html#KVSignal:fAdc" title="TArrayF KVSignal::fAdc">fAdc</a>.<a href="../KVSignal.html#KVSignal:Set" title="void KVSignal::Set(Int_t n)">Set</a>(0);
    <a href="../KVSignal.html#KVSignal:fAdc" title="TArrayF KVSignal::fAdc">fAdc</a>.<a href="../KVSignal.html#KVSignal:Set" title="void KVSignal::Set(Int_t n)">Set</a>(interpo.GetSize());
    <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; nlast; i++) <a href="../KVSignal.html#KVSignal:fAdc" title="TArrayF KVSignal::fAdc">fAdc</a>.AddAt(interpo.At(i), i);
@@ -1516,7 +1516,7 @@ ClassImp(<a href="../KVSignal.html">KVSignal</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-08-05 14:48 </em><em>&raquo; Last generated: 2016-08-05 14:48</em><br />
+<em>&raquo; Last changed: 2016-11-18 14:27 </em><em>&raquo; Last generated: 2016-11-18 14:27</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

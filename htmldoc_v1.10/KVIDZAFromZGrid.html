@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Aug  5 14:47:39 2016            -->
+<!--   Date: Fri Nov 18 14:26:43 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/10</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/12</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/10</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/12</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_IDENTIFICATION_Index.html">IDENTIFICATION</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVIDZAFromZGrid</a>
@@ -530,9 +530,11 @@ Points with code kICODE8 are totally out of range.
 </table></div>
 <div class="access" id="datapubl"><b>public:</b>
 <table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVIDZAFromZGrid:fHasMassCut"></a>fHasMassCut</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVIDZAFromZGrid:fPIDRange"></a>fPIDRange</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a></td><td class="dataname"><a name="KVIDZAFromZGrid:fTables"></a>fTables</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVIDZAFromZGrid:fZmaxInt"></a>fZmaxInt</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVIDZAFromZGrid:fZminInt"></a>fZminInt</td><td></td></tr>
 
 </table></div>
 <div class="access" id="dataprot"><b>protected:</b>
@@ -671,6 +673,14 @@ Points with code kICODE8 are totally out of range.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDZAFromZGrid:ReadFromAsciiFile" href="src/KVIDZAFromZGrid.cxx.html#Nxe1p">ReadFromAsciiFile</a>(<a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; gridfile)</span><br />
+<div class="funccomm"><pre>   <a href="./KVIDZAFromZGrid.html#KVIDZAFromZGrid:fPIDRange" title="Bool_t KVIDZAFromZGrid::fPIDRange">fPIDRange</a> = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>;
+   <a href="./KVIDGraph.html">KVIDGraph</a>::<a href="./KVIDGraph.html#KVIDGraph:ReadFromAsciiFile" title="void KVIDGraph::ReadFromAsciiFile(ifstream&amp; gridfile)">ReadFromAsciiFile</a>(gridfile);
+   if (<a href="./KVIDGraph.html#KVIDGraph:GetParameters" title="KVNameValueList* KVIDGraph::GetParameters()">GetParameters</a>()-><a href="./KVNameValueList.html#KVNameValueList:HasParameter" title="Bool_t KVNameValueList::HasParameter(const Char_t* name)">HasParameter</a>(<span class="string">"PIDRANGE"</span>)) {
+      <a href="./KVIDZAFromZGrid.html#KVIDZAFromZGrid:fPIDRange" title="Bool_t KVIDZAFromZGrid::fPIDRange">fPIDRange</a> = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>;
+      <a href="./KVIDZAFromZGrid.html#KVIDZAFromZGrid:fZmaxInt" title="Int_t KVIDZAFromZGrid::fZmaxInt">fZmaxInt</a> = <a href="./KVIDGraph.html#KVIDGraph:GetParameters" title="KVNameValueList* KVIDGraph::GetParameters()">GetParameters</a>()-><a href="./KVNameValueList.html#KVNameValueList:GetIntValue" title="Int_t KVNameValueList::GetIntValue(const Char_t* name) or overloads">GetIntValue</a>(<span class="string">"PIDRANGE"</span>);
+      <a href="./KVIDZAFromZGrid.html#KVIDZAFromZGrid:LoadPIDRanges" title="void KVIDZAFromZGrid::LoadPIDRanges()">LoadPIDRanges</a>();
+   }
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDZAFromZGrid:LoadPIDRanges" href="src/KVIDZAFromZGrid.cxx.html#s5LXdB">LoadPIDRanges</a>()</span><br />
 </div>
@@ -712,7 +722,7 @@ Points with code kICODE8 are totally out of range.
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?Diego+Gruyer"> Diego Gruyer</a> </em><em>&raquo; Created  by KVClassFactory on Tue Mar  8 10:00:16 2016</em><br />
-<em>&raquo; Last changed: Fri Aug  5 14:47:40 2016 </em><em>&raquo; Last generated: 2016-08-05 14:47</em><br />
+<em>&raquo; Last changed: Fri Nov 18 14:26:44 2016 </em><em>&raquo; Last generated: 2016-11-18 14:26</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
