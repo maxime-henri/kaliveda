@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Nov 18 14:27:55 2016            -->
+<!--   Date: Thu Dec  1 09:57:53 2016            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -223,6 +223,7 @@ return false;}
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimDirGUI:RefreshSimDir">RefreshSimDir</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimDirGUI:RemSimDir">RemSimDir</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimDirGUI:Run">Run</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimDirGUI:RunAnalysis">RunAnalysis</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimDirGUI:RunFilter">RunFilter</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
@@ -342,11 +343,12 @@ return false;}
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVSimDirGUI:fRun"></a>fRun</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVSimDirGUI:fSystem"></a>fSystem</td><td></td></tr>
 <tr class="data"><td class="datatype">TGTextEntry*</td><td class="dataname"><a name="KVSimDirGUI:fTEAnalysisClassFileName"></a>fTEAnalysisClassFileName</td><td></td></tr>
+<tr class="data"><td class="datatype">TGTextEntry*</td><td class="dataname"><a name="KVSimDirGUI:fTESystem"></a>fTESystem</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVSimDirGUI:fWithPROOF"></a>fWithPROOF</td><td class="datadesc">=kTRUE when running with PROOF-lite</td></tr>
 <tr class="data"><td class="datatype"><span class="keyword">const</span> TGPicture*</td><td class="dataname"><a name="KVSimDirGUI:pclose"></a>pclose</td><td class="datadesc">used for list tree items</td></tr>
 <tr class="data"><td class="datatype"><span class="keyword">const</span> TGPicture*</td><td class="dataname"><a name="KVSimDirGUI:popen"></a>popen</td><td class="datadesc">used for list tree items</td></tr>
+<tr class="data"><td class="datatype">TGPictureButton*</td><td class="dataname"><a name="KVSimDirGUI:proof_analysis"></a>proof_analysis</td><td></td></tr>
 <tr class="data"><td class="datatype">TGPictureButton*</td><td class="dataname"><a name="KVSimDirGUI:proof_analysis_ana"></a>proof_analysis_ana</td><td></td></tr>
-<tr class="data"><td class="datatype">TGPictureButton*</td><td class="dataname"><a name="KVSimDirGUI:proof_analysis_filt"></a>proof_analysis_filt</td><td></td></tr>
 
 </table></div>
 </div>
@@ -427,6 +429,10 @@ return false;}
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:SelectRun" href="src/KVSimDirGUI.cxx.html#T18UnE">SelectRun</a>(<span class="keyword">const</span> <span class="keyword">char</span>* )</span><br />
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:Run" href="src/KVSimDirGUI.cxx.html#fQ6crB">Run</a>()</span><br />
+<div class="funccomm"><pre>    <a href="./#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"Run"</span>,<span class="string">"current tab : '%d'"</span>,<a href="./KVSimDirGUI.html#KVSimDirGUI:fAnalysisTabs" title="TGTab* KVSimDirGUI::fAnalysisTabs">fAnalysisTabs</a>-&gt;GetCurrent());
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:RunFilter" href="src/KVSimDirGUI.cxx.html#ljxds">RunFilter</a>()</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:FilterType" href="src/KVSimDirGUI.h.html#n9DUlE">FilterType</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</span><br />
@@ -436,15 +442,19 @@ return false;}
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:Kinematics" href="src/KVSimDirGUI.h.html#quiQWE">Kinematics</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> i)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:EnableProof" href="src/KVSimDirGUI.h.html#BFY0QD">EnableProof</a>()</span><br />
+<div class="funccomm"><pre>      if (<a href="./KVSimDirGUI.html#KVSimDirGUI:fWithPROOF" title="Bool_t KVSimDirGUI::fWithPROOF">fWithPROOF</a>) return;
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimDirGUI:DisableProof" href="src/KVSimDirGUI.h.html#v98a6">DisableProof</a>()</span><br />
+<div class="funccomm"><pre>      if (!<a href="./KVSimDirGUI.html#KVSimDirGUI:fWithPROOF" title="Bool_t KVSimDirGUI::fWithPROOF">fWithPROOF</a>) return;
+</pre></div>
 </div>
 
 <br />
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?John+Frankland"> John Frankland</a> </em><em>&raquo; Created  by KVClassFactory on Wed Jul 18 11:55:11 2012</em><br />
-<em>&raquo; Last changed: Fri Nov 18 14:27:56 2016 </em><em>&raquo; Last generated: 2016-11-18 14:27</em><br />
+<em>&raquo; Last changed: Thu Dec  1 09:57:54 2016 </em><em>&raquo; Last generated: 2016-12-01 09:57</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
