@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:55:23 2016            -->
+<!--   Date: Fri Jan 27 13:32:53 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -45,7 +45,7 @@ ClassImp(<a href="../KVEventViewer.html">KVEventViewer</a>)
 // --&gt; END_HTML<span class="comment"></span>
 <span class="comment">// Any <a href="../KVEvent.html">KVEvent</a> object can be represented by using <a href="../KVEventViewer.html">KVEventViewer</a>::<a href="../KVEventViewer.html#KVEventViewer:DrawEvent" title="void KVEventViewer::DrawEvent(KVEvent* ,const Char_t* frame=&quot;&quot;) or overloads">DrawEvent</a>(<a href="../KVEvent.html">KVEvent</a>*, const <a href="../ListOfTypes.html#Char_t">Char_t</a>* frame=<span class="string">""</span>).</span>
 <span class="comment">// The second (optional) argument allows to choose which reference frame to use (frame must already</span>
-<span class="comment">// have been defined for the <a href="../KVEvent.html">KVEvent</a> using <a href="../KVEvent.html">KVEvent</a>::<a href="../KVEvent.html#KVEvent:SetFrame" title="void KVEvent::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>).</span>
+<span class="comment">// have been defined for the <a href="../KVEvent.html">KVEvent</a> using <a href="../KVEvent.html">KVEvent</a>::<a href="../KVEvent.html#KVEvent:SetFrame" title="void KVEvent::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ft) or overloads">SetFrame</a>).</span>
 <span class="comment">//</span>
 <span class="comment">// For each nucleus of the event, a spherical cluster of protons and neutrons will be displayed,</span>
 <span class="comment">// using the default colors for these particles (see constructor and related methods).</span>
@@ -117,7 +117,7 @@ ClassImp(<a href="../KVEventViewer.html">KVEventViewer</a>)
    <a href="../ListOfTypes.html#Int_t">Int_t</a> N = nucleus-&gt;GetN();
    <a href="../ListOfTypes.html#Int_t">Int_t</a> Z = nucleus-&gt;GetZ();
 
-   TVector3 V = (<a href="../KVEventViewer.html#KVEventViewer:fMomentumSpace" title="Bool_t KVEventViewer::fMomentumSpace">fMomentumSpace</a> ? nucleus-&gt;GetFrame(frame)-&gt;GetMomentum() : nucleus-&gt;GetFrame(frame)-&gt;GetV());
+   TVector3 V = (<a href="../KVEventViewer.html#KVEventViewer:fMomentumSpace" title="Bool_t KVEventViewer::fMomentumSpace">fMomentumSpace</a> ? nucleus-&gt;GetFrame(frame, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetMomentum() : nucleus-&gt;GetFrame(frame, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetV());
 
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> Highlight = <a href="../KVEventViewer.html#KVEventViewer:SetHighlight" title="Bool_t KVEventViewer::SetHighlight(KVNucleus* n)">SetHighlight</a>(nucleus);
 
@@ -178,8 +178,8 @@ ClassImp(<a href="../KVEventViewer.html">KVEventViewer</a>)
    <span class="keyword">if</span> (<a href="../KVEventViewer.html#KVEventViewer:fMomentumSpace" title="Bool_t KVEventViewer::fMomentumSpace">fMomentumSpace</a>) <a href="../KVEventViewer.html#KVEventViewer:fScaleFactor" title="Double_t KVEventViewer::fScaleFactor">fScaleFactor</a> = 1.e-2;
    <span class="keyword">else</span> <a href="../KVEventViewer.html#KVEventViewer:fScaleFactor" title="Double_t KVEventViewer::fScaleFactor">fScaleFactor</a> = 1.;
    <span class="keyword">while</span> ((nuc = event-&gt;GetNextParticle(<span class="string">"ok"</span>))) {
-      <a href="../ListOfTypes.html#Double_t">Double_t</a> v = <a href="../KVEventViewer.html#KVEventViewer:fScaleFactor" title="Double_t KVEventViewer::fScaleFactor">fScaleFactor</a> * (<a href="../KVEventViewer.html#KVEventViewer:fMomentumSpace" title="Bool_t KVEventViewer::fMomentumSpace">fMomentumSpace</a> ? nuc-&gt;GetFrame(frame)-&gt;GetMomentum().Mag() :
-                                   nuc-&gt;GetFrame(frame)-&gt;GetV().Mag());
+      <a href="../ListOfTypes.html#Double_t">Double_t</a> v = <a href="../KVEventViewer.html#KVEventViewer:fScaleFactor" title="Double_t KVEventViewer::fScaleFactor">fScaleFactor</a> * (<a href="../KVEventViewer.html#KVEventViewer:fMomentumSpace" title="Bool_t KVEventViewer::fMomentumSpace">fMomentumSpace</a> ? nuc-&gt;GetFrame(frame, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetMomentum().Mag() :
+                                   nuc-&gt;GetFrame(frame, <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetV().Mag());
       <span class="keyword">if</span> (v &gt; <a href="../KVEventViewer.html#KVEventViewer:maxV" title="Double_t KVEventViewer::maxV">maxV</a>) <a href="../KVEventViewer.html#KVEventViewer:maxV" title="Double_t KVEventViewer::maxV">maxV</a> = v;
       <span class="keyword">if</span> (nuc-&gt;GetZ() &gt; <a href="../KVEventViewer.html#KVEventViewer:maxZ" title="Int_t KVEventViewer::maxZ">maxZ</a>) <a href="../KVEventViewer.html#KVEventViewer:maxZ" title="Int_t KVEventViewer::maxZ">maxZ</a> = nuc-&gt;GetZ();
    }
@@ -338,7 +338,7 @@ ClassImp(<a href="../KVEventViewer.html">KVEventViewer</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-12-01 09:55 </em><em>&raquo; Last generated: 2016-12-01 09:55</em><br />
+<em>&raquo; Last changed: 2017-01-27 13:32 </em><em>&raquo; Last generated: 2017-01-27 13:32</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:58:36 2016            -->
+<!--   Date: Fri Jan 27 13:35:54 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -98,10 +98,10 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
    <span class="comment">// properties, read from file given by TEnv variable <a href="../KVedaLoss.html">KVedaLoss</a>.RangeTables</span>
 
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"init_materials"</span>, <span class="string">"Initialising KVedaLoss..."</span>);
-   printf(<span class="string">"\n"</span>);
-   printf(<span class="string">"\t*************************************************************************\n"</span>);
-   printf(<span class="string">"\t*                VEDALOSS STOPPING POWER &amp; RANGE TABLES                 *\n"</span>);
-   printf(<span class="string">"\t*                                                                       *\n"</span>);
+<span class="comment">//    printf(<span class="string">"\n"</span>);</span>
+<span class="comment">//    printf(<span class="string">"\t*************************************************************************\n"</span>);</span>
+<span class="comment">//    printf(<span class="string">"\t*                VEDALOSS STOPPING POWER &amp; RANGE TABLES                 *\n"</span>);</span>
+<span class="comment">//    printf(<span class="string">"\t*                                                                       *\n"</span>);</span>
    <span class="keyword">int</span> mat_count = 0;
    <a href="../KVedaLoss.html#KVedaLoss:fMaterials" title="KVHashList* KVedaLoss::fMaterials">fMaterials</a> = <span class="keyword">new</span> <a href="../KVHashList.html">KVHashList</a>;
    <a href="../KVedaLoss.html#KVedaLoss:fMaterials" title="KVHashList* KVedaLoss::fMaterials">fMaterials</a>-><a href="../#TCollection:SetName" title="void TCollection::SetName(const char* name)">SetName</a>(<span class="string">"VEDALOSS materials list"</span>);
@@ -150,26 +150,26 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
                <span class="keyword">if</span> (!tmp_mat-&gt;ReadRangeTable(fp)) <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kFALSE</a>;
                tmp_mat-&gt;Initialize();
                ++mat_count;
-               <a href="../ListOfTypes.html#Double_t">Double_t</a> rho = 0.;
+<span class="comment">//               <a href="../ListOfTypes.html#Double_t">Double_t</a> rho = 0.;</span>
                <span class="keyword">if</span> (tmp_mat-&gt;IsGas()) tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:SetTemperatureAndPressure" title="void KVIonRangeTable::SetTemperatureAndPressure(const Char_t* ,Double_t temperature,Double_t pressure)">SetTemperatureAndPressure</a>(19., 1.*<a href="../KVUnits.html">KVUnits</a>::<a href="../KVUnits.html#KVUnits:atm" title="const long double KVUnits::atm">atm</a>);
-               rho = tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetDensity" title="Double_t KVIonRangeTable::GetDensity(const Char_t* )">GetDensity</a>();
-               printf(<span class="string">"\t*  %2d.  %-7s %-18s  Z=%2d A=%5.1f  rho=%6.3f g/cm**3    *\n"</span>,
-                      mat_count, tmp_mat-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>(), tmp_mat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),
-                      (<span class="keyword">int</span>)tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetZ" title="Double_t KVIonRangeTable::GetZ(const Char_t* )">GetZ</a>(), tmp_mat-&gt;GetMass(),
-                      rho);
+<span class="comment">//               rho = tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetDensity" title="Double_t KVIonRangeTable::GetDensity(const Char_t* )">GetDensity</a>();</span>
+<span class="comment">//                printf(<span class="string">"\t*  %2d.  %-7s %-18s  Z=%2d A=%5.1f  rho=%6.3f g/cm**3    *\n"</span>,</span>
+<span class="comment">//                       mat_count, tmp_mat-&gt;<a href="../KVBase.html#KVBase:GetType" title="const Char_t* KVBase::GetType()">GetType</a>(), tmp_mat-&gt;<a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>(),</span>
+<span class="comment">//                       (<a href="../ListOfTypes.html#int">int</a>)tmp_mat-&gt;<a href="../KVIonRangeTable.html#KVIonRangeTable:GetZ" title="Double_t KVIonRangeTable::GetZ(const Char_t* )">GetZ</a>(), tmp_mat-&gt;GetMass(),</span>
+<span class="comment">//                       rho);</span>
                <span class="keyword">break</span>;
          }
       }
       fclose(fp);
    }
-   printf(<span class="string">"\t*                                                                       *\n"</span>);
-   printf(<span class="string">"\t*     TF1::Range::Npx = %4d            TF1::EnergyLoss::Npx = %4d     *\n"</span>,
-          gEnv-&gt;GetValue(<span class="string">"KVedaLoss.Range.Npx"</span>, 100), gEnv-&gt;GetValue(<span class="string">"KVedaLoss.EnergyLoss.Npx"</span>, 100));
-   printf(<span class="string">"\t*                      TF1::ResidualEnergy::Npx = %4d                  *\n"</span>,
-          gEnv-&gt;GetValue(<span class="string">"KVedaLoss.ResidualEnergy.Npx"</span>, 100));
-   printf(<span class="string">"\t*                                                                       *\n"</span>);
-   printf(<span class="string">"\t*                       INITIALISATION COMPLETE                         *\n"</span>);
-   printf(<span class="string">"\t*************************************************************************\n"</span>);
+<span class="comment">//    printf(<span class="string">"\t*                                                                       *\n"</span>);</span>
+<span class="comment">//    printf(<span class="string">"\t*     TF1::Range::Npx = %4d            TF1::EnergyLoss::Npx = %4d     *\n"</span>,</span>
+<span class="comment">//           gEnv-&gt;GetValue(<span class="string">"KVedaLoss.Range.Npx"</span>, 100), gEnv-&gt;GetValue(<span class="string">"KVedaLoss.EnergyLoss.Npx"</span>, 100));</span>
+<span class="comment">//    printf(<span class="string">"\t*                      TF1::ResidualEnergy::Npx = %4d                  *\n"</span>,</span>
+<span class="comment">//           gEnv-&gt;GetValue(<span class="string">"KVedaLoss.ResidualEnergy.Npx"</span>, 100));</span>
+<span class="comment">//    printf(<span class="string">"\t*                                                                       *\n"</span>);</span>
+<span class="comment">//    printf(<span class="string">"\t*                       INITIALISATION COMPLETE                         *\n"</span>);</span>
+<span class="comment">//    printf(<span class="string">"\t*************************************************************************\n"</span>);</span>
    <span class="keyword">return</span> <a href="../ListOfTypes.html#Bool_t">kTRUE</a>;
 }
 
@@ -218,7 +218,7 @@ See documentation &lt;a href="KVedaLossDoc/KVedaLoss.html"&gt;here&lt;/a&gt;.
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-12-01 09:58 </em><em>&raquo; Last generated: 2016-12-01 09:58</em><br />
+<em>&raquo; Last changed: 2017-01-27 13:35 </em><em>&raquo; Last generated: 2017-01-27 13:35</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -1,0 +1,759 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: KaliVeda Development team           -->
+<!--                                             -->
+<!--   Date: Fri Jan 27 13:34:47 2017            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVOldINDRASelector</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVOldINDRASelector','libKVIndraanalysis','KVOldINDRASelector.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/13</a>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVOldINDRASelector.h.html">header file</a>
+<a class="descrheadentry" href="src/KVOldINDRASelector.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVIndra/analysis/KVOldINDRASelector.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVIndra/analysis/KVOldINDRASelector.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVOldINDRASelector:description">class description</a> 
+<a class="descrheadentry" href="#KVOldINDRASelector:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVOldINDRASelector:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVOldINDRASelector:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/13</a>
+ &#187; <a class="locationlevel" href="./KVINDRA_Index.html">KVINDRA</a>
+ &#187; <a class="locationlevel" href="./KVINDRA_ANALYSIS_Index.html">ANALYSIS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVOldINDRASelector</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVOldINDRASelector:description"></a>class KVOldINDRASelector: public TSelector</h1>
+<div class="classdescr">
+<pre>
+<a href="./KVOldINDRASelector.html">KVOldINDRASelector</a>
+
+Basic analysis class derived from <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a> for the analysis of TChains of
+<a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a> objects (ROOT files containing INDRA <a href="./KVOldINDRASelector.html#KVOldINDRASelector:data" title="KVINDRAReconEvent* KVOldINDRASelector::data">data</a>).
+
+The user's analysis class, derived from <a href="./KVOldINDRASelector.html">KVOldINDRASelector</a>, must define the following
+methods:
+
+      <a href="./ListOfTypes.html#void">void</a>    <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>()
+
+              Called once at the beginning of the analysis.
+              Can be used to define histograms, TTrees, etc.
+              Also the place to define the list of global variables to be used.
+
+      <a href="./ListOfTypes.html#void">void</a>    <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitRun" title="void KVOldINDRASelector::InitRun()">InitRun</a>();
+
+              Called at the beginning of each new run.
+              Define code masks for <span class="string">"good"</span> particles here.
+
+      <a href="./ListOfTypes.html#Bool_t">Bool_t</a>  <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>();
+
+              The analysis of the event.
+              Return value: <a href="./ListOfTypes.html#Bool_t">kTRUE</a> normally, <a href="./ListOfTypes.html#Bool_t">kFALSE</a> skips to the next run (?)
+
+      <a href="./ListOfTypes.html#void">void</a>    <a href="./KVOldINDRASelector.html#KVOldINDRASelector:EndRun" title="void KVOldINDRASelector::EndRun()">EndRun</a>();
+
+              Called at the end of each run.
+
+      <a href="./ListOfTypes.html#void">void</a>    <a href="./KVOldINDRASelector.html#KVOldINDRASelector:EndAnalysis" title="void KVOldINDRASelector::EndAnalysis()">EndAnalysis</a>();
+
+              Called at the end of the analysis.
+              <a href="./#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> histograms, TTrees to TFiles, etc.
+
+Use the static method <a href="./KVOldINDRASelector.html">KVOldINDRASelector</a>::<a href="./KVOldINDRASelector.html#KVOldINDRASelector:Make" title="void KVOldINDRASelector::Make(const Char_t* kvsname=&quot;MyOwnKVOldINDRASelector&quot;)">Make</a>(<span class="string">"MySelector"</span>) in order to generate a
+template for your analysis class with the correct declarations for the above
+methods. MySelector.C and MySelector.h will be generated.
+
+Using Options
+
+
+Using Global Variables
+
+Many of the most frequently used global variables have been implemented as
+KaliVeda classes, all of which derive from the base class <a href="./KVVarGlob.html">KVVarGlob</a>. The <a href="./KVOldINDRASelector.html">KVOldINDRASelector</a>
+class provides a semi-automatic way to calculate and use these variables, via
+an internal list of global variables (<a href="./KVGVList.html">KVGVList</a> class). In order to use a
+global variable in your analysis, declare it in your <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>() method,
+its value will automatically be calculated for each event analysed.
+Note that only particles with <a href="./KVINDRAReconNuc.html">KVINDRAReconNuc</a>::<a href="./KVParticle.html#KVParticle:IsOK" title="Bool_t KVParticle::IsOK()">IsOK</a>()==<a href="./ListOfTypes.html#Bool_t">kTRUE</a> are included in the calculation.
+
+For example, let us suppose you want to calculate the isotropy ratio Riso for
+each event. In <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>() you should add the line:
+
+     <a href="./KVOldINDRASelector.html#KVOldINDRASelector:AddGV" title="void KVOldINDRASelector::AddGV(KVVarGlob* ) or overloads">AddGV</a>( <span class="string">"KVRiso"</span>, <span class="string">"riso"</span> );
+
+This will create a new <a href="./KVRiso.html">KVRiso</a> global variable object with the name <span class="string">"riso"</span>
+(used to retrieve the object from the list when you want to know its value)
+and add it to the internal list of global variables to be calculated.
+
+In your event-by-event <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() method, you can retrieve the value of
+the global variable using e.g.
+
+     <a href="./ListOfTypes.html#Double_t">Double_t</a> rapport = <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetGV" title="KVVarGlob* KVOldINDRASelector::GetGV(const Char_t* )">GetGV</a>(<span class="string">"riso"</span>)-><a href="./KVVarGlob.html#KVVarGlob:GetValue" title="Double_t KVVarGlob::GetValue() or overloads">GetValue</a>();
+
+This gives the value of the isotropy ratio for the currently analysed event.
+
+
+More examples can be found in the AnalyseCamp1 analysis class.
+
+Manage histograms
+
+Few methods are defined to make easier the management
+of histograms
+Redefine the method <a href="./KVOldINDRASelector.html#KVOldINDRASelector:CreateHistos" title="void KVOldINDRASelector::CreateHistos()">CreateHistos</a>() and create the histograms
+like this
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:lhisto" title="KVHashList* KVOldINDRASelector::lhisto">lhisto</a>-><a href="./KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(new TH1F(...));
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:lhisto" title="KVHashList* KVOldINDRASelector::lhisto">lhisto</a>-><a href="./KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(new TH2F(...));
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:lhisto" title="KVHashList* KVOldINDRASelector::lhisto">lhisto</a>-><a href="./KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(new TProfile(...));
+All histograms are stored in an <span class="string">"owner"</span> <a href="./KVHashList.html">KVHashList</a> <span class="string">"lhisto"</span>
+
+The method <a href="./KVOldINDRASelector.html#KVOldINDRASelector:FillHisto" title="void KVOldINDRASelector::FillHisto(KVString sname,Double_t one,Double_t two=1,Double_t three=1,Double_t four=1)">FillHisto</a>(<a href="./KVString.html">KVString</a> sname,<a href="./ListOfTypes.html#Double_t">Double_t</a> one,<a href="./ListOfTypes.html#Double_t">Double_t</a> two,<a href="./ListOfTypes.html#Double_t">Double_t</a> three,<a href="./ListOfTypes.html#Double_t">Double_t</a> four)
+allows to fill any histogram declared as shown above
+you only need to give the histogram name followed by the arguments you use normally in the Fill method
+of TH1::Fill() and derivated
+
+Finally, to write the list of histograms in a file
+Just call the <a href="./KVOldINDRASelector.html#KVOldINDRASelector:WriteHistoToFile" title="void KVOldINDRASelector::WriteHistoToFile(KVString filename=&quot;FileFromKVOldINDRASelector.root&quot;,Option_t* option=&quot;recreate&quot;)">WriteHistoToFile</a> method indicating the name of the file (or not)
+
+
+Manage trees
+
+Few methods are defined to make easier the management
+of trees
+Redefine the method <a href="./KVOldINDRASelector.html#KVOldINDRASelector:CreateTrees" title="void KVOldINDRASelector::CreateTrees()">CreateTrees</a>() and create the histograms
+like this
+TTree* tt = 0;
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:lhisto" title="KVHashList* KVOldINDRASelector::lhisto">lhisto</a>-><a href="./KVSeqCollection.html#KVSeqCollection:Add" title="void KVSeqCollection::Add(TObject* obj)">Add</a>(new TTree(...));
+tt = (TTree* )<a href="./KVOldINDRASelector.html#KVOldINDRASelector:lhisto" title="KVHashList* KVOldINDRASelector::lhisto">lhisto</a>-><a href="./KVSeqCollection.html#KVSeqCollection:Last" title="TObject* KVSeqCollection::Last()">Last</a>()
+tt-&gt;Branch(...)
+tt-&gt;Branch(...)
+All histograms are stored in an <span class="string">"owner"</span> <a href="./KVHashList.html">KVHashList</a> <span class="string">"ltree"</span>
+
+The method <a href="./KVOldINDRASelector.html#KVOldINDRASelector:FillTree" title="void KVOldINDRASelector::FillTree(KVString sname=&quot;&quot;)">FillTree</a>(<a href="./KVString.html">KVString</a> sname=<span class="string">""</span>)
+allows to fill tree(s) according to the name passed as argument
+if <span class="string">""</span> is given all trees are filled
+
+Finally, to write the list of trees in a file
+Just call the <a href="./KVOldINDRASelector.html#KVOldINDRASelector:WriteTreeToFile" title="void KVOldINDRASelector::WriteTreeToFile(KVString filename=&quot;FileFromKVOldINDRASelector.root&quot;,Option_t* option=&quot;recreate&quot;)">WriteTreeToFile</a> method indicating the name of the file (or not)
+
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVOldINDRASelector:Function_Members"></a>Function Members (Methods)</h2>
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:KVOldINDRASelector">KVOldINDRASelector</a>(TTree* tree = 0)</td></tr>
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:_KVOldINDRASelector">~KVOldINDRASelector</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:Abort"><span class="baseclass">TSelector::</span>Abort</a>(<span class="keyword">const</span> <span class="keyword">char</span>* why, <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort what = kAbortProcess)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:AddGV">AddGV</a>(<a href="./KVVarGlob.html">KVVarGlob</a>*)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVVarGlob.html">KVVarGlob</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:AddGV@1">AddGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Analysis">Analysis</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:AtEndOfRun">AtEndOfRun</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Begin">Begin</a>(TTree* tree)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:BuildEventList">BuildEventList</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:ChangeFragmentMasses">ChangeFragmentMasses</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> mass_formula)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Clear"><span class="baseclass">TObject::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:CreateHistos">CreateHistos</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:CreateTrees">CreateTrees</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:EndAnalysis">EndAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:EndRun">EndRun</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillHisto">FillHisto</a>(<a href="./KVString.html">KVString</a> sname, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> three = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> four = 1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillTree">FillTree</a>(<a href="./KVString.html">KVString</a> sname = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort</td><td class="funcname"><a class="funcname" href="#TSelector:GetAbort"><span class="baseclass">TSelector::</span>GetAbort</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetDataSelector">GetDataSelector</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetDataSelectorFileName">GetDataSelectorFileName</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:GetEntry"><span class="baseclass">TSelector::</span>GetEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>, <a href="./ListOfTypes.html#Int_t">Int_t</a> = 0)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetEvent">GetEvent</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetEventNumber">GetEventNumber</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVVarGlob.html">KVVarGlob</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetGV">GetGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVGVList.html">KVGVList</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetGVList">GetGVList</a>()</td></tr>
+<tr class="func"><td class="funcret">TH1*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetHisto">GetHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVHashList.html">KVHashList</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetHistoList">GetHistoList</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual TList*</td><td class="funcname"><a class="funcname" href="#TSelector:GetInputList"><span class="baseclass">TSelector::</span>GetInputList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> TString&amp;</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetOpt">GetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TSelector:GetOption"><span class="baseclass">TSelector::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual TList*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetOutputList">GetOutputList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>*</td><td class="funcname"><a class="funcname" href="#TSelector:GetSelector"><span class="baseclass">TSelector::</span>GetSelector</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:GetStatus"><span class="baseclass">TSelector::</span>GetStatus</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TTree*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetTree">GetTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetTreeEntry">GetTreeEntry</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVHashList.html">KVHashList</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetTreeList">GetTreeList</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Init">Init</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:InitAnalysis">InitAnalysis</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:InitRun">InitRun</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:IsOptGiven">IsOptGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:IsStandardDraw"><span class="baseclass">TSelector::</span>IsStandardDraw</a>(<span class="keyword">const</span> <span class="keyword">char</span>* selec)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:LoadDataSelector">LoadDataSelector</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Make">Make</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsname = <span class="string">"MyOwnKVOldINDRASelector"</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Notify">Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;</td><td class="funcname"><a class="funcname" href="#TObject:operator_"><span class="baseclass">TObject::</span>operator=</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; rhs)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Print"><span class="baseclass">TObject::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Process">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:ProcessCut"><span class="baseclass">TSelector::</span>ProcessCut</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:ProcessFill"><span class="baseclass">TSelector::</span>ProcessFill</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:RecalculateGlobalVariables">RecalculateGlobalVariables</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:ResetAbort"><span class="baseclass">TSelector::</span>ResetAbort</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SaveCurrentDataSelection">SaveCurrentDataSelection</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetCurrentRun">SetCurrentRun</a>(<a href="./KVINDRADBRun.html">KVINDRADBRun</a>* r)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetDataSelector">SetDataSelector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dataSel = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetGVList">SetGVList</a>(<a href="./KVGVList.html">KVGVList</a>* list)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetInputList">SetInputList</a>(TList* input)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetObject">SetObject</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetOpt">SetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetOption">SetOption</a>(<span class="keyword">const</span> <span class="keyword">char</span>* option)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetParticleConditions">SetParticleConditions</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp;)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:SetStatus"><span class="baseclass">TSelector::</span>SetStatus</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> status)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SlaveBegin">SlaveBegin</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SlaveTerminate">SlaveTerminate</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Terminate">Terminate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:UnsetOpt">UnsetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:Version">Version</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:WriteHistoToFile">WriteHistoToFile</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"FileFromKVOldINDRASelector.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:WriteTreeToFile">WriteTreeToFile</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"FileFromKVOldINDRASelector.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillKVDalitz">FillKVDalitz</a>(<a href="./KVDalitzPlot.html">KVDalitzPlot</a>* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillTH1">FillTH1</a>(TH1* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillTH2">FillTH2</a>(TH2* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillTH3">FillTH3</a>(TH3* h3, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillTProfile">FillTProfile</a>(TProfile* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:FillTProfile2D">FillTProfile2D</a>(TProfile2D* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./KVINDRADBRun.html">KVINDRADBRun</a>*</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetCurrentRun">GetCurrentRun</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>**</td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:GetEventReference">GetEventReference</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:ParseOptions">ParseOptions</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVOldINDRASelector:SetINDRAReconEventBranchName">SetINDRAReconEventBranchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* br_name)</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVOldINDRASelector:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="data"><td class="datatype">enum  { </td><td class="dataname"><a name="KVOldINDRASelector:kDeleteGVList"></a>kDeleteGVList</td><td></td></tr>
+<tr class="data"><td class="datatype"></td><td class="dataname"><a name="KVOldINDRASelector:kChangeMasses"></a>kChangeMasses</td><td></td></tr>
+<tr class="data"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TSelector::</span>EAbort { </td><td class="dataname"><a href="#TSelector:kContinue">kContinue</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TSelector:kAbortProcess">kAbortProcess</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TSelector:kAbortFile">kAbortFile</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVOldINDRASelector:NbTreeEntry"></a>NbTreeEntry</td><td></td></tr>
+<tr class="data"><td class="datatype">TBranch*</td><td class="dataname"><a name="KVOldINDRASelector:b_data"></a>b_data</td><td class="datadesc">!</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVOldINDRASelector:callnotif"></a>callnotif</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>*</td><td class="dataname"><a name="KVOldINDRASelector:data"></a>data</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVLockfile.html">KVLockfile</a></td><td class="dataname"><a name="KVOldINDRASelector:dataselector_lock"></a>dataselector_lock</td><td class="datadesc">for locking user's data selector file</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="#TSelector:fAbort"><span class="baseclass">TSelector::</span>fAbort</a></td><td class="datadesc">Abort status</td></tr>
+<tr class="data"><td class="datatype">static <a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVOldINDRASelector:fBranchName"></a>fBranchName</td><td class="datadesc">name of branch which contains KVINDRAReconEvent objects in the TTree</td></tr>
+<tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="KVOldINDRASelector:fChain"></a>fChain</td><td class="datadesc">!pointer to the analyzed TTree or TChain</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVINDRADBRun.html">KVINDRADBRun</a>*</td><td class="dataname"><a name="KVOldINDRASelector:fCurrentRun"></a>fCurrentRun</td><td class="datadesc">! current run</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVOldINDRASelector:fCurrentTreeNumber"></a>fCurrentTreeNumber</td><td class="datadesc">!This is the current tree number</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVOldINDRASelector:fDataSelector"></a>fDataSelector</td><td class="datadesc">! Name of the KVDataSelector</td></tr>
+<tr class="data"><td class="datatype">TEventList*</td><td class="dataname"><a name="KVOldINDRASelector:fEvtList"></a>fEvtList</td><td class="datadesc">!this is the current event list.</td></tr>
+<tr class="datainh"><td class="datatype">TList*</td><td class="dataname"><a href="#TSelector:fInput"><span class="baseclass">TSelector::</span>fInput</a></td><td class="datadesc">List of objects available during processing</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVDataSelector.html">KVDataSelector</a>*</td><td class="dataname"><a name="KVOldINDRASelector:fKVDataSelector"></a>fKVDataSelector</td><td class="datadesc">! KVDataSelector</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="dataname"><a name="KVOldINDRASelector:fNewMassFormula"></a>fNewMassFormula</td><td class="datadesc">new mass formula to apply to fragments, if required</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="dataname"><a href="#TSelector:fObject"><span class="baseclass">TSelector::</span>fObject</a></td><td class="datadesc">!Current object if processing object (vs. TTree)</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TSelector:fOption"><span class="baseclass">TSelector::</span>fOption</a></td><td class="datadesc">Option given to TTree::Process</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVOldINDRASelector:fOptionList"></a>fOptionList</td><td></td></tr>
+<tr class="datainh"><td class="datatype">TSelectorList*</td><td class="dataname"><a href="#TSelector:fOutput"><span class="baseclass">TSelector::</span>fOutput</a></td><td class="datadesc">!List of objects created during processing</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVParticleCondition.html">KVParticleCondition</a>*</td><td class="dataname"><a name="KVOldINDRASelector:fPartCond"></a>fPartCond</td><td class="datadesc">(optional) conditions for selecting particles</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a href="#TSelector:fStatus"><span class="baseclass">TSelector::</span>fStatus</a></td><td class="datadesc">Selector status</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a>*</td><td class="dataname"><a name="KVOldINDRASelector:fTEVLexist"></a>fTEVLexist</td><td class="datadesc">! tells if the TEventList exist for each run</td></tr>
+<tr class="data"><td class="datatype">TStopwatch*</td><td class="dataname"><a name="KVOldINDRASelector:fTimer"></a>fTimer</td><td class="datadesc">!used to time analysis</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVOldINDRASelector:fTreeEntry"></a>fTreeEntry</td><td class="datadesc">!this is the current TTree entry number, i.e. the argument passed to TSelector::Process(Long64_t entry)</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a>*</td><td class="dataname"><a name="KVOldINDRASelector:fTreeOffset"></a>fTreeOffset</td><td class="datadesc">!this is the current TTree offset table</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVGVList.html">KVGVList</a>*</td><td class="dataname"><a name="KVOldINDRASelector:gvlist"></a>gvlist</td><td class="datadesc">!</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVOldINDRASelector:lhisto"></a>lhisto</td><td class="datadesc">-&gt;!</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVOldINDRASelector:ltree"></a>ltree</td><td class="datadesc">-&gt;!</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVOldINDRASelector:needToCallEndRun"></a>needToCallEndRun</td><td class="datadesc">! tells if one needs to call EndRun</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVOldINDRASelector:needToSelect"></a>needToSelect</td><td class="datadesc">! tells if one needs to build the TEventList</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVOldINDRASelector:totentry"></a>totentry</td><td></td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVOldINDRASelector:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVOldINDRASelector_Inh" id="MapKVOldINDRASelector_Inh">
+<area shape="rect" id="node4" href="./KVINDRAIdentRoot.html" title="KVINDRAIdentRoot" alt="" coords="489,1,602,18"/>
+<area shape="rect" id="node5" href="./KVINDRAReconIdent.html" title="KVINDRAReconIdent" alt="" coords="486,18,606,35"/>
+<area shape="rect" id="node6" href="./KVINDRAReconRoot.html" title="KVINDRAReconRoot" alt="" coords="486,35,605,52"/>
+<area shape="rect" id="node7" href="./KVIVSelector.html" title="KVIVSelector" alt="" coords="501,52,590,69"/>
+<area shape="rect" id="node8" href="./KVIVReconIdent.html" title="KVIVReconIdent" alt="" coords="662,10,756,27"/>
+<area shape="rect" id="node9" href="./KVReconIdent_e475s.html" title="KVReconIdent_e475s" alt="" coords="650,27,767,44"/>
+</map>
+<map name="MapKVOldINDRASelector_Lib" id="MapKVOldINDRASelector_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="308,372,365,396"/>
+</map>
+<div class="tabs">
+<a id="imgKVOldINDRASelector_Inh" class="tabsel" href="inh/KVOldINDRASelector_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVOldINDRASelector_Inh.png');">Inheritance</a>
+<a id="imgKVOldINDRASelector_InhMem" class="tab" href="inhmem/KVOldINDRASelector_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVOldINDRASelector_InhMem.png');">Inherited Members</a>
+<a id="imgKVOldINDRASelector_Incl" class="tab" href="incl/KVOldINDRASelector_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVOldINDRASelector_Incl.png');">Includes</a>
+<a id="imgKVOldINDRASelector_Lib" class="tab" href="lib/KVOldINDRASelector_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVOldINDRASelector_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVOldINDRASelector_Inh" src="inh/KVOldINDRASelector_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVOldINDRASelector:KVOldINDRASelector" href="src/KVOldINDRASelector.cxx.html#D1ERiC">KVOldINDRASelector</a>(TTree* tree = 0)</span><br />
+<div class="funccomm"><pre>ctor
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVOldINDRASelector:_KVOldINDRASelector" href="src/KVOldINDRASelector.cxx.html#ogAj_">~KVOldINDRASelector</a>()</span><br />
+<div class="funccomm"><pre>dtor
+delete global variable list if it belongs to us, i.e. if created by a
+call to <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetGVList" title="KVGVList* KVOldINDRASelector::GetGVList()">GetGVList</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:Init" href="src/KVOldINDRASelector.cxx.html#CNyHqD">Init</a>(TTree* tree)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVOldINDRASelector:Notify" href="src/KVOldINDRASelector.cxx.html#tIZrk">Notify</a>()</span><br />
+<div class="funccomm"><pre> Called when loading a new file.
+ Get branch pointers.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:Begin" href="src/KVOldINDRASelector.cxx.html#wuTgsC">Begin</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> Function called before starting the event loop.
+ When running with PROOF <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Begin" title="void KVOldINDRASelector::Begin(TTree* tree)">Begin</a>() is only called in the client.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SlaveBegin" href="src/KVOldINDRASelector.cxx.html#UM7HZ">SlaveBegin</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> Function called before starting the event loop.
+ When running with PROOF <a href="./KVOldINDRASelector.html#KVOldINDRASelector:SlaveBegin" title="void KVOldINDRASelector::SlaveBegin(TTree* tree)">SlaveBegin</a>() is called in each slave
+ Initialize the tree branches.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVOldINDRASelector:Process" href="src/KVOldINDRASelector.cxx.html#pmRxp">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)</span><br />
+<div class="funccomm"><pre>Here the event is read into memory and checks are made on the number
+of events read.
+Particles not having the correct identification and calibration quality codes
+are excluded from the analysis (IsOK()=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>).
+Particles which do not satisfy the additional selection criteria set with
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:SetParticleConditions" title="void KVOldINDRASelector::SetParticleConditions(const KVParticleCondition&amp; )">SetParticleConditions</a>() are excluded from the analysis (IsOK()=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>).
+If <a href="./KVOldINDRASelector.html#KVOldINDRASelector:ChangeFragmentMasses" title="void KVOldINDRASelector::ChangeFragmentMasses(UInt_t mass_formula)">ChangeFragmentMasses</a>() was called in <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>() or <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitRun" title="void KVOldINDRASelector::InitRun()">InitRun</a>()
+then the non-measured fragment masses will be recalculated with the
+new mass formula and laboratory energies adjusted accordingly.
+Then the reaction CM momenta of all <span class="string">"OK"</span> particles are calculated and
+the list of global variables (if one is defined) is filled.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SlaveTerminate" href="src/KVOldINDRASelector.cxx.html#uUEqTD">SlaveTerminate</a>()</span><br />
+<div class="funccomm"><pre> Function called at the end of the event loop in each PROOF slave.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:Terminate" href="src/KVOldINDRASelector.cxx.html#bvJaeE">Terminate</a>()</span><br />
+<div class="funccomm"><pre> Function called at the end of the event loop.
+ When running with PROOF <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Terminate" title="void KVOldINDRASelector::Terminate()">Terminate</a>() is only called in the client.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:Make" href="src/KVOldINDRASelector.cxx.html#M1RW.B">Make</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* kvsname = <span class="string">"MyOwnKVOldINDRASelector"</span>)</span><br />
+<div class="funccomm"><pre> Automatic generation of <a href="./KVOldINDRASelector.html">KVOldINDRASelector</a>-derived class for KaliVeda analysis
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetGVList" href="src/KVOldINDRASelector.cxx.html#JMCG8">SetGVList</a>(<a href="./KVGVList.html">KVGVList</a>* list)</span><br />
+<div class="funccomm"><pre>Use a user-defined list of global variables for the analysis.
+In this case it is the user's responsibility to delete the list
+at the end of the analysis.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVGVList.html">KVGVList</a>* <a class="funcname" name="KVOldINDRASelector:GetGVList" href="src/KVOldINDRASelector.cxx.html#yFNe8C">GetGVList</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>Access to the internal list of global variables
+If the list does not exist, it is created.
+In this case it will be automatically deleted with the <a href="./KVOldINDRASelector.html">KVOldINDRASelector</a> object.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:AddGV" href="src/KVOldINDRASelector.cxx.html#nBD5IE">AddGV</a>(<a href="./KVVarGlob.html">KVVarGlob</a>* )</span><br />
+<div class="funccomm"><pre>Add the global variable <span class="string">"vg"</span> to the list of variables for the analysis.
+This is equivalent to <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetGVList" title="KVGVList* KVOldINDRASelector::GetGVList()">GetGVList</a>()-><a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>( vg ).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVVarGlob.html">KVVarGlob</a>* <a class="funcname" name="KVOldINDRASelector:GetGV" href="src/KVOldINDRASelector.cxx.html#VVrslB">GetGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* ) const</span><br />
+<div class="funccomm"><pre>Access the global variable with name <span class="string">"name"</span> in the list of variables
+for the analysis.
+This is equivalent to <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetGVList" title="KVGVList* KVOldINDRASelector::GetGVList()">GetGVList</a>()-><a href="./KVGVList.html#KVGVList:GetGV" title="KVVarGlob* KVGVList::GetGV(const Char_t* nom)">GetGV</a>( name ).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVVarGlob.html">KVVarGlob</a>* <a class="funcname" name="KVOldINDRASelector:AddGV@1" href="src/KVOldINDRASelector.cxx.html#jd.EEC">AddGV</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* class_name, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+<div class="funccomm"><pre>Add a global variable to the list of variables for the analysis.
+
+<span class="string">"class_name"</span> must be the name of a valid class inheriting from <a href="./KVVarGlob.html">KVVarGlob</a>, e.g. any of the default global
+variable classes defined as part of the standard KaliVeda package (in libKVvVarGlob.so). See
+<span class="string">"Class Reference"</span> page on website for the available classes (listed by category under <span class="string">"Global Variables: ..."</span>).
+
+USER-DEFINED GLOBAL VARIABLES
+The user may use her own global variables in an analysis class, without having to add them to the main libraries.
+If the given class name is not known, it is assumed to be a user-defined class and we attempt to compile and load
+the class from the user's source code. For this to work, the user must:
+
+      (1) add to the ROOT macro path the directory where her class's source code is kept, e.g. in $HOME/.rootrc
+              add the following line:
+
+              +Unix.*.Root.MacroPath:      $(HOME)/myVarGlobs
+
+      (2) for each user-defined class, add a line to $HOME/.kvrootrc to define a <span class="string">"plugin"</span>. E.g. for a class called MyNewVarGlob,
+
+              +Plugin.<a href="./KVVarGlob.html">KVVarGlob</a>:    MyNewVarGlob    MyNewVarGlob     MyNewVarGlob.cpp+   <span class="string">"MyNewVarGlob()"</span>
+
+      It is assumed that MyNewVarGlob.h and MyNewVarGlob.cpp will be found in $HOME/myVarGlobs (in this example).
+
+<span class="string">"name"</span> is a unique name for the new global variable object which will be created and added to the internal
+list of global variables. This name can be used to retrieve the object (see <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetGV" title="KVVarGlob* KVOldINDRASelector::GetGV(const Char_t* )">GetGV</a>) in the user's analysis.
+
+Returns pointer to new global variable object in case more than the usual default initialisation is necessary.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:RecalculateGlobalVariables" href="src/KVOldINDRASelector.cxx.html#iHpBsC">RecalculateGlobalVariables</a>()</span><br />
+<div class="funccomm"><pre>Use this method if you change e.g. the acceptable particle identification codes in your
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() method and want to recalculate the values of all global variables
+for your new selection.
+
+WARNING: the global variables are calculated automatically for you for each event
+before method <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() is called. In order for the correct particles to be included in
+this calculation, make sure that at the END of <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() you reset the selection
+criteria.
+
+i.e. if in your <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>() you have:
+      <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="./KVINDRAReconEvent.html#KVINDRAReconEvent:AcceptIDCodes" title="void KVINDRAReconEvent::AcceptIDCodes(UShort_t code)">AcceptIDCodes</a>(kIDCode2|kIDCode3|kIDCode4);
+
+at the beginning of <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() the variables have been calculated for all particles
+with codes 2-4. If you store these values somewhere and then change the code mask:
+
+      <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="./KVINDRAReconEvent.html#KVINDRAReconEvent:AcceptIDCodes" title="void KVINDRAReconEvent::AcceptIDCodes(UShort_t code)">AcceptIDCodes</a>(kIDCode2|kIDCode3|kIDCode4|kIDCode6);
+
+you can recalculate the global variable list for particles with codes 2-4 &amp; 6:
+
+      <a href="./KVOldINDRASelector.html#KVOldINDRASelector:RecalculateGlobalVariables" title="void KVOldINDRASelector::RecalculateGlobalVariables()">RecalculateGlobalVariables</a>();
+
+then at the end of <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>(), after storing the new values of the variables, you
+should reset the code mask:
+
+      <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="./KVINDRAReconEvent.html#KVINDRAReconEvent:AcceptIDCodes" title="void KVINDRAReconEvent::AcceptIDCodes(UShort_t code)">AcceptIDCodes</a>(kIDCode2|kIDCode3|kIDCode4);
+
+which will be used for the next event read for processing.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVOldINDRASelector:GetTreeEntry" href="src/KVOldINDRASelector.cxx.html#oteSU">GetTreeEntry</a>() const</span><br />
+<div class="funccomm"><pre>During event analysis (i.e. inside the <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() method), this gives the current TTree
+entry number, in other words the argument passed to <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::<a href="./KVOldINDRASelector.html#KVOldINDRASelector:Process" title="Bool_t KVOldINDRASelector::Process(Long64_t entry)">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry).
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:BuildEventList" href="src/KVOldINDRASelector.cxx.html#kKMr9B">BuildEventList</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Builds the event list of the TChain by adding the event lists of each TTree.
+ The event list contain the entry number of the TChain
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVOldINDRASelector:AtEndOfRun" href="src/KVOldINDRASelector.cxx.html#EQ6PhE">AtEndOfRun</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Check whether the end of run is reached for the current tree
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:LoadDataSelector" href="src/KVOldINDRASelector.cxx.html#nw0JnD">LoadDataSelector</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Set the pointer of the <a href="./KVDataSelector.html">KVDataSelector</a> according to its name
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SaveCurrentDataSelection" href="src/KVOldINDRASelector.cxx.html#SFVdM">SaveCurrentDataSelection</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Save the newly built TEventList in the DataSelection root file
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVOldINDRASelector:GetDataSelectorFileName" href="src/KVOldINDRASelector.cxx.html#G1kfnE">GetDataSelectorFileName</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre>
+ Gets the name of the file where the TEventLists and the KVDataSelectors
+ are stored.
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:ChangeFragmentMasses" href="src/KVOldINDRASelector.cxx.html#BVmsyE">ChangeFragmentMasses</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> mass_formula)</span><br />
+<div class="funccomm"><pre>Call this method in your <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>() if you want to replace the masses of nuclei
+in each event with masses calculated from the given formula (see <a href="./KVNucleus.html">KVNucleus</a>::<a href="./KVNucleus.html#KVNucleus:GetAFromZ" title="Int_t KVNucleus::GetAFromZ(Double_t ,Char_t mt)">GetAFromZ</a>).
+
+As each event is read, the masses of nuclei with calculated (not measured) masses
+will be replaced with the new value, and the energy of the nucleus will be replaced with
+a new value taking into account the effect of the change in mass on the CsI energy
+calibration (if the particle stops in a CsI detector).
+
+NB: the <span class="string">"CM"</span> frame momenta/energies/angles calculated automatically before your
+<a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() method is called will be calculated using the new masses and lab energies.
+Any subsequent change to the masses and/or energies you make in <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Analysis" title="Bool_t KVOldINDRASelector::Analysis()">Analysis</a>() will not
+change the <span class="string">"CM"</span> momenta. If you change the laboratory energies etc. you must recalculate
+the c.m. momenta by calling e.g. <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="./KVEvent.html#KVEvent:SetFrame" title="void KVEvent::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ft) or overloads">SetFrame</a>(<span class="string">"CM"</span>, ... )
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetParticleConditions" href="src/KVOldINDRASelector.cxx.html#KvL7kE">SetParticleConditions</a>(<span class="keyword">const</span> <a href="./KVParticleCondition.html">KVParticleCondition</a>&amp; )</span><br />
+<div class="funccomm"><pre>Use this method to set criteria for selecting particles (other than the identification
+or calibration quality codes - see <a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>::<a href="./KVINDRAReconEvent.html#KVINDRAReconEvent:AcceptIDCodes" title="void KVINDRAReconEvent::AcceptIDCodes(UShort_t code)">AcceptIDCodes</a> and
+<a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>::<a href="./KVINDRAReconEvent.html#KVINDRAReconEvent:AcceptECodes" title="void KVINDRAReconEvent::AcceptECodes(UChar_t code)">AcceptECodes</a>).
+
+The criteria defined in the <a href="./KVParticleCondition.html">KVParticleCondition</a> object will be applied to every
+particle which has the right quality codes and if they are not satisfied the particle's
+<span class="string">"OK"</span> flag will be set to <a href="./ListOfTypes.html#bool">false</a>, i.e. the particle's IsOK() method will return <a href="./ListOfTypes.html#Bool_t">kFALSE</a>,
+and the particle will not be included in iterations such as <a href="./KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="./KVINDRAReconEvent.html#KVINDRAReconEvent:GetNextParticle" title="KVINDRAReconNuc* KVINDRAReconEvent::GetNextParticle(Option_t* opt=&quot;&quot;)">GetNextParticle</a>(<span class="string">"OK"</span>).
+Neither will the particle be included in the evaluation of any global variables or event
+selection criteria (see <a href="./KVDataSelector.html">KVDataSelector</a>).
+
+This method must be called in the user's <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitAnalysis" title="void KVOldINDRASelector::InitAnalysis()">InitAnalysis</a>() or <a href="./KVOldINDRASelector.html#KVOldINDRASelector:InitRun" title="void KVOldINDRASelector::InitRun()">InitRun</a>() method.
+
+EXAMPLES:
+To include only particles having a time marker between 90 and 110:
+
+       <a href="./KVParticleCondition.html">KVParticleCondition</a> cd(<span class="string">"_NUC_-&gt;GetTimeMarker()&gt;=90 &amp;&amp; _NUC_-&gt;GetTimeMarker()&lt;=110"</span>);
+       <a href="./KVOldINDRASelector.html#KVOldINDRASelector:SetParticleConditions" title="void KVOldINDRASelector::SetParticleConditions(const KVParticleCondition&amp; )">SetParticleConditions</a>( cd );
+
+To include only Z=1 particles having a time marker between 90 and 110, Z&gt;1 particles
+with time markers between 80 and 120:
+
+       <a href="./KVParticleCondition.html">KVParticleCondition</a> tm1(<span class="string">"_NUC_-&gt;GetTimeMarker()&gt;=90 &amp;&amp; _NUC_-&gt;GetTimeMarker()&lt;=110"</span>);
+       <a href="./KVParticleCondition.html">KVParticleCondition</a> tm2(<span class="string">"_NUC_-&gt;GetTimeMarker()&gt;=80 &amp;&amp; _NUC_-&gt;GetTimeMarker()&lt;=120"</span>);
+       <a href="./KVParticleCondition.html">KVParticleCondition</a> z1(<span class="string">"_NUC_-&gt;GetZ()==1"</span>);
+       <a href="./KVParticleCondition.html">KVParticleCondition</a> zgt1(<span class="string">"_NUC_-&gt;GetZ()&gt;1"</span>);
+       <a href="./KVParticleCondition.html">KVParticleCondition</a> cd = (z1 &amp;&amp; tm1) || (zgt1 &amp;&amp; tm2);
+       <a href="./KVOldINDRASelector.html#KVOldINDRASelector:SetParticleConditions" title="void KVOldINDRASelector::SetParticleConditions(const KVParticleCondition&amp; )">SetParticleConditions</a>( cd );
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVHashList.html">KVHashList</a>* <a class="funcname" name="KVOldINDRASelector:GetHistoList" href="src/KVOldINDRASelector.cxx.html#SGLhfB">GetHistoList</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TH1* <a class="funcname" name="KVOldINDRASelector:GetHisto" href="src/KVOldINDRASelector.cxx.html#zMI95C">GetHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillHisto" href="src/KVOldINDRASelector.cxx.html#Xr0OL">FillHisto</a>(<a href="./KVString.html">KVString</a> sname, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> three = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> four = 1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillTH1" href="src/KVOldINDRASelector.cxx.html#glevHC">FillTH1</a>(TH1* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillTProfile" href="src/KVOldINDRASelector.cxx.html#O7VB5D">FillTProfile</a>(TProfile* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillTH2" href="src/KVOldINDRASelector.cxx.html#pbBe">FillTH2</a>(TH2* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillTProfile2D" href="src/KVOldINDRASelector.cxx.html#f23ENE">FillTProfile2D</a>(TProfile2D* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillKVDalitz" href="src/KVOldINDRASelector.cxx.html#Jg.z8C">FillKVDalitz</a>(<a href="./KVDalitzPlot.html">KVDalitzPlot</a>* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillTH3" href="src/KVOldINDRASelector.cxx.html#iCx3LD">FillTH3</a>(TH3* h3, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:CreateHistos" href="src/KVOldINDRASelector.cxx.html#PVA4WC">CreateHistos</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:WriteHistoToFile" href="src/KVOldINDRASelector.cxx.html#fnCuUC">WriteHistoToFile</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"FileFromKVOldINDRASelector.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVHashList.html">KVHashList</a>* <a class="funcname" name="KVOldINDRASelector:GetTreeList" href="src/KVOldINDRASelector.cxx.html#J9a2jD">GetTreeList</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TTree* <a class="funcname" name="KVOldINDRASelector:GetTree" href="src/KVOldINDRASelector.cxx.html#JBenCD">GetTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:CreateTrees" href="src/KVOldINDRASelector.cxx.html#kjALyE">CreateTrees</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:FillTree" href="src/KVOldINDRASelector.cxx.html#Tyzby">FillTree</a>(<a href="./KVString.html">KVString</a> sname = <span class="string">""</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:WriteTreeToFile" href="src/KVOldINDRASelector.cxx.html#Q3sAcD">WriteTreeToFile</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"FileFromKVOldINDRASelector.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetOpt" href="src/KVOldINDRASelector.cxx.html#GD2uMB">SetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</span><br />
+<div class="funccomm"><pre>Set a value for an option
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVOldINDRASelector:IsOptGiven" href="src/KVOldINDRASelector.cxx.html#Cwf1FC">IsOptGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the option 'opt' has been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TString&amp; <a class="funcname" name="KVOldINDRASelector:GetOpt" href="src/KVOldINDRASelector.cxx.html#YSVk2C">GetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) const</span><br />
+<div class="funccomm"><pre> Returns the value of the option
+ Only use after checking existence of option with <a href="./KVOldINDRASelector.html#KVOldINDRASelector:IsOptGiven" title="Bool_t KVOldINDRASelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:UnsetOpt" href="src/KVOldINDRASelector.cxx.html#JE3LlD">UnsetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</span><br />
+<div class="funccomm"><pre> Removes the option 'opt' from the internal lists, as if it had never been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:ParseOptions" href="src/KVOldINDRASelector.cxx.html#C_Y7TC">ParseOptions</a>()</span><br />
+<div class="funccomm"><pre> Analyse comma-separated list of options given to TTree::<a href="./KVOldINDRASelector.html#KVOldINDRASelector:Process" title="Bool_t KVOldINDRASelector::Process(Long64_t entry)">Process</a>
+ and store all <span class="string">"option=value"</span> pairs in <a href="./KVOldINDRASelector.html#KVOldINDRASelector:fOptionList" title="KVNameValueList KVOldINDRASelector::fOptionList">fOptionList</a>.
+ Options can then be accessed using <a href="./KVOldINDRASelector.html#KVOldINDRASelector:IsOptGiven" title="Bool_t KVOldINDRASelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(), GetOptString(), etc.
+ This method is called by <a href="./KVOldINDRASelector.html#KVOldINDRASelector:Begin" title="void KVOldINDRASelector::Begin(TTree* tree)">Begin</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>** <a class="funcname" name="KVOldINDRASelector:GetEventReference" href="src/KVOldINDRASelector.h.html#w1fkGB">GetEventReference</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVINDRADBRun.html">KVINDRADBRun</a>* <a class="funcname" name="KVOldINDRASelector:GetCurrentRun" href="src/KVOldINDRASelector.h.html#PJkm2D">GetCurrentRun</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetINDRAReconEventBranchName" href="src/KVOldINDRASelector.h.html#Qpk4UC">SetINDRAReconEventBranchName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* br_name)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVINDRAReconEvent.html">KVINDRAReconEvent</a>* <a class="funcname" name="KVOldINDRASelector:GetEvent" href="src/KVOldINDRASelector.h.html#nWJ9zD">GetEvent</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVOldINDRASelector:GetEventNumber" href="src/KVOldINDRASelector.h.html#GLQiRB">GetEventNumber</a>()</span><br />
+<div class="funccomm"><pre> returns number of currently analysed event
+ N.B. this may be different to the TTree/TChain entry number etc.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVOldINDRASelector:Version" href="src/KVOldINDRASelector.h.html#dWCTLD">Version</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetCurrentRun" href="src/KVOldINDRASelector.h.html#jPY.SB">SetCurrentRun</a>(<a href="./KVINDRADBRun.html">KVINDRADBRun</a>* r)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetOption" href="src/KVOldINDRASelector.h.html#ygTDPC">SetOption</a>(<span class="keyword">const</span> <span class="keyword">char</span>* option)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetObject" href="src/KVOldINDRASelector.h.html#XIx9RB">SetObject</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetInputList" href="src/KVOldINDRASelector.h.html#XgmdJD">SetInputList</a>(TList* input)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TList* <a class="funcname" name="KVOldINDRASelector:GetOutputList" href="src/KVOldINDRASelector.h.html#GOZvJE">GetOutputList</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:InitAnalysis" href="src/KVOldINDRASelector.h.html#HQlo.">InitAnalysis</a>()</span><br />
+<div class="funccomm"><pre>user entry points
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:InitRun" href="src/KVOldINDRASelector.h.html#QZ61mD">InitRun</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVOldINDRASelector:Analysis" href="src/KVOldINDRASelector.h.html#wC.SI">Analysis</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:EndRun" href="src/KVOldINDRASelector.h.html#ocOhjD">EndRun</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:EndAnalysis" href="src/KVOldINDRASelector.h.html#YQ1XbB">EndAnalysis</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVOldINDRASelector:SetDataSelector" href="src/KVOldINDRASelector.h.html#r3Sc2D">SetDataSelector</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* dataSel = <span class="string">""</span>)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVOldINDRASelector:GetDataSelector" href="src/KVOldINDRASelector.h.html#ToAN2D">GetDataSelector</a>(<span class="keyword">void</span>)</span><br />
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Fri Jan 27 13:34:48 2017 </em><em>&raquo; Last generated: 2017-01-27 13:34</em><br />
+<em>This page has been automatically generated.</em>
+</div>
+</div>
+</body>
+</html>

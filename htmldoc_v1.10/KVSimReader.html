@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:57:56 2016            -->
+<!--   Date: Fri Jan 27 13:35:15 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/12</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/13</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/12</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/13</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_SIMULATION_Index.html">SIMULATION</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVSimReader</a>
@@ -65,10 +65,35 @@ return false;}
 </pre><!-- TDocHtmlDirective start --> <!--
 /* -->
 <h2>KVSimReader</h2>
-<h4>Base class to read output files for simulation and create tree using KVEvent type class</h4>
+<h4>Base class to read output files for simulation and create tree using KVSimEvent class</h4>
 <!-- */
  --> 
 <!-- TDocHtmlDirective end --><pre>
+
+ Specific classes derived from this one can be used to read a variety of simulation
+ output files and transform them into ROOT files containing a TTree with <a href="./KVSimEvent.html">KVSimEvent</a>
+ objects in a branch called 'Simulated_events'.
+
+ To see the list of available classes/models:
+
+    kaliveda[0] <a href="./KVBase.html">KVBase</a>::<a href="./KVBase.html#KVBase:GetListOfPlugins" title="const Char_t* KVBase::GetListOfPlugins(const Char_t* base)">GetListOfPlugins</a>(<span class="string">"KVSimReader"</span>)
+    (const <a href="./ListOfTypes.html#Char_t">Char_t</a> *) <span class="string">"KVSimReader_ELIE KVSimReader_ELIE_asym KVSimReader_HIPSE KVSimReader_HIPSE_asym ... "</span>
+
+ Usually for each model there is a class [XXX] and a class [XXX]_asym.
+ The first one is for reading <span class="string">"primary"</span> events (e.g. before secondary decay),
+ the second one is for converting <span class="string">"asymptotic"</span> events (e.g. just before detection).
+ To generate an instance of the appropriate reader object, use the static method
+ <a href="./KVSimReader.html">KVSimReader</a>::MakeReader(<span class="string">"[model name]_[asym]"</span>)
+
+ Example 1
+ To convert asymptotic events from an MMM simulation in <a href="./KVSimReader.html#KVSimReader:file" title="TFile* KVSimReader::file">file</a> <span class="string">"mmm.out"</span>, do:
+
+    kaliveda[0] <a href="./KVSimReader.html">KVSimReader</a>::MakeReader(<span class="string">"MMM_asym"</span>)-&gt;<a href="./KVSimReader.html#KVSimReader:ConvertAndSaveEventsInFile" title="void KVSimReader::ConvertAndSaveEventsInFile(KVString filename)">ConvertAndSaveEventsInFile</a>(<span class="string">"mmm.out"</span>)
+
+ Example 2
+ To convert primary events (before secondary decay) from an ELIE simulation in <a href="./KVSimReader.html#KVSimReader:file" title="TFile* KVSimReader::file">file</a> <span class="string">"elie.out"</span>, do:
+
+    kaliveda[0] <a href="./KVSimReader.html">KVSimReader</a>::MakeReader(<span class="string">"ELIE"</span>)-&gt;<a href="./KVSimReader.html#KVSimReader:ConvertAndSaveEventsInFile" title="void KVSimReader::ConvertAndSaveEventsInFile(KVString filename)">ConvertAndSaveEventsInFile</a>(<span class="string">"elie.out"</span>)
 
 </pre></div>
 </div></div>
@@ -78,7 +103,6 @@ return false;}
 <div class="access" id="funcpubl"><b>public:</b>
 <table class="func" id="tabfuncpubl" cellspacing="0">
 <tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVSimReader:KVSimReader">KVSimReader</a>()</td></tr>
-<tr class="func"><td class="funcret"></td><td class="funcname"><a class="funcname" href="#KVSimReader:KVSimReader@1">KVSimReader</a>(<a href="./KVString.html">KVString</a> filename)</td></tr>
 <tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVSimReader:_KVSimReader">~KVSimReader</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:AddInfo@1">AddInfo</a>(<a href="./#TNamed:TNamed" title="TNamed TNamed::TNamed() or overloads">TNamed</a>* named)</td></tr>
@@ -97,6 +121,8 @@ return false;}
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:CloseFile"><span class="baseclass">KVFileReader::</span>CloseFile</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:ConvertAndSaveEventsInFile">ConvertAndSaveEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:ConvertEventsInFile">ConvertEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:Copy"><span class="baseclass">KVFileReader::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:CreateInfoList">CreateInfoList</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:CreateObjectList">CreateObjectList</a>()</td></tr>
@@ -172,7 +198,6 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:init">init</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:InitEnvironment"><span class="baseclass">KVBase::</span>InitEnvironment</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
@@ -189,6 +214,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <a href="./KVSimReader.html">KVSimReader</a>*</td><td class="funcname"><a class="funcname" href="#KVSimReader:MakeSimReader">MakeSimReader</a>(<span class="keyword">const</span> <span class="keyword">char</span>* model_uri)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
@@ -208,6 +234,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:PreparForReadingAgain"><span class="baseclass">KVFileReader::</span>PreparForReadingAgain</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Print"><span class="baseclass">KVBase::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:PrintSplashScreen"><span class="baseclass">KVBase::</span>PrintSplashScreen</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVSimReader:ReadEvent">ReadEvent</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:ReadFile">ReadFile</a>()</td></tr>
@@ -218,6 +245,7 @@ return false;}
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVSimReader:ReadNucleus">ReadNucleus</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:ReuseLineAndCheck"><span class="baseclass">KVFileReader::</span>ReuseLineAndCheck</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nexpect, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* pattern)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:Run">Run</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"Output.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
@@ -263,6 +291,11 @@ return false;}
 <table class="func" id="tabfuncprot" cellspacing="0">
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader:init">init</a>()</td></tr>
 
 </table></div>
 </div>
@@ -316,7 +349,7 @@ return false;}
 <tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:reading_line"><span class="baseclass">KVFileReader::</span>reading_line</a></td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVSimReader:root_file_name"></a>root_file_name</td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:status"><span class="baseclass">KVFileReader::</span>status</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:toks"><span class="baseclass">KVFileReader::</span>toks</a></td><td class="datadesc">-&gt;</td></tr>
+<tr class="datainh"><td class="datatype">auto_ptr&lt;TObjArray&gt;</td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:toks"><span class="baseclass">KVFileReader::</span>toks</a></td><td></td></tr>
 <tr class="data"><td class="datatype">TTree*</td><td class="dataname"><a name="KVSimReader:tree"></a>tree</td><td class="datadesc">!</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVSimReader:tree_name"></a>tree_name</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVSimReader:tree_title"></a>tree_title</td><td></td></tr>
@@ -333,22 +366,23 @@ return false;}
 <area shape="rect" id="node9" href="./KVSimReader_MMM_asym.html" title="KVSimReader_MMM_asym" alt="" coords="511,39,622,51"/>
 <area shape="rect" id="node10" href="./KVSimReader_SMF.html" title="KVSimReader_SMF" alt="" coords="526,51,607,64"/>
 <area shape="rect" id="node11" href="./KVSimReader_SMF_asym.html" title="KVSimReader_SMF_asym" alt="" coords="514,64,619,76"/>
-<area shape="rect" id="node12" href="./KVSimReader_HIPSE_asym.html" title="KVSimReader_HIPSE_asym" alt="" coords="655,13,767,26"/>
+<area shape="rect" id="node12" href="./KVSimReader_ELIE_asym.html" title="KVSimReader_ELIE_asym" alt="" coords="657,1,764,13"/>
+<area shape="rect" id="node13" href="./KVSimReader_HIPSE_asym.html" title="KVSimReader_HIPSE_asym" alt="" coords="655,13,767,26"/>
 </map>
 <map name="MapKVSimReader_InhMem" id="MapKVSimReader_InhMem">
 <area shape="rect" id="clust12" href="./KVFileReader.html" alt="" coords="789,47,856,96"/>
 <area shape="rect" id="clust11" href="./KVFileReader.html" alt="" coords="867,47,933,64"/>
 <area shape="rect" id="clust13" href="./KVFileReader.html" alt="" coords="712,47,779,96"/>
 <area shape="rect" id="clust14" href="./KVFileReader.html" alt="" coords="899,80,901,83"/>
-<area shape="rect" id="clust15" href="./KVFileReader.html" alt="" coords="867,99,933,272"/>
-<area shape="rect" id="clust16" href="./KVFileReader.html" alt="" coords="789,99,856,272"/>
-<area shape="rect" id="clust17" href="./KVFileReader.html" alt="" coords="712,99,779,272"/>
-<area shape="rect" id="clust10" href="./KVFileReader.html" title="KVFileReader" alt="" coords="712,16,933,272"/>
+<area shape="rect" id="clust15" href="./KVFileReader.html" alt="" coords="867,99,933,256"/>
+<area shape="rect" id="clust16" href="./KVFileReader.html" alt="" coords="789,99,856,288"/>
+<area shape="rect" id="clust17" href="./KVFileReader.html" alt="" coords="712,99,779,288"/>
+<area shape="rect" id="clust10" href="./KVFileReader.html" title="KVFileReader" alt="" coords="712,16,933,288"/>
 <area shape="rect" id="clust20" href="./KVBase.html" alt="" coords="635,47,701,64"/>
 <area shape="rect" id="clust21" href="./KVBase.html" alt="" coords="557,47,624,96"/>
 <area shape="rect" id="clust22" href="./KVBase.html" alt="" coords="480,47,547,96"/>
 <area shape="rect" id="clust23" href="./KVBase.html" alt="" coords="667,80,669,83"/>
-<area shape="rect" id="clust24" href="./KVBase.html" alt="" coords="635,99,701,432"/>
+<area shape="rect" id="clust24" href="./KVBase.html" alt="" coords="635,99,701,448"/>
 <area shape="rect" id="clust25" href="./KVBase.html" alt="" coords="557,99,624,464"/>
 <area shape="rect" id="clust26" href="./KVBase.html" alt="" coords="480,99,547,464"/>
 <area shape="rect" id="clust19" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,464"/>
@@ -370,7 +404,9 @@ return false;}
 <div class="funccomm"><pre> Default constructor
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVSimReader:KVSimReader@1" href="src/KVSimReader.cxx.html#DahC1">KVSimReader</a>(<a href="./KVString.html">KVString</a> filename)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader:ConvertEventsInFile" href="src/KVSimReader.cxx.html#s4LTsB">ConvertEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</span><br />
+<div class="funccomm"><pre> Method called by constructors with <a href="./KVString.html">KVString</a> filename argument
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVSimReader:_KVSimReader" href="src/KVSimReader.cxx.html#l7GGoE">~KVSimReader</a>()</span><br />
 <div class="funccomm"><pre> Destructor
@@ -387,6 +423,15 @@ return false;}
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVSimReader:ReadEvent" href="src/KVSimReader.cxx.html#YNuKFB">ReadEvent</a>()</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVSimReader:ReadNucleus" href="src/KVSimReader.cxx.html#zst0l">ReadNucleus</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader:ConvertAndSaveEventsInFile" href="src/KVSimReader.cxx.html#vKbb6B">ConvertAndSaveEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</span><br />
+<div class="funccomm"><pre> <a href="./#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> events, convert and save in ROOT <a href="./KVSimReader.html#KVSimReader:file" title="TFile* KVSimReader::file">file</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVSimReader.html">KVSimReader</a>* <a class="funcname" name="KVSimReader:MakeSimReader" href="src/KVSimReader.cxx.html#KC4I9B">MakeSimReader</a>(<span class="keyword">const</span> <span class="keyword">char</span>* model_uri)</span><br />
+<div class="funccomm"><pre> Static method
+ Returns an instance of a child class specific to given model.
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader:Run" href="src/KVSimReader.cxx.html#lShcaE">Run</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"Output.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</span><br />
 </div>
@@ -437,7 +482,7 @@ return false;}
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?bonnet"> bonnet</a> </em><em>&raquo; Created  by KVClassFactory on Wed Jun 30 17:45:01 2010</em><br />
-<em>&raquo; Last changed: Thu Dec  1 09:57:56 2016 </em><em>&raquo; Last generated: 2016-12-01 09:57</em><br />
+<em>&raquo; Last changed: Fri Jan 27 13:35:16 2017 </em><em>&raquo; Last generated: 2017-01-27 13:35</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

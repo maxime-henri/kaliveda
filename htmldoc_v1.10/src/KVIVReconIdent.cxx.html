@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:57:03 2016            -->
+<!--   Date: Fri Jan 27 13:34:26 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -95,7 +95,7 @@ calibration and identification&lt;/h4&gt;
 <span class="cpp">#endif</span>
    <span class="comment">//leaves for reconstructed events</span>
    TBranch* recon_br = (TBranch*)fChain-&gt;GetListOfBranches()-&gt;First();
-   <a href="../KVEvent.html">KVEvent</a>::<a href="../KVEvent.html#KVEvent:MakeEventBranch" title="void KVEvent::MakeEventBranch(TTree* tree,const TString&amp; branchname,const TString&amp; classname,void* event,Int_t bufsize=10000000)">MakeEventBranch</a>(fIdentTree, recon_br-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>(), recon_br-&gt;GetClassName(), <a href="../KVSelector.html#KVSelector:GetEventReference" title="KVINDRAReconEvent** KVSelector::GetEventReference()">GetEventReference</a>());
+   <a href="../KVEvent.html">KVEvent</a>::<a href="../KVEvent.html#KVEvent:MakeEventBranch" title="void KVEvent::MakeEventBranch(TTree* tree,const TString&amp; branchname,const TString&amp; classname,void* event,Int_t bufsize=10000000)">MakeEventBranch</a>(fIdentTree, recon_br-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>(), recon_br-&gt;GetClassName(), <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEventReference" title="KVINDRAReconEvent** KVOldINDRASelector::GetEventReference()">GetEventReference</a>());
 
    <span class="comment">// set flag if this branch contains a <a href="../KVIVReconEvent.html">KVIVReconEvent</a> object</span>
    <a href="../KVIVReconIdent.html#KVIVReconIdent:fIsIVevent" title="Bool_t KVIVReconIdent::fIsIVevent">fIsIVevent</a> = TClass::GetClass(recon_br-&gt;GetClassName())-&gt;<a href="../#TObject:InheritsFrom" title="Bool_t TObject::InheritsFrom(const char* classname) or overloads">InheritsFrom</a>(<span class="string">"KVIVReconEvent"</span>);
@@ -136,13 +136,13 @@ calibration and identification&lt;/h4&gt;
    <span class="comment">//For each event we:</span>
    <span class="comment">//     perform primary event identification and calibration and fill tree</span>
 
-   fEventNumber = <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
+   fEventNumber = <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
 
    <span class="comment">//Analyse INDRA event</span>
    <span class="keyword">if</span> (<a href="../#TObject:TestBit" title="Bool_t TObject::TestBit(UInt_t f)">TestBit</a>(<a href="../KVIVReconIdent.html#KVIVReconIdent:kINDRAdata" title="const enum KVIVReconIdent:: KVIVReconIdent::kINDRAdata">kINDRAdata</a>)) {
-      <span class="keyword">if</span> (<a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVEvent.html#KVEvent:GetMult" title="Int_t KVEvent::GetMult(Option_t* opt=&quot;&quot;)">GetMult</a>() &gt; 0) {
-         <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:IdentifyEvent" title="void KVINDRAReconEvent::IdentifyEvent()">IdentifyEvent</a>();
-         <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVReconstructedEvent.html#KVReconstructedEvent:CalibrateEvent" title="void KVReconstructedEvent::CalibrateEvent()">CalibrateEvent</a>();
+      <span class="keyword">if</span> (<a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVEvent.html#KVEvent:GetMult" title="Int_t KVEvent::GetMult(Option_t* opt=&quot;&quot;)">GetMult</a>() &gt; 0) {
+         <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:IdentifyEvent" title="void KVINDRAReconEvent::IdentifyEvent()">IdentifyEvent</a>();
+         <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVReconstructedEvent.html#KVReconstructedEvent:CalibrateEvent" title="void KVReconstructedEvent::CalibrateEvent()">CalibrateEvent</a>();
       }
    }
 
@@ -151,7 +151,7 @@ calibration and identification&lt;/h4&gt;
       <span class="keyword">if</span> (<a href="../KVIVReconIdent.html#KVIVReconIdent:fIsIVevent" title="Bool_t KVIVReconIdent::fIsIVevent">fIsIVevent</a>) { <span class="comment">// condition set for backwards compatibility with</span>
          <span class="comment">// old recon ROOT files</span>
 
-         <a href="../KVIVReconEvent.html">KVIVReconEvent</a>* IVevent = (<a href="../KVIVReconEvent.html">KVIVReconEvent</a>*)<a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>();
+         <a href="../KVIVReconEvent.html">KVIVReconEvent</a>* IVevent = (<a href="../KVIVReconEvent.html">KVIVReconEvent</a>*)<a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>();
          <span class="comment">// Z-identification, calibration and Q-A identification</span>
          IVevent-&gt;IdentAndCalibVAMOSEvent();
       }
@@ -175,7 +175,7 @@ calibration and identification&lt;/h4&gt;
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-12-01 09:57 </em><em>&raquo; Last generated: 2016-12-01 09:57</em><br />
+<em>&raquo; Last changed: 2017-01-27 13:34 </em><em>&raquo; Last generated: 2017-01-27 13:34</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

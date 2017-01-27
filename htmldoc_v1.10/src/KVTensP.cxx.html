@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:58:11 2016            -->
+<!--   Date: Fri Jan 27 13:35:30 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -227,16 +227,16 @@ ClassImp(<a href="../KVTensP.html">KVTensP</a>)
 <span class="comment">//_________________________________________________________________</span>
 <a name="VC6Np"></a><span class="keyword">void</span> <a href="../KVTensP.html">KVTensP</a>::<a href="../KVTensP.html#KVTensP:Init" title="void KVTensP::Init()">Init</a>(<span class="keyword">void</span>)
 {
-<span class="comment">// methode d'initialisation des</span>
-<span class="comment">// variables internes</span>
    <a href="../KVTensP.html#KVTensP:tenseurP" title="KVTenseur3* KVTensP::tenseurP">tenseurP</a>-><a href="../KVTenseur3.html#KVTenseur3:Reset" title="void KVTenseur3::Reset()">Reset</a>();
+   <a href="../KVParticleCondition.html">KVParticleCondition</a> pc(Form(<span class="string">"_NUC_-&gt;GetZ()&gt;=%d"</span>, <a href="../KVTensP.html#KVTensP:GetZmin" title="Int_t KVTensP::GetZmin()">GetZmin</a>()));
+   <span class="keyword">if</span> (<a href="../KVBase.html#KVBase:HasLabel" title="Bool_t KVBase::HasLabel()">HasLabel</a>()) pc = (pc &amp;&amp; <a href="../KVParticleCondition.html">KVParticleCondition</a>(Form(<span class="string">"_NUC_-&gt;BelongsToGroup(\"%s\")"</span>, <a href="../KVTensP.html#KVTensP:GetPartGroup" title="const Char_t* KVTensP::GetPartGroup()">GetPartGroup</a>())));
+   <span class="keyword">if</span> (fSelection) pc = (pc &amp;&amp; *fSelection);
+   <a href="../KVVarGlob.html#KVVarGlob:SetSelection" title="void KVVarGlob::SetSelection(const KVParticleCondition&amp; )">SetSelection</a>(pc);
 }
 
 <span class="comment">//_________________________________________________________________</span>
 <a name="kBgZbC"></a><span class="keyword">void</span> <a href="../KVTensP.html">KVTensP</a>::<a href="../KVTensP.html#KVTensP:Reset" title="void KVTensP::Reset()">Reset</a>(<span class="keyword">void</span>)
 {
-<span class="comment">// Remise a zero avant le</span>
-<span class="comment">// traitement d'un evenement</span>
    <a href="../KVTensP.html#KVTensP:tenseurP" title="KVTenseur3* KVTensP::tenseurP">tenseurP</a>-><a href="../KVTenseur3.html#KVTenseur3:Reset" title="void KVTenseur3::Reset()">Reset</a>();
 }
 
@@ -259,12 +259,12 @@ ClassImp(<a href="../KVTensP.html">KVTensP</a>)
    <span class="comment">//To calculate in another frame, use <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:SetFrame" title="void KVVarGlob::SetFrame(const Char_t* )">SetFrame</a>() before</span>
    <span class="comment">//calculation begins</span>
 
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> ok = (<a href="../KVBase.html#KVBase:HasLabel" title="Bool_t KVBase::HasLabel()">HasLabel</a>() ? (c-&gt;BelongsToGroup(<a href="../KVTensP.html#KVTensP:GetPartGroup" title="const Char_t* KVTensP::GetPartGroup()">GetPartGroup</a>())) : <a href="../ListOfTypes.html#Bool_t">kTRUE</a>);
-
-   <span class="comment">//check Z of particle</span>
-   <span class="keyword">if</span> ((c-&gt;GetZ() &gt;= <a href="../KVTensP.html#KVTensP:GetZmin" title="Int_t KVTensP::GetZmin()">GetZmin</a>()) &amp;&amp; ok) {
+   <span class="comment">// if method is called by <a href="../KVVarGlob.html#KVVarGlob:FillWithCondition" title="void KVVarGlob::FillWithCondition(KVNucleus* c)">FillWithCondition</a> i.e. by <a href="../KVGVList.html">KVGVList</a>::<a href="../KVGVList.html#KVGVList:CalculateGlobalVariables" title="void KVGVList::CalculateGlobalVariables(KVEvent* e)">CalculateGlobalVariables</a></span>
+   <span class="comment">// (conditioned_fill==<a href="../ListOfTypes.html#Bool_t">kTRUE</a>), all selections have already been tested</span>
+   <span class="comment">// if not i.e. <a href="../KVTensP.html#KVTensP:Fill" title="void KVTensP::Fill(KVNucleus* c)">Fill</a> method called <span class="string">"by hand"</span>, we need to test here</span>
+   <span class="keyword">if</span> (conditioned_fill || fSelection-&gt;Test(c)) {
       <a href="../ListOfTypes.html#Double_t">Double_t</a> poids = (<a href="../ListOfTypes.html#Double_t">Double_t</a>) c-&gt;GetA();
-      <a href="../KVTensP.html#KVTensP:tenseurP" title="KVTenseur3* KVTensP::tenseurP">tenseurP</a>-><a href="../KVTenseur3.html#KVTenseur3:Fill" title="void KVTenseur3::Fill(const TVector3&amp; v,Double_t w=1.) or overloads">Fill</a>(c-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data())-&gt;GetV(), poids);
+      <a href="../KVTensP.html#KVTensP:tenseurP" title="KVTenseur3* KVTensP::tenseurP">tenseurP</a>-><a href="../KVTenseur3.html#KVTenseur3:Fill" title="void KVTenseur3::Fill(const TVector3&amp; v,Double_t w=1.) or overloads">Fill</a>(c-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data(), <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetV(), poids);
    }
 }
 
@@ -369,7 +369,7 @@ ClassImp(<a href="../KVTensP.html">KVTensP</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-12-01 09:58 </em><em>&raquo; Last generated: 2016-12-01 09:58</em><br />
+<em>&raquo; Last changed: 2017-01-27 13:35 </em><em>&raquo; Last generated: 2017-01-27 13:35</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

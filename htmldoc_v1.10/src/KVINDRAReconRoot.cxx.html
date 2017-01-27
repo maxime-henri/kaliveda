@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:56:53 2016            -->
+<!--   Date: Fri Jan 27 13:34:17 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -30,6 +30,7 @@
 <span class="cpp">#include "<a href="../KVDataAnalyser.h">KVDataAnalyser.h</a>"</span>
 <span class="cpp">#include "<a href="../KVINDRAReconNuc.h">KVINDRAReconNuc.h</a>"</span>
 <span class="cpp">#include "<a href="../KVINDRADB.h">KVINDRADB.h</a>"</span>
+<span class="cpp">#include "<a href="../KVINDRAReconDataAnalyser.h">KVINDRAReconDataAnalyser.h</a>"</span>
 
 <span class="keyword">using</span> <span class="keyword">namespace</span> std;
 
@@ -84,7 +85,7 @@ ClassImp(<a href="../KVINDRAReconRoot.html">KVINDRAReconRoot</a>)
 <span class="cpp">#endif</span>
 <span class="cpp">#endif</span>
    <span class="comment">//leaves for reconstructed events</span>
-   <a href="../KVEvent.html">KVEvent</a>::<a href="../KVEvent.html#KVEvent:MakeEventBranch" title="void KVEvent::MakeEventBranch(TTree* tree,const TString&amp; branchname,const TString&amp; classname,void* event,Int_t bufsize=10000000)">MakeEventBranch</a>(<a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentTree" title="TTree* KVINDRAReconRoot::fIdentTree">fIdentTree</a>, <span class="string">"INDRAReconEvent"</span>, <span class="string">"KVINDRAReconEvent"</span>, <a href="../KVSelector.html#KVSelector:GetEventReference" title="KVINDRAReconEvent** KVSelector::GetEventReference()">GetEventReference</a>());
+   <a href="../KVEvent.html">KVEvent</a>::<a href="../KVEvent.html#KVEvent:MakeEventBranch" title="void KVEvent::MakeEventBranch(TTree* tree,const TString&amp; branchname,const TString&amp; classname,void* event,Int_t bufsize=10000000)">MakeEventBranch</a>(<a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentTree" title="TTree* KVINDRAReconRoot::fIdentTree">fIdentTree</a>, <span class="string">"INDRAReconEvent"</span>, <span class="string">"KVINDRAReconEvent"</span>, <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEventReference" title="KVINDRAReconEvent** KVOldINDRASelector::GetEventReference()">GetEventReference</a>());
 
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InitRun"</span>, <span class="string">"Created identified/calibrated data tree %s : %s"</span>, <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentTree" title="TTree* KVINDRAReconRoot::fIdentTree">fIdentTree</a>-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>(), <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentTree" title="TTree* KVINDRAReconRoot::fIdentTree">fIdentTree</a>-&gt;<a href="../#TObject:GetTitle" title="const char* TObject::GetTitle()">GetTitle</a>());
 
@@ -105,12 +106,12 @@ ClassImp(<a href="../KVINDRAReconRoot.html">KVINDRAReconRoot</a>)
 {
    <span class="comment">//For each event we:</span>
    <span class="comment">//     perform primary &amp; secondary event identification and calibration and fill tree</span>
-   <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fEventNumber" title="Int_t KVINDRAReconRoot::fEventNumber">fEventNumber</a> = <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
+   <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fEventNumber" title="Int_t KVINDRAReconRoot::fEventNumber">fEventNumber</a> = <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVBase.html#KVBase:GetNumber" title="UInt_t KVBase::GetNumber()">GetNumber</a>();
    <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:CountStatus" title="void KVINDRAReconRoot::CountStatus()">CountStatus</a>();
-   <span class="keyword">if</span> (<a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVEvent.html#KVEvent:GetMult" title="Int_t KVEvent::GetMult(Option_t* opt=&quot;&quot;)">GetMult</a>() &gt; 0) {
-      <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:IdentifyEvent" title="void KVINDRAReconEvent::IdentifyEvent()">IdentifyEvent</a>();
-      <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVReconstructedEvent.html#KVReconstructedEvent:CalibrateEvent" title="void KVReconstructedEvent::CalibrateEvent()">CalibrateEvent</a>();
-      <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:SecondaryIdentCalib" title="void KVINDRAReconEvent::SecondaryIdentCalib()">SecondaryIdentCalib</a>();
+   <span class="keyword">if</span> (<a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVEvent.html#KVEvent:GetMult" title="Int_t KVEvent::GetMult(Option_t* opt=&quot;&quot;)">GetMult</a>() &gt; 0) {
+      <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:IdentifyEvent" title="void KVINDRAReconEvent::IdentifyEvent()">IdentifyEvent</a>();
+      <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVReconstructedEvent.html#KVReconstructedEvent:CalibrateEvent" title="void KVReconstructedEvent::CalibrateEvent()">CalibrateEvent</a>();
+      <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:SecondaryIdentCalib" title="void KVINDRAReconEvent::SecondaryIdentCalib()">SecondaryIdentCalib</a>();
       <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:CountCodes" title="void KVINDRAReconRoot::CountCodes()">CountCodes</a>();
    }
    <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentTree" title="TTree* KVINDRAReconRoot::fIdentTree">fIdentTree</a>-&gt;Fill();
@@ -120,7 +121,7 @@ ClassImp(<a href="../KVINDRAReconRoot.html">KVINDRAReconRoot</a>)
 {
    <a href="../KVINDRAReconNuc.html">KVINDRAReconNuc</a>* particle;
    <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 15; i++) <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:codes" title="int KVINDRAReconRoot::codes">codes</a>[i] = 0;
-   <span class="keyword">while</span> ((particle = <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:GetNextParticle" title="KVINDRAReconNuc* KVINDRAReconEvent::GetNextParticle(Option_t* opt=&quot;&quot;)">GetNextParticle</a>())) {
+   <span class="keyword">while</span> ((particle = <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:GetNextParticle" title="KVINDRAReconNuc* KVINDRAReconEvent::GetNextParticle(Option_t* opt=&quot;&quot;)">GetNextParticle</a>())) {
       <span class="keyword">int</span> code = particle-&gt;GetCodes().GetVedaIDCode();
       <span class="keyword">if</span> ((code == 0 &amp;&amp; particle-&gt;IsIdentified()) || (code &gt; 0 &amp;&amp; code &lt; 15)) <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:codes" title="int KVINDRAReconRoot::codes">codes</a>[code] += 1;
    }
@@ -134,7 +135,7 @@ ClassImp(<a href="../KVINDRAReconRoot.html">KVINDRAReconRoot</a>)
 {
    <a href="../KVINDRAReconNuc.html">KVINDRAReconNuc</a>* particle;
    <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; 4; i++) <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:status" title="int KVINDRAReconRoot::status">status</a>[i] = 0;
-   <span class="keyword">while</span> ((particle = <a href="../KVSelector.html#KVSelector:GetEvent" title="KVINDRAReconEvent* KVSelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:GetNextParticle" title="KVINDRAReconNuc* KVINDRAReconEvent::GetNextParticle(Option_t* opt=&quot;&quot;)">GetNextParticle</a>())) {
+   <span class="keyword">while</span> ((particle = <a href="../KVOldINDRASelector.html#KVOldINDRASelector:GetEvent" title="KVINDRAReconEvent* KVOldINDRASelector::GetEvent()">GetEvent</a>()-><a href="../KVINDRAReconEvent.html#KVINDRAReconEvent:GetNextParticle" title="KVINDRAReconNuc* KVINDRAReconEvent::GetNextParticle(Option_t* opt=&quot;&quot;)">GetNextParticle</a>())) {
       <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:status" title="int KVINDRAReconRoot::status">status</a>[particle-&gt;<a href="../#TSelector:GetStatus" title="Long64_t TSelector::GetStatus()">GetStatus</a>()] += 1;
    }
    <span class="keyword">int</span> ntot = 0;
@@ -157,8 +158,7 @@ ClassImp(<a href="../KVINDRAReconRoot.html">KVINDRAReconRoot</a>)
 
    gDataAnalyser-&gt;WriteBatchInfo(<a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentTree" title="TTree* KVINDRAReconRoot::fIdentTree">fIdentTree</a>);
 
-   <a href="../KVSelector.html#KVSelector:GetRawData" title="TTree* KVSelector::GetRawData()">GetRawData</a>()-&gt;CloneTree(-1, <span class="string">"fast"</span>); <span class="comment">//copy raw data tree to file</span>
-   <a href="../KVSelector.html#KVSelector:GetGeneData" title="TTree* KVSelector::GetGeneData()">GetGeneData</a>()-&gt;CloneTree(-1, <span class="string">"fast"</span>); <span class="comment">//copy pulser &amp; laser (gene) tree to file</span>
+   ((<a href="../KVINDRAReconDataAnalyser.html">KVINDRAReconDataAnalyser</a>*)gDataAnalyser)-&gt;CloneRawAndGeneTrees();
 
    <a href="../KVINDRAReconRoot.html#KVINDRAReconRoot:fIdentFile" title="TFile* KVINDRAReconRoot::fIdentFile">fIdentFile</a>-&gt;<a href="../#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a>();
 
@@ -202,7 +202,7 @@ ClassImp(<a href="../KVINDRAReconRoot.html">KVINDRAReconRoot</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-12-01 09:56 </em><em>&raquo; Last generated: 2016-12-01 09:56</em><br />
+<em>&raquo; Last changed: 2017-01-27 13:34 </em><em>&raquo; Last generated: 2017-01-27 13:34</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

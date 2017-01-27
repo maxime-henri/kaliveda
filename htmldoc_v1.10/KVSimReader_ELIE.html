@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:57:56 2016            -->
+<!--   Date: Fri Jan 27 13:35:16 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/12</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/13</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/12</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/13</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_SIMULATION_Index.html">SIMULATION</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVSimReader_ELIE</a>
@@ -69,6 +69,48 @@ return false;}
 <!-- */
  --> 
 <!-- TDocHtmlDirective end --><pre>
+ This class is for reading primary events before secondary decay,
+ i.e. output files with names like: elie_58_197_32_1000_primary.output
+ The events will be stored in a ROOT file with a name like:
+ ELIE_[PROJ]_[TARG]_[EBEAM]AMeV_PRIM.root
+ This file will contain a TTree called <span class="string">"ELIE"</span> with a branch <span class="string">"Simulated_evts"</span>
+ All the informations in the header of the ELIE output file are stored in
+ a <a href="./KVNameValueList.html">KVNameValueList</a> in the TTree:
+   ELIE-&gt;GetUserInfo()-&gt;<a href="./#TObject:FindObject" title="TObject* TObject::FindObject(const char* name) or overloads">FindObject</a>(<span class="string">"ELIE Parameters"</span>)-&gt;<a href="./#TNamed:ls" title="void TNamed::ls(Option_t* option=&quot;&quot;)">ls</a>()
+<a href="./KVNameValueList.html">KVNameValueList</a>::ELIE <a href="./Parameters.html">Parameters</a> :  (0x55b2067172f0)
+ &lt;ievt=50&gt;
+ &lt;projectile=Ni&gt;
+ &lt;target=Au&gt;
+ &lt;a_proj=58&gt;
+ &lt;z_proj=28&gt;
+ &lt;a_targ=197&gt;
+ &lt;z_targ=79&gt;
+ &lt;<a href="./KVSimReader_ELIE.html#KVSimReader_ELIE:ebeam" title="Double_t KVSimReader_ELIE::ebeam">ebeam</a>=32&gt;
+ &lt;ilevel=0&gt;
+ &lt;medium_effect=0&gt;
+ &lt;g_al=1&gt;
+ &lt;fraction_ex=0.5&gt;
+ &lt;tempe_limite=5.5&gt;
+ &lt;decay_in_flight=1&gt;
+ &lt;lab_frame=0&gt;
+ &lt;bminimum=0&gt;
+ &lt;bmaximum=1&gt;
+ &lt;choix_ex=0&gt;
+ &lt;fermi=1&gt;
+ &lt;version=1000&gt;
+ &lt;periph_trick=0&gt;
+ &lt;b_limite=0.75&gt;
+ &lt;freeze_out=3&gt;
+ &lt;proba_free_nucleon=0.001&gt;
+ &lt;tole_pourcent=0.01&gt;
+ &lt;discrete=1&gt;
+ &lt;minimisation=0&gt;
+ &lt;geometry=0&gt;
+ &lt;free_nucleon=0&gt;
+ &lt;lambda_ex=1.3&gt;
+
+ If parameter lab_frame=1, we transform the events to the CM frame.
+ In this way, for further analysis/filtering, ELIE events are always in the CM frame.
 
 </pre></div>
 </div></div>
@@ -97,6 +139,8 @@ return false;}
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:CloseFile"><span class="baseclass">KVFileReader::</span>CloseFile</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:CombineFiles"><span class="baseclass">KVBase::</span>CombineFiles</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file1, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* file2, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newfilename, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> keep = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Compare"><span class="baseclass">TNamed::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSimReader.html#KVSimReader:ConvertAndSaveEventsInFile"><span class="baseclass">KVSimReader::</span>ConvertAndSaveEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:ConvertEventsInFile">ConvertEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:Copy"><span class="baseclass">KVFileReader::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSimReader.html#KVSimReader:CreateInfoList"><span class="baseclass">KVSimReader::</span>CreateInfoList</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSimReader.html#KVSimReader:CreateObjectList"><span class="baseclass">KVSimReader::</span>CreateObjectList</a>()</td></tr>
@@ -188,6 +232,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:List"><span class="baseclass">KVBase::</span>List</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static TPluginHandler*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:LoadPlugin"><span class="baseclass">KVBase::</span>LoadPlugin</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* base, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* uri = <span class="string">"0"</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TNamed:ls"><span class="baseclass">TNamed::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./KVSimReader.html">KVSimReader</a>*</td><td class="funcname"><a class="funcname" href="./KVSimReader.html#KVSimReader:MakeSimReader"><span class="baseclass">KVSimReader::</span>MakeSimReader</a>(<span class="keyword">const</span> <span class="keyword">char</span>* model_uri)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
@@ -207,6 +252,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:PreparForReadingAgain"><span class="baseclass">KVFileReader::</span>PreparForReadingAgain</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Print"><span class="baseclass">KVBase::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:PrintSplashScreen"><span class="baseclass">KVBase::</span>PrintSplashScreen</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:ReadEvent">ReadEvent</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:ReadFile">ReadFile</a>()</td></tr>
@@ -217,6 +263,7 @@ return false;}
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:ReadNucleus">ReadNucleus</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="./KVFileReader.html#KVFileReader:ReuseLineAndCheck"><span class="baseclass">KVFileReader::</span>ReuseLineAndCheck</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> nexpect, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* pattern)</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSimReader.html#KVSimReader:Run"><span class="baseclass">KVSimReader::</span>Run</a>(<a href="./KVString.html">KVString</a> filename = <span class="string">"Output.root"</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
@@ -260,13 +307,15 @@ return false;}
 </table></div>
 <div class="access" id="funcprot"><b>protected:</b>
 <table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:define_output_filename">define_output_filename</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:transform_to_cm">transform_to_cm</a>()</td></tr>
 
 </table></div>
 <div class="access" id="funcpriv"><b>private:</b>
 <table class="func" id="tabfuncpriv" cellspacing="0">
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:init">init</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVSimReader_ELIE:init">init</a>()</td></tr>
 
 </table></div>
 </div>
@@ -304,6 +353,8 @@ return false;}
 <div class="access" id="dataprot"><b>protected:</b>
 <table class="data" id="tabdataprot" cellspacing="0">
 <tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:branch_name"><span class="baseclass">KVSimReader::</span>branch_name</a></td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVSimReader_ELIE:ebeam"></a>ebeam</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a>*</td><td class="dataname"><a name="KVSimReader_ELIE:elie_params"></a>elie_params</td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVSimEvent.html">KVSimEvent</a>*</td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:evt"><span class="baseclass">KVSimReader::</span>evt</a></td><td class="datadesc">!</td></tr>
 <tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="./KVBase.html#KVBase:fLabel"><span class="baseclass">KVBase::</span>fLabel</a></td><td class="datadesc">label for the object</td></tr>
 <tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fName"><span class="baseclass">TNamed::</span>fName</a></td><td class="datadesc">object identifier</td></tr>
@@ -317,54 +368,50 @@ return false;}
 <tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:nline"><span class="baseclass">KVFileReader::</span>nline</a></td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVSimNucleus.html">KVSimNucleus</a>*</td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:nuc"><span class="baseclass">KVSimReader::</span>nuc</a></td><td class="datadesc">!</td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a>*</td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:nv"><span class="baseclass">KVSimReader::</span>nv</a></td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNucleus.html">KVNucleus</a></td><td class="dataname"><a name="KVSimReader_ELIE:proj"></a>proj</td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:reading_line"><span class="baseclass">KVFileReader::</span>reading_line</a></td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:root_file_name"><span class="baseclass">KVSimReader::</span>root_file_name</a></td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:status"><span class="baseclass">KVFileReader::</span>status</a></td><td></td></tr>
-<tr class="datainh"><td class="datatype">TObjArray*</td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:toks"><span class="baseclass">KVFileReader::</span>toks</a></td><td class="datadesc">-&gt;</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNucleus.html">KVNucleus</a></td><td class="dataname"><a name="KVSimReader_ELIE:targ"></a>targ</td><td></td></tr>
+<tr class="datainh"><td class="datatype">auto_ptr&lt;TObjArray&gt;</td><td class="dataname"><a href="./KVFileReader.html#KVFileReader:toks"><span class="baseclass">KVFileReader::</span>toks</a></td><td></td></tr>
 <tr class="datainh"><td class="datatype">TTree*</td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:tree"><span class="baseclass">KVSimReader::</span>tree</a></td><td class="datadesc">!</td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:tree_name"><span class="baseclass">KVSimReader::</span>tree_name</a></td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a href="./KVSimReader.html#KVSimReader:tree_title"><span class="baseclass">KVSimReader::</span>tree_title</a></td><td></td></tr>
 
 </table></div>
-<div class="access" id="datapriv"><b>private:</b>
-<table class="data" id="tabdatapriv" cellspacing="0">
-<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="dataname"><a name="KVSimReader_ELIE:ebeam"></a>ebeam</td><td></td></tr>
-<tr class="data"><td class="datatype"><a href="./KVNucleus.html">KVNucleus</a></td><td class="dataname"><a name="KVSimReader_ELIE:proj"></a>proj</td><td></td></tr>
-<tr class="data"><td class="datatype"><a href="./KVNucleus.html">KVNucleus</a></td><td class="dataname"><a name="KVSimReader_ELIE:targ"></a>targ</td><td></td></tr>
-
-</table></div>
 </div>
 <h2><a id="KVSimReader_ELIE:Class_Charts"></a>Class Charts</h2>
 <map name="MapKVSimReader_ELIE_Inh" id="MapKVSimReader_ELIE_Inh">
-<area shape="rect" id="node2" href="./KVSimReader.html" title="KVSimReader" alt="" coords="496,4,579,19"/>
-<area shape="rect" id="node3" href="./KVFileReader.html" title="KVFileReader" alt="" coords="373,4,455,19"/>
-<area shape="rect" id="node4" href="./KVBase.html" title="KVBase" alt="" coords="249,4,331,19"/>
+<area shape="rect" id="node2" href="./KVSimReader.html" title="KVSimReader" alt="" coords="404,3,471,16"/>
+<area shape="rect" id="node3" href="./KVFileReader.html" title="KVFileReader" alt="" coords="303,3,371,16"/>
+<area shape="rect" id="node4" href="./KVBase.html" title="KVBase" alt="" coords="203,3,270,16"/>
+<area shape="rect" id="node7" href="./KVSimReader_ELIE_asym.html" title="KVSimReader_ELIE_asym" alt="" coords="658,3,767,16"/>
 </map>
 <map name="MapKVSimReader_ELIE_InhMem" id="MapKVSimReader_ELIE_InhMem">
-<area shape="rect" id="clust11" href="./KVSimReader.html" alt="" coords="1021,47,1088,128"/>
-<area shape="rect" id="clust10" href="./KVSimReader.html" alt="" coords="1099,47,1165,112"/>
-<area shape="rect" id="clust12" href="./KVSimReader.html" alt="" coords="944,47,1011,128"/>
-<area shape="rect" id="clust13" href="./KVSimReader.html" alt="" coords="1131,120,1133,123"/>
-<area shape="rect" id="clust14" href="./KVSimReader.html" alt="" coords="1099,131,1165,336"/>
-<area shape="rect" id="clust15" href="./KVSimReader.html" alt="" coords="1021,131,1088,352"/>
-<area shape="rect" id="clust16" href="./KVSimReader.html" alt="" coords="944,131,1011,352"/>
-<area shape="rect" id="clust9" href="./KVSimReader.html" title="KVSimReader" alt="" coords="944,16,1165,352"/>
-<area shape="rect" id="clust19" href="./KVFileReader.html" alt="" coords="867,47,933,64"/>
-<area shape="rect" id="clust20" href="./KVFileReader.html" alt="" coords="789,47,856,96"/>
-<area shape="rect" id="clust21" href="./KVFileReader.html" alt="" coords="712,47,779,96"/>
-<area shape="rect" id="clust22" href="./KVFileReader.html" alt="" coords="899,80,901,83"/>
-<area shape="rect" id="clust23" href="./KVFileReader.html" alt="" coords="867,99,933,272"/>
-<area shape="rect" id="clust24" href="./KVFileReader.html" alt="" coords="789,99,856,272"/>
-<area shape="rect" id="clust25" href="./KVFileReader.html" alt="" coords="712,99,779,272"/>
-<area shape="rect" id="clust18" href="./KVFileReader.html" title="KVFileReader" alt="" coords="712,16,933,272"/>
-<area shape="rect" id="clust28" href="./KVBase.html" alt="" coords="635,47,701,64"/>
-<area shape="rect" id="clust29" href="./KVBase.html" alt="" coords="557,47,624,96"/>
-<area shape="rect" id="clust30" href="./KVBase.html" alt="" coords="480,47,547,96"/>
-<area shape="rect" id="clust31" href="./KVBase.html" alt="" coords="667,80,669,83"/>
-<area shape="rect" id="clust32" href="./KVBase.html" alt="" coords="635,99,701,432"/>
-<area shape="rect" id="clust33" href="./KVBase.html" alt="" coords="557,99,624,464"/>
-<area shape="rect" id="clust34" href="./KVBase.html" alt="" coords="480,99,547,464"/>
-<area shape="rect" id="clust27" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,464"/>
+<area shape="rect" id="clust12" href="./KVSimReader.html" alt="" coords="1021,47,1088,128"/>
+<area shape="rect" id="clust11" href="./KVSimReader.html" alt="" coords="1099,47,1165,112"/>
+<area shape="rect" id="clust13" href="./KVSimReader.html" alt="" coords="944,47,1011,128"/>
+<area shape="rect" id="clust14" href="./KVSimReader.html" alt="" coords="1131,120,1133,123"/>
+<area shape="rect" id="clust15" href="./KVSimReader.html" alt="" coords="1099,131,1165,352"/>
+<area shape="rect" id="clust16" href="./KVSimReader.html" alt="" coords="1021,131,1088,368"/>
+<area shape="rect" id="clust17" href="./KVSimReader.html" alt="" coords="944,131,1011,368"/>
+<area shape="rect" id="clust10" href="./KVSimReader.html" title="KVSimReader" alt="" coords="944,16,1165,368"/>
+<area shape="rect" id="clust20" href="./KVFileReader.html" alt="" coords="867,47,933,64"/>
+<area shape="rect" id="clust21" href="./KVFileReader.html" alt="" coords="789,47,856,96"/>
+<area shape="rect" id="clust22" href="./KVFileReader.html" alt="" coords="712,47,779,96"/>
+<area shape="rect" id="clust23" href="./KVFileReader.html" alt="" coords="899,80,901,83"/>
+<area shape="rect" id="clust24" href="./KVFileReader.html" alt="" coords="867,99,933,256"/>
+<area shape="rect" id="clust25" href="./KVFileReader.html" alt="" coords="789,99,856,288"/>
+<area shape="rect" id="clust26" href="./KVFileReader.html" alt="" coords="712,99,779,288"/>
+<area shape="rect" id="clust19" href="./KVFileReader.html" title="KVFileReader" alt="" coords="712,16,933,288"/>
+<area shape="rect" id="clust29" href="./KVBase.html" alt="" coords="635,47,701,64"/>
+<area shape="rect" id="clust30" href="./KVBase.html" alt="" coords="557,47,624,96"/>
+<area shape="rect" id="clust31" href="./KVBase.html" alt="" coords="480,47,547,96"/>
+<area shape="rect" id="clust32" href="./KVBase.html" alt="" coords="667,80,669,83"/>
+<area shape="rect" id="clust33" href="./KVBase.html" alt="" coords="635,99,701,448"/>
+<area shape="rect" id="clust34" href="./KVBase.html" alt="" coords="557,99,624,464"/>
+<area shape="rect" id="clust35" href="./KVBase.html" alt="" coords="480,99,547,464"/>
+<area shape="rect" id="clust28" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,464"/>
 </map>
 <map name="MapKVSimReader_ELIE_Lib" id="MapKVSimReader_ELIE_Lib">
 <area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="325,373,377,395"/>
@@ -377,45 +424,69 @@ return false;}
 </div><div class="classcharts"><div class="classchartswidth"></div>
 <img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVSimReader_ELIE_Inh" src="inh/KVSimReader_ELIE_Inh.png"/></div>
 <h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader_ELIE:define_output_filename" href="src/KVSimReader_ELIE.cxx.html#BCTzBE">define_output_filename</a>()</span><br />
+<div class="funccomm"><pre> ROOT file called: ELIE_[PROJ]_[TARG]_[EBEAM]AMeV_PRIM.root
+ Call after reading file header
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader_ELIE:transform_to_cm" href="src/KVSimReader_ELIE.cxx.html#aZ2uz">transform_to_cm</a>()</span><br />
+<div class="funccomm"><pre> transform all particle kinematics to CM frame from lab
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVSimReader_ELIE:KVSimReader_ELIE" href="src/KVSimReader_ELIE.cxx.html#jcHVWE">KVSimReader_ELIE</a>()</span><br />
 <div class="funccomm"><pre> Default constructor
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVSimReader_ELIE:KVSimReader_ELIE@1" href="src/KVSimReader_ELIE.cxx.html#PWTFU">KVSimReader_ELIE</a>(<a href="./KVString.html">KVString</a> filename)</span><br />
-<div class="funccomm"><pre> <a href="./#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> your code here
+<div class="funccomm"><pre> <a href="./#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> file
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVSimReader_ELIE:_KVSimReader_ELIE" href="src/KVSimReader_ELIE.cxx.html#QAMRs">~KVSimReader_ELIE</a>()</span><br />
 <div class="funccomm"><pre> Destructor
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader_ELIE:ConvertEventsInFile" href="src/KVSimReader_ELIE.cxx.html#oDYxM">ConvertEventsInFile</a>(<a href="./KVString.html">KVString</a> filename)</span><br />
+</div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader_ELIE:ReadFile" href="src/KVSimReader_ELIE.cxx.html#Yo.VpD">ReadFile</a>()</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVSimReader_ELIE:ReadHeader" href="src/KVSimReader_ELIE.cxx.html#O7iomB">ReadHeader</a>()</span><br />
-<div class="funccomm"><pre> File header contains info on colliding nuclei
- and number of simulated events:
+<div class="funccomm"><pre> File header contains info on simulation
 
  54 129 50 119 32
  20000
+   ievt=50
+   projectile=Ni
+   target=Au
+   a_proj=58
+   z_proj=28
+   a_targ=197
+   z_targ=79
+   [...]
+   geometry=0
+   free_nucleon=0
+   lambda_ex=1.3
 
- for 20000 events of 129Xe+119Sn@32MeV/nucleon
+ The simulation parameters are stored in a <a href="./KVNameValueList.html">KVNameValueList</a>
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVSimReader_ELIE:ReadEvent" href="src/KVSimReader_ELIE.cxx.html#DGGF9C">ReadEvent</a>()</span><br />
-<div class="funccomm"><pre> Events begin with event number, multiplicity and (?) impact parameter,
- followed by list of particles:
- 0 61 0
- 0 11 24.0 57.4156777729 306.493830835 107.248038513
- 1 2 3.0 44.7736647511 50.6065561553 127.526000603
- 2 7 15.0 57.7807658304 121.672537111 55.9601768553
- 3 9 19.0 35.5421741719 70.5034488937 236.567079783
- etc.
+<div class="funccomm"><pre> Event structure: (primary events)
+   nevt multiplicite b reduit
+   0 2 0.998654688551
+   particules dans l'evt
+   indice_particule  charge_particule masse_particule teta_particule(degres) phi_particule(degres) indice_particule energie d'excitation totale (MeV)
+   0 27 57 3.27897003986 230.52425244 1109.37002505 0 0.00499304975261
+   1 80 198 176.726338776 129.481056376 319.364098122 1 0.017344278088
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVSimReader_ELIE:ReadNucleus" href="src/KVSimReader_ELIE.cxx.html#ldNROC">ReadNucleus</a>()</span><br />
-<div class="funccomm"><pre> Particles are given as:
- 0 11 24.0 57.4156777729 306.493830835 107.248038513
- # Z  A     theta(deg)      phi(deg)    energy(MeV)
+<div class="funccomm"><pre> Event structure: (primary events)
+   nevt multiplicite b reduit
+   0 2 0.998654688551
+   particules dans l'evt
+   indice_particule  charge_particule masse_particule teta_particule(degres) phi_particule(degres) indice_particule energie d'excitation totale (MeV)
+   0 27 57 3.27897003986 230.52425244 1109.37002505 0 0.00499304975261
+   1 80 198 176.726338776 129.481056376 319.364098122 1 0.017344278088
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVSimReader_ELIE:init" href="src/KVSimReader_ELIE.h.html#tqBZnC">init</a>()</span><br />
@@ -425,7 +496,7 @@ return false;}
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?John+Frankland"> John Frankland</a> </em><em>&raquo; Created  by KVClassFactory on Sun Jan 20 13:31:10 2013</em><br />
-<em>&raquo; Last changed: Thu Dec  1 09:57:57 2016 </em><em>&raquo; Last generated: 2016-12-01 09:57</em><br />
+<em>&raquo; Last changed: Fri Jan 27 13:35:16 2017 </em><em>&raquo; Last generated: 2017-01-27 13:35</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

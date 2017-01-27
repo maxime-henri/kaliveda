@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:57:26 2016            -->
+<!--   Date: Fri Jan 27 13:34:48 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -23,7 +23,7 @@
 <div id="toplinks">
 <div class="descrhead"><div class="descrheadcontent">
 <span class="descrtitle">Quick Links:</span>
-<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/12</a>
+<a class="descrheadentry" href="http://indra.in2p3.fr/KaliVedaDoc">KaliVeda v1.10/13</a>
 <a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
 <a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
 <a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
@@ -53,7 +53,7 @@ return false;}
 </div></div>
 </div>
 <div class="location">
-<a class="locationlevel" href="index.html">KaliVeda v1.10/12</a>
+<a class="locationlevel" href="index.html">KaliVeda v1.10/13</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
  &#187; <a class="locationlevel" href="./KVMULTIDET_PARTICLES_Index.html">PARTICLES</a>
  &#187; <a class="locationlevel" href="#TopOfPage">KVParticle</a>
@@ -72,8 +72,10 @@ Unless otherwise stated,
       - all angles are in degrees (polar angles between 0 and 180 degrees; azimuthal angles between 0 and 360 degrees).
       - all momenta are in MeV/c
 
-This class derives from <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a> - a particle is basically a Lorentz 4-vector with added attributes - and therefore any methods which are not
-documented here will be found in that class. This also means that all particles and kinematics are relativistic in KaliVeda.
+This class derives from <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a> - a particle is basically a Lorentz 4-vector with added attributes - and therefore
+any methods which are not documented here will be found in that class [N.B. most 'Set'ter methods of <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>
+should not be used directly and have been made 'private' in <a href="./KVParticle.html">KVParticle</a> in order to prevent their use].
+This also means that all particles and kinematics are relativistic in KaliVeda.
 
 Methods defined/redefined in this class:
 
@@ -96,7 +98,7 @@ Particle properties can be defined either using one of the constructors :
 or with the usual 'Set' methods:
 
       part.<a href="./KVParticle.html#KVParticle:SetMass" title="void KVParticle::SetMass(Double_t m)">SetMass</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> m);                                               // changes rest mass, leaves momentum unchanged
-
+      part.<a href="./KVParticle.html#KVParticle:SetEnergy" title="void KVParticle::SetEnergy(Double_t e)">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e);                                             // set kinetic energy (in MeV)
       part.<a href="./KVParticle.html#KVParticle:SetMomentum" title="void KVParticle::SetMomentum(const TVector3&amp; v) or overloads">SetMomentum</a>(const TVector3 &amp; v);                                   // changes momentum, leaves rest mass unchanged
       part.<a href="./KVParticle.html#KVParticle:SetMomentum" title="void KVParticle::SetMomentum(const TVector3&amp; v) or overloads">SetMomentum</a>(const TVector3 * v);
 
@@ -128,20 +130,127 @@ or with the usual 'Set' methods:
       For the same particle, number of groups is unlimited.
       All these groups are stored in the <a href="./KVParticle.html#KVParticle:fGroups" title="KVUniqueNameList KVParticle::fGroups">fGroups</a> pointeur (<a href="./KVUniqueNameList.html">KVUniqueNameList</a> of TObjString objects)
 
-      The name of the frame which particle as been created via the <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>() method is now stored
+      The name of the frame which particle as been created via the <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>() method is now stored
       in the non persistent field <a href="./KVParticle.html#KVParticle:fFrameName" title="TString KVParticle::fFrameName">fFrameName</a>
       Two WARNINGS :
             - <a href="./KVParticle.html#KVParticle:SetName" title="void KVParticle::SetName(const Char_t* nom)">SetName</a> and <a href="./KVParticle.html#KVParticle:GetName" title="const Char_t* KVParticle::GetName()">GetName</a> Methods now are related to the <a href="./KVParticle.html#KVParticle:fName" title="TString KVParticle::fName">fName</a> field which is the name of the particle
             - All group names are not case sensitive
              Ex : <a href="./KVNucleus.html">KVNucleus</a> nn; nn.<a href="./KVParticle.html#KVParticle:AddGroup" title="void KVParticle::AddGroup(const Char_t* groupname,const Char_t* from=&quot;&quot;) or overloads">AddGroup</a>(<span class="string">"forward"</span>); nn.<a href="./KVParticle.html#KVParticle:BelongsToGroup" title="Bool_t KVParticle::BelongsToGroup(const Char_t* groupname)">BelongsToGroup</a>(<span class="string">"ForWaRD"</span>) -&gt; return <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
-      When new <a href="./KVParticle.html">KVParticle</a> is defined using <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>() Method, the list of group names is already stored in it
+      When new <a href="./KVParticle.html">KVParticle</a> is defined using <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>() Method, the list of group names is already stored in it
       In the same way, when some change is made on the <span class="string">"principal"</span> <a href="./KVParticle.html">KVParticle</a>, if some <span class="string">"secondary"</span> particles
       have been already stored in <a href="./KVParticle.html#KVParticle:fBoosted" title="KVList KVParticle::fBoosted">fBoosted</a> list, the change is also apply
       On the contrary if some change is made in the following way :
-      par-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(framename).<a href="./KVParticle.html#KVParticle:AddGroup" title="void KVParticle::AddGroup(const Char_t* groupname,const Char_t* from=&quot;&quot;) or overloads">AddGroup</a>(groupname)
+      par-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(framename).<a href="./KVParticle.html#KVParticle:AddGroup" title="void KVParticle::AddGroup(const Char_t* groupname,const Char_t* from=&quot;&quot;) or overloads">AddGroup</a>(groupname)
       the group groupname is only stored for <span class="string">"par-&gt;GetFrame(framename) particle"</span>
       ie :   par-&gt;<a href="./KVParticle.html#KVParticle:BelongsToGroup" title="Bool_t KVParticle::BelongsToGroup(const Char_t* groupname)">BelongsToGroup</a>(groupname) = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>
-        and  par-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(framename).<a href="./KVParticle.html#KVParticle:BelongsToGroup" title="Bool_t KVParticle::BelongsToGroup(const Char_t* groupname)">BelongsToGroup</a>(groupname) = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+        and  par-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(framename).<a href="./KVParticle.html#KVParticle:BelongsToGroup" title="Bool_t KVParticle::BelongsToGroup(const Char_t* groupname)">BelongsToGroup</a>(groupname) = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>
+
+KINEMATICAL REFERENCE FRAMES
+1. Accessing particle kinematics in different frames
+Particle kinematics in different frames can be accessed with <a href="./KVParticle.html#KVParticle:InFrame" title="KVParticle KVParticle::InFrame(const KVFrameTransform&amp; )">InFrame</a>(const <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;).
+This method does not modify the particle's kinematics or default reference frame (see 2 below).
+If you want to access lots of information from this frame, it is probably more efficient to
+define and store it in the particle's list of reference frames (see 3 below).
+
+ Ex.) inspect kinematics of particle (accessed through pointer <a href="./KVParticle.html">KVParticle</a>* p)
+       - in a frame moving at 5 cm/ns in the beam direction:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:InFrame" title="KVParticle KVParticle::InFrame(const KVFrameTransform&amp; )">InFrame</a>(TVector3(0,0,5)).<a href="./KVParticle.html#KVParticle:GetVpar" title="Double_t KVParticle::GetVpar()">GetVpar</a>();
+
+       - in a frame rotated by 90° clockwise around the +ve beam direction:
+
+            TRotation rot;
+            rot.<a href="./#TLorentzVector:RotateZ" title="void TLorentzVector::RotateZ(Double_t angle)">RotateZ</a>(TMath::PiOver2());
+            p-&gt;<a href="./KVParticle.html#KVParticle:InFrame" title="KVParticle KVParticle::InFrame(const KVFrameTransform&amp; )">InFrame</a>(rot).<a href="./KVParticle.html#KVParticle:GetPhi" title="Double_t KVParticle::GetPhi()">GetPhi</a>();
+
+       - in a frame moving at 0.1c in the beam direction:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:InFrame" title="KVParticle KVParticle::InFrame(const KVFrameTransform&amp; )">InFrame</a>(<a href="./KVFrameTransform.html">KVFrameTransform</a>(TVector3(0,0,0.1),<a href="./ListOfTypes.html#Bool_t">kTRUE</a>)).<a href="./KVParticle.html#KVParticle:GetKE" title="Double_t KVParticle::GetKE()">GetKE</a>();
+
+       [note that in this case you have to explicitly use the <a href="./KVFrameTransform.html">KVFrameTransform</a> constructor]
+
+2. Modifying particle kinematics
+Particle kinematics can be modified using method <a href="./KVParticle.html#KVParticle:ChangeFrame" title="void KVParticle::ChangeFrame(const KVFrameTransform&amp; )">ChangeFrame</a>(const <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;):
+
+ Ex.) change kinematics of particle (accessed through pointer <a href="./KVParticle.html">KVParticle</a>* p)
+       - to a frame moving at 5 cm/ns in the beam direction:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:ChangeFrame" title="void KVParticle::ChangeFrame(const KVFrameTransform&amp; )">ChangeFrame</a>(TVector3(0,0,5));
+
+       - to a frame rotated by 90° clockwise around the +ve beam direction:
+
+            TRotation rot;
+            rot.<a href="./#TLorentzVector:RotateZ" title="void TLorentzVector::RotateZ(Double_t angle)">RotateZ</a>(TMath::PiOver2());
+            p-&gt;<a href="./KVParticle.html#KVParticle:ChangeFrame" title="void KVParticle::ChangeFrame(const KVFrameTransform&amp; )">ChangeFrame</a>(rot);
+
+       - to a frame moving at 0.1c in the beam direction:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:ChangeFrame" title="void KVParticle::ChangeFrame(const KVFrameTransform&amp; )">ChangeFrame</a>(<a href="./KVFrameTransform.html">KVFrameTransform</a>(TVector3(0,0,0.1),<a href="./ListOfTypes.html#Bool_t">kTRUE</a>));
+
+       [note that in this case you have to explicitly use the <a href="./KVFrameTransform.html">KVFrameTransform</a> constructor]
+
+3. Using several reference frames
+Rather than changing the reference frame of the particle, you can define and use several
+different reference frames while keeping the original kinematics as the default. Each
+frame can be used independently, and new frames can be defined based on any of the
+existing frames:
+
+ Ex.) for a particle accessed through pointer <a href="./KVParticle.html">KVParticle</a>* p:
+        - define a new frame moving at 5 cm/ns in the beam direction:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"moving_frame"</span>, TVector3(0,0,5));
+
+        - define a rotated coordinate frame in the <span class="string">"moving_frame"</span>,
+          rotated by 90° clockwise around the +ve beam direction:
+
+            TRotation rot;
+            rot.<a href="./#TLorentzVector:RotateZ" title="void TLorentzVector::RotateZ(Double_t angle)">RotateZ</a>(TMath::PiOver2());
+            p-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"rotated_moving_frame"</span>, <span class="string">"moving_frame"</span>, rot);
+
+        [Note that the same frame can be defined directly from the original
+         particle by using a combined boost-then-rotation transform:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"rotated_moving_frame"</span>, <a href="./KVFrameTransform.html">KVFrameTransform</a>(TVector3(0,0,5),rot));
+
+         In this case the <a href="./KVFrameTransform.html">KVFrameTransform</a> constructor has to be called explicitly.]
+
+        - define a similarly rotated coordinate frame in the original
+          (default) reference frame:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"rotated_frame"</span>, rot);
+
+        - access kinematical information in any of these frames:
+
+            p-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"moving_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetVpar" title="Double_t KVParticle::GetVpar()">GetVpar</a>();
+            p-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"rotated_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetPhi" title="Double_t KVParticle::GetPhi()">GetPhi</a>();
+            p-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"rotated_moving_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTransverseEnergy" title="Double_t KVParticle::GetTransverseEnergy()">GetTransverseEnergy</a>();
+
+If you call <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a> several times with the same frame name
+[note that frame names are case insensitive], the existing reference frame will
+be updated to use the new transformation, which will be applied to the kinematics
+of the particle in the 'parent' frame used to define the frame. Any frames which
+were defined based on the frame will be updated too:
+
+ Ex.) for the previous particle &amp; frame definitions
+
+        - change the angle of rotation in the moving rotated frame:
+
+           rot.<a href="./#TLorentzVector:RotateZ" title="void TLorentzVector::RotateZ(Double_t angle)">RotateZ</a>(-TMath::PiOver4());
+           p-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"rotated_moving_frame"</span>, rot);
+
+        - change the velocity of the moving frame to 0.1c:
+
+           p-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"moving_frame"</span>, <a href="./KVFrameTransform.html">KVFrameTransform</a>(TVector3(0,0,0.1),<a href="./ListOfTypes.html#Bool_t">kTRUE</a>));
+
+          [Note that in this case, the <span class="string">"rotated_moving_frame"</span> will be updated
+           automatically to take account of the new velocity of <span class="string">"moving_frame"</span>]
+
+If you change the kinematics of the particle in its original (default) frame,
+you can update the kinematics in all defined frames by calling the method
+
+           p-&gt;<a href="./KVParticle.html#KVParticle:UpdateAllFrames" title="void KVParticle::UpdateAllFrames()">UpdateAllFrames</a>();
+
+[it does not occur automatically].
 
 </pre></div>
 </div></div>
@@ -167,6 +276,8 @@ or with the usual 'Set' methods:
 <tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#TLorentzVector:BoostVector"><span class="baseclass">TLorentzVector::</span>BoostVector</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
 <tr class="func"><td class="funcret">static <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:C">C</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:ChangeDefaultFrame">ChangeDefaultFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* defname = <span class="string">"orig"</span>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:ChangeFrame">ChangeFrame</a>(<span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;)</td></tr>
 <tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVParticle:Class">Class</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:Clear">Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
@@ -205,7 +316,7 @@ or with the usual 'Set' methods:
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:GetE">GetE</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:GetEnergy">GetEnergy</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:GetEtran">GetEtran</a>() <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret"><a href="./KVParticle.html">KVParticle</a>*</td><td class="funcname"><a class="funcname" href="#KVParticle:GetFrame">GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./KVParticle.html">KVParticle</a>*</td><td class="funcname"><a class="funcname" href="#KVParticle:GetFrame">GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> warn_and_return_null_if_unknown = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="#KVParticle:GetFrameName">GetFrameName</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./KVUniqueNameList.html">KVUniqueNameList</a>*</td><td class="funcname"><a class="funcname" href="#KVParticle:GetGroups">GetGroups</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
@@ -240,6 +351,7 @@ or with the usual 'Set' methods:
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVParticle:HasFrame">HasFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVParticle.html">KVParticle</a></td><td class="funcname"><a class="funcname" href="#KVParticle:InFrame">InFrame</a>(<span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:init">init</a>()</td></tr>
@@ -254,7 +366,7 @@ or with the usual 'Set' methods:
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:ListGroups">ListGroups</a>() <span class="keyword">const</span></td></tr>
-<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:ls">ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#TLorentzVector:M"><span class="baseclass">TLorentzVector::</span>M</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#TLorentzVector:M2"><span class="baseclass">TLorentzVector::</span>M2</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#TLorentzVector:Mag"><span class="baseclass">TLorentzVector::</span>Mag</a>() <span class="keyword">const</span></td></tr>
@@ -330,14 +442,8 @@ or with the usual 'Set' methods:
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetE">SetE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetE0">SetE0</a>(TVector3* e = 0)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetEnergy">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@1">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TLorentzRotation&amp; rot)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@2">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TRotation&amp; rot)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TVector3&amp; boost, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@5">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TLorentzRotation&amp; rot)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@6">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TRotation&amp; rot)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@3">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TVector3&amp; boost, TRotation&amp; rot, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@4">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TVector3&amp; boost, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@7">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TVector3&amp; boost, TRotation&amp; rot, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrame@1">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetFrameName">SetFrameName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* framename)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetIsDetected">SetIsDetected</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetIsOK">SetIsOK</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> flag = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</td></tr>
@@ -349,28 +455,11 @@ or with the usual 'Set' methods:
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetMomentum@2">SetMomentum</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> px, <a href="./ListOfTypes.html#Double_t">Double_t</a> py, <a href="./ListOfTypes.html#Double_t">Double_t</a> pz, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"cart"</span>)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetName">SetName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* nom)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPerp"><span class="baseclass">TLorentzVector::</span>SetPerp</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> r)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPhi">SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPtEtaPhiE"><span class="baseclass">TLorentzVector::</span>SetPtEtaPhiE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPtEtaPhiM"><span class="baseclass">TLorentzVector::</span>SetPtEtaPhiM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPx"><span class="baseclass">TLorentzVector::</span>SetPx</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPxPyPzE"><span class="baseclass">TLorentzVector::</span>SetPxPyPzE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> px, <a href="./ListOfTypes.html#Double_t">Double_t</a> py, <a href="./ListOfTypes.html#Double_t">Double_t</a> pz, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPy"><span class="baseclass">TLorentzVector::</span>SetPy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetPz"><span class="baseclass">TLorentzVector::</span>SetPz</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetRandomMomentum">SetRandomMomentum</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./#TLorentzVector:T" title="Double_t TLorentzVector::T()">T</a>, <a href="./ListOfTypes.html#Double_t">Double_t</a> thmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> thmax, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmin, <a href="./ListOfTypes.html#Double_t">Double_t</a> phmax, <a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">"isotropic"</span>)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetRho"><span class="baseclass">TLorentzVector::</span>SetRho</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> rho)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetT"><span class="baseclass">TLorentzVector::</span>SetT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetTheta">SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetVect"><span class="baseclass">TLorentzVector::</span>SetVect</a>(<span class="keyword">const</span> TVector3&amp; p)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetVectM"><span class="baseclass">TLorentzVector::</span>SetVectM</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> mass)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetVectMag"><span class="baseclass">TLorentzVector::</span>SetVectMag</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> magnitude)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetVelocity">SetVelocity</a>(<span class="keyword">const</span> TVector3&amp;)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetX"><span class="baseclass">TLorentzVector::</span>SetX</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetXYZM"><span class="baseclass">TLorentzVector::</span>SetXYZM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetXYZT"><span class="baseclass">TLorentzVector::</span>SetXYZT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> t)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetY"><span class="baseclass">TLorentzVector::</span>SetY</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
-<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TLorentzVector:SetZ"><span class="baseclass">TLorentzVector::</span>SetZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
@@ -381,6 +470,7 @@ or with the usual 'Set' methods:
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#TLorentzVector:Theta"><span class="baseclass">TLorentzVector::</span>Theta</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="#TLorentzVector:Transform"><span class="baseclass">TLorentzVector::</span>Transform</a>(<span class="keyword">const</span> TRotation&amp; m)</td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp;</td><td class="funcname"><a class="funcname" href="#TLorentzVector:Transform@1"><span class="baseclass">TLorentzVector::</span>Transform</a>(<span class="keyword">const</span> TLorentzRotation&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:UpdateAllFrames">UpdateAllFrames</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">TVector3</td><td class="funcname"><a class="funcname" href="#TLorentzVector:Vect"><span class="baseclass">TLorentzVector::</span>Vect</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
@@ -400,6 +490,30 @@ or with the usual 'Set' methods:
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetGroups">SetGroups</a>(<a href="./KVUniqueNameList.html">KVUniqueNameList</a>* un)</td></tr>
+
+</table></div>
+<div class="access" id="funcpriv"><b>private:</b>
+<table class="func" id="tabfuncpriv" cellspacing="0">
+<tr class="func"><td class="funcret"><a href="./KVKinematicalFrame.html">KVKinematicalFrame</a>*</td><td class="funcname"><a class="funcname" href="#KVParticle:get_frame">get_frame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVKinematicalFrame.html">KVKinematicalFrame</a>*</td><td class="funcname"><a class="funcname" href="#KVParticle:get_parent_frame">get_parent_frame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <a href="./KVKinematicalFrame.html">KVKinematicalFrame</a>* F = 0)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:print_frames">print_frames</a>(TString fmt = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPerp">SetPerp</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> p)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPtEtaPhiE">SetPtEtaPhiE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPtEtaPhiM">SetPtEtaPhiM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPx">SetPx</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPxPyPzE">SetPxPyPzE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> px, <a href="./ListOfTypes.html#Double_t">Double_t</a> py, <a href="./ListOfTypes.html#Double_t">Double_t</a> pz, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPy">SetPy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetPz">SetPz</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetRho">SetRho</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> rho)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetT">SetT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetVect">SetVect</a>(<span class="keyword">const</span> TVector3&amp; vect3)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetVectM">SetVectM</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> mass)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetVectMag">SetVectMag</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> magnitude)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetX">SetX</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetXYZM">SetXYZM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetXYZT">SetXYZT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> t)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetY">SetY</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVParticle:SetZ">SetZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</td></tr>
 
 </table></div>
 </div>
@@ -493,6 +607,8 @@ or with the usual 'Set' methods:
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVParticle:_KVParticle" href="src/KVParticle.cxx.html#em2W0C">~KVParticle</a>()</span><br />
+<div class="funccomm"><pre><a href="./#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"~KVParticle"</span>,<span class="string">"%p"</span>,this);
+</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:C" href="src/KVParticle.cxx.html#ZdoTiB">C</a>()</span><br />
 <div class="funccomm"><pre>Static function.
@@ -513,6 +629,10 @@ Based on <a href="./KVPosition.html">KVPosition</a>::<a href="./KVPosition.html#
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMomentum@3" href="src/KVParticle.cxx.html#Wa8hkC">SetMomentum</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> <a href="./#TLorentzVector:T" title="Double_t TLorentzVector::T()">T</a>, TVector3 dir)</span><br />
 <div class="funccomm"><pre>set momentum with kinetic energy t and unit direction vector d
 (d is normalised first in case it is not a unit vector)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:print_frames" href="src/KVParticle.cxx.html#H.u82E">print_frames</a>(TString fmt = <span class="string">""</span>) const</span><br />
+<div class="funccomm"><pre> recursive print out of all defined kinematical frames
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:Print" href="src/KVParticle.cxx.html#xbe5cB">Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* t = <span class="string">""</span>) const</span><br />
@@ -549,6 +669,8 @@ If <a href="./KVParticle.html#KVParticle:SetIsOK" title="void KVParticle::SetIsO
 In order to 'forget' this status (accept all particles) use <a href="./KVParticle.html#KVParticle:ResetIsOK" title="void KVParticle::ResetIsOK()">ResetIsOK</a>()
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:ls" href="src/KVParticle.cxx.html#MFrpuE">ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) const</span><br />
+</div>
 <div class="funcdoc"><span class="funcname"><a href="./KVParticle.html">KVParticle</a>&amp; <a class="funcname" name="KVParticle:operator_" href="src/KVParticle.cxx.html#OVMMOB">operator=</a>(<span class="keyword">const</span> <a href="./KVParticle.html">KVParticle</a>&amp; rhs)</span><br />
 <div class="funccomm"><pre><a href="./KVParticle.html">KVParticle</a> assignment operator.
 </pre></div>
@@ -583,15 +705,14 @@ Particles which have not encountered any absorbers/detectors are left as they ar
  the line
          if (!<a href="./KVParticle.html#KVParticle:fGroups" title="KVUniqueNameList KVParticle::fGroups">fGroups</a>) <a href="./KVParticle.html#KVParticle:CreateGroups" title="void KVParticle::CreateGroups()">CreateGroups</a>();
  has to be included
+ The group will be added to all 'particles' representing different kinematical frames
+ for this particle
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:AddGroup" href="src/KVParticle.cxx.html#qfW0ZB">AddGroup</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* from = <span class="string">""</span>)</span><br />
 <div class="funccomm"><pre> Associate this particle with the given named group.
  Optional argument <span class="string">"from"</span> allows to put a condition on the already stored
  group list, is set to <span class="string">""</span> by default
-
- Apply the method to all particles stored in <a href="./KVParticle.html#KVParticle:fBoosted" title="KVList KVParticle::fBoosted">fBoosted</a>
-<a href="./#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"AddGroup"</span>,<span class="string">"%s"</span>,groupname);
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:AddGroup@1" href="src/KVParticle.cxx.html#fomgHD">AddGroup</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <a href="./KVParticleCondition.html">KVParticleCondition</a>* )</span><br />
@@ -609,6 +730,12 @@ if there is an existing list, it's deleted
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:AddGroups" href="src/KVParticle.cxx.html#yvtfdC">AddGroups</a>(<a href="./KVUniqueNameList.html">KVUniqueNameList</a>* un)</span><br />
 <div class="funccomm"><pre>list of groups added to the current one
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVParticle:GetNumberOfDefinedFrames" href="src/KVParticle.cxx.html#AesqI">GetNumberOfDefinedFrames</a>()</span><br />
+<div class="funccomm"><pre> Returns the total number of defined kinematical frames for this particle.
+ This includes all frames which are defined with respect to other frames
+ (i.e. we count recursively the contents of all <a href="./KVParticle.html#KVParticle:fBoosted" title="KVList KVParticle::fBoosted">fBoosted</a> lists)
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVParticle:GetNumberOfDefinedGroups" href="src/KVParticle.cxx.html#N_gSAE">GetNumberOfDefinedGroups</a>(<span class="keyword">void</span>)</span><br />
@@ -639,141 +766,138 @@ return <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if no group has be defined
 <div class="funccomm"><pre>List all stored groups
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./KVParticle.html">KVParticle</a>* <a class="funcname" name="KVParticle:GetFrame" href="src/KVParticle.cxx.html#WQZKsD">GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</span><br />
-<div class="funccomm"><pre> Return the momentum of the particle in the Lorentz-boosted frame corresponding to the name
- <span class="string">"frame"</span> given as argument (see <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>() for definition of different frames).
+<div class="funcdoc"><span class="funcname"><a href="./KVParticle.html">KVParticle</a> <a class="funcname" name="KVParticle:InFrame" href="src/KVParticle.cxx.html#bX3o5E">InFrame</a>(<span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp; )</span><br />
+<div class="funccomm"><pre> Use this method to obtain 'on-the-fly' some information on particle kinematics
+ in a different reference frame. The default kinematics of the particle are unchanged.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:ChangeFrame" href="src/KVParticle.cxx.html#ulAdFD">ChangeFrame</a>(<span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp; )</span><br />
+<div class="funccomm"><pre> Permanently modify kinematics of particle according to the given transformation.
+ NB the current kinematics will be lost. If you want to keep it after changing the
+ default kinematics, define the new frame with <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a> and then use <a href="./KVParticle.html#KVParticle:ChangeDefaultFrame" title="void KVParticle::ChangeDefaultFrame(const Char_t* ,const Char_t* defname=&quot;orig&quot;)">ChangeDefaultFrame</a>.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:ChangeDefaultFrame" href="src/KVParticle.cxx.html#sYBzhD">ChangeDefaultFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* , <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* defname = <span class="string">"orig"</span>)</span><br />
+<div class="funccomm"><pre> Make existing reference frame 'newdef' the new default frame for particle kinematics.
+ The current default frame will then be accessible from the list of frames
+ using name 'defname' (by default, <span class="string">"orig"</span>)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame" href="src/KVParticle.cxx.html#lZ6Xh">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp; )</span><br />
+<div class="funccomm"><pre>Define a Lorentz-boosted and/or rotated frame in which to calculate this particle's momentum and energy.
 
- WARNING: if <span class="string">"frame"</span> does not correspond exactly to the name of a frame previously created with
-          <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>() - upper &amp; lower case names are not considered the same - then we
-          return a pointer to the particle itself: in other words, you will be dealing with
-          the kinematics of the particle in its default (usually laboratory) frame.
+The new frame will have the name given in the string <span class="string">"frame"</span>, which can then be used to
+access the kinematics of the particle in different frames using <a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>() (frame names are case-insensitive).
+Calling this method with the name of an existing frame will update the kinematics of the particle
+in that frame using the given transform (note that kinematics in all frames defined as 'subframes' of
+this frame will also be updated).
+
+USING BOOSTS
+The boost velocity vector is that of the boosted frame with respect to the original frame of the particles in the event.
+The velocity vector can be given either in cm/ns units (default) or in units of <span class="string">'c'</span> (beta=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>).
+
+<a href="./#TLorentzVector:E" title="Double_t TLorentzVector::E()">E</a>.g. to define a frame moving at 0.1c in the +ve z-direction with respect to the original
+event frame:
+
+      (...supposing a valid pointer <a href="./KVParticle.html">KVParticle</a>* my_part...)
+      TVector3 vframe(0,0,0.1);
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, <a href="./KVFrameTransform.html">KVFrameTransform</a>(vframe, <a href="./ListOfTypes.html#Bool_t">kTRUE</a>));
+
+or with velocity in cm/ns units (default):
+      TVector3 vframe(0,0,3);
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, <a href="./KVFrameTransform.html">KVFrameTransform</a>(vframe));
+ OR   my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, vframe);
+
+USING ROTATIONS
+According to the conventions adopted for the TRotation and TLorentzRotation classes,
+we actually use the inverse of the TLorentzRotation to make the transformation,
+to get the coordinates corresponding to a rotated coordinate system, not the coordinates
+of a rotated vector in the same coordinate system
+=&gt; you do not need to invert the transformation matrix
+
+<a href="./#TLorentzVector:E" title="Double_t TLorentzVector::E()">E</a>.g. if you want to define a new frame whose coordinate axes are rotated with respect
+to the original axes, you can set up a TRotation like so:
+
+      TRotation rot;
+      TVector3 newX, newY, newZ; // the new coordinate axes
+      rot.RotateAxes(newX, newY, newZ);
+
+If you are using one of the two global variables which calculate the event tensor
+(<a href="./KVTensP.html">KVTensP</a> and <a href="./KVTensPCM.html">KVTensPCM</a>) you can obtain the transformation to the tensor frame
+using:
+
+      TRotation rot;
+      <a href="./KVTensP.html">KVTensP</a>* tens_gv;// pointer to tensor global variable
+      tens_gv-&gt;GetTensor()-&gt;GetRotation(rot);// see <a href="./KVTenseur3.html">KVTenseur3</a>::<a href="./KVTenseur3.html#KVTenseur3:GetRotation" title="void KVTenseur3::GetRotation(TRotation&amp; )">GetRotation</a>
+
+Then the new frame can be defined by
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, <a href="./KVFrameTransform.html">KVFrameTransform</a>(rot));
+  OR  my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, rot);
+
+USING COMBINED BOOST AND ROTATION
+You can define a frame using both a boost and a rotation like so:
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, <a href="./KVFrameTransform.html">KVFrameTransform</a>(vframe,rot,<a href="./ListOfTypes.html#Bool_t">kTRUE</a>));
+
+ACCESSING KINEMATICS IN NEW FRAMES
+In order to access the kinematics of the particle in the new frame:
+
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"my_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTransverseEnergy" title="Double_t KVParticle::GetTransverseEnergy()">GetTransverseEnergy</a>();// transverse energy in <span class="string">"my_frame"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVParticle.html">KVParticle</a> <span class="keyword">const</span>* <a class="funcname" name="KVParticle:GetFrame" href="src/KVParticle.cxx.html#O2oZOC">GetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> warn_and_return_null_if_unknown = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funccomm"><pre> Return the momentum of the particle in the Lorentz-boosted frame corresponding to the name
+ <span class="string">"frame"</span> given as argument (see <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>() for definition of different frames).
+
+ This frame may have been defined by a direct transformation of the original kinematics of the
+ particle (using <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(newframe,...)) or by a transformation of the kinematics in another
+ user-defined frame (using <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(newframe,oldframe,...)).
+
+ Note that frames are not <span class="string">"dynamic"</span>: if any changes are made to the original particle's kinematics
+ after definition of a frame, if you want these changes to affect also the other frames you
+ need to update them by hand by calling <a href="./KVParticle.html">KVParticle</a>::<a href="./KVParticle.html#KVParticle:UpdateAllFrames" title="void KVParticle::UpdateAllFrames()">UpdateAllFrames</a>().
+
+ Frame names are case insensitive: <span class="string">"CM"</span> or <span class="string">"cm"</span> or <span class="string">"Cm"</span> are all good...
+
+ By default, if no frame with the given name is found, we return nullptr and print a warning.
+ If warn_and_return_null_if_unknown=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>, we return the address of the particle itself,
+ i.e. the original/default kinematics.
+ [Note that this is an inversion of the previous default behaviour]
+
+ Note that the properties of the particle returned by this method can not be modified:
+    this is deliberate, as any modifications e.g. to kinematics will have no effect
+    in any other frames.
 
  The returned pointer corresponds to a <span class="string">"pseudoparticle"</span> in the desired frame,
  therefore you can use any <a href="./KVParticle.html">KVParticle</a> method in order to access the kinematics of the
  particle in the boosted frame, e.g.
 
       (...supposing a valid pointer <a href="./KVParticle.html">KVParticle</a>* my_part...)
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(<span class="string">"cm_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetVpar" title="Double_t KVParticle::GetVpar()">GetVpar</a>();// //el velocity in <span class="string">"cm_frame"</span>
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(<span class="string">"QP_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTheta" title="Double_t KVParticle::GetTheta()">GetTheta</a>();// polar angle in <span class="string">"QP_frame"</span>
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"cm_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetVpar" title="Double_t KVParticle::GetVpar()">GetVpar</a>();// //el velocity in <span class="string">"cm_frame"</span>
+      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"QP_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTheta" title="Double_t KVParticle::GetTheta()">GetTheta</a>();// polar angle in <span class="string">"QP_frame"</span>
       etc. etc.
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVParticle:HasFrame" href="src/KVParticle.cxx.html#AFyh7C">HasFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</span><br />
-<div class="funccomm"><pre> Check if a given frame has been defined
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:UpdateAllFrames" href="src/KVParticle.cxx.html#v8b0hE">UpdateAllFrames</a>()</span><br />
+<div class="funccomm"><pre> Call this method to update particle kinematics in all defined frames if you change
+ the kinematics of the particle in its original/default frame.
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame" href="src/KVParticle.cxx.html#E9A3bE">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TVector3&amp; boost, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
-<div class="funccomm"><pre>Define a Lorentz-boosted frame in which to calculate the particle's momentum and energy.
-
-The new frame will have the name given in the string <span class="string">"frame"</span>, which can then be used to
-access the kinematics of the particle in different frames using <a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>().
-
-The boost velocity vector is that of the boosted frame with respect to the original frame of the particles in the event.
-The velocity vector can be given either in cm/ns units (default) or in units of <span class="string">'c'</span> (beta=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>).
-
-<a href="./#TLorentzVector:E" title="Double_t TLorentzVector::E()">E</a>.g. to define a frame moving at 0.1c in the +ve z-direction with respect to the original
-event frame:
-
-      (...supposing a valid pointer <a href="./KVParticle.html">KVParticle</a>* my_part...)
-      TVector3 vframe(0,0,0.1);
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, vframe, <a href="./ListOfTypes.html#Bool_t">kTRUE</a>);
-
-In order to access the kinematics of the particle in the new frame:
-
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(<span class="string">"my_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTransverseEnergy" title="Double_t KVParticle::GetTransverseEnergy()">GetTransverseEnergy</a>();// transverse energy in <span class="string">"my_frame"</span>
+<div class="funcdoc"><span class="funcname"><a href="./KVKinematicalFrame.html">KVKinematicalFrame</a>* <a class="funcname" name="KVParticle:get_frame" href="src/KVParticle.cxx.html#I0aDEE">get_frame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* )</span><br />
+<div class="funccomm"><pre> PRIVATE method for internal use only
+ This allows to modify the returned frame, i.e. in order to define
+ new frames in <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(newframe,oldframe,...)
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@1" href="src/KVParticle.cxx.html#u23wmB">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TLorentzRotation&amp; rot)</span><br />
-<div class="funccomm"><pre>Define a Lorentz-rotated frame in which to calculate the particle's momentum.
-
-The new frame will have the name given in the string <span class="string">"frame"</span>, which can then be used to
-access the kinematics of the particle in different frames using <a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>().
-
-According to the conventions adopted for the TRotation and TLorentzRotation classes,
-we actually use the inverse of the TLorentzRotation to make the transformation,
-i.e. to get the coordinates corresponding to a rotated coordinate system, not the coordinates
-of a rotated vector in the same coordinate system.
-
-The transformed coordinates of the particle are calculated using
-      v *= rot.Inverse();
-where v = particle's original momentum 4-vector and rot = TLorentzRotation
+<div class="funcdoc"><span class="funcname"><a href="./KVKinematicalFrame.html">KVKinematicalFrame</a>* <a class="funcname" name="KVParticle:get_parent_frame" href="src/KVParticle.cxx.html#OHGeCE">get_parent_frame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* , <a href="./KVKinematicalFrame.html">KVKinematicalFrame</a>* F = 0)</span><br />
+<div class="funccomm"><pre> PRIVATE method for internal use only
+ Returns pointer to parent frame of <span class="string">'f'</span>
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@2" href="src/KVParticle.cxx.html#tHPiqB">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TRotation&amp; rot)</span><br />
-<div class="funccomm"><pre>Define a rotated frame in which to calculate the particle's momentum and energy.
-
-<a href="./#TLorentzVector:E" title="Double_t TLorentzVector::E()">E</a>.g. if you want to define a new frame whose coordinate axes are rotated with respect
-to the original axes, you can set up a TRotation like so:
-
-      TRotation rot;
-      TVector3 newX, newY, newZ; // the new coordinate axes
-      rot.RotateAxes(newX, newY, newZ);
-
-If you are using one of the two global variables which calculate the event tensor
-(<a href="./KVTensP.html">KVTensP</a> and <a href="./KVTensPCM.html">KVTensPCM</a>) you can obtain the transformation to the tensor frame
-using:
-
-      TRotation rot;
-      <a href="./KVTensP.html">KVTensP</a>* tens_gv;// pointer to tensor global variable
-      tens_gv-&gt;GetTensor()-&gt;GetRotation(rot);// see <a href="./KVTenseur3.html">KVTenseur3</a>::<a href="./KVTenseur3.html#KVTenseur3:GetRotation" title="void KVTenseur3::GetRotation(TRotation&amp; )">GetRotation</a>
-
-N.B. you do not need to invert the transformation matrix (cf. TRotation), this is handled by
-<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, TLorentzRotation&amp; rot)
-
-The new frame will have the name given in the string <span class="string">"frame"</span>, which can then be used to
-access the kinematics of the particle in different frames using <a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>().
-
-In order to access the kinematics of the particle in the new frame:
-
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(<span class="string">"my_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTransverseEnergy" title="Double_t KVParticle::GetTransverseEnergy()">GetTransverseEnergy</a>();// transverse energy in <span class="string">"my_frame"</span>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@1" href="src/KVParticle.cxx.html#evSARB">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp; )</span><br />
+<div class="funccomm"><pre> Define new kinematical frame by transformation from existing frame
+ See <a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const KVFrameTransform&amp; ) or overloads">SetFrame</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>*,const <a href="./KVFrameTransform.html">KVFrameTransform</a>&amp;) for details on
+ defining kinematically-transformed frames.
 </pre></div>
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@3" href="src/KVParticle.cxx.html#E9A3bE">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, <span class="keyword">const</span> TVector3&amp; boost, TRotation&amp; rot, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
-<div class="funccomm"><pre>Define a Lorentz-boosted and rotated frame in which to calculate the particle's momentum and energy.
-
-The new frame will have the name given in the string <span class="string">"frame"</span>, which can then be used to
-access the kinematics of the particle in different frames using <a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>().
-
-<a href="./#TLorentzVector:E" title="Double_t TLorentzVector::E()">E</a>.g. if you want to define a new frame whose coordinate axes are rotated with respect
-to the original axes, you can set up a TRotation like so:
-
-      TRotation rot;
-      TVector3 newX, newY, newZ; // the new coordinate axes
-      rot.RotateAxes(newX, newY, newZ);
-
-If you are using one of the two global variables which calculate the event tensor
-(<a href="./KVTensP.html">KVTensP</a> and <a href="./KVTensPCM.html">KVTensPCM</a>) you can obtain the transformation to the tensor frame
-using:
-
-      TRotation rot;
-      <a href="./KVTensP.html">KVTensP</a>* tens_gv;// pointer to tensor global variable
-      tens_gv-&gt;GetTensor()-&gt;GetRotation(rot);// see <a href="./KVTenseur3.html">KVTenseur3</a>::<a href="./KVTenseur3.html#KVTenseur3:GetRotation" title="void KVTenseur3::GetRotation(TRotation&amp; )">GetRotation</a>
-
-N.B. you do not need to invert the transformation matrix (cf. TRotation), this is handled by
-<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame, TLorentzRotation&amp; rot)
-
-The boost velocity vector is that of the boosted frame with respect to the original frame of the particles in the event.
-The velocity vector can be given either in cm/ns units (default) or in units of <span class="string">'c'</span> (beta=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>).
-
-<a href="./#TLorentzVector:E" title="Double_t TLorentzVector::E()">E</a>.g. to define a frame moving at 0.1c in the +ve z-direction with respect to the original
-event frame:
-
-      (...supposing a valid pointer <a href="./KVParticle.html">KVParticle</a>* my_part...)
-      TVector3 vframe(0,0,0.1);
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:SetFrame" title="void KVParticle::SetFrame(const Char_t* frame,const TVector3&amp; boost,Bool_t beta=kFALSE) or overloads">SetFrame</a>(<span class="string">"my_frame"</span>, vframe, <a href="./ListOfTypes.html#Bool_t">kTRUE</a>);
-
-In order to access the kinematics of the particle in the new frame:
-
-      my_part-&gt;<a href="./KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(<span class="string">"my_frame"</span>)-><a href="./KVParticle.html#KVParticle:GetTransverseEnergy" title="Double_t KVParticle::GetTransverseEnergy()">GetTransverseEnergy</a>();// transverse energy in <span class="string">"my_frame"</span>
-</pre></div>
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@4" href="src/KVParticle.cxx.html#boI1ZD">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TVector3&amp; boost, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@5" href="src/KVParticle.cxx.html#boI1ZD">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TLorentzRotation&amp; rot)</span><br />
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@6" href="src/KVParticle.cxx.html#boI1ZD">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TRotation&amp; rot)</span><br />
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrame@7" href="src/KVParticle.cxx.html#boI1ZD">SetFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* newframe, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* oldframe, <span class="keyword">const</span> TVector3&amp; boost, TRotation&amp; rot, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> beta = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
 </div>
 <div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVParticle:GetVelocity" href="src/KVParticle.cxx.html#V9EeWB">GetVelocity</a>() const</span><br />
 <div class="funccomm"><pre>returns velocity vector in cm/ns units
@@ -795,84 +919,124 @@ sign is +ve if py&gt;=0, -ve if py&lt;0
 <div class="funccomm"><pre> Set velocity of particle (in cm/ns units)
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetVect" href="src/KVParticle.h.html#THiMmB">SetVect</a>(<span class="keyword">const</span> TVector3&amp; vect3)</span><br />
+<div class="funccomm"><pre> <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a> setters should not be used
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetVectM" href="src/KVParticle.h.html#o0cdPD">SetVectM</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> mass)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetVectMag" href="src/KVParticle.h.html#vKlX2C">SetVectMag</a>(<span class="keyword">const</span> TVector3&amp; spatial, <a href="./ListOfTypes.html#Double_t">Double_t</a> magnitude)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPerp" href="src/KVParticle.h.html#eQW_2C">SetPerp</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> p)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPtEtaPhiE" href="src/KVParticle.h.html#xXV.FE">SetPtEtaPhiE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPtEtaPhiM" href="src/KVParticle.h.html#B.V.FE">SetPtEtaPhiM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> pt, <a href="./ListOfTypes.html#Double_t">Double_t</a> eta, <a href="./ListOfTypes.html#Double_t">Double_t</a> phi, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPx" href="src/KVParticle.h.html#yRPvaE">SetPx</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPy" href="src/KVParticle.h.html#eq2HaE">SetPy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPz" href="src/KVParticle.h.html#KDegZE">SetPz</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPxPyPzE" href="src/KVParticle.h.html#G49Tg">SetPxPyPzE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> px, <a href="./ListOfTypes.html#Double_t">Double_t</a> py, <a href="./ListOfTypes.html#Double_t">Double_t</a> pz, <a href="./ListOfTypes.html#Double_t">Double_t</a> e)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetRho" href="src/KVParticle.h.html#m9jgYC">SetRho</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> rho)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetT" href="src/KVParticle.h.html#wfTom">SetT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetX" href="src/KVParticle.h.html#c46om">SetX</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetY" href="src/KVParticle.h.html#UCxom">SetY</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetZ" href="src/KVParticle.h.html#skOpm">SetZ</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetXYZM" href="src/KVParticle.h.html#HgvIND">SetXYZM</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> m)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetXYZT" href="src/KVParticle.h.html#TR_tND">SetXYZT</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Double_t">Double_t</a> z, <a href="./ListOfTypes.html#Double_t">Double_t</a> t)</span><br />
+</div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:CreateGroups" href="src/KVParticle.h.html#bxhe0B">CreateGroups</a>()</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVParticle:GetNumberOfDefinedFrames" href="src/KVParticle.h.html#AuGd2">GetNumberOfDefinedFrames</a>(<span class="keyword">void</span>)</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVParticle:HasFrame" href="src/KVParticle.h.html#tgfh_D">HasFrame</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* frame)</span><br />
+<div class="funccomm"><pre> Check if a given frame has been defined
+ Note that this may be a frame defined by transformation of another frame
+ Also: frame names are case-insensitive
+</pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMass" href="src/KVParticle.h.html#Q5ngMD">SetMass</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> m)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMass" href="src/KVParticle.h.html#Styn3E">SetMass</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> m)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetMass" href="src/KVParticle.h.html#neQ6O">GetMass</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetMass" href="src/KVParticle.h.html#yg5YFD">GetMass</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMomentum" href="src/KVParticle.h.html#O03R4C">SetMomentum</a>(<span class="keyword">const</span> TVector3&amp; v)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMomentum" href="src/KVParticle.h.html#iltjP">SetMomentum</a>(<span class="keyword">const</span> TVector3&amp; v)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMomentum@1" href="src/KVParticle.h.html#e03R4C">SetMomentum</a>(<span class="keyword">const</span> TVector3* v)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetMomentum@1" href="src/KVParticle.h.html#HILGtC">SetMomentum</a>(<span class="keyword">const</span> TVector3* v)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:Set4Mom" href="src/KVParticle.h.html#f.GvyD">Set4Mom</a>(<span class="keyword">const</span> <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp; p)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:Set4Mom" href="src/KVParticle.h.html#Bm.kyD">Set4Mom</a>(<span class="keyword">const</span> <a href="./#TLorentzVector:TLorentzVector" title="TLorentzVector TLorentzVector::TLorentzVector() or overloads">TLorentzVector</a>&amp; p)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetE" href="src/KVParticle.h.html#iPCBED">SetE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetE" href="src/KVParticle.h.html#MMnqm">SetE</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> a)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetEnergy" href="src/KVParticle.h.html#Z0v43E">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetEnergy" href="src/KVParticle.h.html#pXRRlC">SetEnergy</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> e)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVParticle:GetMomentum" href="src/KVParticle.h.html#pzjkc">GetMomentum</a>() const</span><br />
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVParticle:GetMomentum" href="src/KVParticle.h.html#blwRoE">GetMomentum</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetKE" href="src/KVParticle.h.html#Gwg0CC">GetKE</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetKE" href="src/KVParticle.h.html#aSX_yC">GetKE</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetEnergy" href="src/KVParticle.h.html#veQvW">GetEnergy</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetEnergy" href="src/KVParticle.h.html#ICVqBC">GetEnergy</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetTransverseEnergy" href="src/KVParticle.h.html#o5QOeB">GetTransverseEnergy</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetTransverseEnergy" href="src/KVParticle.h.html#mmc3HB">GetTransverseEnergy</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetEtran" href="src/KVParticle.h.html#r0RWQB">GetEtran</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetEtran" href="src/KVParticle.h.html#IDjSQB">GetEtran</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetRTransverseEnergy" href="src/KVParticle.h.html#oq5QLE">GetRTransverseEnergy</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetRTransverseEnergy" href="src/KVParticle.h.html#bN3gLE">GetRTransverseEnergy</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetREtran" href="src/KVParticle.h.html#rtZ.mC">GetREtran</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetREtran" href="src/KVParticle.h.html#IMj12E">GetREtran</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetE" href="src/KVParticle.h.html#m9FcPC">GetE</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetE" href="src/KVParticle.h.html#RRSitE">GetE</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetWaveLength" href="src/KVParticle.h.html#Ns5McC">GetWaveLength</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetWaveLength" href="src/KVParticle.h.html#Ks8HH">GetWaveLength</a>() const</span><br />
 <div class="funccomm"><pre>should be in fm
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetThermalWaveLength" href="src/KVParticle.h.html#WuiIQD">GetThermalWaveLength</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> temp) const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetThermalWaveLength" href="src/KVParticle.h.html#da7vCE">GetThermalWaveLength</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> temp) const</span><br />
 <div class="funccomm"><pre>should be in fm
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVParticle:GetV" href="src/KVParticle.h.html#s7jmtE">GetV</a>() const</span><br />
+<div class="funcdoc"><span class="funcname">TVector3 <a class="funcname" name="KVParticle:GetV" href="src/KVParticle.h.html#HoXlQC">GetV</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetVpar" href="src/KVParticle.h.html#WIpnF">GetVpar</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetVpar" href="src/KVParticle.h.html#i5stdE">GetVpar</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetTheta" href="src/KVParticle.h.html#oKLF.D">GetTheta</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetTheta" href="src/KVParticle.h.html#fUhB.D">GetTheta</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetPhi" href="src/KVParticle.h.html#Bci3iC">GetPhi</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVParticle:GetPhi" href="src/KVParticle.h.html#rrHlsE">GetPhi</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetTheta" href="src/KVParticle.h.html#kJ32vC">SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetTheta" href="src/KVParticle.h.html#a00vvC">SetTheta</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> theta)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPhi" href="src/KVParticle.h.html#MD.OnD">SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetPhi" href="src/KVParticle.h.html#ur3HnD">SetPhi</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> phi)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:ResetIsOK" href="src/KVParticle.h.html#HMl.WC">ResetIsOK</a>()</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:ResetIsOK" href="src/KVParticle.h.html#EZrB7B">ResetIsOK</a>()</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a>* <a class="funcname" name="KVParticle:GetListOfFrames" href="src/KVParticle.h.html#dagfuB">GetListOfFrames</a>(<span class="keyword">void</span>)</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a>* <a class="funcname" name="KVParticle:GetListOfFrames" href="src/KVParticle.h.html#feFsuB">GetListOfFrames</a>(<span class="keyword">void</span>)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetE0" href="src/KVParticle.h.html#Lhr4OE">SetE0</a>(TVector3* e = 0)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetE0" href="src/KVParticle.h.html#TligI">SetE0</a>(TVector3* e = 0)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname">TVector3* <a class="funcname" name="KVParticle:GetPInitial" href="src/KVParticle.h.html#SW8GEB">GetPInitial</a>() const</span><br />
+<div class="funcdoc"><span class="funcname">TVector3* <a class="funcname" name="KVParticle:GetPInitial" href="src/KVParticle.h.html#h9_2DB">GetPInitial</a>() const</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetIsDetected" href="src/KVParticle.h.html#TUz7.D">SetIsDetected</a>()</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetIsDetected" href="src/KVParticle.h.html#KEfYvD">SetIsDetected</a>()</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVParticle:IsDetected" href="src/KVParticle.h.html#IbS6wE">IsDetected</a>()</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVParticle:IsDetected" href="src/KVParticle.h.html#C8b2EE">IsDetected</a>()</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVParticle:GetFrameName" href="src/KVParticle.h.html#VvR.k">GetFrameName</a>(<span class="keyword">void</span>)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVParticle:GetFrameName" href="src/KVParticle.h.html#yRWa8B">GetFrameName</a>(<span class="keyword">void</span>)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrameName" href="src/KVParticle.h.html#Cnnx2B">SetFrameName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* framename)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVParticle:SetFrameName" href="src/KVParticle.h.html#CIBUe">SetFrameName</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* framename)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./KVNameValueList.html">KVNameValueList</a>* <a class="funcname" name="KVParticle:GetParameters" href="src/KVParticle.h.html#UtYjzD">GetParameters</a>() const</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./KVNameValueList.html">KVNameValueList</a>* <a class="funcname" name="KVParticle:GetParameters" href="src/KVParticle.h.html#HGZDrD">GetParameters</a>() const</span><br />
 </div>
 
 <br />
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Thu Dec  1 09:57:27 2016 </em><em>&raquo; Last generated: 2016-12-01 09:57</em><br />
+<em>&raquo; Last changed: Fri Jan 27 13:34:49 2017 </em><em>&raquo; Last generated: 2017-01-27 13:34</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

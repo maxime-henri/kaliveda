@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu Dec  1 09:54:40 2016            -->
+<!--   Date: Fri Jan 27 13:32:12 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -50,7 +50,7 @@ ClassImp(<a href="../KVCalorimetry.html">KVCalorimetry</a>)
 <span class="comment">// le bilan énergétique suivant:</span>
 <span class="comment">// Exci + Qini  = Eksum + Qsum -&gt; Exci = Eksum + Qsum - Qini</span>
 <span class="comment">// A noter : Si l'utilisateur définit un repère via <a href="../KVVarGlob.html">KVVarGlob</a>::<a href="../KVVarGlob.html#KVVarGlob:SetFrame" title="void KVVarGlob::SetFrame(const Char_t* )">SetFrame</a>(const <a href="../ListOfTypes.html#Char_t">Char_t</a>* ) les énergies <a href="../ListOfTypes.html#istream">cin</a>étiques</span>
-<span class="comment">// des noyaux sont prises dans ce référentiel ( <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVParticle.html#KVParticle:GetFrame" title="KVParticle* KVParticle::GetFrame(const Char_t* frame)">GetFrame</a>(<span class="string">"nom_du_referentiel)"</span>-&gt;GetKE() )</span>
+<span class="comment">// des noyaux sont prises dans ce référentiel ( <a href="../KVNucleus.html">KVNucleus</a>::<a href="../KVParticle.html#KVParticle:GetFrame" title="const KVParticle* KVParticle::GetFrame(const Char_t* frame,Bool_t warn_and_return_null_if_unknown=kTRUE)">GetFrame</a>(<span class="string">"nom_du_referentiel)"</span>-&gt;GetKE() )</span>
 <span class="comment">//------------------</span>
 <span class="comment">// Exemple d utilisation :</span>
 <span class="comment">//------------------</span>
@@ -351,13 +351,13 @@ ClassImp(<a href="../KVCalorimetry.html">KVCalorimetry</a>)
       <span class="keyword">if</span> (n-&gt;GetZ() &gt;= <a href="../KVCaloBase.html#KVCaloBase:GetParValue" title="Double_t KVCaloBase::GetParValue(KVString name)">GetParValue</a>(<span class="string">"FragmentMinimumCharge"</span>)) {
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Zfrag"</span>, n-&gt;GetZ());
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Afrag"</span>, n-&gt;GetA());
-         <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Ekfrag"</span>, n-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data())-&gt;GetKE());
+         <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Ekfrag"</span>, n-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data(), <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetKE());
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Qfrag"</span>, n-&gt;GetMassExcess());
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Mfrag"</span>, 1);
       } <span class="keyword">else</span> {
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Zpart"</span>, n-&gt;GetZ());
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Apart"</span>, n-&gt;GetA());
-         <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Ekpart"</span>, n-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data())-&gt;GetKE());
+         <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Ekpart"</span>, n-&gt;<a href="../KVVarGlob.html#KVVarGlob:GetFrame" title="const Char_t* KVVarGlob::GetFrame()">GetFrame</a>(fFrame.Data(), <a href="../ListOfTypes.html#Bool_t">kFALSE</a>)-&gt;GetKE());
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Qpart"</span>, n-&gt;GetMassExcess());
          <a href="../KVCaloBase.html#KVCaloBase:AddIngValue" title="void KVCaloBase::AddIngValue(KVString name,Double_t value)">AddIngValue</a>(<span class="string">"Mpart"</span>, 1);
       }
@@ -523,7 +523,7 @@ ClassImp(<a href="../KVCalorimetry.html">KVCalorimetry</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2016-12-01 09:54 </em><em>&raquo; Last generated: 2016-12-01 09:54</em><br />
+<em>&raquo; Last changed: 2017-01-27 13:32 </em><em>&raquo; Last generated: 2017-01-27 13:32</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
