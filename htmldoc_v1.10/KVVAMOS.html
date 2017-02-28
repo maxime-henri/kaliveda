@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:35:38 2017            -->
+<!--   Date: Tue Feb 28 17:22:58 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -251,6 +251,7 @@ return false;}
 <tr class="func"><td class="funcret"><a href="./KVACQParam.html">KVACQParam</a>*</td><td class="funcname"><a class="funcname" href="#KVVAMOS:GetVACQParam">GetVACQParam</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name)</td></tr>
 <tr class="func"><td class="funcret"><a href="./KVList.html">KVList</a>*</td><td class="funcname"><a class="funcname" href="#KVVAMOS:GetVACQParams">GetVACQParams</a>() <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><a href="./KVCalibrator.html">KVCalibrator</a>*</td><td class="funcname"><a class="funcname" href="#KVVAMOS:GetVCalibrator">GetVCalibrator</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* type) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>*</td><td class="funcname"><a class="funcname" href="#KVVAMOS:GetWeightFinder">GetWeightFinder</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:GetWORKDIRFilePath"><span class="baseclass">KVBase::</span>GetWORKDIRFilePath</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* namefile = <span class="string">""</span>)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitBranch"><span class="baseclass">KVBase::</span>gitBranch</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*</td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:gitCommit"><span class="baseclass">KVBase::</span>gitCommit</a>()</td></tr>
@@ -512,6 +513,7 @@ return false;}
 <tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVVAMOS:fVACQParams"></a>fVACQParams</td><td class="datadesc">-&gt;References to data acquisition parameter belonging to VAMOS</td></tr>
 <tr class="data"><td class="datatype">TGeoVolume*</td><td class="dataname"><a name="KVVAMOS:fVAMOSvol"></a>fVAMOSvol</td><td class="datadesc">!TGeoVolume of VAMOS</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a name="KVVAMOS:fVCalibrators"></a>fVCalibrators</td><td class="datadesc">-&gt;References to calibrator belonging to VAMOS</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>*</td><td class="dataname"><a name="KVVAMOS:fWeightFinder"></a>fWeightFinder</td><td class="datadesc">!Weight computation for VAMOS events</td></tr>
 
 </table></div>
 <div class="access" id="datapriv"><b>private:</b>
@@ -553,7 +555,7 @@ return false;}
 <area shape="rect" id="clust27" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,464"/>
 </map>
 <map name="MapKVVAMOS_Lib" id="MapKVVAMOS_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="188,378,218,390"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="183,378,212,390"/>
 </map>
 <div class="tabs">
 <a id="imgKVVAMOS_Inh" class="tabsel" href="inh/KVVAMOS_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVVAMOS_Inh.png');">Inheritance</a>
@@ -816,6 +818,14 @@ in the directory of the current dataset ( see the method
 <a href="./KVVAMOSTransferMatrix.html">KVVAMOSTransferMatrix</a>::<a href="./KVVAMOSTransferMatrix.html#KVVAMOSTransferMatrix:ReadCoefInDataSet" title="void KVVAMOSTransferMatrix::ReadCoefInDataSet()">ReadCoefInDataSet</a>() ).
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><a href="./KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>* <a class="funcname" name="KVVAMOS:GetWeightFinder" href="src/KVVAMOS.cxx.html#wW8IQE">GetWeightFinder</a>()</span><br />
+<div class="funccomm"><pre>Returns the transformation matrix allowing to map the measured
+coordinates at the focal plane back to the target. If no matrix
+exists then a new matrix is built from coefficient files found
+in the directory of the current dataset ( see the method
+<a href="./KVVAMOSTransferMatrix.html">KVVAMOSTransferMatrix</a>::<a href="./KVVAMOSTransferMatrix.html#KVVAMOSTransferMatrix:ReadCoefInDataSet" title="void KVVAMOSTransferMatrix::ReadCoefInDataSet()">ReadCoefInDataSet</a>() ).
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOS:Initialize" href="src/KVVAMOS.cxx.html#bkBt9C">Initialize</a>()</span><br />
 <div class="funccomm"><pre> <a href="./KVVAMOS.html#KVVAMOS:Initialize" title="void KVVAMOS::Initialize()">Initialize</a> data members of the VAMOS detectors and of VAMOS
  itself. This method has to be called each time you look at a
@@ -980,7 +990,7 @@ already exists then it is deleted first to set the new one.
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?Guilain+ADEMARD"> Guilain ADEMARD</a> </em><em>&raquo; Created  by KVClassFactory on Tue Sep  4 11:26:12 2012</em><br />
-<em>&raquo; Last changed: Fri Jan 27 13:35:39 2017 </em><em>&raquo; Last generated: 2017-01-27 13:35</em><br />
+<em>&raquo; Last changed: Tue Feb 28 17:22:59 2017 </em><em>&raquo; Last generated: 2017-02-28 17:22</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

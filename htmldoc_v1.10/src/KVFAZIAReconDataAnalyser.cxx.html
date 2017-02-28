@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:33:04 2017            -->
+<!--   Date: Tue Feb 28 17:20:20 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -64,17 +64,17 @@ ClassImp(<a href="../KVFAZIAReconDataAnalyser.html">KVFAZIAReconDataAnalyser</a>
 <a name="s4DZ0B"></a><span class="keyword">void</span> <a href="../KVFAZIAReconDataAnalyser.html">KVFAZIAReconDataAnalyser</a>::<a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:SubmitTask" title="void KVFAZIAReconDataAnalyser::SubmitTask()">SubmitTask</a>()
 {
    <span class="comment">//<a href="../KVDataAnalyser.html#KVDataAnalyser:Run" title="void KVDataAnalyser::Run()">Run</a> the interactive analysis</span>
-   <span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a> != fDataSet) fDataSet-&gt;cd();
+   <span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a> != <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()) <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:cd" title="void KVDataSet::cd()">cd</a>();
 
    <a href="../KVEventSelector.html">KVEventSelector</a> es;
-   es.SetOption(fUserClassOptions.Data());
+   es.SetOption(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClassOptions" title="const KVString&amp; KVDataAnalyser::GetUserClassOptions()">GetUserClassOptions</a>());
    es.ParseOptions();
    <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:fLinkRawData" title="Bool_t KVFAZIAReconDataAnalyser::fLinkRawData">fLinkRawData</a> = es.IsOptGiven(<span class="string">"ReadRawData"</span>);
 
    <span class="comment">//loop over runs</span>
-   <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Begin" title="void KVNumberList::Begin()">Begin</a>();
-   <span class="keyword">while</span> (!<a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:End" title="Bool_t KVNumberList::End()">End</a>()) {
-      <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:fRunNumber" title="Int_t KVFAZIAReconDataAnalyser::fRunNumber">fRunNumber</a> = <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Next" title="Int_t KVNumberList::Next()">Next</a>();
+   <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Begin" title="void KVNumberList::Begin()">Begin</a>();
+   <span class="keyword">while</span> (!<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:End" title="Bool_t KVNumberList::End()">End</a>()) {
+      <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:fRunNumber" title="Int_t KVFAZIAReconDataAnalyser::fRunNumber">fRunNumber</a> = <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Next" title="Int_t KVNumberList::Next()">Next</a>();
       <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"treatment of run# %d"</span>, <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:fRunNumber" title="Int_t KVFAZIAReconDataAnalyser::fRunNumber">fRunNumber</a>);
       <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:ProcessRun" title="void KVFAZIAReconDataAnalyser::ProcessRun()">ProcessRun</a>();
    }
@@ -89,8 +89,8 @@ ClassImp(<a href="../KVFAZIAReconDataAnalyser.html">KVFAZIAReconDataAnalyser</a>
    <span class="comment">//</span>
    <span class="comment">// For further customisation, the pre/post-methods are called just before and just after</span>
    <span class="comment">// each of these methods (<a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:preInitRun" title="void KVFAZIAReconDataAnalyser::preInitRun()">preInitRun</a>(), <a href="../KVDataAnalyser.html#KVDataAnalyser:postAnalysis" title="void KVDataAnalyser::postAnalysis()">postAnalysis</a>(), etc. etc.)</span>
-   TString fullPathToRunfile = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetFullPathToRunfile" title="TString KVDataSet::GetFullPathToRunfile(const Char_t* type,Int_t run)">GetFullPathToRunfile</a>(fDataType.Data(), <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:fRunNumber" title="Int_t KVFAZIAReconDataAnalyser::fRunNumber">fRunNumber</a>);
-   TFile* f = (TFile*)<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenRunfile" title="TObject* KVDataSet::OpenRunfile(const Char_t* type,Int_t run)">OpenRunfile</a>(fDataType.Data(), <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:fRunNumber" title="Int_t KVFAZIAReconDataAnalyser::fRunNumber">fRunNumber</a>);
+   TString fullPathToRunfile = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetFullPathToRunfile" title="TString KVDataSet::GetFullPathToRunfile(const Char_t* type,Int_t run)">GetFullPathToRunfile</a>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="const KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(), fRunNumber);
+   TFile* f = (TFile*)<a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:OpenRunfile" title="TObject* KVDataSet::OpenRunfile(const Char_t* type,Int_t run)">OpenRunfile</a>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="const KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(), fRunNumber);
    <span class="keyword">if</span> (!(f &amp;&amp; !f-&gt;<a href="../#TObject:IsZombie" title="Bool_t TObject::IsZombie()">IsZombie</a>())) {
       <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"ProcessRun"</span>, <span class="string">"file %s does not exist or is made zombie"</span>, fullPathToRunfile.Data());
       <span class="keyword">return</span>;
@@ -118,8 +118,8 @@ ClassImp(<a href="../KVFAZIAReconDataAnalyser.html">KVFAZIAReconDataAnalyser</a>
    }
 
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Beginning TTree::Process... Option=%s"</span>, option.Data());
-   <span class="keyword">if</span> (nbEventToRead) {
-      <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:theTree" title="TTree* KVFAZIAReconDataAnalyser::theTree">theTree</a>-&gt;Process(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>(), option.Data(), nbEventToRead);
+   <span class="keyword">if</span> (<a href="../KVDataAnalyser.html#KVDataAnalyser:GetNbEventToRead" title="Long64_t KVDataAnalyser::GetNbEventToRead()">GetNbEventToRead</a>()) {
+      <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:theTree" title="TTree* KVFAZIAReconDataAnalyser::theTree">theTree</a>-&gt;Process(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>(), option.Data(), <a href="../KVDataAnalyser.html#KVDataAnalyser:GetNbEventToRead" title="Long64_t KVDataAnalyser::GetNbEventToRead()">GetNbEventToRead</a>());
    } <span class="keyword">else</span> {
       <a href="../KVFAZIAReconDataAnalyser.html#KVFAZIAReconDataAnalyser:theTree" title="TTree* KVFAZIAReconDataAnalyser::theTree">theTree</a>-&gt;Process(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetUserClass" title="const Char_t* KVDataAnalyser::GetUserClass()">GetUserClass</a>(), option.Data());
    }
@@ -269,7 +269,7 @@ ClassImp(<a href="../KVFAZIAReconDataAnalyser.html">KVFAZIAReconDataAnalyser</a>
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-01-27 13:33 </em><em>&raquo; Last generated: 2017-01-27 13:33</em><br />
+<em>&raquo; Last changed: 2017-02-28 17:20 </em><em>&raquo; Last generated: 2017-02-28 17:20</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

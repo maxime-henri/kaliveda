@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:33:58 2017            -->
+<!--   Date: Tue Feb 28 17:21:14 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -54,6 +54,8 @@ $Id: <a href="../KVIDTelescope.html">KVIDTelescope</a>.h,v 1.33 2009/04/01 15:58
 <span class="keyword">class</span> TH2;
 
 <span class="keyword">class</span> <a href="../KVIDTelescope.html">KVIDTelescope</a>: <span class="keyword">public</span> <a href="../KVBase.html">KVBase</a> {
+
+   <span class="keyword">static</span> TEnv* <a href="../KVIDTelescope.html#KVIDTelescope:fgIdentificationBilan" title="TEnv* KVIDTelescope::fgIdentificationBilan">fgIdentificationBilan</a>;
 
 <span class="keyword">protected</span>:
    <a href="../KVList.html">KVList</a>* <a href="../KVIDTelescope.html#KVIDTelescope:fDetectors" title="KVList* KVIDTelescope::fDetectors">fDetectors</a>;          <span class="comment">//-&gt;list of detectors in telescope</span>
@@ -125,13 +127,7 @@ $Id: <a href="../KVIDTelescope.html">KVIDTelescope</a>.h,v 1.33 2009/04/01 15:58
    <span class="keyword">virtual</span> TGraph* <a href="../KVIDTelescope.html#KVIDTelescope:MakeIDLine" title="TGraph* KVIDTelescope::MakeIDLine(KVNucleus* nuc,Double_t Emin,Double_t Emax,Double_t Estep=0.0)">MakeIDLine</a>(<a href="../KVNucleus.html">KVNucleus</a>* nuc, <a href="../ListOfTypes.html#Double_t">Double_t</a> Emin, <a href="../ListOfTypes.html#Double_t">Double_t</a> Emax,
                               <a href="../ListOfTypes.html#Double_t">Double_t</a> Estep = 0.0);
 
-<a name="EDObGB"></a>   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>(<span class="keyword">void</span>)
-   {
-      <span class="comment">// Default initialisation for ID telescopes. <a href="../KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> is set to <a href="../ListOfTypes.html#Bool_t">kFALSE</a>.</span>
-      <span class="comment">// To implement identification, make a class derived from <a href="../KVIDTelescope.html">KVIDTelescope</a></span>
-      <span class="comment">// and set <a href="../KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> to <a href="../ListOfTypes.html#Bool_t">kTRUE</a> in <a href="../KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>() method of derived class.</span>
-      <a href="../#TObject:ResetBit" title="void TObject::ResetBit(UInt_t f)">ResetBit</a>(<a href="../KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a>);
-   };
+   <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>(<span class="keyword">void</span>);
 
    <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVIDTelescope.html#KVIDTelescope:Identify" title="Bool_t KVIDTelescope::Identify(KVIdentificationResult* ,Double_t x=-1.,Double_t y=-1.)">Identify</a>(<a href="../KVIdentificationResult.html">KVIdentificationResult</a>*, <a href="../ListOfTypes.html#Double_t">Double_t</a> x = -1., <a href="../ListOfTypes.html#Double_t">Double_t</a> y = -1.);
 
@@ -264,6 +260,10 @@ $Id: <a href="../KVIDTelescope.html">KVIDTelescope</a>.h,v 1.33 2009/04/01 15:58
 
       <span class="keyword">return</span> (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>() == 1 || (<a href="../KVIDTelescope.html#KVIDTelescope:GetSize" title="UInt_t KVIDTelescope::GetSize()">GetSize</a>() == 2 &amp;&amp; <a href="../KVIDTelescope.html#KVIDTelescope:GetDetector" title="KVDetector* KVIDTelescope::GetDetector(UInt_t n) or overloads">GetDetector</a>(1)-><a href="../KVDetector.html#KVDetector:GetNode" title="KVGeoDetectorNode* KVDetector::GetNode()">GetNode</a>()-><a href="../KVGeoDetectorNode.html#KVGeoDetectorNode:GetNTraj" title="Int_t KVGeoDetectorNode::GetNTraj()">GetNTraj</a>() == 1));
    }
+
+   <span class="keyword">static</span> <span class="keyword">void</span> <a href="../KVIDTelescope.html#KVIDTelescope:OpenIdentificationBilan" title="void KVIDTelescope::OpenIdentificationBilan(const TString&amp; path)">OpenIdentificationBilan</a>(<span class="keyword">const</span> TString&amp; path);
+   <span class="keyword">void</span> <a href="../KVIDTelescope.html#KVIDTelescope:CheckIdentificationBilan" title="void KVIDTelescope::CheckIdentificationBilan(const TString&amp; system)">CheckIdentificationBilan</a>(<span class="keyword">const</span> TString&amp; system);
+
    ClassDef(<a href="../KVIDTelescope.html">KVIDTelescope</a>, 5)   <span class="comment">//A delta-E - E identification telescope</span>
 };
 
@@ -276,7 +276,7 @@ $Id: <a href="../KVIDTelescope.html">KVIDTelescope</a>.h,v 1.33 2009/04/01 15:58
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-01-27 13:33 </em><em>&raquo; Last generated: 2017-01-27 13:33</em><br />
+<em>&raquo; Last changed: 2017-02-28 17:21 </em><em>&raquo; Last generated: 2017-02-28 17:21</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

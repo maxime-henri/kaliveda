@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:32:22 2017            -->
+<!--   Date: Tue Feb 28 17:19:38 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -316,7 +316,7 @@ ClassImp(<a href="../KVClust3D.html">KVClust3D</a>)
                   }
                   <span class="comment">//au moins une cellule voisine non nulle</span>
                   <span class="comment">//</span>
-                  <span class="keyword">if</span> (ncv &gt; 1) {
+                  <span class="keyword">if</span> (ncv &gt;= 1) {
                      <span class="comment">//les cellules voisines sont associees a un ou plusieur cluster</span>
                      <span class="keyword">if</span> (nl.GetNValues() &gt;= 1) {
                         <span class="comment">//on prend le premier cluster qui vient</span>
@@ -442,12 +442,12 @@ ClassImp(<a href="../KVClust3D.html">KVClust3D</a>)
    }
 
    <span class="comment">//on reordonne les clusters, liste possible avec des clusters vides</span>
-   <span class="comment">//on reprend l indexage en partant de 0 jusqu a nclust-1</span>
+   <span class="comment">//on reprend l indexage en partant de 1 jusqu a nclust</span>
    <span class="comment">// pour avoir en sortie les contenus suivants dans hclust :</span>
-   <span class="comment">// -1 la cellule appartient a aucun cluster</span>
-   <span class="comment">// contenu ii&gt;=0, la cellule appartient a iieme cluster</span>
+   <span class="comment">// &lt;=0 la cellule appartient a aucun cluster</span>
+   <span class="comment">// contenu ii&gt;0, la cellule appartient a iieme cluster</span>
    <span class="comment">//</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a> nreel = 0;
+   <a href="../ListOfTypes.html#Int_t">Int_t</a> nreel = 1;
    <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> ii = 0; ii &lt;= Ntemp; ii += 1) {
       <span class="keyword">if</span> (<a href="../KVClust3D.html#KVClust3D:fNcells" title="TArrayI* KVClust3D::fNcells">fNcells</a>-&gt;<a href="../#TArrayD:At" title="Double_t TArrayD::At(Int_t i)">At</a>(ii) &gt; 0) {
          <span class="keyword">for</span> (<a href="../ListOfTypes.html#Int_t">Int_t</a> nx = 1; nx &lt;= <a href="../#TH1:GetNbinsX" title="Int_t TH1::GetNbinsX()">GetNbinsX</a>(); nx += 1) {
@@ -465,8 +465,8 @@ ClassImp(<a href="../KVClust3D.html">KVClust3D</a>)
       }
    }
 
-   <span class="keyword">if</span> (nreel != <a href="../KVClust3D.html#KVClust3D:fNclusters" title="Int_t KVClust3D::fNclusters">fNclusters</a>)
-      printf(<span class="string">"pb de coherence %d %d\n"</span>, nreel, <a href="../KVClust3D.html#KVClust3D:fNclusters" title="Int_t KVClust3D::fNclusters">fNclusters</a>);
+   <span class="keyword">if</span> (nreel != <a href="../KVClust3D.html#KVClust3D:fNclusters" title="Int_t KVClust3D::fNclusters">fNclusters</a> + 1)
+      printf(<span class="string">"pb de coherence %d %d\n"</span>, nreel, <a href="../KVClust3D.html#KVClust3D:fNclusters" title="Int_t KVClust3D::fNclusters">fNclusters</a> + 1);
 
 }
 
@@ -527,7 +527,7 @@ ClassImp(<a href="../KVClust3D.html">KVClust3D</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-01-27 13:32 </em><em>&raquo; Last generated: 2017-01-27 13:32</em><br />
+<em>&raquo; Last changed: 2017-02-28 17:19 </em><em>&raquo; Last generated: 2017-02-28 17:19</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

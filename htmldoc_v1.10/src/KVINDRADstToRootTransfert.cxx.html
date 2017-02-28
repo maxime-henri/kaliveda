@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:34:10 2017            -->
+<!--   Date: Tue Feb 28 17:21:26 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -84,7 +84,7 @@ ClassImp(<a href="../KVINDRADstToRootTransfert.html">KVINDRADstToRootTransfert</
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InitRun"</span>, <span class="string">"dst file %s"</span>, dst_file.Data());
 
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InitRun"</span>, <span class="string">"%s %s"</span>, <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataPathSubdir" title="const Char_t* KVDataSet::GetDataPathSubdir()">GetDataPathSubdir</a>(), <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetRunfileName" title="const Char_t* KVDataSet::GetRunfileName(const Char_t* type,Int_t run)">GetRunfileName</a>(<span class="string">"dst"</span>, <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a>));
-   <a href="../KVDataRepository.html">gDataRepository</a>-><a href="../KVDataRepository.html#KVDataRepository:CopyFileFromRepository" title="void KVDataRepository::CopyFileFromRepository(KVDataSet* dataset,const Char_t* datatype,const Char_t* filename,const Char_t* destination)">CopyFileFromRepository</a>(<a href="../KVDataSet.html">gDataSet</a>, <span class="string">"dst"</span>, <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetRunfileName" title="const Char_t* KVDataSet::GetRunfileName(const Char_t* type,Int_t run)">GetRunfileName</a>(<span class="string">"dst"</span>, <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a>), <span class="string">"."</span>);
+   <a href="../KVDataRepository.html">gDataRepository</a>-><a href="../KVDataRepository.html#KVDataRepository:CopyFileFromRepository" title="void KVDataRepository::CopyFileFromRepository(const KVDataSet* dataset,const Char_t* datatype,const Char_t* filename,const Char_t* destination)">CopyFileFromRepository</a>(<a href="../KVDataSet.html">gDataSet</a>, <span class="string">"dst"</span>, <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetRunfileName" title="const Char_t* KVDataSet::GetRunfileName(const Char_t* type,Int_t run)">GetRunfileName</a>(<span class="string">"dst"</span>, <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a>), <span class="string">"."</span>);
    gROOT-&gt;ProcessLine(<span class="string">".! ls -lhrt *"</span>);
 
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"InitRun"</span>, <span class="string">"Starting analysis of run %d"</span>, <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a>);
@@ -357,20 +357,20 @@ ClassImp(<a href="../KVINDRADstToRootTransfert.html">KVINDRADstToRootTransfert</
 <a name="PQ96v"></a><span class="keyword">void</span> <a href="../KVINDRADstToRootTransfert.html">KVINDRADstToRootTransfert</a>::<a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:SubmitTask" title="void KVINDRADstToRootTransfert::SubmitTask()">SubmitTask</a>()
 {
 
-   <span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a> != fDataSet) fDataSet-&gt;cd();
+   <span class="keyword">if</span> (<a href="../KVDataSet.html">gDataSet</a> != <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()) <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:cd" title="void KVDataSet::cd()">cd</a>();
    <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:SetCampagneNumber" title="void KVINDRADstToRootTransfert::SetCampagneNumber()">SetCampagneNumber</a>();
 
    <span class="keyword">if</span> (<a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fCampNumber" title="Int_t KVINDRADstToRootTransfert::fCampNumber">fCampNumber</a> == -1) <span class="keyword">return</span>;
 
    <span class="comment">//InitAnalysis();</span>
-   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Liste de runs : %s"</span>, <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars=0)">AsString</a>());
+   <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Liste de runs : %s"</span>, <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:AsString" title="const Char_t* KVNumberList::AsString(Int_t maxchars=0)">AsString</a>());
    <span class="comment">//loop over runs</span>
    <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"RunningInLaunchDirectory : %d"</span>, <a href="../ListOfTypes.html#Int_t">Int_t</a>(<a href="../KVDataAnalyser.html#KVDataAnalyser:RunningInLaunchDirectory" title="Bool_t KVDataAnalyser::RunningInLaunchDirectory()">RunningInLaunchDirectory</a>()));
 
-   <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Begin" title="void KVNumberList::Begin()">Begin</a>();
-   <span class="keyword">while</span> (!<a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:End" title="Bool_t KVNumberList::End()">End</a>()) {
+   <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Begin" title="void KVNumberList::Begin()">Begin</a>();
+   <span class="keyword">while</span> (!<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:End" title="Bool_t KVNumberList::End()">End</a>()) {
       <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"%s"</span>, <a href="../KVDataAnalyser.html#KVDataAnalyser:GetBatchName" title="const Char_t* KVDataAnalyser::GetBatchName()">GetBatchName</a>());
-      <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a> = <a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Next" title="Int_t KVNumberList::Next()">Next</a>();
+      <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a> = <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Next" title="Int_t KVNumberList::Next()">Next</a>();
       <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"SubmitTask"</span>, <span class="string">"Traitement du Run %d"</span>, <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:fRunNumber" title="Int_t KVINDRADstToRootTransfert::fRunNumber">fRunNumber</a>);
       <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:InitRun" title="void KVINDRADstToRootTransfert::InitRun()">InitRun</a>();
       <a href="../KVINDRADstToRootTransfert.html#KVINDRADstToRootTransfert:ProcessRun" title="void KVINDRADstToRootTransfert::ProcessRun()">ProcessRun</a>();
@@ -1015,14 +1015,14 @@ ClassImp(<a href="../KVINDRADstToRootTransfert.html">KVINDRADstToRootTransfert</
    <span class="comment">//Returns list containing all run numbers</span>
 
    <a href="../KVNumberList.html">KVNumberList</a> all_runs =
-      fDataSet-&gt;<a href="../KVDataAnalyser.html#KVDataAnalyser:GetRunList" title="KVNumberList&amp; KVDataAnalyser::GetRunList()">GetRunList</a>(datatype.Data(), fSystem);
+      <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetRunList" title="KVNumberList KVDataSet::GetRunList(const Char_t* data_type,const KVDBSystem* sys=0)">GetRunList</a>(datatype.Data(), <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetSystem" title="const KVDBSystem* KVDataSetAnalyser::GetSystem()">GetSystem</a>());
    <a href="../KVINDRADBRun.html">KVINDRADBRun</a>* dbrun;
 
    <span class="comment">//first read list and find what triggers are available</span>
    vector&lt;<span class="keyword">int</span>&gt; triggers;
    all_runs.Begin();
    <span class="keyword">while</span> (!all_runs.End()) {
-      dbrun = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a>*)fDataSet-&gt;GetDataBase()-&gt;GetTable(<span class="string">"Runs"</span>)-&gt;GetRecord(all_runs.Next());
+      dbrun = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a>*)<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetDataBase" title="KVDataBase* KVDataSet::GetDataBase(Option_t* opt=&quot;&quot;)">GetDataBase</a>()-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"Runs"</span>)-><a href="../KVDBTable.html#KVDBTable:GetRecord" title="KVDBRecord* KVDBTable::GetRecord(const Char_t* rec_name) or overloads">GetRecord</a>(all_runs.Next());
       <span class="keyword">if</span> (triggers.size() == 0
             || std::find(triggers.begin(), triggers.end(), dbrun-&gt;GetTrigger()) != triggers.end()) {
          triggers.push_back(dbrun-&gt;GetTrigger());
@@ -1035,7 +1035,7 @@ ClassImp(<a href="../KVINDRADstToRootTransfert.html">KVINDRADstToRootTransfert</
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">" ---&gt; Trigger M&gt;"</span> &lt;&lt; *it &lt;&lt; endl;
       all_runs.Begin();
       <span class="keyword">while</span> (!all_runs.End()) {
-         dbrun = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a>*)fDataSet-&gt;GetDataBase()-&gt;GetTable(<span class="string">"Runs"</span>)-&gt;GetRecord(all_runs.Next());
+         dbrun = (<a href="../KVINDRADBRun.html">KVINDRADBRun</a>*)<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetDataBase" title="KVDataBase* KVDataSet::GetDataBase(Option_t* opt=&quot;&quot;)">GetDataBase</a>()-><a href="../KVDataBase.html#KVDataBase:GetTable" title="KVDBTable* KVDataBase::GetTable(const Char_t* table)">GetTable</a>(<span class="string">"Runs"</span>)-><a href="../KVDBTable.html#KVDBTable:GetRecord" title="KVDBRecord* KVDBTable::GetRecord(const Char_t* rec_name) or overloads">GetRecord</a>(all_runs.Next());
          <span class="keyword">if</span> (dbrun-&gt;GetTrigger() == *it) {
             <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"    "</span> &lt;&lt; Form(<span class="string">"%4d"</span>, dbrun-&gt;GetNumber());
             <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; Form(<span class="string">"\t(%7d events)"</span>, dbrun-&gt;GetEvents());
@@ -1075,7 +1075,7 @@ ClassImp(<a href="../KVINDRADstToRootTransfert.html">KVINDRADstToRootTransfert</
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-01-27 13:34 </em><em>&raquo; Last generated: 2017-01-27 13:34</em><br />
+<em>&raquo; Last changed: 2017-02-28 17:21 </em><em>&raquo; Last generated: 2017-02-28 17:21</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:32:41 2017            -->
+<!--   Date: Tue Feb 28 17:19:56 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -87,6 +87,7 @@ One can then access the corresponding dataset manager through <a href="./KVDataS
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:CheckAvailability">CheckAvailability</a>()</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVDataSetManager:CheckUser">CheckUser</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* groupname, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* username = <span class="string">""</span>)</td></tr>
 <tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:Class">Class</a>()</td></tr>
+<tr class="func"><td class="funcret"><a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetAnalysisTaskAny">GetAnalysisTaskAny</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* keywords) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetAvailableDataSet">GetAvailableDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetDataSet">GetDataSet</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a>) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./KVDataSet.html">KVDataSet</a>*</td><td class="funcname"><a class="funcname" href="#KVDataSetManager:GetDataSet@1">GetDataSet</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*)</td></tr>
@@ -125,7 +126,7 @@ One can then access the corresponding dataset manager through <a href="./KVDataS
 <tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVDataSetManager:fCacheFileName"></a>fCacheFileName</td><td class="datadesc">name of cache file ( = [repository name].available.datasets)</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVUniqueNameList.html">KVUniqueNameList</a></td><td class="dataname"><a name="KVDataSetManager:fDataSets"></a>fDataSets</td><td class="datadesc">list of datasets handled by manager</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#ifstream">ifstream</a></td><td class="dataname"><a name="KVDataSetManager:fDatasets"></a>fDatasets</td><td class="datadesc">for reading cached repository available datasets file</td></tr>
-<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a>*</td><td class="dataname"><a name="KVDataSetManager:fIndex"></a>fIndex</td><td class="datadesc">array of indices of available datasets</td></tr>
+<tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="dataname"><a name="KVDataSetManager:fIndex"></a>fIndex</td><td class="datadesc">array of indices of available datasets</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="dataname"><a name="KVDataSetManager:fMaxCacheTime"></a>fMaxCacheTime</td><td class="datadesc">maximum allowed age of cache file in seconds</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a name="KVDataSetManager:fNavailable"></a>fNavailable</td><td class="datadesc">number of available datasets</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVDataRepository.html">KVDataRepository</a>*</td><td class="dataname"><a name="KVDataSetManager:fRepository"></a>fRepository</td><td class="datadesc">the repository for which data sets are handled</td></tr>
@@ -139,7 +140,7 @@ One can then access the corresponding dataset manager through <a href="./KVDataS
 <area shape="rect" id="node2" href="./KVRemoteDataSetManager.html" title="KVRemoteDataSetManager" alt="" coords="440,9,765,47"/>
 </map>
 <map name="MapKVDataSetManager_Lib" id="MapKVDataSetManager_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="414,371,478,397"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="392,371,453,397"/>
 </map>
 <div class="tabs">
 <a id="imgKVDataSetManager_Inh" class="tabsel" href="inh/KVDataSetManager_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVDataSetManager_Inh.png');">Inheritance</a>
@@ -264,6 +265,12 @@ We return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the file exists &amp;
 less than <a href="./KVDataSetManager.html#KVDataSetManager:fMaxCacheTime" title="UInt_t KVDataSetManager::fMaxCacheTime">fMaxCacheTime</a> seconds ago.
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><a href="./KVDataAnalysisTask.html">KVDataAnalysisTask</a>* <a class="funcname" name="KVDataSetManager:GetAnalysisTaskAny" href="src/KVDataSetManager.cxx.html#Ao0BXC">GetAnalysisTaskAny</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* keywords) const</span><br />
+<div class="funccomm"><pre> This method returns a pointer to the analysis task whose description (title) contains
+ all of the whitespace-separated keywords (which may be regular expressions)
+ given in the string <span class="string">"keywords"</span>. The comparison is case-insensitive.
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./KVSeqCollection.html">KVSeqCollection</a>* <a class="funcname" name="KVDataSetManager:GetAnalysisTaskList" href="src/KVDataSetManager.h.html#q4sSdD">GetAnalysisTaskList</a>() const</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVDataSetManager:GetNavailable" href="src/KVDataSetManager.h.html#VQRf7B">GetNavailable</a>() const</span><br />
@@ -277,7 +284,7 @@ less than <a href="./KVDataSetManager.html#KVDataSetManager:fMaxCacheTime" title
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jan 27 13:32:41 2017 </em><em>&raquo; Last generated: 2017-01-27 13:32</em><br />
+<em>&raquo; Last changed: Tue Feb 28 17:19:57 2017 </em><em>&raquo; Last generated: 2017-02-28 17:19</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

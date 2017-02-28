@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:33:58 2017            -->
+<!--   Date: Tue Feb 28 17:21:14 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -143,6 +143,7 @@ and the grids added to its list.
 <tr class="func"><td class="funcret"><a href="./KVIDGrid.html">KVIDGrid</a>*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CalculateDeltaE_EGrid">CalculateDeltaE_EGrid</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* Zrange, <a href="./ListOfTypes.html#Int_t">Int_t</a> deltaMasse, <a href="./ListOfTypes.html#Int_t">Int_t</a> npoints, <a href="./ListOfTypes.html#Double_t">Double_t</a> lifetime = -10, <a href="./ListOfTypes.html#UChar_t">UChar_t</a> massformula = 0, <a href="./ListOfTypes.html#Double_t">Double_t</a> xfactor = 1.)</td></tr>
 <tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CalculateParticleEnergy">CalculateParticleEnergy</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>* nuc)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CanIdentify">CanIdentify</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> Z, <a href="./ListOfTypes.html#Int_t">Int_t</a>)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CheckIdentificationBilan">CheckIdentificationBilan</a>(<span class="keyword">const</span> TString&amp; system)</td></tr>
 <tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:CheckTheoreticalIdentificationThreshold">CheckTheoreticalIdentificationThreshold</a>(<a href="./KVNucleus.html">KVNucleus</a>*, <a href="./ListOfTypes.html#Double_t">Double_t</a> = 0.0)</td></tr>
 <tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVIDTelescope:Class">Class</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
@@ -261,6 +262,7 @@ and the grids added to its list.
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Notify"><span class="baseclass">TObject::</span>Notify</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenContextMenu"><span class="baseclass">KVBase::</span>OpenContextMenu</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj, <span class="keyword">const</span> <span class="keyword">char</span>* alt_method_name = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVIDTelescope:OpenIdentificationBilan">OpenIdentificationBilan</a>(<span class="keyword">const</span> TString&amp; path)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:OpenTempFile"><span class="baseclass">KVBase::</span>OpenTempFile</a>(TString&amp; base, <a href="./ListOfTypes.html#ofstream">ofstream</a>&amp; fp)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
@@ -375,6 +377,11 @@ and the grids added to its list.
 <tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVIDTelescope:fVarY"></a>fVarY</td><td></td></tr>
 
 </table></div>
+<div class="access" id="datapriv"><b>private:</b>
+<table class="data" id="tabdatapriv" cellspacing="0">
+<tr class="data"><td class="datatype">static TEnv*</td><td class="dataname"><a name="KVIDTelescope:fgIdentificationBilan"></a>fgIdentificationBilan</td><td></td></tr>
+
+</table></div>
 </div>
 <h2><a id="KVIDTelescope:Class_Charts"></a>Class Charts</h2>
 <map name="MapKVIDTelescope_Inh" id="MapKVIDTelescope_Inh">
@@ -436,7 +443,7 @@ and the grids added to its list.
 <area shape="rect" id="clust10" href="./KVBase.html" title="KVBase" alt="" coords="480,16,701,464"/>
 </map>
 <map name="MapKVIDTelescope_Lib" id="MapKVIDTelescope_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="307,374,353,394"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="295,375,339,393"/>
 </map>
 <div class="tabs">
 <a id="imgKVIDTelescope_Inh" class="tabsel" href="inh/KVIDTelescope_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVIDTelescope_Inh.png');">Inheritance</a>
@@ -450,6 +457,17 @@ and the grids added to its list.
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:init" href="src/KVIDTelescope.cxx.html#oCvtPB">init</a>()</span><br />
 <div class="funccomm"><pre>default <a href="./KVIDTelescope.html#KVIDTelescope:init" title="void KVIDTelescope::init()">init</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:Initialize" href="src/KVIDTelescope.cxx.html#LbFQiB">Initialize</a>(<span class="keyword">void</span>)</span><br />
+<div class="funccomm"><pre> Default initialisation for ID telescopes.
+ <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> is set to <a href="./ListOfTypes.html#Bool_t">kFALSE</a>, unless the current dataset (if defined)
+ has been declared to have no associated identification/calibration parameters,
+ in which case <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> is by default set to <a href="./ListOfTypes.html#Bool_t">kTRUE</a> (for filtering simulations).
+
+ To implement identification, make a class derived from <a href="./KVIDTelescope.html">KVIDTelescope</a>
+ and set <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> to <a href="./ListOfTypes.html#Bool_t">kTRUE</a> in <a href="./KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>() method of derived class if
+ necessary conditions for identification are met (has an ID grid etc.).
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIDTelescope:_KVIDTelescope" href="src/KVIDTelescope.cxx.html#UqEsFC">~KVIDTelescope</a>()</span><br />
@@ -694,6 +712,14 @@ un noyau de A et Z donne n'est considere que s'il retourne <a href="./KVNucleus.
  If this is not a dE-E telescope, we return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> by default.
 </pre></div>
 </div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:OpenIdentificationBilan" href="src/KVIDTelescope.cxx.html#pvCYF">OpenIdentificationBilan</a>(<span class="keyword">const</span> TString&amp; path)</span><br />
+<div class="funccomm"><pre> Open IdentificationBilan.dat file with given path
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:CheckIdentificationBilan" href="src/KVIDTelescope.cxx.html#em7dx">CheckIdentificationBilan</a>(<span class="keyword">const</span> TString&amp; system)</span><br />
+<div class="funccomm"><pre> Set status of ID Telescope for given system
+</pre></div>
+</div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVIDTelescope:KVIDTelescope" href="src/KVIDTelescope.h.html#OX183">KVIDTelescope</a>()</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./KVList.html">KVList</a>* <a class="funcname" name="KVIDTelescope:GetDetectors" href="src/KVIDTelescope.h.html#QcITO">GetDetectors</a>() const</span><br />
@@ -707,12 +733,6 @@ un noyau de A et Z donne n'est considere que s'il retourne <a href="./KVNucleus.
 <div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVIDTelescope:GetVarX" href="src/KVIDTelescope.h.html#SyDrr">GetVarX</a>() const</span><br />
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* <a class="funcname" name="KVIDTelescope:GetVarY" href="src/KVIDTelescope.h.html#CGErr">GetVarY</a>() const</span><br />
-</div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVIDTelescope:Initialize" href="src/KVIDTelescope.h.html#EDObGB">Initialize</a>(<span class="keyword">void</span>)</span><br />
-<div class="funccomm"><pre> Default initialisation for ID telescopes. <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> is set to <a href="./ListOfTypes.html#Bool_t">kFALSE</a>.
- To implement identification, make a class derived from <a href="./KVIDTelescope.html">KVIDTelescope</a>
- and set <a href="./KVIDTelescope.html#KVIDTelescope:kReadyForID" title="const enum KVIDTelescope:: KVIDTelescope::kReadyForID">kReadyForID</a> to <a href="./ListOfTypes.html#Bool_t">kTRUE</a> in <a href="./KVIDTelescope.html#KVIDTelescope:Initialize" title="void KVIDTelescope::Initialize()">Initialize</a>() method of derived class.
-</pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVIDTelescope:GetCalibStatus" href="src/KVIDTelescope.h.html#YlfhuC">GetCalibStatus</a>() const</span><br />
 <div class="funccomm"><pre> When called just after <a href="./KVIDTelescope.html#KVIDTelescope:CalculateParticleEnergy" title="void KVIDTelescope::CalculateParticleEnergy(KVReconstructedNucleus* nuc)">CalculateParticleEnergy</a>(<a href="./KVReconstructedNucleus.html">KVReconstructedNucleus</a>*)
@@ -793,7 +813,7 @@ un noyau de A et Z donne n'est considere que s'il retourne <a href="./KVNucleus.
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jan 27 13:33:58 2017 </em><em>&raquo; Last generated: 2017-01-27 13:33</em><br />
+<em>&raquo; Last changed: Tue Feb 28 17:21:14 2017 </em><em>&raquo; Last generated: 2017-02-28 17:21</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

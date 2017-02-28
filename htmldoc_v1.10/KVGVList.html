@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:33:13 2017            -->
+<!--   Date: Tue Feb 28 17:20:29 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -65,13 +65,10 @@ return false;}
 
    This class allows to process in a single call many KVVargGlob instances. This list
  can be managed by using standard <a href="./KVList.html">KVList</a> methods. The methods used to initiate, reset
- and fill such a liste are:
+ and fill such a list are:
 
-      virtual <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:Init" title="void KVGVList::Init()">Init</a>(<a href="./ListOfTypes.html#void">void</a>)                 initiates the global variables
-      virtual <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:Reset" title="void KVGVList::Reset()">Reset</a>(<a href="./ListOfTypes.html#void">void</a>)                resets the global variables before the treatment
-      virtual <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:Fill" title="void KVGVList::Fill(KVNucleus* c)">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a> *c)         compute all the 1-body global variables
-      virtual <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:Fill2" title="void KVGVList::Fill2(KVNucleus* c1,KVNucleus* c2)">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a> *n1, <a href="./KVNucleus.html">KVNucleus</a> *n2)         compute all the 2-body global variables
-      virtual <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:FillN" title="void KVGVList::FillN(KVEvent* e)">FillN</a>(<a href="./KVEvent.html">KVEvent</a>* e)         compute all the N-body global variables
+      <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:Init" title="void KVGVList::Init()">Init</a>(<a href="./ListOfTypes.html#void">void</a>)                             initiates the global variables (call once)
+      <a href="./ListOfTypes.html#void">void</a> <a href="./KVGVList.html#KVGVList:CalculateGlobalVariables" title="void KVGVList::CalculateGlobalVariables(KVEvent* e)">CalculateGlobalVariables</a>(<a href="./KVEvent.html">KVEvent</a> *e)   compute all global variables for the event
 
  By default the <a href="./KVGVList.html">KVGVList</a> does not own the objects it contains (they may be on the stack).
  User's responsibility in this case to delete heap-based objects after use.
@@ -84,25 +81,22 @@ return false;}
  <a href="./KVEkin.html">KVEkin</a> *Sekin=new <a href="./KVEkin.html">KVEkin</a>(<span class="string">"SEkin"</span>);
  <a href="./KVZmean.html">KVZmean</a> zmean;
  <a href="./KVZmax.html">KVZmax</a>  zmax;
- <a href="./KVGVList.html">KVGVList</a> *gvlist=new <a href="./KVGVList.html">KVGVList</a>();
- gvlist-&gt;<a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>(Sekin);
- gvlist-&gt;<a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>(&amp;zmean);
- gvlist-&gt;<a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>(&amp;zmax);
- gvlist-&gt;<a href="./KVGVList.html#KVGVList:Init" title="void KVGVList::Init()">Init</a>();
+ <a href="./KVGVList.html">KVGVList</a> gvlist;
+ gvlist.<a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>(Sekin);
+ gvlist.<a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>(&amp;zmean);
+ gvlist.<a href="./KVGVList.html#KVGVList:Add" title="void KVGVList::Add(TObject* obj)">Add</a>(&amp;zmax);
+ gvlist.<a href="./KVGVList.html#KVGVList:Init" title="void KVGVList::Init()">Init</a>();
 
 
  // Treatment loop for each event called for each event
 
- gvlist-&gt;<a href="./KVGVList.html#KVGVList:Reset" title="void KVGVList::Reset()">Reset</a>();
- <a href="./KVINDRAReconNuc.html">KVINDRAReconNuc</a> *part = 0;
- while( (part = GetEvent()-&gt;GetNextParticle(<span class="string">"ok"</span>)) ){//loop over particles with correct codes
-  gvlist-&gt;<a href="./KVGVList.html#KVGVList:Fill" title="void KVGVList::Fill(KVNucleus* c)">Fill</a>(part);
- }
+ gvlist.<a href="./KVGVList.html#KVGVList:CalculateGlobalVariables" title="void KVGVList::CalculateGlobalVariables(KVEvent* e)">CalculateGlobalVariables</a>(event); // with <a href="./KVEvent.html">KVEvent</a>* event pointer
+
  <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Total kinetic energy : "</span> &lt;&lt; Sekin-&gt;GetValue() &lt;&lt; endl;
  <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Mean charge          : "</span> &lt;&lt; zmean() &lt;&lt; endl;
  <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Standard deviation   : "</span> &lt;&lt; zmean(<span class="string">"RMS"</span>) &lt;&lt; endl;
  <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Charge of the heaviest   : "</span> &lt;&lt; zmax() &lt;&lt; endl;
- <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Vpar of the heaviest     : "</span> &lt;&lt; ((<a href="./KVNucleus.html">KVNucleus</a> *)zmax.GetObject()).GetVpar() &lt;&lt; endl;
+ <a href="./ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Vpar of the heaviest     : "</span> &lt;&lt; zmax.GetZmax(0)-&gt;GetVpar() &lt;&lt; endl;
 
 
 
@@ -177,10 +171,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:Execute@1"><span class="baseclass">KVSeqCollection::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Fill">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Fill2">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>* c1, <a href="./KVNucleus.html">KVNucleus</a>* c2)</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:FillBranches">FillBranches</a>()</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:FillN">FillN</a>(<a href="./KVEvent.html">KVEvent</a>* e)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:FillBranches">FillBranches</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:FindObject"><span class="baseclass">KVSeqCollection::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:FindObject@1"><span class="baseclass">KVSeqCollection::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:FindObjectAny"><span class="baseclass">KVSeqCollection::</span>FindObjectAny</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* att, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* keys, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> contains_all = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> case_sensitive = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>) <span class="keyword">const</span></td></tr>
@@ -231,7 +222,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Init">Init</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Init">Init</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
 <tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVGVList:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
@@ -250,7 +241,7 @@ return false;}
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TSeqCollection:LastIndex"><span class="baseclass">TSeqCollection::</span>LastIndex</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:LowPriority"><span class="baseclass">KVSeqCollection::</span>LowPriority</a>(<span class="keyword">const</span> <span class="keyword">char</span>* signal_name, <span class="keyword">const</span> <span class="keyword">char</span>* slot_name = 0)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TCollection:ls"><span class="baseclass">TCollection::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:MakeBranches">MakeBranches</a>(TTree*)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:MakeBranches">MakeBranches</a>(TTree*)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual TIterator*</td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:MakeIterator"><span class="baseclass">KVSeqCollection::</span>MakeIterator</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> dir = <a href="./ListOfTypes.html#Bool_t">kIterForward</a>) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./KVSeqCollection.html">KVSeqCollection</a>*</td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:MakeListFromFile"><span class="baseclass">KVSeqCollection::</span>MakeListFromFile</a>(TFile* file)</td></tr>
 <tr class="funcinh"><td class="funcret">static <a href="./KVSeqCollection.html">KVSeqCollection</a>*</td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:MakeListFromFileWithClass"><span class="baseclass">KVSeqCollection::</span>MakeListFromFileWithClass</a>(TFile* file, <span class="keyword">const</span> TClass* _class)</td></tr>
@@ -293,7 +284,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSeqCollection:RemoveBefore"><span class="baseclass">TSeqCollection::</span>RemoveBefore</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* before)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSeqCollection:RemoveFirst"><span class="baseclass">TSeqCollection::</span>RemoveFirst</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSeqCollection:RemoveLast"><span class="baseclass">TSeqCollection::</span>RemoveLast</a>()</td></tr>
-<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Reset">Reset</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Reset">Reset</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
@@ -329,6 +320,9 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:_GetSubListWithMethod"><span class="baseclass">KVSeqCollection::</span>_GetSubListWithMethod</a>(<a href="./KVSeqCollection.html">KVSeqCollection</a>*, TCollection*, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>*) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVSeqCollection.html#KVSeqCollection:Changed"><span class="baseclass">KVSeqCollection::</span>Changed</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Fill">Fill</a>(<a href="./KVNucleus.html">KVNucleus</a>* c)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:Fill2">Fill2</a>(<a href="./KVNucleus.html">KVNucleus</a>* c1, <a href="./KVNucleus.html">KVNucleus</a>* c2)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:FillN">FillN</a>(<a href="./KVEvent.html">KVEvent</a>* e)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TCollection:GetCollectionEntryName"><span class="baseclass">TCollection::</span>GetCollectionEntryName</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* entry) <span class="keyword">const</span></td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVGVList:init_KVGVList">init_KVGVList</a>()</td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
@@ -415,7 +409,7 @@ return false;}
 <area shape="rect" id="clust16" href="./KVSeqCollection.html" title="KVSeqCollection" alt="" coords="712,112,933,624"/>
 </map>
 <map name="MapKVGVList_Lib" id="MapKVGVList_Lib">
-<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="407,369,480,399"/>
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="383,370,451,398"/>
 </map>
 <div class="tabs">
 <a id="imgKVGVList_Inh" class="tabsel" href="inh/KVGVList_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVGVList_Inh.png');">Inheritance</a>
@@ -451,8 +445,9 @@ return false;}
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVGVList:Init" href="src/KVGVList.cxx.html#mSwxyB">Init</a>(<span class="keyword">void</span>)</span><br />
-<div class="funccomm"><pre> methode d'initialisation des
- variables Internes
+<div class="funccomm"><pre> Initialisation of all global variables in list
+ As this method may be called several times we ensure that
+ variables are only initialised once
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVGVList:Reset" href="src/KVGVList.cxx.html#rrk0kD">Reset</a>(<span class="keyword">void</span>)</span><br />
@@ -558,7 +553,7 @@ return false;}
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: Fri Jan 27 13:33:13 2017 </em><em>&raquo; Last generated: 2017-01-27 13:33</em><br />
+<em>&raquo; Last changed: Tue Feb 28 17:20:30 2017 </em><em>&raquo; Last generated: 2017-02-28 17:20</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

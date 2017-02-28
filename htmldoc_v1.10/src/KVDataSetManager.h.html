@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:32:41 2017            -->
+<!--   Date: Tue Feb 28 17:19:57 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -31,7 +31,7 @@ $Author: franklan $
 
 <span class="cpp">#include "<a href="../KVUniqueNameList.h">KVUniqueNameList.h</a>"</span>
 <span class="cpp">#include "<a href="../KVNameValueList.h">KVNameValueList.h</a>"</span>
-
+<span class="cpp">#include &lt;vector&gt;</span>
 <span class="cpp">#include "<a href="../KVDataSet.h">KVDataSet.h</a>"</span>
 <span class="cpp">#include "<a href="../KVDataRepository.h">KVDataRepository.h</a>"</span>
 <span class="cpp">#include "<a href="../KVDataAnalysisTask.h">KVDataAnalysisTask.h</a>"</span>
@@ -45,7 +45,7 @@ $Author: franklan $
    <a href="../KVUniqueNameList.html">KVUniqueNameList</a> <a href="../KVDataSetManager.html#KVDataSetManager:fDataSets" title="KVUniqueNameList KVDataSetManager::fDataSets">fDataSets</a>;            <span class="comment">//list of datasets handled by manager</span>
    <a href="../KVUniqueNameList.html">KVUniqueNameList</a> <a href="../KVDataSetManager.html#KVDataSetManager:fTasks" title="KVUniqueNameList KVDataSetManager::fTasks">fTasks</a>;               <span class="comment">//list of all known analysis tasks</span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVDataSetManager.html#KVDataSetManager:fNavailable" title="Int_t KVDataSetManager::fNavailable">fNavailable</a>;           <span class="comment">//number of available datasets</span>
-   <a href="../ListOfTypes.html#Int_t">Int_t</a>* <a href="../KVDataSetManager.html#KVDataSetManager:fIndex" title="Int_t* KVDataSetManager::fIndex">fIndex</a>;               <span class="comment">//array of indices of available datasets</span>
+   std::vector&lt;<a href="../ListOfTypes.html#Int_t">Int_t</a>&gt; <a href="../KVDataSetManager.html#KVDataSetManager:fIndex" title="vector&lt;Int_t&gt; KVDataSetManager::fIndex">fIndex</a>;               <span class="comment">//array of indices of available datasets</span>
    <a href="../KVNameValueList.html">KVNameValueList</a> <a href="../KVDataSetManager.html#KVDataSetManager:fUserGroups" title="KVNameValueList KVDataSetManager::fUserGroups">fUserGroups</a>;    <span class="comment">//list of user groups</span>
 
    <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataSetManager.html#KVDataSetManager:ReadDataSetList" title="Bool_t KVDataSetManager::ReadDataSetList()">ReadDataSetList</a>();
@@ -58,7 +58,7 @@ $Author: franklan $
 <a name="q4sSdD"></a>   <span class="keyword">const</span> <a href="../KVSeqCollection.html">KVSeqCollection</a>* <a href="../KVDataSetManager.html#KVDataSetManager:GetAnalysisTaskList" title="const KVSeqCollection* KVDataSetManager::GetAnalysisTaskList()">GetAnalysisTaskList</a>() <span class="keyword">const</span>
    {
       <span class="keyword">return</span> &amp;<a href="../KVDataSetManager.html#KVDataSetManager:fTasks" title="KVUniqueNameList KVDataSetManager::fTasks">fTasks</a>;
-   };
+   }
    <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataSetManager.html#KVDataSetManager:OpenAvailableDatasetsFile" title="Bool_t KVDataSetManager::OpenAvailableDatasetsFile()">OpenAvailableDatasetsFile</a>();
    <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataSetManager.html#KVDataSetManager:ReadAvailableDatasetsFile" title="Bool_t KVDataSetManager::ReadAvailableDatasetsFile()">ReadAvailableDatasetsFile</a>();
    <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataSetManager.html#KVDataSetManager:fCacheAvailable" title="Bool_t KVDataSetManager::fCacheAvailable">fCacheAvailable</a>;<span class="comment">//<a href="../ListOfTypes.html#Bool_t">kTRUE</a> if caching is activated for parent repository</span>
@@ -67,7 +67,6 @@ $Author: franklan $
    <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVDataSetManager.html#KVDataSetManager:CheckCacheStatus" title="Bool_t KVDataSetManager::CheckCacheStatus()">CheckCacheStatus</a>();
 
 <span class="keyword">public</span>:
-
    <a href="../KVDataSetManager.html">KVDataSetManager</a>();
    <span class="keyword">virtual</span> ~ <a href="../KVDataSetManager.html">KVDataSetManager</a>();
 
@@ -95,6 +94,7 @@ $Author: franklan $
    <span class="keyword">virtual</span> <a href="../KVDataAnalysisTask.html">KVDataAnalysisTask</a>* <a href="../KVDataSetManager.html#KVDataSetManager:GetTask" title="KVDataAnalysisTask* KVDataSetManager::GetTask(const Char_t* name)">GetTask</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name);
 
    <span class="keyword">virtual</span> <span class="keyword">void</span> <a href="../KVDataSetManager.html#KVDataSetManager:Update" title="void KVDataSetManager::Update()">Update</a>();
+   <a href="../KVDataAnalysisTask.html">KVDataAnalysisTask</a>* <a href="../KVDataSetManager.html#KVDataSetManager:GetAnalysisTaskAny" title="KVDataAnalysisTask* KVDataSetManager::GetAnalysisTaskAny(const Char_t* keywords)">GetAnalysisTaskAny</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* keywords) <span class="keyword">const</span>;
 
    ClassDef(<a href="../KVDataSetManager.html">KVDataSetManager</a>, 3)        <span class="comment">//Handles datasets in a data repository</span>
 };
@@ -111,7 +111,7 @@ R__EXTERN <a href="../KVDataSetManager.html">KVDataSetManager</a>* <a href="../K
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-01-27 13:32 </em><em>&raquo; Last generated: 2017-01-27 13:32</em><br />
+<em>&raquo; Last changed: 2017-02-28 17:19 </em><em>&raquo; Last generated: 2017-02-28 17:19</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

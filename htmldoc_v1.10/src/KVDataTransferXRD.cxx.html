@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Jan 27 13:32:43 2017            -->
+<!--   Date: Tue Feb 28 17:19:57 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -58,22 +58,22 @@ ClassImp(<a href="../KVDataTransferXRD.html">KVDataTransferXRD</a>)
    fSourceRep-&gt;IsConnected();
 
    <span class="comment">// loop over runs</span>
-   fRunList.Begin();
-   <span class="keyword">while</span> (!fRunList.End()) {
+   <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Begin" title="void KVNumberList::Begin()">Begin</a>();
+   <span class="keyword">while</span> (!<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:End" title="Bool_t KVNumberList::End()">End</a>()) {
 
-      <a href="../ListOfTypes.html#Int_t">Int_t</a> irun = fRunList.Next();
+      <a href="../ListOfTypes.html#Int_t">Int_t</a> irun = <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetRunList" title="const KVNumberList&amp; KVDataSetAnalyser::GetRunList()">GetRunList</a>().<a href="../KVNumberList.html#KVNumberList:Next" title="Int_t KVNumberList::Next()">Next</a>();
 
       <span class="comment">// source file full path</span>
-      TString src_full = fDataSet-&gt;GetFullPathToRunfile(fDataType.Data(), irun);
+      TString src_full = <a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../KVDataSet.html#KVDataSet:GetFullPathToRunfile" title="TString KVDataSet::GetFullPathToRunfile(const Char_t* type,Int_t run)">GetFullPathToRunfile</a>(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="const KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(), irun);
 
       <span class="comment">//target repository dataset pointer</span>
-      <a href="../KVDataSet.html">KVDataSet</a>* targ_ds = fTargetRep-&gt;GetDataSetManager()-&gt;<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataSet" title="KVDataSet* KVDataAnalyser::GetDataSet()">GetDataSet</a>(fDataSet-&gt;<a href="../#TObject:GetName" title="const char* TObject::GetName()">GetName</a>());
-      TString targ_fn = targ_ds-&gt;GetRunfileName(fDataType.Data(), irun);
+      <a href="../KVDataSet.html">KVDataSet</a>* targ_ds = fTargetRep-&gt;GetDataSetManager()-&gt;<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>(<a href="../KVDataSetAnalyser.html#KVDataSetAnalyser:GetDataSet" title="const KVDataSet* KVDataSetAnalyser::GetDataSet()">GetDataSet</a>()-><a href="../#TNamed:GetName" title="const char* TNamed::GetName()">GetName</a>());
+      TString targ_fn = targ_ds-&gt;GetRunfileName(<a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="const KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(), irun);
       <span class="comment">//we have to replace illegal characters like <span class="string">":"</span> in the target file name</span>
       <span class="comment">//to avoid problems due to the meaning of the <span class="string">":"</span> character for some</span>
       <span class="comment">//systems (MacOsX, Windows, some Linux distributions)</span>
       targ_fn.ReplaceAll(<span class="string">":"</span>, <span class="string">"_"</span>);
-      TString dest_full = fTargetRep-&gt;GetFullPathToTransferFile(targ_ds, fDataType.Data(), targ_fn.Data());
+      TString dest_full = fTargetRep-&gt;GetFullPathToTransferFile(targ_ds, <a href="../KVDataAnalyser.html#KVDataAnalyser:GetDataType" title="const KVString&amp; KVDataAnalyser::GetDataType()">GetDataType</a>(), targ_fn.Data());
 
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"TFile::Cp(\""</span> &lt;&lt; src_full.Data() &lt;&lt; <span class="string">"\", \""</span> &lt;&lt; dest_full.Data() &lt;&lt; <span class="string">"\")"</span> &lt;&lt; endl;
 
@@ -89,7 +89,7 @@ ClassImp(<a href="../KVDataTransferXRD.html">KVDataTransferXRD</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-01-27 13:32 </em><em>&raquo; Last generated: 2017-01-27 13:32</em><br />
+<em>&raquo; Last changed: 2017-02-28 17:19 </em><em>&raquo; Last generated: 2017-02-28 17:19</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
