@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Tue Feb 28 17:22:59 2017            -->
+<!--   Date: Sun Mar 12 15:51:19 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../ROOT.js"></script>
 </head>
 <body  onload="javascript:SetValuesFromCookie();">
-<img src="htmldoc_banner.png" height="180px" width="700px" alt="KaliVeda logo"/>
+<img src="htmldoc_banner.png" height="285px" width="1013px" alt="KaliVeda logo"/>
 <div id="codeAndLineNumbers"><pre class="listing">
 <span class="comment">//Created by <a href="../KVClassFactory.html">KVClassFactory</a> on Tue Sep  4 11:26:12 2012</span>
 <span class="comment">//Author: Guilain ADEMARD</span>
@@ -32,6 +32,7 @@
 <span class="cpp">#include "TGeoMatrix.h"</span>
 <span class="cpp">#include "<a href="../KVReconstructedNucleus.h">KVReconstructedNucleus.h</a>"</span>
 <span class="cpp">#include "<a href="../KVMacros.h">KVMacros.h</a>"</span> <span class="comment">// 'UNUSED' macro</span>
+<span class="cpp">#include "<a href="../KVZGOUBIInverseMatrix.h">KVZGOUBIInverseMatrix.h</a>"</span>
 
 <span class="keyword">using</span> <span class="keyword">namespace</span> std;
 
@@ -46,6 +47,7 @@
 <span class="keyword">class</span> <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>;
 <span class="keyword">class</span> <a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a>;
 <span class="keyword">class</span> <a href="../KVBasicVAMOSFilter.html">KVBasicVAMOSFilter</a>;
+<span class="keyword">class</span> <a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>;
 
 <span class="keyword">class</span> <a href="../KVVAMOS.html">KVVAMOS</a> : <span class="keyword">public</span> <a href="../KVMultiDetArray.html">KVMultiDetArray</a> {
 
@@ -75,6 +77,7 @@
    <a href="../KVVAMOSReconGeoNavigator.html">KVVAMOSReconGeoNavigator</a>* <a href="../KVVAMOS.html#KVVAMOS:fReconNavigator" title="KVVAMOSReconGeoNavigator* KVVAMOS::fReconNavigator">fReconNavigator</a>;<span class="comment">//! navigator used to reconstruct nuclei in VAMOS</span>
    <a href="../KVVAMOSTransferMatrix.html">KVVAMOSTransferMatrix</a>* <a href="../KVVAMOS.html#KVVAMOS:fTransMatrix" title="KVVAMOSTransferMatrix* KVVAMOS::fTransMatrix">fTransMatrix</a>;<span class="comment">//!Transfer matrix for the reconstruction LAB&lt;--&gt;FP</span>
    <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>* <a href="../KVVAMOS.html#KVVAMOS:fWeightFinder" title="KVVAMOSWeightFinder* KVVAMOS::fWeightFinder">fWeightFinder</a>;<span class="comment">//!Weight computation for VAMOS events</span>
+   <a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>* <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a>;<span class="comment">//!Transfer matrix for the reconstruction LAB&lt;--&gt;FP using ZGOUBI</span>
    <a href="../KVList.html">KVList</a>*      <a href="../KVVAMOS.html#KVVAMOS:fVACQParams" title="KVList* KVVAMOS::fVACQParams">fVACQParams</a>;  <span class="comment">//-&gt;References to data acquisition parameter belonging to VAMOS</span>
    TGeoVolume*  <a href="../KVVAMOS.html#KVVAMOS:fVAMOSvol" title="TGeoVolume* KVVAMOS::fVAMOSvol">fVAMOSvol</a>;    <span class="comment">//!TGeoVolume of VAMOS</span>
    <a href="../KVList.html">KVList</a>*      <a href="../KVVAMOS.html#KVVAMOS:fVCalibrators" title="KVList* KVVAMOS::fVCalibrators">fVCalibrators</a>;<span class="comment">//-&gt;References to calibrator belonging to VAMOS</span>
@@ -119,6 +122,7 @@
    <span class="keyword">virtual</span> <a href="../ListOfTypes.html#Double_t">Double_t</a> <a href="../KVVAMOS.html#KVVAMOS:GetStripFoilEnergyLossCorrection" title="Double_t KVVAMOS::GetStripFoilEnergyLossCorrection(KVReconstructedNucleus* )">GetStripFoilEnergyLossCorrection</a>(<a href="../KVReconstructedNucleus.html">KVReconstructedNucleus</a>*);
    <a href="../KVVAMOSReconGeoNavigator.html">KVVAMOSReconGeoNavigator</a>* <a href="../KVVAMOS.html#KVVAMOS:GetReconNavigator" title="KVVAMOSReconGeoNavigator* KVVAMOS::GetReconNavigator()">GetReconNavigator</a>();
    <a href="../KVVAMOSTransferMatrix.html">KVVAMOSTransferMatrix</a>* <a href="../KVVAMOS.html#KVVAMOS:GetTransferMatrix" title="KVVAMOSTransferMatrix* KVVAMOS::GetTransferMatrix()">GetTransferMatrix</a>();
+   <a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>* <a href="../KVVAMOS.html#KVVAMOS:GetZGOUBIInverseMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::GetZGOUBIInverseMatrix()">GetZGOUBIInverseMatrix</a>();
    <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>* <a href="../KVVAMOS.html#KVVAMOS:GetWeightFinder" title="KVVAMOSWeightFinder* KVVAMOS::GetWeightFinder()">GetWeightFinder</a>();
    <span class="keyword">virtual</span> <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:Initialize" title="void KVVAMOS::Initialize()">Initialize</a>();
    <span class="keyword">static</span>  <a href="../KVVAMOS.html">KVVAMOS</a>* <a href="../KVVAMOS.html#KVVAMOS:MakeVAMOS" title="KVVAMOS* KVVAMOS::MakeVAMOS(const Char_t* name)">MakeVAMOS</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* name);
@@ -128,6 +132,7 @@
    <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:SetStripFoil" title="void KVVAMOS::SetStripFoil(KVMaterial* foil,Double_t pos=0) or overloads">SetStripFoil</a>(<a href="../KVMaterial.html">KVMaterial</a>* foil, <a href="../ListOfTypes.html#Double_t">Double_t</a> pos = 0);
    <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:SetStripFoil" title="void KVVAMOS::SetStripFoil(KVMaterial* foil,Double_t pos=0) or overloads">SetStripFoil</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* material, <span class="keyword">const</span> <a href="../ListOfTypes.html#Float_t">Float_t</a> area_density, <a href="../ListOfTypes.html#Double_t">Double_t</a> pos);
    <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:SetTransferMatrix" title="void KVVAMOS::SetTransferMatrix(KVVAMOSTransferMatrix* mat)">SetTransferMatrix</a>(<a href="../KVVAMOSTransferMatrix.html">KVVAMOSTransferMatrix</a>* mat);
+   <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:SetZGOUBIInverseMatrix" title="void KVVAMOS::SetZGOUBIInverseMatrix(KVZGOUBIInverseMatrix* mat)">SetZGOUBIInverseMatrix</a>(<a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>* mat);
    <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:TargetToFocal" title="void KVVAMOS::TargetToFocal(const Double_t* target,Double_t* focal)">TargetToFocal</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>* target, <a href="../ListOfTypes.html#Double_t">Double_t</a>* focal);
    <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:TargetToFocalVect" title="void KVVAMOS::TargetToFocalVect(const Double_t* target,Double_t* focal)">TargetToFocalVect</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Double_t">Double_t</a>* target, <a href="../ListOfTypes.html#Double_t">Double_t</a>* focal);
    <span class="keyword">virtual</span> <span class="keyword">void</span>     <a href="../KVVAMOS.html#KVVAMOS:UpdateGeometry" title="void KVVAMOS::UpdateGeometry()">UpdateGeometry</a>();
@@ -165,27 +170,22 @@
 
    <span class="keyword">static</span> <a href="../ListOfTypes.html#UInt_t">UInt_t</a>    <a href="../KVVAMOS.html#KVVAMOS:CalculateUniqueID" title="UInt_t KVVAMOS::CalculateUniqueID(KVBase* param,KVVAMOSDetector* det=0)">CalculateUniqueID</a>(<a href="../KVBase.html">KVBase</a>* param, <a href="../KVVAMOSDetector.html">KVVAMOSDetector</a>* det = NULL);
    <span class="keyword">static</span> <a href="../ListOfTypes.html#UChar_t">UChar_t</a>   <a href="../KVVAMOS.html#KVVAMOS:GetACQParamTypeIdx" title="UChar_t KVVAMOS::GetACQParamTypeIdx(const Char_t* type,KVVAMOSDetector* det=0)">GetACQParamTypeIdx</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* type, <a href="../KVVAMOSDetector.html">KVVAMOSDetector</a>* det = NULL);
-<a name="wQzULB"></a>   <span class="keyword">static</span> <a href="../ListOfTypes.html#UChar_t">UChar_t</a>   <a href="../KVVAMOS.html#KVVAMOS:GetACQParamTypeIdxFromID" title="UChar_t KVVAMOS::GetACQParamTypeIdxFromID(UInt_t id)">GetACQParamTypeIdxFromID</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> id)
-   {
+<a name="YdN3MD"></a>   <span class="keyword">static</span> <a href="../ListOfTypes.html#UChar_t">UChar_t</a>   <a href="../KVVAMOS.html#KVVAMOS:GetACQParamTypeIdxFromID" title="UChar_t KVVAMOS::GetACQParamTypeIdxFromID(UInt_t id)">GetACQParamTypeIdxFromID</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> id) {
       <span class="keyword">return</span> (id / 1000) % 10;
    }
-<a name="nBnnvC"></a>   <span class="keyword">static</span> <a href="../KVString.html">KVString</a>&amp; <a href="../KVVAMOS.html#KVVAMOS:GetACQParamTypes" title="KVString&amp; KVVAMOS::GetACQParamTypes()">GetACQParamTypes</a>()
-   {
+<a name="WGbYQE"></a>   <span class="keyword">static</span> <a href="../KVString.html">KVString</a>&amp; <a href="../KVVAMOS.html#KVVAMOS:GetACQParamTypes" title="KVString&amp; KVVAMOS::GetACQParamTypes()">GetACQParamTypes</a>() {
       <span class="keyword">return</span> <a href="../KVVAMOS.html#KVVAMOS:fACQParamTypes" title="KVString KVVAMOS::fACQParamTypes">fACQParamTypes</a>;
    }
    <span class="keyword">static</span> <a href="../ListOfTypes.html#UChar_t">UChar_t</a>   <a href="../KVVAMOS.html#KVVAMOS:GetPositionTypeIdx" title="UChar_t KVVAMOS::GetPositionTypeIdx(const Char_t* type,KVVAMOSDetector* det=0)">GetPositionTypeIdx</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* type, <a href="../KVVAMOSDetector.html">KVVAMOSDetector</a>* det = NULL);
-<a name="Q31neD"></a>   <span class="keyword">static</span> <a href="../ListOfTypes.html#UChar_t">UChar_t</a>   <a href="../KVVAMOS.html#KVVAMOS:GetPositionTypeIdxFromID" title="UChar_t KVVAMOS::GetPositionTypeIdxFromID(UInt_t id)">GetPositionTypeIdxFromID</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> id)
-   {
+<a name="laqOAD"></a>   <span class="keyword">static</span> <a href="../ListOfTypes.html#UChar_t">UChar_t</a>   <a href="../KVVAMOS.html#KVVAMOS:GetPositionTypeIdxFromID" title="UChar_t KVVAMOS::GetPositionTypeIdxFromID(UInt_t id)">GetPositionTypeIdxFromID</a>(<a href="../ListOfTypes.html#UInt_t">UInt_t</a> id) {
       <span class="keyword">return</span> (id / 10000) % 10;
    }
-<a name="Omc8FD"></a>   <span class="keyword">static</span> <a href="../KVString.html">KVString</a>&amp; <a href="../KVVAMOS.html#KVVAMOS:GetPositionTypes" title="KVString&amp; KVVAMOS::GetPositionTypes()">GetPositionTypes</a>()
-   {
+<a name="f.D9V"></a>   <span class="keyword">static</span> <a href="../KVString.html">KVString</a>&amp; <a href="../KVVAMOS.html#KVVAMOS:GetPositionTypes" title="KVString&amp; KVVAMOS::GetPositionTypes()">GetPositionTypes</a>() {
       <span class="keyword">return</span> <a href="../KVVAMOS.html#KVVAMOS:fPositionTypes" title="KVString KVVAMOS::fPositionTypes">fPositionTypes</a>;
    }
    <span class="keyword">static</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a>    <a href="../KVVAMOS.html#KVVAMOS:IsUsedToMeasure" title="Bool_t KVVAMOS::IsUsedToMeasure(const Char_t* type,KVVAMOSDetector* det=0)">IsUsedToMeasure</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* type, <a href="../KVVAMOSDetector.html">KVVAMOSDetector</a>* det = NULL);
 
-<a name="otS4RE"></a>   <span class="keyword">void</span> <a href="../KVVAMOS.html#KVVAMOS:ShowECalibPar" title="void KVVAMOS::ShowECalibPar()">ShowECalibPar</a>()
-   {
+<a name="c17hjB"></a>   <span class="keyword">void</span> <a href="../KVVAMOS.html#KVVAMOS:ShowECalibPar" title="void KVVAMOS::ShowECalibPar()">ShowECalibPar</a>() {
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"par0= "</span> &lt;&lt; <a href="../KVVAMOS.html#KVVAMOS:fECalibPar" title="Double_t KVVAMOS::fECalibPar">fECalibPar</a>[0] &lt;&lt; endl;
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"par1= "</span> &lt;&lt; <a href="../KVVAMOS.html#KVVAMOS:fECalibPar" title="Double_t KVVAMOS::fECalibPar">fECalibPar</a>[1] &lt;&lt; endl;
       <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"par2= "</span> &lt;&lt; <a href="../KVVAMOS.html#KVVAMOS:fECalibPar" title="Double_t KVVAMOS::fECalibPar">fECalibPar</a>[2] &lt;&lt; endl;
@@ -355,7 +355,7 @@ R__EXTERN <a href="../KVVAMOS.html">KVVAMOS</a>* <a href="../KVVAMOS.html">gVamo
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-02-28 17:22 </em><em>&raquo; Last generated: 2017-02-28 17:22</em><br />
+<em>&raquo; Last changed: 2017-03-12 15:51 </em><em>&raquo; Last generated: 2017-03-12 15:51</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
