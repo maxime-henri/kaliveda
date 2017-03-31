@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Sun Mar 12 15:51:18 2017            -->
+<!--   Date: Fri Mar 31 13:07:31 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -91,7 +91,7 @@ ClassImp(<a href="../KVVAMOS.html">KVVAMOS</a>)
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="tAiejD"></a><a href="../KVVAMOS.html">KVVAMOS</a>::<a href="../KVVAMOS.html#KVVAMOS:KVVAMOS" title="KVVAMOS KVVAMOS::KVVAMOS() or overloads">KVVAMOS</a>(<span class="keyword">const</span> <a href="../KVVAMOS.html">KVVAMOS</a>&amp; obj)  : <a href="../KVMultiDetArray.html#KVMultiDetArray:KVMultiDetArray" title="KVMultiDetArray KVMultiDetArray::KVMultiDetArray()">KVMultiDetArray</a>()
+<a name="tAiejD"></a><a href="../KVVAMOS.html">KVVAMOS</a>::<a href="../KVVAMOS.html#KVVAMOS:KVVAMOS" title="KVVAMOS KVVAMOS::KVVAMOS() or overloads">KVVAMOS</a>(<span class="keyword">const</span> <a href="../KVVAMOS.html">KVVAMOS</a>&amp; obj)  : <a href="../KVMultiDetArray.html#KVMultiDetArray:KVMultiDetArray" title="KVMultiDetArray KVMultiDetArray::KVMultiDetArray() or overloads">KVMultiDetArray</a>()
 {
    <span class="comment">// <a href="../KVVAMOS.html#KVVAMOS:Copy" title="void KVVAMOS::Copy(TObject&amp; )">Copy</a> constructor</span>
    <span class="comment">// This ctor is used to make a copy of an existing object (for example</span>
@@ -124,7 +124,7 @@ ClassImp(<a href="../KVVAMOS.html">KVVAMOS</a>)
    <a href="../KVVAMOS.html#KVVAMOS:fVAMOSvol" title="TGeoVolume* KVVAMOS::fVAMOSvol">fVAMOSvol</a>      = NULL;
    <a href="../KVVAMOS.html#KVVAMOS:fStripFoil" title="KVMaterial* KVVAMOS::fStripFoil">fStripFoil</a>     = NULL;
    <a href="../KVVAMOS.html#KVVAMOS:fTransMatrix" title="KVVAMOSTransferMatrix* KVVAMOS::fTransMatrix">fTransMatrix</a>   = NULL;
-   <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a> = NULL;
+   <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a> = NULL;
    <a href="../KVVAMOS.html#KVVAMOS:fReconNavigator" title="KVVAMOSReconGeoNavigator* KVVAMOS::fReconNavigator">fReconNavigator</a> = NULL;
    <a href="../KVVAMOS.html#KVVAMOS:fWeightFinder" title="KVVAMOSWeightFinder* KVVAMOS::fWeightFinder">fWeightFinder</a>  = NULL;
    <a href="../KVVAMOS.html#KVVAMOS:fRotation" title="TGeoRotation* KVVAMOS::fRotation">fRotation</a>      = NULL;
@@ -161,7 +161,7 @@ ClassImp(<a href="../KVVAMOS.html">KVVAMOS</a>)
    SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fFiredDets" title="KVList* KVVAMOS::fFiredDets">fFiredDets</a>);
    SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fStripFoil" title="KVMaterial* KVVAMOS::fStripFoil">fStripFoil</a>);
    SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fTransMatrix" title="KVVAMOSTransferMatrix* KVVAMOS::fTransMatrix">fTransMatrix</a>);
-   SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a>);
+   SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a>);
    SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fReconNavigator" title="KVVAMOSReconGeoNavigator* KVVAMOS::fReconNavigator">fReconNavigator</a>);
    SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fWeightFinder" title="KVVAMOSWeightFinder* KVVAMOS::fWeightFinder">fWeightFinder</a>);
    SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fFilter" title="KVBasicVAMOSFilter* KVVAMOS::fFilter">fFilter</a>);
@@ -1078,15 +1078,15 @@ ClassImp(<a href="../KVVAMOS.html">KVVAMOS</a>)
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="L5xdVD"></a><a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>* <a href="../KVVAMOS.html">KVVAMOS</a>::<a href="../KVVAMOS.html#KVVAMOS:GetZGOUBIInverseMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::GetZGOUBIInverseMatrix()">GetZGOUBIInverseMatrix</a>()
+<a name="BtzvD"></a><a href="../KVZGOUBIReconstruction.html">KVZGOUBIReconstruction</a>* <a href="../KVVAMOS.html">KVVAMOS</a>::<a href="../KVVAMOS.html#KVVAMOS:GetZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::GetZGOUBIReconstruction()">GetZGOUBIReconstruction</a>()
 {
    <span class="comment">//Returns the transformation matrix allowing to map the measured</span>
    <span class="comment">//coordinates at the focal plane back to the target. If no matrix</span>
    <span class="comment">//exists then a new matrix is built from coefficient files found</span>
    <span class="comment">//in the directory of the current dataset ( see the method</span>
    <span class="comment">//<a href="../KVVAMOSTransferMatrix.html">KVVAMOSTransferMatrix</a>::<a href="../KVVAMOSTransferMatrix.html#KVVAMOSTransferMatrix:ReadCoefInDataSet" title="void KVVAMOSTransferMatrix::ReadCoefInDataSet()">ReadCoefInDataSet</a>() ).</span>
-   <span class="keyword">if</span> (<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a>) <span class="keyword">return</span> <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a>;
-   <span class="keyword">return</span> (<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a> = <span class="keyword">new</span> <a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>(50, 50, 50, 50));
+   <span class="keyword">if</span> (<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a>) <span class="keyword">return</span> <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a>;
+   <span class="keyword">return</span> (<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a> = <span class="keyword">new</span> <a href="../KVZGOUBIReconstruction.html">KVZGOUBIReconstruction</a>(<span class="keyword">true</span>));
 }
 <span class="comment">//________________________________________________________________</span>
 
@@ -1245,15 +1245,15 @@ ClassImp(<a href="../KVVAMOS.html">KVVAMOS</a>)
 }
 <span class="comment">//________________________________________________________________</span>
 
-<a name="wCL5kC"></a><span class="keyword">void</span> <a href="../KVVAMOS.html">KVVAMOS</a>::<a href="../KVVAMOS.html#KVVAMOS:SetZGOUBIInverseMatrix" title="void KVVAMOS::SetZGOUBIInverseMatrix(KVZGOUBIInverseMatrix* mat)">SetZGOUBIInverseMatrix</a>(<a href="../KVZGOUBIInverseMatrix.html">KVZGOUBIInverseMatrix</a>* mat)
+<a name="Pyc3PC"></a><span class="keyword">void</span> <a href="../KVVAMOS.html">KVVAMOS</a>::<a href="../KVVAMOS.html#KVVAMOS:SetZGOUBIReconstruction" title="void KVVAMOS::SetZGOUBIReconstruction(KVZGOUBIReconstruction* mat)">SetZGOUBIReconstruction</a>(<a href="../KVZGOUBIReconstruction.html">KVZGOUBIReconstruction</a>* mat)
 {
    <span class="comment">//Set the transformation matrix allowing to map the measured</span>
    <span class="comment">//coordinates at the focal plane back to the target. If a matrix</span>
    <span class="comment">//already exists then it is deleted first to set the new one.</span>
 
    <span class="keyword">if</span> (!mat) <span class="keyword">return</span>;
-   <span class="keyword">if</span> (<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a>) SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a>);
-   <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIMatrix" title="KVZGOUBIInverseMatrix* KVVAMOS::fZGOUBIMatrix">fZGOUBIMatrix</a> = mat;
+   <span class="keyword">if</span> (<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a>) SafeDelete(<a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a>);
+   <a href="../KVVAMOS.html#KVVAMOS:fZGOUBIReconstruction" title="KVZGOUBIReconstruction* KVVAMOS::fZGOUBIReconstruction">fZGOUBIReconstruction</a> = mat;
 }
 <span class="comment">//________________________________________________________________</span>
 
@@ -1327,7 +1327,7 @@ ClassImp(<a href="../KVVAMOS.html">KVVAMOS</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-03-12 15:51 </em><em>&raquo; Last generated: 2017-03-12 15:51</em><br />
+<em>&raquo; Last changed: 2017-03-31 13:07 </em><em>&raquo; Last generated: 2017-03-31 13:07</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

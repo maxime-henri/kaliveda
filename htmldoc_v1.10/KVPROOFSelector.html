@@ -1,0 +1,517 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--                                             -->
+<!-- Author: KaliVeda Development team           -->
+<!--                                             -->
+<!--   Date: Fri Mar 31 13:06:42 2017            -->
+<!--                                             -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>KVPROOFSelector</title>
+<meta name="rating" content="General" />
+<meta name="objecttype" content="Manual" />
+<meta name="keywords" content="software development, oo, object oriented, linux, c++, html, indra, fazia" />
+<meta name="description" content="KaliVeda - An Object-Oriented Toolkit for Analysis of Heavy-Ion Collisions" />
+<link rel="stylesheet" type="text/css" href="ROOT.css" id="ROOTstyle" />
+<script type="text/javascript" src="ROOT.js"></script>
+</head>
+<body  onload="javascript:SetValuesFromCookie();">
+<img src="htmldoc_banner.png" height="285px" width="1013px" alt="KaliVeda logo"/>
+<a name="TopOfPage"></a>
+<script type="text/javascript">WriteFollowPageBox('class KVPROOFSelector','libKVMultiDetanalysis','KVPROOFSelector.h');</script>
+<div id="toplinks">
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Quick Links:</span>
+<a class="descrheadentry" href="http://indra.in2p3.fr/kaliveda">KaliVeda v1.10/15</a>
+<a class="descrheadentry" href="http://root.cern.ch">ROOT Homepage</a>
+<a class="descrheadentry" href="./ClassIndex.html">Class Index</a>
+<a class="descrheadentry" href="./ClassHierarchy.html">Class Hierarchy</a></div>
+<script type="text/javascript">
+function onSearch() {
+var s='http://www.google.com/search?q=%s+site%3A%u+-site%3A%u%2Fsrc%2F+-site%3A%u%2Fexamples%2F';
+var ref=String(document.location.href).replace(/https?:\/\//,'').replace(/\/[^\/]*$/,'').replace(/\//g,'%2F');
+window.location.href=s.replace(/%u/ig,ref).replace(/%s/ig,escape(document.searchform.t.value));
+return false;}
+</script>
+<form id="searchform" name="searchform" onsubmit="return onSearch()" action="javascript:onSearch();" method="post">
+<input name="t" size="30" value="Search documentation..." onfocus="if (document.searchform.t.value=='Search documentation...') document.searchform.t.value='';"></input>
+<a id="searchlink"  title="www.google.com"  href="javascript:onSearch();" onclick="return onSearch()">Search</a></form>
+</div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Source:</span>
+<a class="descrheadentry" href="src/KVPROOFSelector.h.html">header file</a>
+<a class="descrheadentry" href="src/KVPROOFSelector.cxx.html">source file</a>
+<a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/analysis/KVPROOFSelector.h">viewVC header</a> <a class="descrheadentry" href="https://github.com/kaliveda-dev/kaliveda/blob/1.10/KVMultiDet/analysis/KVPROOFSelector.cpp">viewVC source</a> 
+</div></div>
+<div class="descrhead"><div class="descrheadcontent">
+<span class="descrtitle">Sections:</span>
+<a class="descrheadentry" href="#KVPROOFSelector:description">class description</a> 
+<a class="descrheadentry" href="#KVPROOFSelector:Function_Members">function members</a>
+<a class="descrheadentry" href="#KVPROOFSelector:Data_Members">data members</a>
+<a class="descrheadentry" href="#KVPROOFSelector:Class_Charts">class charts</a>
+</div></div>
+</div>
+<div class="location">
+<a class="locationlevel" href="index.html">KaliVeda v1.10/15</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_Index.html">KVMULTIDET</a>
+ &#187; <a class="locationlevel" href="./KVMULTIDET_ANALYSIS_Index.html">ANALYSIS</a>
+ &#187; <a class="locationlevel" href="#TopOfPage">KVPROOFSelector</a>
+</div>
+<div class="dropshadow"><div class="withshadow"><h1><a name="KVPROOFSelector:description"></a>class KVPROOFSelector: public TSelector</h1>
+<div class="classdescr">
+<pre>
+
+</pre><!-- TDocHtmlDirective start --> <!--
+/* -->
+<h2>KVPROOFSelector</h2>
+<h4>General purpose class for running parallel tasks with PROOF</h4>
+<!-- */
+ --> 
+<!-- TDocHtmlDirective end --><pre>
+ Generate a class derived from this one using static method
+
+    <a href="./KVPROOFSelector.html">KVPROOFSelector</a>::<a href="./KVPROOFSelector.html#KVPROOFSelector:Make" title="void KVPROOFSelector::Make(const Char_t* classname)">Make</a>(<span class="string">"MySelector"</span>);
+
+ then you can use PROOF in order to run tasks in parallel:
+
+    TProof::Open(<span class="string">""</span>);           // open PROOFLite session
+    gProof-&gt;<a href="./KVPROOFSelector.html#KVPROOFSelector:Process" title="Bool_t KVPROOFSelector::Process(Long64_t entry)">Process</a>(<span class="string">"MySelector.cpp+"</span>, [ncycles], <span class="string">"[options]"</span>);
+
+ This will execute MySelector::<a href="./KVPROOFSelector.html#KVPROOFSelector:Process" title="Bool_t KVPROOFSelector::Process(Long64_t entry)">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>) ncycles times.
+
+ USING TREES &amp; HISTOGRAMS TO SAVE DATA
+ - declare any histograms with method <a href="./KVPROOFSelector.html#KVPROOFSelector:AddHisto" title="void KVPROOFSelector::AddHisto(TH1* histo)">AddHisto</a>(TH1*)
+ e.g. in <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>:
+ <a href="./ListOfTypes.html#void">void</a> MySelector::<a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>()
+ {
+     <a href="./KVPROOFSelector.html#KVPROOFSelector:AddHisto" title="void KVPROOFSelector::AddHisto(TH1* histo)">AddHisto</a>( new TH2F(<span class="string">"toto"</span>, <span class="string">"tata"</span>, 100, 0, 0, 500, 0, 0) );
+ }
+ Histograms can also be declared 'on the fly' in <a href="./KVPROOFSelector.html#KVPROOFSelector:Analysis" title="Bool_t KVPROOFSelector::Analysis()">Analysis</a>() method in
+ the same way;
+
+ - for TTrees, first call <a href="./KVPROOFSelector.html#KVPROOFSelector:CreateTreeFile" title="Bool_t KVPROOFSelector::CreateTreeFile(const Char_t* filename=&quot;&quot;)">CreateTreeFile</a>(<span class="string">"..."</span>) with name of file for TTree(s)
+ (by default, histograms and TTrees are written in different files - but see below),
+ then declare all trees using method <a href="./KVPROOFSelector.html#KVPROOFSelector:AddTree" title="void KVPROOFSelector::AddTree(TTree* tree)">AddTree</a>(TTree*)
+ e.g. in <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>:
+ <a href="./ListOfTypes.html#void">void</a> MySelector::<a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>()
+ {
+     <a href="./KVPROOFSelector.html#KVPROOFSelector:CreateTreeFile" title="Bool_t KVPROOFSelector::CreateTreeFile(const Char_t* filename=&quot;&quot;)">CreateTreeFile</a>(<span class="string">"MyTrees.root"</span>);
+     TTree* aTree = new TTree(<span class="string">"t1"</span>, <span class="string">"Some Tree"</span>);
+     aTree-&gt;Branch(...) etc.
+     <a href="./KVPROOFSelector.html#KVPROOFSelector:AddTree" title="void KVPROOFSelector::AddTree(TTree* tree)">AddTree</a>(aTree);
+ }
+
+ - if you want (not obligatory), you can use methods <a href="./KVPROOFSelector.html#KVPROOFSelector:FillHisto" title="void KVPROOFSelector::FillHisto(const Char_t* sname,Double_t one,Double_t two=1,Double_t three=1,Double_t four=1)">FillHisto</a>(...) and
+  <a href="./KVPROOFSelector.html#KVPROOFSelector:FillTree" title="void KVPROOFSelector::FillTree(const Char_t* sname=&quot;&quot;)">FillTree</a>(...) in your <a href="./KVPROOFSelector.html#KVPROOFSelector:Analysis" title="Bool_t KVPROOFSelector::Analysis()">Analysis</a>() method;
+
+ - to save histograms to file in <a href="./KVPROOFSelector.html#KVPROOFSelector:EndAnalysis" title="void KVPROOFSelector::EndAnalysis()">EndAnalysis</a>(), call method
+  <a href="./KVPROOFSelector.html#KVPROOFSelector:SaveHistos" title="void KVPROOFSelector::SaveHistos(const Char_t* filename=&quot;&quot;,Option_t* option=&quot;recreate&quot;,Bool_t onlyfilled=kFALSE)">SaveHistos</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename) in <a href="./KVPROOFSelector.html#KVPROOFSelector:EndAnalysis" title="void KVPROOFSelector::EndAnalysis()">EndAnalysis</a>()
+
+ -  the file declared with <a href="./KVPROOFSelector.html#KVPROOFSelector:CreateTreeFile" title="Bool_t KVPROOFSelector::CreateTreeFile(const Char_t* filename=&quot;&quot;)">CreateTreeFile</a> will be automatically written
+ to disk at the end of the analysis.
+
+ HISTOS &amp; TREES IN SAME FILE
+ If you want all results of your analysis to be written in a single file
+ containing both histos and trees, put the following in the list of options:
+      CombinedOutputFile=myResults.root
+ or call method <a href="./KVPROOFSelector.html#KVPROOFSelector:SetCombinedOutputFile" title="void KVPROOFSelector::SetCombinedOutputFile(const TString&amp; filename)">SetCombinedOutputFile</a>(<span class="string">"myResults.root"</span>) in your <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>();
+ do not call <a href="./KVPROOFSelector.html#KVPROOFSelector:SaveHistos" title="void KVPROOFSelector::SaveHistos(const Char_t* filename=&quot;&quot;,Option_t* option=&quot;recreate&quot;,Bool_t onlyfilled=kFALSE)">SaveHistos</a>() in <a href="./KVPROOFSelector.html#KVPROOFSelector:EndAnalysis" title="void KVPROOFSelector::EndAnalysis()">EndAnalysis</a>(), and make
+ sure you call <a href="./KVPROOFSelector.html#KVPROOFSelector:CreateTreeFile" title="Bool_t KVPROOFSelector::CreateTreeFile(const Char_t* filename=&quot;&quot;)">CreateTreeFile</a>() without giving a name (the
+ resulting intermediate file will have a default name
+ allowing it to be found at the end of the analysis)
+
+</pre></div>
+</div></div>
+
+<div id="functions">
+<h2><a id="KVPROOFSelector:Function_Members"></a>Function Members (Methods)</h2>
+&nbsp;<br /><b>&nbsp;&nbsp;&nbsp;&nbsp;This is an abstract class, constructors will not be documented.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Look at the <a href="KVPROOFSelector.h">header</a> to check for available constructors.</b><br />
+<div class="access" id="funcpubl"><b>public:</b>
+<table class="func" id="tabfuncpubl" cellspacing="0">
+<tr class="func"><td class="funcret"> virtual</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:_KVPROOFSelector">~KVPROOFSelector</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:Abort"><span class="baseclass">TSelector::</span>Abort</a>(<span class="keyword">const</span> <span class="keyword">char</span>* why, <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort what = kAbortProcess)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AbstractMethod"><span class="baseclass">TObject::</span>AbstractMethod</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:AddHisto">AddHisto</a>(TH1* histo)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:AddTree">AddTree</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Analysis">Analysis</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:AppendPad"><span class="baseclass">TObject::</span>AppendPad</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Begin">Begin</a>(TTree* tree)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Class">Class</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Clear"><span class="baseclass">TObject::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:Clone"><span class="baseclass">TObject::</span>Clone</a>(<span class="keyword">const</span> <span class="keyword">char</span>* newname = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Compare"><span class="baseclass">TObject::</span>Compare</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Copy"><span class="baseclass">TObject::</span>Copy</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; object) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:CreateTreeFile">CreateTreeFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Delete"><span class="baseclass">TObject::</span>Delete</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:DistancetoPrimitive"><span class="baseclass">TObject::</span>DistancetoPrimitive</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Draw"><span class="baseclass">TObject::</span>Draw</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DrawClass"><span class="baseclass">TObject::</span>DrawClass</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:DrawClone"><span class="baseclass">TObject::</span>DrawClone</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Dump"><span class="baseclass">TObject::</span>Dump</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:EndAnalysis">EndAnalysis</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Error"><span class="baseclass">TObject::</span>Error</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute"><span class="baseclass">TObject::</span>Execute</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Execute@1"><span class="baseclass">TObject::</span>Execute</a>(TMethod* method, TObjArray* params, <a href="./ListOfTypes.html#Int_t">Int_t</a>* error = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ExecuteEvent"><span class="baseclass">TObject::</span>ExecuteEvent</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> event, <a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Fatal"><span class="baseclass">TObject::</span>Fatal</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillHisto">FillHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> three = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> four = 1)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillTree">FillTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="funcname"><a class="funcname" href="#TObject:FindObject@1"><span class="baseclass">TObject::</span>FindObject</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort</td><td class="funcname"><a class="funcname" href="#TSelector:GetAbort"><span class="baseclass">TSelector::</span>GetAbort</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:GetCycleNumber">GetCycleNumber</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Option_t">Option_t</a>*</td><td class="funcname"><a class="funcname" href="#TObject:GetDrawOption"><span class="baseclass">TObject::</span>GetDrawOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Long_t">Long_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetDtorOnly"><span class="baseclass">TObject::</span>GetDtorOnly</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:GetEntry"><span class="baseclass">TSelector::</span>GetEntry</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>, <a href="./ListOfTypes.html#Int_t">Int_t</a> = 0)</td></tr>
+<tr class="func"><td class="funcret">TH1*</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:GetHisto">GetHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVHashList.html">KVHashList</a>*</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:GetHistoList">GetHistoList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetIconName"><span class="baseclass">TObject::</span>GetIconName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual TList*</td><td class="funcname"><a class="funcname" href="#TSelector:GetInputList"><span class="baseclass">TSelector::</span>GetInputList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetName"><span class="baseclass">TObject::</span>GetName</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetObjectInfo"><span class="baseclass">TObject::</span>GetObjectInfo</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> px, <a href="./ListOfTypes.html#Int_t">Int_t</a> py) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetObjectStat"><span class="baseclass">TObject::</span>GetObjectStat</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">const</span> TString&amp;</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:GetOpt">GetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TSelector:GetOption"><span class="baseclass">TSelector::</span>GetOption</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual TList*</td><td class="funcname"><a class="funcname" href="#TSelector:GetOutputList"><span class="baseclass">TSelector::</span>GetOutputList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>*</td><td class="funcname"><a class="funcname" href="#TSelector:GetSelector"><span class="baseclass">TSelector::</span>GetSelector</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:GetStatus"><span class="baseclass">TSelector::</span>GetStatus</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:GetTitle"><span class="baseclass">TObject::</span>GetTitle</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">TTree*</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:GetTree">GetTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><a href="./KVHashList.html">KVHashList</a>*</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:GetTreeList">GetTreeList</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#UInt_t">UInt_t</a></td><td class="funcname"><a class="funcname" href="#TObject:GetUniqueID"><span class="baseclass">TObject::</span>GetUniqueID</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Hash"><span class="baseclass">TObject::</span>Hash</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:Init"><span class="baseclass">TSelector::</span>Init</a>(TTree*)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:InitAnalysis">InitAnalysis</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Inspect"><span class="baseclass">TObject::</span>Inspect</a>() <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:InvertBit"><span class="baseclass">TObject::</span>InvertBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="func"><td class="funcret">virtual TClass*</td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:IsA">IsA</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsEqual"><span class="baseclass">TObject::</span>IsEqual</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsFolder"><span class="baseclass">TObject::</span>IsFolder</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsOnHeap"><span class="baseclass">TObject::</span>IsOnHeap</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:IsOptGiven">IsOptGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsSortable"><span class="baseclass">TObject::</span>IsSortable</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:IsStandardDraw"><span class="baseclass">TSelector::</span>IsStandardDraw</a>(<span class="keyword">const</span> <span class="keyword">char</span>* selec)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:IsZombie"><span class="baseclass">TObject::</span>IsZombie</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ls"><span class="baseclass">TObject::</span>ls</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Make">Make</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MayNotUse"><span class="baseclass">TObject::</span>MayNotUse</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:Notify"><span class="baseclass">TSelector::</span>Notify</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Obsolete"><span class="baseclass">TObject::</span>Obsolete</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* asOfVers, <span class="keyword">const</span> <span class="keyword">char</span>* removedFromVers) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete@1"><span class="baseclass">TObject::</span>operator delete</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:operator_delete[]@1"><span class="baseclass">TObject::</span>operator delete[]</a>(<span class="keyword">void</span>* ptr, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new@1"><span class="baseclass">TObject::</span>operator new</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span>*</td><td class="funcname"><a class="funcname" href="#TObject:operator_new[]@1"><span class="baseclass">TObject::</span>operator new[]</a>(<a href="./ListOfTypes.html#size_t">size_t</a> sz, <span class="keyword">void</span>* vp)</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp;</td><td class="funcname"><a class="funcname" href="#TObject:operator_"><span class="baseclass">TObject::</span>operator=</a>(<span class="keyword">const</span> <a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>&amp; rhs)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Paint"><span class="baseclass">TObject::</span>Paint</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:ParseOptions">ParseOptions</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Pop"><span class="baseclass">TObject::</span>Pop</a>()</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Print"><span class="baseclass">TObject::</span>Print</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Process">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TSelector:ProcessCut"><span class="baseclass">TSelector::</span>ProcessCut</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:ProcessFill"><span class="baseclass">TSelector::</span>ProcessFill</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Read"><span class="baseclass">TObject::</span>Read</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:RecursiveRemove"><span class="baseclass">TObject::</span>RecursiveRemove</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:ResetAbort"><span class="baseclass">TSelector::</span>ResetAbort</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:ResetBit"><span class="baseclass">TObject::</span>ResetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SaveAs"><span class="baseclass">TObject::</span>SaveAs</a>(<span class="keyword">const</span> <span class="keyword">char</span>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>) <span class="keyword">const</span><span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:SaveHistos">SaveHistos</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> onlyfilled = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SavePrimitive"><span class="baseclass">TObject::</span>SavePrimitive</a>(<a href="./ListOfTypes.html#ostream">ostream</a>&amp; out, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit@1"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetBit"><span class="baseclass">TObject::</span>SetBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> set)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:SetCombinedOutputFile">SetCombinedOutputFile</a>(<span class="keyword">const</span> TString&amp; filename)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDrawOption"><span class="baseclass">TObject::</span>SetDrawOption</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">""</span>)<span class="funcprop"><abbr title="has a popup menu entry">MENU</abbr> </span></td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetDtorOnly"><span class="baseclass">TObject::</span>SetDtorOnly</a>(<span class="keyword">void</span>* obj)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:SetEventsReadInterval">SetEventsReadInterval</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> N)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:SetInputList"><span class="baseclass">TSelector::</span>SetInputList</a>(TList* input)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:SetObject"><span class="baseclass">TSelector::</span>SetObject</a>(<a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* obj)</td></tr>
+<tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetObjectStat"><span class="baseclass">TObject::</span>SetObjectStat</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> stat)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:SetOpt">SetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:SetOption"><span class="baseclass">TSelector::</span>SetOption</a>(<span class="keyword">const</span> <span class="keyword">char</span>* option)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TSelector:SetStatus"><span class="baseclass">TSelector::</span>SetStatus</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> status)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SetUniqueID"><span class="baseclass">TObject::</span>SetUniqueID</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> uid)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:ShowMembers">ShowMembers</a>(TMemberInspector&amp;)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:SlaveBegin">SlaveBegin</a>(TTree* tree)</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:SlaveTerminate">SlaveTerminate</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Streamer">Streamer</a>(TBuffer&amp;)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:StreamerNVirtual">StreamerNVirtual</a>(TBuffer&amp; ClassDef_StreamerNVirtual_b)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:SysError"><span class="baseclass">TObject::</span>SysError</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Terminate">Terminate</a>()</td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBit"><span class="baseclass">TObject::</span>TestBit</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:TestBits"><span class="baseclass">TObject::</span>TestBits</a>(<a href="./ListOfTypes.html#UInt_t">UInt_t</a> f) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:UnsetOpt">UnsetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:UseCurrentStyle"><span class="baseclass">TObject::</span>UseCurrentStyle</a>()</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:Version">Version</a>() <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Warning"><span class="baseclass">TObject::</span>Warning</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0)</td></tr>
+<tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="funcname"><a class="funcname" href="#TObject:Write@1"><span class="baseclass">TObject::</span>Write</a>(<span class="keyword">const</span> <span class="keyword">char</span>* name = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> option = 0, <a href="./ListOfTypes.html#Int_t">Int_t</a> bufsize = 0) <span class="keyword">const</span></td></tr>
+
+</table></div>
+<div class="access" id="funcprot"><b>protected:</b>
+<table class="func" id="tabfuncprot" cellspacing="0">
+<tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillTH1">FillTH1</a>(TH1* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillTH2">FillTH2</a>(TH2* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillTH3">FillTH3</a>(TH3* h3, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillTProfile">FillTProfile</a>(TProfile* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVPROOFSelector:FillTProfile2D">FillTProfile2D</a>(TProfile2D* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</td></tr>
+<tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
+
+</table></div>
+</div>
+
+<div id="datamembers">
+<h2><a name="KVPROOFSelector:Data_Members"></a>Data Members</h2>
+<div class="access" id="enumpubl"><b>public:</b>
+<table class="data" id="tabenumpubl" cellspacing="0">
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TSelector::</span>EAbort { </td><td class="dataname"><a href="#TSelector:kContinue">kContinue</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TSelector:kAbortProcess">kAbortProcess</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TSelector:kAbortFile">kAbortFile</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span>EStatusBits { </td><td class="dataname"><a href="#TObject:kCanDelete">kCanDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kMustCleanup">kMustCleanup</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kObjInCanvas">kObjInCanvas</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kIsReferenced">kIsReferenced</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kHasUUID">kHasUUID</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kCannotPick">kCannotPick</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNoContextMenu">kNoContextMenu</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kInvalidObject">kInvalidObject</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+<tr class="datainh"><td class="datatype">enum <span class="baseclass">TObject::</span><i>[unnamed]</i> { </td><td class="dataname"><a href="#TObject:kIsOnHeap">kIsOnHeap</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kNotDeleted">kNotDeleted</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kZombie">kZombie</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kBitMask">kBitMask</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kSingleKey">kSingleKey</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kOverwrite">kOverwrite</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype"></td><td class="dataname"><a href="#TObject:kWriteDelete">kWriteDelete</a></td><td></td></tr>
+<tr class="datainh"><td class="datatype">};</td><td></td><td></td></tr>
+
+</table></div>
+<div class="access" id="datapubl"><b>public:</b>
+<table class="data" id="tabdatapubl" cellspacing="0">
+<tr class="data"><td class="datatype">TProofOutputFile*</td><td class="dataname"><a name="KVPROOFSelector:mergeFile"></a>mergeFile</td><td class="datadesc">! for merging with PROOF</td></tr>
+<tr class="data"><td class="datatype">TString</td><td class="dataname"><a name="KVPROOFSelector:tree_file_name"></a>tree_file_name</td><td></td></tr>
+<tr class="data"><td class="datatype">TFile*</td><td class="dataname"><a name="KVPROOFSelector:writeFile"></a>writeFile</td><td class="datadesc">!</td></tr>
+
+</table></div>
+<div class="access" id="dataprot"><b>protected:</b>
+<table class="data" id="tabdataprot" cellspacing="0">
+<tr class="datainh"><td class="datatype"><a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a>::EAbort</td><td class="dataname"><a href="#TSelector:fAbort"><span class="baseclass">TSelector::</span>fAbort</a></td><td class="datadesc">Abort status</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVString.html">KVString</a></td><td class="dataname"><a name="KVPROOFSelector:fCombinedOutputFile"></a>fCombinedOutputFile</td><td class="datadesc">optional name for single results file with trees and histos</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVPROOFSelector:fDisableCreateTreeFile"></a>fDisableCreateTreeFile</td><td class="datadesc">used with PROOF</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVPROOFSelector:fEventsRead"></a>fEventsRead</td><td class="datadesc">cycle number (argument 'entry' passed to Process(Long64_t))</td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a name="KVPROOFSelector:fEventsReadInterval"></a>fEventsReadInterval</td><td class="datadesc">interval at which to print number of events read</td></tr>
+<tr class="datainh"><td class="datatype">TList*</td><td class="dataname"><a href="#TSelector:fInput"><span class="baseclass">TSelector::</span>fInput</a></td><td class="datadesc">List of objects available during processing</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*</td><td class="dataname"><a href="#TSelector:fObject"><span class="baseclass">TSelector::</span>fObject</a></td><td class="datadesc">!Current object if processing object (vs. TTree)</td></tr>
+<tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TSelector:fOption"><span class="baseclass">TSelector::</span>fOption</a></td><td class="datadesc">Option given to TTree::Process</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVNameValueList.html">KVNameValueList</a></td><td class="dataname"><a name="KVPROOFSelector:fOptionList"></a>fOptionList</td><td></td></tr>
+<tr class="datainh"><td class="datatype">TSelectorList*</td><td class="dataname"><a href="#TSelector:fOutput"><span class="baseclass">TSelector::</span>fOutput</a></td><td class="datadesc">!List of objects created during processing</td></tr>
+<tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Long64_t">Long64_t</a></td><td class="dataname"><a href="#TSelector:fStatus"><span class="baseclass">TSelector::</span>fStatus</a></td><td class="datadesc">Selector status</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVPROOFSelector:lhisto"></a>lhisto</td><td class="datadesc">-&gt;!</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVPROOFSelector:ltree"></a>ltree</td><td class="datadesc">-&gt;!</td></tr>
+
+</table></div>
+</div>
+<h2><a id="KVPROOFSelector:Class_Charts"></a>Class Charts</h2>
+<map name="MapKVPROOFSelector_Lib" id="MapKVPROOFSelector_Lib">
+<area shape="rect" id="node1" href="LibraryDependencies.html" title="All Libraries" alt="" coords="321,374,371,394"/>
+</map>
+<div class="tabs">
+<a id="imgKVPROOFSelector_Inh" class="tabsel" href="inh/KVPROOFSelector_Inh.png" onclick="javascript:return SetImg('Charts','inh/KVPROOFSelector_Inh.png');">Inheritance</a>
+<a id="imgKVPROOFSelector_InhMem" class="tab" href="inhmem/KVPROOFSelector_InhMem.png" onclick="javascript:return SetImg('Charts','inhmem/KVPROOFSelector_InhMem.png');">Inherited Members</a>
+<a id="imgKVPROOFSelector_Incl" class="tab" href="incl/KVPROOFSelector_Incl.png" onclick="javascript:return SetImg('Charts','incl/KVPROOFSelector_Incl.png');">Includes</a>
+<a id="imgKVPROOFSelector_Lib" class="tab" href="lib/KVPROOFSelector_Lib.png" onclick="javascript:return SetImg('Charts','lib/KVPROOFSelector_Lib.png');">Libraries</a><br/>
+</div><div class="classcharts"><div class="classchartswidth"></div>
+<img id="Charts" alt="Class Charts" class="classcharts" usemap="#MapKVPROOFSelector_Inh" src="inh/KVPROOFSelector_Inh.png"/></div>
+<h2>Function documentation</h2>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:Begin" href="src/KVPROOFSelector.cxx.html#oX1Oa">Begin</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> Need to parse options here for use in <a href="./KVPROOFSelector.html#KVPROOFSelector:Terminate" title="void KVPROOFSelector::Terminate()">Terminate</a>
+ Also, on PROOF, any <a href="./KVDataAnalyser.html">KVDataAnalyser</a> instance has to be passed to the workers
+ via the <a href="./#TSelector:TSelector" title="TSelector TSelector::TSelector(const TSelector&amp; ) or overloads">TSelector</a> input list.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:SlaveBegin" href="src/KVPROOFSelector.cxx.html#Kmyj4C">SlaveBegin</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> The <a href="./KVPROOFSelector.html#KVPROOFSelector:SlaveBegin" title="void KVPROOFSelector::SlaveBegin(TTree* tree)">SlaveBegin</a>() function is called after the <a href="./KVPROOFSelector.html#KVPROOFSelector:Begin" title="void KVPROOFSelector::Begin(TTree* tree)">Begin</a>() function.
+ When running with PROOF <a href="./KVPROOFSelector.html#KVPROOFSelector:SlaveBegin" title="void KVPROOFSelector::SlaveBegin(TTree* tree)">SlaveBegin</a>() is called on each slave server.
+ The tree argument is deprecated (on PROOF 0 is passed).
+
+ <a href="./KVPROOFSelector.html#KVPROOFSelector:ParseOptions" title="void KVPROOFSelector::ParseOptions()">ParseOptions</a> : Manage options passed as arguments
+
+ Called user method <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a> where users can create trees or histos
+ using the appropiate methods :
+ CreateTrees and CreateMethods
+
+ Test the presence or not of such histo or tree
+ to manage it properly
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPROOFSelector:CreateTreeFile" href="src/KVPROOFSelector.cxx.html#Du5zzD">CreateTreeFile</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre> For PROOF:
+ This method must be called before creating any user TTree in <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>().
+ If no filename is given, default name=<span class="string">"TreeFileFrom[name of selector class].root"</span>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPROOFSelector:Process" href="src/KVPROOFSelector.cxx.html#Rwn1KD">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)</span><br />
+<div class="funccomm"><pre> Processing will abort cleanly if static flag fCleanAbort has been set
+ by some external controlling process.
+
+ Use fStatus to set the return value of TTree::<a href="./KVPROOFSelector.html#KVPROOFSelector:Process" title="Bool_t KVPROOFSelector::Process(Long64_t entry)">Process</a>().
+
+ The return value is currently not used.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:SlaveTerminate" href="src/KVPROOFSelector.cxx.html#i000oB">SlaveTerminate</a>()</span><br />
+<div class="funccomm"><pre> The <a href="./KVPROOFSelector.html#KVPROOFSelector:SlaveTerminate" title="void KVPROOFSelector::SlaveTerminate()">SlaveTerminate</a>() function is called after all entries or objects
+ have been processed. When running with PROOF <a href="./KVPROOFSelector.html#KVPROOFSelector:SlaveTerminate" title="void KVPROOFSelector::SlaveTerminate()">SlaveTerminate</a>() is called
+ on each slave server.
+ if tree have been defined in the CreateTrees method
+ manage the merge of them in ProofLite session
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:Terminate" href="src/KVPROOFSelector.cxx.html#Ev8d5">Terminate</a>()</span><br />
+<div class="funccomm"><pre> The <a href="./KVPROOFSelector.html#KVPROOFSelector:Terminate" title="void KVPROOFSelector::Terminate()">Terminate</a>() function is the last function to be called during
+ a query. It always runs on the client, it can be used to present
+ the results graphically or save the results to file.
+
+ This method call the user defined <a href="./KVPROOFSelector.html#KVPROOFSelector:EndAnalysis" title="void KVPROOFSelector::EndAnalysis()">EndAnalysis</a>
+ where user can do what she wants
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVHashList.html">KVHashList</a>* <a class="funcname" name="KVPROOFSelector:GetHistoList" href="src/KVPROOFSelector.cxx.html#KOE5nC">GetHistoList</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname">TH1* <a class="funcname" name="KVPROOFSelector:GetHisto" href="src/KVPROOFSelector.cxx.html#MCwQ.D">GetHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:AddHisto" href="src/KVPROOFSelector.cxx.html#N3THIB">AddHisto</a>(TH1* histo)</span><br />
+<div class="funccomm"><pre> Declare a histogram to be used in analysis.
+ This method must be called when using PROOF.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:AddTree" href="src/KVPROOFSelector.cxx.html#RvbwxD">AddTree</a>(TTree* tree)</span><br />
+<div class="funccomm"><pre> Declare a TTree to be used in analysis.
+ This method must be called when using PROOF.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillHisto" href="src/KVPROOFSelector.cxx.html#gn_BRD">FillHisto</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> three = 1, <a href="./ListOfTypes.html#Double_t">Double_t</a> four = 1)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillTH1" href="src/KVPROOFSelector.cxx.html#IOfGpD">FillTH1</a>(TH1* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillTProfile" href="src/KVPROOFSelector.cxx.html#PrfDTC">FillTProfile</a>(TProfile* h1, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillTH2" href="src/KVPROOFSelector.cxx.html#yZYbl">FillTH2</a>(TH2* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillTProfile2D" href="src/KVPROOFSelector.cxx.html#PMz1CC">FillTProfile2D</a>(TProfile2D* h2, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillTH3" href="src/KVPROOFSelector.cxx.html#qcRykC">FillTH3</a>(TH3* h3, <a href="./ListOfTypes.html#Double_t">Double_t</a> one, <a href="./ListOfTypes.html#Double_t">Double_t</a> two, <a href="./ListOfTypes.html#Double_t">Double_t</a> three, <a href="./ListOfTypes.html#Double_t">Double_t</a> four)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:SaveHistos" href="src/KVPROOFSelector.cxx.html#GCqm5C">SaveHistos</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* filename = <span class="string">""</span>, <a href="./ListOfTypes.html#Option_t">Option_t</a>* option = <span class="string">"recreate"</span>, <a href="./ListOfTypes.html#Bool_t">Bool_t</a> onlyfilled = <a href="./ListOfTypes.html#Bool_t">kFALSE</a>)</span><br />
+<div class="funccomm"><pre> <a href="./#TObject:Write" title="Int_t TObject::Write(const char* name=0,Int_t option=0,Int_t bufsize=0) or overloads">Write</a> in file all histograms declared with <a href="./KVPROOFSelector.html#KVPROOFSelector:AddHisto" title="void KVPROOFSelector::AddHisto(TH1* histo)">AddHisto</a>(TH1*)
+ This method works with PROOF.
+
+ If no filename is specified, set default name : HistoFileFrom[KVEvenSelector::<a href="./#TObject:GetName" title="const char* TObject::GetName()">GetName</a>()].root
+
+ If a filename is specified, search in gROOT-&gt;GetListOfFiles() if
+ this file has been already opened
+  - if yes write in it
+  - if not, create it with the corresponding option, write in it
+ and close it just after
+
+ onlyfilled flag allow to write all (onlyfilled=<a href="./ListOfTypes.html#Bool_t">kFALSE</a>, default)
+ or only histograms (onlyfilled=<a href="./ListOfTypes.html#Bool_t">kTRUE</a>) those have been filled
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./KVHashList.html">KVHashList</a>* <a class="funcname" name="KVPROOFSelector:GetTreeList" href="src/KVPROOFSelector.cxx.html#rbgBOD">GetTreeList</a>() const</span><br />
+<div class="funccomm"><pre>return the list of created trees
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname">TTree* <a class="funcname" name="KVPROOFSelector:GetTree" href="src/KVPROOFSelector.cxx.html#HeHmT">GetTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* name) const</span><br />
+<div class="funccomm"><pre>return the tree named tree_name
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:FillTree" href="src/KVPROOFSelector.cxx.html#Y.i4dD">FillTree</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* sname = <span class="string">""</span>)</span><br />
+<div class="funccomm"><pre>Filltree method, the tree named tree_name
+has to be declared with AddTTree(TTree*) method
+
+if no sname=<span class="string">""</span>, all trees in the list is filled
+
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:SetOpt" href="src/KVPROOFSelector.cxx.html#RXBwdD">SetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option, <span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* value)</span><br />
+<div class="funccomm"><pre>Set a value for an option
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPROOFSelector:IsOptGiven" href="src/KVPROOFSelector.cxx.html#QFobkC">IsOptGiven</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option)</span><br />
+<div class="funccomm"><pre> Returns <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if the option 'opt' has been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">const</span> TString&amp; <a class="funcname" name="KVPROOFSelector:GetOpt" href="src/KVPROOFSelector.cxx.html#OUkxcE">GetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* option) const</span><br />
+<div class="funccomm"><pre> Returns the value of the option
+ Only use after checking existence of option with <a href="./KVPROOFSelector.html#KVPROOFSelector:IsOptGiven" title="Bool_t KVPROOFSelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(const <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:UnsetOpt" href="src/KVPROOFSelector.cxx.html#pU0DpE">UnsetOpt</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* opt)</span><br />
+<div class="funccomm"><pre> Removes the option 'opt' from the internal lists, as if it had never been set
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:ParseOptions" href="src/KVPROOFSelector.cxx.html#Z4n2HE">ParseOptions</a>()</span><br />
+<div class="funccomm"><pre> Analyse comma-separated list of options given to TTree::<a href="./KVPROOFSelector.html#KVPROOFSelector:Process" title="Bool_t KVPROOFSelector::Process(Long64_t entry)">Process</a>
+ and store all <span class="string">"option=value"</span> pairs in <a href="./KVPROOFSelector.html#KVPROOFSelector:fOptionList" title="KVNameValueList KVPROOFSelector::fOptionList">fOptionList</a>.
+ Options can then be accessed using <a href="./KVPROOFSelector.html#KVPROOFSelector:IsOptGiven" title="Bool_t KVPROOFSelector::IsOptGiven(const Char_t* option)">IsOptGiven</a>(), GetOptString(), etc.
+ This method is called by <a href="./KVPROOFSelector.html#KVPROOFSelector:SlaveBegin" title="void KVPROOFSelector::SlaveBegin(TTree* tree)">SlaveBegin</a>
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:Make" href="src/KVPROOFSelector.cxx.html#tkZPLD">Make</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* classname)</span><br />
+<div class="funccomm"><pre> Generate a new class derived from this one with given name
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">virtual</span> <a class="funcname" name="KVPROOFSelector:_KVPROOFSelector" href="src/KVPROOFSelector.h.html#LdjDUE">~KVPROOFSelector</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:SetEventsReadInterval" href="src/KVPROOFSelector.h.html#KTbSCC">SetEventsReadInterval</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> N)</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVPROOFSelector:Version" href="src/KVPROOFSelector.h.html#cAh.4">Version</a>() const</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:InitAnalysis" href="src/KVPROOFSelector.h.html#vMuNWB">InitAnalysis</a>()</span><br />
+<div class="funccomm"><pre>user entry points
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVPROOFSelector:Analysis" href="src/KVPROOFSelector.h.html#btnFAE">Analysis</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:EndAnalysis" href="src/KVPROOFSelector.h.html#d2fEYE">EndAnalysis</a>()</span><br />
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVPROOFSelector:SetCombinedOutputFile" href="src/KVPROOFSelector.h.html#QRraFD">SetCombinedOutputFile</a>(<span class="keyword">const</span> TString&amp; filename)</span><br />
+<div class="funccomm"><pre> Call in <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>() to set the name of the single output file
+ containing all histograms and TTrees produced by analysis.
+ This is equivalent to running the analysis with option
+    CombinedOutputFile=[filename]
+ but setting this option in <a href="./KVPROOFSelector.html#KVPROOFSelector:InitAnalysis" title="void KVPROOFSelector::InitAnalysis()">InitAnalysis</a>() will not work.
+ Note that if this method is not called/the option is not given,
+ histograms and TTrees will be written in separate files.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Long64_t">Long64_t</a> <a class="funcname" name="KVPROOFSelector:GetCycleNumber" href="src/KVPROOFSelector.h.html#NRGIC">GetCycleNumber</a>() const</span><br />
+<div class="funccomm"><pre> Returns the argument 'entry' passed to <a href="./KVPROOFSelector.html#KVPROOFSelector:Process" title="Bool_t KVPROOFSelector::Process(Long64_t entry)">Process</a>(<a href="./ListOfTypes.html#Long64_t">Long64_t</a> entry)
+</pre></div>
+</div>
+
+<br />
+<!--SIGNATURE-->
+<div id="footer">
+
+<em>&raquo; Last changed: Fri Mar 31 13:06:42 2017 </em><em>&raquo; Last generated: 2017-03-31 13:06</em><br />
+<em>This page has been automatically generated.</em>
+</div>
+</div>
+</body>
+</html>
