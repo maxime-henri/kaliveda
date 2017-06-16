@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu May 11 13:34:52 2017            -->
+<!--   Date: Fri Jun 16 15:14:04 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -137,7 +137,7 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
    <span class="comment">//</span>
    <span class="comment">// [dataset_name].<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>.RunListFile:  [file_name]</span>
    <span class="comment">//</span>
-   <span class="comment">// This file contains a list of: Run, Brho, ThetaVamos, DT, Scalers</span>
+   <span class="comment">// This file contains a list of: Run Brho ThetaVamos DT Scalers</span>
 
    <span class="comment">//Find the file to use</span>
    TString filename = <a href="../KVDataSet.html">gDataSet</a>-><a href="../KVDataSet.html#KVDataSet:GetDataSetEnv" title="const Char_t* KVDataSet::GetDataSetEnv(const Char_t* type,const Char_t* defval=&quot;&quot;) or overloads">GetDataSetEnv</a>(<span class="string">"KVVAMOSWeightFinder.RunListFile"</span>);
@@ -251,7 +251,7 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> pos = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetRunPosition" title="Int_t KVVAMOSWeightFinder::GetRunPosition(Int_t run_number)">GetRunPosition</a>(run_number);
 
-   <span class="keyword">if</span> (pos &gt; 0) val = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetInfoLine" title="vector&lt;Float_t&gt; KVVAMOSWeightFinder::GetInfoLine(Int_t line_number)">GetInfoLine</a>(pos).at(num_value);
+   <span class="keyword">if</span> (pos &gt;= 0) val = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetInfoLine" title="vector&lt;Float_t&gt; KVVAMOSWeightFinder::GetInfoLine(Int_t line_number)">GetInfoLine</a>(pos).at(num_value);
 
    <span class="keyword">return</span> val;
 }
@@ -409,13 +409,15 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
 }
 
 <span class="comment">//____________________________________________________________________________//</span>
-<a name="q1XiEC"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>::<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetTransCoef" title="Float_t KVVAMOSWeightFinder::GetTransCoef(Float_t VamosAngle_deg,Float_t delta,Float_t thetaI_rad)">GetTransCoef</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> VamosAngle_deg, <a href="../ListOfTypes.html#Float_t">Float_t</a> delta, <a href="../ListOfTypes.html#Float_t">Float_t</a> thetaI_rad)
+<a name="j6jcXD"></a>std::pair&lt;<a href="../ListOfTypes.html#Float_t">Float_t</a>, <a href="../ListOfTypes.html#Float_t">Float_t</a>&gt; <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>::<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetTransCoef" title="pair&lt;Float_t,Float_t&gt; KVVAMOSWeightFinder::GetTransCoef(Float_t VamosAngle_deg,Float_t delta,Float_t thetaI_rad)">GetTransCoef</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> VamosAngle_deg, <a href="../ListOfTypes.html#Float_t">Float_t</a> delta, <a href="../ListOfTypes.html#Float_t">Float_t</a> thetaI_rad)
 {
    <span class="comment">//Find the trans. coef. for a given (ThetaVamos, delta, thetaI) triplet.</span>
    <span class="comment">//First find the path to the file coresponding to the given ThetaVamos</span>
    <span class="comment">//(precision of 0.1 deg) and containing a TTree of its associated trans. coefs.</span>
    <span class="comment">//Then use the associated steps to extract the correct entry number of the</span>
    <span class="comment">//couple (delta, thetaI) in the TTree.</span>
+   <span class="comment">//</span>
+   <span class="comment">//Return a pair of &lt;trans. coef., trans. coef. variance&gt;</span>
 
    <span class="comment">//Find VamosAngle position in <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fvec_TCfiles" title="vector&lt;std::pair&lt;Float_t,TString&gt; &gt; KVVAMOSWeightFinder::fvec_TCfiles">fvec_TCfiles</a></span>
    <a href="../ListOfTypes.html#Int_t">Int_t</a> num_angle = 0;
@@ -446,7 +448,7 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
    <span class="keyword">if</span> (TMath::Abs(line.at(0) - VamosAngle_deg) &gt; 0.1) {
       <span class="keyword">if</span> (<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fkverbose" title="Bool_t KVVAMOSWeightFinder::fkverbose">fkverbose</a>) <a href="../#TObject:Error" title="void TObject::Error(const char* method,const char* msgfmt)">Error</a>(<span class="string">"GetTransCoef"</span>, <span class="string">"... found VamosAngle in steps vector (=%f) is different from given angle (=%f) ..."</span>,
                               line.at(0), VamosAngle_deg);
-      <span class="keyword">return</span> -666.;
+      <span class="keyword">return</span> std::make_pair(-666., -666.);
    }
 
    <a href="../ListOfTypes.html#Int_t">Int_t</a> ndelta = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetNValue" title="Int_t KVVAMOSWeightFinder::GetNValue(Float_t val_exp,Float_t val_min,Float_t val_max,Float_t val_step)">GetNValue</a>(delta, line.at(1), line.at(2), line.at(3));
@@ -468,8 +470,9 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
 
       <span class="keyword">if</span> (<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fkverbose" title="Bool_t KVVAMOSWeightFinder::fkverbose">fkverbose</a>) <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetTransCoef"</span>, <span class="string">"... found entry in tree (=%lli) and entry in chain (=%lli / %lli) ..."</span>, pos_tree, pos_chain, <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fchain" title="TChain* KVVAMOSWeightFinder::fchain">fchain</a>-&gt;GetEntries());
 
-      <a href="../ListOfTypes.html#Float_t">Float_t</a> tc, dd, tt;
+      <a href="../ListOfTypes.html#Float_t">Float_t</a> tc, dtc, dd, tt;
       <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fchain" title="TChain* KVVAMOSWeightFinder::fchain">fchain</a>-&gt;SetBranchAddress(<span class="string">"TransCoef"</span>, &amp;tc);
+      <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fchain" title="TChain* KVVAMOSWeightFinder::fchain">fchain</a>-&gt;SetBranchAddress(<span class="string">"DeltaTransCoef"</span>, &amp;dtc); <span class="comment">//variance of trans. coef. from MC</span>
       <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fchain" title="TChain* KVVAMOSWeightFinder::fchain">fchain</a>-&gt;SetBranchAddress(<span class="string">"Zdelta"</span>, &amp;dd);
       <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fchain" title="TChain* KVVAMOSWeightFinder::fchain">fchain</a>-&gt;SetBranchAddress(<span class="string">"ZthetaI"</span>, &amp;tt);
       <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fchain" title="TChain* KVVAMOSWeightFinder::fchain">fchain</a>-&gt;GetEntry(pos_chain, 1);
@@ -480,10 +483,10 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
               VamosAngle_deg, delta, thetaI_rad, <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetClosestValue" title="Float_t KVVAMOSWeightFinder::GetClosestValue(Float_t val_exp,Float_t val_step)">GetClosestValue</a>(delta, line.at(3)), <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetClosestValue" title="Float_t KVVAMOSWeightFinder::GetClosestValue(Float_t val_exp,Float_t val_step)">GetClosestValue</a>(thetaI_rad, line.at(7)), dd, tt);
       }
 
-      <span class="keyword">return</span> tc;
+      <span class="keyword">return</span> std::make_pair(tc, dtc);
    }
 
-   <span class="keyword">else</span> <span class="keyword">return</span> -666.;
+   <span class="keyword">else</span> <span class="keyword">return</span> std::make_pair(-666., -666.);
 }
 <span class="comment">//____________________________________________________________________________//</span>
 
@@ -565,37 +568,34 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
 }
 
 <span class="comment">//____________________________________________________________________________//</span>
-<a name="GA9.xC"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>::<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetInverseWeight" title="Float_t KVVAMOSWeightFinder::GetInverseWeight(Float_t brho_exp,Float_t thetaI_exp)">GetInverseWeight</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> brho, <a href="../ListOfTypes.html#Float_t">Float_t</a> thetaI)
+<a name="FNpV5D"></a><a href="../ListOfTypes.html#Float_t">Float_t</a> <a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>::<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetWeight" title="Float_t KVVAMOSWeightFinder::GetWeight(Float_t brho_exp,Float_t thetaI_exp)">GetWeight</a>(<a href="../ListOfTypes.html#Float_t">Float_t</a> brho, <a href="../ListOfTypes.html#Float_t">Float_t</a> thetaI)
 {
    <span class="comment">//Compute the weight for a given experimental VAMOS event,</span>
    <span class="comment">//using the identified VAMOS nucleus informations, which means:</span>
-   <span class="comment">//(bro_exp, thetaI_rad) where 'brho' is in T.m of the nucleus,</span>
-   <span class="comment">//'thetaI' is the experimental theta angle in rad and in lab. ref. frame in</span>
-   <span class="comment">//INDRA convention of the nucleus ( and also the current run number this events</span>
+   <span class="comment">//(bro_exp, thetaI_rad) where 'brho' is the magnetic rigidity of the nucleus (in T.m),</span>
+   <span class="comment">//and 'thetaI' is the experimental theta angle in rad and in lab. ref. frame (in</span>
+   <span class="comment">//INDRA convention) of the nucleus (and also the current run number this events</span>
    <span class="comment">//belongs to, set as an argument of the class constructor).</span>
    <span class="comment">//</span>
-   <span class="comment">//The inverse weight will be computed from:</span>
+   <span class="comment">//The weight will be computed from:</span>
    <span class="comment">//- the chosen run list (see <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:SetRunList" title="void KVVAMOSWeightFinder::SetRunList(KVNumberList&amp; nl)">SetRunList</a>() method) and the associated experimental</span>
    <span class="comment">//  (BrhoRef, AngleVamos, Scalers_INDRA) values from this run list.</span>
    <span class="comment">//- the transmission coefficient obtained from ZGOUBI simulations (normalised over</span>
-   <span class="comment">//  2*TMath::Pi() in phi angle in lab. ref. frame and INDRA convention, depending on</span>
-   <span class="comment">//  the (brho, thetaI) of the nucleus).</span>
-   <span class="comment">//- the experimental DeadTime associated to <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunNumber" title="Int_t KVVAMOSWeightFinder::fRunNumber">fRunNumber</a>, the run number the VAMOS</span>
+   <span class="comment">//  2.*TMath::Pi() in phi angle in lab. ref. frame and INDRA convention, depending on</span>
+   <span class="comment">//  the (brho, thetaI) of the nucleus.</span>
+   <span class="comment">//- the experimental Dead Time (DT) associated to <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunNumber" title="Int_t KVVAMOSWeightFinder::fRunNumber">fRunNumber</a>, the run number the VAMOS</span>
    <span class="comment">//  events belongs to.</span>
    <span class="comment">//</span>
-   <span class="comment">//It was chosen to apply a weighted average on VAMOS events only defined by their</span>
+   <span class="comment">//The computed weight is similar to a weighted average on VAMOS events only defined by their</span>
    <span class="comment">//(Brho, thetaI) values. In this way we are able to use ALL the statistics without</span>
    <span class="comment">//applying cuts on overlaping experimental Brho.</span>
    <span class="comment">//</span>
-   <span class="comment">//The returned total weight 'W_tot' will be:</span>
+   <span class="comment">//The returned total weight <span class="string">'W'</span> will be:</span>
+   <span class="comment">//</span>
    <span class="comment">// Begin_Latex</span>
-   // W_{tot}(B #rho , theta_{I}, run_number)= DT_{corr}(run_number) * W(B #rho , #theta _{I})
+   // #W(B #rho , #theta _{I}) = #frac{ #sum_{i}^{RunList}Scaler^{i} }{ #sum_{i}^{RunList}Scaler^{i} #cdot T(#delta ^{i}, #theta_{I} , #theta ^{i}_{V})}
    // End_Latex<span class="comment"></span>
    <span class="comment">//</span>
-   <span class="comment">// where:</span>
-   <span class="comment">// Begin_Latex</span>
-   // #frac{1}{W(B #rho , #theta _{I})} = #frac{#sum_{i}^{RunList}Scaler^{i} #cdot T(#delta ^{i}, #theta_{I} , #theta ^{i}_{V})}{#sum_{i}^{RunList}Scaler^{i}}
-   // End_Latex<span class="comment"></span>
    <span class="comment">// and:</span>
    <span class="comment">// Begin_Latex</span>
    // DT_{corr}(run_number) = #frac{1}{1-DT(run_number)}
@@ -614,15 +614,11 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
 
    <a href="../ListOfTypes.html#Float_t">Float_t</a> num     = 0.;
    <a href="../ListOfTypes.html#Float_t">Float_t</a> denum   = 0.;
-   <a href="../ListOfTypes.html#Float_t">Float_t</a> dt_corr = -666.;
    <a href="../ListOfTypes.html#Float_t">Float_t</a> dt_run  = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetDeadTime" title="Float_t KVVAMOSWeightFinder::GetDeadTime(Int_t run_number)">GetDeadTime</a>(<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunNumber" title="Int_t KVVAMOSWeightFinder::fRunNumber">fRunNumber</a>); <span class="comment">//default '-666.' value will be returned if not found</span>
+   <a href="../ListOfTypes.html#Float_t">Float_t</a> dt_corr = 1. / (1. - dt_run);
 
-   <span class="comment">//DT found from the event run_number</span>
-   <span class="keyword">if</span> (dt_run &gt;= 0.) {
-      <span class="comment">//compute DT_corr for the current run</span>
-      dt_corr = 1. / (1. - dt_run);
-
-      <span class="comment">//extract W(Brho, ThetaI) from runlist</span>
+   <span class="keyword">if</span> (dt_run &gt;= 0.) {<span class="comment">//DT found from the event run_number</span>
+      <span class="comment">//Compute W(Brho, ThetaI) from runlist</span>
       <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunList" title="KVNumberList KVVAMOSWeightFinder::fRunList">fRunList</a>.<a href="../KVNumberList.html#KVNumberList:Begin" title="void KVNumberList::Begin()">Begin</a>();
       <span class="keyword">while</span> (!<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunList" title="KVNumberList KVVAMOSWeightFinder::fRunList">fRunList</a>.<a href="../KVNumberList.html#KVNumberList:End" title="Bool_t KVNumberList::End()">End</a>()) {
          <a href="../ListOfTypes.html#Int_t">Int_t</a> next_run = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunList" title="KVNumberList KVVAMOSWeightFinder::fRunList">fRunList</a>.<a href="../KVNumberList.html#KVNumberList:Next" title="Int_t KVNumberList::Next()">Next</a>();
@@ -630,33 +626,37 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
          <a href="../ListOfTypes.html#Float_t">Float_t</a> brho_ref = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetBrhoRef" title="Float_t KVVAMOSWeightFinder::GetBrhoRef(Int_t run_number)">GetBrhoRef</a>(next_run);
          <a href="../ListOfTypes.html#Float_t">Float_t</a> scaler   = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetScalerINDRA" title="Float_t KVVAMOSWeightFinder::GetScalerINDRA(Int_t run_number)">GetScalerINDRA</a>(next_run);
          <a href="../ListOfTypes.html#Float_t">Float_t</a> thetav   = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetThetaVamos" title="Float_t KVVAMOSWeightFinder::GetThetaVamos(Int_t run_number)">GetThetaVamos</a>(next_run);
-         <a href="../ListOfTypes.html#Float_t">Float_t</a> tc       = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetTransCoef" title="Float_t KVVAMOSWeightFinder::GetTransCoef(Float_t VamosAngle_deg,Float_t delta,Float_t thetaI_rad)">GetTransCoef</a>(thetav, brho / brho_ref, thetaI);
+         std::pair&lt;<a href="../ListOfTypes.html#Float_t">Float_t</a>, <a href="../ListOfTypes.html#Float_t">Float_t</a>&gt; pair_tc = <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:GetTransCoef" title="pair&lt;Float_t,Float_t&gt; KVVAMOSWeightFinder::GetTransCoef(Float_t VamosAngle_deg,Float_t delta,Float_t thetaI_rad)">GetTransCoef</a>(thetav, brho / brho_ref, thetaI);
+         <a href="../ListOfTypes.html#Float_t">Float_t</a> tc  = pair_tc.first; <span class="comment">// trans. coef.</span>
+         <a href="../ListOfTypes.html#Float_t">Float_t</a> dtc = pair_tc.second; <span class="comment">//variance of trans. coef.</span>
 
-         <span class="comment">//(brho_ref, scaler) is OK for the given run</span>
-         <span class="comment">//if the transmission coef. doesn't exist for the given (ThetaVamos, delta, thetaI)</span>
-         <span class="comment">//(i.e tc=-666.), we still consider the scaler in the denumerator, but not in the</span>
-         <span class="comment">//numerator (i.e we consider tc=0.)</span>
-         <span class="keyword">if</span> ((brho_ref &gt; 0) &amp;&amp; (scaler &gt; 0)) {
-            denum += scaler;
-            <span class="keyword">if</span> (tc &gt;= 0.) num += tc * scaler;
+         <span class="keyword">if</span> ((brho_ref &gt; 0) &amp;&amp; (scaler &gt; 0)) {<span class="comment">//(brho_ref, scaler) is OK for the given run</span>
+            <span class="keyword">if</span> ((tc &gt;= 0.)) { <span class="comment">//trans. coef. exists for the given (ThetaVamos, delta, thetaI)</span>
+               denum += scaler * tc;
+            }
+
+            <span class="comment">//if trans. coef. doesn't exist for the given (ThetaVamos, delta, thetaI),</span>
+            <span class="comment">//we still consider the scaler in the numerator (i.e tc=0.)</span>
+            num += scaler;
          }
 
          <span class="keyword">if</span> (<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fkverbose" title="Bool_t KVVAMOSWeightFinder::fkverbose">fkverbose</a>) {
-            <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetInverseWeight"</span>, <span class="string">"... (next_run=%d, brho=%f, thetaI=%f) -&gt; (brho_ref=%f, thetav=%f, scaler=%f, tc=%f) ..."</span>,
-                 next_run, brho, thetaI, brho_ref, thetav, scaler, tc);
-            <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetInverseWeight"</span>, <span class="string">"... numerator=%f, denumerator=%f"</span>, num, denum);
+            <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetWeight"</span>, <span class="string">"... (next_run=%d, brho=%lf, thetaI=%lf) -&gt; (brho_ref=%lf, thetav=%lf, scaler=%lf, tc=%lf, var_tc=%lf) ..."</span>,
+                 next_run, brho, thetaI, brho_ref, thetav, scaler, tc, dtc);
+            <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetWeight"</span>, <span class="string">"... numerator=%lf, denumerator=%lf"</span>, num, denum);
          }
       }
 
-      <span class="comment">//return W_tot</span>
-      <span class="keyword">return</span> num / denum / dt_corr;
+      <span class="comment">//return Weight</span>
+      <a href="../ListOfTypes.html#Float_t">Float_t</a> weight = (denum &gt; 0 ? num / denum* dt_corr : -666.);
+      <span class="keyword">return</span> weight;
    }
 
    <span class="comment">//DT not found for the current run, weight can't be computed</span>
    <span class="comment">//default value -666. will be returned...</span>
    <span class="keyword">else</span> {
       <span class="keyword">if</span> (<a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fkverbose" title="Bool_t KVVAMOSWeightFinder::fkverbose">fkverbose</a>) {
-         <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetInverseWeight"</span>, <span class="string">"... !!! DT(current_run=%d)=%f &lt;0. !!! can't compute the weight of the event ..."</span>, <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunNumber" title="Int_t KVVAMOSWeightFinder::fRunNumber">fRunNumber</a>, dt_run);
+         <a href="../#TObject:Info" title="void TObject::Info(const char* method,const char* msgfmt)">Info</a>(<span class="string">"GetWeight"</span>, <span class="string">"... !!! DT(current_run=%d)=%f &lt;0. !!! can't compute the weight of the event ..."</span>, <a href="../KVVAMOSWeightFinder.html#KVVAMOSWeightFinder:fRunNumber" title="Int_t KVVAMOSWeightFinder::fRunNumber">fRunNumber</a>, dt_run);
       }
 
       <span class="keyword">return</span> -666.;
@@ -670,7 +670,7 @@ ClassImp(<a href="../KVVAMOSWeightFinder.html">KVVAMOSWeightFinder</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-05-11 13:34 </em><em>&raquo; Last generated: 2017-05-11 13:34</em><br />
+<em>&raquo; Last changed: 2017-06-16 15:14 </em><em>&raquo; Last generated: 2017-06-16 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

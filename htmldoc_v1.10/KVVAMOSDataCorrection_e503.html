@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Thu May 11 13:34:47 2017            -->
+<!--   Date: Fri Jun 16 15:14:00 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -64,9 +64,9 @@ return false;}
 
 </pre><!-- TDocHtmlDirective start --> <!--
 /* -->
-<h2>KVVAMOSDataCorrection_e503</h2>
-<h4>Base class to use for VAMOS data corrections for e503 experiment</h4>
-<!-- */
+   <h2>KVVAMOSDataCorrection_e503</h2>
+   <h4>Base class to use for VAMOS data corrections for e503 experiment</h4>
+   <!-- */
  --> 
 <!-- TDocHtmlDirective end --><pre>
 
@@ -86,6 +86,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">static <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:AreEqual"><span class="baseclass">KVBase::</span>AreEqual</a>(<a href="./ListOfTypes.html#Double_t">Double_t</a> x, <a href="./ListOfTypes.html#Double_t">Double_t</a> y, <a href="./ListOfTypes.html#Long64_t">Long64_t</a> maxdif = 1)</td></tr>
 <tr class="funcinh"><td class="funcret">static <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:BackupFileWithDate"><span class="baseclass">KVBase::</span>BackupFileWithDate</a>(<span class="keyword">const</span> <a href="./ListOfTypes.html#Char_t">Char_t</a>* path)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Browse"><span class="baseclass">TObject::</span>Browse</a>(TBrowser* b)</td></tr>
+<tr class="func"><td class="funcret">virtual <a href="./ListOfTypes.html#Double_t">Double_t</a></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:CalibrateFromDetList">CalibrateFromDetList</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>*)</td></tr>
 <tr class="func"><td class="funcret">static TClass*</td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:Class">Class</a>()</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">const</span> <span class="keyword">char</span>*</td><td class="funcname"><a class="funcname" href="#TObject:ClassName"><span class="baseclass">TObject::</span>ClassName</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:Clear"><span class="baseclass">KVBase::</span>Clear</a>(<a href="./ListOfTypes.html#Option_t">Option_t</a>* opt = <span class="string">""</span>)</td></tr>
@@ -150,6 +151,7 @@ return false;}
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:HandleTimer"><span class="baseclass">TObject::</span>HandleTimer</a>(TTimer* timer)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#ULong_t">ULong_t</a></td><td class="funcname"><a class="funcname" href="#TNamed:Hash"><span class="baseclass">TNamed::</span>Hash</a>() <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="./KVBase.html#KVBase:HasLabel"><span class="baseclass">KVBase::</span>HasLabel</a>() <span class="keyword">const</span></td></tr>
+<tr class="func"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:IdentifyCorrectedNucleus">IdentifyCorrectedNucleus</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>*)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:Info"><span class="baseclass">TObject::</span>Info</a>(<span class="keyword">const</span> <span class="keyword">char</span>* method, <span class="keyword">const</span> <span class="keyword">char</span>* msgfmt) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> <span class="keyword">char</span>* classname) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret">virtual <a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#TObject:InheritsFrom@1"><span class="baseclass">TObject::</span>InheritsFrom</a>(<span class="keyword">const</span> TClass* cl) <span class="keyword">const</span></td></tr>
@@ -229,16 +231,17 @@ return false;}
 <div class="access" id="funcprot"><b>protected:</b>
 <table class="func" id="tabfuncprot" cellspacing="0">
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ApplyHFCorrections">ApplyHFCorrections</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>*, <a href="./KVHashList.html">KVHashList</a>*, vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;)</td></tr>
-<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ApplyToFAndPathOffset">ApplyToFAndPathOffset</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>*)</td></tr>
 <tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ApplyToFDuplicationCorrections">ApplyToFDuplicationCorrections</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>*, <a href="./KVHashList.html">KVHashList</a>*, <a href="./ListOfTypes.html#Float_t">Float_t</a>)</td></tr>
+<tr class="func"><td class="funcret"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ApplyToFOffsetZFunctionCorrections">ApplyToFOffsetZFunctionCorrections</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>*, TF1*)</td></tr>
 <tr class="funcinh"><td class="funcret">virtual <span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:DoError"><span class="baseclass">TObject::</span>DoError</a>(<span class="keyword">int</span> level, <span class="keyword">const</span> <span class="keyword">char</span>* location, <span class="keyword">const</span> <span class="keyword">char</span>* fmt, va_list va) <span class="keyword">const</span></td></tr>
 <tr class="funcinh"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#TObject:MakeZombie"><span class="baseclass">TObject::</span>MakeZombie</a>()</td></tr>
-<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadAdditionalToFAndPathOffsetsInDataSet">ReadAdditionalToFAndPathOffsetsInDataSet</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadDuplicationCutFileList">ReadDuplicationCutFileList</a>(<a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <a href="./ListOfTypes.html#Int_t">Int_t</a> type)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadDuplicationCutFilesListInDataSet">ReadDuplicationCutFilesListInDataSet</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadDuplicationToFOffsetsInDataSet">ReadDuplicationToFOffsetsInDataSet</a>()</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadHFCutFileList">ReadHFCutFileList</a>(<a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <a href="./ListOfTypes.html#Int_t">Int_t</a> type)</td></tr>
 <tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadHFCutFilesListInDataSet">ReadHFCutFilesListInDataSet</a>()</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadToFOffsetZFunctionFileList">ReadToFOffsetZFunctionFileList</a>(<a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <a href="./ListOfTypes.html#Int_t">Int_t</a> type)</td></tr>
+<tr class="func"><td class="funcret"><span class="keyword">void</span></td><td class="funcname"><a class="funcname" href="#KVVAMOSDataCorrection_e503:ReadToFOffsetZFunctionFilesListInDataSet">ReadToFOffsetZFunctionFilesListInDataSet</a>()</td></tr>
 
 </table></div>
 </div>
@@ -276,16 +279,18 @@ return false;}
 <tr class="datainh"><td class="datatype"><a href="./KVList.html">KVList</a>*</td><td class="dataname"><a href="./KVVAMOSDataCorrection.html#KVVAMOSDataCorrection:fRecords"><span class="baseclass">KVVAMOSDataCorrection::</span>fRecords</a></td><td></td></tr>
 <tr class="datainh"><td class="datatype"><a href="./ListOfTypes.html#Int_t">Int_t</a></td><td class="dataname"><a href="./KVVAMOSDataCorrection.html#KVVAMOSDataCorrection:fRunNumber"><span class="baseclass">KVVAMOSDataCorrection::</span>fRunNumber</a></td><td class="datadesc">!run number associated to this data corrector</td></tr>
 <tr class="datainh"><td class="datatype">TString</td><td class="dataname"><a href="#TNamed:fTitle"><span class="baseclass">TNamed::</span>fTitle</a></td><td class="datadesc">object title</td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:ffunc_ztof_icsi"></a>ffunc_ztof_icsi</td><td></td></tr>
+<tr class="data"><td class="datatype">TF1*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:ffunc_ztof_sicsi"></a>ffunc_ztof_sicsi</td><td class="datadesc">pol2 function for AoQ=2 misalignments corrections</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fkIsInit"></a>fkIsInit</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fkfunc_ztof_icsi_init"></a>fkfunc_ztof_icsi_init</td><td></td></tr>
+<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fkfunc_ztof_sicsi_init"></a>fkfunc_ztof_sicsi_init</td><td class="datadesc">=kTRUE if the pol2 function was correctly init</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Bool_t">Bool_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fkverbose"></a>fkverbose</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:flist_HFcuts_icsi"></a>flist_HFcuts_icsi</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:flist_HFcuts_sicsi"></a>flist_HFcuts_sicsi</td><td class="datadesc">list of TCutG* for HF frequency corrections</td></tr>
 <tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:flist_aoq_cut_icsi"></a>flist_aoq_cut_icsi</td><td></td></tr>
-<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:flist_aoq_cut_sicsi"></a>flist_aoq_cut_sicsi</td><td class="datadesc">list of TCutG* for AoQ duplication corrections</td></tr>
-<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fpath_offset"></a>fpath_offset</td><td class="datadesc">global offset in Path to correct AoQ=2 misalignments</td></tr>
+<tr class="data"><td class="datatype"><a href="./KVHashList.html">KVHashList</a>*</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:flist_aoq_cut_sicsi"></a>flist_aoq_cut_sicsi</td><td class="datadesc">list of RealZ:BasicAoQ TCutG* for AoQ duplication corrections</td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:ftof_corr_icsi"></a>ftof_corr_icsi</td><td></td></tr>
 <tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:ftof_corr_sicsi"></a>ftof_corr_sicsi</td><td class="datadesc">correction of ToF (in ns) for AoQ duplication corrections</td></tr>
-<tr class="data"><td class="datatype"><a href="./ListOfTypes.html#Float_t">Float_t</a></td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:ftof_offset"></a>ftof_offset</td><td class="datadesc">glogal offset in ToF to correct AoQ=2 misalignments</td></tr>
 <tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fvec_nHF_icsi"></a>fvec_nHF_icsi</td><td></td></tr>
 <tr class="data"><td class="datatype">vector&lt;<a href="./ListOfTypes.html#Int_t">Int_t</a>&gt;</td><td class="dataname"><a name="KVVAMOSDataCorrection_e503:fvec_nHF_sicsi"></a>fvec_nHF_sicsi</td><td class="datadesc">vector containing the number of times the beam pulse period must be corrected for each cut</td></tr>
 
@@ -415,14 +420,47 @@ NOTE: these corrections are applied AFTER HF corrections
 By default this offset is equal to 1.25 ns.
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:ReadAdditionalToFAndPathOffsetsInDataSet" href="src/KVVAMOSDataCorrection_e503.cxx.html#IhMxc">ReadAdditionalToFAndPathOffsetsInDataSet</a>()</span><br />
-<div class="funccomm"><pre>Find in '$KVROOT/KVFiles/VAMOS/etc/.kvrootrc' the values of general ToF offset
-and also Path offset to apply to correct AoQ=2 misalignments.
-All data will be applied these ToF and Path offsets.
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:ReadToFOffsetZFunctionFilesListInDataSet" href="src/KVVAMOSDataCorrection_e503.cxx.html#oaSduD">ReadToFOffsetZFunctionFilesListInDataSet</a>()</span><br />
+<div class="funccomm"><pre> <a href="./#TObject:Read" title="Int_t TObject::Read(const char* name)">Read</a> the file containing infos to use
+ for e503 A/Q=2 misalignments in function
+ of the charge Z of the VAMOS particle.
+ This file is set in the dataset directory:
+ $KVROOT/KVFiles/INDRA_e503
 
-NOTE: these corrections are applied AFTER HF corrections and AFTER ToF duplication
-corrections
+ This file, specific to a given dataset, is found and
+ opened using its name given by the following environment
+ variable defined in $KVROOT/KVFiles/.kvrootrc:
 
+ INDRA_e503.<a href="./KVVAMOSDataCorrection_e503.html">KVVAMOSDataCorrection_e503</a>.ToFOffsetZFunctionSiCsI:  [file_name]
+
+ This file contains a list of *.root file names, each
+ of them associated to a system/range of runs.
+ Each of these *.root files contains more specificly a
+ TEnv object with the parameters of a function to use to correct the
+ A/Q=2 misalignments, by applying an offset in the ToF of the identified particle.
+ The correction applied will be: ToF+=ToF_offset,
+ where ToF_offset = f(Z) and <span class="string">'f'</span> is a pol2 function.
+ In the associated TEnv is also saved the run range.
+
+ The idea to apply an ToF offset depending on the Z of the particle comes
+ from a possible wrong calibration of the ToF general offset applied
+ when in was calibrated (by using 40Ca elastic collisions). In fact it
+ is possible that this calibration is wrong as the raise time of
+ the Si signals (used as a 'start' in ToF measurements) depends
+ strongly on the charge Z of the particle passing through the Si.
+
+ As an example, we observe for the 40Ca+48Ca system an offset varying between 0 ns
+(Z=20) and -2.7 ns (Z=5), and the tendency matches a pol2 function.
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:ReadToFOffsetZFunctionFileList" href="src/KVVAMOSDataCorrection_e503.cxx.html#V.zvmE">ReadToFOffsetZFunctionFileList</a>(<a href="./ListOfTypes.html#ifstream">ifstream</a>&amp; file, <a href="./ListOfTypes.html#Int_t">Int_t</a> type)</span><br />
+<div class="funccomm"><pre>Protected method to read and set the ToF correction in function of the
+charge Z of the particle for the dataset e503.
+Set 'type' to 0 for SiCsI telescopes and set 'type' to 1 for ICSi telescopes
+For each file listed in this list file we:
+- read the TEnv in the file to access to the run range of the file
+- if 'fRunNumber' is in the run range we create in '<a href="./KVVAMOSDataCorrection_e503.html#KVVAMOSDataCorrection_e503:ffunc_ztof_sicsi" title="TF1* KVVAMOSDataCorrection_e503::ffunc_ztof_sicsi">ffunc_ztof_sicsi</a>'
+  the pol2 function with the parameters set in the TEnv and stop the research.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:ApplyCorrections" href="src/KVVAMOSDataCorrection_e503.cxx.html#SUcu2">ApplyCorrections</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>* )</span><br />
@@ -455,14 +493,37 @@ Return <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if no correction needed.
 NOTE: for the moment the duplication corrections are applied AFTER HF corrections...
 </pre></div>
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:ApplyToFAndPathOffset" href="src/KVVAMOSDataCorrection_e503.cxx.html#TxDW.C">ApplyToFAndPathOffset</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>* )</span><br />
-<div class="funccomm"><pre>Apply a general ime of flight offset to correct AoQ=2 misalignments
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Bool_t">Bool_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:ApplyToFOffsetZFunctionCorrections" href="src/KVVAMOSDataCorrection_e503.cxx.html#NGV.HD">ApplyToFOffsetZFunctionCorrections</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>* , TF1* )</span><br />
+<div class="funccomm"><pre>Apply time of flight offset in function of the charge Z of the particle
+to correct AoQ=2 misalignments.
 
 Return <a href="./ListOfTypes.html#Bool_t">kTRUE</a> if correction applied.
 Return <a href="./ListOfTypes.html#Bool_t">kFALSE</a> if no correction needed.
 
-NOTE: for the moment the duplication corrections are applied AFTER HF corrections
-      and AFTER ToF duplication corrections...
+NOTE: for the moment the duplication corrections are applied AFTER HF corrections,
+      AFTER ToF duplication corrections and AFTER the global ToF+Path offset ...
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:IdentifyCorrectedNucleus" href="src/KVVAMOSDataCorrection_e503.cxx.html#v83aEB">IdentifyCorrectedNucleus</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>* )</span><br />
+<div class="funccomm"><pre>Once the nucleus has been corrected (see <a href="./KVVAMOSDataCorrection_e503.html#KVVAMOSDataCorrection_e503:ApplyCorrections" title="Bool_t KVVAMOSDataCorrection_e503::ApplyCorrections(KVVAMOSReconNuc* )">ApplyCorrections</a>() method), we need
+to identify its final charge state <span class="string">'Q'</span> and mass <span class="string">'A'</span>.
+To do so we use the corrected <span class="string">"AE vs AoQ"</span> maps, where 'AE' is the corrected
+mass found by energy conservation law and 'AoQ' is the corrected
+mass:charge ratio found by Lorentz law.
+The integer value of charge state 'Q_int' is thus found using the associated
+grids (see <a href="./KVIDQAGrid.html">KVIDQAGrid</a> class) where the value of Q is linearised.
+The definitive mass <span class="string">'A'</span> is then obtained from 'AoQ/Q_int'.
+
+NOTE:This process
+</pre></div>
+</div>
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Double_t">Double_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:CalibrateFromDetList" href="src/KVVAMOSDataCorrection_e503.cxx.html#uPCU8">CalibrateFromDetList</a>(<a href="./KVVAMOSReconNuc.html">KVVAMOSReconNuc</a>* )</span><br />
+<div class="funccomm"><pre> Iterate over the list of aligned detectors (the list is in reverse
+ order) and add up the energies of all the absorbers, making our way
+ back towards the target. We must do this explicitly as the VAMOS
+ definition of <span class="string">"calibrated detector"</span> may differ from the standard
+ KaliVeda definition.  All we care about here is that the detector is
+ calibrated in energy.
 </pre></div>
 </div>
 <div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:PrintInitInfos" href="src/KVVAMOSDataCorrection_e503.cxx.html#xtDtrB">PrintInitInfos</a>()</span><br />
@@ -471,18 +532,18 @@ NOTE: for the moment the duplication corrections are applied AFTER HF correction
 </div>
 <div class="funcdoc"><span class="funcname"> <a class="funcname" name="KVVAMOSDataCorrection_e503:KVVAMOSDataCorrection_e503" href="src/KVVAMOSDataCorrection_e503.h.html#B.mgI">KVVAMOSDataCorrection_e503</a>(<a href="./ListOfTypes.html#Int_t">Int_t</a> run_number)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:SetVerbose" href="src/KVVAMOSDataCorrection_e503.h.html#LEMMYC">SetVerbose</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> status = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
+<div class="funcdoc"><span class="funcname"><span class="keyword">void</span> <a class="funcname" name="KVVAMOSDataCorrection_e503:SetVerbose" href="src/KVVAMOSDataCorrection_e503.h.html#uqIWUE">SetVerbose</a>(<a href="./ListOfTypes.html#Bool_t">Bool_t</a> status = <a href="./ListOfTypes.html#Bool_t">kTRUE</a>)</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:GetNCutHFSiCsI" href="src/KVVAMOSDataCorrection_e503.h.html#V8j5bC">GetNCutHFSiCsI</a>()</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:GetNCutHFSiCsI" href="src/KVVAMOSDataCorrection_e503.h.html#DVGXkC">GetNCutHFSiCsI</a>()</span><br />
 </div>
-<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:GetNCutHFICSi" href="src/KVVAMOSDataCorrection_e503.h.html#Vj4JcE">GetNCutHFICSi</a>()</span><br />
+<div class="funcdoc"><span class="funcname"><a href="./ListOfTypes.html#Int_t">Int_t</a> <a class="funcname" name="KVVAMOSDataCorrection_e503:GetNCutHFICSi" href="src/KVVAMOSDataCorrection_e503.h.html#TkYg_B">GetNCutHFICSi</a>()</span><br />
 </div>
 
 <br />
 <!--SIGNATURE-->
 <div id="footer">
 <em>&raquo; Author: <a href="http://consult.cern.ch/xwho/people?Quentin+Fable"> Quentin Fable</a> </em><em>&raquo; Created  by KVClassFactory on Mon Feb 13 18:45:07 2017</em><br />
-<em>&raquo; Last changed: Thu May 11 13:34:47 2017 </em><em>&raquo; Last generated: 2017-05-11 13:34</em><br />
+<em>&raquo; Last changed: Fri Jun 16 15:14:00 2017 </em><em>&raquo; Last generated: 2017-06-16 15:14</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
