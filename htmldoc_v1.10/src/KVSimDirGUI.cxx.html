@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Mar 31 13:07:09 2017            -->
+<!--   Date: Thu May 11 13:34:22 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -522,15 +522,15 @@ ClassImp(<a href="../KVSimDirGUI.html">KVSimDirGUI</a>)
    fi.fFileTypes = filetypes;
    <span class="keyword">new</span> <a href="../KVFileDialog.html">KVFileDialog</a>(gClient-&gt;GetDefaultRoot(), <a href="../KVSimDirGUI.html#KVSimDirGUI:MainFrame" title="TGMainFrame* KVSimDirGUI::MainFrame">MainFrame</a>, kKVFDOpen, &amp;fi);
    <span class="keyword">if</span> (fi.fFilename) {
-      <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a> = fi.fFilename;
+      <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a> = gSystem-&gt;BaseName(fi.fFilename);
       <a href="../ListOfTypes.html#Int_t">Int_t</a> idot = <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a>.<a href="../#TString:Index" title="Ssiz_t TString::Index(const char* s,Ssiz_t i=0,TString::ECaseCompare cmp=kExact) or overloads">Index</a>(<span class="string">"."</span>);
       <span class="keyword">if</span> (idot &lt; 0) <span class="keyword">return</span>;
       <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a>.<a href="../#TString:Remove" title="TString&amp; TString::Remove(Ssiz_t pos) or overloads">Remove</a>(idot, 2);
-      <span class="keyword">if</span> (<a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name,KVString&amp; imp_file,KVString&amp; dec_file,const Char_t* dir_name=&quot;.&quot;)">FindClassSourceFiles</a>(gSystem-&gt;BaseName(<a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a>), <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassImp" title="KVString KVSimDirGUI::fAnalClassImp">fAnalClassImp</a>, <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassHeader" title="KVString KVSimDirGUI::fAnalClassHeader">fAnalClassHeader</a>, fi.fIniDir)) {
+      <span class="keyword">if</span> (<a href="../KVBase.html#KVBase:FindClassSourceFiles" title="Bool_t KVBase::FindClassSourceFiles(const Char_t* class_name,KVString&amp; imp_file,KVString&amp; dec_file,const Char_t* dir_name=&quot;.&quot;)">FindClassSourceFiles</a>(<a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a>, <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassImp" title="KVString KVSimDirGUI::fAnalClassImp">fAnalClassImp</a>, <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassHeader" title="KVString KVSimDirGUI::fAnalClassHeader">fAnalClassHeader</a>, fi.fIniDir)) {
          <a href="../KVSimDirGUI.html#KVSimDirGUI:fTEAnalysisClassFileName" title="TGTextEntry* KVSimDirGUI::fTEAnalysisClassFileName">fTEAnalysisClassFileName</a>-&gt;SetText(<a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a>);
-         <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a> = gSystem-&gt;BaseName(<a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassName" title="KVString KVSimDirGUI::fAnalClassName">fAnalClassName</a>);
          <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassDir" title="KVString KVSimDirGUI::fAnalClassDir">fAnalClassDir</a> = fi.fIniDir;
-         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Found class header "</span> &lt;&lt; <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassHeader" title="KVString KVSimDirGUI::fAnalClassHeader">fAnalClassHeader</a> &lt;&lt; <span class="string">" and implementation "</span> &lt;&lt; <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassImp" title="KVString KVSimDirGUI::fAnalClassImp">fAnalClassImp</a> &lt;&lt; <span class="string">" in "</span> &lt;&lt; <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassDir" title="KVString KVSimDirGUI::fAnalClassDir">fAnalClassDir</a> &lt;&lt; endl;
+         <a href="../ListOfTypes.html#ostream">cout</a> &lt;&lt; <span class="string">"Found class header "</span> &lt;&lt; gSystem-&gt;BaseName(<a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassHeader" title="KVString KVSimDirGUI::fAnalClassHeader">fAnalClassHeader</a>) &lt;&lt; <span class="string">" and implementation "</span>
+              &lt;&lt; gSystem-&gt;BaseName(<a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassImp" title="KVString KVSimDirGUI::fAnalClassImp">fAnalClassImp</a>) &lt;&lt; <span class="string">" in "</span> &lt;&lt; <a href="../KVSimDirGUI.html#KVSimDirGUI:fAnalClassDir" title="KVString KVSimDirGUI::fAnalClassDir">fAnalClassDir</a> &lt;&lt; endl;
       }
    }
    dir = fi.fIniDir;
@@ -661,10 +661,10 @@ ClassImp(<a href="../KVSimDirGUI.html">KVSimDirGUI</a>)
          <span class="keyword">new</span> TGMsgBox(gClient-&gt;GetRoot(), <a href="../KVSimDirGUI.html#KVSimDirGUI:MainFrame" title="TGMainFrame* KVSimDirGUI::MainFrame">MainFrame</a>, <span class="string">"KVSimDirGUI::RunFilter"</span>, <span class="string">"Choose a simulated data file to filter!"</span>, kMBIconExclamation);
          <span class="keyword">return</span>;
       }
-      <span class="keyword">if</span> (selected_sim_runs-&gt;GetEntries() &gt; 1) {
-         <span class="keyword">new</span> TGMsgBox(gClient-&gt;GetRoot(), <a href="../KVSimDirGUI.html#KVSimDirGUI:MainFrame" title="TGMainFrame* KVSimDirGUI::MainFrame">MainFrame</a>, <span class="string">"KVSimDirGUI::RunFilter"</span>, <span class="string">"Choose ONE simulated data file to filter!"</span>, kMBIconExclamation);
-         <span class="keyword">return</span>;
-      }
+<span class="comment">//       if (selected_sim_runs-&gt;GetEntries() &gt; 1) {</span>
+<span class="comment">//          new TGMsgBox(gClient-&gt;GetRoot(), <a href="../KVSimDirGUI.html#KVSimDirGUI:MainFrame" title="TGMainFrame* KVSimDirGUI::MainFrame">MainFrame</a>, <span class="string">"KVSimDirGUI::RunFilter"</span>, <span class="string">"Choose ONE simulated data file to filter!"</span>, kMBIconExclamation);</span>
+<span class="comment">//          return;</span>
+<span class="comment">//       }</span>
       runs_to_analyse = selected_sim_runs.get();
       analysis_task = <span class="string">"filter simulated"</span>;
    }
@@ -850,7 +850,7 @@ ClassImp(<a href="../KVSimDirGUI.html">KVSimDirGUI</a>)
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-03-31 13:07 </em><em>&raquo; Last generated: 2017-03-31 13:07</em><br />
+<em>&raquo; Last changed: 2017-05-11 13:34 </em><em>&raquo; Last generated: 2017-05-11 13:34</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>

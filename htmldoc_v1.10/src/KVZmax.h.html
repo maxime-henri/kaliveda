@@ -4,7 +4,7 @@
 <!--                                             -->
 <!-- Author: KaliVeda Development team           -->
 <!--                                             -->
-<!--   Date: Fri Mar 31 13:07:47 2017            -->
+<!--   Date: Thu May 11 13:35:02 2017            -->
 <!--                                             -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -28,11 +28,11 @@
 
 <span class="cpp">#ifndef KVZmax_h</span>
 <span class="cpp">#define KVZmax_h</span>
-<span class="cpp">#include "<a href="../KVVarGlob1.h">KVVarGlob1.h</a>"</span>
+<span class="cpp">#include "<a href="../KVVarGlob.h">KVVarGlob.h</a>"</span>
 
 <span class="comment">//#define DEBUG_KVZmax</span>
 
-<span class="keyword">class</span> <a href="../KVZmax.html">KVZmax</a>: <span class="keyword">public</span> <a href="../KVVarGlob1.html">KVVarGlob1</a> {
+<span class="keyword">class</span> <a href="../KVZmax.html">KVZmax</a>: <span class="keyword">public</span> <a href="../KVVarGlob.html">KVVarGlob</a> {
 <span class="keyword">public</span>:
 <span class="comment">// Champs Statiques:</span>
    <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVZmax.html#KVZmax:nb" title="Int_t KVZmax::nb">nb</a>;
@@ -40,8 +40,8 @@
    <span class="keyword">static</span> <a href="../ListOfTypes.html#Int_t">Int_t</a> <a href="../KVZmax.html#KVZmax:nb_dest" title="Int_t KVZmax::nb_dest">nb_dest</a>;
 <span class="comment">// Champs prives:</span>
 <span class="keyword">protected</span>:
-   TList* <a href="../KVZmax.html#KVZmax:heaviest" title="TList* KVZmax::heaviest">heaviest</a>;            <span class="comment">//sorted list of pointers to nuclei, sorted by decreasing Z</span>
-   <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVZmax.html#KVZmax:fSorted" title="Bool_t KVZmax::fSorted">fSorted</a>;              <span class="comment">//<a href="../ListOfTypes.html#bool">true</a> if list has been sorted already</span>
+   <span class="keyword">mutable</span> TList <a href="../KVZmax.html#KVZmax:heaviest" title="TList KVZmax::heaviest">heaviest</a>;            <span class="comment">//sorted list of pointers to nuclei, sorted by decreasing Z</span>
+   <span class="keyword">mutable</span> <a href="../ListOfTypes.html#Bool_t">Bool_t</a> <a href="../KVZmax.html#KVZmax:fSorted" title="Bool_t KVZmax::fSorted">fSorted</a>;              <span class="comment">//<a href="../ListOfTypes.html#bool">true</a> if list has been sorted already</span>
 <span class="comment">// Methodes</span>
 <span class="keyword">protected</span>:
    <span class="keyword">void</span> <a href="../KVZmax.html#KVZmax:init_KVZmax" title="void KVZmax::init_KVZmax()">init_KVZmax</a>(<span class="keyword">void</span>);
@@ -50,7 +50,7 @@
 
 <span class="keyword">public</span>:
    <a href="../KVZmax.html">KVZmax</a>(<span class="keyword">void</span>);               <span class="comment">// constructeur par defaut</span>
-   <a href="../KVZmax.html">KVZmax</a>(<a href="../ListOfTypes.html#Char_t">Char_t</a>* nom);
+   <a href="../KVZmax.html">KVZmax</a>(<span class="keyword">const</span> <a href="../ListOfTypes.html#Char_t">Char_t</a>* nom);
    <a href="../KVZmax.html">KVZmax</a>(<span class="keyword">const</span> <a href="../KVZmax.html">KVZmax</a>&amp; a);    <span class="comment">// constructeur par <a href="../KVZmax.html#KVZmax:Copy" title="void KVZmax::Copy(TObject&amp; obj)">Copy</a></span>
 
    <span class="keyword">virtual</span> ~ <a href="../KVZmax.html">KVZmax</a>(<span class="keyword">void</span>);     <span class="comment">// destructeur</span>
@@ -71,14 +71,14 @@
 <a name="I3yrHB"></a>   <span class="keyword">virtual</span> <a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>* <a href="../KVZmax.html#KVZmax:GetObject" title="TObject* KVZmax::GetObject()">GetObject</a>(<span class="keyword">void</span>) <span class="keyword">const</span>
    {
       <span class="comment">// Retourne le pointeur du fragment le plus lourd.</span>
-      <span class="keyword">return</span> (<a href="../#TObject:TObject" title="TObject TObject::TObject() or overloads">TObject</a>*) <span class="keyword">const_cast</span>&lt;<a href="../KVZmax.html">KVZmax</a>*&gt;(<span class="keyword">this</span>)-><a href="../KVZmax.html#KVZmax:GetZmax" title="KVNucleus* KVZmax::GetZmax(Int_t i)">GetZmax</a>(0);
-   };
+      <span class="keyword">return</span> <a href="../KVZmax.html#KVZmax:GetZmax" title="KVNucleus* KVZmax::GetZmax(Int_t i)">GetZmax</a>(0);
+   }
 
-   <a href="../KVNucleus.html">KVNucleus</a>* <a href="../KVZmax.html#KVZmax:GetZmax" title="KVNucleus* KVZmax::GetZmax(Int_t i)">GetZmax</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> i);
+   <a href="../KVNucleus.html">KVNucleus</a>* <a href="../KVZmax.html#KVZmax:GetZmax" title="KVNucleus* KVZmax::GetZmax(Int_t i)">GetZmax</a>(<a href="../ListOfTypes.html#Int_t">Int_t</a> i) <span class="keyword">const</span>;
 
    <a href="../ListOfTypes.html#Double_t">Double_t</a>* <a href="../KVZmax.html#KVZmax:GetValuePtr" title="Double_t* KVZmax::GetValuePtr()">GetValuePtr</a>(<span class="keyword">void</span>);
 
-   ClassDef(<a href="../KVZmax.html">KVZmax</a>, 1)<span class="comment">//Rank fragments by charge and return Z or pointer of i_th <a href="../KVZmax.html#KVZmax:heaviest" title="TList* KVZmax::heaviest">heaviest</a> fragment</span>
+   ClassDef(<a href="../KVZmax.html">KVZmax</a>, 1)<span class="comment">//Rank fragments by charge and return Z or pointer of i_th <a href="../KVZmax.html#KVZmax:heaviest" title="TList KVZmax::heaviest">heaviest</a> fragment</span>
 };
 <span class="cpp">#endif</span>
 </pre>
@@ -89,7 +89,7 @@
 <!--SIGNATURE-->
 <div id="footer">
 
-<em>&raquo; Last changed: 2017-03-31 13:07 </em><em>&raquo; Last generated: 2017-03-31 13:07</em><br />
+<em>&raquo; Last changed: 2017-05-11 13:35 </em><em>&raquo; Last generated: 2017-05-11 13:35</em><br />
 <em>This page has been automatically generated.</em>
 </div>
 </div>
