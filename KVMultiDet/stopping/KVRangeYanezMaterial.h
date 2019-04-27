@@ -3,8 +3,14 @@
 
 #ifndef __KVRANGEYANEZMATERIAL_H
 #define __KVRANGEYANEZMATERIAL_H
+/**
+ \class KVRangeYanezMaterial
+ \ingroup Stopping
+ \brief Description of absorber for the Range dE/dx and range library (Ricardo Yanez)
+ */
 
 #include "KVIonRangeTableMaterial.h"
+using namespace std;
 
 class KVRangeYanezMaterial : public KVIonRangeTableMaterial {
    Int_t fTableType;//=0 for Northcliffe-Schilling (<12 MeV/u), =1 for Hubert et al (2.5<E/A<500 MeV), =2 for interpolated (0<E/A<500 MeV)
@@ -51,6 +57,12 @@ public:
    };
 
    virtual Double_t GetEIncFromEResOfIon(Int_t Z, Int_t A, Double_t Eres, Double_t e, Double_t isoAmat = 0.);
+
+   Int_t GetNElem() const
+   {
+      return fNelem;
+   }
+   void SaveMaterial(ofstream& matfile);
 
    ClassDef(KVRangeYanezMaterial, 1) //Description of absorber for the Range dE/dx and range library (Ricardo Yanez)
 };

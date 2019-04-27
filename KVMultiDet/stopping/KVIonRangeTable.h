@@ -7,6 +7,11 @@
 #include "KVBase.h"
 #include "KVUnits.h"
 
+/**
+ \class KVIonRangeTable
+ \ingroup Stopping
+ \brief Abstract base class for calculation of range & energy loss of charged particles in matter
+ */
 class TGeoMaterial;
 class KVIonRangeTableMaterial;
 class TGeoManager;
@@ -15,8 +20,8 @@ class TVector3;
 class KVIonRangeTable : public KVBase {
 
 protected:
-   virtual KVIonRangeTableMaterial* GetMaterialWithPointer(TGeoMaterial*);
-   virtual KVIonRangeTableMaterial* GetMaterialWithNameOrType(const Char_t* material) = 0;
+   virtual KVIonRangeTableMaterial* GetMaterialWithPointer(TGeoMaterial*) const;
+   virtual KVIonRangeTableMaterial* GetMaterialWithNameOrType(const Char_t* material) const = 0;
 
 public:
    enum SolType {
@@ -29,33 +34,36 @@ public:
 
    static KVIonRangeTable* GetRangeTable(const Char_t* name);
 
-   virtual void AddElementalMaterial(Int_t /*z*/, Int_t /*a*/ = 0)
+   virtual KVIonRangeTableMaterial* AddElementalMaterial(Int_t /*z*/, Int_t /*a*/ = 0) const
    {
       // Adds a material composed of a single isotope of a chemical element.
       // If the isotope (a) is not specified, we create a material containing the naturally
       // occuring isotopes of the given element, weighted according to their abundance.
       // If the element name is "X", this material will be called "natX", for "naturally-occuring X".
-   };
-   virtual void AddCompoundMaterial(
+      return nullptr;
+   }
+   virtual KVIonRangeTableMaterial* AddCompoundMaterial(
       const Char_t* /*name*/, const Char_t* /* symbol */,
-      Int_t /* nelem */, Int_t* /* z */, Int_t* /* a */, Int_t* /* natoms */, Double_t /* density */ = -1.0)
+      Int_t /* nelem */, Int_t* /* z */, Int_t* /* a */, Int_t* /* natoms */, Double_t /* density */ = -1.0) const
    {
       // Adds a compound material:
       //   nelem = number of elements in compound
       //   z[],a[],natoms[]: arrays with atomic number, mass, and number of atoms of each element
       //   if compound is a solid, give density in g/cm**3
-   };
-   virtual void AddMixedMaterial(
+      return nullptr;
+   }
+   virtual KVIonRangeTableMaterial* AddMixedMaterial(
       const Char_t* /* name */, const Char_t* /* symbol */,
       Int_t /* nelem */, Int_t* /* z */, Int_t* /* a */, Int_t* /* natoms */, Double_t* /* proportion */,
-      Double_t /* density */ = -1.0)
+      Double_t /* density */ = -1.0) const
    {
       // Adds a material which is a mixture of either elements or compounds:
       //   nelem = number of elements in mixture
       //   z[],a[],natoms[],proportion[]: arrays with atomic number, mass, number of atoms
       //            and proportion of each element
       //   if mixture is a solid, give density in g/cm**3
-   };
+      return nullptr;
+   }
 
    // Create and fill a list of all materials for which range tables exist.
    // Each entry is a TNamed with the name and type (title) of the material.
@@ -82,8 +90,8 @@ public:
    virtual Double_t GetAtomicMass(const Char_t*);
 
    // Returns pointer to material of given name or type.
-   KVIonRangeTableMaterial* GetMaterial(const Char_t* material);
-   KVIonRangeTableMaterial* GetMaterial(TGeoMaterial*);
+   KVIonRangeTableMaterial* GetMaterial(const Char_t* material) const;
+   KVIonRangeTableMaterial* GetMaterial(TGeoMaterial*) const;
 
    // Return kTRUE if material is in range tables
    virtual Bool_t IsMaterialKnown(const Char_t*);
@@ -149,6 +157,7 @@ public:
       AbstractMethod("CheckIon");
       return kTRUE;
    }
+   virtual Bool_t ReadMaterials(const Char_t*) const = 0;
 
    ClassDef(KVIonRangeTable, 1) //Abstract base class for calculation of range & energy loss of charged particles in matter
 };

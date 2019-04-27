@@ -3,9 +3,12 @@
 
 #include "KVedaLoss.h"
 #include "KVedaLossMaterial.h"
+#include "KVedaLossRangeFitter.h"
 #include <TString.h>
 #include <TSystem.h>
 #include <TEnv.h>
+#include <KVSystemDirectory.h>
+#include <KVSystemFile.h>
 #include "TGeoMaterial.h"
 
 ClassImp(KVedaLoss)
@@ -61,6 +64,8 @@ KVedaLoss::KVedaLoss()
                      "Calculation of range and energy loss of charged particles in matter using VEDALOSS range tables")
 {
    // Default constructor
+
+   fLocalMaterialsDirectory = GetWORKDIRFilePath("VEDALOSS");
    if (!CheckMaterialsList()) {
       Error("KVedaLoss", "Problem reading range tables. Do not use.");
    }
@@ -75,13 +80,11 @@ Bool_t KVedaLoss::init_materials() const
 {
    // PRIVATE method - called to initialize fMaterials list of all known materials
    // properties, read from file given by TEnv variable KVedaLoss.RangeTables
+   //
+   // any files in $(WORKING_DIR)/vedaloss/*.dat will also be read, these contain
+   // materials added by the user(s)
 
    Info("init_materials", "Initialising KVedaLoss...");
-//    printf("\n");
-//    printf("\t*************************************************************************\n");
-//    printf("\t*                VEDALOSS STOPPING POWER & RANGE TABLES                 *\n");
-//    printf("\t*                                                                       *\n");
-   int mat_count = 0;
    fMaterials = new KVHashList;
    fMaterials->SetName("VEDALOSS materials list");
    fMaterials->SetOwner();
@@ -92,16 +95,35 @@ Bool_t KVedaLoss::init_materials() const
       return kFALSE;
    }
 
+   bool ok = ReadMaterials(DataFilePath);
+
+   if (!gSystem->AccessPathName(fLocalMaterialsDirectory)) {
+      // read all user materials in directory
+      KVSystemDirectory matDir("matDir", fLocalMaterialsDirectory);
+      TIter nxtfil(matDir.GetListOfFiles());
+      KVSystemFile* fil;
+      while ((fil = (KVSystemFile*)nxtfil())) {
+         if (TString(fil->GetName()).EndsWith(".dat")) ok = ok && ReadMaterials(fil->GetFullPath());
+      }
+   }
+   return ok;
+}
+
+Bool_t KVedaLoss::ReadMaterials(const Char_t* DataFilePath) const
+{
+   // Read and add range tables for materials in file
+
    Char_t name[25], gtype[25], state[10];
    Float_t Amat = 0.;
    Float_t Dens = 0.;
    Float_t MoleWt = 0.;
    Float_t Temp = 19.;
    Float_t Zmat = 0.;
+   int mat_count = 0;
 
    FILE* fp;
-   if (!(fp = fopen(DataFilePath.Data(), "r"))) {
-      Error("init_materials()", "Range tables file %s cannot be opened", DataFilePath.Data());
+   if (!(fp = fopen(DataFilePath, "r"))) {
+      Error("init_materials()", "Range tables file %s cannot be opened", DataFilePath);
       return kFALSE;
    } else {
       char line[132];
@@ -118,43 +140,73 @@ Bool_t KVedaLoss::init_materials() const
                           gtype, name, state, &Dens, &Zmat, &Amat,
                           &MoleWt, &Temp)
                      != 8) {
-                  Error("init_materials()", "Problem reading file %s", DataFilePath.Data());
+                  Error("init_materials()", "Problem reading file %s", DataFilePath);
                   fclose(fp);
                   return kFALSE;
                }
-//found a new material
+               //found a new material
                KVedaLossMaterial* tmp_mat = new KVedaLossMaterial(this, name, gtype, state, Dens,
                      Zmat, Amat, MoleWt);
                fMaterials->Add(tmp_mat);
                if (!tmp_mat->ReadRangeTable(fp)) return kFALSE;
                tmp_mat->Initialize();
                ++mat_count;
-//               Double_t rho = 0.;
                if (tmp_mat->IsGas()) tmp_mat->SetTemperatureAndPressure(19., 1.*KVUnits::atm);
-//               rho = tmp_mat->GetDensity();
-//                printf("\t*  %2d.  %-7s %-18s  Z=%2d A=%5.1f  rho=%6.3f g/cm**3    *\n",
-//                       mat_count, tmp_mat->GetType(), tmp_mat->GetName(),
-//                       (int)tmp_mat->GetZ(), tmp_mat->GetMass(),
-//                       rho);
                break;
          }
       }
       fclose(fp);
    }
-//    printf("\t*                                                                       *\n");
-//    printf("\t*     TF1::Range::Npx = %4d            TF1::EnergyLoss::Npx = %4d     *\n",
-//           gEnv->GetValue("KVedaLoss.Range.Npx", 100), gEnv->GetValue("KVedaLoss.EnergyLoss.Npx", 100));
-//    printf("\t*                      TF1::ResidualEnergy::Npx = %4d                  *\n",
-//           gEnv->GetValue("KVedaLoss.ResidualEnergy.Npx", 100));
-//    printf("\t*                                                                       *\n");
-//    printf("\t*                       INITIALISATION COMPLETE                         *\n");
-//    printf("\t*************************************************************************\n");
    return kTRUE;
+}
+
+KVIonRangeTableMaterial* KVedaLoss::AddElementalMaterial(Int_t Z, Int_t A) const
+{
+   // Use the RANGE tables to generate a new material of a given element.
+   // If A is given only one isotope will be used, by default the natural abundance
+   // of each isotope is used to generate a mixture
+
+   unique_ptr<KVIonRangeTable> yanez(KVIonRangeTable::GetRangeTable("RANGE"));
+   KVIonRangeTableMaterial* mat = yanez->AddElementalMaterial(Z, A);
+   AddMaterial(mat);
+   return GetMaterial(mat->GetName());
+}
+
+Bool_t KVedaLoss::AddRANGEMaterial(const Char_t* name) const
+{
+   // If the given material is defined in the RANGE tables, import it into VEDALOSS
+
+   unique_ptr<KVIonRangeTable> yanez(KVIonRangeTable::GetRangeTable("RANGE"));
+   if (yanez->GetMaterial(name)) {
+      AddMaterial(yanez->GetMaterial(name));
+      return kTRUE;
+   }
+   return kFALSE;
+}
+
+KVIonRangeTableMaterial* KVedaLoss::AddCompoundMaterial(const Char_t* name, const Char_t* symbol, Int_t nel, Int_t* Z, Int_t* A, Int_t* nat, Double_t dens) const
+{
+   // Use the RANGE tables to generate a new compound material
+
+   unique_ptr<KVIonRangeTable> yanez(KVIonRangeTable::GetRangeTable("RANGE"));
+   KVIonRangeTableMaterial* mat = yanez->AddCompoundMaterial(name, symbol, nel, Z, A, nat, dens);
+   AddMaterial(mat);
+   return GetMaterial(mat->GetName());
+}
+
+KVIonRangeTableMaterial* KVedaLoss::AddMixedMaterial(const Char_t* name, const Char_t* symbol, Int_t nel, Int_t* Z, Int_t* A, Int_t* nat, Double_t* prop, Double_t dens) const
+{
+   // Use the RANGE tables to generate a new mixed material
+
+   unique_ptr<KVIonRangeTable> yanez(KVIonRangeTable::GetRangeTable("RANGE"));
+   KVIonRangeTableMaterial* mat = yanez->AddMixedMaterial(name, symbol, nel, Z, A, nat, prop, dens);
+   AddMaterial(mat);
+   return GetMaterial(mat->GetName());
 }
 
 //________________________________________________________________________________//
 
-KVIonRangeTableMaterial* KVedaLoss::GetMaterialWithNameOrType(const Char_t* material)
+KVIonRangeTableMaterial* KVedaLoss::GetMaterialWithNameOrType(const Char_t* material) const
 {
    // Returns pointer to material of given name or type.
    KVIonRangeTableMaterial* M = (KVIonRangeTableMaterial*)fMaterials->FindObject(material);
@@ -162,6 +214,30 @@ KVIonRangeTableMaterial* KVedaLoss::GetMaterialWithNameOrType(const Char_t* mate
       M = (KVIonRangeTableMaterial*)fMaterials->FindObjectByType(material);
    }
    return M;
+}
+
+void KVedaLoss::AddMaterial(KVIonRangeTableMaterial* mat) const
+{
+   // Add a material (taken from a different range table) to VEDALOSS
+   // This means fitting the ranges for Z=1-100 and writing the parameters in a
+   // file which will be stored in
+   //
+   //    $(WORKING_DIR)/VEDALOSS/[name].dat
+   //
+   // which will be read at each initialisation to include the new material
+
+   KVedaLossRangeFitter vlfit;
+   vlfit.SetMaterial(mat);
+   TString matname = mat->GetName();
+   matname.ReplaceAll(" ", "_"); //no spaces in filename
+   matname += ".dat";
+   // check directory exists & make it if necessary
+   if (gSystem->AccessPathName(fLocalMaterialsDirectory)) {
+      gSystem->mkdir(fLocalMaterialsDirectory, true);
+      gSystem->Chmod(fLocalMaterialsDirectory, 0755);
+   }
+   vlfit.DoFits(Form("%s/%s", fLocalMaterialsDirectory.Data(), matname.Data()));
+   ReadMaterials(Form("%s/%s", fLocalMaterialsDirectory.Data(), matname.Data()));
 }
 
 void KVedaLoss::Print(Option_t*) const

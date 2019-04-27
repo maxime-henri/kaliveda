@@ -9,6 +9,8 @@
 #include "TString.h"
 #include "KVNucleus.h"
 #include "KVNumberList.h"
+#include <KVSystemDirectory.h>
+#include <KVSystemFile.h>
 #include <Riostream.h>
 using namespace std;
 
@@ -49,8 +51,21 @@ KVRangeYanez::KVRangeYanez()
       nextPath = DataFilePaths.Next();
       if (nextPath == lastPath) break; //check for double occurrence of last file : TEnv bug?
       lastPath = nextPath;
-      ReadPredefinedMaterials(nextPath);
+      ReadMaterials(nextPath);
    }
+
+   // directory where any materials defined by user are stored
+   fLocalMaterialsDirectory = GetWORKDIRFilePath("RANGE");
+   if (!gSystem->AccessPathName(fLocalMaterialsDirectory)) {
+      // read all materials in directory if it exists
+      KVSystemDirectory matDir("matDir", fLocalMaterialsDirectory);
+      TIter nxtfil(matDir.GetListOfFiles());
+      KVSystemFile* fil;
+      while ((fil = (KVSystemFile*)nxtfil())) {
+         if (TString(fil->GetName()).EndsWith(".dat")) ReadMaterials(fil->GetFullPath());
+      }
+   }
+   fDoNotSaveMaterials = kFALSE;
 }
 
 //________________________________________________________________
@@ -86,28 +101,14 @@ void KVRangeYanez::Copy(TObject& obj) const
    //KVRangeYanez& CastedObj = (KVRangeYanez&)obj;
 }
 
-KVIonRangeTableMaterial* KVRangeYanez::GetMaterialWithNameOrType(const Char_t* material)
+KVIonRangeTableMaterial* KVRangeYanez::GetMaterialWithNameOrType(const Char_t* material) const
 {
-   // Returns pointer to material of given name or type.
-   // Note that any request for an element of the periodic table will cause
-   // the corresponding material to be created (if not already done).
-   // If given in the form of an isotope ("48Ca", "124Sn", etc.) this material will
-   // be isotopically pure. If not ("Ca", "natSn", etc.) the material generated will be
-   // a mixture of the most abundant naturally-occurring isotopes.
+   // Returns pointer to material of given name or type if it has been defined.
 
    CheckMaterialsList();
    KVIonRangeTableMaterial* M = (KVIonRangeTableMaterial*)fMaterials->FindObject(material);
    if (!M) {
       M = (KVIonRangeTableMaterial*)fMaterials->FindObjectByType(material);
-   }
-   if (!M) {
-      // is the requested material an atomic element?
-      Int_t A = KVNucleus::IsMassGiven(material);
-      if (A > -1) {
-         KVNucleus n(material);
-         AddElementalMaterial(n.GetZ(), A);
-         M = (KVIonRangeTableMaterial*)fMaterials->FindObjectByType(material);
-      }
    }
    return M;
 }
@@ -119,7 +120,8 @@ void KVRangeYanez::Print(Option_t*) const
    if (n) {
       printf("\nEnergy loss & range tables loaded for %d materials:\n\n", fMaterials->GetEntries());
       fMaterials->Print();
-   } else
+   }
+   else
       printf("\nEnergy loss & range tables loaded for 0 materials.\n");
 }
 
@@ -138,7 +140,7 @@ TObjArray* KVRangeYanez::GetListOfMaterials()
    }
    return list;
 }
-void KVRangeYanez::CheckMaterialsList()
+void KVRangeYanez::CheckMaterialsList() const
 {
    if (!fMaterials) {
       fMaterials = new KVHashList;
@@ -146,7 +148,7 @@ void KVRangeYanez::CheckMaterialsList()
       fMaterials->SetOwner();
    }
 }
-void KVRangeYanez::AddElementalMaterial(Int_t z, Int_t a)
+KVIonRangeTableMaterial* KVRangeYanez::AddElementalMaterial(Int_t z, Int_t a) const
 {
    // Adds a material composed of a single isotope of a chemical element.
    // If the isotope (a) is not specified, we create a material containing the naturally
@@ -159,19 +161,18 @@ void KVRangeYanez::AddElementalMaterial(Int_t z, Int_t a)
    // mixtures of atomic elements ("Ca", "Calcium", etc.).
 
    KVIonRangeTableMaterial* mat;
-   if (!a) {
-      mat = MakeNaturallyOccuringElementMixture(z);
-   } else {
+   if (!a) mat = MakeNaturallyOccuringElementMixture(z, a); // this may set a!=0 if only one isotope exists in nature
+   if (a) {
       if (!gNDTManager) {
          Error("AddElementalMaterial",
                "Nuclear data tables have not been initialised");
-         return;
+         return nullptr;
       }
       KVElementDensity* ed = (KVElementDensity*)gNDTManager->GetData(z, a, "ElementDensity");
       if (!ed) {
          Error("AddElementalMaterial",
                "No element found in ElementDensity NDT-table with Z=%d", z);
-         return;
+         return nullptr;
       }
       TString state = "solid";
       if (ed->IsGas()) state = "gas";
@@ -182,12 +183,13 @@ void KVRangeYanez::AddElementalMaterial(Int_t z, Int_t a)
    }
    CheckMaterialsList();
    fMaterials->Add(mat);
-   mat->ls();
+   if (!fDoNotSaveMaterials) SaveMaterial(mat);
+   return mat;
 }
 
-void KVRangeYanez::AddCompoundMaterial(
+KVIonRangeTableMaterial* KVRangeYanez::AddCompoundMaterial(
    const Char_t* name, const Char_t* symbol,
-   Int_t nelem, Int_t* z, Int_t* a, Int_t* natoms, Double_t density)
+   Int_t nelem, Int_t* z, Int_t* a, Int_t* natoms, Double_t density) const
 {
    // Adds a compound material with a simple formula composed of different elements
    // For solids, give the density (in g/cm**3)
@@ -202,12 +204,13 @@ void KVRangeYanez::AddCompoundMaterial(
    mat->Initialize();
    CheckMaterialsList();
    fMaterials->Add(mat);
-   mat->ls();
+   if (!fDoNotSaveMaterials) SaveMaterial(mat);
+   return mat;
 }
 
-void KVRangeYanez::AddMixedMaterial(
+KVIonRangeTableMaterial* KVRangeYanez::AddMixedMaterial(
    const Char_t* name, const Char_t* symbol,
-   Int_t nelem, Int_t* z, Int_t* a, Int_t* natoms, Double_t* proportion, Double_t density)
+   Int_t nelem, Int_t* z, Int_t* a, Int_t* natoms, Double_t* proportion, Double_t density) const
 {
    // Adds a material which is a mixture of either elements or compounds:
    //   nelem = number of elements in mixture
@@ -224,13 +227,17 @@ void KVRangeYanez::AddMixedMaterial(
    mat->Initialize();
    CheckMaterialsList();
    fMaterials->Add(mat);
-   mat->ls();
+   if (!fDoNotSaveMaterials) SaveMaterial(mat);
+   return mat;
 }
 
-KVIonRangeTableMaterial* KVRangeYanez::MakeNaturallyOccuringElementMixture(Int_t z)
+KVIonRangeTableMaterial* KVRangeYanez::MakeNaturallyOccuringElementMixture(Int_t z, Int_t& a) const
 {
    // create a material containing the naturally occuring isotopes of the given element,
    // weighted according to their abundance.
+   //
+   // if there is only one naturally occurring isotope of the element we set 'a' to this isotope
+   // and don't create any material
 
    if (!gNDTManager) {
       Error("MakeNaturallyOccuringElementMixture",
@@ -243,6 +250,18 @@ KVIonRangeTableMaterial* KVRangeYanez::MakeNaturallyOccuringElementMixture(Int_t
             "No element found in ElementDensity NDT-table with Z=%d", z);
       return 0x0;
    }
+
+   KVNucleus nuc(z);
+   KVNumberList isotopes = nuc.GetKnownARange();
+   isotopes.Begin();
+   while (!isotopes.End()) {
+      nuc.SetA(isotopes.Next());
+      if (nuc.GetAbundance() == 100.) {
+         a = nuc.GetA();
+         return nullptr;
+      }
+   }
+
    TString state = "solid";
    if (ed->IsGas()) state = "gas";
    KVRangeYanezMaterial* mat =
@@ -250,22 +269,18 @@ KVIonRangeTableMaterial* KVRangeYanez::MakeNaturallyOccuringElementMixture(Int_t
                                ed->GetElementName(),
                                ed->GetElementSymbol(),
                                state, ed->GetValue());
-   KVNucleus nuc(z);
-   KVNumberList isotopes = nuc.GetKnownARange();
    isotopes.Begin();
    while (!isotopes.End()) {
-
       nuc.SetA(isotopes.Next());
       Double_t abundance = nuc.GetAbundance() / 100.;
       if (abundance > 0.) mat->AddMixtureElement(z, nuc.GetA(), 1, abundance);
-
    }
    mat->Initialize();
    return (KVIonRangeTableMaterial*)mat;
 }
 //____________________________________________________________________________
 
-void KVRangeYanez::ReadPredefinedMaterials(const Char_t* filename)
+Bool_t KVRangeYanez::ReadMaterials(const Char_t* filename) const
 {
    // Read materials from file whose name is given
 
@@ -274,9 +289,11 @@ void KVRangeYanez::ReadPredefinedMaterials(const Char_t* filename)
    ifstream filestream;
    if (!SearchAndOpenKVFile(DataFilePath, filestream, "data")) {
       Error("ReadPredefinedMaterials", "Cannot open %s for reading", DataFilePath.Data());
-      return;
+      return kFALSE;
    }
    Info("ReadPredefinedMaterials", "Reading materials in file : %s", filename);
+
+   fDoNotSaveMaterials = kTRUE; //don't write what we just read!!
 
    Bool_t compound, mixture;
    compound = mixture = kFALSE;
@@ -289,9 +306,13 @@ void KVRangeYanez::ReadPredefinedMaterials(const Char_t* filename)
          if (line.BeginsWith("COMPOUND")) {
             compound = kTRUE;
             mixture = kFALSE;
-         } else if (line.BeginsWith("MIXTURE")) {
+         }
+         else if (line.BeginsWith("MIXTURE")) {
             compound = kFALSE;
             mixture = kTRUE;
+         }
+         else if (line.BeginsWith("ELEMENT")) {
+            compound = mixture = kFALSE;
          }
          if (compound || mixture) {
             // new compound or mixed material
@@ -330,6 +351,46 @@ void KVRangeYanez::ReadPredefinedMaterials(const Char_t* filename)
             else if (mixture) AddMixedMaterial(name, symbol, nelem, z, a, natoms, proportion, density);
             compound = mixture = kFALSE;
          }
+         else {
+            // new isotopically pure material
+            KVString name, symbol, state;
+            line.ReadLine(filestream);
+            while (filestream.good() && !line.IsWhitespace() && line != "\n") {
+               line.Begin("=");
+               KVString next = line.Next();
+               if (next == "name") name = line.Next();
+               else if (next == "symbol") symbol = line.Next();
+               else if (next == "state") state = line.Next();
+               line.ReadLine(filestream, kFALSE); //do not skip 'whitespace'
+            }
+            KVNucleus nuc(symbol);
+            AddElementalMaterial(nuc.GetZ(), nuc.GetA());
+         }
       }
+   }
+   fDoNotSaveMaterials = kFALSE;
+   return kTRUE;
+}
+
+void KVRangeYanez::SaveMaterial(KVIonRangeTableMaterial* mat) const
+{
+   // Write definition of material in a file in the directory
+   //
+   //  $(WORKING_DIR)/RANGE
+   //
+   // All files in this directory are read when the table is initialised
+
+   // make directory if needed
+   if (gSystem->AccessPathName(fLocalMaterialsDirectory)) {
+      gSystem->mkdir(fLocalMaterialsDirectory, true);
+      gSystem->Chmod(fLocalMaterialsDirectory, 0755);
+   }
+   TString matfilename(mat->GetName());
+   matfilename.ReplaceAll(" ", "_"); // no spaces in filenames
+   matfilename += ".dat";
+   ofstream matfil;
+   if (SearchAndOpenKVFile(matfilename, matfil, fLocalMaterialsDirectory)) {
+      dynamic_cast<KVRangeYanezMaterial*>(mat)->SaveMaterial(matfil);
+      matfil.close();
    }
 }
