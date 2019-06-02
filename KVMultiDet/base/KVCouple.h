@@ -9,8 +9,8 @@
 class KVCouple {
 
 protected:
-   Int_t* tz1;
-   Int_t* tz2;
+   std::vector<Int_t> tz1;
+   std::vector<Int_t> tz2;
    Int_t current_idx;
    Int_t zlim;
    Int_t nbre;
@@ -26,7 +26,6 @@ public:
 
    void ResetVars()
    {
-      nbre = 0;
       current_idx = 0;
       zlim = 0;
       nbre = 0;
@@ -37,11 +36,6 @@ public:
 
    virtual ~KVCouple()
    {
-
-      if (init) {
-         delete [] tz1;
-         delete [] tz2;
-      }
       ResetVars();
       init = kFALSE;
    }

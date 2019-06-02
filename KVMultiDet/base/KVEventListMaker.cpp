@@ -32,8 +32,8 @@ void KVEventListMaker::Process()
    if (!IsReady()) return;
 
 //open file where tree is stored
-   TFile* file = new TFile(GetFileName().Data(), "update");
-   KVList* kevtlist = new KVList();
+   TFile file(GetFileName().Data(), "update");
+   KVList kevtlist;
 
    TTree* tt = NULL;
 
@@ -47,11 +47,11 @@ void KVEventListMaker::Process()
    }
    if (nbre == 0) return;
 
-   Int_t* variable = new Int_t[nbre];
+   std::vector<Int_t> variable(nbre);
    KVString evtname;
    Bool_t ok = kFALSE;
 //check if the tree are there
-   if ((tt = (TTree*)file->Get(GetTreeName().Data()))) {
+   if ((tt = (TTree*)file.Get(GetTreeName().Data()))) {
       Int_t nentries = tt->GetEntries();
       printf("nbre d entree %d\n", nentries);
       TBranch* bb = NULL;
@@ -92,31 +92,26 @@ void KVEventListMaker::Process()
             }
          }
 
-         if (!(el = kevtlist->get_object<TEventList>(evtname.Data()))) {
+         if (!(el = kevtlist.get_object<TEventList>(evtname.Data()))) {
             printf("creation de %s \n", evtname.Data());
-            kevtlist->Add(new TEventList(evtname.Data()));
-            el = (TEventList*)kevtlist->Last();
+            kevtlist.Add(new TEventList(evtname.Data()));
+            el = (TEventList*)kevtlist.Last();
          }
          el->Enter(kk);
       }
 
       //write TEventList created
       if (ktag_tree) {
-         for (Int_t nn = 0; nn < kevtlist->GetEntries(); nn += 1) {
+         for (Int_t nn = 0; nn < kevtlist.GetEntries(); nn += 1) {
             KVString tampname;
-            tampname.Form("%s_%s", GetTreeName().Data(), kevtlist->At(nn)->GetName());
-            ((TEventList*) kevtlist->At(nn))->SetName(tampname.Data());
-            kevtlist->At(nn)->Write();
+            tampname.Form("%s_%s", GetTreeName().Data(), kevtlist.At(nn)->GetName());
+            ((TEventList*) kevtlist.At(nn))->SetName(tampname.Data());
+            kevtlist.At(nn)->Write();
          }
       }
       else {
-         kevtlist->Write();
+         kevtlist.Write();
       }
    }
    else printf("%s n existe pas\n", GetTreeName().Data());
-
-   delete [] variable;
-//close the file
-   file->Close();
-
 }

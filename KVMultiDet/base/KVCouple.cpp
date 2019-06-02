@@ -41,8 +41,8 @@ KVCouple::KVCouple(Int_t zf, Int_t zsup)
 
    nbre = zref - zlim + 1;
    if (nbre > 0) {
-      tz1 = new Int_t[nbre];
-      tz2 = new Int_t[nbre];
+      tz1.reserve(nbre);
+      tz2.reserve(nbre);
       Int_t z1 = 0;
       for (Int_t ii = 0; ii < nbre; ii += 1) {
          z1 = zref - ii;
@@ -79,8 +79,8 @@ KVCouple::KVCouple(Int_t zf, Int_t zsup, Int_t div)
       nbre = zmax - zlim + 1;
       if (nbre > 0) {
 
-         tz1 = new Int_t[nbre];
-         tz2 = new Int_t[nbre];
+         tz1.reserve(nbre);
+         tz2.reserve(nbre);
          Int_t z1 = 0;
          for (Int_t ii = 0; ii < nbre; ii += 1) {
             z1 = zmax - ii;
@@ -98,8 +98,8 @@ KVCouple::KVCouple(Int_t zf, Int_t zsup, Int_t div)
       nbre = zfra - zlim + 1;
       if (nbre > 0) {
 
-         tz1 = new Int_t[nbre];
-         tz2 = new Int_t[nbre];
+         tz1.reserve(nbre);
+         tz2.reserve(nbre);
          Int_t z1 = 0;
          for (Int_t ii = 0; ii < nbre; ii += 1) {
             z1 = zfra - ii;

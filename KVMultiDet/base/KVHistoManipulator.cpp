@@ -1,9 +1,3 @@
-/*
-$Id: KVHistoManipulator.cpp,v 1.9 2009/04/07 14:54:15 ebonnet Exp $
-$Revision: 1.9 $
-$Date: 2009/04/07 14:54:15 $
-*/
-
 //Created by KVClassFactory on Thu Oct 18 11:48:18 2007
 //Author: Eric Bonnet
 
@@ -50,19 +44,19 @@ ClassImp(KVHistoManipulator)
 
 KVHistoManipulator* gHistoManipulator;
 
-KVHistoManipulator::KVHistoManipulator(void)
+KVHistoManipulator::KVHistoManipulator()
 {
    //Default constructor
    init();
    gHistoManipulator = this;
-   fVDCanvas = 0;
+   fVDCanvas = nullptr;
 }
 
 
 KVHistoManipulator::~KVHistoManipulator()
 {
    if (gHistoManipulator == this)
-      gHistoManipulator = 0;
+      gHistoManipulator = nullptr;
 }
 
 //###############################################################################################################"
@@ -79,7 +73,7 @@ Int_t KVHistoManipulator::CutStatBin(TH1* hh, Int_t stat_min, Int_t stat_max)
    // pour les TH2 cela correspond a GetBinContent(xx,yy) --> cellules
    // pour les TProfile cela correspond a GetBinEntries(xx)
    // la fonction renvoie le nbre de bins ou cellules mis a zero
-   // si stat_min ou stat_max sont egales à -1 la borne associée n'est pas prise en compte
+   // si stat_min ou stat_max sont egales Ã  -1 la borne associÃ©e n'est pas prise en compte
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
       return -1;
@@ -198,9 +192,8 @@ TH1* KVHistoManipulator::ScaleHisto(TH1* hh, TF1* fx, TF1* fy, Int_t nx, Int_t n
    // to achieve a continuous scaled distribution we have to randomize X within each bin.
    // This will only work if the bin contents of 'hh' are integer numbers, i.e. unnormalised raw data histogram.
 
-   TRandom3* alea = new TRandom3(); //generateur de nbre aleatoire
    Bool_t width = !strcmp(norm, "width");
-   TH1* gg = NULL;
+   TH1* gg = nullptr;
    Double_t abs;
    Bool_t fixed_bins = (nx != -1);
    if (fx) {
@@ -241,7 +234,7 @@ TH1* KVHistoManipulator::ScaleHisto(TH1* hh, TF1* fx, TF1* fy, Int_t nx, Int_t n
 
    TClass* clas = TClass::GetClass(hh->ClassName());
    gg = (TH1*) clas->New();
-   if (!gg) return NULL;
+   if (!gg) return nullptr;
    TString hname;
    hname.Form("%s_scaled", hh->GetName());
    gg->SetNameTitle(hname.Data(), hh->GetTitle());
@@ -266,7 +259,7 @@ TH1* KVHistoManipulator::ScaleHisto(TH1* hh, TF1* fx, TF1* fy, Int_t nx, Int_t n
    for (Int_t xx = 1; xx <= hh->GetNbinsX(); xx += 1) {
       Double_t bmin = hh->GetXaxis()->GetBinLowEdge(xx);
       Double_t bmax = hh->GetXaxis()->GetBinUpEdge(xx);
-      abs  = alea->Uniform(bmin, bmax);
+      abs  = gRandom->Uniform(bmin, bmax);
       if (abs == bmax) abs = bmin;
       Double_t resx = abs;
       if (fx) resx = fx->Eval(abs);
@@ -275,7 +268,7 @@ TH1* KVHistoManipulator::ScaleHisto(TH1* hh, TF1* fx, TF1* fy, Int_t nx, Int_t n
             if (hh->GetBinContent(xx, yy) > 0) {
                bmin = hh->GetYaxis()->GetBinLowEdge(yy);
                bmax = hh->GetYaxis()->GetBinUpEdge(yy);
-               abs  = alea->Uniform(bmin, bmax);
+               abs  = gRandom->Uniform(bmin, bmax);
                if (abs == bmax) abs = bmin;
                Double_t resy = abs;
                if (fy) resy = fy->Eval(abs);
@@ -293,7 +286,7 @@ TH1* KVHistoManipulator::ScaleHisto(TH1* hh, TF1* fx, TF1* fy, Int_t nx, Int_t n
             // otherwise scaled histogram will be discontinuously filled.
             Int_t nmax = (Int_t)hh->GetBinContent(xx);
             for (int i = 0; i < nmax; i++) {
-               abs  = alea->Uniform(bmin, bmax);
+               abs  = gRandom->Uniform(bmin, bmax);
                Double_t resx = fx->Eval(abs);
                gg->Fill(resx, Xbin_width_corr);
                //cout << resx << "  " << Xbin_width_corr << endl;
@@ -307,10 +300,7 @@ TH1* KVHistoManipulator::ScaleHisto(TH1* hh, TF1* fx, TF1* fy, Int_t nx, Int_t n
          }
       }
    }
-
-   delete alea;
    return gg;
-
 }
 
 //###############################################################################################################
@@ -326,10 +316,10 @@ TGraph* KVHistoManipulator::ScaleGraph(TGraph* hh, TF1* fx, TF1* fy)
    // les parametres de la fonction doivent etre initialises avant.
    // Si la fonction est un pointeur NULL, aucune transformation n est appliquee et l axe reste tel quel.
 
-   TGraph* gg = NULL;
+   TGraph* gg = nullptr;
    TClass* clas = TClass::GetClass(hh->ClassName());
    gg = (TGraph*) clas->New();
-   if (!gg) return NULL;
+   if (!gg) return nullptr;
    TString hname;
    hname.Form("%s_scaled", hh->GetName());
    gg->SetNameTitle(hname.Data(), hh->GetTitle());
@@ -346,7 +336,7 @@ TGraph* KVHistoManipulator::ScaleGraph(TGraph* hh, TF1* fx, TF1* fy)
       if (gg->InheritsFrom("TGraphErrors")) {
          // transformation of errors
          // if f = f(x) the error on f, e_f, for a given error on x, e_x, is
-         //    e_f  =  abs(df/dx) * e_x
+         //    e_f  =  abs0(df/dx) * e_x
          Double_t e_x = ((TGraphErrors*)hh)->GetErrorX(nn);
          Double_t e_y = ((TGraphErrors*)hh)->GetErrorY(nn);
          if (fx) e_x = TMath::Abs(fx->Derivative(xx1)) * e_x;
@@ -368,27 +358,24 @@ TH1* KVHistoManipulator::CentreeReduite(TH1* hh, Int_t nx, Int_t ny, Double_t xm
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
 
    TString expression;
    expression.Form("(x-%lf)/%lf", hh->GetMean(1), hh->GetRMS(1));
-   TF1* fx = new TF1("fx", expression.Data());
-   TF1* fy = NULL;
+   TF1 fx("fx", expression.Data());
+   unique_ptr<TF1> fy;
    if (hh->InheritsFrom("TH2")) {
       expression.Form("(x-%lf)/%lf", hh->GetMean(2), hh->GetRMS(2));
-      fy = new TF1("fy", expression.Data());
+      fy.reset(new TF1("fy", expression.Data()));
    }
 
-   TH1* gg = ScaleHisto(hh, fx, fy, nx, ny, xmin, xmax, ymin, ymax);
+   TH1* gg = ScaleHisto(hh, &fx, fy.get(), nx, ny, xmin, xmax, ymin, ymax);
    TString hname;
    hname.Form("%s_centred", hh->GetName());
    gg->SetName(hname.Data());
-   if (fx) delete fx;
-   if (fy) delete fy;
 
    return gg;
-
 }
 //###############################################################################################################
 //-------------------------------------------------
@@ -400,20 +387,18 @@ TH2* KVHistoManipulator::CentreeReduiteX(TH2* hh, Int_t nx, Double_t xmin, Doubl
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
 
    TString expression;
    expression.Form("(x-%lf)/%lf", hh->GetMean(1), hh->GetRMS(1));
-   TF1* fx = new TF1("fx", expression.Data());
-   TH2* gg = (TH2*)ScaleHisto(hh, fx, NULL, nx, -1, xmin, xmax, -1., -1.);
+   TF1 fx("fx", expression.Data());
+   TH2* gg = (TH2*)ScaleHisto(hh, &fx, nullptr, nx, -1, xmin, xmax, -1., -1.);
    TString hname;
    hname.Form("%s_centred_X", hh->GetName());
    gg->SetName(hname.Data());
-   if (fx) delete fx;
 
    return gg;
-
 }
 //###############################################################################################################
 //-------------------------------------------------
@@ -425,20 +410,18 @@ TH2* KVHistoManipulator::CentreeReduiteY(TH2* hh, Int_t ny, Double_t ymin, Doubl
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
 
    TString expression;
    expression.Form("(x-%lf)/%lf", hh->GetMean(1), hh->GetRMS(1));
-   TF1* fy = new TF1("fy", expression.Data());
-   TH2* gg = (TH2*)ScaleHisto(hh, NULL, fy, -1, ny, -1., -1., ymin, ymax);
+   TF1 fy("fy", expression.Data());
+   TH2* gg = (TH2*)ScaleHisto(hh, nullptr, &fy, -1, ny, -1., -1., ymin, ymax);
    TString hname;
    hname.Form("%s_centred_Y", hh->GetName());
    gg->SetName(hname.Data());
-   if (fy) delete fy;
 
    return gg;
-
 }
 
 //###############################################################################################################
@@ -461,7 +444,7 @@ TH2* KVHistoManipulator::RenormaliseHisto(TH2* hh, Int_t bmin, Int_t bmax, TStri
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
 
    if (bmin == -1) bmin = 1;
@@ -522,13 +505,13 @@ TH2* KVHistoManipulator::RenormaliseHisto(TH2* hh, Double_t valmin, Double_t val
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
    if (axis == "X")       return RenormaliseHisto(hh, hh->GetXaxis()->FindBin(valmin), hh->GetXaxis()->FindBin(valmax), axis, valref);
    else if (axis == "Y")  return RenormaliseHisto(hh, hh->GetYaxis()->FindBin(valmin), hh->GetYaxis()->FindBin(valmax), axis, valref);
    else {
       cout << "l option TString axis doit etre X ou Y" << endl;
-      return NULL;
+      return nullptr;
    }
 
 }
@@ -556,12 +539,12 @@ TH1*  KVHistoManipulator::CumulatedHisto(TH1* hh, TString direction, Int_t bmin,
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
    direction.ToUpper();
    if (direction != "C" && direction != "D") {
       cout << "l option TString direction doit etre C ou D" << endl;
-      return NULL;
+      return nullptr;
    }
    if (hh->GetDimension() == 1) {
       if (bmin < 1) bmin = 1;
@@ -605,7 +588,7 @@ TH1*  KVHistoManipulator::CumulatedHisto(TH1* hh, TString direction, Int_t bmin,
    }
    else {
       cout << "cette methode n est pas prevue pour les TH2, TH3" << endl;
-      return NULL;
+      return nullptr;
    }
 
 }
@@ -628,11 +611,11 @@ TH1*  KVHistoManipulator::GetDerivative(TH1* hh, Int_t order)
 
    if (!hh) {
       cout << "pointeur histogramme nul" << endl;
-      return NULL;
+      return hh;
    }
    if (!(0 <= order && order <= 2)) {
       cout << "ordre " << order << "n est pas implemente" << endl;
-      return NULL;
+      return nullptr;
    }
    if (hh->GetDimension() == 1) {
 
@@ -682,7 +665,7 @@ TH1*  KVHistoManipulator::GetDerivative(TH1* hh, Int_t order)
    }
    else {
       cout << "cette methode n est pas prevue pour les TH2, TH3" << endl;
-      return NULL;
+      return nullptr;
    }
 
 }
@@ -698,7 +681,7 @@ TGraphErrors*  KVHistoManipulator::GetMomentEvolution(TH2* hh, TString momentx, 
    // Les TString momentx et momenty doivent etre des "Get like" methodes connues de TH1
    // comme GetMean, GetRMS ou GetKurtosis :
    // - Si momenty="" -> on obtient l'evolution du moment momentx en fonction de
-   // la variable associée a l'autre axe.
+   // la variable associÃ©e a l'autre axe.
    // - Si momenty!="" -> on obtient l'evolution du moment momenty en fonction du momentx
    //
    // Si TString axis = X la variable en X est le parametre d echantillonage et vice-versa
@@ -709,38 +692,27 @@ TGraphErrors*  KVHistoManipulator::GetMomentEvolution(TH2* hh, TString momentx, 
 
    if (axis != "X" && axis != "Y") {
       cout << "GetMomentEvolution(TH2*,TString ,TString ,TString) Mauvaise syntaxe pour TString axis (X ou Y) " << endl;
-      return NULL;
+      return nullptr;
    }
-   TMethodCall* cmx = new TMethodCall();
-   cmx->InitWithPrototype(TClass::GetClass("TH1D"), Form("%s", momentx.Data()), "int");
-   TMethodCall* Ecmx = new TMethodCall();
-   Ecmx->InitWithPrototype(TClass::GetClass("TH1D"), Form("%sError", momentx.Data()), "int");
-   if (!cmx->IsValid()) {
+   TMethodCall cmx;
+   cmx.InitWithPrototype(TClass::GetClass("TH1D"), Form("%s", momentx.Data()), "int");
+   if (!cmx.IsValid()) {
       cout << "GetMomentEvolution(TH2*,TString ,TString ,TString) TString momentx n'est pas une methode valide " << momentx.Data() << endl;
-      delete cmx;
-      cmx = 0;
-      return NULL;
+      return nullptr;
    }
-   else if (!Ecmx->IsValid()) {
-      delete Ecmx;
-      Ecmx = 0;
-   }
+   unique_ptr<TMethodCall> Ecmx(new TMethodCall());
+   Ecmx->InitWithPrototype(TClass::GetClass("TH1D"), Form("%sError", momentx.Data()), "int");
 
-   TMethodCall* cmy = NULL, *Ecmy = NULL;
+   unique_ptr<TMethodCall> cmy, Ecmy;
    if (momenty != "")  {
-      cmy = new TMethodCall();
+      cmy.reset(new TMethodCall());
       cmy->InitWithPrototype(TClass::GetClass("TH1D"), Form("%s", momenty.Data()), "int");
-      Ecmy = new TMethodCall();
-      Ecmy->InitWithPrototype(TClass::GetClass("TH1D"), Form("%sError", momenty.Data()), "int");
       if (!cmy->IsValid()) {
          cout << "GetMomentEvolution(TH2*,TString ,TString ,TString) TString momenty n'est pas une methode valide " << momenty.Data() << endl;
-         delete cmy;
-         return NULL;
+         return nullptr;
       }
-      else if (!Ecmy->IsValid()) {
-         delete Ecmy;
-         Ecmy = 0;
-      }
+      Ecmy.reset(new TMethodCall());
+      Ecmy->InitWithPrototype(TClass::GetClass("TH1D"), Form("%sError", momenty.Data()), "int");
    }
 
    TString fmt_histo;
@@ -771,11 +743,11 @@ TGraphErrors*  KVHistoManipulator::GetMomentEvolution(TH2* hh, TString momentx, 
          Int_t bin = lbins.Next();
          if (axis == "Y") hp = (TH1D*)hh->ProjectionY(fmt_histo.Data(), bin, bin);
          else           hp = (TH1D*)hh->ProjectionX(fmt_histo.Data(), bin, bin);
-         cmx->Execute(hp, "1", valx);
-         if (Ecmx) Ecmx->Execute(hp, "1", Evalx);
-         if (cmy) {
+         cmx.Execute(hp, "1", valx);
+         if (Ecmx->IsValid()) Ecmx->Execute(hp, "1", Evalx);
+         if (momenty != "") {
             cmy->Execute(hp, "1", valy);
-            if (Ecmy) Ecmy->Execute(hp, "1", Evaly);
+            if (Ecmy->IsValid()) Ecmy->Execute(hp, "1", Evaly);
             gr->SetPoint(npts, valx, valy);
             if (Evalx != 0 && Evaly != 0) gr->SetPointError(npts, Evalx, Evaly);
             npts += 1;
@@ -795,20 +767,11 @@ TGraphErrors*  KVHistoManipulator::GetMomentEvolution(TH2* hh, TString momentx, 
          }
          gDirectory->Delete(fmt_histo.Data());
       }
-      if (cmx) delete cmx;
-      if (cmy) delete cmy;
-      if (Ecmx) delete Ecmx;
-      if (Ecmy) delete Ecmy;
       return gr;
    }
    else {
       cout << "GetMomentEvolution(TH2*,TString ,TString ,TString) Aucun point dans le TGraph" << endl;
-      if (cmx) delete cmx;
-      if (cmy) delete cmy;
-      return NULL;
-      if (Ecmx) delete Ecmx;
-      if (Ecmy) delete Ecmy;
-      return NULL;
+      return nullptr;
    }
 
 }
@@ -892,7 +855,7 @@ KVList* KVHistoManipulator::Give_ProjectionList(TH2* hh, Double_t MinIntegral, T
 {
 //-------------------------------------------------
    // Retourne une liste contenant les projections par tranche de l'axe (TString axis="X" ou "Y")
-   // remplissant une condition leur integral qui doit etre superieur à MinIntegral (=-1 par defaut)
+   // remplissant une condition leur integral qui doit etre superieur Ã  MinIntegral (=-1 par defaut)
    // si axis="X", les projections sur l'axe Y de l'histogramme est fait pour chaque bin de l'axe X
 
    if (!hh) {
@@ -1077,7 +1040,7 @@ TGraph* KVHistoManipulator::PermuteAxis(TGraph* gr)
 TGraphErrors* KVHistoManipulator::MakeGraphFrom(TProfile* pf, Bool_t Error)
 {
 //-------------------------------------------------
-   // Cree un graph à partir d un histo
+   // Cree un graph Ã  partir d un histo
    //
    // L'utilisateur doit effacer ce TGraph apres utilisation
    //
@@ -1108,7 +1071,7 @@ TGraphErrors* KVHistoManipulator::MakeGraphFrom(TProfile* pf, Bool_t Error)
 // TGraphErrors* KVHistoManipulator::MakeGraphFrom(TH1* pf, Bool_t Error)
 // {
 // //-------------------------------------------------
-//    // Cree un graph à partir d un histo
+//    // Cree un graph Ã  partir d un histo
 //    //
 //    // L'utilisateur doit effacer ce TGraph apres utilisation
 //    //
@@ -1638,7 +1601,7 @@ TH1* KVHistoManipulator::CumulatedHisto(TH1* hh, Double_t xmin, Double_t xmax, T
 //-------------------------------------------------
 Double_t KVHistoManipulator::GetChisquare(TH1* h1, TF1* f1, Bool_t norm, Bool_t err, Double_t* para)
 {
-   //Camcul du chi2 entre un histogramme et une fonction donnée
+   //Camcul du chi2 entre un histogramme et une fonction donnÃ©e
    //Warning : ne prend en compte que les bins avec une stat>0
    //de l histogramme
    // norm = kTRUE (default), normalise la valeur du Chi2 au nombre de bin pris en compte
@@ -1707,7 +1670,7 @@ Double_t KVHistoManipulator::GetChisquare(TH1* h1, TF1* f1, Bool_t norm, Bool_t 
 //-------------------------------------------------
 Double_t KVHistoManipulator::GetLikelihood(TH1* h1, TF1* f1, Bool_t norm, Double_t* para)
 {
-   //Calcul du chi2 entre un histogramme et une fonction donnée
+   //Calcul du chi2 entre un histogramme et une fonction donnÃ©e
    //Warning : ne prend en compte que les bins avec une stat>0
    //de l histogramme
    // norm = kTRUE (default), normalise la valeur du Chi2 au nombre de bin pris en compte
