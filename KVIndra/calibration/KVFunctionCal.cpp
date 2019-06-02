@@ -217,9 +217,11 @@ void KVFunctionCal::SetOptions(const KVNameValueList& opt)
    // Used to set up a function calibrator from infos in a calibration parameter file.
    // Use an option string like this:
    //
+   //~~~~~~~~~~~~~~
    // CalibOptions:   func=[function],min=[minimum of X],max=[maximum of X]
+   //~~~~~~~~~~~~~~
    //
-   // An optional option is 'inverse=true' which will call SetUseInverseFunction(true)
+   // An optional option is `inverse=true` which will call KVFunctionCal::SetUseInverseFunction(true)
 
    SetExpFormula(opt.GetStringValue("func"), opt.GetTStringValue("min").Atof(), opt.GetTStringValue("max").Atof());
    SetUseInverseFunction(opt.IsValue("inverse", "true"));

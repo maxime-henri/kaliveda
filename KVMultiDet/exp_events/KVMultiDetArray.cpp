@@ -3239,25 +3239,38 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
 {
    // Read a calibration file with the format
    //
-   //RunList:                                 0-999999
-   //Signal:                                  PG
-   //CalibType:                               Channel-Volt PG
-   //CalibClass:                              FunctionCal
-   //CalibOptions:                            func=pol3,min=0,max=1
-   //[detector]: 0.0,0.261829,0.0
-   //[detector]: 0.1,0.539535,1.2
+   //~~~~~~~~~~~~~
+   // RunList:                                 0-999999
+   // Signal:                                  PG
+   // CalibType:                               Channel-Volt PG
+   // CalibClass:                              FunctionCal
+   // CalibOptions:                            func=pol3,min=0,max=1
+   // [detector1]: 0.0,0.261829,0.0
+   // [detector2]: 0.1,0.539535,1.2
+   //~~~~~~~~~~~~~
    //
-   //The [RunList] is optional: if not given, the calibration will be applied to all runs in the database.
+   //The `[RunList]` is optional: if not given, the calibration will be applied to all runs in the database.
+   //
    //If different parameters are required for different sets of runs, they should be written in different
-   //files (all of which are listed in CalibrationFiles.dat or [array].CalibrationFiles.dat).
+   //files (all of which are listed in `CalibrationFiles.dat` or `[array].CalibrationFiles.dat`).
    //
-   //The [CalibClass] is optional: if given, it should correspond to a KVCalibrator plugin.
-   //If any detector has a calibrator of type [CalibType] which is not of the given class
+   //The `[CalibClass]` must correspond to a KVCalibrator plugin name. The list of plugin names and the corresponding
+   //classes can be retrieved with
+   //
+   //~~~~~~~~~~~
+   //KVBase::GetListOfPlugins("KVCalibrator")
+   //KVBase::GetListOfPluginURIs("KVCalibrator")
+   //~~~~~~~~~~~
+   //
+   //KVCalibrator objects are added to detectors as required by the contents of calibration files.
+   //If any detector has an existing calibrator of type `[CalibType]` which is not of the given class
    //it will be replaced with a new calibrator corresponding to the plugin.
    //
-   //The [CalibOptions] is optional: if [CalibClass] is given, list in [CalibOptions] will be used
+   //The `[CalibOptions]` is optional: if `[CalibClass]` is given, list in `[CalibOptions]` will be used
    //to complete set-up of any new calibrator objects by calling the KVCalibrator::SetOptions(const KVNameValueList&)
-   //method. [CalibOptions] should hold a comma-separated list of 'parameter=value' pairs which will be used
+   //method.
+   //
+   //`[CalibOptions]` should hold a comma-separated list of `parameter=value` pairs which will be used
    //to fill a KVNameValueList for the method call. See the SetOptions(const KVNameValueList&) method of the
    //specific class to see which options should/can be given.
 
