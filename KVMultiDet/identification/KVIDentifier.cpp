@@ -614,33 +614,42 @@ Int_t KVIDentifier::IncreaseNumberOfPoints()
    return fNpoints;
 }
 
-//Int_t KVIDentifier::DecreaseNumberOfPoints()
-//{
-//   if (!GetEditable()) return -2;
-//   if(fNpoints<2) return -1;
+Int_t KVIDentifier::DecreaseNumberOfPoints()
+{
+   if (!GetEditable()) return -2;
+   if (fNpoints < 2) return -1;
 
-//   Int_t nNpoints = (fNpoints%2)?(fNpoints/2):((fNpoints+1)/2);
-//   Double_t *nX = new Double_t[nNpoints-1];
-//   Double_t *nY = new Double_t[nNpoints-1];
+   Int_t nNpoints = fNpoints / 2 + 1; //(fNpoints%2)?(fNpoints/2):((fNpoints+1)/2);
+   Double_t* nX = new Double_t[nNpoints];
+   Double_t* nY = new Double_t[nNpoints];
 
-//   nX[0] = fX[0];
-//   nY[0] = fY[0];
+   nX[0] = fX[0];
+   nY[0] = fY[0];
 
-//   for(int ii=1; ii<nNpoints-1; ii++) {
-//      nX[ii] = fX[ii*2];
-//      nY[ii] = fY[ii*2];
-//   }
+   for (int ii = 1; ii < nNpoints - 1; ii++) {
+      nX[ii] = fX[ii * 2];
+      nY[ii] = fY[ii * 2];
+   }
 
-//   Set(0);
-//   for(int ii=0; ii<nNpoints; ii++) SetPoint(ii,nX[ii],nY[ii]);
+   nX[nNpoints - 1] = fX[fNpoints - 1];
+   nY[nNpoints - 1] = fY[fNpoints - 1];
 
-//   delete[] nX;
-//   delete[] nY;
+   Set(0);
+   for (int ii = 0; ii < nNpoints; ii++) SetPoint(ii, nX[ii], nY[ii]);
 
-//   if(gPad) gPad->Modified();
+   delete[] nX;
+   delete[] nY;
 
-//   return fNpoints;
-//}
+   if (gPad) gPad->Modified();
+
+   return fNpoints;
+}
+
+Int_t KVIDentifier::SortPoints(Bool_t ascending)
+{
+   Sort(&TGraph::CompareX, ascending);
+   return 0;
+}
 
 //______________________________________________________________________________
 Double_t KVIDentifier::GetPID() const

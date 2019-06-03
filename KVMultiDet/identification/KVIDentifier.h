@@ -223,8 +223,9 @@ public:
    virtual Int_t         AddPointAtTheEnd(); // *MENU={Hierarchy="Modify Line.../AddPointAtTheEnd"}*
    virtual Int_t         RemoveFirstPoint(); // *MENU={Hierarchy="Modify Line.../RemoveFirstPoint"}*
    virtual Int_t         RemoveLastPoint(); // *MENU={Hierarchy="Modify Line.../RemoveLastPoint"}*
-   virtual Int_t         IncreaseNumberOfPoints(); // *MENU={Hierarchy="Modify Line.../IncreaseNumberOfPoints"}*
-//   virtual Int_t         DecreaseNumberOfPoints(); // *MENU={Hierarchy="Modify Line.../DecreaseNumberOfPoints"}*
+   virtual Int_t         IncreaseNumberOfPoints(); // *MENU*
+   virtual Int_t         DecreaseNumberOfPoints(); // *MENU*
+   virtual Int_t         SortPoints(Bool_t ascending = kTRUE); // *MENU*
    virtual Int_t         ContinueDrawing(); // *MENU={Hierarchy="Modify Line.../ContinueDrawing"}*
    virtual void         ChechHierarchy(KVIDentifier* gr);
    virtual Int_t         RemovePoint()
