@@ -749,23 +749,43 @@ Bool_t KVDataSet::GetDataSetEnv(const Char_t* type, Bool_t defval) const
 TObject* KVDataSet::open_runfile(const Char_t* type, Int_t run)
 {
    // Open file containing data of given datatype for given run number of this dataset.
-   // Returns a pointer to the opened file; if the file is not available, we return nullptr.
-   // The user must cast the returned pointer to the correct class, which will
-   // depend on the data type and the dataset (see $KVROOT/KVFiles/.kvrootrc)
    //
-   // SPECIAL CASE: MFM data with EBYEDAT frames
+   // Returns a pointer to the opened file; if the file is not available, we return nullptr.
+   //
+   // The user must cast the returned pointer to the correct class, which will
+   // depend on the data type and the dataset (see `$KVROOT/KVFiles/.kvrootrc`)
+   //
+   // **SPECIAL CASE: MFM data with EBYEDAT frames**
+   //
    // If the variable
+   //
+   //~~~~~~~~~~~~~~~~~~~~~~~~~
    //   [dataset].MFM.WithEbyedat:   yes
-   // is set, then we expect to find the necessary ACTIONS_* files in the dataset directory
-   // in subdirectory 'ebyedat'
+   //~~~~~~~~~~~~~~~~~~~~~~~~~
+   //
+   // is set, then we expect to find the necessary `ACTIONS_*` files in the dataset directory
+   // in subdirectory `ebyedat` (they should have the same names as the data files prefixed by
+   // `ACTIONS_[expname].CHC_PAR.`).
+   //
+   // If in addition the variable
+   //
+   //~~~~~~~~~~~~~~~~~~~~~~~~~
+   //   [dataset].MFM.EbyedatActionsExpName:   [expname]
+   //~~~~~~~~~~~~~~~~~~~~~~~~~
+   //
+   // is set, then we use the same `ACTIONS` file for all runs, with name `ACTIONS_[expname].CHC_PAR`
+
 
    if (!strcmp(type, "raw") && !strcmp(GetDataSetEnv("MFM.WithEbyedat", ""), "yes")) {
       TString ebydir = GetDataSetDir();
       ebydir += "/ebyedat";
       gEnv->SetValue("KVMFMDataFileReader.ActionsDirectory", ebydir);
+      if (strcmp(GetDataSetEnv("MFM.EbyedatActionsExpName", ""), ""))
+         gEnv->SetValue("KVMFMDataFileReader.ActionsExpName", GetDataSetEnv("MFM.EbyedatActionsExpName", ""));
       TObject* f = GetRepository()->OpenDataSetRunFile(this, type, run, GetName());
       // reset in case another dataset opens a raw MFM file without EBYEDAT data
       gEnv->SetValue("KVMFMDataFileReader.ActionsDirectory", "");
+      gEnv->SetValue("KVMFMDataFileReader.ActionsExpName", "");
       return f;
    }
    return GetRepository()->OpenDataSetRunFile(this, type, run, GetName());

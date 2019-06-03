@@ -32,6 +32,8 @@ public:
       return "MFM";
    }
    void SetActionsDirectory(const string&);
+   void SetActionsExpName(const string&);
+
    Int_t GetRunNumberReadFromFile() const;
 
    TString GetPathToLastEbyedatActionsFile();

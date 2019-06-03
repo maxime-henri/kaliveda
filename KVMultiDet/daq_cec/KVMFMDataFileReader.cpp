@@ -33,6 +33,8 @@ KVMFMDataFileReader::KVMFMDataFileReader(const Char_t* filepath)
 
    std::string actions_dir = gEnv->GetValue("KVMFMDataFileReader.ActionsDirectory", "");
    if (actions_dir != "") SetActionsDirectory(actions_dir);
+   std::string actions_expname = gEnv->GetValue("KVMFMDataFileReader.ActionsExpName", "");
+   if (actions_expname != "") SetActionsExpName(actions_expname);
    if (!ReadNextFrame()) {
       Error("KVMFMDataFileReader", "Cannot read file %s", filepath);
       MakeZombie();
@@ -66,6 +68,15 @@ void KVMFMDataFileReader::SetActionsDirectory(const string& d)
    // Set directory in which to look for Ebyedat ACTIONS_* files
    // Defaults to data directory
    GetFrameLibrary().SetEbyedatActionsDirectory(d);
+}
+
+void KVMFMDataFileReader::SetActionsExpName(const string& e)
+{
+   // Set experiment name for Ebyedat ACTIONS_* files.
+   //
+   // Setting this means that a single ACTIONS file will be looked for in the actions directory
+   // (set with SetActionsDirectory).
+   GetFrameLibrary().SetEbyedatExpName(e);
 }
 
 Int_t KVMFMDataFileReader::GetRunNumberReadFromFile() const
