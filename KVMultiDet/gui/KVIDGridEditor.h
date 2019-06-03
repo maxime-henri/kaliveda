@@ -58,6 +58,8 @@ protected:
 
    Bool_t fDebug;
    Bool_t fSVGMode;
+   Bool_t fBlackMode;
+   Bool_t fJoelMode;
    Int_t  fSVGIndex;
    TPaveText* fKeyShow;
 

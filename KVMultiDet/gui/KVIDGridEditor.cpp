@@ -16,6 +16,8 @@
 #include <KVHistogram.h>
 #include "KVTestIDGridDialog.h"
 #include "KVItvFinderDialog.h"
+#include "TFrame.h"
+
 using namespace std;
 
 ClassImp(KVIDGridEditor)
@@ -39,11 +41,13 @@ KVIDGridEditor::KVIDGridEditor()
 {
    // Default constructor
    fSpiderOption = "DRLF";
-
+   gStyle->SetPalette(55);
 
    // Style
    gStyle->SetPadLeftMargin(0.1);
    gStyle->SetPadBottomMargin(0.1);
+   gStyle->SetPadTopMargin(0.1);
+   gStyle->SetPadRightMargin(0.1);
    gStyle->SetPadTickX(1);
    gStyle->SetPadTickY(1);
    gStyle->SetNdivisions(310, "xyz");
@@ -167,6 +171,8 @@ void KVIDGridEditor::SetDefault()
    is_col     = false;
 
    fSVGMode   = false;
+   fBlackMode = false;
+   fJoelMode  = false;
    fSVGIndex  = 0;
 
    SelectedColor = kOrange + 1;
@@ -861,9 +867,9 @@ void KVIDGridEditor::SelectLabel()
    if (event == kButton1Down) {
       Int_t color = label->GetFillColor();
       if (lplabel->Contains(label)) {
-         lplabel->Execute("SetFillColor", "kWhite");
-         if (color == kWhite) label->SetFillColor(kRed);
-         else if (color == kRed) label->SetFillColor(kWhite);
+         lplabel->Execute("SetFillColor", fBlackMode ? "kBlack" : "kWhite");
+         if (color == kWhite || color == kBlack) label->SetFillColor(kRed);
+         else if (color == kRed) label->SetFillColor(fBlackMode ? kBlack : kWhite);
          UpdateViewer();
       }
       else if (lplabel2->Contains(label)) {
@@ -875,9 +881,9 @@ void KVIDGridEditor::SelectLabel()
          DispatchOrder(label);
       }
       else if (lplabel3->Contains(label)) {
-         lplabel3->Execute("SetFillColor", "kWhite");
-         if (color == kWhite) label->SetFillColor(kGreen);
-         if (color == kGreen)  label->SetFillColor(kWhite);
+         lplabel3->Execute("SetFillColor", fBlackMode ? "kBlack" : "kWhite");
+         if (color == kWhite || color == kBlack) label->SetFillColor(kGreen);
+         if (color == kGreen)  label->SetFillColor(fBlackMode ? kBlack : kWhite);
          //      SelectLines(label);
          SelectLines("Select");
          UpdateViewer();
@@ -890,11 +896,11 @@ void KVIDGridEditor::SelectLabel()
    }
    else if (event == kButton1Up) {
       if (lplabel2->Contains(label)) {
-         label->SetFillColor(kWhite);
+         label->SetFillColor(fBlackMode ? kBlack : kWhite);
          UpdateViewer();
       }
       else if (lplabel5->Contains(label) && (label != modulator)) {
-         label->SetFillColor(kWhite);
+         label->SetFillColor(fBlackMode ? kBlack : kWhite);
          UpdateViewer();
       }
    }
@@ -1115,9 +1121,9 @@ void KVIDGridEditor::MakeTransformation()
          }
       }
    }
-
-   if ((event == kButton1Double) && (!drawmode)) {
-      if (!select->InheritsFrom("KVIDentifier")) {
+   if ((event == kButton1Double)) {
+      if (drawmode) drawmode = false;
+      else if (!select->InheritsFrom("KVIDentifier")) {
          Int_t xx = fPad->GetEventX();
          Int_t yy = fPad->GetEventY();
 
@@ -1126,15 +1132,8 @@ void KVIDGridEditor::MakeTransformation()
 
          SetPivot(x0, y0);
          fPivot->Draw("P");
+         UpdateViewer();
       }
-      //     else if(select->InheritsFrom("KVIDentifier"))
-      //       {
-      //       TPaveLabel* label = (TPaveLabel*)lplabel3->FindObject("All");
-      //       lplabel3->Execute("SetFillColor","kWhite");
-      //       label->SetFillColor(kGreen);
-      //       SelectLines(label);
-      //       }
-      UpdateViewer();
    }
    if ((event == kButton1Shift) && (!drawmode)) {
       if (!select->InheritsFrom("KVIDentifier")) {
@@ -1146,8 +1145,8 @@ void KVIDGridEditor::MakeTransformation()
 
          SetPiedestal(x0, y0);
          fPivot->Draw("P");
+         UpdateViewer();
       }
-      UpdateViewer();
    }
    if ((event == kWheelUp) || (event == kWheelDown)) {
       Int_t sign = (event == kWheelUp ? 1 : -1);
@@ -1214,46 +1213,46 @@ void KVIDGridEditor::DispatchOrder(TPaveLabel* label)
       label->SetFillColor(kRed);
       UpdateViewer();
       FitGrid();
-      label->SetFillColor(kWhite);
+      label->SetFillColor(fBlackMode ? kBlack : kWhite);
       UpdateViewer();
    }
    else if (commande.Contains("Test")) {
       label->SetFillColor(kRed);
       UpdateViewer();
       TestGrid();
-      label->SetFillColor(kWhite);
+      label->SetFillColor(fBlackMode ? kBlack : kWhite);
       UpdateViewer();
    }
    else if (commande.Contains("Mass")) {
       label->SetFillColor(kRed);
       UpdateViewer();
       FindZALines();
-      label->SetFillColor(kWhite);
+      label->SetFillColor(fBlackMode ? kBlack : kWhite);
       UpdateViewer();
    }
    else if (commande.Contains("Spider")) {
       label->SetFillColor(kRed);
       UpdateViewer();
       SpiderIdentification();
-      label->SetFillColor(kWhite);
+      label->SetFillColor(fBlackMode ? kBlack : kWhite);
       UpdateViewer();
    }
    else if (commande.Contains("More")) {
       label->SetFillColor(kRed);
       UpdateViewer();
       SuggestMoreAction();
-      label->SetFillColor(kWhite);
+      label->SetFillColor(fBlackMode ? kBlack : kWhite);
       UpdateViewer();
    }
    else if (commande.Contains("Delete")) {
       if (!TheGrid) return;
       Int_t color = label->GetFillColor();
       if (color == kRed) {
-         label->SetFillColor(kWhite);
+         label->SetFillColor(fBlackMode ? kBlack : kWhite);
          dlmode = false;
          UpdateViewer();
       }
-      else if (color == kWhite) {
+      else if (color == kWhite || color == kBlack) {
          label->SetFillColor(kRed);
          dlmode = true;
          UpdateViewer();
@@ -1268,10 +1267,10 @@ void KVIDGridEditor::SetEditable(TPaveLabel* label)
    if (TheGrid) {
       Bool_t iseditable = TheGrid->IsEditable();
       TheGrid->SetEditable(!iseditable);
-      if (iseditable) label->SetFillColor(kWhite);
+      if (iseditable) label->SetFillColor(fBlackMode ? kBlack : kWhite);
       else label->SetFillColor(kRed);
    }
-   else label->SetFillColor(kWhite);
+   else label->SetFillColor(fBlackMode ? kBlack : kWhite);
    UpdateViewer();
    return;
 }
@@ -1301,7 +1300,7 @@ void KVIDGridEditor::SelectLines(const Char_t* label)
       selectmode = false;
    }
    if (title.Contains("Select")) {
-      if (color == kWhite) {
+      if (color == kWhite || color == kBlack) {
          selectmode = false;
          ResetColor(ListOfLines);
          ListOfLines->Clear();
@@ -1346,10 +1345,10 @@ void KVIDGridEditor::NewLine()
 
    TheGrid->DrawAndAdd("ID", cut_class.Data());
 
-   label->SetFillColor(kWhite);
-   UpdateViewer();
+   label->SetFillColor(fBlackMode ? kBlack : kWhite);
+   if (fBlackMode) ResetColor(TheGrid->GetIdentifiers());
 
-   drawmode = false;
+   UpdateViewer();
    if (fDebug) cout << "INFO: KVIDGridEditor::NewLine(): New Line has been added to the current grid..." << endl;
    return;
 }
@@ -1400,10 +1399,9 @@ void KVIDGridEditor::NewCut()
    cut_class.Prepend("KVIDCut");
    TheGrid->DrawAndAdd("CUT", cut_class.Data());
 
-   label->SetFillColor(kWhite);
+   label->SetFillColor(fBlackMode ? kBlack : kWhite);
    UpdateViewer();
 
-   drawmode = false;
    if (fDebug) cout << "INFO: KVIDGridEditor::NewCut(): New Cut has been added to the current grid..." << endl;
    return;
 }
@@ -2108,8 +2106,8 @@ void KVIDGridEditor::ResetColor(KVIDentifier* Ident)
 {
    if (!TheGrid) return;
    if (!(TheGrid->GetCuts()->Contains(Ident))) {
-      Ident->SetLineColor(kBlack);
-      Ident->SetMarkerColor(kBlack);
+      Ident->SetLineColor(fBlackMode ? kGray : kBlack);
+      Ident->SetMarkerColor(fBlackMode ? kGray : kBlack);
    }
    else {
       Ident->SetLineColor(kRed);
@@ -2253,6 +2251,113 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
          UpdateViewer();
          break;
 
+      case kKey_o:
+         x0 = 0.;
+         y0 = 0.;
+         SetPivot(x0, y0);
+         SetPiedestal(0.0, 0.0);
+         UpdateViewer();
+         break;
+
+      case kKey_b:
+         if (fBlackMode) {
+            fBlackMode = false;
+            if (fJoelMode) {
+               fPad->SetFillStyle(1001);
+               fPad->GetFrame()->SetFillStyle(1001);
+            }
+            fPad->SetFillColor(kWhite);
+            fPad->GetFrame()->SetFillColor(kWhite);
+            gStyle->SetPalette(55);
+            TheHisto->GetXaxis()->SetAxisColor(kBlack);
+            TheHisto->GetYaxis()->SetAxisColor(kBlack);
+            TheHisto->GetXaxis()->SetLabelColor(kBlack);
+            TheHisto->GetYaxis()->SetLabelColor(kBlack);
+
+            SelectedColor = kOrange + 1;
+
+            lplabel->Execute("SetFillColor", "kWhite");
+            lplabel->Execute("SetTextColor", "kBlack");
+            lplabel->Execute("SetLineColor", "kBlack");
+
+            lplabel2->Execute("SetFillColor", "kWhite");
+            lplabel2->Execute("SetTextColor", "kBlack");
+            lplabel2->Execute("SetLineColor", "kBlack");
+
+            lplabel3->Execute("SetFillColor", "kWhite");
+            lplabel3->Execute("SetTextColor", "kBlack");
+            lplabel3->Execute("SetLineColor", "kBlack");
+
+            lplabel4->Execute("SetFillColor", "kWhite");
+            lplabel4->Execute("SetTextColor", "kBlack");
+            lplabel4->Execute("SetLineColor", "kBlack");
+
+            TIter it(lplabel5);
+            TPaveLabel* dummy = 0;
+            while ((dummy = (TPaveLabel*)it()))
+               if (dummy != modulator) {
+                  dummy->SetFillColor(kWhite);
+                  dummy->SetTextColor(kBlack);
+                  dummy->SetLineColor(kBlack);
+               }
+
+         }
+         else {
+            fBlackMode = true;
+            if (fJoelMode) {
+               fPad->SetFillStyle(3905);
+               fPad->SetFillColor(kBlack);
+               fPad->GetFrame()->SetFillStyle(3905);
+               fPad->GetFrame()->SetFillColor(kBlack);
+               gStyle->SetHatchesSpacing(1.5);
+               gStyle->SetHatchesLineWidth(17);
+            }
+            else {
+               fPad->SetFillColor(kBlack);
+               fPad->GetFrame()->SetFillColor(kBlack);
+               gStyle->SetPalette(56);
+               TheHisto->GetXaxis()->SetAxisColor(kWhite);
+               TheHisto->GetYaxis()->SetAxisColor(kWhite);
+               TheHisto->GetXaxis()->SetLabelColor(kWhite);
+               TheHisto->GetYaxis()->SetLabelColor(kWhite);
+
+               SelectedColor = kGreen;
+
+               lplabel->Execute("SetFillColor", "kBlack");
+               lplabel->Execute("SetTextColor", "kWhite");
+               lplabel->Execute("SetLineColor", "kWhite");
+
+               lplabel2->Execute("SetFillColor", "kBlack");
+               lplabel2->Execute("SetTextColor", "kWhite");
+               lplabel2->Execute("SetLineColor", "kWhite");
+
+               lplabel3->Execute("SetFillColor", "kBlack");
+               lplabel3->Execute("SetTextColor", "kWhite");
+               lplabel3->Execute("SetLineColor", "kWhite");
+
+               lplabel4->Execute("SetFillColor", "kBlack");
+               lplabel4->Execute("SetTextColor", "kWhite");
+               lplabel4->Execute("SetLineColor", "kWhite");
+
+               TIter it(lplabel5);
+               TPaveLabel* dummy = 0;
+               while ((dummy = (TPaveLabel*)it()))
+                  if (dummy != modulator) {
+                     dummy->SetFillColor(kBlack);
+                     dummy->SetTextColor(kWhite);
+                     dummy->SetLineColor(kWhite);
+                  }
+
+            }
+         }
+         ResetColor(TheGrid->GetIdentifiers());
+         UpdateViewer();
+         break;
+
+      case kKey_j:
+         fJoelMode = !fJoelMode;
+         break;
+
       case kKey_d:
          label = (TPaveLabel*)lplabel4->FindObject("Delete");
          DispatchOrder(label);
@@ -2299,9 +2404,9 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
       case kKey_z:
          label = (TPaveLabel*)lplabel3->FindObject("Select");
          color = label->GetFillColor();
-         lplabel3->Execute("SetFillColor", "kWhite");
-         if (color == kWhite) label->SetFillColor(kGreen);
-         if (color == kGreen)  label->SetFillColor(kWhite);
+         lplabel3->Execute("SetFillColor", fBlackMode ? "kBlack" : "kWhite");
+         if (color == kWhite || color == kBlack) label->SetFillColor(kGreen);
+         if (color == kGreen)  label->SetFillColor(fBlackMode ? kBlack : kWhite);
          SelectLines("Select");
          UpdateViewer();
          break;
@@ -2434,9 +2539,9 @@ void KVIDGridEditor::SelectTrans(TPaveLabel* label)
    if (!label) return;
 
    Int_t color = label->GetFillColor();
-   lplabel->Execute("SetFillColor", "kWhite");
-   if (color == kWhite) label->SetFillColor(kRed);
-   else if (color == kRed) label->SetFillColor(kWhite);
+   lplabel->Execute("SetFillColor", fBlackMode ? "kBlack" : "kWhite");
+   if (color == kWhite || color == kBlack) label->SetFillColor(kRed);
+   else if (color == kRed) label->SetFillColor(fBlackMode ? kBlack : kWhite);
 
    return;
 }
