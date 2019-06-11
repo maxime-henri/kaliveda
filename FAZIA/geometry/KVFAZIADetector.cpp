@@ -217,7 +217,7 @@ Double_t KVFAZIADetector::GetCalibratedEnergy()
 {
    //Set up calibrators for this detector. Call once name has been set.
 
-   if (fChannelToEnergy->GetStatus()) {
+   if (fChannelToEnergy && fChannelToEnergy->GetStatus()) {
       return fChannelToEnergy->Compute(fChannel);
    }
    return 0;
@@ -240,7 +240,7 @@ Double_t KVFAZIADetector::GetCalibratedVolt()
 {
    //Set up calibrators for this detector. Call once name has been set.
 
-   if (fChannelToVolt->GetStatus()) {
+   if (fChannelToVolt && fChannelToVolt->GetStatus()) {
       return fChannelToVolt->Compute(fChannel);
    }
    return 0;
