@@ -2106,8 +2106,8 @@ void KVIDGridEditor::ResetColor(KVIDentifier* Ident)
 {
    if (!TheGrid) return;
    if (!(TheGrid->GetCuts()->Contains(Ident))) {
-      Ident->SetLineColor(fBlackMode ? kGray : kBlack);
-      Ident->SetMarkerColor(fBlackMode ? kGray : kBlack);
+      Ident->SetLineColor(fBlackMode ? kBlue : kBlack);
+      Ident->SetMarkerColor(fBlackMode ? kBlue : kBlack);
    }
    else {
       Ident->SetLineColor(kRed);
@@ -2325,7 +2325,7 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
                TheHisto->GetXaxis()->SetLabelColor(kWhite);
                TheHisto->GetYaxis()->SetLabelColor(kWhite);
 
-               SelectedColor = kGreen;
+               SelectedColor = kMagenta;
 
                lplabel->Execute("SetFillColor", "kBlack");
                lplabel->Execute("SetTextColor", "kWhite");
