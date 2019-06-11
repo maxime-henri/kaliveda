@@ -2268,6 +2268,8 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
             }
             fPad->SetFillColor(kWhite);
             fPad->GetFrame()->SetFillColor(kWhite);
+            gStyle->SetFrameFillColor(kWhite);
+            gROOT->ForceStyle();
             gStyle->SetPalette(55);
             TheHisto->GetXaxis()->SetAxisColor(kBlack);
             TheHisto->GetYaxis()->SetAxisColor(kBlack);
@@ -2315,6 +2317,8 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
             else {
                fPad->SetFillColor(kBlack);
                fPad->GetFrame()->SetFillColor(kBlack);
+               gStyle->SetFrameFillColor(kBlack);
+               gROOT->ForceStyle();
                gStyle->SetPalette(56);
                TheHisto->GetXaxis()->SetAxisColor(kWhite);
                TheHisto->GetYaxis()->SetAxisColor(kWhite);
