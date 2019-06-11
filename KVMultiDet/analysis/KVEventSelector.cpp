@@ -333,7 +333,7 @@ Bool_t KVEventSelector::Process(Long64_t entry)
          printf(" CpuSys = %f  s.    CpuUser = %f s.    ResMem = %f MB   VirtMem = %f MB\n",
                 pid.fCpuSys, pid.fCpuUser, pid.fMemResident / 1024., pid.fMemVirtual / 1024.);
       }
-      KVClassMonitor::GetInstance()->Check();
+      //KVClassMonitor::GetInstance()->Check();
    }
    GetEntry(entry);
    if (gDataAnalyser) gDataAnalyser->preAnalysis();
