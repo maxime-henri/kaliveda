@@ -6,8 +6,11 @@
 #pragma link C++ nestedclasses;
 #pragma link C++ nestedtypedefs;
 #pragma link C++ class KVACQParam+;
+#pragma link C++ class KVACQParamSignal+;
 #pragma link C++ class KVCalibrator-;//customised streamer
 #pragma link C++ class KVDetector+;
+#pragma link C++ class KVDetectorSignal+;
+#pragma link C++ class KVCalibratedSignal+;
 #pragma link C++ class KVTelescope+;
 #pragma link C++ class KVGroup+;
 #pragma link C++ class KVASGroup+;
