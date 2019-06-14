@@ -64,18 +64,18 @@ void KVACQParam::init()
 
 //_________________________________________________________________________
 KVACQParam::KVACQParam()
+   : KVBase()
 {
    //default constructor
    init();
 }
 
 //_________________________________________________________________________
-KVACQParam::KVACQParam(const Char_t* parname)
+KVACQParam::KVACQParam(const TString& name, const TString& type)
+   : KVBase(name, type)
 {
-   //constructor with name
-   //'parname' = parameter name associated with this object
+   // Make acquisition parameter with given name & type.
    init();
-   SetName(parname);
 }
 
 //

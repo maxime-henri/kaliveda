@@ -47,15 +47,13 @@ void KVINDRADetector::AddACQParamType(const Char_t* type)
    // Then for the dataset 'e613', calling GetACQParam("T") for the detector
    // SI_0101 will return the parameter with name "SI_0101_TOF"
 
-   KVACQParam* par = new KVACQParam();
    TString extension = gDataSet->GetDataSetEnv(Form("KVACQParam.%s.%s", GetName(), type), type);
    TString name;
    name = this->GetName();
    name.Append("_");
    name.Append(extension.Data());
-   par->SetName(name);
-   par->SetType(type);
-   AddACQParam(par);
+
+   AddACQParam(new KVACQParam(name, type));
 }
 
 //________________________________________________________________________________

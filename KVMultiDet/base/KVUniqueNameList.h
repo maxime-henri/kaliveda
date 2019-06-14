@@ -68,7 +68,7 @@ public:
       return save;
    }
 
-   ClassDef(KVUniqueNameList, 2) //Optimised list in which objects can only be placed once
+   ClassDef(KVUniqueNameList, 2) //Optimised list in which objects with the same name can only be placed once
 };
 
 #endif
