@@ -30,7 +30,8 @@ protected:
    Double_t* fPar;              //[fParamNumber] array of parameters
    KVDetector* fDetector;       //Detector to which this calibration corresponds
    Bool_t fReady;               //=kTRUE if the detector is calibrated i.e. if the formula has been set up
-
+   TString fInputSignal;        //type of signal used as input
+   TString fOutputSignal;       //type of output calibrated signal
 
 public:
    KVCalibrator();
@@ -75,7 +76,13 @@ public:
       fReady = ready;
    };
    virtual void Print(Option_t* opt = "") const;
-   virtual void Reset();
+   virtual void Reset()
+   {
+      for (Int_t i = 0; i < fParamNumber; i++) {
+         fPar[i] = 0;
+      }
+      SetStatus(kFALSE);
+   }
    void SetParameters(Double_t val, ...);
    virtual Double_t Compute(Double_t x) const = 0;
    virtual Double_t operator()(Double_t x) = 0;
@@ -95,16 +102,24 @@ public:
 
    static KVCalibrator* MakeCalibrator(const Char_t* type);
    virtual void SetOptions(const KVNameValueList&);
+   void SetInputSignalType(const TString& type)
+   {
+      fInputSignal = type;
+   }
+   void SetOutputSignalType(const TString& type)
+   {
+      fOutputSignal = type;
+   }
+   TString GetInputSignalType() const
+   {
+      return fInputSignal;
+   }
+   TString GetOutputSignalType() const
+   {
+      return fOutputSignal;
+   }
 
    ClassDef(KVCalibrator, 1)    //Base class for calibration of detectors
 };
-
-inline void KVCalibrator::Reset()
-{
-   for (Int_t i = 0; i < fParamNumber; i++) {
-      fPar[i] = 0;
-   }
-   SetStatus(kFALSE);
-}
 
 #endif

@@ -1427,8 +1427,14 @@ void KVMultiDetArray::SetCalibrators()
 
 void KVMultiDetArray::SetCalibratorParameters(KVDBRun* r, const TString& myname)
 {
+   // Sets up calibrators for all detectors with a defined calibration for run
    // Set parameters for all detectors with links to table "Calibrations" for run
    // If 'myname' is given, we look in "myname.Calibrations"
+
+   //Reset all calibrators of all detectors first
+   TIter next(GetDetectors());
+   KVDetector* kvd;
+   while ((kvd = (KVDetector*) next())) kvd->RemoveCalibrators();
 
    TString tabname = (myname != "" ? Form("%s.Calibrations", myname.Data()) : "Calibrations");
    Info("SetCalibratorParameters", "For array %s in table %s", GetName(), tabname.Data());
@@ -1448,47 +1454,30 @@ void KVMultiDetArray::SetCalibratorParameters(KVDBRun* r, const TString& myname)
          Warning("SetCalibratorParameters", "Got parameters for unknown detector: %s", dbps->GetName());
          continue;
       }
-      KVCalibrator* cal = det->GetCalibrator(dbps->GetTitle());
-      // Check if calibrator has right class if one was specified in parameter set
-      // This also allows to create the calibrator if it does not exist
-      if (dbps->HasParameter("CalibClass")) {
-
-         KVNameValueList class_options;
-         KVString clop;
-         if (dbps->HasParameter("CalibOptions")) clop = dbps->GetStringParameter("CalibOptions");
-         if (clop != "") {
-            clop.Begin(",");
-            while (!clop.End()) {
-               KVString clopp = clop.Next(true);
-               clopp.Begin("=");
-               KVString par(clopp.Next(true)), val(clopp.Next(true));
-               class_options.SetValue(par, val);
-            }
-         }
-         // make sure calibrator exists & is of right class
-         // if not we replace it
-         if (cal) {
-            if (dbps->GetStringParameter("CalibClass") != cal->ClassName()) {
-               // detector has calibrator of wrong class
-               cal = KVCalibrator::MakeCalibrator(dbps->GetStringParameter("CalibClass"));
-               cal->SetType(dbps->GetTitle());
-               if (clop != "") cal->SetOptions(class_options);
-               det->ReplaceCalibrator(dbps->GetTitle(), cal);
-            }
-         }
-         else {
-            // detector had no calibrator of right type
-            cal = KVCalibrator::MakeCalibrator(dbps->GetStringParameter("CalibClass"));
-            cal->SetType(dbps->GetTitle());
-            if (clop != "") cal->SetOptions(class_options);
-            det->AddCalibrator(cal);
-         }
-      }
-
-      if (!cal) {
-         Warning("SetCalibratorParameters", "Detector %s has no calibrator of type: %s", dbps->GetName(), dbps->GetTitle());
+      if (!dbps->HasParameter("CalibClass")) {
+         Warning("SetCalibratorParameters", "No class defined for calibrator (CalibClass): %s [%s]", dbps->GetName(), dbps->GetTitle());
          continue;
       }
+
+      KVNameValueList class_options;
+      KVString clop;
+      if (dbps->HasParameter("CalibOptions")) clop = dbps->GetStringParameter("CalibOptions");
+      if (clop != "") {
+         clop.Begin(",");
+         while (!clop.End()) {
+            KVString clopp = clop.Next(true);
+            clopp.Begin("=");
+            KVString par(clopp.Next(true)), val(clopp.Next(true));
+            class_options.SetValue(par, val);
+         }
+      }
+      KVCalibrator* cal = KVCalibrator::MakeCalibrator(dbps->GetStringParameter("CalibClass"));
+      cal->SetType(dbps->GetTitle());
+      if (clop != "") cal->SetOptions(class_options);
+      cal->SetInputSignalType(dbps->GetStringParameter("SignalIn"));
+      cal->SetOutputSignalType(dbps->GetStringParameter("SignalOut"));
+      det->AddCalibrator(cal);
+
       if (dbps->GetParamNumber() > cal->GetNumberParams()) {
          Warning("SetCalibratorParameters", "Wrong number of parameters (%d) for calibrator %s for detector %s : should be %d",
                  dbps->GetParamNumber(), dbps->GetTitle(), dbps->GetName(), cal->GetNumberParams());
@@ -3241,7 +3230,8 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
    //
    //~~~~~~~~~~~~~
    // RunList:                                 0-999999
-   // Signal:                                  PG
+   // SignalIn:                                PG
+   // SignalOut:                               Volts
    // CalibType:                               Channel-Volt PG
    // CalibClass:                              FunctionCal
    // CalibOptions:                            func=pol3,min=0,max=1
@@ -3287,19 +3277,27 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
 
    // read options from file
    KVNameValueList options;
-   KVString opt_list = "RunList Signal CalibType CalibClass CalibOptions";
+   KVString opt_list = "RunList SignalIn SignalOut CalibType CalibClass CalibOptions";
    opt_list.Begin(" ");
    while (!opt_list.End()) {
       KVString opt = opt_list.Next();
       options.SetValue(opt, env.GetValue(opt, ""));
    }
 
-   if (options.GetTStringValue("Signal") == "") {
-      Error("ReadCalibFile", "No signal defined");
+   if (options.GetTStringValue("SignalIn") == "") {
+      Error("ReadCalibFile", "No input signal defined : SignalIn");
+      return;
+   }
+   if (options.GetTStringValue("SignalOut") == "") {
+      Error("ReadCalibFile", "No output signal defined : SignalOut");
       return;
    }
    if (options.GetTStringValue("CalibType") == "") {
-      Error("ReadCalibFile", "No calibration type defined");
+      Error("ReadCalibFile", "No calibration type defined : CalibType");
+      return;
+   }
+   if (options.GetTStringValue("CalibClass") == "") {
+      Error("ReadCalibFile", "No KVCalibrator class defined : CalibClass");
       return;
    }
    Bool_t check_class(options.GetTStringValue("CalibClass") != "");
@@ -3332,6 +3330,8 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
 
       KVString lval(rec->GetValue());
       par = new KVDBParameterSet(sname.Data(), options.GetStringValue("CalibType"), lval.GetNValues(","));
+      par->SetParameter("SignalIn", options.GetStringValue("SignalIn"));
+      par->SetParameter("SignalOut", options.GetStringValue("SignalOut"));
       if (check_class) {
          // put infos on required calibrator class into database so that it can be replaced
          // as needed in SetCalibratorParameters

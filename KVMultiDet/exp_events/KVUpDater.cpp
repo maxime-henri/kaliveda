@@ -149,9 +149,6 @@ void KVUpDater::SetIDGrids(UInt_t run)
 void KVUpDater::SetCalibrationParameters(UInt_t run)
 {
    //Set calibration parameters for this run.
-   //This will:
-   //      reset all the calibrators of all the detectors ready to receive the calibrators for the run (handled by child classes),
-   //      set calibration parameters for the run
 
    cout << "Setting calibration parameters of multidetector array for run " << run << ":" <<
         endl;
@@ -159,18 +156,6 @@ void KVUpDater::SetCalibrationParameters(UInt_t run)
    if (!kvrun) {
       Error("SetParameters(UInt_t)", "Run %u not found in database!", run);
       return;
-   }
-   //Reset all calibrators of all detectors first
-   TIter next(fArray->GetDetectors());
-   KVDetector* kvd;
-   KVCalibrator* kvc;
-   while ((kvd = (KVDetector*) next())) {
-      if (kvd->GetListOfCalibrators()) {
-         TIter next_cal(kvd->GetListOfCalibrators());
-         while ((kvc = (KVCalibrator*) next_cal())) {
-            kvc->Reset();
-         }
-      }
    }
    SetCalibParameters(kvrun);
 }
