@@ -35,6 +35,7 @@ $Id: KVDetector.h,v 1.71 2009/05/22 14:45:40 ebonnet Exp $
 #include "Binary_t.h"
 #include "KVGeoDetectorNode.h"
 #include "KVUniqueNameList.h"
+#include "KVDetectorSignal.h"
 
 class KVGeoStrucElement;
 class KVGroup;
@@ -85,6 +86,9 @@ private:
       return KVPosition::GetShape();
    }
    TString fKVDetectorFiredACQParameterListFormatString;//!
+
+   KVUniqueNameList fSignals;//! list of signals associated with detector
+
 protected:
 
    TString fFName;              //!dynamically generated full name of detector
@@ -241,7 +245,12 @@ public:
       return fCalibrators;
    }
    virtual void RefreshCalibratorPointers() {}
-   virtual Bool_t IsCalibrated() const;
+   virtual Bool_t IsCalibrated() const
+   {
+      // A detector is considered to be calibrated if it has
+      // a signal "Energy" available
+      return HasSignal("Energy");
+   }
 
    virtual void Clear(Option_t* opt = "");
    virtual void Reset(Option_t* opt = "")
@@ -294,6 +303,39 @@ public:
    virtual void SetACQParams();
    virtual void SetCalibrators();
    virtual void RemoveCalibrators();
+
+   Double_t GetSignalValue(const TString& type) const
+   {
+      // Return value of signal of given type associated with detector
+      // Some signals require the necessary calibrators to be present & initialised
+      // If the signal is not available, returns 0.
+
+      KVDetectorSignal* s = GetSignal(type);
+      return (s ? s->GetValue() : 0);
+   }
+   Double_t GetSignalInverseValue(const TString& output, Double_t value, const TString& input) const
+   {
+      // Calculate the value of the input signal for a given value of the output signal.
+      // This uses the inverse calibrations of all intermediate calibrators.
+      // If the output signal is not defined, or if input & output are not related,
+      // this returns 0.
+
+      KVDetectorSignal* s = GetSignal(output);
+      return (s ? s->GetInverseValue(value, input) : 0);
+   }
+   KVDetectorSignal* GetSignal(const TString& type) const
+   {
+      // Return the signal with given type, if defined for this detector
+      // If signal not defined, returns nullptr.
+
+      return fSignals.get_object<KVDetectorSignal>(type);
+   }
+   Bool_t HasSignal(const TString& type) const
+   {
+      // Return kTRUE if signal with given type is defind for detector
+      return (GetSignal(type) != nullptr);
+   }
+
 
    virtual void AddIDTelescope(TObject* idt);
    KVList* GetIDTelescopes()
@@ -473,6 +515,11 @@ public:
    {
       // Return name of multidetector array this detector belongs to
       return fNameOfArray;
+   }
+
+   const KVSeqCollection& GetListOfSignals() const
+   {
+      return fSignals;
    }
 
    ClassDef(KVDetector, 10)      //Base class for the description of detectors in multidetector arrays

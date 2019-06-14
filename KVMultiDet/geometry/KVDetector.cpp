@@ -18,6 +18,8 @@
 #include "TGeoBBox.h"
 #include "TGeoArb8.h"
 #include "TGeoTube.h"
+#include "KVACQParamSignal.h"
+#include "KVCalibratedSignal.h"
 
 #include <TGeoPhysicalNode.h>
 //#include <KVGeoDNTrajectory.h>
@@ -128,6 +130,7 @@ void KVDetector::init()
    fSingleLayer = kTRUE;
    fNode.SetDetector(this);
    SetKVDetectorFiredACQParameterListFormatString();
+   fSignals.SetOwner();
 }
 
 void KVDetector::SetKVDetectorFiredACQParameterListFormatString()
@@ -457,18 +460,31 @@ const Char_t* KVDetector::GetArrayName()
 //_____________________________________________________________________________________
 Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
 {
-   //Associate a calibration with this detector.
-   //If the calibrator object has the same class and type
-   //as an existing object in the list (see KVCalibrator::IsEqual),
-   //it will not be added to the list
-   //(avoids duplicate calibrators) and the method returns kFALSE.
+   // Associate a calibration with this detector.
+   // This will add a new signal to the list of the detector's signals
 
    if (!cal) return kFALSE;
    if (!fCalibrators)
       fCalibrators = new KVList();
-   if (fCalibrators->FindObject(cal)) return kFALSE;
+
    fCalibrators->Add(cal);
    cal->SetDetector(this);
+
+   // add new signal
+   KVDetectorSignal* in  = GetSignal(cal->GetInputSignalType());
+   if (!in) {
+      Warning("AddCalibrator", "%s : input signal %s not found for calibrator %s. No output signal created.",
+              GetName(), cal->GetInputSignalType().Data(), cal->GetType());
+   }
+   else {
+      if (cal->GetOutputSignalType() == "") {
+         Warning("AddCalibrator", "%s : output signal not defined for calibrator %s. No output signal created.",
+                 GetName(), cal->GetType());
+      }
+      else
+         fSignals.Add(new KVCalibratedSignal(in, cal));
+   }
+
    RefreshCalibratorPointers();
    return kTRUE;
 }
@@ -497,11 +513,12 @@ void KVDetector::AddACQParam(KVACQParam* par)
    // Add given acquisition parameter to this detector.
 
    if (!fACQParams) {
-      fACQParams = new KVList();
+      fACQParams = new KVList;
       fACQParams->SetName(Form("List of acquisition parameters for detector %s", GetName()));
    }
    par->SetDetector(this);
    fACQParams->Add(par);
+   fSignals.Add(new KVACQParamSignal(par));
 }
 
 //________________________________________________________________________________
@@ -577,24 +594,6 @@ void KVDetector::Clear(Option_t* opt)
    fEResforEinc = -1.;
 }
 
-//______________________________________________________________________________
-Bool_t KVDetector::IsCalibrated() const
-{
-   //Returns true if the detector has been calibrated
-   //i.e. if
-   //  -  it has associated calibrators
-   //  -  ALL of the calibrators are ready
-   if (GetListOfCalibrators()) {
-      TIter next(GetListOfCalibrators());
-      KVCalibrator* cal;
-      while ((cal = (KVCalibrator*) next())) {
-         if (!cal->GetStatus())
-            return kFALSE;
-      }
-   }
-   return kTRUE;
-}
-
 void KVDetector::AddAbsorber(KVMaterial* mat)
 {
    // Add a layer of absorber material to the detector
@@ -650,9 +649,25 @@ void KVDetector::SetCalibrators()
 
 void KVDetector::RemoveCalibrators()
 {
-   //Removes all calibrations associated to this detector: in other words, we delete all
-   //the KVCalibrator objects in list fCalibrators.
-   if (fCalibrators) fCalibrators->Delete();
+   // Removes all calibrations associated to this detector: in other words, we delete all
+   // the KVCalibrator objects in list fCalibrators.
+   //
+   // We also destroy all signals provided by these calibrators
+
+   if (fCalibrators) {
+      KVCalibrator* K;
+      TIter it(fCalibrators);
+      while ((K = (KVCalibrator*)it())) {
+         if (K->GetOutputSignalType() != "") {
+            KVDetectorSignal* ds = GetSignal(K->GetOutputSignalType());
+            if (ds) {
+               fSignals.Remove(ds);
+               delete ds;
+            }
+         }
+      }
+      fCalibrators->Delete();
+   }
 }
 
 //___________________________________________________________________________//
