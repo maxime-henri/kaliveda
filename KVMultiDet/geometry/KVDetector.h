@@ -249,7 +249,7 @@ public:
    {
       // A detector is considered to be calibrated if it has
       // a signal "Energy" available
-      return HasSignal("Energy");
+      return HasValue("Energy");
    }
 
    virtual void Clear(Option_t* opt = "");
@@ -304,36 +304,36 @@ public:
    virtual void SetCalibrators();
    virtual void RemoveCalibrators();
 
-   Double_t GetSignalValue(const TString& type) const
+   Double_t GetValue(const TString& type) const
    {
       // Return value of signal of given type associated with detector
       // Some signals require the necessary calibrators to be present & initialised
       // If the signal is not available, returns 0.
 
-      KVDetectorSignal* s = GetSignal(type);
+      KVDetectorSignal* s = GetDetectorSignal(type);
       return (s ? s->GetValue() : 0);
    }
-   Double_t GetSignalInverseValue(const TString& output, Double_t value, const TString& input) const
+   Double_t GetInverseValue(const TString& output, Double_t value, const TString& input) const
    {
       // Calculate the value of the input signal for a given value of the output signal.
       // This uses the inverse calibrations of all intermediate calibrators.
       // If the output signal is not defined, or if input & output are not related,
       // this returns 0.
 
-      KVDetectorSignal* s = GetSignal(output);
+      KVDetectorSignal* s = GetDetectorSignal(output);
       return (s ? s->GetInverseValue(value, input) : 0);
    }
-   KVDetectorSignal* GetSignal(const TString& type) const
+   KVDetectorSignal* GetDetectorSignal(const TString& type) const
    {
       // Return the signal with given type, if defined for this detector
       // If signal not defined, returns nullptr.
 
       return fSignals.get_object<KVDetectorSignal>(type);
    }
-   Bool_t HasSignal(const TString& type) const
+   Bool_t HasValue(const TString& type) const
    {
       // Return kTRUE if signal with given type is defind for detector
-      return (GetSignal(type) != nullptr);
+      return (GetDetectorSignal(type) != nullptr);
    }
 
 

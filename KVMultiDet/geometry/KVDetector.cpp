@@ -471,7 +471,7 @@ Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
    cal->SetDetector(this);
 
    // add new signal
-   KVDetectorSignal* in  = GetSignal(cal->GetInputSignalType());
+   KVDetectorSignal* in  = GetDetectorSignal(cal->GetInputSignalType());
    if (!in) {
       Warning("AddCalibrator", "%s : input signal %s not found for calibrator %s. No output signal created.",
               GetName(), cal->GetInputSignalType().Data(), cal->GetType());
@@ -659,7 +659,7 @@ void KVDetector::RemoveCalibrators()
       TIter it(fCalibrators);
       while ((K = (KVCalibrator*)it())) {
          if (K->GetOutputSignalType() != "") {
-            KVDetectorSignal* ds = GetSignal(K->GetOutputSignalType());
+            KVDetectorSignal* ds = GetDetectorSignal(K->GetOutputSignalType());
             if (ds) {
                fSignals.Remove(ds);
                delete ds;
