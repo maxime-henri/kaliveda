@@ -249,7 +249,7 @@ public:
    {
       // A detector is considered to be calibrated if it has
       // a signal "Energy" available
-      return HasValue("Energy");
+      return HasDetectorSignalValue("Energy");
    }
 
    virtual void Clear(Option_t* opt = "");
@@ -304,7 +304,7 @@ public:
    virtual void SetCalibrators();
    virtual void RemoveCalibrators();
 
-   Double_t GetValue(const TString& type) const
+   Double_t GetDetectorSignalValue(const TString& type) const
    {
       // Return value of signal of given type associated with detector
       // Some signals require the necessary calibrators to be present & initialised
@@ -313,7 +313,7 @@ public:
       KVDetectorSignal* s = GetDetectorSignal(type);
       return (s ? s->GetValue() : 0);
    }
-   Double_t GetInverseValue(const TString& output, Double_t value, const TString& input) const
+   Double_t GetInverseDetectorSignalValue(const TString& output, Double_t value, const TString& input) const
    {
       // Calculate the value of the input signal for a given value of the output signal.
       // This uses the inverse calibrations of all intermediate calibrators.
@@ -330,7 +330,7 @@ public:
 
       return fSignals.get_object<KVDetectorSignal>(type);
    }
-   Bool_t HasValue(const TString& type) const
+   Bool_t HasDetectorSignalValue(const TString& type) const
    {
       // Return kTRUE if signal with given type is defind for detector
       return (GetDetectorSignal(type) != nullptr);
