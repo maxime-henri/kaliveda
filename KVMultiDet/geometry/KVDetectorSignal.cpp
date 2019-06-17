@@ -13,3 +13,14 @@ ClassImp(KVDetectorSignal)
 <!-- */
 // --> END_HTML
 ////////////////////////////////////////////////////////////////////////////////
+
+void KVDetectorSignal::SetDetector(KVDetector* d)
+{
+   fDetector = d;
+}
+
+KVDetector* KVDetectorSignal::GetDetector() const
+{
+   return fDetector;
+}
+

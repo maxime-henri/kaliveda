@@ -519,7 +519,9 @@ void KVDetector::AddACQParam(KVACQParam* par)
    }
    par->SetDetector(this);
    fACQParams->Add(par);
-   fDetSignals.Add(new KVACQParamSignal(par));
+   KVACQParamSignal* ap = new KVACQParamSignal(par);
+   ap->SetDetector(this);
+   fDetSignals.Add(ap);
 }
 
 //________________________________________________________________________________

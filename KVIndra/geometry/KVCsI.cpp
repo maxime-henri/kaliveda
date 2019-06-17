@@ -381,7 +381,7 @@ void KVCsI::SetACQParams()
    // Set acquisition parameters for this CsI.
    // Do not call before detector's name has been set.
    // Initialises member pointers fACQ_R & fACQ_L for (fast) direct access.
-   // Also initialises "TotalLightOutput" output signal
+   // Also initialises "TOT_LIGHT" output signal (corresponds to GetLumiereTotale())
 
    AddACQParamType("R");
    AddACQParamType("L");

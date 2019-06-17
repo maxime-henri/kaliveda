@@ -6,13 +6,18 @@
 
 #include "KVBase.h"
 
+class KVDetector;
+
 class KVDetectorSignal : public KVBase {
+
+   KVDetector* fDetector;//! associated detector
+
 public:
    KVDetectorSignal()
-      : KVBase()
+      : KVBase(), fDetector(nullptr)
    {}
    KVDetectorSignal(const Char_t* type)
-      : KVBase(type)
+      : KVBase(type), fDetector(nullptr)
    {}
    virtual ~KVDetectorSignal()
    {}
@@ -25,6 +30,9 @@ public:
    {
       return 0;
    }
+
+   void SetDetector(KVDetector*);
+   KVDetector* GetDetector() const;
 
    ClassDef(KVDetectorSignal, 1) //Signal associated with detector
 };

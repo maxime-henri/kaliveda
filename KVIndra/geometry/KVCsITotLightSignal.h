@@ -8,18 +8,19 @@
 #include "KVCsI.h"
 
 class KVCsITotLightSignal : public KVDetectorSignal {
-   KVCsI* fCsI;//! the CsI detector in question
 
 public:
    KVCsITotLightSignal(KVCsI* csi)
-      : KVDetectorSignal("TotalLightOutput"), fCsI(csi)
-   {}
+      : KVDetectorSignal("TOT_LIGHT")
+   {
+      SetDetector(csi);
+   }
    virtual ~KVCsITotLightSignal()
    {}
 
    Double_t GetValue() const
    {
-      return fCsI->GetLumiereTotale();
+      return ((KVCsI*)GetDetector())->GetLumiereTotale();
    }
 
    ClassDef(KVCsITotLightSignal, 1) //Return total light output for INDRA CsI detector

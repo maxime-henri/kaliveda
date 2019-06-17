@@ -26,7 +26,7 @@ class KVIDSiCsI: public KVINDRAIDTelescope {
 public:
 
    KVIDSiCsI();
-   virtual ~ KVIDSiCsI();
+   virtual ~ KVIDSiCsI() {}
 
    ClassDef(KVIDSiCsI, 1)       //INDRA identification using Si-CsI matrices
 };

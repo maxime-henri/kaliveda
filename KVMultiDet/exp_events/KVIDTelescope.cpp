@@ -119,7 +119,7 @@ void KVIDTelescope::init()
    fGroup = nullptr;
    fIDGrids = new KVList(kFALSE);
    fIDGrids->SetCleanup(kTRUE);
-   fVarX = fVarY = "";
+   fVarX = fVarY = nullptr;
    fMassIDValidity = nullptr;
 }
 
@@ -230,6 +230,8 @@ void KVIDTelescope::Print(Option_t* opt) const
          cout << opt << "Detector: " << obj->GetName() << endl;
       }
    }
+   if (fVarY) cout << "\n\nIDMapY: Using signal " << fVarY->GetName() << " of detector " << fVarY->GetDetector()->GetName() << endl;
+   if (fVarX) cout << "IDMapX: Using signal " << fVarX->GetName() << " of detector " << fVarX->GetDetector()->GetName() << endl;
 }
 
 //____________________________________________________________________________________
@@ -382,8 +384,74 @@ Bool_t KVIDTelescope::Identify(KVIdentificationResult* idr, Double_t x, Double_t
 
 void KVIDTelescope::SetIDGrid(KVIDGraph* grid)
 {
-   //Add an identification grid to the list of grids used by this telescope.
-   fIDGrids->Add(grid);
+   // Add an identification grid to the list of grids used by this telescope.
+   //
+   // If the grid's VARX and VARY parameters are set and contain the names of valid
+   // detector signals (see formatting rules below) they will be used to set
+   // the fVarX and fVarY member pointers which will be used by GetIDMapX/Y()
+   // in order to perform particle identification using the grid.
+   //
+   // VARX/VARY Formatting
+   //
+   // To be valid, grid VARX/Y parameters should be set as follows:
+   //
+   //~~~~~~~~~~~~~~~~~~
+   //      [det_label]::[signal name]
+   //~~~~~~~~~~~~~~~~~~
+   //
+   // where
+   //
+   //~~~~~~~~~~~~~~~~~~
+   //    [det_label]   = detector label i.e. string returned by KVDetector::GetLabel()
+   //                    method for detector
+   //    [signal_name] = name of a signal defined for the detector, possibly depending
+   //                    on availability of calibration
+   //
+   //    To see all available signals for a detector, use
+   //
+   //         KVDetector::GetListOfDetectorSignals()
+   //~~~~~~~~~~~~~~~~~~
+
+   if (grid) {
+      fIDGrids->Add(grid);
+      fVarX = fVarY = nullptr;
+      fVarX = GetSignalFromGridVar(grid->GetVarX());
+      fVarY = GetSignalFromGridVar(grid->GetVarY());
+   }
+}
+
+KVDetectorSignal* KVIDTelescope::GetSignalFromGridVar(const KVString& var)
+{
+   // Deduce & return pointer to detector signal from grid VARX/VARY parameter
+   //
+   // To be valid, grid VARX/Y parameters should be set as follows:
+   //
+   //~~~~~~~~~~~~~~~~~~
+   //      [det_label]::[signal name]
+   //~~~~~~~~~~~~~~~~~~
+   //
+   // where
+   //
+   //~~~~~~~~~~~~~~~~~~
+   //    [det_label]   = detector label i.e. string returned by KVDetector::GetLabel()
+   //                    method for detector
+   //    [signal_name] = name of a signal defined for the detector, possibly depending
+   //                    on availability of calibration
+   //
+   //    To see all available signals for a detector, use
+   //
+   //         KVDetector::GetListOfDetectorSignals()
+   //~~~~~~~~~~~~~~~~~~
+
+   if (var.GetNValues("::") == 2) {
+      var.Begin("::");
+      KVString det_label = var.Next();
+      KVString sig_type = var.Next();
+      KVDetector* det = (KVDetector*)GetDetectors()->FindObjectByLabel(det_label);
+      if (!det) return nullptr;
+      return det->GetDetectorSignal(sig_type);
+   }
+   return nullptr;
 }
 
 //____________________________________________________________________________________
@@ -414,30 +482,15 @@ KVIDGraph* KVIDTelescope::GetIDGrid(const Char_t* label)
 
 //____________________________________________________________________________________
 
-Double_t KVIDTelescope::GetIDMapX(Option_t* opt)
+Double_t KVIDTelescope::GetIDMapX(Option_t*)
 {
-   //This method should define how to calculate the X-coordinate in a 2D identification map
-   //associated with the ID telescope based on the current state of the detectors.
-   //By default, we assume a dE - E telescope, and so 'X' is equal to the energy measured in the
-   //second detector of the telescope (or zero if there is not a 2nd detector in the telescope)
+   // Returns the value defined as the X-coordinate of the identification grid for this
+   // telescope via its "VARX" parameter.
    //
-   //However, if the detector is not calibrated, GetEnergy will return 0, therefore
-   //if 'opt' is not an empty string (default) we return the value of the acquisition
-   //parameter of type 'opt' associated to the detector
-   //
-   //If an identification grid is associated with the telescope, and if the grid defines
-   //the quantities associated with the two axes, we use this information
+   // If no grid or no parameter is defined, this method returns -1.
 
-   if (GetSize() < 2)
-      return 0.0;
-
-   if (GetIDGrid() && strcmp(GetIDGrid()->GetVarX(), "")) {
-      return GetDetector(2)->GetACQData(GetIDGrid()->GetVarX());
-   }
-   if (strcmp(opt, "")) {
-      return GetDetector(2)->GetACQData(opt);
-   }
-   return GetDetector(2)->GetEnergy();
+   if (fVarX) return fVarX->GetValue();
+   return -1.;
 }
 
 Double_t KVIDTelescope::GetPedestalX(Option_t*)
@@ -460,27 +513,15 @@ Double_t KVIDTelescope::GetPedestalY(Option_t*)
 
 //____________________________________________________________________________________
 
-Double_t KVIDTelescope::GetIDMapY(Option_t* opt)
+Double_t KVIDTelescope::GetIDMapY(Option_t*)
 {
-   //This method should define how to calculate the Y-coordinate in a 2D identification map
-   //associated with the ID telescope based on the current state of the detectors.
-   //By default, we assume a dE - E telescope, and so 'Y' is equal to the energy measured in the
-   //first detector of the telescope.
+   // Returns the value defined as the Y-coordinate of the identification grid for this
+   // telescope via its "VARY" parameter.
    //
-   //However, if the detector is not calibrated, GetEnergy will return 0, therefore
-   //if 'opt' is not an empty string (default) we return the value of the acquisition
-   //parameter of type 'opt' associated to the detector
-   //
-   //If an identification grid is associated with the telescope, and if the grid defines
-   //the quantities associated with the two axes, we use this information
+   // If no grid or no parameter is defined, this method returns -1.
 
-   if (GetIDGrid() && strcmp(GetIDGrid()->GetVarY(), "")) {
-      return GetDetector(1)->GetACQData(GetIDGrid()->GetVarY());
-   }
-   if (strcmp(opt, "")) {
-      return GetDetector(1)->GetACQData(opt);
-   }
-   return GetDetector(1)->GetEnergy();
+   if (fVarY) return fVarY->GetValue();
+   return -1.;
 }
 
 //____________________________________________________________________________________
@@ -490,6 +531,7 @@ void KVIDTelescope::RemoveGrids()
    //Remove all identification grids for this ID telescope
    //Grids are not deleted as this is handled by gIDGridManager
    fIDGrids->Clear();
+   fVarX = fVarY = nullptr;
 }
 
 //____________________________________________________________________________________

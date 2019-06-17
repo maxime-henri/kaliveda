@@ -10,6 +10,8 @@ ClassImp(KVCsITotLightSignal)
 /* -->
 <h2>KVCsITotLightSignal</h2>
 <h4>Return total light output for INDRA CsI detector</h4>
+
+The type of this signal is TOT_LIGHT
 <!-- */
 // --> END_HTML
 ////////////////////////////////////////////////////////////////////////////////
