@@ -72,6 +72,8 @@ protected:
 
    Bool_t fIsFiredFromSignals;
 
+   Int_t fDetTag, fGTTag;
+
    KVCalibrator* fChannelToEnergy;//!To obtain energy from charge
    KVCalibrator* fChannelToVolt;//!To obtain volt from channel
    KVCalibrator* fVoltToEnergy;//!To obtain energy from volt
@@ -436,6 +438,24 @@ public:
    Double_t GetQ3FastFPGAEnergy() const
    {
       return fFastFPGAEnergyQ3;
+   }
+
+   Int_t GetDetTag()
+   {
+      return fDetTag;
+   }
+   void SetDetTag(Int_t dettag)
+   {
+      fDetTag = dettag;
+   }
+
+   Int_t GetGTTag()
+   {
+      return fGTTag;
+   }
+   void SetGTTag(Int_t gttag)
+   {
+      fGTTag = gttag;
    }
 
    Double_t GetSetupParameter(const Char_t* parname);

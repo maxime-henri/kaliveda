@@ -436,6 +436,37 @@ Bool_t KVFAZIA::treat_event(const DAQ::FzEvent& e)
 
    Bool_t good = kTRUE;
 
+   //get info from trigger
+   int ts = e.trinfo_size();
+   uint64_t dt = 0;
+   uint64_t tot = 0;
+   for (Int_t tr = ts - 1; tr >= 0; tr--) {
+      const DAQ::FzTrigInfo& rdtrinfo = e.trinfo(tr);
+      uint64_t triggervalue = rdtrinfo.value();
+      if (tr == ts - 5)       fReconParameters.SetValue("FAZIA.TRIGPAT", (int)triggervalue);
+      else if (tr == ts - 6)  fReconParameters.SetValue64bit("FAZIA.EC", ((triggervalue << 12) + e.ec()));
+      else if (tr == ts - 8)  dt = triggervalue;
+      else if (tr == ts - 9)  fReconParameters.SetValue("FAZIA.TRIGRATE.EXT", 1.*triggervalue / dt);
+      else if (tr == ts - 10) fReconParameters.SetValue("FAZIA.TRIGRATE.MAN", 1.*triggervalue / dt);
+      else if (tr == ts - 11) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 12) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 13) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 14) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 15) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 16) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 17) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 18) fReconParameters.SetValue(Form("FAZIA.TRIGRATE.PAT%d", tr - 2), 1.*triggervalue / dt);
+      else if (tr == ts - 19) {
+         fReconParameters.SetValue("FAZIA.TRIGRATE.TOT", 1.*triggervalue / dt);
+         tot = triggervalue;
+      }
+      else if (tr == ts - 20) {
+         fReconParameters.SetValue("FAZIA.TRIGRATE.VAL", 1.*triggervalue / dt);
+         fReconParameters.SetValue("FAZIA.DEADTIME", 100.*(1. - 1.*triggervalue / tot));
+      }
+      else {}
+   }
+
    for (int b = 0; b < e.block_size(); ++b) {
 
       // check block errors
@@ -466,11 +497,17 @@ Bool_t KVFAZIA::treat_event(const DAQ::FzEvent& e)
                const DAQ::FzData& rdata = rdhit.data(mm);
                int fIdSignal = rdata.type();
 
+               int DetTag = rdhit.dettag();
+               int GTTag = rdhit.gttag();
+               if (DetTag >= 16384 && GTTag < 16384) GTTag += 32768;
+
                //on decompile le HIT
                int fIdQuartet = fQuartet[fIdFee][fIdTel];
                int fIdTelescope = fTelescope[fIdFee][fIdTel];
 
                KVFAZIADetector* det = (KVFAZIADetector*)gFazia->GetDetector(Form("%s-%d", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope));
+               det->SetDetTag(DetTag);
+               det->SetGTTag(GTTag);
 
                if (!rdata.has_energy() && !rdata.has_waveform()) {
                   Warning("treat_event", "[NO DATA] [%s %s]", det->GetName(), FzDataType_str[fIdSignal]);

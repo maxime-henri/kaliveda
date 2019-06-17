@@ -188,6 +188,9 @@ void KVFAZIAGroupReconstructor::PostReconstructionProcessing()
             }
          }
 
+         rnuc->GetParameters()->SetValue("DetTag", det->GetDetTag());
+         rnuc->GetParameters()->SetValue("GTTag", det->GetGTTag());
+
          if (!strcmp(det->GetLabel(), "SI1")) {
             double val = rnuc->GetParameters()->GetDoubleValue(Form("%s.QL1.Amplitude", det->GetName()));
             det->SetQL1Amplitude(val);
