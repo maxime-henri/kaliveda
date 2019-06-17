@@ -174,8 +174,8 @@ Double_t KVSilicon::GetCalibratedEnergy()
    //(we require that at least one acquisition parameter have a value
    //greater than the current pedestal value)
 
-   if (IsCalibrated() && Fired("Pany"))
-      return (fVoltE->Compute(GetVolts()));
+   if (Fired("Pany"))
+      return GetDetectorSignalValue("Energy");
    return 0;
 }
 
@@ -236,6 +236,8 @@ Double_t KVSilicon::GetVolts()
    //from GG to PG produces a discontinuity (unless only GG calibration is available, then
    //we convert PG to GG and use the GG calibration)
    //Returns 0 if no calibration available
+
+   return GetDetectorSignalValue("Volt");
 
    if (fChVoltPG && fChVoltPG->GetStatus()) {
       return GetVoltsFromCanalPG();

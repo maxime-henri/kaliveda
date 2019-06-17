@@ -25,9 +25,6 @@ class KVSilicon: public KVINDRADetector {
 
 protected:
 
-//   KVChannelVolt* fChVoltGG;//!channel-volt conversion (GG)
-//   KVChannelVolt* fChVoltPG;//!channel-volt conversion (PG)
-//   KVVoltEnergy* fVoltE;//!volt-energy conversion
    KVPulseHeightDefect* fPHD;//!pulse height defect
    KVCalibrator* fChVoltGG;//!channel-volt conversion (GG)
    KVCalibrator* fChVoltPG;//!channel-volt conversion (PG)
@@ -61,8 +58,6 @@ public:
 
    Double_t GetPHD(Double_t dE, UInt_t Z);
 
-   inline Bool_t IsCalibrated() const;
-
    virtual void SetMoultonPHDParameters(Double_t a1, Double_t a2, Double_t b1, Double_t b2);
 
    virtual Short_t GetCalcACQParam(KVACQParam*, Double_t) const;
@@ -86,24 +81,6 @@ public:
 
    ClassDef(KVSilicon, 9)       //INDRA forward-rings silicon detector
 };
-
-//____________________________________________________________________________________________
-
-inline Bool_t KVSilicon::IsCalibrated() const
-{
-   //Redefined.
-   //Only one of the channel-volts calibrators needs to be ready,
-   //plus the volts-energy calibrator
-
-   if (fVoltE && fVoltE->GetStatus()) {
-      Bool_t ok_gg = (fChVoltGG != 0) ? fChVoltGG->GetStatus() : 0;
-      Bool_t ok_pg = (fChVoltPG != 0) ? fChVoltPG->GetStatus() : 0;
-      return (ok_gg || ok_pg);
-   }
-
-   return kFALSE;
-}
-
 
 class KVSi75: public KVSilicon {
 public:

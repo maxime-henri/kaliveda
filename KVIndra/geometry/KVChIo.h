@@ -54,7 +54,6 @@ public:
 
    Double_t GetELossMylar(UInt_t z, UInt_t a, Double_t egas = -1.0, Bool_t stopped = kFALSE);
 
-   inline Bool_t IsCalibrated() const;
    virtual Short_t GetCalcACQParam(KVACQParam*, Double_t) const;
 
    virtual void SetPressure(Double_t P /* mbar */)
@@ -74,22 +73,5 @@ public:
 
    ClassDef(KVChIo, 5)          //The ionisation chamber detectors (ChIo) of the INDRA array
 };
-
-//____________________________________________________________________________________________
-
-inline Bool_t KVChIo::IsCalibrated() const
-{
-   //Redefined.
-   //Only one of the channel-volts calibrators needs to be ready,
-   //plus the volts-energy calibrator
-
-   if (fVoltE && fVoltE->GetStatus()) {
-      Bool_t ok_gg = (fChVoltGG != 0) ? fChVoltGG->GetStatus() : 0;
-      Bool_t ok_pg = (fChVoltPG != 0) ? fChVoltPG->GetStatus() : 0;
-      return (ok_gg || ok_pg);
-   }
-
-   return kFALSE;
-}
 
 #endif
