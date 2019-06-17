@@ -87,7 +87,9 @@ private:
    }
    TString fKVDetectorFiredACQParameterListFormatString;//!
 
-   KVUniqueNameList fSignals;//! list of signals associated with detector
+   KVUniqueNameList fDetSignals;//! list of signals associated with detector
+
+   void remove_signal_for_calibrator(KVCalibrator* K);
 
 protected:
 
@@ -328,7 +330,7 @@ public:
       // Return the signal with given type, if defined for this detector
       // If signal not defined, returns nullptr.
 
-      return fSignals.get_object<KVDetectorSignal>(type);
+      return fDetSignals.get_object<KVDetectorSignal>(type);
    }
    Bool_t HasDetectorSignalValue(const TString& type) const
    {
@@ -519,7 +521,14 @@ public:
 
    const KVSeqCollection& GetListOfSignals() const
    {
-      return fSignals;
+      return fDetSignals;
+   }
+   void AddDetectorSignal(KVDetectorSignal* ds)
+   {
+      // Add KVDetectorSignal object to list of detector's signals.
+      // Object ownership is taken over by the detector, i.e. will be deleted by the detector
+
+      fDetSignals.Add(ds);
    }
 
    ClassDef(KVDetector, 10)      //Base class for the description of detectors in multidetector arrays

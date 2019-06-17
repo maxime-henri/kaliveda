@@ -130,7 +130,7 @@ void KVDetector::init()
    fSingleLayer = kTRUE;
    fNode.SetDetector(this);
    SetKVDetectorFiredACQParameterListFormatString();
-   fSignals.SetOwner();
+   fDetSignals.SetOwner();
 }
 
 void KVDetector::SetKVDetectorFiredACQParameterListFormatString()
@@ -482,7 +482,7 @@ Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
                  GetName(), cal->GetType());
       }
       else
-         fSignals.Add(new KVCalibratedSignal(in, cal));
+         fDetSignals.Add(new KVCalibratedSignal(in, cal));
    }
 
    RefreshCalibratorPointers();
@@ -502,6 +502,7 @@ Bool_t KVDetector::ReplaceCalibrator(const Char_t* type, KVCalibrator* cal)
    KVCalibrator* old_cal = GetCalibrator(type);
    if (old_cal) {
       fCalibrators->Remove(old_cal);
+      remove_signal_for_calibrator(old_cal);
       delete old_cal;
    }
    return AddCalibrator(cal);
@@ -518,7 +519,7 @@ void KVDetector::AddACQParam(KVACQParam* par)
    }
    par->SetDetector(this);
    fACQParams->Add(par);
-   fSignals.Add(new KVACQParamSignal(par));
+   fDetSignals.Add(new KVACQParamSignal(par));
 }
 
 //________________________________________________________________________________
@@ -647,6 +648,20 @@ void KVDetector::SetCalibrators()
    ;
 }
 
+void KVDetector::remove_signal_for_calibrator(KVCalibrator* K)
+{
+   // Used when a calibrator object is removed or replaced
+   // We remove and delete the corresponding output signal from the list of detector signals
+
+   if (K->GetOutputSignalType() != "") {
+      KVDetectorSignal* ds = GetDetectorSignal(K->GetOutputSignalType());
+      if (ds) {
+         fDetSignals.Remove(ds);
+         delete ds;
+      }
+   }
+}
+
 void KVDetector::RemoveCalibrators()
 {
    // Removes all calibrations associated to this detector: in other words, we delete all
@@ -658,13 +673,7 @@ void KVDetector::RemoveCalibrators()
       KVCalibrator* K;
       TIter it(fCalibrators);
       while ((K = (KVCalibrator*)it())) {
-         if (K->GetOutputSignalType() != "") {
-            KVDetectorSignal* ds = GetDetectorSignal(K->GetOutputSignalType());
-            if (ds) {
-               fSignals.Remove(ds);
-               delete ds;
-            }
-         }
+         remove_signal_for_calibrator(K);
       }
       fCalibrators->Delete();
    }

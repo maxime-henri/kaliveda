@@ -26,6 +26,7 @@ $Id: KVCsI.cpp,v 1.38 2009/04/09 09:25:43 ebonnet Exp $
 #include "KVIDZAGrid.h"
 #include "KVIDZALine.h"
 #include "KVIDCutLine.h"
+#include <KVCsITotLightSignal.h>
 #include <TCanvas.h>
 #include "TMarker.h"
 #include "KVIDTelescope.h"
@@ -377,15 +378,17 @@ void KVCsI::Print(Option_t* option) const
 
 void KVCsI::SetACQParams()
 {
-   //Set acquisition parameters for this CsI.
-   //Do not call before detector's name has been set.
-   //Initialises member pointers fACQ_R & fACQ_L for (fast) direct access.
+   // Set acquisition parameters for this CsI.
+   // Do not call before detector's name has been set.
+   // Initialises member pointers fACQ_R & fACQ_L for (fast) direct access.
+   // Also initialises "TotalLightOutput" output signal
 
    AddACQParamType("R");
    AddACQParamType("L");
    AddACQParamType("T");
    fACQ_R = GetACQParam("R");
    fACQ_L = GetACQParam("L");
+   AddDetectorSignal(new KVCsITotLightSignal(this));
 }
 
 void KVCsI::SetCalibrators()

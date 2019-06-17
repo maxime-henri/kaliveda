@@ -15,6 +15,7 @@
 #pragma link C++ class KVChIo_e475s-;
 #pragma link C++ class KVCsI-;
 #pragma link C++ class KVCsI_e475s-;
+#pragma link C++ class KVCsITotLightSignal+;
 #pragma link C++ class KVPhoswich+;
 #pragma link C++ class KVBIC-;
 #pragma link C++ class KVSiB-;
