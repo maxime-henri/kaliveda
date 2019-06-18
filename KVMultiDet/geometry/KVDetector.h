@@ -519,7 +519,7 @@ public:
       return fNameOfArray;
    }
 
-   const KVSeqCollection& GetListOfSignals() const
+   const KVSeqCollection& GetListOfDetectorSignals() const
    {
       return fDetSignals;
    }
