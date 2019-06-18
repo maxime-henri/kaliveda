@@ -200,12 +200,22 @@ public:
    void SetGain(Double_t gain);
    Double_t GetGain() const;
 
+   virtual Double_t GetCalibratedEnergy() const
+   {
+      // Returns energy loss in detector calculated using available calibration(s)
+      return GetDetectorSignalValue("Energy");
+   }
    virtual Double_t GetEnergy() const
    {
-      //
-      // Returns energy lost in active layer by particles.
-      //
-      return (GetActiveLayer() ? GetActiveLayer()->GetEnergyLoss() : KVMaterial::GetEnergyLoss());
+      // Returns either the calibrated energy loss measured in the active layer of the detector,
+      // or (if IsSimMode()==kTRUE) the simulated energy losses
+      Double_t ELoss = GetActiveLayer() ? GetActiveLayer()->GetEnergyLoss() : KVMaterial::GetEnergyLoss();
+      if (IsSimMode()) return ELoss; // in simulation mode, return calculated energy loss in active layer
+      if (ELoss > 0) return ELoss;
+      ELoss = GetCalibratedEnergy();
+      if (ELoss < 0) ELoss = 0;
+      SetEnergy(ELoss);
+      return ELoss;
    }
    virtual void SetEnergy(Double_t e) const
    {
@@ -237,7 +247,7 @@ public:
    virtual Float_t GetPedestal(const Char_t* /*name*/) const;
    virtual void SetPedestal(const Char_t* /*name*/, Float_t);
 
-   virtual Bool_t AddCalibrator(KVCalibrator* cal);
+   Bool_t AddCalibrator(KVCalibrator* cal);
    Bool_t ReplaceCalibrator(const Char_t* type, KVCalibrator* cal);
    KVCalibrator* GetCalibrator(const Char_t* name,
                                const Char_t* type) const;

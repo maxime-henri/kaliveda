@@ -166,19 +166,6 @@ Double_t KVSilicon::GetPHD(Double_t dE, UInt_t Z)
    return fPHD->Compute(dE);
 }
 
-//__________________________________________________________________________________________
-Double_t KVSilicon::GetCalibratedEnergy() const
-{
-   //Calculate energy in MeV from coder values.
-   //Returns 0 if calibration not ready or detector not fired
-   //(we require that at least one acquisition parameter have a value
-   //greater than the current pedestal value)
-
-   if (Fired("Pany"))
-      return GetDetectorSignalValue("Energy");
-   return 0;
-}
-
 //____________________________________________________________________________________________
 
 Double_t KVSilicon::GetVoltsFromCanalPG(Double_t chan)
@@ -277,28 +264,6 @@ Double_t KVSilicon::GetEnergyFromVolts(Double_t volts)
 }
 
 //____________________________________________________________________________________________
-
-Double_t KVSilicon::GetEnergy() const
-{
-   //Redefinition of KVDetector::GetEnergy().
-   //If energy lost in active layer is already set (e.g. by calculation of energy loss
-   //of charged particles), return its value.
-   //If not, we calculate it and set it using the values read from coders (if fired)
-   //and any calibrations, if present
-   //
-   //Returns 0 if (i) no calibration present (ii) calibration present but no data in acquisition parameters
-
-   //fELoss already set, return its value
-   Double_t ELoss = KVDetector::GetEnergy();
-   if (IsSimMode()) return ELoss; // in simulation mode, return calculated energy loss in active layer
-   if (ELoss > 0) return ELoss;
-   ELoss = GetCalibratedEnergy();
-   if (ELoss < 0) ELoss = 0;
-   SetEnergy(ELoss);
-   return ELoss;
-}
-
-//______________________________________________________________________________
 
 void KVSilicon::Streamer(TBuffer& R__b)
 {

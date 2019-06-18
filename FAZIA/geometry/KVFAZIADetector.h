@@ -98,9 +98,6 @@ public:
    static const Char_t* GetNewName(KVString oldname);
 
    virtual Bool_t Fired(Option_t* opt = "any") const;
-   Double_t GetCalibratedEnergy() const;
-   Double_t GetEnergy() const;
-   Double_t GetCalibratedVolt();
 
    void SetSignal(TGraph* signal, const Char_t* signal_name);
    Bool_t HasSignal() const;
@@ -110,7 +107,6 @@ public:
    Int_t GetNumberOfSignals() const;
    const KVSeqCollection* GetListOfSignals() const;
    virtual void SetCalibrators();
-   virtual Bool_t IsCalibrated() const;
    void ComputePSA();
 
    void SetFPGAEnergy(int sigid, Int_t idx /* Si: alway 0, CsI: 0=max 1=fast */, Double_t energy);
@@ -458,8 +454,6 @@ public:
    Double_t GetSetupParameter(const Char_t* parname);
 
    void RefreshCalibratorPointers();
-   Bool_t AddCalibrator(KVCalibrator* cal);
-
 
    ClassDef(KVFAZIADetector, 1) //Base class for FAZIA detector
 };

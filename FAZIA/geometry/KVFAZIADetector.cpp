@@ -73,23 +73,6 @@ void KVFAZIADetector::RefreshCalibratorPointers()
    fVoltToEnergy = GetCalibrator("Volt-Energy");
 }
 
-Bool_t KVFAZIADetector::AddCalibrator(KVCalibrator* cal)
-{
-   // Have to override base method as different calibrators can have same class
-   // Associate a calibration with this detector.
-   // If the calibrator object has the same type as an existing object in the list,
-   // it will not be added to the list (avoids duplicate calibrators) and the method returns kFALSE.
-
-   if (!cal) return kFALSE;
-   if (!fCalibrators)
-      fCalibrators = new KVList();
-   if (GetCalibrator(cal->GetType())) return kFALSE;
-   fCalibrators->Add(cal);
-   cal->SetDetector(this);
-   RefreshCalibratorPointers();
-   return kTRUE;
-}
-
 //________________________________________________________________
 KVFAZIADetector::KVFAZIADetector()
 {
@@ -199,53 +182,6 @@ void KVFAZIADetector::SetCalibrators()
    }
 
    if (!AddCalibrator(fzcal)) delete fzcal;
-}
-
-Bool_t KVFAZIADetector::IsCalibrated() const
-{
-   //Returns true if the detector has been calibrated
-   //i.e. if
-   //  -  it has Channel-Energy calibrator ready
-
-   if (!GetCalibrator("Channel-Energy")) return kFALSE;
-   else if (!GetCalibrator("Channel-Energy")->GetStatus()) return kFALSE;
-
-   return kTRUE;
-}
-
-//________________________________________________________________
-Double_t KVFAZIADetector::GetCalibratedEnergy() const
-{
-   //Set up calibrators for this detector. Call once name has been set.
-
-   if (fChannelToEnergy && fChannelToEnergy->GetStatus()) {
-      return fChannelToEnergy->Compute(fChannel);
-   }
-   return 0;
-}
-
-//________________________________________________________________
-Double_t KVFAZIADetector::GetEnergy() const
-{
-   // Returns energy lost in active layer by particles.
-   Double_t eloss = (GetActiveLayer() ? GetActiveLayer()->GetEnergyLoss() : KVMaterial::GetEnergyLoss());
-   if (eloss <= 0) {
-      Double_t ecal = GetCalibratedEnergy();
-      if (ecal > 0) SetEnergy(ecal);
-      return ecal;
-   }
-   return eloss;
-}
-//________________________________________________________________
-Double_t KVFAZIADetector::GetCalibratedVolt()
-{
-   //Set up calibrators for this detector. Call once name has been set.
-
-   if (fChannelToVolt && fChannelToVolt->GetStatus()) {
-      return fChannelToVolt->Compute(fChannel);
-   }
-   return 0;
-
 }
 
 //________________________________________________________________
