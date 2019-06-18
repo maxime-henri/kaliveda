@@ -15,7 +15,7 @@ public:
       : KVDetectorSignal(), fParam(nullptr)
    {}
    KVACQParamSignal(KVACQParam* p)
-      : KVDetectorSignal(p->GetType()), fParam(p)
+      : KVDetectorSignal(p->GetType(), p->GetDetector()), fParam(p)
    {}
 
    virtual ~KVACQParamSignal()

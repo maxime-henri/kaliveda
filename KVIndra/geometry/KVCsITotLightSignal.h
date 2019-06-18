@@ -11,10 +11,8 @@ class KVCsITotLightSignal : public KVDetectorSignal {
 
 public:
    KVCsITotLightSignal(KVCsI* csi)
-      : KVDetectorSignal("TOT_LIGHT")
-   {
-      SetDetector(csi);
-   }
+      : KVDetectorSignal("TOT_LIGHT", csi)
+   {}
    virtual ~KVCsITotLightSignal()
    {}
 

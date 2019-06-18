@@ -16,10 +16,8 @@ public:
       : KVDetectorSignal(), fInputSignal(nullptr), fCalibrator(nullptr)
    {}
    KVCalibratedSignal(KVDetectorSignal* input, KVCalibrator* calib)
-      : KVDetectorSignal(calib->GetOutputSignalType()), fInputSignal(input), fCalibrator(calib)
-   {
-      SetDetector(input->GetDetector());
-   }
+      : KVDetectorSignal(calib->GetOutputSignalType(), input->GetDetector()), fInputSignal(input), fCalibrator(calib)
+   {}
    virtual ~KVCalibratedSignal()
    {}
 
