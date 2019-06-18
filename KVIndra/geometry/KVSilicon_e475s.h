@@ -36,14 +36,14 @@ public:
    void ChangeCalibParameters(KVDBParameterSet* kvdbps);
 
    Double_t GetOriginalValue(Float_t to, TString signal);
-   Double_t GetCalibratedValue(Float_t from, TString signal);
+   Double_t GetCalibratedValue(Float_t from, TString signal) const;
 
    KVFunctionCal* GetCalibratorBySignal(TString signal) const;
    Bool_t   IsCalibrated() const;
    Bool_t   IsCalibratedBySignal(TString signal) const;
 
-   Double_t GetCalibratedEnergy();
-   Double_t GetEnergy();
+   Double_t GetCalibratedEnergy() const;
+   Double_t GetEnergy() const;
 
    Double_t GetCorrectedEnergy(KVNucleus*, Double_t e = -1., Bool_t transmission = kTRUE);
 

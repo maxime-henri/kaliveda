@@ -25,21 +25,21 @@ public:
 
    KVChIo_e475s();
    KVChIo_e475s(Float_t pressure, Float_t thick = 50.0 * KVUnits::mm);
-   virtual ~KVChIo_e475s() {};
+   virtual ~KVChIo_e475s() {}
 
-   virtual void SetCalibrators() {};
+   virtual void SetCalibrators() {}
    void SetCalibrator(KVDBParameterSet* kvdbps);
    void ChangeCalibParameters(KVDBParameterSet* kvdbps);
 
    Double_t GetOriginalValue(Float_t to, TString signal);
-   Double_t GetCalibratedValue(Float_t from, TString signal);
+   Double_t GetCalibratedValue(Float_t from, TString signal) const;
 
    KVFunctionCal* GetCalibratorBySignal(TString signal) const;
    virtual Bool_t IsCalibrated() const;
    Bool_t   IsCalibratedBySignal(TString signal) const;
 
-   Double_t GetCalibratedEnergy();
-   virtual Double_t  GetEnergy();
+   Double_t GetCalibratedEnergy() const;
+   virtual Double_t  GetEnergy() const;
    virtual Short_t GetCalcACQParam(KVACQParam*, Double_t) const;
 
    ClassDef(KVChIo_e475s, 1) //derivation of KVChIo class for E475s experiment

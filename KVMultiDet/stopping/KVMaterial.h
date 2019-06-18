@@ -48,7 +48,7 @@ private:
    Double_t fThick;              // area density of absorber in g/cm**2
    Double_t fPressure;        // gas pressure in torr
    Double_t fTemp;            // gas temperature in degrees celsius
-   Double_t fELoss;             //total of energy lost by all particles traversing absorber
+   mutable Double_t fELoss;             //total of energy lost by all particles traversing absorber
 
 public:
    enum SolType {
@@ -83,14 +83,14 @@ public:
    virtual Double_t GetParticleEIncFromERes(KVNucleus*, TVector3* norm = 0);
 
    virtual void Print(Option_t* option = "") const;
-   virtual Double_t GetEnergyLoss()
+   virtual Double_t GetEnergyLoss() const
    {
       return fELoss;
-   };
-   virtual void SetEnergyLoss(Double_t e)
+   }
+   virtual void SetEnergyLoss(Double_t e) const
    {
       fELoss = e;
-   };
+   }
 
 #if ROOT_VERSION_CODE >= ROOT_VERSION(3,4,0)
    virtual void Copy(TObject& obj) const;

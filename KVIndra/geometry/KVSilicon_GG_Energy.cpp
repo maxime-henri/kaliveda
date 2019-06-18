@@ -23,7 +23,7 @@ void KVSilicon_GG_Energy::SetCalibrators()
 }
 
 //__________________________________________________________________________________________
-Double_t KVSilicon_GG_Energy::GetCalibratedEnergy()
+Double_t KVSilicon_GG_Energy::GetCalibratedEnergy() const
 {
    //Calculate energy in MeV from coder values.
    //Returns 0 if calibration not ready or no parameters fired

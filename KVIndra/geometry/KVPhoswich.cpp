@@ -63,7 +63,7 @@ KVPhoswich::~KVPhoswich()
 
 
 //___________________________________________________________________________________
-Double_t KVPhoswich::GetEnergy()
+Double_t KVPhoswich::GetEnergy() const
 {
    //Override KVDetector::GetEnergy to return total energy lost in both layers
 
@@ -72,7 +72,7 @@ Double_t KVPhoswich::GetEnergy()
 }
 
 //_____________________________________________________________________________________
-void KVPhoswich::SetEnergy(Double_t e)
+void KVPhoswich::SetEnergy(Double_t e) const
 {
    //Set energy lost in both layers
 

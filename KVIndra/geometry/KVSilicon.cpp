@@ -167,7 +167,7 @@ Double_t KVSilicon::GetPHD(Double_t dE, UInt_t Z)
 }
 
 //__________________________________________________________________________________________
-Double_t KVSilicon::GetCalibratedEnergy()
+Double_t KVSilicon::GetCalibratedEnergy() const
 {
    //Calculate energy in MeV from coder values.
    //Returns 0 if calibration not ready or detector not fired
@@ -278,7 +278,7 @@ Double_t KVSilicon::GetEnergyFromVolts(Double_t volts)
 
 //____________________________________________________________________________________________
 
-Double_t KVSilicon::GetEnergy()
+Double_t KVSilicon::GetEnergy() const
 {
    //Redefinition of KVDetector::GetEnergy().
    //If energy lost in active layer is already set (e.g. by calculation of energy loss

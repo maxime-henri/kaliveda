@@ -198,7 +198,7 @@ Double_t KVChIo::GetELossMylar(UInt_t z, UInt_t a, Double_t egas, Bool_t stopped
 
 //_______________________________________________________________________________
 
-Double_t KVChIo::GetCalibratedEnergy()
+Double_t KVChIo::GetCalibratedEnergy() const
 {
    //Calculate energy in MeV from coder values.
    //Returns 0 if calibration not ready or detector not fired
@@ -310,7 +310,7 @@ Double_t KVChIo::GetVolts()
 
 //____________________________________________________________________________________________
 
-Double_t KVChIo::GetEnergy()
+Double_t KVChIo::GetEnergy() const
 {
    //Redefinition of KVDetector::GetEnergy().
    //If energy lost in active (gas) layer is already set (e.g. by calculation of energy loss

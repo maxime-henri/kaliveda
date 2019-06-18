@@ -82,7 +82,7 @@ Double_t KVChIo_e475s::GetOriginalValue(Float_t to, TString signal)
 }
 
 //------------------------------
-Double_t KVChIo_e475s::GetCalibratedValue(Float_t from, TString signal)
+Double_t KVChIo_e475s::GetCalibratedValue(Float_t from, TString signal) const
 //------------------------------
 {
    if (IsCalibratedBySignal(signal)) return GetCalibratorBySignal(signal)->Compute(from);
@@ -116,14 +116,14 @@ Bool_t  KVChIo_e475s::IsCalibratedBySignal(TString signal) const
 }
 
 //------------------------------
-Double_t  KVChIo_e475s::GetCalibratedEnergy()
+Double_t  KVChIo_e475s::GetCalibratedEnergy() const
 //------------------------------
 {
    return GetCalibratedValue(TMath::Max(Float_t(0.), GetPG() - GetPedestal("PG")), "PG");
 }
 
 //------------------------------
-Double_t KVChIo_e475s::GetEnergy()
+Double_t KVChIo_e475s::GetEnergy() const
 //------------------------------
 {
 

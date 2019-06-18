@@ -94,7 +94,7 @@ Double_t KVCsI_e475s::GetOriginalValue(Float_t to, TString signal)
 }
 
 //------------------------------
-Double_t KVCsI_e475s::GetCalibratedValue(Float_t from, TString signal)
+Double_t KVCsI_e475s::GetCalibratedValue(Float_t from, TString signal) const
 //------------------------------
 {
    if (IsCalibratedBySignal(signal)) return GetCalibratorBySignal(signal)->Compute(from);
@@ -125,7 +125,7 @@ Bool_t  KVCsI_e475s::IsCalibratedBySignal(TString signal) const
 }
 
 //------------------------------
-Double_t  KVCsI_e475s::GetCalibratedEnergy()
+Double_t  KVCsI_e475s::GetCalibratedEnergy() const
 //------------------------------
 {
    return GetCalibratedValue(TMath::Max(0., GetLumiereTotale()), "LT");
@@ -141,7 +141,7 @@ Double_t KVCsI_e475s::GetCorrectedEnergy(KVNucleus*, Double_t, Bool_t)
 }
 
 //------------------------------
-Double_t KVCsI_e475s::GetEnergy()
+Double_t KVCsI_e475s::GetEnergy() const
 //------------------------------
 {
    Double_t ELoss = KVDetector::GetEnergy();

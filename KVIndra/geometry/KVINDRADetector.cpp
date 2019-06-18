@@ -57,7 +57,7 @@ void KVINDRADetector::AddACQParamType(const Char_t* type)
 }
 
 //________________________________________________________________________________
-KVACQParam* KVINDRADetector::GetACQParam(const Char_t* type)
+KVACQParam* KVINDRADetector::GetACQParam(const Char_t* type) const
 {
    // Look for acquisition parameter with given type in list
    // of parameters associated with this detector.

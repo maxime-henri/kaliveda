@@ -109,7 +109,7 @@ KVCsI::~KVCsI()
 
 //______________________________________________________________________________________________
 
-Double_t KVCsI::GetLumiereTotale(Double_t rapide, Double_t lente)
+Double_t KVCsI::GetLumiereTotale(Double_t rapide, Double_t lente) const
 {
    // Returns calculated total light output for a CsI detector from its pedestal-
    // corrected measured fast and slow components.
@@ -153,7 +153,7 @@ Double_t KVCsI::GetLumiereTotale(Double_t rapide, Double_t lente)
 
 //______________________________________________________________________________________________
 
-Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide, Double_t lente)
+Double_t KVCsI::GetCorrectedLumiereTotale(Double_t rapide, Double_t lente) const
 {
    // Returns total light output corrected for gain variations, if known (see KVINDRADB::ReadCsITotalLightGainCorrections
    // for how corrections are read into database, format of correction files, etc.).
@@ -189,7 +189,7 @@ Double_t KVCsI::GetTauZero(Double_t rapide, Double_t lente)
 
 //______________________________________________________________________________________________
 
-Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide, Double_t lente)
+Double_t KVCsI::Calculate(UShort_t mode, Double_t rapide, Double_t lente) const
 {
    //Private method
    //This function is called by GetLumiereTotale and GetTauZero, the return value depends
@@ -499,7 +499,7 @@ Double_t KVCsI::GetCorrectedEnergy(KVNucleus* nuc, Double_t lum, Bool_t)
 
 //__________________________________________________________________________________________//
 
-Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E)
+Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E) const
 {
    //Calculate calibrated light output given by a nucleus (Z,A) deposing E (MeV)
    //in the detector. If E is not given, the current value of GetEnergy() is used.
@@ -523,7 +523,7 @@ Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E)
 
 //__________________________________________________________________________________________//
 
-Double_t KVCsI::GetEnergyFromLight(Int_t Z, Int_t A, Double_t lum)
+Double_t KVCsI::GetEnergyFromLight(Int_t Z, Int_t A, Double_t lum) const
 {
    //Calculate energy from a given Z and A and light output (lum)
    //Returns -1 in case of problems (no calibration available)

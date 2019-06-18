@@ -200,41 +200,41 @@ public:
    void SetGain(Double_t gain);
    Double_t GetGain() const;
 
-   virtual Double_t GetEnergy()
+   virtual Double_t GetEnergy() const
    {
       //
       // Returns energy lost in active layer by particles.
       //
       return (GetActiveLayer() ? GetActiveLayer()->GetEnergyLoss() : KVMaterial::GetEnergyLoss());
-   };
-   virtual void SetEnergy(Double_t e)
+   }
+   virtual void SetEnergy(Double_t e) const
    {
       //
       //Set value of energy lost in active layer
       //
       if (GetActiveLayer()) GetActiveLayer()->SetEnergyLoss(e);
       else KVMaterial::SetEnergyLoss(e);
-   };
-   virtual Double_t GetEnergyLoss()
+   }
+   virtual Double_t GetEnergyLoss() const
    {
       return GetEnergy();
-   };
-   virtual void SetEnergyLoss(Double_t e)
+   }
+   virtual void SetEnergyLoss(Double_t e) const
    {
       SetEnergy(e);
-   };
+   }
    virtual Double_t GetCorrectedEnergy(KVNucleus*, Double_t e =
                                           -1., Bool_t transmission = kTRUE);
    virtual Int_t FindZmin(Double_t ELOSS = -1., Char_t mass_formula = -1);
 
    void AddACQParam(KVACQParam*);
-   virtual KVACQParam* GetACQParam(const Char_t* /*name*/);
-   KVList* GetACQParamList()
+   virtual KVACQParam* GetACQParam(const Char_t* /*name*/) const;
+   KVList* GetACQParamList() const
    {
       return fACQParams;
-   };
-   virtual Float_t GetACQData(const Char_t* /*name*/);
-   virtual Float_t GetPedestal(const Char_t* /*name*/);
+   }
+   virtual Float_t GetACQData(const Char_t* /*name*/) const;
+   virtual Float_t GetPedestal(const Char_t* /*name*/) const;
    virtual void SetPedestal(const Char_t* /*name*/, Float_t);
 
    virtual Bool_t AddCalibrator(KVCalibrator* cal);
@@ -299,8 +299,8 @@ public:
    {
       SetBit(kIsAnalysed, b);
    }
-   inline virtual Bool_t Fired(Option_t* opt = "any");
-   inline virtual Bool_t FiredP(Option_t* opt = "any");
+   inline virtual Bool_t Fired(Option_t* opt = "any") const;
+   inline virtual Bool_t FiredP(Option_t* opt = "any") const;
 
    virtual void SetACQParams();
    virtual void SetCalibrators();
@@ -573,7 +573,7 @@ inline Double_t KVDetector::GetGain() const
 
 //_________________________________________________________________________________
 
-Bool_t KVDetector::Fired(Option_t* opt)
+Bool_t KVDetector::Fired(Option_t* opt) const
 {
    // Returns kTRUE if detector was hit (fired) in an event
    //
@@ -616,7 +616,7 @@ Bool_t KVDetector::Fired(Option_t* opt)
       else event.ResetBit(id);
       id++;
    }
-   Binary8_t ok = fFiredMask & event;
+   Binary8_t ok = ((Binary8_t)fFiredMask) & event;
    // "all" considered parameters fired if ok == mask
    // "any" considered parameters fired if ok != 0
    if (!strcmp(opt, "all"))  return (ok == fFiredMask);
@@ -624,7 +624,7 @@ Bool_t KVDetector::Fired(Option_t* opt)
 }
 //_________________________________________________________________________________
 
-Bool_t KVDetector::FiredP(Option_t* opt)
+Bool_t KVDetector::FiredP(Option_t* opt) const
 {
    //opt="any" :
    //Returns true if ANY* of the working acquisition parameters associated with the detector were fired in an event
@@ -651,7 +651,7 @@ Bool_t KVDetector::FiredP(Option_t* opt)
       else event.ResetBit(id);
       id++;
    }
-   Binary8_t ok = fFiredMask & event;
+   Binary8_t ok = ((Binary8_t)fFiredMask) & event;
    // "all" considered parameters fired if ok == mask
    // "any" considered parameters fired if ok != 0
    if (!strcmp(opt, "all"))  return (ok == fFiredMask);

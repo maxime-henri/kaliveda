@@ -57,7 +57,7 @@ public:
    }
 
    virtual void AddACQParamType(const Char_t* type);
-   virtual KVACQParam* GetACQParam(const Char_t* /*type*/);
+   virtual KVACQParam* GetACQParam(const Char_t* /*type*/) const;
 
    Double_t GetPGfromGG(Double_t GG = -1);
    Double_t GetGGfromPG(Double_t PG = -1);
@@ -83,27 +83,27 @@ public:
    KVINDRADetector* GetChIo() const
    {
       return (fChIo ? fChIo : const_cast<KVINDRADetector*>(this)->FindChIo());
-   };
-   virtual Float_t GetPG()
+   }
+   virtual Float_t GetPG() const
    {
       return GetACQData("PG");
-   };
-   virtual Float_t GetGG()
+   }
+   virtual Float_t GetGG() const
    {
       return GetACQData("GG");
-   };
-   virtual Float_t GetR()
+   }
+   virtual Float_t GetR() const
    {
       return GetACQData("R");
-   };
-   virtual Float_t GetL()
+   }
+   virtual Float_t GetL() const
    {
       return GetACQData("L");
-   };
-   UShort_t GetMT()
+   }
+   UShort_t GetMT() const
    {
       return GetACQParam("T")->GetCoderData();
-   };
+   }
 
    void SetNumeroCodeur(Int_t numero);
    Int_t GetNumeroCodeur();

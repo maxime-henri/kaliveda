@@ -40,7 +40,7 @@ public:
 
    virtual Double_t GetVoltsFromCanalPG(Double_t chan = 0.0);
    Double_t GetVoltsFromCanalGG(Double_t chan = 0.0);
-   virtual Double_t GetCalibratedEnergy();
+   virtual Double_t GetCalibratedEnergy() const;
    Double_t GetVolts();
    Double_t GetVoltsFromEnergy(Double_t);
 
@@ -51,7 +51,7 @@ public:
    Double_t GetCanalGGFromVoltsDouble(Float_t volts);
 
    Double_t GetEnergyFromVolts(Double_t volts = 0.0);
-   virtual Double_t GetEnergy();
+   virtual Double_t GetEnergy() const;
 
    void SetACQParams();
    void SetCalibrators();

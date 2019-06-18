@@ -27,19 +27,19 @@ public:
    KVCsI_e475s(Float_t thick);
    virtual ~KVCsI_e475s() { };
 
-   void SetCalibrators() {};
+   void SetCalibrators() {}
    void SetCalibrator(KVDBParameterSet* kvdbps);
    void ChangeCalibParameters(KVDBParameterSet* kvdbps);
 
    Double_t GetOriginalValue(Float_t to, TString signal);
-   Double_t GetCalibratedValue(Float_t from, TString signal);
+   Double_t GetCalibratedValue(Float_t from, TString signal) const;
 
    KVFunctionCal* GetCalibratorBySignal(TString signal) const;
    Bool_t   IsCalibrated() const;
    Bool_t   IsCalibratedBySignal(TString signal) const;
 
-   Double_t GetCalibratedEnergy();
-   Double_t GetEnergy();
+   Double_t GetCalibratedEnergy() const;
+   Double_t GetEnergy() const;
 
    Double_t GetLightFromEnergy(UInt_t, UInt_t, Double_t  = -1.)
    {

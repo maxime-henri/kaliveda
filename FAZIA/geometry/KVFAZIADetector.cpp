@@ -10,6 +10,7 @@
 #include "TClass.h"
 #include "KVLightEnergyCsIFull.h"
 #include "KVDataSet.h"
+#include "KVFAZIADetectorSignal.h"
 
 ClassImp(KVFAZIADetector)
 
@@ -213,7 +214,7 @@ Bool_t KVFAZIADetector::IsCalibrated() const
 }
 
 //________________________________________________________________
-Double_t KVFAZIADetector::GetCalibratedEnergy()
+Double_t KVFAZIADetector::GetCalibratedEnergy() const
 {
    //Set up calibrators for this detector. Call once name has been set.
 
@@ -224,7 +225,7 @@ Double_t KVFAZIADetector::GetCalibratedEnergy()
 }
 
 //________________________________________________________________
-Double_t KVFAZIADetector::GetEnergy()
+Double_t KVFAZIADetector::GetEnergy() const
 {
    // Returns energy lost in active layer by particles.
    Double_t eloss = (GetActiveLayer() ? GetActiveLayer()->GetEnergyLoss() : KVMaterial::GetEnergyLoss());
@@ -330,12 +331,29 @@ Bool_t KVFAZIADetector::SetProperties()
    KVString lsignals = "";
    if (!strcmp(GetLabel(), "SI1")) {
       lsignals = "QH1,I1,QL1";
+
+      AddDetectorSignal(new KVFAZIADetectorSignal("QH1FPGAEnergy", this, &KVFAZIADetector::GetQH1FPGAEnergy));
+      AddDetectorSignal(new KVFAZIADetectorSignal("QH1RiseTime", this, &KVFAZIADetector::GetQH1RiseTime));
+      AddDetectorSignal(new KVFAZIADetectorSignal("QH1Amplitude", this, &KVFAZIADetector::GetQH1Amplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("QL1Amplitude", this, &KVFAZIADetector::GetQL1Amplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("QL1RiseTime", this, &KVFAZIADetector::GetQL1RiseTime));
+      AddDetectorSignal(new KVFAZIADetectorSignal("QI1Amplitude", this, &KVFAZIADetector::GetI1Amplitude));
    }
    else if (!strcmp(GetLabel(), "SI2")) {
       lsignals = "Q2,I2";
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q2FPGAEnergy", this, &KVFAZIADetector::GetQ2FPGAEnergy));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q2RiseTime", this, &KVFAZIADetector::GetQ2RiseTime));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q2Amplitude", this, &KVFAZIADetector::GetQ2Amplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("I2Amplitude", this, &KVFAZIADetector::GetI2Amplitude));
    }
    else if (!strcmp(GetLabel(), "CSI")) {
       lsignals = "Q3";
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q3FPGAEnergy", this, &KVFAZIADetector::GetQ3FPGAEnergy));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q3FastFPGAEnergy", this, &KVFAZIADetector::GetQ3FastFPGAEnergy));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q3Amplitude", this, &KVFAZIADetector::GetQ3Amplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q3FastAmplitude", this, &KVFAZIADetector::GetQ3FastAmplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q3SlowAmplitude", this, &KVFAZIADetector::GetQ3SlowAmplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("Q3RiseTime", this, &KVFAZIADetector::GetQ3RiseTime));
    }
    else {
       Warning("SetProperties", "Unknown label \"%s\" for this detector : %s\n", GetLabel(), GetName());
@@ -396,7 +414,7 @@ const Char_t* KVFAZIADetector::GetNewName(KVString oldname)
 }
 
 //________________________________________________________________
-Bool_t KVFAZIADetector::Fired(Option_t*)
+Bool_t KVFAZIADetector::Fired(Option_t*) const
 {
    // Returns kTRUE if detector was hit (fired) in an event
    //

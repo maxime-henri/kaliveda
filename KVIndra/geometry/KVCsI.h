@@ -34,8 +34,8 @@ class KVLightEnergyCsI;
 
 class KVCsI: public KVINDRADetector {
 
-   Double_t fLumiereTotale;     //total light output calculated from R and L components
-   UInt_t fLumTotStatus;        //status of light calculation
+   mutable Double_t fLumiereTotale;     //total light output calculated from R and L components
+   mutable UInt_t fLumTotStatus;        //status of light calculation
    Double_t fA1, fA2, fA3;
 
    KVLightEnergyCsI* fCalZ1; //! light-energy calibration for Z=1
@@ -48,7 +48,7 @@ class KVCsI: public KVINDRADetector {
    KVACQParam* fACQ_L;//'Lente' acquisition parameter
 
    Double_t Calculate(UShort_t mode, Double_t rapide =
-                         -1.0, Double_t lente = -1.0);
+                         -1.0, Double_t lente = -1.0) const;
 
    enum { kLumiere, kTau };
 
@@ -62,19 +62,19 @@ public:
 
    void SetAlThickness(Float_t thickAl /* um */);
 
-   Float_t GetR()
+   Float_t GetR() const
    {
       return fACQ_R->GetData();
-   };
-   Float_t GetL()
+   }
+   Float_t GetL() const
    {
       return fACQ_L->GetData();
-   };
+   }
 
    virtual Double_t GetLumiereTotale(Double_t rapide = -1.0, Double_t lente =
-                                        -1.0);
+                                        -1.0) const;
    virtual Double_t GetCorrectedLumiereTotale(Double_t rapide = -1.0, Double_t lente =
-            -1.0);
+            -1.0) const;
    Double_t GetTauZero(Double_t rapide = -1.0, Double_t lente = -1.0);
    void SetLumiereTotale(Double_t lum)
    {
@@ -89,8 +89,8 @@ public:
    void SetCalibrators();
 
    Double_t GetCorrectedEnergy(KVNucleus*, Double_t lum = -1., Bool_t transmission = kTRUE);
-   Double_t GetLightFromEnergy(Int_t Z, Int_t A, Double_t E = -1.);
-   Double_t GetEnergyFromLight(Int_t Z, Int_t A, Double_t lum);
+   Double_t GetLightFromEnergy(Int_t Z, Int_t A, Double_t E = -1.) const;
+   Double_t GetEnergyFromLight(Int_t Z, Int_t A, Double_t lum) const;
 
    void SetPinLaser(Int_t n)
    {

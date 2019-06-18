@@ -31,13 +31,13 @@ ClassImp(KVBIC)
 //End_Html
 //
 //structure as absorbers:
-//GetAbsorber(0) - 1.5µm mylar entrance window
+//GetAbsorber(0) - 1.5Âµm mylar entrance window
 //GetAbsorber(1) - CF4 at x Torr with thickness given by GetEffectiveEntryThickness()
-//GetAbsorber(2) - 1 µm mylar internal window
+//GetAbsorber(2) - 1 Âµm mylar internal window
 //GetAbsorber(3) - 60 mm of CF4 at x Torr
-//GetAbsorber(4) - 1 µm mylar internal window
+//GetAbsorber(4) - 1 Âµm mylar internal window
 //GetAbsorber(5) - CF4 at x Torr with thickness given by GetEffectiveEntryThickness()
-//GetAbsorber(6) - 1.5µm mylar exit window
+//GetAbsorber(6) - 1.5Âµm mylar exit window
 //
 //Bombage:
 //      La valeur du bombage des fenetres externes a ete "estimee" par C. Mazur
@@ -133,7 +133,7 @@ void KVBIC::AddACQParam(const Char_t* type)
 
 //________________________________________________________________________________
 
-KVACQParam* KVBIC::GetACQParam(const Char_t* type)
+KVACQParam* KVBIC::GetACQParam(const Char_t* type) const
 {
    //
    //Access acquisition parameter of given type
@@ -268,7 +268,7 @@ void KVBIC::Streamer(TBuffer& R__b)
 
 //__________________________________________________________________________________________________________________________
 
-Double_t KVBIC::GetEnergy()
+Double_t KVBIC::GetEnergy() const
 {
    //Redefinition of KVChIo::GetEnergy().
    //If energy lost in active layer is already set (e.g. by calculation of energy loss

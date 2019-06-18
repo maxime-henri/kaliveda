@@ -505,7 +505,7 @@ Bool_t KVFAZIA::treat_event(const DAQ::FzEvent& e)
                int fIdQuartet = fQuartet[fIdFee][fIdTel];
                int fIdTelescope = fTelescope[fIdFee][fIdTel];
 
-               KVFAZIADetector* det = (KVFAZIADetector*)gFazia->GetDetector(Form("%s-%d", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope));
+               KVFAZIADetector* det = (KVFAZIADetector*)GetDetector(Form("%s-%d", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope));
                if (!det) {
                   Error("treat_event", "No detector %s-%d found in FAZIA geometry...", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope);
                   continue;

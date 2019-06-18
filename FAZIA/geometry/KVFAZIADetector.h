@@ -97,12 +97,9 @@ public:
 
    static const Char_t* GetNewName(KVString oldname);
 
-//   KVList* PrepareIDTelescopeList();
-//   void SortIDTelescopes();
-
-   virtual Bool_t Fired(Option_t* opt = "any");
-   Double_t GetCalibratedEnergy();
-   Double_t GetEnergy();
+   virtual Bool_t Fired(Option_t* opt = "any") const;
+   Double_t GetCalibratedEnergy() const;
+   Double_t GetEnergy() const;
    Double_t GetCalibratedVolt();
 
    void SetSignal(TGraph* signal, const Char_t* signal_name);

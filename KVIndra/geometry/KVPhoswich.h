@@ -29,8 +29,8 @@ public:
 
    const Char_t* GetArrayName();
    //void Print(Option_t * opt="") const;
-   Double_t GetEnergy();
-   void SetEnergy(Double_t e);
+   Double_t GetEnergy() const;
+   void SetEnergy(Double_t e) const;
    void SetACQParams();
 
    ClassDef(KVPhoswich, 2)     //Phoswich telescopes of the INDRA array

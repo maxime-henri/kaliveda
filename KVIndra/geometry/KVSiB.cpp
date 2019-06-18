@@ -71,7 +71,7 @@ void KVSiB::SetACQParams()
 
 //____________________________________________________________________________
 
-Bool_t KVSiB::Fired(Option_t* opt)
+Bool_t KVSiB::Fired(Option_t* opt) const
 {
    //opt="any" (default):
    //Returns true if ANY of the acquisition parameters associated with the detector were fired in an event & the associated BIC fired (any)
@@ -124,7 +124,7 @@ void KVSiB::Streamer(TBuffer& R__b)
 
 //__________________________________________________________________________________________________________________________
 
-Double_t KVSiB::GetEnergy()
+Double_t KVSiB::GetEnergy() const
 {
    //Redefinition of KVSilicon::GetEnergy().
    //If energy lost in active layer is already set (e.g. by calculation of energy loss

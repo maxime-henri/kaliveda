@@ -519,13 +519,11 @@ void KVDetector::AddACQParam(KVACQParam* par)
    }
    par->SetDetector(this);
    fACQParams->Add(par);
-   KVACQParamSignal* ap = new KVACQParamSignal(par);
-   ap->SetDetector(this);
-   fDetSignals.Add(ap);
+   fDetSignals.Add(new KVACQParamSignal(par));
 }
 
 //________________________________________________________________________________
-KVACQParam* KVDetector::GetACQParam(const Char_t* name)
+KVACQParam* KVDetector::GetACQParam(const Char_t* name) const
 {
    // Look for acquisition parameter with given name in list
    // of parameters associated with this detector.
@@ -537,7 +535,7 @@ KVACQParam* KVDetector::GetACQParam(const Char_t* name)
 }
 
 //__________________________________________________________________________________
-Float_t KVDetector::GetACQData(const Char_t* name)
+Float_t KVDetector::GetACQData(const Char_t* name) const
 {
    // Access acquisition data value associated to parameter with given name.
    // Returns value as a floating-point number which is the raw channel number
@@ -550,7 +548,7 @@ Float_t KVDetector::GetACQData(const Char_t* name)
 }
 
 //__________________________________________________________________________________
-Float_t KVDetector::GetPedestal(const Char_t* name)
+Float_t KVDetector::GetPedestal(const Char_t* name) const
 {
    // Access pedestal value associated to parameter with given name.
 

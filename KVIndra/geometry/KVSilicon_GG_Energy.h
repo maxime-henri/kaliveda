@@ -22,7 +22,7 @@ public:
    {
       return KVDetector::IsCalibrated();
    }
-   Double_t GetCalibratedEnergy();
+   Double_t GetCalibratedEnergy() const;
    void RefreshCalibratorPointers();
 
    ClassDef(KVSilicon_GG_Energy, 1) //INDRA Silicon detector with GG-Energy calibration

@@ -34,7 +34,7 @@ public:
 
    void SetACQParams();
    const Char_t* GetArrayName();
-   virtual Bool_t Fired(Option_t* opt = "any");
+   virtual Bool_t Fired(Option_t* opt = "any") const;
 
    Float_t GetP1()
    {
@@ -60,7 +60,7 @@ public:
    KVBIC* GetBIC() const;
 
    void SetCalibrators();
-   Double_t GetEnergy();
+   Double_t GetEnergy() const;
    //returns kTRUE if linear calibrator fLinCal is present and has been initialised
    Bool_t IsCalibrated() const
    {

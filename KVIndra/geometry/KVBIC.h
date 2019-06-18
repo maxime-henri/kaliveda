@@ -34,7 +34,7 @@ public:
 
    const Char_t* GetArrayName();
    void AddACQParam(const Char_t*);
-   KVACQParam* GetACQParam(const Char_t* type);
+   KVACQParam* GetACQParam(const Char_t* type) const;
 
    void SetPressure(Float_t);
    void SetTemperature(Double_t t);
@@ -50,7 +50,7 @@ public:
 
    void SetCalibrators();
 
-   Double_t GetEnergy();
+   Double_t GetEnergy() const;
    //returns kTRUE if linear calibrator fLinCal is present and has been initialised
    Bool_t IsCalibrated() const
    {
