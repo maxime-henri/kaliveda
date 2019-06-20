@@ -540,6 +540,7 @@ public:
 
       fDetSignals.Add(ds);
    }
+   Bool_t AddDetectorSignalExpression(const TString& type, const KVString& _expr);
 
    ClassDef(KVDetector, 10)      //Base class for the description of detectors in multidetector arrays
 };

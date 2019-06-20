@@ -20,6 +20,7 @@
 #include "TGeoTube.h"
 #include "KVACQParamSignal.h"
 #include "KVCalibratedSignal.h"
+#include "KVDetectorSignalExpression.h"
 
 #include <TGeoPhysicalNode.h>
 //#include <KVGeoDNTrajectory.h>
@@ -1780,4 +1781,24 @@ Bool_t KVDetector::HasSameStructureAs(const KVDetector* other) const
          same = false;
    }
    return same;
+}
+
+Bool_t KVDetector::AddDetectorSignalExpression(const TString& type, const KVString& _expr)
+{
+   // Add a new KVDetectorSignalExpression to this detector:
+   //
+   // 'type' will be the name of the new signal.
+   //
+   // '_expr' is a mathematical expression using any of the known signals of the detector.
+   //
+   // If the expression is not valid, no signal will be created and method returns kFALSE.
+
+   KVDetectorSignalExpression* ds = new KVDetectorSignalExpression(type, _expr, this);
+   if (!ds->IsValid()) {
+      delete ds;
+      ds = nullptr;
+   }
+   else
+      AddDetectorSignal(ds);
+   return (ds != nullptr);
 }

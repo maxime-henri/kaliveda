@@ -483,16 +483,14 @@ KVDetectorSignal* KVIDTelescope::GetSignalFromGridVar(const KVString& var, const
    ds = det->GetDetectorSignal(sig_type);
    if (!ds) {
       // sig_type is not the name of a known signal: assume it is an expression using known signal names
-      ds = new KVDetectorSignalExpression(Form("%s-VAR%s", GetName(), axe.Data()), sig_type, det);
-      if (!ds->IsValid()) {
+      if (!det->AddDetectorSignalExpression(Form("%s-VAR%s", GetName(), axe.Data()), sig_type)) {
          Error("GetSignalFromGridVar",
                "Problem initialising ID-grid %s coordinate for telescope %s. Request for unknown signal %s for detector %s. Check definition of VAR%s for grid (=%s)",
                axe.Data(), GetName(), sig_type.Data(), det->GetName(), axe.Data(), var.Data());
-         delete ds;
          ds = nullptr;
       }
       else
-         det->AddDetectorSignal(ds); // will be deleted by the detector
+         ds = det->GetDetectorSignal(Form("%s-VAR%s", GetName(), axe.Data()));
    }
    return ds;
 }
