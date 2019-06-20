@@ -136,7 +136,6 @@ void KVIDZAFromZGrid::ReadFromAsciiFile(std::ifstream& gridfile)
       }
       LoadPIDRanges();
    }
-
 }
 
 void KVIDZAFromZGrid::WriteToAsciiFile(std::ofstream& gridfile)

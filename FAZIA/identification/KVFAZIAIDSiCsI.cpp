@@ -31,26 +31,6 @@ KVFAZIAIDSiCsI::~KVFAZIAIDSiCsI()
 
 //____________________________________________________________________________________
 
-Double_t KVFAZIAIDSiCsI::GetIDMapX(Option_t*)
-{
-   //X-coordinate for Si2-CsI identification map :
-   // computed fast componment
-   // of the charge signal of CsI detector
-   return fCsI->GetQ3Amplitude();
-}
-
-//____________________________________________________________________________________
-
-Double_t KVFAZIAIDSiCsI::GetIDMapY(Option_t*)
-{
-   //Y-coordinate for Si2-CsI identification map :
-   // computed amlpitude
-   // of the charge signal od Si2 detector
-   return fSi2->GetQ2Amplitude();
-}
-
-//____________________________________________________________________________________
-
 Bool_t KVFAZIAIDSiCsI::Identify(KVIdentificationResult* idr, Double_t x, Double_t y)
 {
    //Particle identification and code setting using identification grid (class KVIDZAGrid).
@@ -104,11 +84,9 @@ void KVFAZIAIDSiCsI::Initialize()
    // IsReadyForID() will return kTRUE if a grid is associated to this telescope for the current run.
 //  printf("in KVFAZIAIDSiCsI::Initialize()\n");
    TheGrid = (KVIDZAGrid*) GetIDGrid();
-   fSi2 = (KVFAZIADetector*)GetDetector(1);
-   fCsI = (KVFAZIADetector*)GetDetector(2);
    if (TheGrid) {
       //printf("Grid Found\n");
-      SetHasMassID(TheGrid->IsOnlyZId());
+      SetHasMassID(TheGrid->HasMassIDCapability());
       TheGrid->Initialize();
       fBelowProton = (KVIDCutLine*)TheGrid->GetCut("PIEDESTAL");
       fSiThreshold = (KVIDCutLine*)TheGrid->GetCut("threshold");

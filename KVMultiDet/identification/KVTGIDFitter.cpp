@@ -122,7 +122,7 @@ void KVTGIDFitter::Fit(KVIDGraph* theGrid)
       return;
    }
    fGrid = theGrid;
-   fZorA = (Int_t)theGrid->OnlyZId();
+   fZorA = (Int_t)(!theGrid->HasMassIDCapability());
    // prepare new parameter array and status array
    if (fPar) delete [] fPar;
    Int_t npar = KVTGID::GetNumberOfLTGParameters(fType, fLight);
@@ -291,8 +291,8 @@ void KVTGIDFitter::FitPanel(Int_t functional_type, Bool_t with_csi_light_energy,
    // generate grid representing fit
    KVTGIDGrid* fitgr = new KVTGIDGrid(fTGID, (KVIDZAGrid*)fGrid);
    // make fitted grid 'onlyzid' if parent grid was
-   fitgr->SetOnlyZId(fGrid->OnlyZId());
-   if (fGrid->OnlyZId()) fitgr->SetMassFormula(fGrid->GetMassFormula());
+   fitgr->SetOnlyZId(!fGrid->HasMassIDCapability());
+   if (!fGrid->HasMassIDCapability()) fitgr->SetMassFormula(fGrid->GetMassFormula());
    fitgr->Generate(fGrid->GetXmax(), fGrid->GetXmin());
    gIDGridManager->Modified();
 

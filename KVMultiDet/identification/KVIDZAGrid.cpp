@@ -320,14 +320,14 @@ void KVIDZAGrid::CalculateLineWidths()
       // per Z, in this case we calculate a width based on the separation from the
       // neighbouring Z, as if it were 'OnlyZId'.
       Int_t i_other;// index of line used to calculate width
-      if (OnlyZId()) { //grid is 'OnlyZId':calculate widths by comparing neighbouring Z.
+      if (IsOnlyZId()) { //grid is 'OnlyZId':calculate widths by comparing neighbouring Z.
          i_other = (Zhi > -1 ? i + 1 : (Zlo > -1 ? i - 1 : -1));
       }
       else {
          //grid with several isotopes for each Z:calculate isotopic widths using lines with same Z, different A
          i_other = (Zhi == Z ? i + 1 : (Zlo == Z ? i - 1 : -1));
       }
-      if (!OnlyZId() && i_other < 0) { //grid is not 'OnlyZId' but only one isotope for this Z
+      if (!IsOnlyZId() && i_other < 0) { //grid is not 'OnlyZId' but only one isotope for this Z
          i_other = (Zhi > -1 ? i + 1 : (Zlo > -1 ? i - 1 : -1));
       }
 
@@ -1243,7 +1243,7 @@ void KVIDZAGrid::Identify(Double_t x, Double_t y, KVIdentificationResult* idr) c
       idr->SetComment("no identification: (x,y) out of range covered by grid");
       return;
    }
-   if (OnlyZId()) {
+   if (IsOnlyZId()) {
       Double_t Z;
       const_cast < KVIDZAGrid* >(this)->IdentZ(x, y, Z);
       idr->IDquality = fICode;
@@ -1504,11 +1504,11 @@ KVIDGraph* KVIDZAGrid::MakeSubsetGraph(TList* lines, TClass* graph_class)
    }
    KVIDGraph* new_graph = (KVIDGraph*)graph_class->New();
    new_graph->AddIDTelescopes(&fTelescopes);
-   new_graph->SetOnlyZId(OnlyZId());
+   new_graph->SetOnlyZId(IsOnlyZId());
    new_graph->SetRuns(GetRuns());
    new_graph->SetVarX(GetVarX());
    new_graph->SetVarY(GetVarY());
-   if (OnlyZId()) {
+   if (IsOnlyZId()) {
       new_graph->SetMassFormula(GetMassFormula());
    }
    // loop over lines in list, make clones and add to graph

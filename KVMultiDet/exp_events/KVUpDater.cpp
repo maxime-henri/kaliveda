@@ -123,7 +123,6 @@ void KVUpDater::SetIdentificationParameters(UInt_t run)
    cout << "Setting identification parameters of multidetector array for run " << run << ":" <<
         endl;
    SetIDGrids(run);
-   Info("SetIdentificationParameters", "Now");
    fArray->InitializeIDTelescopes();
 }
 

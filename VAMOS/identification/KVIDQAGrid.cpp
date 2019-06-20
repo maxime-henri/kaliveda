@@ -596,7 +596,7 @@ KVIDGraph* KVIDQAGrid::MakeSubsetGraph(TList* lines, TClass* graph_class)
    }
    KVIDGraph* new_graph = (KVIDGraph*)graph_class->New();
    new_graph->AddIDTelescopes((TList*)&fTelescopes);
-   new_graph->SetOnlyZId(OnlyZId());
+   new_graph->SetOnlyZId(IsOnlyZId());
    new_graph->SetRuns(GetRuns());
    new_graph->SetVarX(GetVarX());
    new_graph->SetVarY(GetVarY());

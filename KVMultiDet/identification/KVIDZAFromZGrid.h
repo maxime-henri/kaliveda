@@ -55,6 +55,28 @@ public:
 
    void Initialize();
 
+   Bool_t HasMassIDCapability() const
+   {
+      // Overrides KVIDGraph::HasMassIDCapability
+      //
+      // Returns true if at least one mass interval (PID range) is defined.
+      //
+      // Note that IsOnlyZId() returns kTRUE for KVIDZAFromZGrid
+      // and thus should not be used to know if a grid can identify masses
+
+      return (fPIDRange || fTables.GetEntries());
+   }
+   void SetOnlyZId(Bool_t /*yes*/ = kTRUE)
+   {
+      // Overrides KVIDGraph::SetOnlyZId
+      //
+      // fOnlyZId is really an internal variable, and must always be kTRUE for a KVIDZAFromZGrid.
+      //
+      // Therefore we disable the possibility to change it.
+
+      KVIDZAGrid::SetOnlyZId(true);
+   }
+
    ClassDef(KVIDZAFromZGrid, 1) //Compute Z and A only from Z lines...
 };
 

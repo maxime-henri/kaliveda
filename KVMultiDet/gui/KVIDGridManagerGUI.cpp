@@ -477,7 +477,7 @@ void KVIDGridManagerGUI::HandleGridsMenu(Int_t id)
          // set varx for all selected grids
          {
             if (!fSelectedGrid) break; // must have selected at least one grid
-            Bool_t runs = fSelectedGrid->IsOnlyZId(); // fill dialog box with current runlist of selected grid
+            Bool_t runs = !fSelectedGrid->HasMassIDCapability(); // fill dialog box with current runlist of selected grid
             TIter next(fSelectedEntries);
             KVIDGraph* entry;
             while ((entry = (KVIDGraph*) next())) {
@@ -786,11 +786,11 @@ void KVIDGridManagerGUI::CreateAndFillTabs()
       fIDGridList = new KVListView(KVIDGraph::Class(), cf, 600, 400);
       fIDGridList->SetDataColumns(10);
       fIDGridList->SetDataColumn(0, "Name", "", kTextLeft);
-      fIDGridList->SetDataColumn(1, "VarX", "", kTextLeft);
-      fIDGridList->SetDataColumn(2, "VarY", "", kTextLeft);
+      fIDGridList->SetDataColumn(2, "VarX", "", kTextLeft);
+      fIDGridList->SetDataColumn(1, "VarY", "", kTextLeft);
       fIDGridList->SetDataColumn(3, "ID Telescopes", "GetNamesOfIDTelescopes", kTextLeft);
       fIDGridList->SetDataColumn(4, "RunList", "", kTextLeft);
-      fIDGridList->SetDataColumn(5, "OnlyZId", "IsOnlyZId", kTextCenterX);
+      fIDGridList->SetDataColumn(5, "Identify Z and A?", "HasMassIDCapability", kTextCenterX);
       fIDGridList->GetDataColumn(5)->SetIsBoolean();
       fIDGridList->SetDataColumn(6, "# Ident.", "GetNumberOfIdentifiers", kTextRight);
       fIDGridList->SetDataColumn(7, "# Cuts", "GetNumberOfCuts", kTextRight);
@@ -816,11 +816,11 @@ void KVIDGridManagerGUI::CreateAndFillTabs()
       fIDGridList = new KVListView(KVIDGraph::Class(), cf, 600, 400);
       fIDGridList->SetDataColumns(10);
       fIDGridList->SetDataColumn(0, "Name", "", kTextLeft);
-      fIDGridList->SetDataColumn(1, "VarX", "", kTextLeft);
-      fIDGridList->SetDataColumn(2, "VarY", "", kTextLeft);
+      fIDGridList->SetDataColumn(2, "VarX", "", kTextLeft);
+      fIDGridList->SetDataColumn(1, "VarY", "", kTextLeft);
       fIDGridList->SetDataColumn(3, "ID Telescopes", "GetNamesOfIDTelescopes", kTextLeft);
       fIDGridList->SetDataColumn(4, "RunList", "", kTextLeft);
-      fIDGridList->SetDataColumn(5, "OnlyZId", "IsOnlyZId", kTextCenterX);
+      fIDGridList->SetDataColumn(5, "Identify Z and A?", "HasMassIDCapability", kTextCenterX);
       fIDGridList->GetDataColumn(5)->SetIsBoolean();
       fIDGridList->SetDataColumn(6, "# Ident.", "GetNumberOfIdentifiers", kTextRight);
       fIDGridList->SetDataColumn(7, "# Cuts", "GetNumberOfCuts", kTextRight);
@@ -868,11 +868,11 @@ void KVIDGridManagerGUI::UpdateTabs()
       fIDGridList = new KVListView(KVIDGraph::Class(), cf, 600, 400);
       fIDGridList->SetDataColumns(10);
       fIDGridList->SetDataColumn(0, "Name", "", kTextLeft);
-      fIDGridList->SetDataColumn(1, "VarX", "", kTextLeft);
-      fIDGridList->SetDataColumn(2, "VarY", "", kTextLeft);
+      fIDGridList->SetDataColumn(2, "VarX", "", kTextLeft);
+      fIDGridList->SetDataColumn(1, "VarY", "", kTextLeft);
       fIDGridList->SetDataColumn(3, "ID Telescopes", "GetNamesOfIDTelescopes", kTextLeft);
       fIDGridList->SetDataColumn(4, "RunList", "", kTextLeft);
-      fIDGridList->SetDataColumn(5, "OnlyZId", "IsOnlyZId", kTextCenterX);
+      fIDGridList->SetDataColumn(5, "Identify Z and A?", "HasMassIDCapability", kTextCenterX);
       fIDGridList->GetDataColumn(5)->SetIsBoolean();
       fIDGridList->SetDataColumn(6, "# Ident.", "GetNumberOfIdentifiers", kTextRight);
       fIDGridList->SetDataColumn(7, "# Cuts", "GetNumberOfCuts", kTextRight);
@@ -921,11 +921,11 @@ void KVIDGridManagerGUI::UpdateTabs()
          fIDGridList = new KVListView(KVIDGraph::Class(), cf, 600, 400);
          fIDGridList->SetDataColumns(10);
          fIDGridList->SetDataColumn(0, "Name", "", kTextLeft);
-         fIDGridList->SetDataColumn(1, "VarX", "", kTextLeft);
-         fIDGridList->SetDataColumn(2, "VarY", "", kTextLeft);
+         fIDGridList->SetDataColumn(2, "VarX", "", kTextLeft);
+         fIDGridList->SetDataColumn(1, "VarY", "", kTextLeft);
          fIDGridList->SetDataColumn(3, "ID Telescopes", "GetNamesOfIDTelescopes", kTextLeft);
          fIDGridList->SetDataColumn(4, "RunList", "", kTextLeft);
-         fIDGridList->SetDataColumn(5, "OnlyZId", "IsOnlyZId", kTextCenterX);
+         fIDGridList->SetDataColumn(5, "Identify Z and A?", "HasMassIDCapability", kTextCenterX);
          fIDGridList->GetDataColumn(5)->SetIsBoolean();
          fIDGridList->SetDataColumn(6, "# Ident.", "GetNumberOfIdentifiers", kTextRight);
          fIDGridList->SetDataColumn(7, "# Cuts", "GetNumberOfCuts", kTextRight);

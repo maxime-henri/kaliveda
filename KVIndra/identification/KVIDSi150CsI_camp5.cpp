@@ -44,7 +44,7 @@ void KVIDSi150CsI_camp5::Initialize()
    TIter next(fIDGrids);
    KVIDGrid* grid = 0;
    while ((grid = (KVIDGrid*)next())) {
-      if (grid->OnlyZId()) fZGrid = (KVIDZAGrid*)grid;
+      if (!grid->HasMassIDCapability()) fZGrid = (KVIDZAGrid*)grid;
       else fZAGrid = (KVIDZAGrid*)grid;
    }
    if (fZAGrid) {

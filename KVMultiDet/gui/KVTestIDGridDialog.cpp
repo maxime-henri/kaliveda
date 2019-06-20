@@ -52,7 +52,7 @@ KVTestIDGridDialog::KVTestIDGridDialog(const TGWindow* p,
    hzvseymin = hzrealxmin;
    hzvseymax = hzrealxmax;
 
-   if (!g->IsOnlyZId()) {
+   if (g->HasMassIDCapability() && !g->InheritsFrom("KVIDZAFromZGrid")) {// KLUDGE! replaces if(!g->IsOnlyZId()) {
       hzrealbins = 150 * (hzrealxmax - hzrealxmin);
       hzvseybins = hzrealbins;
    }
@@ -394,7 +394,7 @@ void KVTestIDGridDialog::TestGrid()
    // A dist for isotopically identified particles
    TH2F* hazreal = 0;
    TH2F* adist_aident = 0;
-   if (!fSelectedGrid->IsOnlyZId() || fSelectedGrid->InheritsFrom("KVIDZAFromZGrid")) {// WARNING: KLUDGE!!!
+   if (fSelectedGrid->HasMassIDCapability()) {
       hazreal = new TH2F("AZMap", "Z vs. A", 30 * (hnmax - hnmin + 0.5), hnmin - 0.5, hnmax + 1, 30 * (hzrealxmax - hzrealxmin + 1), hzrealxmin - 1, hzrealxmax + 1);
 
       histo_names.SetValue("Z_A_REAL", "AZMap");

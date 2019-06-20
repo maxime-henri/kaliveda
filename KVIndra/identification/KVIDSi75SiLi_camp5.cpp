@@ -52,7 +52,7 @@ void KVIDSi75SiLi_camp5::Initialize()
    while ((grid = (KVIDGrid*)next())) {
       if (!strcmp(grid->GetVarY(), "SI75_GG")) fGGgrid = (KVIDZAGrid*)grid;
       else if (!strcmp(grid->GetVarY(), "SI75_PG")) {
-         if (grid->OnlyZId()) fPGZgrid = (KVIDZAGrid*)grid;
+         if (!grid->HasMassIDCapability()) fPGZgrid = (KVIDZAGrid*)grid;
          else fPGgrid = (KVIDZAGrid*)grid;
       }
    }

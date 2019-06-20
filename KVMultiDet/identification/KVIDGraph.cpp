@@ -268,7 +268,7 @@ KVIDentifier* KVIDGraph::GetIdentifier(Int_t Z, Int_t A) const
    // If this is a 'OnlyZId()' graph we ignore A.
 
    KVIDentifier* id = 0;
-   if (!OnlyZId()) {
+   if (!IsOnlyZId()) {
       unique_ptr<KVSeqCollection> isotopes(fIdentifiers->GetSubListWithMethod(Form("%d", Z), "GetZ"));
       TIter next(isotopes.get());
       while ((id = (KVIDentifier*)next())) if (id->GetA() == A) break;
@@ -380,7 +380,7 @@ void KVIDGraph::WriteToAsciiFile(ofstream& gridfile)
    }
 
    //write fOnlyZId & mass formula
-   if (OnlyZId()) gridfile << "OnlyZId " << GetMassFormula() << endl;
+   if (IsOnlyZId()) gridfile << "OnlyZId " << GetMassFormula() << endl;
 
    //remove scaling if there is one
    if (fLastScaleX != 1 || fLastScaleY != 1)
@@ -1082,7 +1082,7 @@ void KVIDGraph::SetMassFormula(Int_t mass)
    // This will change the mass (A) of each identifier.
 
    fMassFormula = mass;
-   if (OnlyZId()) {
+   if (IsOnlyZId()) {
       if (GetNumberOfIdentifiers() > 0) {
          fIdentifiers->R__FOR_EACH(KVIDentifier, SetMassFormula)(mass);
       }

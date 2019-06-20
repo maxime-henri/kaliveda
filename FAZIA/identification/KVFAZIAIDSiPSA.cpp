@@ -66,7 +66,8 @@ Bool_t KVFAZIAIDSiPSA::Identify(KVIdentificationResult* idr, Double_t x, Double_
 
    if (IGrid->IsIdentifiable(ima, esi)) {
       IGrid->Identify(ima, esi, idr);
-   } else {
+   }
+   else {
       idr->IDOK = kFALSE;
       idr->IDquality = KVIDZAGrid::kICODE8;
    }
@@ -103,10 +104,11 @@ void KVFAZIAIDSiPSA::Initialize()
    IGrid = (KVIDZAGrid*) GetIDGrid(); // for the moment we defined only Igrids -> to be modified latter
    fSi = (KVFAZIADetector*)GetDetector(1);
    if (IGrid) {
-      SetHasMassID(IGrid->IsOnlyZId());
+      SetHasMassID(IGrid->HasMassIDCapability());
       IGrid->Initialize();
       SetBit(kReadyForID);
-   } else {
+   }
+   else {
       ResetBit(kReadyForID);
    }
    if (!gDataSet->HasCalibIdentInfos()) { // for filtering simulations
@@ -147,7 +149,8 @@ void KVFAZIAIDSiPSA::SetIdentificationStatus(KVReconstructedNucleus* n)
    okmass = okmass && (n->GetEnergy() >= fAThreshold->Eval(n->GetZ()));
    if (okmass) {
       n->SetAMeasured();
-   } else {
+   }
+   else {
       double e = n->GetE();
       n->SetZ(n->GetZ());
       n->SetE(e);
