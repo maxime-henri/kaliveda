@@ -24,7 +24,6 @@
 class KVIDINDRACsI: public KVINDRAIDTelescope {
 
    KVIDGCsI* CsIGrid;//! telescope's grid
-   KVDetector* fCsI;//!
 
    Int_t fThresMin[2][4];// min ID thresholds (smooth step)
    Int_t fThresMax[2][4];// max ID thresholds (smooth step)
@@ -41,9 +40,6 @@ public:
    const Char_t* GetArrayName();
 
    virtual Bool_t Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.);
-
-   Double_t GetIDMapX(Option_t* opt = "");
-   Double_t GetIDMapY(Option_t* opt = "");
 
    virtual void Initialize();
    virtual Bool_t CanIdentify(Int_t Z, Int_t /*A*/)

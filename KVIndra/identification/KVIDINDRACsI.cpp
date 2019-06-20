@@ -39,7 +39,6 @@ KVIDINDRACsI::KVIDINDRACsI()
    fECode = kECode1;
    SetSubCodeManager(4, 3);
    CsIGrid = 0;
-   fCsI = 0;
 
    fThresMin[0][0] = 1;
    fThresMax[0][0] = 2;    // protons
@@ -114,25 +113,6 @@ Bool_t KVIDINDRACsI::Identify(KVIdentificationResult* IDR, Double_t x, Double_t 
 
 }
 
-//____________________________________________________________________________________
-
-Double_t KVIDINDRACsI::GetIDMapX(Option_t*)
-{
-   //X-coordinate for CsI identification map is raw "L" coder value
-   return (Double_t) fCsI->GetACQData("L");
-}
-
-//____________________________________________________________________________________
-
-Double_t KVIDINDRACsI::GetIDMapY(Option_t*)
-{
-   //Y-coordinate for CsI identification map is raw "R" coder value
-   return (Double_t) fCsI->GetACQData("R");
-}
-
-//____________________________________________________________________________________
-
-
 void KVIDINDRACsI::Initialize()
 {
    // Initialisation of telescope before identification.
@@ -141,7 +121,6 @@ void KVIDINDRACsI::Initialize()
    // IsReadyForID() will return kTRUE if a grid is associated to this telescope for the current run,
    // or if no calibr/ident parameters are defined for the dataset
    CsIGrid = (KVIDGCsI*) GetIDGrid();
-   fCsI = GetDetector(1);
    if (CsIGrid) {
       CsIGrid->Initialize();
       SetBit(kReadyForID);
@@ -168,7 +147,7 @@ void KVIDINDRACsI::SetIdentificationStatus(KVReconstructedNucleus* n)
    n->SetZMeasured();
 
    if (n->GetA() > 5) {
-      if (fCsI->GetEnergy() > 40)
+      if (GetDetector(1)->GetEnergy() > 40)
          n->SetAMeasured();
       else {
          double e = n->GetE();
@@ -178,7 +157,7 @@ void KVIDINDRACsI::SetIdentificationStatus(KVReconstructedNucleus* n)
       return;
    }
    if (fThresMin[n->GetZ() - 1][n->GetA() - 1] > 0) {
-      Bool_t okmass = gRandom->Uniform() < smootherstep(fThresMin[n->GetZ() - 1][n->GetA() - 1], fThresMax[n->GetZ() - 1][n->GetA() - 1], fCsI->GetEnergy());
+      Bool_t okmass = gRandom->Uniform() < smootherstep(fThresMin[n->GetZ() - 1][n->GetA() - 1], fThresMax[n->GetZ() - 1][n->GetA() - 1], GetDetector(1)->GetEnergy());
       if (okmass) {
          n->SetAMeasured();
       }
