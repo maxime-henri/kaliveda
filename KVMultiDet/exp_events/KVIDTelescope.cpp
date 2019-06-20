@@ -415,43 +415,76 @@ void KVIDTelescope::SetIDGrid(KVIDGraph* grid)
    if (grid) {
       fIDGrids->Add(grid);
       fVarX = fVarY = nullptr;
-      fVarX = GetSignalFromGridVar(grid->GetVarX());
-      fVarY = GetSignalFromGridVar(grid->GetVarY());
+      fVarX = GetSignalFromGridVar(grid->GetVarX(), "X");
+      fVarY = GetSignalFromGridVar(grid->GetVarY(), "Y");
    }
 }
 
-KVDetectorSignal* KVIDTelescope::GetSignalFromGridVar(const KVString& var)
+KVDetectorSignal* KVIDTelescope::GetSignalFromGridVar(const KVString& var, const KVString& axe)
 {
    // Deduce & return pointer to detector signal from grid VARX/VARY parameter
    //
-   // To be valid, grid VARX/Y parameters should be set as follows:
+   // To be valid, grid VARX/Y parameters should be set in one of two ways:
    //
    //~~~~~~~~~~~~~~~~~~
+   //      [signal name]
    //      [det_label]::[signal name]
    //~~~~~~~~~~~~~~~~~~
    //
    // where
    //
    //~~~~~~~~~~~~~~~~~~
-   //    [det_label]   = detector label i.e. string returned by KVDetector::GetLabel()
-   //                    method for detector
    //    [signal_name] = name of a signal defined for the detector, possibly depending
    //                    on availability of calibration
+   //    [det_label]   = optional detector label i.e. string returned by
+   //                    KVDetector::GetLabel() method for detector
+   //~~~~~~~~~~~~~~~~~~
+   //
+   // If `[det_label]` is not given, we assume for `VARX` the second (E) detector,
+   // while for `VARY` we assume the first (dE) detector. If this telescope has only
+   // one detector, we use it for both variables.
    //
    //    To see all available signals for a detector, use
    //
+   //~~~~~~~~~~~~~~~~~~
    //         KVDetector::GetListOfDetectorSignals()
    //~~~~~~~~~~~~~~~~~~
 
+   if (var == "") {
+      Warning("GetSignalFromGridVar",
+              "No VAR%s defined for grid for telescope %s. KVIDTelescope-derived class handling identification must override GetIDMapX/GetIDMapY",
+              axe.Data(), GetName());
+      return nullptr;
+   }
+   KVDetector* det = nullptr;
+   KVDetectorSignal* ds(nullptr);
+   KVString sig_type;
    if (var.GetNValues("::") == 2) {
+      // VARX/Y = [det_label]::[signal name]
       var.Begin("::");
       KVString det_label = var.Next();
-      KVString sig_type = var.Next();
-      KVDetector* det = (KVDetector*)GetDetectors()->FindObjectByLabel(det_label);
-      if (!det) return nullptr;
-      return det->GetDetectorSignal(sig_type);
+      sig_type = var.Next();
+      det = (KVDetector*)GetDetectors()->FindObjectByLabel(det_label);
+      if (!det) {
+         Error("GetSignalFromGridVar",
+               "Problem initialising ID-grid %s coordinate for telescope %s. Request for unknown detector label %s. Check definition of VAR%s for grid (=%s)",
+               axe.Data(), GetName(), det_label.Data(), axe.Data(), var.Data());
+         return nullptr;
+      }
    }
-   return nullptr;
+   else {
+      // VARX/Y = [signal name]
+      if (axe == "Y" || GetSize() == 1) det = GetDetector(1);
+      else det = GetDetector(2);
+      sig_type = var;
+   }
+   ds = det->GetDetectorSignal(sig_type);
+   if (!ds) {
+      Error("GetSignalFromGridVar",
+            "Problem initialising ID-grid %s coordinate for telescope %s. Request for unknown signal %s for detector %s. Check definition of VAR%s for grid (=%s)",
+            axe.Data(), GetName(), sig_type.Data(), det->GetName(), axe.Data(), var.Data());
+   }
+   return ds;
 }
 
 //____________________________________________________________________________________
