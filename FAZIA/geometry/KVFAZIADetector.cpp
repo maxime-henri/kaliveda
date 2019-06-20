@@ -273,7 +273,7 @@ Bool_t KVFAZIADetector::SetProperties()
       AddDetectorSignal(new KVFAZIADetectorSignal("QH1Amplitude", this, &KVFAZIADetector::GetQH1Amplitude));
       AddDetectorSignal(new KVFAZIADetectorSignal("QL1Amplitude", this, &KVFAZIADetector::GetQL1Amplitude));
       AddDetectorSignal(new KVFAZIADetectorSignal("QL1RiseTime", this, &KVFAZIADetector::GetQL1RiseTime));
-      AddDetectorSignal(new KVFAZIADetectorSignal("QI1Amplitude", this, &KVFAZIADetector::GetI1Amplitude));
+      AddDetectorSignal(new KVFAZIADetectorSignal("I1Amplitude", this, &KVFAZIADetector::GetI1Amplitude));
    }
    else if (!strcmp(GetLabel(), "SI2")) {
       lsignals = "Q2,I2";
