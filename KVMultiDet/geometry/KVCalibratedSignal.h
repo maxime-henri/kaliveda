@@ -17,7 +17,9 @@ public:
    {}
    KVCalibratedSignal(KVDetectorSignal* input, KVCalibrator* calib)
       : KVDetectorSignal(calib->GetOutputSignalType(), input->GetDetector()), fInputSignal(input), fCalibrator(calib)
-   {}
+   {
+      SetTitle(Form("Signal %s calculated from signal %s of detector %s", GetName(), input->GetName(), GetDetector()->GetName()));
+   }
    virtual ~KVCalibratedSignal()
    {}
 

@@ -67,6 +67,10 @@ public:
       fLastCheck = kFALSE;
       return save;
    }
+   void ReplaceObjects(Bool_t yes = kTRUE)
+   {
+      fReplace = yes;
+   }
 
    ClassDef(KVUniqueNameList, 2) //Optimised list in which objects with the same name can only be placed once
 };

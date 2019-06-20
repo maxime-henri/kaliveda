@@ -16,9 +16,7 @@ public:
    KVDetectorSignal()
       : KVBase(), fDetector(nullptr)
    {}
-   KVDetectorSignal(const Char_t* type, KVDetector* det = nullptr)
-      : KVBase(type), fDetector(det)
-   {}
+   KVDetectorSignal(const Char_t* type, KVDetector* det = nullptr);
 
    virtual ~KVDetectorSignal()
    {}
@@ -42,6 +40,10 @@ public:
       return fDetector;
    }
 
+   virtual Bool_t IsValid() const
+   {
+      return kTRUE;
+   }
 
    ClassDef(KVDetectorSignal, 1) //Signal associated with detector
 };

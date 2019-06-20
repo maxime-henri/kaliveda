@@ -2,6 +2,7 @@
 //Author: John Frankland,,,
 
 #include "KVDetectorSignal.h"
+#include "KVDetector.h"
 
 ClassImp(KVDetectorSignal)
 
@@ -13,4 +14,11 @@ ClassImp(KVDetectorSignal)
 <!-- */
 // --> END_HTML
 ////////////////////////////////////////////////////////////////////////////////
+
+KVDetectorSignal::KVDetectorSignal(const Char_t* type, KVDetector* det)
+   : KVBase(type), fDetector(det)
+{
+   if (det) SetTitle(Form("Signal %s of detector %s", type, det->GetName()));
+   else SetTitle(Form("Detector signal %s", type));
+}
 

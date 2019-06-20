@@ -130,7 +130,11 @@ void KVDetector::init()
    fSingleLayer = kTRUE;
    fNode.SetDetector(this);
    SetKVDetectorFiredACQParameterListFormatString();
+   // detector owns any signals which are defined for it
    fDetSignals.SetOwner();
+   // adding a new signal with the same name as an existing one
+   // will delete the existing signal and replace it
+   fDetSignals.ReplaceObjects();
 }
 
 void KVDetector::SetKVDetectorFiredACQParameterListFormatString()

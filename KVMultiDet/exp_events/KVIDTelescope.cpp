@@ -37,6 +37,8 @@ Author : $Author: franklan $
 #include "TH2.h"
 #include "KVParticleCondition.h"
 
+#include <KVDetectorSignalExpression.h>
+
 using namespace std;
 
 ClassImp(KVIDTelescope)
@@ -434,8 +436,8 @@ KVDetectorSignal* KVIDTelescope::GetSignalFromGridVar(const KVString& var, const
    // where
    //
    //~~~~~~~~~~~~~~~~~~
-   //    [signal_name] = name of a signal defined for the detector, possibly depending
-   //                    on availability of calibration
+   //    [signal_name] = name of a signal or a mathematical expression using
+   //                    any of the signals defined for the detector
    //    [det_label]   = optional detector label i.e. string returned by
    //                    KVDetector::GetLabel() method for detector
    //~~~~~~~~~~~~~~~~~~
@@ -480,9 +482,17 @@ KVDetectorSignal* KVIDTelescope::GetSignalFromGridVar(const KVString& var, const
    }
    ds = det->GetDetectorSignal(sig_type);
    if (!ds) {
-      Error("GetSignalFromGridVar",
-            "Problem initialising ID-grid %s coordinate for telescope %s. Request for unknown signal %s for detector %s. Check definition of VAR%s for grid (=%s)",
-            axe.Data(), GetName(), sig_type.Data(), det->GetName(), axe.Data(), var.Data());
+      // sig_type is not the name of a known signal: assume it is an expression using known signal names
+      ds = new KVDetectorSignalExpression(Form("%s-VAR%s", GetName(), axe.Data()), sig_type, det);
+      if (!ds->IsValid()) {
+         Error("GetSignalFromGridVar",
+               "Problem initialising ID-grid %s coordinate for telescope %s. Request for unknown signal %s for detector %s. Check definition of VAR%s for grid (=%s)",
+               axe.Data(), GetName(), sig_type.Data(), det->GetName(), axe.Data(), var.Data());
+         delete ds;
+         ds = nullptr;
+      }
+      else
+         det->AddDetectorSignal(ds); // will be deleted by the detector
    }
    return ds;
 }
