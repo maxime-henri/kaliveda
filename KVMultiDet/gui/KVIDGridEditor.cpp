@@ -110,6 +110,8 @@ KVIDGridEditor::KVIDGridEditor()
 
    ResetScalingRecap();
 
+//   MakeCustomMenuForLines();
+
 }
 
 //________________________________________________________________
@@ -2510,6 +2512,17 @@ void KVIDGridEditor::ChangeZoomRatio(Int_t sign)
 
    axis->SetRange(XX1 + dX, XX2 - dX);
    UpdateViewer();
+}
+
+void KVIDGridEditor::MakeCustomMenuForLines()
+{
+   TClass* cl = gROOT->GetClass("KVIDZALine");
+   cl->MakeCustomMenuList();
+   TList* ml = cl->GetMenuList();
+   ml->Clear();
+
+   Info("MakeCustomMenuForLines", "called...");
+
 }
 
 //________________________________________________________________

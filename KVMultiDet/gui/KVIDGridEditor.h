@@ -192,6 +192,9 @@ protected:
    void RecurseFileStructureFindHistos(TString& hist_names, TDirectory* the_directory);
 
    void ChangeZoomRatio(Int_t sign);
+
+   void MakeCustomMenuForLines();
+
 public:
 
    KVIDGridEditor();
