@@ -297,16 +297,20 @@ void KVTestIDGridDialog::TestGrid()
    Int_t hzmin = ((KVIDentifier*)fSelectedGrid->GetIdentifiers()->First())->GetZ();
    Int_t hzmax = ((KVIDentifier*)fSelectedGrid->GetIdentifiers()->Last())->GetZ();
    if (fSelectedGrid->InheritsFrom("KVIDZAFromZGrid")) {
-      interval* itv = (interval*)((interval_set*)((KVIDZAFromZGrid*)fSelectedGrid)->GetIntervalSets()->Last())->GetIntervals()->Last();
-      if (itv) {
-         hnmax = itv->GetA() - itv->GetZ();
-         hamax = itv->GetA();
-         hzmax = itv->GetZ();
-      }
-      itv = (interval*)((interval_set*)((KVIDZAFromZGrid*)fSelectedGrid)->GetIntervalSets()->First())->GetIntervals()->First();
-      if (itv) {
-         hamin = itv->GetA();
-         hzmin = itv->GetZ();
+      KVList* is_list = ((KVIDZAFromZGrid*)fSelectedGrid)->GetIntervalSets();
+      if (is_list && is_list->GetEntries()) {
+         KVList* iv_list = ((interval_set*)is_list->Last())->GetIntervals();
+         if (iv_list && iv_list->GetEntries()) {
+            interval* itv = (interval*)iv_list->Last();
+            hnmax = itv->GetA() - itv->GetZ();
+            hamax = itv->GetA();
+            hzmax = itv->GetZ();
+            itv = (interval*)((interval_set*)is_list->First())->GetIntervals()->First();
+            if (itv) {
+               hamin = itv->GetA();
+               hzmin = itv->GetZ();
+            }
+         }
       }
    }
 
