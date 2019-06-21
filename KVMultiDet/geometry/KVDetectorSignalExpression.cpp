@@ -16,7 +16,7 @@ ClassImp(KVDetectorSignalExpression)
 ////////////////////////////////////////////////////////////////////////////////
 
 KVDetectorSignalExpression::KVDetectorSignalExpression(const Char_t* type, const KVString& _expr, KVDetector* det)
-   : KVDetectorSignal(type, det)
+   : KVDetectorSignal(type, det), fFormula(nullptr)
 {
    // 'type' will be an alias for this expression
    //
@@ -37,7 +37,11 @@ KVDetectorSignalExpression::KVDetectorSignalExpression(const Char_t* type, const
       }
    }
    if (nsigs) {
+#if ROOT_VERSION_CODE < ROOT_VERSION(6,0,0)
+      fFormula = new TFormula(type, expr);
+#else
       fFormula.reset(new TFormula(type, expr));
+#endif
       fValid = kTRUE;
    }
    else
@@ -50,15 +54,9 @@ Double_t KVDetectorSignalExpression::GetValue() const
 {
    // Evaluate the expression using all current values of signals
 
-   int nsigs = 0;
-#ifdef WITH_CPP11
-   for (KVDetectorSignal* ds : fSignals) {
-#else
-   for (std::vector<KVDetectorSignal*>::const_iterator it = fSignals.begin(); it != fSignals.End(); ++it) {
-      KVDetectorSignal* ds = *it;
-#endif
-      fFormula->SetParameter(nsigs, ds->GetValue());
-      ++nsigs;
+   int nsigs = fSignals.size();
+   for (int i = 0; i < nsigs; ++i) {
+      fFormula->SetParameter(i, fSignals[i]->GetValue());
    }
    return fFormula->Eval(0);
 }

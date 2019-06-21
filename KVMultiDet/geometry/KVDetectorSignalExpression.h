@@ -8,13 +8,22 @@
 #include "TFormula.h"
 
 class KVDetectorSignalExpression : public KVDetectorSignal {
+#if ROOT_VERSION_CODE < ROOT_VERSION(6,0,0)
+   TFormula* fFormula;//!
+#else
    std::unique_ptr<TFormula> fFormula;
+#endif
    std::vector<KVDetectorSignal*> fSignals;
    Bool_t fValid;
 
 public:
    KVDetectorSignalExpression(const Char_t* type, const KVString& _expr, KVDetector* det);
-   virtual ~KVDetectorSignalExpression() {}
+   virtual ~KVDetectorSignalExpression()
+   {
+#if ROOT_VERSION_CODE < ROOT_VERSION(6,0,0)
+      SafeDelete(fFormula);
+#endif
+   }
 
    Double_t GetValue() const;
    Bool_t IsValid() const
