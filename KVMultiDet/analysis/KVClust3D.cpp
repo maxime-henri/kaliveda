@@ -74,10 +74,12 @@ KVClust3D::KVClust3D(const char* name, const char* title, Int_t nbinsx, const Do
 KVClust3D::~KVClust3D()
 {
    // Destructor
+   /*
    delete fCluster;
    delete fVoisins;
    delete fNcells;
    delete fPop;
+   */
 }
 
 //____________________________________________________________________________//

@@ -24,7 +24,7 @@ ClassImp(KVVAMOSDataCorrection_e503)
 ////////////////////////////////////////////////////////////////////////////////
 
 //____________________________________________________________________________//
-KVVAMOSDataCorrection_e503::KVVAMOSDataCorrection_e503(Int_t run_number = -1) : KVVAMOSDataCorrection(run_number)
+KVVAMOSDataCorrection_e503::KVVAMOSDataCorrection_e503(Int_t run_number) : KVVAMOSDataCorrection(run_number)
 {
    // Default constructor
    fkverbose   = kFALSE;

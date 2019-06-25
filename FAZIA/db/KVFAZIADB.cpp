@@ -707,7 +707,7 @@ void KVFAZIADB::ReadCalibFile(const Char_t* filename)
    TIter next(env.GetTable());
    TEnvRec* rec = 0;
    KVDBParameterSet* par = 0;
-   KVNumberList run_list = GetRunList();
+   KVNumberList default_run_list = GetRunList();
 
    TString ssignal = "";
    TString stype = "";
@@ -719,6 +719,9 @@ void KVFAZIADB::ReadCalibFile(const Char_t* filename)
       }
       else if (sname == "CalibType") {
          stype = rec->GetValue();
+      }
+      else if (sname == "RunList") {
+         default_run_list.Set(rec->GetValue());
       }
       else {
          KVString lval(rec->GetValue());
@@ -736,7 +739,7 @@ void KVFAZIADB::ReadCalibFile(const Char_t* filename)
             par->SetParameter(np++, lval.Next().Atof());
          }
          fCalibrations->AddRecord(par);
-         LinkRecordToRunRange(par, run_list);
+         LinkRecordToRunRange(par, default_run_list);
       }
    }
 
