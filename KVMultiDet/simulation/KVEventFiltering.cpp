@@ -352,7 +352,7 @@ void KVEventFiltering::InitAnalysis()
 #endif
    if (!gDataSet->HasCalibIdentInfos()) {
       TString fullpath;
-      if (KVBase::SearchKVFile("IdentificationBilan.dat", fullpath, gDataSet->GetName())) {
+      if (sys && KVBase::SearchKVFile("IdentificationBilan.dat", fullpath, gDataSet->GetName())) {
          Info("InitAnalysis", "Setting identification bilan...");
          TString sysname = sys->GetBatchName();
          KVIDTelescope::OpenIdentificationBilan(fullpath);
