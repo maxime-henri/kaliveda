@@ -560,7 +560,7 @@ void KVIDGridEditor::SetHisto(TH2* hh)
 {
 
    if (!hh) {
-      TString Listo   = ListOfHistogramInMemory();
+      KVString Listo   = ListOfHistogramInMemory();
       TString Select  = PreselectHistogram(Listo);
 
       TString Choices;
@@ -581,7 +581,13 @@ void KVIDGridEditor::SetHisto(TH2* hh)
          Default = Select;
          Choices += Select.Data();
          Choices += " ";
-         Choices += Listo.ReplaceAll(Select.Data(), "");
+         //Choices += Listo.ReplaceAll(Select.Data(), "");
+         Listo.Begin(" ");//in case list contains a histo with a similar name to Select
+         // if Select="SI_CSI_0801" and the list contains "SI_CSI_0801_GG"
+         while (!Listo.End()) {
+            KVString s = Listo.Next();
+            if (s != Select) Choices += Form("%s ", s.Data());
+         }
       }
 
       TString Answer;
