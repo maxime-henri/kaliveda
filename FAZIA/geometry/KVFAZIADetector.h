@@ -74,10 +74,6 @@ protected:
 
    Int_t fDetTag, fGTTag;
 
-   KVCalibrator* fChannelToEnergy;//!To obtain energy from charge
-   KVCalibrator* fChannelToVolt;//!To obtain volt from channel
-   KVCalibrator* fVoltToEnergy;//!To obtain energy from volt
-
    void init();   //initialisation method called by the constructors
    Bool_t SetProperties();
 

@@ -162,6 +162,6 @@ void KVUpDater::SetCalibrationParameters(UInt_t run)
 void KVUpDater::SetCalibParameters(KVDBRun* r)
 {
    // Override in child classes to set specific calibrations.
-   fArray->SetCalibratorParameters(r);
-   fArray->SetPedestalParameters(r);
+   fArray->SetCalibratorParameters(r, fArray->GetName());
+   fArray->SetPedestalParameters(r, fArray->GetName());
 }

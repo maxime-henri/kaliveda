@@ -34,15 +34,10 @@ KVFAZIAUpDater::~KVFAZIAUpDater()
 
 void KVFAZIAUpDater::SetCalibParameters(KVDBRun* dbrun)
 {
+   KVUpDater::SetCalibParameters(dbrun);
+
    SetPSAParameters(dbrun);
-   SetCalibrations(dbrun);
    CheckStatusOfDetectors(dbrun);
-
-   std::cout << std::endl << std::endl << std::endl;
-   Info("SetCalibParameters", "called !");
-   std::cout << std::endl << std::endl << std::endl;
-
-
 }
 
 void KVFAZIAUpDater::SetPSAParameters(KVDBRun* dbrun)
@@ -89,12 +84,12 @@ void KVFAZIAUpDater::SetPSAParameters(KVDBRun* dbrun)
 }
 void KVFAZIAUpDater::SetCalibrations(KVDBRun* dbrun)
 {
-   //Loop on calibrations stores in the database
+   //Loop on calibrations stored in the database
    //and update parameters for each concerned calibrators
    KVFAZIADetector* det = 0;
    KVCalibrator* cal = 0;
    KVDBParameterSet* par = 0;
-   TList* list = (TList*)dbrun->GetLinks("Calibrations");
+   TList* list = (TList*)dbrun->GetLinks("FAZIA.Calibrations");
    TIter next(list);
    while ((par = (KVDBParameterSet*)next())) {
       TString sdet(par->GetName());

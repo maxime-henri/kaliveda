@@ -8,6 +8,7 @@
 #include <KVLightEnergyCsI.h>
 #include <KVCalibrator.h>
 #include <KVIDGCsI.h>
+#include <KVCalibratedSignal.h>
 
 ClassImp(KVFAZIAGroupReconstructor)
 
@@ -52,17 +53,11 @@ void KVFAZIAGroupReconstructor::CalibrateParticle(KVReconstructedNucleus* PART)
 
       if (det->IsCalibrated()) {
          if (det->GetIdentifier() == KVFAZIADetector::kCSI) {
-            if (det->GetCalibrator("Channel-Energy")->InheritsFrom("KVLightEnergyCsIFull")) {
-               KVLightEnergyCsIFull* calib = (KVLightEnergyCsIFull*)det->GetCalibrator("Channel-Energy");
+            if (det->HasDetectorSignalValue("Energy")) {
+               KVLightEnergyCsIFull* calib = (KVLightEnergyCsIFull*)((KVCalibratedSignal*)det->GetDetectorSignal("Energy"))->GetCalibrator();
                calib->SetZ(PART->GetZ());
                calib->SetA(PART->GetA());
-               eloss[ntot - ndet - 1] = calib->Compute(det->GetQ3Amplitude());
-            }
-            else if (det->GetCalibrator("Channel-Energy")->InheritsFrom("KVLightEnergyCsI")) {
-               KVLightEnergyCsI* calib = (KVLightEnergyCsI*)det->GetCalibrator("Channel-Energy");
-               calib->SetZ(PART->GetZ());
-               calib->SetA(PART->GetA());
-               eloss[ntot - ndet - 1] = calib->Compute(det->GetQ3Amplitude());
+               eloss[ntot - ndet - 1] = det->GetEnergy();
             }
          }
          else eloss[ntot - ndet - 1] = det->GetEnergy();

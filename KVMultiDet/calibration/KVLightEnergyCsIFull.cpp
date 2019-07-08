@@ -453,10 +453,8 @@ void KVLightEnergyCsIFull::init()
 
 void KVLightEnergyCsIFull::Print(Option_t* opt) const
 {
-   cout << "Formula : " << fLightFormula << endl;
    KVCalibrator::Print(opt);
    cout << "Formula : " << fLightFormula << endl;
-
 }
 
 KVLightEnergyCsIFull::~KVLightEnergyCsIFull()
@@ -532,6 +530,20 @@ Double_t KVLightEnergyCsIFull::Invert(Double_t energy)
 
    return fLight->Eval(energy);
 }
+
+void KVLightEnergyCsIFull::SetOptions(const KVNameValueList& opt)
+{
+   // Used to set up a CsI calibrator from infos in a calibration parameter file.
+   // Use an option string like this:
+   //
+   //~~~~~~~~~~~~~~
+   // CalibOptions:   formula=[0:kExact,1:kApproxIntegral,2:kApprox(INDRA style),3:kApproxSilicon]
+   //~~~~~~~~~~~~~~
+
+   SetLightFormula(opt.GetIntValue("formula"));
+
+}
+
 
 //Double_t KVLightEnergyCsIFull::dLightIntegral( double *x , double *par )
 //{

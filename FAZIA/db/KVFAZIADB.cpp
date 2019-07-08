@@ -11,6 +11,7 @@
 #include "KVDBParameterSet.h"
 #include "IRODS.h"
 #include "TRandom.h"
+#include "KVMultiDetArray.h"
 
 KVFAZIADB* gFaziaDB;
 
@@ -86,7 +87,8 @@ void KVFAZIADB::Build()
    ReadRutherfordCounting();
    ReadRutherfordCrossSection();
    ReadComments();
-   ReadCalibrationFiles();
+   KVMultiDetArray::MakeMultiDetector(fDataSet);
+   gMultiDetArray->MakeCalibrationTables(this);
    ReadOoODetectors();
 
 }

@@ -26,6 +26,11 @@ public:
    Double_t GetValue() const;
    Double_t GetInverseValue(Double_t out_val, const TString& in_sig) const;
 
+   KVCalibrator* GetCalibrator() const
+   {
+      return fCalibrator;
+   }
+
    ClassDef(KVCalibratedSignal, 1) //Detector signal produced by a calibrator
 };
 

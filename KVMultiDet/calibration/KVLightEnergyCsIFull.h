@@ -89,6 +89,8 @@ public:
    Double_t sp_e(double z, double a, double e);
    Double_t sp_n(double z, double a, double e);
 
+   void SetOptions(const KVNameValueList& opt);
+
 protected:
    Double_t gamma(double z, double a, double e);
    Double_t gamma_ziegler(double z, double a, double e);

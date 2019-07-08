@@ -46,9 +46,6 @@ void KVFAZIADetector::init()
    fIndex = -1;
    fIsRutherford = kFALSE;
 
-   fChannelToEnergy = 0;
-   fChannelToVolt = 0;
-   fVoltToEnergy = 0;
    fLabel = -1;
    fChannel = 0;
    fVolt = 0;
@@ -68,9 +65,6 @@ Double_t KVFAZIADetector::GetSetupParameter(const Char_t* parname)
 
 void KVFAZIADetector::RefreshCalibratorPointers()
 {
-   fChannelToEnergy = GetCalibrator("Channel-Energy");
-   fChannelToVolt = GetCalibrator("Channel-Volt");
-   fVoltToEnergy = GetCalibrator("Volt-Energy");
 }
 
 //________________________________________________________________
