@@ -198,6 +198,9 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
       fListOfAuxFiles->Add(fSimDir->GetSimDataList()->FindObject(auxfiles.Next()));
    }
 
+   // this option, if set, copies the files to be analysed to the current working directory
+   SetCopyFilesToWorkDir(GetBatchInfoFile()->GetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", false));
+
    ok = kTRUE;
 
    return ok;
@@ -206,6 +209,8 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
 void KVSimDirAnalyser::BuildChain()
 {
    // Build a TChain with all files/trees to be analysed
+   //
+   // If fCopyFilesToWorkDir==true, files are first copied to working directory
 
    TIter next(fListOfSimFiles);
    KVSimFile* file;
@@ -215,7 +220,12 @@ void KVSimDirAnalyser::BuildChain()
       }
       TString fullpath;
       AssignAndDelete(fullpath, gSystem->ConcatFileName(file->GetSimDir()->GetDirectory(), file->GetName()));
-      fAnalysisChain->Add(fullpath);
+      if (IsCopyFilesToWorkDir()) {
+         TFile::Cp(fullpath, Form("./%s", gSystem->BaseName(fullpath)));
+         fAnalysisChain->Add(gSystem->BaseName(fullpath));
+      }
+      else
+         fAnalysisChain->Add(fullpath);
    }
 }
 

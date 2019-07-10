@@ -15,6 +15,7 @@ class KVSimDirAnalyser : public KVDataAnalyser {
    TList* fListOfAuxFiles;//!    [optional] list of original simulated data to be used during filtered data analysis
    TChain* fAnalysisChain;//!    TChain for analysis
    KVSimDir* fSimDir;//!         used for batch analysis
+   Bool_t fCopyFilesToWorkDir;//! if true, files to be analysed are copied to working directory first
 
 private:
    void DeleteSimFilesListIfOurs();
@@ -55,6 +56,15 @@ public:
    Bool_t ReadBatchEnvFile(const Char_t*);
 
    static void Make(const Char_t* kvsname = "MySimulatedAnalysis");
+
+   void SetCopyFilesToWorkDir(Bool_t on = kTRUE)
+   {
+      fCopyFilesToWorkDir = on;
+   }
+   Bool_t IsCopyFilesToWorkDir() const
+   {
+      return fCopyFilesToWorkDir;
+   }
 
    ClassDef(KVSimDirAnalyser, 1) //Analysis of trees containing simulated events
 };
