@@ -63,7 +63,7 @@ void KVGELogReader::ReadLine(TString& line, Bool_t& ok)
       fOK = kFALSE;
       return;
    }
-   else if (line.Contains("XCPU")) {
+   else if (line.Contains("Job received KILL signal")) {
       ok = kFALSE;
       fStatus = "KILLED";
       fOK = kFALSE;
