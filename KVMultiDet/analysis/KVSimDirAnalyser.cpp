@@ -227,6 +227,10 @@ void KVSimDirAnalyser::BuildChain()
       else
          fAnalysisChain->Add(fullpath);
    }
+   if (IsCopyFilesToWorkDir()) {
+      // rescan the working directory to include the newly-added copies of the files to analyse
+      ScanWorkingDirectory(&fWorkDirInit);
+   }
 }
 
 
