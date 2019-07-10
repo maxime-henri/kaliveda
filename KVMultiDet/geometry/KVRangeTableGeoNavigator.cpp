@@ -164,27 +164,27 @@ void KVRangeTableGeoNavigator::ParticleEntersNewVolume(KVNucleus* part)
             //theDet->AddHit(part);//don't put a reference to simulated particle in detector
          }
       }
-      part->GetParameters()->SetValue(Form("Xin:%s", absorber_name.Data()), GetEntryPoint().X());
-      part->GetParameters()->SetValue(Form("Yin:%s", absorber_name.Data()), GetEntryPoint().Y());
-      part->GetParameters()->SetValue(Form("Zin:%s", absorber_name.Data()), GetEntryPoint().Z());
+      //part->GetParameters()->SetValue(Form("Xin:%s", absorber_name.Data()), GetEntryPoint().X());
+      //part->GetParameters()->SetValue(Form("Yin:%s", absorber_name.Data()), GetEntryPoint().Y());
+      //part->GetParameters()->SetValue(Form("Zin:%s", absorber_name.Data()), GetEntryPoint().Z());
       if (StopPropagation()) {
          // If particle stops in this volume, we use as 'exit point' the point corresponding to
          // the calculated range of the particle
          Double_t r = irmat->GetRangeOfLastDE() / irmat->GetDensity();
          TVector3 path = GetExitPoint() - GetEntryPoint();
          TVector3 midVol = GetEntryPoint() + (r / path.Mag()) * path;
-         part->GetParameters()->SetValue(Form("Xout:%s", absorber_name.Data()), midVol.X());
-         part->GetParameters()->SetValue(Form("Yout:%s", absorber_name.Data()), midVol.Y());
-         part->GetParameters()->SetValue(Form("Zout:%s", absorber_name.Data()), midVol.Z());
+         //part->GetParameters()->SetValue(Form("Xout:%s", absorber_name.Data()), midVol.X());
+         //part->GetParameters()->SetValue(Form("Yout:%s", absorber_name.Data()), midVol.Y());
+         //part->GetParameters()->SetValue(Form("Zout:%s", absorber_name.Data()), midVol.Z());
          if (IsTracking()) {
             AddPointToCurrentTrack(GetEntryPoint().X(), GetEntryPoint().Y(), GetEntryPoint().Z());
             AddPointToCurrentTrack(midVol.X(), midVol.Y(), midVol.Z());
          }
       }
       else {
-         part->GetParameters()->SetValue(Form("Xout:%s", absorber_name.Data()), GetExitPoint().X());
-         part->GetParameters()->SetValue(Form("Yout:%s", absorber_name.Data()), GetExitPoint().Y());
-         part->GetParameters()->SetValue(Form("Zout:%s", absorber_name.Data()), GetExitPoint().Z());
+         //part->GetParameters()->SetValue(Form("Xout:%s", absorber_name.Data()), GetExitPoint().X());
+         //part->GetParameters()->SetValue(Form("Yout:%s", absorber_name.Data()), GetExitPoint().Y());
+         //part->GetParameters()->SetValue(Form("Zout:%s", absorber_name.Data()), GetExitPoint().Z());
          if (IsTracking()) {
             AddPointToCurrentTrack(GetEntryPoint().X(), GetEntryPoint().Y(), GetEntryPoint().Z());
             AddPointToCurrentTrack(GetExitPoint().X(), GetExitPoint().Y(), GetExitPoint().Z());
