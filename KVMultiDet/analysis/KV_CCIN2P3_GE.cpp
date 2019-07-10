@@ -178,6 +178,9 @@ void KV_CCIN2P3_GE::WriteBatchEnvFile(TEnv* env)
    env->SetValue("BatchSystem.Time", GetJobTime());
    env->SetValue("BatchSystem.Memory", GetJobMemory());
    env->SetValue("BatchSystem.Disk", GetJobDisk());
+   // if analysis of simulated data is being used, we copy the files to analyse to the
+   // scratch disk of the batch job (make sure enough disk space is requested)
+   env->SetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", true);
 }
 
 //_______________________________________________________________________________//

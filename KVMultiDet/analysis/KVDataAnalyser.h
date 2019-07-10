@@ -47,12 +47,12 @@ private:
    KVBatchSystem* fBatchSystem;//batch system to use for submission of job
    Bool_t fChoseRunMode; //set to kTRUE once running mode has been set/chosen
 
-   TList* fWorkDirInit;//list of files in working directory before task runs
    TList* fWorkDirEnd;//list of files in working directory after task runs
    static Bool_t fCleanAbort;//flag to force abort of processing
    Bool_t fUseBaseClassSubmitTask;
 
 protected:
+   TList* fWorkDirInit;//list of files in working directory before task runs
    void ScanWorkingDirectory(TList**);
    void CopyAnalysisResultsToLaunchDirectory();
 

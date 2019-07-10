@@ -61,7 +61,7 @@ void KVSimDirAnalyser::SubmitTask()
    results_file_name.Form("%s_%s", GetUserClass(), first_file->GetName());
    TString options;
    options.Form("SimFileName=%s,SimTitle=%s,OutputDir=%s,EventsReadInterval=%lld,BranchName=%s,CombinedOutputFile=%s,SimulationInfos=%s",
-                first_file->GetName(), fAnalysisChain->GetTitle(), first_file->GetSimDir()->GetDirectory(),
+                first_file->GetName(), fAnalysisChain->GetTitle(), (IsCopyFilesToWorkDir() ? "." : first_file->GetSimDir()->GetDirectory()),
                 update_interval, first_file->GetBranchName(),
                 results_file_name.Data(), first_file->GetTitle());
    if (first_file->IsFiltered()) options += Form(",DataSet=%s,System=%s,Run=%d",
@@ -198,6 +198,9 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
       fListOfAuxFiles->Add(fSimDir->GetSimDataList()->FindObject(auxfiles.Next()));
    }
 
+   // this option, if set, copies the files to be analysed to the current working directory
+   SetCopyFilesToWorkDir(GetBatchInfoFile()->GetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", false));
+
    ok = kTRUE;
 
    return ok;
@@ -206,6 +209,8 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
 void KVSimDirAnalyser::BuildChain()
 {
    // Build a TChain with all files/trees to be analysed
+   //
+   // If fCopyFilesToWorkDir==true, files are first copied to working directory
 
    TIter next(fListOfSimFiles);
    KVSimFile* file;
@@ -215,7 +220,16 @@ void KVSimDirAnalyser::BuildChain()
       }
       TString fullpath;
       AssignAndDelete(fullpath, gSystem->ConcatFileName(file->GetSimDir()->GetDirectory(), file->GetName()));
-      fAnalysisChain->Add(fullpath);
+      if (IsCopyFilesToWorkDir()) {
+         TFile::Cp(fullpath, Form("./%s", gSystem->BaseName(fullpath)));
+         fAnalysisChain->Add(gSystem->BaseName(fullpath));
+      }
+      else
+         fAnalysisChain->Add(fullpath);
+   }
+   if (IsCopyFilesToWorkDir()) {
+      // rescan the working directory to include the newly-added copies of the files to analyse
+      ScanWorkingDirectory(&fWorkDirInit);
    }
 }
 
