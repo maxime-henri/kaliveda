@@ -6,6 +6,7 @@
 #include <KVSimFile.h>
 #include <KVSimDir.h>
 #include <KVClassFactory.h>
+#include <TStopwatch.h>
 #include "TSystem.h"
 
 ClassImp(KVSimDirAnalyser)
@@ -20,7 +21,7 @@ ClassImp(KVSimDirAnalyser)
 ////////////////////////////////////////////////////////////////////////////////
 
 KVSimDirAnalyser::KVSimDirAnalyser()
-   : KVDataAnalyser(), fListOfSimFiles(nullptr), fListOfAuxFiles(nullptr), fAnalysisChain(nullptr), fSimDir(nullptr)
+   : KVDataAnalyser(), fListOfSimFiles(nullptr), fListOfAuxFiles(nullptr), fAnalysisChain(nullptr), fSimDir(nullptr), fCopyFilesToWorkDir(false)
 {
    // Default constructor
 }
@@ -186,6 +187,9 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
       else if (filetype == "filtered") fListOfSimFiles->Add(fSimDir->GetFiltDataList()->FindObject(simfiles.Next()));
    }
 
+   // this option, if set, copies the files to be analysed to the current working directory
+   SetCopyFilesToWorkDir(GetBatchInfoFile()->GetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", false));
+
    KVString auxfiles = GetBatchInfoFile()->GetValue("AuxFiles", "");
    if (auxfiles == "") return (ok = kTRUE);
 
@@ -197,9 +201,6 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
    while (!auxfiles.End()) {
       fListOfAuxFiles->Add(fSimDir->GetSimDataList()->FindObject(auxfiles.Next()));
    }
-
-   // this option, if set, copies the files to be analysed to the current working directory
-   SetCopyFilesToWorkDir(GetBatchInfoFile()->GetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", false));
 
    ok = kTRUE;
 
@@ -221,7 +222,10 @@ void KVSimDirAnalyser::BuildChain()
       TString fullpath;
       AssignAndDelete(fullpath, gSystem->ConcatFileName(file->GetSimDir()->GetDirectory(), file->GetName()));
       if (IsCopyFilesToWorkDir()) {
-         TFile::Cp(fullpath, Form("./%s", gSystem->BaseName(fullpath)));
+         Info("BuildChain", "Copying file to analyse from %s to %s", fullpath.Data(), Form("./%s", gSystem->BaseName(fullpath)));
+         TStopwatch timer;
+         TFile::Cp(fullpath, Form("./%s", gSystem->BaseName(fullpath)), kFALSE, 1e+08);
+         Info("BuildChain", "Copied file in %g seconds", timer.RealTime());
          fAnalysisChain->Add(gSystem->BaseName(fullpath));
       }
       else
