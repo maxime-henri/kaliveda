@@ -186,6 +186,9 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
       else if (filetype == "filtered") fListOfSimFiles->Add(fSimDir->GetFiltDataList()->FindObject(simfiles.Next()));
    }
 
+   // this option, if set, copies the files to be analysed to the current working directory
+   SetCopyFilesToWorkDir(GetBatchInfoFile()->GetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", false));
+
    KVString auxfiles = GetBatchInfoFile()->GetValue("AuxFiles", "");
    if (auxfiles == "") return (ok = kTRUE);
 
@@ -197,9 +200,6 @@ Bool_t KVSimDirAnalyser::ReadBatchEnvFile(const Char_t* filename)
    while (!auxfiles.End()) {
       fListOfAuxFiles->Add(fSimDir->GetSimDataList()->FindObject(auxfiles.Next()));
    }
-
-   // this option, if set, copies the files to be analysed to the current working directory
-   SetCopyFilesToWorkDir(GetBatchInfoFile()->GetValue("SimDirAnalyser.CopyFilesToWorkingDirectory", false));
 
    ok = kTRUE;
 
