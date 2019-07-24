@@ -20,7 +20,7 @@ ClassImp(KVSimDirAnalyser)
 ////////////////////////////////////////////////////////////////////////////////
 
 KVSimDirAnalyser::KVSimDirAnalyser()
-   : KVDataAnalyser(), fListOfSimFiles(nullptr), fListOfAuxFiles(nullptr), fAnalysisChain(nullptr), fSimDir(nullptr)
+   : KVDataAnalyser(), fListOfSimFiles(nullptr), fListOfAuxFiles(nullptr), fAnalysisChain(nullptr), fSimDir(nullptr), fCopyFilesToWorkDir(false)
 {
    // Default constructor
 }
