@@ -4,17 +4,17 @@
 #ifndef __KVSMOOTHIPDIST_H
 #define __KVSMOOTHIPDIST_H
 
+#include "KVBase.h"
 #include "TF1.h"
 
-class KVSmoothIPDist : public TF1 {
+class KVSmoothIPDist : public KVBase {
    TH1*  fHisto;//! last fitted histogram
+   TF1 fIPdist;// impact parameter distribution
+   TF1 fSigmaR;// total reaction cross section
+   TF1 fCentrality;//
 
 public:
-   KVSmoothIPDist()
-      : TF1(), fHisto(nullptr)
-   {
-      // Default constructor
-   }
+   KVSmoothIPDist();
    KVSmoothIPDist(TH1*);
    virtual ~KVSmoothIPDist() {}
 
@@ -23,13 +23,38 @@ public:
    Double_t GetCrossSection() const;
    Double_t GetB0() const
    {
-      return GetParameter(1);
+      return fIPdist.GetParameter(1);
    }
    Double_t GetDeltaB() const
    {
-      return GetParameter(2);
+      return fIPdist.GetParameter(2);
    }
    Double_t GetCrossSectionPerEvent() const;
+   void SetB0(Double_t x)
+   {
+      fIPdist.SetParameter(1, x);
+      fCentrality.SetParameter(0, x);
+   }
+   void SetDeltaB(Double_t x)
+   {
+      fIPdist.SetParameter(2, x);
+      fSigmaR.SetParameter(0, x);
+      fCentrality.SetParameter(1, x);
+   }
+   void SetDeltaB_WithConstantCrossSection(Double_t deltab, Double_t sigmaR = 0);
+   const TF1& GetIPDist() const
+   {
+      return fIPdist;
+   }
+   const TF1& GetSigmaR() const
+   {
+      return fSigmaR;
+   }
+   const TF1& GetCentrality() const
+   {
+      return fCentrality;
+   }
+   Double_t Calculate_b(Double_t centrality) const;
 
    ClassDef(KVSmoothIPDist, 1) //Triangular IP distribution with smooth fall-off
 };
