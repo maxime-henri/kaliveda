@@ -36,6 +36,7 @@
 #pragma link C++ class KVDataTransferSFTP+;
 #pragma link C++ class KVDataTransferXRD+;
 #pragma link C++ class KVImpactParameter;
+#pragma link C++ class KVSmoothIPDist+;
 #pragma link C++ class KVClust3D;
 #pragma link C++ class KVRandomizor;
 #pragma link C++ class KVRandomizorInd;
