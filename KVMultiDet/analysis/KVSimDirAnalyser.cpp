@@ -6,6 +6,7 @@
 #include <KVSimFile.h>
 #include <KVSimDir.h>
 #include <KVClassFactory.h>
+#include <TStopwatch.h>
 #include "TSystem.h"
 
 ClassImp(KVSimDirAnalyser)
@@ -221,7 +222,10 @@ void KVSimDirAnalyser::BuildChain()
       TString fullpath;
       AssignAndDelete(fullpath, gSystem->ConcatFileName(file->GetSimDir()->GetDirectory(), file->GetName()));
       if (IsCopyFilesToWorkDir()) {
-         TFile::Cp(fullpath, Form("./%s", gSystem->BaseName(fullpath)));
+         Info("BuildChain", "Copying file to analyse from %s to %s", fullpath.Data(), Form("./%s", gSystem->BaseName(fullpath)));
+         TStopwatch timer;
+         TFile::Cp(fullpath, Form("./%s", gSystem->BaseName(fullpath)), kFALSE, 1e+08);
+         Info("BuildChain", "Copied file in %g seconds", timer.RealTime());
          fAnalysisChain->Add(gSystem->BaseName(fullpath));
       }
       else
