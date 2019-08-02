@@ -15,5 +15,5 @@ public:
    void EndRun() {}
    void EndAnalysis() {}
 
-   ClassDef(RawAnalysisTemplate, 1)
+   ClassDef(RawAnalysisTemplate, 0)
 };

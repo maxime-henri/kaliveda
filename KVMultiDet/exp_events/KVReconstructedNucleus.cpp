@@ -195,6 +195,14 @@ Bool_t KVReconstructedNucleus::InArray(const TString& name) const
    return GetParameters()->IsValue("ARRAY", name.Data());
 }
 
+TString KVReconstructedNucleus::GetArrayName() const
+{
+   // Returns name of array particle was detected in (if known)
+   if (GetParameters()->HasStringParameter("ARRAY")) return GetParameters()->GetStringValue("ARRAY");
+   if (GetStoppingDetector()) return GetStoppingDetector()->GetGroup()->GetArray()->GetName();
+   return "";
+}
+
 void KVReconstructedNucleus::Print(Option_t*) const
 {
 
