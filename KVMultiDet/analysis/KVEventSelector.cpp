@@ -978,7 +978,7 @@ A simple example of analysis of simulated data, for use with kaliveda-sim
 
 A simple example of analysis of filtered simulated data, for use with kaliveda-sim.
 Note that this class was written specially for filtering simulations with the
-future coupling of INDRA and FAZIA.
+coupled INDRA and FAZIA arrays.
 
 \include ExampleFilteredSimDataAnalysis.h
 */
