@@ -7,8 +7,8 @@ class ReconDataSelectorTemplate : public KVReconEventSelector {
    double Vx[1000], Vy[1000], Vz[1000]; //!
 
 public:
-   ReconDataSelectorTemplate() {};
-   virtual ~ReconDataSelectorTemplate() {};
+   ReconDataSelectorTemplate() {}
+   virtual ~ReconDataSelectorTemplate() {}
 
    virtual void InitRun();
    virtual void EndRun() {}
@@ -16,5 +16,5 @@ public:
    virtual Bool_t Analysis();
    virtual void EndAnalysis() {}
 
-   ClassDef(ReconDataSelectorTemplate, 0);
+   ClassDef(ReconDataSelectorTemplate, 0)
 };

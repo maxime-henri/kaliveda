@@ -293,7 +293,7 @@ void KVRawDataAnalyser::SaveHistos(const Char_t* filename, Option_t* option, Boo
    // onlyfilled flag allow to write all (onlyfilled=kFALSE, default)
    // or only histograms (onlyfilled=kTRUE) those have been filled
 
-   if (fHistoList.GetEntries()) return;
+   if (!fHistoList.GetEntries()) return;
 
    TString histo_file_name = "";
    if (!strcmp(filename, ""))
@@ -356,35 +356,9 @@ void KVRawDataAnalyser::Make(const Char_t* kvsname)
 {
    //Automatic generation of derived class for raw data analysis
 
-   KVClassFactory cf(kvsname, "User raw data analysis class", "KVRawDataAnalyser");
-   cf.AddMethod("InitAnalysis", "void");
-   cf.AddMethod("InitRun", "void");
-   cf.AddMethod("Analysis", "Bool_t");
-   cf.AddMethod("EndRun", "void");
-   cf.AddMethod("EndAnalysis", "void");
-   KVString body;
-   //initanalysis
-   body = "   //Initialisation of e.g. histograms, performed once at beginning of analysis";
-   cf.AddMethodBody("InitAnalysis", body);
-   //initrun
-   body = "   //Initialisation performed at beginning of each run\n";
-   body += "   //  GetRunNumber() returns current run number";
-   body += "   //  GetCurrentRun() returns KVDBRun pointer to current run in database";
-   cf.AddMethodBody("InitRun", body);
-   //Analysis
-   body = "   //Analysis method called for each event\n";
-   body += "   //  GetEventNumber() returns current event number\n";
-   body += "   //  GetRunFileReader() returns object used to read data (KVRawDataReader child class)\n";
-   body += "   //  gMultiDetArray->HandledRawData() returns kTRUE if interesting data was read\n";
-   body += "   //  Processing will stop if this method returns kFALSE\n";
-   body += "   return kTRUE;";
-   cf.AddMethodBody("Analysis", body);
-   //endrun
-   body = "   //Method called at end of each run";
-   cf.AddMethodBody("EndRun", body);
-   //endanalysis
-   body = "   //Method called at end of analysis: save/display histograms etc.";
-   cf.AddMethodBody("EndAnalysis", body);
+   KVClassFactory cf(kvsname, "Analysis of raw data", "",
+                     kTRUE, "RawAnalysisTemplate");
+
    cf.AddImplIncludeFile("KVMultiDetArray.h");
    cf.GenerateCode();
 }
