@@ -21,7 +21,6 @@ void KVFAZIAIDSiSi_e789::Initialize()
 {
    // Initialize telescope for current run.
    // If there is at least 1 grid, we set fCanIdentify = kTRUE
-   // "Natural" line widths are calculated for KVIDZAGrids.
 
    fSiSiGrid    = nullptr;
    fSiSiGridQL1 = nullptr;
