@@ -1882,22 +1882,22 @@ void KVIDGridEditor::TranslateY(Int_t Sign)
 }
 
 //________________________________________________________________
-void KVIDGridEditor::DynamicZoom(Int_t Sign, Int_t px, Int_t py)
+void KVIDGridEditor::DynamicZoom(Int_t Sign, Int_t px, Int_t py, Double_t speed)
 {
    // Zoom in or out of histogram with mouse wheel
 
    if (!TheHisto) return;
 
-   // use modulator value as the percentage of the number of bins
-   // currently displayed on each axis
-   Double_t percent = TMath::Min(imod / 100., 1.0);
-   percent = 0.15 - Sign * 0.05;
+   Double_t percent = TMath::Abs(0.15 * speed - Sign * 0.05);
 
    Int_t dX = 0;
    Int_t dY = 0;
 
-   px = fPad->AbsPixeltoX(px);
-   py = fPad->AbsPixeltoY(py);
+   if (px == 0) px = (TheHisto->GetXaxis()->GetFirst() + TheHisto->GetXaxis()->GetLast()) / 2;
+   else      px = fPad->AbsPixeltoX(px);
+
+   if (py == 0) py = (TheHisto->GetYaxis()->GetFirst() + TheHisto->GetYaxis()->GetLast()) / 2;
+   else py = fPad->AbsPixeltoY(py);
 
    TAxis* ax = TheHisto->GetXaxis();
    Int_t NbinsX = ax->GetNbins();
@@ -2115,7 +2115,7 @@ void KVIDGridEditor::ResetColor(KVIDentifier* Ident)
    if (!TheGrid) return;
    if (!(TheGrid->GetCuts()->Contains(Ident))) {
       Ident->SetLineColor(fBlackMode ? kBlue : kBlack);
-      Ident->SetMarkerColor(fBlackMode ? kBlue : kBlack);
+      Ident->SetMarkerColor(fBlackMode ? kRed : kBlack);
    }
    else {
       Ident->SetLineColor(kRed);
@@ -2250,7 +2250,6 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
 
       case kKey_u:
          UpdateViewer();
-         cout << "Force Update !" << endl;
          break;
 
       case kKey_e:
@@ -2260,11 +2259,16 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
          break;
 
       case kKey_o:
-         x0 = 0.;
-         y0 = 0.;
-         SetPivot(x0, y0);
-         SetPiedestal(0.0, 0.0);
-         UpdateViewer();
+         DynamicZoom(-1, 0, 0, 0.1);
+//         x0 = 0.;
+//         y0 = 0.;
+//         SetPivot(x0, y0);
+//         SetPiedestal(0.0, 0.0);
+//         UpdateViewer();
+         break;
+
+      case kKey_i:
+         DynamicZoom(1, 0, 0, 0.1);
          break;
 
       case kKey_b:
@@ -2449,24 +2453,41 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
          UpdateViewer();
          break;
 
+      case kKey_t:
+         MoveHor(1, .2, false);
+         break;
+
       case kKey_Left:
       case kKey_4:
-         MoveHor(1);
+         MoveHor(1, 0.1);
          break;
+
+      case kKey_r:
+         MoveHor(-1, .2, false);
+         break;
+
 
       case kKey_Right:
       case kKey_6:
-         MoveHor(-1);
+         MoveHor(-1, 0.1);
+         break;
+
+      case kKey_n:
+         MoveVert(1, .25, false);
          break;
 
       case kKey_Down:
       case kKey_2:
-         MoveVert(1);
+         MoveVert(1, 0.1);
+         break;
+
+      case kKey_p:
+         MoveVert(-1, .25, false);
          break;
 
       case kKey_Up:
       case kKey_8:
-         MoveVert(-1);
+         MoveVert(-1, 0.1);
          break;
 
       case kKey_Space:
@@ -2484,7 +2505,7 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
 }
 
 //________________________________________________________________
-void KVIDGridEditor::MoveHor(Int_t sign)
+void KVIDGridEditor::MoveHor(Int_t sign, Double_t speed, Bool_t update)
 {
    if (!TheHisto) return;
 
@@ -2496,14 +2517,14 @@ void KVIDGridEditor::MoveHor(Int_t sign)
    if ((XX1 == 1) && (sign == 1)) return;
    if ((XX2 == xAxis->GetNbins() - 1) && (sign == -1)) return;
 
-   Int_t dX = (Int_t)sign * (XX1 - XX2) * 0.25;
+   Int_t dX = (Int_t)sign * (XX1 - XX2) * 0.25 * speed;
 
    xAxis->SetRange(XX1 + dX, XX2 + dX);
-   UpdateViewer();
+   if (update) UpdateViewer();
 }
 
 //________________________________________________________________
-void KVIDGridEditor::ChangeZoomRatio(Int_t sign)
+void KVIDGridEditor::ChangeZoomRatio(Int_t sign, Double_t speed)
 {
    if (!TheHisto) return;
 
@@ -2514,25 +2535,15 @@ void KVIDGridEditor::ChangeZoomRatio(Int_t sign)
    Int_t XX1 = axis->GetFirst();
    Int_t XX2 = axis->GetLast();
 
-   Int_t dX = (Int_t) - 1 * (XX1 - XX2) * 0.1;
+   Int_t dX = (Int_t) - 1 * (XX1 - XX2) * 0.1 * speed;
 
    axis->SetRange(XX1 + dX, XX2 - dX);
    UpdateViewer();
 }
 
-void KVIDGridEditor::MakeCustomMenuForLines()
-{
-   TClass* cl = gROOT->GetClass("KVIDZALine");
-   cl->MakeCustomMenuList();
-   TList* ml = cl->GetMenuList();
-   ml->Clear();
-
-   Info("MakeCustomMenuForLines", "called...");
-
-}
 
 //________________________________________________________________
-void KVIDGridEditor::MoveVert(Int_t sign)
+void KVIDGridEditor::MoveVert(Int_t sign, Double_t speed, Bool_t update)
 {
    if (!TheHisto) return;
 
@@ -2544,13 +2555,13 @@ void KVIDGridEditor::MoveVert(Int_t sign)
    if ((XX1 == 1) && (sign == 1)) return;
    if ((XX2 == yAxis->GetNbins() - 1) && (sign == -1)) return;
 
-   Int_t dX = (Int_t)sign * (XX1 - XX2) * 0.25;
+   Int_t dX = (Int_t)sign * (XX1 - XX2) * 0.25 * speed;
 
    yAxis->SetRange(XX1 + dX, XX2 + dX);
-   UpdateViewer();
+   if (update) UpdateViewer();
 }
 
-void KVIDGridEditor::ZoomOnMouser()
+void KVIDGridEditor::ZoomOnMouse()
 {
 
 }

@@ -127,10 +127,10 @@ protected:
    Double_t GetPdy();
 
    Bool_t HandleKey(Int_t px, Int_t py);
-   void MoveHor(Int_t sign);
-   void MoveVert(Int_t sign);
+   void MoveHor(Int_t sign, Double_t speed = 1, Bool_t update = true);
+   void MoveVert(Int_t sign, Double_t speed = 1, Bool_t update = true);
 
-   void ZoomOnMouser();
+   void ZoomOnMouse();
    void AddMethod(const char* theMethod);
    void SelectTrans(TPaveLabel* label);
 
@@ -149,7 +149,7 @@ protected:
    void ScaleXY(Int_t Sign);
    void ScaleCurvature(Int_t Sign);
 
-   void DynamicZoom(Int_t Sign, Int_t px = 0, Int_t py = 0); //zoom molette
+   void DynamicZoom(Int_t Sign, Int_t px = 0, Int_t py = 0, Double_t speed = .5); //zoom molette
    void Unzoom();                      //unzoom histo (accessible via l'interface : I)
    void ZoomSelected();                //zoom 'gnuplot'
 
@@ -191,10 +191,7 @@ protected:
    TH2* FindInCanvases(const Char_t* name);
    void RecurseFileStructureFindHistos(TString& hist_names, TDirectory* the_directory);
 
-   void ChangeZoomRatio(Int_t sign);
-
-   void MakeCustomMenuForLines();
-
+   void ChangeZoomRatio(Int_t sign, Double_t speed = .5);
 public:
 
    KVIDGridEditor();
