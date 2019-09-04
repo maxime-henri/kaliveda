@@ -75,7 +75,6 @@ Bool_t KVFAZIAIDSiSi_e789::Identify(KVIdentificationResult* idr, Double_t x, Dou
    // first try with high range grid
    if (fSiSiGrid && fSiSiGrid->IsIdentifiable(si2, si1)) {
       fSiSiGrid->Identify(si2, si1, idr);
-      idr->Print();
    }
    else {
       idr->IDOK = kFALSE;
