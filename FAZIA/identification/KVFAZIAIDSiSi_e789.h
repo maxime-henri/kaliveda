@@ -15,7 +15,7 @@ protected:
    KVIDZAGrid* fSiSiGridQL1;//! telescope's grid low range
 
 public:
-   KVFAZIAIDSiSi_e789() {}
+   KVFAZIAIDSiSi_e789();
    virtual ~KVFAZIAIDSiSi_e789() {}
 
    Double_t GetIDMapX(Option_t* /*opt*/ = "")

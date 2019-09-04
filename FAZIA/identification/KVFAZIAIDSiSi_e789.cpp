@@ -17,6 +17,16 @@ ClassImp(KVFAZIAIDSiSi_e789)
 ////////////////////////////////////////////////////////////////////////////////
 
 
+KVFAZIAIDSiSi_e789::KVFAZIAIDSiSi_e789()
+{
+   fSiSiGrid = 0;
+   fSiSiGridQL1 = 0;
+   SetType("Si-Si");
+   fSi1 = 0;
+   fSi2 = 0;
+   SetHasMassID(kTRUE);
+}
+
 void KVFAZIAIDSiSi_e789::Initialize()
 {
    // Initialize telescope for current run.
@@ -39,6 +49,7 @@ void KVFAZIAIDSiSi_e789::Initialize()
       }
    }
 
+
    fSi1 = (KVFAZIADetector*)GetDetector(1);
    fSi2 = (KVFAZIADetector*)GetDetector(2);
 
@@ -50,7 +61,7 @@ void KVFAZIAIDSiSi_e789::Initialize()
 
 
 //________________________________________________________________
-Bool_t KVFAZIAIDSiSi_e789::Identify(KVIdentificationResult* idr, Double_t /*x*/, Double_t /*y*/)
+Bool_t KVFAZIAIDSiSi_e789::Identify(KVIdentificationResult* idr, Double_t x, Double_t y)
 {
    // Particle identification and code setting using identification grids.
    // perform identification in QH1-Q2 map / QL1-Q2 map
@@ -58,23 +69,25 @@ Bool_t KVFAZIAIDSiSi_e789::Identify(KVIdentificationResult* idr, Double_t /*x*/,
    idr->SetIDType(GetType());
    idr->IDattempted = kTRUE;
 
-   Double_t si1 = GetIDMapY();
-   Double_t si2 = GetIDMapX();
+   Double_t si1 = (y < 0. ? GetIDMapY() : y);
+   Double_t si2 = (x < 0. ? GetIDMapX() : x);
 
    // first try with high range grid
    if (fSiSiGrid && fSiSiGrid->IsIdentifiable(si2, si1)) {
       fSiSiGrid->Identify(si2, si1, idr);
+      idr->Print();
    }
    else {
       idr->IDOK = kFALSE;
       idr->IDquality = KVIDZAGrid::kICODE8;
    }
 
+
    //if there is a QL1 grid available, it has the priority (better resolution)
 //   si1 = GetIDMapY("QL1");
 //   if (fSiSiGridQL1 && fSiSiGridQL1->IsIdentifiable(si2, si1))  fSiSiGridQL1->Identify(si2, si1, idr);
 
-//   idr->IDcode = GetIDCode();
+   idr->IDcode = GetIDCode();
 
    return kTRUE;
 
