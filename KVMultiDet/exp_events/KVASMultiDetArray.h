@@ -91,7 +91,7 @@ public:
       return sol_ang;
    }
 
-   virtual Double_t GetTotalSolidAngle(void);
+   virtual Double_t GetTotalSolidAngle(void) const;
    void AnalyseGroupAndReconstructEvent(KVReconstructedEvent* event, KVGroup* grp);
    void AnalyseTelescopes(KVReconstructedEvent* event, TList* kvtl);
 

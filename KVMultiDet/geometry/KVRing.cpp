@@ -89,7 +89,7 @@ Int_t KVRing::Compare(const TObject* obj) const
       return 0;
 }
 
-Double_t KVRing::GetSolidAngle()
+Double_t KVRing::GetSolidAngle() const
 {
    // redefinition of KVPosition::GetSolidAngle() to take into account
    // only KVTelescope of the considered KVLayer which define the KVRing

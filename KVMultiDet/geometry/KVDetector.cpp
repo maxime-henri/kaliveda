@@ -1001,19 +1001,6 @@ KVDetector* KVDetector::MakeDetector(const Char_t* name, Float_t thickness)
 
 //____________________________________________________________________________________
 
-const TVector3& KVDetector::GetNormal()
-{
-   // Return unit vector normal to surface of detector. The vector points from the target (origin)
-   // towards the detector's entrance window. It can be used with GetELostByParticle and
-   // GetParticleEIncFromERes.
-   // The vector is generated from the theta & phi of the centre of the detector
-
-   fNormToMat.SetMagThetaPhi(1, GetTheta()*TMath::DegToRad(), GetPhi()*TMath::DegToRad());
-   return fNormToMat;
-}
-
-//____________________________________________________________________________________
-
 void KVDetector::GetVerticesInOwnFrame(TVector3* corners, Double_t depth, Double_t layer_thickness)
 {
    // This will fill the array corners[8] with the coordinates of the vertices of the
@@ -1212,11 +1199,15 @@ void printvec(TVector3& v)
 Double_t KVDetector::GetEntranceWindowSurfaceArea()
 {
    // Return surface area of first layer of detector in cm2.
-   // For ROOT geometries, this is the area of the rectangular bounding box
-   // containing the detector shape. If the detector is not rectangular,
-   // the area will be too large (see TGeoBBox::GetFacetArea).
 
-   if (GetShape()) return GetShape()->GetFacetArea(1);
+   if (ROOTGeo()) {
+      if (!GetEntranceWindow().GetShape()->InheritsFrom("TGeoArb8")) {
+         // simple shape area
+         return GetEntranceWindow().GetShape()->GetFacetArea(1);
+      }
+      // Monte Carlo calculation for TGeoArb8 shapes
+      return GetEntranceWindow().GetSurfaceArea();
+   }
 
    KVTelescope* fTelescope = (KVTelescope*)GetParentStructure("TELESCOPE");
    if (fTelescope && fDepthInTelescope == 0)
@@ -1678,18 +1669,6 @@ void KVDetector::SetActiveLayerShape(TGeoBBox* s)
    SetShape(s);
 }
 
-TGeoHMatrix* KVDetector::GetActiveLayerMatrix() const
-{
-   // Get ROOT geometry global matrix transformation to coordinate frame of active layer volume
-   return GetMatrix();
-}
-
-TGeoBBox* KVDetector::GetActiveLayerShape() const
-{
-   // Get ROOT geometry shape of active layer volume
-   return GetShape();
-}
-
 void KVDetector::SetEntranceWindowMatrix(const TGeoHMatrix* m)
 {
    // Set ROOT geometry global matrix transformation to coordinate frame of entrance window
@@ -1700,32 +1679,6 @@ void KVDetector::SetEntranceWindowShape(TGeoBBox* s)
 {
    // Set ROOT geometry shape of entrance window
    fEWPosition.SetShape(s);
-}
-
-TGeoHMatrix* KVDetector::GetEntranceWindowMatrix() const
-{
-   // Get ROOT geometry global matrix transformation to coordinate frame of entrance window
-   return fEWPosition.GetMatrix();
-}
-
-TGeoBBox* KVDetector::GetEntranceWindowShape() const
-{
-   // Get ROOT geometry shape of entrance window
-   return fEWPosition.GetShape();
-}
-
-TVector3 KVDetector::GetRandomPointOnEntranceWindow() const
-{
-   // Return vector from origin to a random point on the entrance window.
-   // Use GetRandomPoint() if you want a random point on the active layer.
-   return fEWPosition.GetRandomPoint();
-}
-
-TVector3 KVDetector::GetCentreOfEntranceWindow() const
-{
-   // Return vector position of centre of entrance window.
-   // Use GetCentre() if you want the centre of the active layer.
-   return fEWPosition.GetCentre();
 }
 
 void KVDetector::SetThickness(Double_t thick)

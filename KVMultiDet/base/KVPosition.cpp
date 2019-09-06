@@ -97,6 +97,7 @@ void KVPosition::init()
    fTheta_min = fTheta_max = fPhi_min = fPhi_max = fDistance = 0.;
    fMatrix = 0;
    fShape = 0;
+   fSolidAngle = 0;
 }
 
 KVPosition::~KVPosition()
@@ -243,7 +244,7 @@ TVector3 KVPosition::GetRandomDirection(Option_t* t)
 
    if (ROOTGeo()) {
       // * ROOT Geometry *
-      TVector3 r = GetRandomPoint();
+      TVector3 r = GetRandomPointOnSurface();
       return r.Unit();
    }
 
@@ -272,7 +273,7 @@ void KVPosition::GetRandomAngles(Double_t& th, Double_t& ph, Option_t* t)
 
    if (ROOTGeo()) {
       // * ROOT Geometry *
-      TVector3 r = GetRandomPoint();
+      TVector3 r = GetRandomPointOnSurface();
       th = r.Theta() / dtor;
       ph = r.Phi() / dtor;
       if (ph < 0) ph += 360.;
@@ -480,7 +481,7 @@ void KVPosition::GetCornerCoordinatesInOwnFrame(TVector3* corners, Double_t dept
 }
 
 //___________________________________________________________________________
-Double_t KVPosition::GetSolidAngle(void)
+Double_t KVPosition::GetSolidAngle(void) const
 {
    // Return values of the solid angle (in msr) seen by the geometric ensemble
    // For simple geometries defined by theta_min/max etc., this is exact.
@@ -488,6 +489,15 @@ Double_t KVPosition::GetSolidAngle(void)
    // it by the square of the distance to the detector.
 
    if (ROOTGeo()) {
+      if (!fSolidAngle) {
+         // TGeoArb8 shapes' solid angles calculated on demand as this requires
+         // a monte carlo calculation
+         // this takes into account any eventual "misalignment" i.e. if the vector from the
+         // origin to the centre of the volume is not perpendicular to the entrance surface,
+         // which reduces the effective area "seen" from the target
+         Double_t area = GetSurfaceArea() * GetOC_SC_CosAngle();
+         fSolidAngle = area / pow(GetDistance(), 2.) * 1.e3;
+      }
       return fSolidAngle;
    }
 
@@ -572,20 +582,29 @@ TRotation KVPosition::GetRandomIsotropicRotation()
 void KVPosition::SetMatrix(const TGeoHMatrix* m)
 {
    // * ROOT Geometry *
-   // Set the global transformation matrix for this detector
+   // Set the global transformation matrix for this volume
    // If shape has been set, we set the (theta,phi) angles
-   // corresponding to the centre of the entrance window, and
-   // the distance from the target.
+   // corresponding to the centre of the volume, and
+   // the distance from the target corresponding to the distance
+   // along (theta,phi) to the entrance surface of the volume
+   // (not necessarily the same as the distance from the target to
+   // the centre of the entrance surface)
 
    if (fMatrix) delete fMatrix;
    fMatrix = new TGeoHMatrix(*m);
    if (ROOTGeo()) {
-      TVector3 centre = GetCentre();
+      TVector3 centre = GetVolumeCentre();
       SetTheta(centre.Theta()*TMath::RadToDeg());
       SetPhi(centre.Phi()*TMath::RadToDeg());
-      SetDistance(centre.Mag());
-      Double_t area = GetShape()->GetFacetArea(1);
-      fSolidAngle = area / pow(GetDistance(), 2.) * 1.e3;
+      SetDistance(GetVolumeCentre().Mag() - GetSCVector().Mag() / GetOC_SC_CosAngle());
+      // solid angle calculated and set here only for non-TGeoArb8 shapes
+      // this takes into account any eventual "misalignment" i.e. if the vector from the
+      // origin to the centre of the volume is not perpendicular to the entrance surface,
+      // which reduces the effective area "seen" from the target
+      if (!GetShape()->InheritsFrom("TGeoArb8")) {
+         Double_t area = GetShape()->GetFacetArea(1) * GetOC_SC_CosAngle();
+         fSolidAngle = area / pow(GetDistance(), 2.) * 1.e3;
+      }
    }
 }
 
@@ -594,16 +613,26 @@ void KVPosition::SetShape(TGeoBBox* b)
    // * ROOT Geometry *
    // Set the shape of this detector
    // If matrix has been set, we set the (theta,phi) angles
-   // corresponding to the centre of the entrance window, and
-   // the distance from the target.
+   // corresponding to the centre of the volume, and
+   // the distance from the target corresponding to the distance
+   // along (theta,phi) to the entrance surface of the volume
+   // (not necessarily the same as the distance from the target to
+   // the centre of the entrance surface)
+
    fShape = b;
    if (ROOTGeo()) {
-      TVector3 centre = GetCentre();
+      TVector3 centre = GetVolumeCentre();
       SetTheta(centre.Theta()*TMath::RadToDeg());
       SetPhi(centre.Phi()*TMath::RadToDeg());
-      SetDistance(centre.Mag());
-      Double_t area = GetShape()->GetFacetArea(1);
-      fSolidAngle = area / pow(GetDistance(), 2.) * 1.e3;
+      SetDistance(GetVolumeCentre().Mag() - GetSCVector().Mag() / GetOC_SC_CosAngle());
+      // solid angle calculated and set here only for non-TGeoArb8 shapes
+      // this takes into account any eventual "misalignment" i.e. if the vector from the
+      // origin to the centre of the volume is not perpendicular to the entrance surface,
+      // which reduces the effective area "seen" from the target
+      if (!GetShape()->InheritsFrom("TGeoArb8")) {
+         Double_t area = GetShape()->GetFacetArea(1) * GetOC_SC_CosAngle();
+         fSolidAngle = area / pow(GetDistance(), 2.) * 1.e3;
+      }
    }
 }
 
@@ -621,13 +650,13 @@ TGeoBBox* KVPosition::GetShape() const
    return fShape;
 }
 
-TVector3 KVPosition::GetRandomPoint() const
+TVector3 KVPosition::GetRandomPointOnSurface() const
 {
    // * ROOT Geometry *
    // Generate a vector in the world (laboratory) frame from the origin
-   // to a random point on the entrance window of the detector.
+   // to a random point on the entrance surface of this volume.
    //
-   // It is assumed that the detector volume was defined in such a way
+   // It is assumed that the volume was defined in such a way
    // that the entrance window corresponds to the facet in the X-Y plane
    // placed at -dZ.
    //
@@ -637,7 +666,7 @@ TVector3 KVPosition::GetRandomPoint() const
    // to check that the point does actually correspond to the TGeoArb8.
 
    if (!ROOTGeo()) {
-      ::Error("KVPosition::GetRandomPointOnEntranceWindow",
+      ::Error("KVPosition::GetRandomPointOnSurface",
               "ROOT Geometry has not been initialised");
       return TVector3();
    }
@@ -656,7 +685,7 @@ TVector3 KVPosition::GetRandomPoint() const
    if (!ok1) {
       ::Error("KVPosition::GetRandomPoint",
               "TGeoBBox::GetPointsOnFacet returns kFALSE for shape %s. Returning coordinates of centre.", GetShape()->ClassName());
-      return GetCentre();
+      return GetSurfaceCentre();
    }
    Int_t np = 0;
    if (!ok2) {
@@ -672,9 +701,9 @@ TVector3 KVPosition::GetRandomPoint() const
          np++;
       }
       if (!ok2) {
-         ::Error("KVPosition::GetRandomPoint",
-                 "Cannot generate points for shape %s. Returning coordinates of centre.", GetShape()->ClassName());
-         return GetCentre();
+         ::Error("KVPosition::GetRandomPointOnSurface",
+                 "Cannot generate points for shape %s. Returning coordinates of surface centre.", GetShape()->ClassName());
+         return GetSurfaceCentre();
       }
    }
    Double_t* npoint = points + 3 * np;
@@ -683,18 +712,18 @@ TVector3 KVPosition::GetRandomPoint() const
    return TVector3(master);
 }
 
-TVector3 KVPosition::GetCentre() const
+TVector3 KVPosition::GetSurfaceCentre() const
 {
    // * ROOT Geometry *
    // Generate a vector in the world (laboratory) frame from the origin
-   // to the centre of the entrance window of the detector.
+   // to the centre of the entrance surface of the volume.
    //
-   // It is assumed that the detector volume was defined in such a way
-   // that the entrance window corresponds to the facet in the X-Y plane
+   // It is assumed that the volume was defined in such a way
+   // that the entrance surface corresponds to the facet in the X-Y plane
    // placed at -dZ.
 
    if (!ROOTGeo()) {
-      ::Error("KVPosition::GetCentreOfSurface",
+      ::Error("KVPosition::GetSurfaceCentre",
               "ROOT Geometry has not been initialised");
       return TVector3();
    }
@@ -705,3 +734,80 @@ TVector3 KVPosition::GetCentre() const
    return TVector3(master);
 }
 
+TVector3 KVPosition::GetVolumeCentre() const
+{
+   // * ROOT Geometry *
+   // Generate a vector in the world (laboratory) frame from the origin
+   // to the centre of the volume.
+
+   if (!ROOTGeo()) {
+      ::Error("KVPosition::GetVolumeCentre",
+              "ROOT Geometry has not been initialised");
+      return TVector3();
+   }
+   Double_t master[3];
+   const Double_t* origin = GetShape()->GetOrigin();
+   Double_t points[] = {origin[0], origin[1], origin[2]};
+   GetMatrix()->LocalToMaster(points, master);
+   return TVector3(master);
+}
+
+TVector3 KVPosition::GetSurfaceNormal() const
+{
+   // * ROOT Geometry *
+   // Generate a vector in the world (laboratory) frame representing
+   // the normal to the entrance surface of the volume (pointing away
+   // from the target, i.e. towards the inside of the volume)
+   //
+   // It is assumed that the volume was defined in such a way
+   // that the entrance surface corresponds to the facet in the X-Y plane
+   // placed at -dZ.
+
+   if (!ROOTGeo()) {
+      ::Error("KVPosition::GetSurfaceNormal",
+              "ROOT Geometry has not been initialised");
+      return TVector3();
+   }
+   return GetSCVector().Unit();
+}
+
+Double_t KVPosition::GetSurfaceArea(int npoints) const
+{
+   // Monte Carlo calculation of entrance surface area for TGeoArb8 shapes
+   // Area is calculated as area of bounding box facet multiplied by the ratio between
+   // number of random points actually on the shape surface to the number of points
+   // npoints generated over the surface of the bounding box facet
+   //
+   // npoints is the number of points to test
+
+   Double_t* points = new Double_t[3 * npoints];
+   const Double_t* origin = GetShape()->GetOrigin();
+   Double_t dz = GetShape()->GetDZ();
+   // This will generate npoints points on the (-DZ) face of the bounding box of the shape
+   Bool_t ok1 = GetShape()->TGeoBBox::GetPointsOnFacet(1, npoints, points);
+   if (!ok1) {
+      ::Error("KVPosition::GetEntranceWindowArea",
+              "TGeoBBox::GetPointsOnFacet returns kFALSE for shape %s. Returning 0.0", GetShape()->ClassName());
+      delete [] points;
+      return 0.0;
+   }
+   Double_t points_on_facet = 0;
+   for (Int_t np = 0; np < npoints; ++np) {
+      Double_t* npoint = points + 3 * np;
+      // We move the point slightly inside the volume to test if it actually corresponds
+      // to a point on the shape's facet
+      npoint[2] += dz / 100.;
+      // Correct for offset of centre of shape
+      for (int i = 0; i < 3; i++) npoint[i] += origin[i];
+      if (GetShape()->Contains(npoint)) ++points_on_facet;
+   }
+   delete [] points;
+   return GetShape()->GetFacetArea(1) * (points_on_facet / Double_t(npoints));
+}
+
+Double_t KVPosition::GetMisalignmentAngle() const
+{
+   // Return angle (in deg.) between the vector from the target to the volume centre
+   // and the normal to the volume surface
+   return TMath::RadToDeg() * TMath::ACos(GetOC_SC_CosAngle());
+}

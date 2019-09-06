@@ -54,7 +54,7 @@ public:
    };
    Int_t Compare(const TObject* obj) const;
 
-   Double_t GetSolidAngle(void);
+   Double_t GetSolidAngle(void) const;
    virtual TGeoVolume* GetGeoVolume();
    virtual void AddToGeometry();
 

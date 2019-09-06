@@ -23,6 +23,7 @@
 #include "RVersion.h"
 #include "KVBase.h"
 #include "KVList.h"
+#include "KVUnits.h"
 #include "TF1.h"
 #include "TVector3.h"
 #include "Riostream.h"
@@ -36,8 +37,6 @@ class KVMaterial: public KVBase {
 
 protected:
    static KVIonRangeTable* fIonRangeTable; //  pointer to class used to calculate charged particle ranges & energy losses
-
-   TVector3 fNormToMat;//!dummy vector for calculating normal to absorber
 
    TGeoVolume* fAbsorberVolume;//!pointer to corresponding volume in ROOT geometry
 
@@ -132,13 +131,6 @@ public:
    Bool_t IsNat() const;
 
    Bool_t IsGas() const;
-
-   virtual const TVector3& GetNormal()
-   {
-      // Return vector normal to surface of absorber. For a KVMaterial, this is (0,0,1) as
-      // a basic absorber has no orientation. Rederived in child classes KVTarget and KVDetector.
-      return fNormToMat;
-   }
 
    virtual TGeoMedium* GetGeoMedium(const Char_t* /*med_name*/ = "");
    virtual void SetAbsGeoVolume(TGeoVolume* v)

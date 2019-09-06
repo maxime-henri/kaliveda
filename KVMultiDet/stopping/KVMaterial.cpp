@@ -51,7 +51,6 @@ void KVMaterial::init()
    fELoss = 0;
    SetName("");
    SetTitle("");
-   fNormToMat.SetXYZ(0, 0, 1);
    fAmasr = 0;
    fPressure = 1. * KVUnits::atm;
    fTemp = 19.0;

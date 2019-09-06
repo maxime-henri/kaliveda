@@ -242,7 +242,7 @@ KVDetector* KVGeoImport::GetCurrentDetector()
    if (!fCreateArray) {
       if (det) {
          // set matrix & shape for entrance window if not done yet
-         if (!det->GetEntranceWindowMatrix()) {
+         if (!det->GetEntranceWindow().ROOTGeo()) {
             det->SetEntranceWindowMatrix(GetCurrentMatrix());
             det->SetEntranceWindowShape((TGeoBBox*)GetCurrentVolume()->GetShape());
          }

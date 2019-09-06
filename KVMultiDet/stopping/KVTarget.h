@@ -29,7 +29,7 @@ protected:
 
    KVList* fTargets;           //list of layers
    Int_t fNLayers;              //number of layers
-   TVector3 fNormal;            //normal to target - (0,0,1) by default. Keep for backwards compatibility!!
+   TVector3 fNormal;            //normal to target - (0,0,1) by default
    TVector3 fIntPoint;          //last randomly generated interaction point
 
    void init();
@@ -45,7 +45,7 @@ public:
    {
       // Return vector normal to target
       return fNormal;
-   };
+   }
    void SetAngleToBeam(Double_t a);
    Double_t GetAngleToBeam();
 

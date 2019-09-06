@@ -922,7 +922,7 @@ void KVINDRA::CreateROOTGeometry()
       nuc->SetPhi(det->GetPhi());
       gimp.SetLastDetector(0);
       gimp.PropagateEvent(evt);
-      if (!(det->GetActiveLayerShape() && det->GetActiveLayerMatrix())) {
+      if (!(det->ROOTGeo())) {
          Info("CreateROOTGeometry", "Volume checking for %s", det->GetName());
          Double_t theta0 = det->GetTheta();
          Double_t phi0 = det->GetPhi();
@@ -932,16 +932,16 @@ void KVINDRA::CreateROOTGeometry()
                nuc->SetPhi(PH);
                gimp.SetLastDetector(0);
                gimp.PropagateEvent(evt);
-               if (det->GetActiveLayerShape() && det->GetActiveLayerMatrix()) break;
+               if (det->ROOTGeo()) break;
             }
-            if (det->GetActiveLayerShape() && det->GetActiveLayerMatrix()) break;
+            if (det->ROOTGeo()) break;
          }
       }
-      if (!(det->GetActiveLayerShape() && det->GetActiveLayerMatrix())) {
+      if (!(det->ROOTGeo())) {
          Info("CreateROOTGeometry", "Volume checking failed for : %s", det->GetName());
       }
       // check etalon trajectories (if etalons are present)
-      if (det->GetActiveLayerShape() && det->GetActiveLayerMatrix() && det->GetRingNumber() > 9) {
+      if (det->ROOTGeo() && det->GetRingNumber() > 9) {
          if (GetDetector(Form("SI75_%d", det->GetRingNumber())) || GetDetector(Form("SILI_%d", det->GetRingNumber()))) {
             if ((det->IsCalled("CSI_1002") || det->IsCalled("CSI_1102")
                   || det->IsCalled("CSI_1202") || det->IsCalled("CSI_1304")
@@ -964,7 +964,7 @@ void KVINDRA::CreateROOTGeometry()
             }
          }
       }
-      nrootgeo += (det->GetActiveLayerShape() && det->GetActiveLayerMatrix());
+      nrootgeo += (det->ROOTGeo());
    }
    delete evt;
 

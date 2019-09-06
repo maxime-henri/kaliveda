@@ -317,9 +317,23 @@ public:
    virtual void InitializeIDTelescopes();
    Bool_t ReadGridsFromAsciiFile(const Char_t*) const;
 
-   virtual Double_t GetTotalSolidAngle(void)
+   virtual Double_t GetTotalSolidAngle(void) const
    {
-      return 0;
+      // Returns total solid angle of array in [msr].
+      // This is the sum of the solid angles of all detectors in the array which have no other
+      // detectors in front of them (i.e. closer to the target position).
+      // If the array has partially overlapping detectors, this will not be correct:
+      // in this case a Monte Carlo approach should be used
+
+      Double_t SA = 0;
+      TIter it(GetDetectors());
+      KVDetector* d;
+      while ((d = (KVDetector*)it())) {
+         if (!d->GetNode()->GetDetectorsInFront()) {
+            SA += d->GetSolidAngle();
+         }
+      }
+      return SA;
    }
 
    TList* GetStatusOfIDTelescopes();

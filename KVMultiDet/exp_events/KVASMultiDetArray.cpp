@@ -443,10 +443,14 @@ TList* KVASMultiDetArray::GetTelescopes(Float_t theta, Float_t phi)
 
 //_________________________________________________________________________________
 
-Double_t KVASMultiDetArray::GetTotalSolidAngle(void)
+Double_t KVASMultiDetArray::GetTotalSolidAngle(void) const
 {
    // compute & return the total solid angle (msr) of the array
    // it is the sum of solid angles of all existing KVGroups
+
+   // if ROOT geometry is used, just use base class method
+   if (IsROOTGeometry()) return KVMultiDetArray::GetTotalSolidAngle();
+
    Double_t ftotal_solid_angle = 0.0;
    KVASGroup* grp;
    KVSeqCollection* fGroups = GetStructures()->GetSubListWithType("GROUP");

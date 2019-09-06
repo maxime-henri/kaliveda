@@ -48,7 +48,7 @@ class KVEvent;
 class KVDetector: public KVMaterial, public KVPosition {
 
 private:
-   KVPosition fEWPosition;//position of entrance window
+   KVPosition fEWPosition;//position of entrance window i.e. first volume in detector geometry
    KVUniqueNameList fParentStrucList;//list of geometry structures which directly contain this detector
    KVGeoDetectorNode fNode;//positioning information relative to other detectors
    static Int_t fDetCounter;
@@ -68,7 +68,9 @@ private:
    Int_t fIdentP;               //! temporary counters, determine state of identified/unidentified particle flags
    Int_t fUnidentP;             //! temporary counters, determine state of identified/unidentified particle flags
 
-   /* make KVPosition methods private to avoid misuse */
+   // Make KVPosition methods private to avoid misuse
+   // N.B. the inherited KVPosition part of KVDetector is used for the ACTIVE layer of the detector
+   //      the entrance window is described by member KVPosition fEWPosition
    void SetMatrix(const TGeoHMatrix* m)
    {
       KVPosition::SetMatrix(m);
@@ -85,6 +87,31 @@ private:
    {
       return KVPosition::GetShape();
    }
+   TVector3 GetRandomPointOnSurface() const
+   {
+      return KVPosition::GetRandomPointOnSurface();
+   }
+   TVector3 GetSurfaceCentre() const
+   {
+      return KVPosition::GetSurfaceCentre();
+   }
+   TVector3 GetVolumeCentre() const
+   {
+      return KVPosition::GetVolumeCentre();
+   }
+   TVector3 GetSurfaceNormal() const
+   {
+      return KVPosition::GetSurfaceNormal();
+   }
+   Double_t GetSurfaceArea(int npoints = 100000) const
+   {
+      return KVPosition::GetSurfaceArea(npoints);
+   }
+   Double_t GetMisalignmentAngle() const
+   {
+      return KVPosition::GetMisalignmentAngle();
+   }
+
    TString fKVDetectorFiredACQParameterListFormatString;//!
 
    KVUniqueNameList fDetSignals;//! list of signals associated with detector
@@ -380,12 +407,32 @@ public:
    }
 
    static KVDetector* MakeDetector(const Char_t* name, Float_t thick);
-   const TVector3& GetNormal();
 
    virtual TGeoVolume* GetGeoVolume();
    virtual void AddToGeometry();
    virtual void GetVerticesInOwnFrame(TVector3* /*corners[8]*/, Double_t /*depth*/, Double_t /*layer_thickness*/);
    virtual Double_t GetEntranceWindowSurfaceArea();
+   TVector3 GetActiveLayerSurfaceCentre() const
+   {
+      // Return centre of entrance surface of active layer
+      // [this is NOT necessarily the same as the entrance window]
+      return GetSurfaceCentre();
+   }
+   TVector3 GetActiveLayerVolumeCentre() const
+   {
+      // Return centre of the active layer volume
+      return KVPosition::GetVolumeCentre();
+   }
+   TGeoBBox* GetActiveLayerShape() const
+   {
+      // Return geometry of active layer
+      return GetShape();
+   }
+   TGeoHMatrix* GetActiveLayerMatrix() const
+   {
+      // Return coordinate transformation matrix to active layer
+      return GetMatrix();
+   }
 
    virtual void SetFiredBitmask(KVString&);
    Binary8_t GetFiredBitmask() const
@@ -495,21 +542,69 @@ public:
    void RemoveParentStructure(KVGeoStrucElement* elem);
    KVGeoStrucElement* GetParentStructure(const Char_t* type, const Char_t* name = "") const;
 
-   //virtual KVGeoDNTrajectory* GetTrajectoryForReconstruction();
-
    void SetActiveLayerMatrix(const TGeoHMatrix*);
    void SetActiveLayerShape(TGeoBBox*);
-   TGeoHMatrix* GetActiveLayerMatrix() const;
-   TGeoBBox* GetActiveLayerShape() const;
    void SetEntranceWindowMatrix(const TGeoHMatrix*);
    void SetEntranceWindowShape(TGeoBBox*);
-   TGeoHMatrix* GetEntranceWindowMatrix() const;
-   TGeoBBox* GetEntranceWindowShape() const;
-   TVector3 GetRandomPointOnEntranceWindow() const;
-   TVector3 GetCentreOfEntranceWindow() const;
    const KVPosition& GetEntranceWindow() const
    {
+      // Returns KVPosition object corresponding to the entrance window
+      // volume i.e. the first volume encountered in the detector
       return fEWPosition;
+   }
+   Double_t GetSolidAngle() const
+   {
+      // Return solid angle [msr] corresponding to the entrance window of the detector
+      if (ROOTGeo()) return fEWPosition.GetSolidAngle();
+      return KVPosition::GetSolidAngle();
+   }
+   TVector3 GetRandomDirection(Option_t* t = "isotropic")
+   {
+      // random direction corresponding to point on entrance window
+      if (ROOTGeo()) return fEWPosition.GetRandomDirection(t);
+      return KVPosition::GetRandomDirection(t);
+   }
+   void GetRandomAngles(Double_t& th, Double_t& ph, Option_t* t = "isotropic")
+   {
+      // random angles [deg.] corresponding to point on entrance window
+      if (ROOTGeo()) fEWPosition.GetRandomAngles(th, ph, t);
+      else KVPosition::GetRandomAngles(th, ph, t);
+   }
+   TVector3 GetDirection()
+   {
+      // direction corresponding to centre of entrance window
+      if (ROOTGeo()) return fEWPosition.GetDirection();
+      return KVPosition::GetDirection();
+   }
+   Double_t GetDistance() const
+   {
+      // distance from target [cm] to entrance window of detector
+      if (ROOTGeo()) return fEWPosition.GetDistance();
+      return KVPosition::GetDistance();
+   }
+   Double_t GetTheta() const
+   {
+      // polar angle [deg.] corresponding to centre of entrance window of detector
+      if (ROOTGeo()) return fEWPosition.GetTheta();
+      return KVPosition::GetTheta();
+   }
+   Double_t GetSinTheta() const
+   {
+      // sinus of polar angle corresponding to centre of entrance window of detector
+      if (ROOTGeo()) return fEWPosition.GetSinTheta();
+      return KVPosition::GetSinTheta();
+   }
+   Double_t GetCosTheta() const
+   {
+      // cosinus of polar angle corresponding to centre of entrance window of detector
+      if (ROOTGeo()) return fEWPosition.GetCosTheta();
+      return KVPosition::GetCosTheta();
+   }
+   Double_t GetPhi() const
+   {
+      // azimuthal angle [deg.] corresponding to centre of entrance window of detector
+      if (ROOTGeo()) return fEWPosition.GetPhi();
+      return KVPosition::GetPhi();
    }
 
    void SetThickness(Double_t thick);
