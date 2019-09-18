@@ -10,6 +10,95 @@
 #include "KVNamedParameter.h"
 class KVEnv;
 
+/**
+ \class KVNameValueList
+ \ingroup Base
+ \brief Handles lists of named parameters with different types, a list of KVNamedParameter objects
+
+ ###Adding and modifying parameters###
+ Parameters are dynamically added or modified by calling SetValue():
+
+ ~~~~~~~~~~~{.cpp}
+ KVNameValueList l("MyList", "A list of things");
+ l.SetValue("a", 6);
+ l.SetValue("b", 3.14);
+ l.SetValue("c", "sqrt");
+
+ l.SetValue("a", false);  <= change value & type of existing parameter
+
+ l.Print();
+
+ KVNameValueList::MyList : A list of things (0x7f405e51e010)
+ <a=false>
+ <b=3.14>
+ <c=sqrt>
+ ~~~~~~~~~~~
+
+ ###Retrieving parameters###
+ Before trying to retrieve a parameter from the list, it is advisable to test if a parameter with the correct
+ name **and type** exists in the list:
+
+ ~~~~~~~~~~~{.cpp}
+ l.HasDoubleParameter("a"); => false
+ l.HasParameter<double>("b"); => true
+ l.HasBoolParameter("a"); => true
+ ~~~~~~~~~~~
+
+ Values can then be retrieved with the following methods:
+
+ ~~~~~~~~~~~{.cpp}
+ l.GetValue<bool>("a"); => false
+ l.GetDoubleValue("b"); => 3.1400
+ l.GetValue<std::string>("c"); => (std::string) "sqrt"
+ ~~~~~~~~~~~
+
+ Some conversions between different types will work implicitly, however
+ be aware that any attempt to convert a non-numeric string parameter into
+ a numerical value will result in zero:
+
+ ~~~~~~~~~~~{.cpp}
+ l.GetTStringValue("a"); => (TString) "false"
+ l.GetValue<int>("b"); => 3
+ l.GetValue<double>("c"); => 0.0000
+ ~~~~~~~~~~~
+
+ Another method allows to test whether a parameter with a given name exists and has
+ a specific value (including of the right type):
+
+ ~~~~~~~~~~~{.cpp}
+ l.IsValue("a",false); => (bool) true
+ l.IsValue("b",3); => (bool) false
+ l.IsValue("b",3.14); => (bool) true
+ ~~~~~~~~~~~
+
+ ###64-bit parameters###
+ In addition to the four types handled by KVNamedParameter, KVNameValueList adds the possibility to
+ store (unsigned) 64-bit integers using SetValue64bit():
+
+ ~~~~~~~~~~~{.cpp}
+ l.SetValue64bit("A64", 1234567890987654321);
+
+ l.Print();
+
+ KVNameValueList::MyList : A list of things (0x7f405e51e010)
+ <a=false>
+ <b=3.14>
+ <c=sqrt>
+ <A64_hi=287445236>
+ <A64_lo=-1318314831>
+ ~~~~~~~~~~~
+
+ The 64-bit value is stored as 2 32-bit integers with suffixes "hi" and "lo". Dedicated methods must be used
+ to test for the presence or retrieve the value of a 64-bit parameter:
+
+ ~~~~~~~~~~~{.cpp}
+ l.HasValue64bit("A64"); => (bool) true
+
+ l.GetValue64bit("A64"); => (unsigned long long) 1234567890987654321
+ ~~~~~~~~~~~
+
+ */
+
 class KVNameValueList : public TNamed {
 protected:
    KVHashList fList;//list of KVNamedParameter objects
@@ -231,6 +320,8 @@ public:
 
    void Sort(Bool_t order = kSortAscending)
    {
+      // Sort a list of numerical values into ascending order (by default).
+      // Use order = kSortDescending to reverse order.
       fList.Sort(order);
    }
 

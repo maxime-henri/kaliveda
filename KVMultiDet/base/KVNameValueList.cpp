@@ -11,35 +11,6 @@ using namespace std;
 
 ClassImp(KVNameValueList)
 
-////////////////////////////////////////////////////////////////////////////////
-// BEGIN_HTML <!--
-/* -->
-<h2>KVNameValueList</h2>
-<h4>A general-purpose list of parameters (name and associated value)</h4>
-<!-- */
-// --> END_HTML
-//Cette classe permet de gerer des listes de parametres avec pour chaque une valeur
-//associee
-//L'objet contient une liste (KVHashList) rempli de KVNamedParameter
-//permettant de faire le lien entre un nom et une valeur
-//Les objets de la liste lui appartiennent par defaut
-//
-//Fonctionnement:
-//--------------
-//Chaque parametre defini par son nom ne peut etre present qu une fois
-//les valeurs peuvent etre passer et recuperer sous trois format Double_t, Int_t et Char_t*
-//
-//Les parametres sont ajoutes automatiquement dans la liste et leur valeur changee
-//par les memes methodes SetValue
-//
-//Il est possible de connaitre :
-// - l'index d'un parametre dans la liste -> GetNameIndex()
-// - sa presence ou non -> HasParameter()
-// - le nom d'un parametre pour un index donne -> GetNameAt()
-//Il est possible de retirer un parametre : RemoveParameter()
-//
-////////////////////////////////////////////////////////////////////////////////
-
 //______________________________________________
 KVNameValueList::KVNameValueList()
    : fList(), fIgnoreBool(kFALSE)

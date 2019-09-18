@@ -10,6 +10,82 @@
 
 typedef const char* cstring;
 
+/**
+  \class KVNamedParameter
+  \ingroup Base
+  \brief A generic named parameter storing values of different types
+
+  The four different types which are handled are: `int`, `double`, `bool`, `TString`:
+
+  ###Setting and retrieving parameter values###
+
+  ~~~~~~~~~~~~~~~~{.cpp}
+  KVNamedParameter a("a", 12.34);
+  a.Is<double>(); // => true
+  a.IsInt(); // => false
+  a.IsNumber(); // => true
+
+  KVNamedParameter b("b", true);
+  b.Is<bool>(); // => true
+  b.Is<TString>(); // => false
+  ~~~~~~~~~~~~~~~~
+
+  The same parameter can be reused to store a value with a different type:
+
+  ~~~~~~~~~~~~~~~~{.cpp}
+  b.Set("hello");
+  b.IsBool(); // => false
+  b.IsString(); // => true
+  b.Is<std::string>(); // => true
+  ~~~~~~~~~~~~~~~~
+
+  To retrieve the value of the parameter, its type must be given. This need not be
+  the original type of the parameter, some common sense transformations are
+  allowed:
+
+  ~~~~~~~~~~~~~~~~{.cpp}
+  b.GetString(); => (const char*) "hello"
+  b.Get<std::string>(); => (std::string) "hello"
+  b.Get<int>() => (int) 0
+
+  a.Get<double>(); => (double) 12.34
+  a.GetString(); => (const char*) "12.34"
+  a.GetInt(); => (int) 12
+
+  b.Set("12.34");
+  b.GetDouble(); => (double) 12.34
+  b.Get<int>() => (int) 12
+  ~~~~~~~~~~~~~~~~
+
+  ###Comparing parameters###
+
+  Two types of comparison are possible. The `==` operator or member function IsEqual() test for strict
+  equality between two parameters, i.e. they must have the same type, value, **and name**:
+
+  ~~~~~~~~~~~~~~~~{.cpp}
+  KVNamedParameter a{"A",12}, b{"A",12};
+
+  cout << (a==b) << endl; => (bool) true
+
+  b.SetName("B");
+  cout << b.IsEqual(&a) << endl; => (bool) false
+  ~~~~~~~~~~~~~~~~
+
+  On the other hand, HasTheSameValueAs() returns `true` as long as both parameters have the same type and
+  value:
+
+  ~~~~~~~~~~~~~~~~{.cpp}
+  cout << b.HasTheSameValueAs(a) << endl; => (bool) true
+  ~~~~~~~~~~~~~~~~
+
+  ###Miscellaneous###
+  The methods WriteToEnv(TEnv*, const TString &) and Set(TEnv*, const TString &) can be used to read/write parameter lists
+  from/to ROOT resource files (`.rootrc`-style files).
+
+  Add(const KVNamedParameter &) will sum the values of two numerical parameters or concatenate two string parameters with
+  a separating comma.
+ */
+
 class KVNamedParameter : public TNamed {
 
    friend class KVNameValueList;

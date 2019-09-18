@@ -10,15 +10,6 @@ using namespace std;
 
 ClassImp(KVNamedParameter)
 
-////////////////////////////////////////////////////////////////////////////////
-// BEGIN_HTML <!--
-/* -->
-<h2>KVNamedParameter</h2>
-<h4>A generic parameter with a name and a value</h4>
-<!-- */
-// --> END_HTML
-////////////////////////////////////////////////////////////////////////////////
-
 KVNamedParameter::KVNamedParameter() : TNamed(), fNumber(0.0)
 {
    // Default constructor
