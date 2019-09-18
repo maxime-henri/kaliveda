@@ -239,7 +239,7 @@ TVector3 KVPosition::GetRandomDirection(Option_t* t)
    // By default, the direction is "isotropic".
    //
    // * ROOT Geometry *
-   // Direction corresponds to a random position on the detector's entrance window.
+   // Direction corresponds to a random position on the entrance surface of the volume.
    // The "isotropic" option has no effect.
 
    if (ROOTGeo()) {

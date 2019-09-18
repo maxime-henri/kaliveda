@@ -552,6 +552,13 @@ public:
       // volume i.e. the first volume encountered in the detector
       return fEWPosition;
    }
+   const TVector3 GetCentreOfEntranceWindow() const
+   {
+      // This method does exactly the same as the method in previous versions of KaliVeda:
+      // it returns the vector position of the centre of the surface (entrance) of the
+      // "entrance window" of the detector i.e. the first volume encountered
+      return GetEntranceWindow().GetSurfaceCentre();
+   }
    Double_t GetSolidAngle() const
    {
       // Return solid angle [msr] corresponding to the entrance window of the detector
