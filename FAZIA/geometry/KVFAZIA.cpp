@@ -451,8 +451,8 @@ Bool_t KVFAZIA::treat_event(const DAQ::FzEvent& e)
                   Error("treat_event", "No detector %s-%d found in FAZIA geometry...", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope);
                   continue;
                }
-               det->GetDetectorSignal("DetTag")->SetValue(DetTag);
-               det->GetDetectorSignal("GTTag")->SetValue(GTTag);
+               det->SetDetTag(DetTag);
+               det->SetGTTag(GTTag);
 
                if (!rdata.has_energy() && !rdata.has_waveform()) {
                   Warning("treat_event", "[NO DATA] [%s %s]", det->GetName(), FzDataType_str[fIdSignal]);
