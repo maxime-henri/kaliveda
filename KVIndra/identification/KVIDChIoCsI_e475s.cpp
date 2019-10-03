@@ -49,7 +49,7 @@ void KVIDChIoCsI_e475s::Initialize(void)
    Bool_t ready = kTRUE;
    fidgrid = 0;
    ready &= GetListOfIDGrids()->GetEntries();
-   if (ready) fidgrid = (KVIDZAGrid*)fIDGrids->First();
+   if (ready) fidgrid = (KVIDZAGrid*)GetListOfIDGrids()->First();
    if (fidgrid) fidgrid->Initialize();
    ready &= GetDetector(1)->IsCalibrated();
    ready &= GetDetector(2)->IsCalibrated();
@@ -125,7 +125,7 @@ void KVIDChIoCsI_e475s::CalculateParticleEnergy(KVReconstructedNucleus* nuc)
    //Cette methode sert a affilier / calculer l energie incidente de la particule
    //pour les telescopes ChIo-CsI des couronnes au-dessus de 10
    //Les CsI n'ayant pas de calibration propre
-   //Le calcul de l'énergie n'est possible seulement si le Delta E (ChIo) est calibree en MeV
+   //Le calcul de l'Ã©nergie n'est possible seulement si le Delta E (ChIo) est calibree en MeV
    //Si le Delta E n'est pas calibre on ressort de la routine sans avoir rien fait
 
    //status code

@@ -109,6 +109,7 @@ ClassImp(KVIDTelescope)
 TEnv* KVIDTelescope::fgIdentificationBilan = nullptr;
 
 KVIDTelescope::KVIDTelescope()
+   : fDetectors(kFALSE), fGroup(nullptr), fIDGrids(kFALSE)
 {
    init();
 }
@@ -116,12 +117,9 @@ KVIDTelescope::KVIDTelescope()
 void KVIDTelescope::init()
 {
    //default init
-   fDetectors = new KVList(kFALSE);
-   fDetectors->SetCleanup(kTRUE);
-   fGroup = nullptr;
-   fIDGrids = new KVList(kFALSE);
-   fIDGrids->SetCleanup(kTRUE);
-   fVarX = fVarY = nullptr;
+   fDetectors.SetCleanup(kTRUE);
+   fIDGrids.SetCleanup(kTRUE);
+//   fVarX = fVarY = nullptr;
    fMassIDValidity = nullptr;
 }
 
@@ -176,14 +174,8 @@ void KVIDTelescope::Initialize(void)
 KVIDTelescope::~KVIDTelescope()
 {
    //delete this ID telescope
-   if (fDetectors && fDetectors->TestBit(kNotDeleted)) {
-      fDetectors->Clear("nodelete");
-      delete fDetectors;
-   }
-   fDetectors = 0;
-   fGroup = 0;
-   fIDGrids->Clear("nodelete");
-   SafeDelete(fIDGrids);
+//   fDetectors.Clear("nodelete");
+//   fIDGrids.Clear("nodelete");
    SafeDelete(fMassIDValidity);
 }
 
@@ -195,7 +187,7 @@ void KVIDTelescope::AddDetector(KVDetector* d)
    //Update name of telescope to "ID_[name of DE]_[name of E]"
 
    if (d) {
-      fDetectors->Add(d);
+      fDetectors.Add(d);
       d->AddIDTelescope(this);
       if (GetSize() > 1)
          SetName(Form("ID_%s_%s", GetDetector(1)->GetName(), GetDetector(2)->GetName()));
@@ -212,7 +204,7 @@ void KVIDTelescope::Print(Option_t* opt) const
    // print out telescope structure
    //if opt="fired" only fired detectors are printed
 
-   TIter next(fDetectors);
+   TIter next(GetDetectors());
    KVDetector* obj;
 
    if (!strcmp(opt, "fired")) {
@@ -232,8 +224,8 @@ void KVIDTelescope::Print(Option_t* opt) const
          cout << opt << "Detector: " << obj->GetName() << endl;
       }
    }
-   if (fVarY) cout << "\n\nIDMapY: Using signal " << fVarY->GetName() << " of detector " << fVarY->GetDetector()->GetName() << endl;
-   if (fVarX) cout << "IDMapX: Using signal " << fVarX->GetName() << " of detector " << fVarX->GetDetector()->GetName() << endl;
+//   if (fVarY) cout << "\n\nIDMapY: Using signal " << fVarY->GetName() << " of detector " << fVarY->GetDetector()->GetName() << endl;
+//   if (fVarX) cout << "IDMapX: Using signal " << fVarX->GetName() << " of detector " << fVarX->GetDetector()->GetName() << endl;
 }
 
 //____________________________________________________________________________________
@@ -242,7 +234,7 @@ KVDetector* KVIDTelescope::GetDetector(const Char_t* name) const
 {
    // Return a pointer to the detector in the telescope with the name "name".
 
-   KVDetector* tmp = (KVDetector*) fDetectors->FindObject(name);
+   KVDetector* tmp = (KVDetector*) GetDetectors()->FindObject(name);
    if (!tmp)
       Warning("GetDetector(const Char_t *name)",
               "Detector %s not found in telescope %s", name, GetName());
@@ -415,10 +407,13 @@ void KVIDTelescope::SetIDGrid(KVIDGraph* grid)
    //~~~~~~~~~~~~~~~~~~
 
    if (grid) {
-      fIDGrids->Add(grid);
-      fVarX = fVarY = nullptr;
-      fVarX = GetSignalFromGridVar(grid->GetVarX(), "X");
-      fVarY = GetSignalFromGridVar(grid->GetVarY(), "Y");
+      fIDGrids.Add(grid);
+      KVDetectorSignal* xx = GetSignalFromGridVar(grid->GetVarX(), "X");
+      KVDetectorSignal* yy = GetSignalFromGridVar(grid->GetVarY(), "Y");
+      GraphCoords gc;
+      gc.fVarX = xx;
+      gc.fVarY = yy;
+      fGraphCoords[grid] = gc;
    }
 }
 
@@ -509,7 +504,7 @@ KVIDGraph* KVIDTelescope::GetIDGrid()
 KVIDGraph* KVIDTelescope::GetIDGrid(Int_t index)
 {
    //Return pointer to grid using position in list. First grid has index = 1.
-   return (KVIDGraph*)fIDGrids->At(index - 1);
+   return (KVIDGraph*)GetListOfIDGrids()->At(index - 1);
 }
 
 //____________________________________________________________________________________
@@ -518,7 +513,7 @@ KVIDGraph* KVIDTelescope::GetIDGrid(const Char_t* label)
 {
    //Return pointer to grid using "label" to search in list of grids associated
    //to this telescope.
-   return (KVIDGraph*)fIDGrids->FindObjectByLabel(label);
+   return (KVIDGraph*)GetListOfIDGrids()->FindObjectByLabel(label);
 }
 
 //____________________________________________________________________________________
@@ -530,7 +525,7 @@ Double_t KVIDTelescope::GetIDMapX(Option_t*)
    //
    // If no grid or no parameter is defined, this method returns -1.
 
-   if (fVarX) return fVarX->GetValue();
+   //if (fVarX) return fVarX->GetValue();
    return -1.;
 }
 
@@ -552,6 +547,26 @@ Double_t KVIDTelescope::GetPedestalY(Option_t*)
    return 0.;
 }
 
+Double_t KVIDTelescope::GetIDGridXCoord(KVIDGraph* g) const
+{
+   // Return value of X coordinate to be used with the given ID grid
+   // This corresponds to whatever was given as parameter "VARX" for the grid
+
+   KVDetectorSignal* ds = fGraphCoords[g].fVarX;
+   if (ds) return ds->GetValue();
+   return -1;
+}
+
+Double_t KVIDTelescope::GetIDGridYCoord(KVIDGraph* g) const
+{
+   // Return value of Y coordinate to be used with the given ID grid
+   // This corresponds to whatever was given as parameter "VARY" for the grid
+
+   KVDetectorSignal* ds = fGraphCoords[g].fVarY;
+   if (ds) return ds->GetValue();
+   return -1;
+}
+
 //____________________________________________________________________________________
 
 Double_t KVIDTelescope::GetIDMapY(Option_t*)
@@ -561,7 +576,7 @@ Double_t KVIDTelescope::GetIDMapY(Option_t*)
    //
    // If no grid or no parameter is defined, this method returns -1.
 
-   if (fVarY) return fVarY->GetValue();
+   //if (fVarY) return fVarY->GetValue();
    return -1.;
 }
 
@@ -571,8 +586,9 @@ void KVIDTelescope::RemoveGrids()
 {
    //Remove all identification grids for this ID telescope
    //Grids are not deleted as this is handled by gIDGridManager
-   fIDGrids->Clear();
-   fVarX = fVarY = nullptr;
+   fIDGrids.Clear();
+   //fVarX = fVarY = nullptr;
+   fGraphCoords.clear();
 }
 
 //____________________________________________________________________________________
@@ -672,7 +688,7 @@ void KVIDTelescope::RemoveIdentificationParameters()
    //and for each one: 1) checks if it is still in the gIDGridManager's list
    //2) if yes, delete the grid and remove it from gIDGridManager
 
-   TIter next_grid(fIDGrids);
+   TIter next_grid(GetListOfIDGrids());
    KVIDGrid* grid;
    while ((grid = (KVIDGrid*)next_grid())) {
 
@@ -683,7 +699,7 @@ void KVIDTelescope::RemoveIdentificationParameters()
       }
    }
    //clear list of grids
-   fIDGrids->Clear();
+   fIDGrids.Clear();
    SetHasMassID(kFALSE);
 }
 
@@ -716,7 +732,7 @@ void KVIDTelescope::CalculateParticleEnergy(KVReconstructedNucleus* nuc)
    if (z == 0) return;
 
    KVDetector* d1 = GetDetector(1);
-   KVDetector* d2 = (fDetectors->GetSize() > 1 ? GetDetector(2) : 0);
+   KVDetector* d2 = (GetSize() > 1 ? GetDetector(2) : 0);
    Bool_t d1_cal = d1->IsCalibrated();
    Bool_t d2_cal = (d2 ? d2->IsCalibrated() : kFALSE);
 
@@ -1262,7 +1278,7 @@ Double_t KVIDTelescope::GetMeanDEFromID(Int_t& status, Int_t Z, Int_t A, Double_
 
    status = kMeanDE_OK;
    // loop over grids
-   TIter next(fIDGrids);
+   TIter next(GetListOfIDGrids());
    KVIDGrid* grid;
    KVIDLine* idline = 0;
    while ((grid = (KVIDGrid*)next())) {

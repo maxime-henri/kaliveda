@@ -41,7 +41,7 @@ void KVIDSi150CsI_camp5::Initialize()
    fSIPG = fSi->GetACQParam("PG");
    fCsI = (KVCsI*)GetDetector(2);
    fZGrid = fZAGrid = 0;
-   TIter next(fIDGrids);
+   TIter next(GetListOfIDGrids());
    KVIDGrid* grid = 0;
    while ((grid = (KVIDGrid*)next())) {
       if (!grid->HasMassIDCapability()) fZGrid = (KVIDZAGrid*)grid;

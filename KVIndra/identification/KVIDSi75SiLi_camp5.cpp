@@ -47,7 +47,7 @@ void KVIDSi75SiLi_camp5::Initialize()
    fSiLi = GetDetector(2);
    fSi75 = GetDetector(1);
    fGGgrid = fPGgrid = fPGZgrid = 0;
-   TIter next(fIDGrids);
+   TIter next(GetListOfIDGrids());
    KVIDGrid* grid = 0;
    while ((grid = (KVIDGrid*)next())) {
       if (!strcmp(grid->GetVarY(), "SI75_GG")) fGGgrid = (KVIDZAGrid*)grid;

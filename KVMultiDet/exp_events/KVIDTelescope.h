@@ -33,14 +33,20 @@ class KVIdentificationResult;
 class TH2;
 class KVParticleCondition;
 
+#ifdef WITH_CPP11
+#include <unordered_map>
+#else
+#include <map>
+#endif
+
 class KVIDTelescope: public KVBase {
 
    static TEnv* fgIdentificationBilan;
 
 protected:
-   KVList* fDetectors;          //->list of detectors in telescope
-   KVGroup* fGroup;             //group to which telescope belongs
-   KVList* fIDGrids;           //->identification grid(s)
+   KVList fDetectors;         //list of detectors in telescope
+   KVGroup* fGroup;           //group to which telescope belongs
+   KVList fIDGrids;           //identification grid(s)
    enum {
       kMassID = BIT(15),         //set if telescope is capable of mass identification i.e. isotopic resolution
       kReadyForID = BIT(16)         //set if telescope is ready and able for identification. set in Initialize()
@@ -50,8 +56,19 @@ protected:
    void SetLabelFromURI(const Char_t* uri);
    KVParticleCondition* fMassIDValidity;//! may be used to limit mass identification to certain Z and/or A range
    KVDetectorSignal* GetSignalFromGridVar(const KVString& var, const KVString& axe);
-   KVDetectorSignal* fVarX;//! detector signal to be used for grid X coordinate (read from grid VarX)
-   KVDetectorSignal* fVarY;//! detector signal to be used for grid Y coordinate (read from grid VarY)
+//   KVDetectorSignal* fVarX;//! detector signal to be used for grid X coordinate (read from grid VarX)
+//   KVDetectorSignal* fVarY;//! detector signal to be used for grid Y coordinate (read from grid VarY)
+#ifndef __CINT__
+   struct GraphCoords {
+      KVDetectorSignal* fVarX;
+      KVDetectorSignal* fVarY;
+   };
+#ifdef WITH_CPP11
+   mutable std::unordered_map<KVIDGraph*, GraphCoords> fGraphCoords; // X/Y coordinates from detector signals for ID maps
+#else
+   mutable std::map<KVIDGraph*, GraphCoords> fGraphCoords; // X/Y coordinates from detector signals for ID maps
+#endif
+#endif
 
 public:
 
@@ -68,9 +85,9 @@ public:
    virtual ~ KVIDTelescope();
    void init();
    virtual void AddDetector(KVDetector* d);
-   KVList* GetDetectors() const
+   const KVList* GetDetectors() const
    {
-      return fDetectors;
+      return &fDetectors;
    }
    KVDetector* GetDetector(UInt_t n) const
    {
@@ -80,7 +97,7 @@ public:
                GetSize());
          return 0;
       }
-      KVDetector* d = (KVDetector*) fDetectors->At((n - 1));
+      KVDetector* d = (KVDetector*) GetDetectors()->At((n - 1));
       return d;
    };
    KVDetector* GetDetector(const Char_t* name) const;
@@ -94,13 +111,13 @@ public:
       // returns position (1=front, 2=next, etc.) detector in the telescope structure
       // returns 0 if detector not found in telescope
 
-      return fDetectors->IndexOf(kvd) + 1;
+      return GetDetectors()->IndexOf(kvd) + 1;
    }
    UInt_t GetSize() const
    {
       //returns number of detectors in telescope
-      return (fDetectors ? fDetectors->GetSize() : 0);
-   };
+      return GetDetectors()->GetSize();
+   }
 
    KVGroup* GetGroup() const;
    void SetGroup(KVGroup* kvg);
@@ -130,9 +147,9 @@ public:
    KVIDGraph* GetIDGrid();
    KVIDGraph* GetIDGrid(Int_t);
    KVIDGraph* GetIDGrid(const Char_t*);
-   KVList* GetListOfIDGrids() const
+   const KVList* GetListOfIDGrids() const
    {
-      return fIDGrids;
+      return &fIDGrids;
    }
 
    virtual void RemoveGrids();
@@ -141,6 +158,9 @@ public:
    virtual Double_t GetIDMapY(Option_t* opt = "");
    virtual Double_t GetPedestalX(Option_t* opt = "");
    virtual Double_t GetPedestalY(Option_t* opt = "");
+
+   Double_t GetIDGridXCoord(KVIDGraph*) const;
+   Double_t GetIDGridYCoord(KVIDGraph*) const;
 
    void SetHasMassID(Bool_t yes = kTRUE)
    {

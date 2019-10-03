@@ -39,7 +39,7 @@ void KVIDChIoSi75_camp5::Initialize()
    fchio = GetDetector(1);
    fsi = GetDetector(2);
    fGGgrid = fPGgrid = 0;
-   TIter next(fIDGrids);
+   TIter next(GetListOfIDGrids());
    KVIDGrid* grid = 0;
    while ((grid = (KVIDGrid*)next())) {
       if (!strcmp(grid->GetVarY(), "CIGG")) fGGgrid = (KVIDZAGrid*)grid;

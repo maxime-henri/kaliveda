@@ -48,7 +48,7 @@ void KVIDSiCsI_e475s::Initialize(void)
    Bool_t ready = kTRUE;
    fidgrid = 0;
    ready &= GetListOfIDGrids()->GetEntries();
-   if (ready) fidgrid = (KVIDZAGrid*)fIDGrids->First();
+   if (ready) fidgrid = (KVIDZAGrid*)GetListOfIDGrids()->First();
    if (fidgrid) fidgrid->Initialize();
    ready &= GetDetector(1)->IsCalibrated();
    ready &= GetDetector(2)->IsCalibrated();
