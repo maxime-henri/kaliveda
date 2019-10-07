@@ -56,8 +56,6 @@ protected:
    void SetLabelFromURI(const Char_t* uri);
    KVParticleCondition* fMassIDValidity;//! may be used to limit mass identification to certain Z and/or A range
    KVDetectorSignal* GetSignalFromGridVar(const KVString& var, const KVString& axe);
-//   KVDetectorSignal* fVarX;//! detector signal to be used for grid X coordinate (read from grid VarX)
-//   KVDetectorSignal* fVarY;//! detector signal to be used for grid Y coordinate (read from grid VarY)
 #ifndef __CINT__
    struct GraphCoords {
       KVDetectorSignal* fVarX;
