@@ -294,9 +294,9 @@ void KVFAZIA::FillDetectorList(KVReconstructedNucleus* rnuc, KVHashList* DetList
             }
          }
          if (rnuc->GetParameters()->HasParameter("GTTag"))
-            det->SetDetectorSignalValue("GTTag", rnuc->GetParameters()->GetDoubleValue("GTTag"));
+            det->SetGTTag(rnuc->GetParameters()->GetIntValue("GTTag"));
          if (rnuc->GetParameters()->HasParameter("DetTag"))
-            det->SetDetectorSignalValue("DetTag", rnuc->GetParameters()->GetDoubleValue("DetTag"));
+            det->SetDetTag(rnuc->GetParameters()->GetIntValue("DetTag"));
       }
    }
 }

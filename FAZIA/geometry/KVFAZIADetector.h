@@ -9,6 +9,7 @@ class KVFAZIACalibrator;
 class KVSignal;
 
 #define __KVFD_methname(X, Y)  Get ## X ## Y
+#define __KVFD_setmethname(X, Y)  Set ## X ## Y
 #define __KVFD_dotcat(X, Y)  X.Y
 #define __KVFD_str(s) #s
 #define __KVFD_xstr(s) __KVFD_str(s)
@@ -18,6 +19,10 @@ class KVSignal;
    Double_t __KVFD_methname(sig,type)() const \
    { \
       return GetDetectorSignalValue(__KVFD_dcs(sig,type)); \
+   } \
+   void __KVFD_setmethname(sig,type)(Double_t val) \
+   { \
+      GetDetectorSignal(__KVFD_dcs(sig,type))->SetValue(val); \
    }
 
 class KVFAZIADetector : public KVDetector {
@@ -158,6 +163,14 @@ public:
    Int_t GetGTTag() const
    {
       return GetDetectorSignalValue("GTTag");
+   }
+   void SetDetTag(Int_t t)
+   {
+      SetDetectorSignalValue("DetTag", t);
+   }
+   void SetGTTag(Int_t t)
+   {
+      SetDetectorSignalValue("GTTag", t);
    }
 
    ClassDef(KVFAZIADetector, 1) //Base class for FAZIA detector
