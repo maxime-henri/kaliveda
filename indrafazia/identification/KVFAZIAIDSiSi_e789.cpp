@@ -2,8 +2,7 @@
 //Author: ,,,
 
 #include "KVFAZIAIDSiSi_e789.h"
-#include "KVDataSet.h"
-
+#include "KVIDZAGrid.h"
 
 ClassImp(KVFAZIAIDSiSi_e789)
 
@@ -22,8 +21,6 @@ KVFAZIAIDSiSi_e789::KVFAZIAIDSiSi_e789()
    fSiSiGrid = 0;
    fSiSiGridQL1 = 0;
    SetType("Si-Si");
-   fSi1 = 0;
-   fSi2 = 0;
    SetHasMassID(kTRUE);
 }
 
@@ -35,28 +32,16 @@ void KVFAZIAIDSiSi_e789::Initialize()
    fSiSiGrid    = nullptr;
    fSiSiGridQL1 = nullptr;
 
-   int ig = 0;
-   KVIDZAGrid*  dummy;
-   while (++ig) {
-      if (!(dummy = (KVIDZAGrid*) GetIDGrid(ig))) break;
-      else if (!strcmp(dummy->GetVarY(), "QH1FPGAEnergy")) {
-         fSiSiGrid    = dummy;
-         fSiSiGrid->Initialize();
-      }
-      else if (!strcmp(dummy->GetVarY(), "QL1Amplitude"))  {
-         fSiSiGridQL1 = dummy;
-         fSiSiGridQL1->Initialize();
+   KVFAZIAIDSiSi::Initialize();
+
+   if (GetIDGrid()) {
+      TIter it(GetListOfIDGrids());
+      KVIDGraph* gr;
+      while ((gr = (KVIDGraph*)it())) {
+         if (TString(gr->GetVarY()) == "QH1.FPGAEnergy") fSiSiGrid = gr;
       }
    }
-
-
-   fSi1 = (KVFAZIADetector*)GetDetector(1);
-   fSi2 = (KVFAZIADetector*)GetDetector(2);
-
-   if (fSiSiGrid || fSiSiGridQL1) SetBit(kReadyForID);
-   else ResetBit(kReadyForID);
-
-   if (!gDataSet->HasCalibIdentInfos()) SetBit(kReadyForID);
+   if (!fSiSiGrid) fSiSiGrid = GetIDGrid();
 }
 
 
@@ -64,16 +49,15 @@ void KVFAZIAIDSiSi_e789::Initialize()
 Bool_t KVFAZIAIDSiSi_e789::Identify(KVIdentificationResult* idr, Double_t x, Double_t y)
 {
    // Particle identification and code setting using identification grids.
-   // perform identification in QH1-Q2 map / QL1-Q2 map
+   // For the moment: only perform identification in QH1-Q2 map
 
    idr->SetIDType(GetType());
    idr->IDattempted = kTRUE;
 
-   Double_t si1 = (y < 0. ? GetIDMapY() : y);
-   Double_t si2 = (x < 0. ? GetIDMapX() : x);
+   Double_t si1, si2;
+   GetIDGridCoords(si2, si1, fSiSiGrid, x, y);
 
-   // first try with high range grid
-   if (fSiSiGrid && fSiSiGrid->IsIdentifiable(si2, si1)) {
+   if (fSiSiGrid->IsIdentifiable(si2, si1)) {
       fSiSiGrid->Identify(si2, si1, idr);
    }
    else {
@@ -86,4 +70,3 @@ Bool_t KVFAZIAIDSiSi_e789::Identify(KVIdentificationResult* idr, Double_t x, Dou
    return kTRUE;
 
 }
-

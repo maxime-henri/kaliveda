@@ -5,14 +5,12 @@
 #define __KVFAZIAIDSiSi_e789_H
 
 #include "KVFAZIAIDSiSi.h"
-#include "KVFAZIADetector.h"
-#include "KVIDZAGrid.h"
 
 class KVFAZIAIDSiSi_e789 : public KVFAZIAIDSiSi {
 
 protected:
-   KVIDZAGrid* fSiSiGrid;//! telescope's grid
-   KVIDZAGrid* fSiSiGridQL1;//! telescope's grid low range
+   KVIDGraph* fSiSiGrid;//! telescope's grid
+   KVIDGraph* fSiSiGridQL1;//! telescope's grid low range
 
 public:
    KVFAZIAIDSiSi_e789();
