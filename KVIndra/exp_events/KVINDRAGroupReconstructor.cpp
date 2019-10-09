@@ -2,6 +2,7 @@
 //Author: John Frankland,,,
 
 #include "KVINDRAGroupReconstructor.h"
+#include <KVIDGCsI.h>
 #include <KVIDINDRACsI.h>
 #include <KVINDRADetector.h>
 #include "KVINDRACodeMask.h"

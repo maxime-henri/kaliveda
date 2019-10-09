@@ -976,13 +976,13 @@ const Char_t* KVIDGraph::GetName() const
    // with which this grid is associated.
 
    if (fName != "") return fName;
-   const_cast<KVIDGraph*>(this)->fDyName = "";
-   if (fTelescopes.At(0)) const_cast<KVIDGraph*>(this)->fDyName = fTelescopes.At(0)->GetName();
+   fDyName = "";
+   if (fTelescopes.At(0)) fDyName = fTelescopes.At(0)->GetName();
    else {
       if (fPar->HasParameter("IDTelescopes")) {
          KVString tel_list = fPar->GetStringValue("IDTelescopes");
          tel_list.Begin(",");
-         const_cast<KVIDGraph*>(this)->fDyName = tel_list.Next();
+         fDyName = tel_list.Next();
       }
    }
    return fDyName;

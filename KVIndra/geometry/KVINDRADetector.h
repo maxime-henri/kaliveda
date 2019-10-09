@@ -47,16 +47,16 @@ public:
    }
 
    const Char_t* GetArrayName();
-   virtual UInt_t GetRingNumber() const
+   UInt_t GetRingNumber() const
    {
       return (GetTelescope() ? GetTelescope()->GetRingNumber() : 0);
    }
-   virtual UInt_t GetModuleNumber() const
+   UInt_t GetModuleNumber() const
    {
       return (GetTelescope() ? GetTelescope()->GetNumber() : 0);
    }
 
-   virtual void AddACQParamType(const Char_t* type);
+   void AddACQParamType(const Char_t* type);
    virtual KVACQParam* GetACQParam(const Char_t* /*type*/) const;
 
    Double_t GetPGfromGG(Double_t GG = -1);

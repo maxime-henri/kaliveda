@@ -410,17 +410,33 @@ public:
    void AcceptIDCodes(const TString& codelist)
    {
       // Set list of (numeric) identification codes which are acceptable for
-      // analysis of reconstructed particles with this array.
+      // analysis of reconstructed particles with this array. Multiple values
+      // should be separated with a comma, e.g. : "1,3,22"
+      //
       // Default list may be set with variable:
+      //
+      //~~~~~~~~~~~~~
       //   [DataSet].[name].ReconstructedNuclei.AcceptIDCodes:  [list]
+      //~~~~~~~~~~~~~
+      //
+      // If called several times, only the last list of values will be taken into account.
+
       fAcceptIDCodes.Set(codelist);
    }
    void AcceptECodes(const TString& codelist)
    {
       // Set list of (numeric) calibration codes which are acceptable for
-      // analysis of reconstructed particles with this array.
+      // analysis of reconstructed particles with this array. Multiple values
+      // should be separated with a comma, e.g. : "1,3,22"
+      //
       // Default list may be set with variable:
+      //
+      //~~~~~~~~~~~~
       //   [DataSet].[name].ReconstructedNuclei.AcceptECodes:  [list]
+      //~~~~~~~~~~~~
+      //
+      // If called several times, only the last list of values will be taken into account.
+
       fAcceptECodes.Set(codelist);
    }
 
