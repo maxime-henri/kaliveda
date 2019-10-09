@@ -184,11 +184,14 @@ void KVFAZIAGroupReconstructor::PostReconstructionProcessing()
                // only store raw data, excluding any expressions based only on raw data
             {
                TString pname;
-               if (TString(ds->GetName()) != "DetTag" && TString(ds->GetName()) != "GTTag")
-                  pname = Form("%s.%s", det->GetName(), ds->GetName());
-               else
-                  pname = ds->GetName();
-               rnuc->GetParameters()->SetValue(pname, ds->GetValue());
+               // Only store non-zero parameters
+               if (ds->GetValue() != 0) {
+                  if (TString(ds->GetName()) != "DetTag" && TString(ds->GetName()) != "GTTag")
+                     pname = Form("%s.%s", det->GetName(), ds->GetName());
+                  else
+                     pname = ds->GetName();
+                  rnuc->GetParameters()->SetValue(pname, ds->GetValue());
+               }
             }
          }
 
