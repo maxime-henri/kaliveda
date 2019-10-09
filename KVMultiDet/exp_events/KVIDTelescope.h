@@ -159,7 +159,16 @@ public:
 
    Double_t GetIDGridXCoord(KVIDGraph*) const;
    Double_t GetIDGridYCoord(KVIDGraph*) const;
+   void GetIDGridCoords(Double_t& X, Double_t& Y, KVIDGraph* grid, Double_t x = -1, Double_t y = -1)
+   {
+      // Returns coordinates to be used in grid (defined by VARX/Y parameters of grid).
+      //
+      // If x!=-1 or y!=-1, their value(s) is(are) used instead of whatever current value of
+      // the detector signals defined by VARX/Y
 
+      Y = (y < 0. ? GetIDGridYCoord(grid) : y);
+      X = (x < 0. ? GetIDGridXCoord(grid) : x);
+   }
    void SetHasMassID(Bool_t yes = kTRUE)
    {
       SetBit(kMassID, yes);

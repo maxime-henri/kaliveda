@@ -38,6 +38,7 @@ Author : $Author: franklan $
 #include "KVParticleCondition.h"
 
 #include <KVDetectorSignalExpression.h>
+#include <KVIDZAGrid.h>
 
 using namespace std;
 
@@ -151,11 +152,13 @@ void KVIDTelescope::Initialize(void)
    // and set kReadyForID to kTRUE in Initialize() method of derived class if
    // necessary conditions for identification are met (has an ID grid etc.).
 
+   ResetBit(kReadyForID);
    if (GetIDGrid()) {
       KVIDGraph* gr;
       TIter it(GetListOfIDGrids());
       bool ok = kTRUE;
       while ((gr = (KVIDGraph*)it())) {
+         SetHasMassID(gr->HasMassIDCapability());
          gr->Initialize();
          // make sure both x & y axes' signals are well set up
          if (!fGraphCoords[gr].fVarX || !fGraphCoords[gr].fVarY) {
@@ -365,14 +368,17 @@ Bool_t KVIDTelescope::Identify(KVIdentificationResult* idr, Double_t x, Double_t
 
    KVIDGraph* grid = GetIDGrid();
 
-   Double_t de = (y < 0. ? GetIDGridYCoord(grid) : y);
-   Double_t e = (x < 0. ? GetIDGridXCoord(grid) : x);
+   Double_t de, e;
+   GetIDGridCoords(e, de, grid, x, y);
+
+   idr->SetGridName(grid->GetName());
 
    if (grid->IsIdentifiable(e, de)) {
       grid->Identify(e, de, idr);
    }
    else {
       idr->IDOK = kFALSE;
+      idr->IDquality = KVIDZAGrid::kICODE8;
    }
 
    idr->IDcode = GetIDCode();
@@ -387,23 +393,30 @@ void KVIDTelescope::SetIDGrid(KVIDGraph* grid)
    // Add an identification grid to the list of grids used by this telescope.
    //
    // If the grid's VARX and VARY parameters are set and contain the names of valid
-   // detector signals (see formatting rules below) they will be used to set
-   // the fVarX and fVarY member pointers which will be used by GetIDMapX/Y()
-   // in order to perform particle identification using the grid.
+   // detector signals (see formatting rules below) they will be used by
+   // GetIDGridXCoord() and GetIDGridYCoord() to return the coordinates
+   // needed to perform particle identification using the grid.
+   //
+   // The name of the grid is set to "VARY_VARX" (just the signal names, not the detector
+   // label part - see below). This value will be stored in the
+   // KVIdentificationResult corresponding to an attempted identification of a
+   // KVReconstructedNucleus by this grid.
    //
    // VARX/VARY Formatting
    //
    // To be valid, grid VARX/Y parameters should be set as follows:
    //
    //~~~~~~~~~~~~~~~~~~
-   //      [det_label]::[signal name]
+   //      [signal name]
+   //  or  [det_label]::[signal name]
    //~~~~~~~~~~~~~~~~~~
    //
    // where
    //
    //~~~~~~~~~~~~~~~~~~
-   //    [det_label]   = detector label i.e. string returned by KVDetector::GetLabel()
-   //                    method for detector
+   //    [det_label] (optional)  = detector label i.e. string returned by KVDetector::GetLabel()
+   //                    method for detector. By default, VARX is assumed to be the Eres detector
+   //                    or second detector and VARY the DE detector or first detector
    //    [signal_name] = name of a signal defined for the detector, possibly depending
    //                    on availability of calibration
    //
@@ -420,6 +433,11 @@ void KVIDTelescope::SetIDGrid(KVIDGraph* grid)
       gc.fVarX = xx;
       gc.fVarY = yy;
       fGraphCoords[grid] = gc;
+      TString grid_name;
+      if (xx && yy) {
+         grid_name.Form("%s_%s", yy->GetName(), xx->GetName());
+         grid->SetName(grid_name);
+      }
    }
 }
 
@@ -502,7 +520,7 @@ KVIDGraph* KVIDTelescope::GetIDGrid()
 {
    //Return the first in the list of identification grids used by this telescope
    //(this is for backwards compatibility with ID telescopes which had only one grid).
-   return GetIDGrid(1);
+   return (KVIDGraph*)GetListOfIDGrids()->First();
 }
 
 //____________________________________________________________________________________
@@ -1257,7 +1275,7 @@ KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(TH2* haa_zz, Bool_t Zonly, Int_t 
 Double_t KVIDTelescope::GetMeanDEFromID(Int_t& status, Int_t Z, Int_t A, Double_t Eres)
 {
    // Returns the Y-axis value in the 2D identification map containing isotope (Z,A)
-   // corresponding to either the given X-axis/Eres value or the current X-axis value given by GetIDMapX.
+   // corresponding to either the given X-axis/Eres value or the current X-axis value given by GetIDGridXCoord()
    // If no mass information is available, just give Z.
    //
    // In this (default) implementation this means scanning the ID grids associated with
@@ -1285,7 +1303,7 @@ Double_t KVIDTelescope::GetMeanDEFromID(Int_t& status, Int_t Z, Int_t A, Double_
       return -1.;
    }
    Double_t x, x1, y1, x2, y2;
-   x = (Eres < 0 ? GetIDMapX() : Eres);
+   x = (Eres < 0 ? GetIDGridXCoord(grid) : Eres);
    idline->GetEndPoint(x2, y2);
    if (x > x2) {
       status = kMeanDE_XtooLarge;
