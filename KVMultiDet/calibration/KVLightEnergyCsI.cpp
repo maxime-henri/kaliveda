@@ -27,8 +27,13 @@ ClassImp(KVLightEnergyCsI);
 //The function Double_t CalculLumiere(Double_t * x, Double_t * par) (in the source file KVLightEnergyCsI.cpp)
 //is used to parameterize the total light output as a function of deposited energy (in MeV).
 //
-//This function has 3 parameters, a1, a2 & a3. In order to correctly reproduce the light-energy
-//relationship for all ions, two parameterizations have to be used: one for Z=1 and another for Z>1.
+// See M. Parlog et al., Nuclear Instruments and Methods in Physics Research A 482 (2002) 693–706
+//
+//This function has 4 parameters, a1, a2, a3 & a4. In order to correctly reproduce the light-energy
+//relationship for all ions, two parameterizations should be used: one for Z=1 and another for Z>1.
+//The main difference is the gain parameter, a1, which compensates the understimation of total
+//light output for high energy protons.
+//
 //The parameter a3 normally has a fixed value (a3=6), but this is not "hard-coded" : it should be fixed
 //when fitting data.
 
@@ -38,13 +43,16 @@ Double_t CalculLumiere(Double_t* x, Double_t* par)
 {
    //Calcul de la lumiere totale a partir de Z, A d'une particule et son energie
    //
+   //~~~~~~~~~~~~~~~~~~
    // x[0] = energie (MeV)
-   // par[0] = a1
-   // par[1] = a2
-   // par[2] = a3
-   // par[3] = a4
+   // par[0] = a1 : gain factor
+   // par[1] = a2 : nuclear & recombination quenching term
+   // par[2] = a3 : threshold (MeV/u) for delta-ray production
+   // par[3] = a4 : fractional energy loss removed by delta rays
    // par[4] = Z
    // par[5] = A
+   //~~~~~~~~~~~~~~~~~~
+   //
 
    Double_t Z = par[4];
    Double_t A = par[5];
