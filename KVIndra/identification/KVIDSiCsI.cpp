@@ -26,18 +26,15 @@ ClassImp(KVIDSiCsI)
 //
 //Identification in Si-CsI matrices of INDRA
 //
-//Identification subcodes are written in bits 8-11 of KVIDSubCodeManager
-//(see KVINDRACodes)
 ////////////////////////////////////////////////////////////////////////////////
 
 KVIDSiCsI::KVIDSiCsI()
 {
    //set IDCode
-   fIDCode = kIDCode_SiCsI;
+   set_id_code(kIDCode_SiCsI);
    fZminCode = kIDCode_ArretSi;
    fECode = kECode1;
    fPIEDESTAL = nullptr;
-   SetSubCodeManager(4, 11);
 }
 
 void KVIDSiCsI::Initialize()

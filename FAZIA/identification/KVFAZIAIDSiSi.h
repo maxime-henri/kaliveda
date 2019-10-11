@@ -11,10 +11,6 @@ class KVFAZIAIDSiSi : public KVFAZIAIDTelescope {
 public:
    KVFAZIAIDSiSi();
    virtual ~KVFAZIAIDSiSi();
-   virtual UShort_t GetIDCode()
-   {
-      return kSi1Si2;
-   }
 
    ClassDef(KVFAZIAIDSiSi, 1) //identification telescope for FAZIA Si-Si idcards
 };

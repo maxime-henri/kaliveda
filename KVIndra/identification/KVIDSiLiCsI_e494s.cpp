@@ -115,7 +115,7 @@ Bool_t KVIDSiLiCsI_e494s::Identify(KVIdentificationResult* IDR, Double_t x, Doub
    IDR->IDquality   = 15;
 
    // set general ID code
-   IDR->IDcode = fIDCode;
+   IDR->IDcode = GetIDCode();
 
    const Bool_t inRange = (fThresholdX < X) && (X < 4090.) && (fThresholdY < Y) && (Y < 4090.);
 

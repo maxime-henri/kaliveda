@@ -29,17 +29,13 @@ ClassImp(KVIDINDRACsI)
 //
 //Identification in CsI R-L matrices of INDRA
 //
-//Identification subcodes are written in bits 0-3 of KVIDSubCodeManager
-//(see KVINDRACodes). They correspond to the values of KVIDGCsI::GetQualityCode()
-//(see KVIDGCsI class description).
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 KVIDINDRACsI::KVIDINDRACsI()
 {
-   fIDCode = kIDCode_CsI;
+   set_id_code(kIDCode_CsI);
    fZminCode = kIDCode_ZminCsI;
    fECode = kECode1;
-   SetSubCodeManager(4, 3);
    CsIGrid = 0;
 
    fThresMin[0][0] = 1;

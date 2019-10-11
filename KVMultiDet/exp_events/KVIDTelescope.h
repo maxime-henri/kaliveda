@@ -42,6 +42,7 @@ class KVParticleCondition;
 class KVIDTelescope: public KVBase {
 
    static TEnv* fgIdentificationBilan;
+   UShort_t fIDCode;            //! general id code corresponding to correct identification by this type of telescope
 
 protected:
    KVList fDetectors;         //list of detectors in telescope
@@ -67,6 +68,11 @@ protected:
    mutable std::map<KVIDGraph*, GraphCoords> fGraphCoords; // X/Y coordinates from detector signals for ID maps
 #endif
 #endif
+   void set_id_code(UShort_t c)
+   {
+      // used by child class constructors to set the id code for their type of identification
+      fIDCode = c;
+   }
 
 public:
 
@@ -227,11 +233,10 @@ public:
    };
    virtual UShort_t GetIDCode()
    {
-      // return a general identification code (can be a bitmask) for particles correctly identified
+      // return the general identification code (can be a bitmask) for particles correctly identified
       // with this type of ID telescope
-      // redefine in child classes; default returns 4.
-      return 4;
-   };
+      return fIDCode;
+   }
    virtual UShort_t GetZminCode()
    {
       // return a general identification code (can be a bitmask) for particles partially identified

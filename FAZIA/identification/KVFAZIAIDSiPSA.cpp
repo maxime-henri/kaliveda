@@ -46,6 +46,7 @@ KVFAZIAIDSiPSA::KVFAZIAIDSiPSA()
       fAThreshold->SetParameters(-5.14823, 2.03461, 1.55798);
    }
    SetType("SiPSA");
+   set_id_code(kSi1);
 }
 
 KVFAZIAIDSiPSA::~KVFAZIAIDSiPSA()

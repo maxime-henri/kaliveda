@@ -148,17 +148,24 @@ void KVIDTelescope::Initialize(void)
    //
    //   [dataset].[telescope label].MassID.Validity:  (Z>3)&&(A<20)
    //
-   // To implement identification, make a class derived from KVIDTelescope
-   // and set kReadyForID to kTRUE in Initialize() method of derived class if
-   // necessary conditions for identification are met (has an ID grid etc.).
+   //For identifications using more than one grid, the default behaviour is to try identification
+   //with each grid in turn until a successful identification is obtained. The order in which
+   //the grids should be tried should be specified by a variable with the following format:
+   //
+   //~~~~~~~~~~~~~~~~
+   //[Dataset].[telescope label].GridOrder:  [Grid1],[Grid2],...
+   //~~~~~~~~~~~~~~~~
 
    ResetBit(kReadyForID);
    if (GetIDGrid()) {
       KVIDGraph* gr;
       TIter it(GetListOfIDGrids());
       bool ok = kTRUE;
+      KVUniqueNameList tmp_list;// for re-ordering grids
+      bool mass_id = false;
       while ((gr = (KVIDGraph*)it())) {
-         SetHasMassID(gr->HasMassIDCapability());
+         tmp_list.Add(gr);
+         if (gr->HasMassIDCapability()) mass_id = true;
          gr->Initialize();
          // make sure both x & y axes' signals are well set up
          if (!fGraphCoords[gr].fVarX || !fGraphCoords[gr].fVarY) {
@@ -166,6 +173,25 @@ void KVIDTelescope::Initialize(void)
             Warning("Initialize",
                     "ID tel. %s: grid %s has undefined VarX(%s:%p) or VarY(%s:%p) - WILL NOT USE",
                     GetName(), gr->GetName(), gr->GetVarX(), fGraphCoords[gr].fVarX, gr->GetVarY(), fGraphCoords[gr].fVarY);
+         }
+      }
+      // set to true if at least one grid can provide mass identification
+      SetHasMassID(mass_id);
+      // if more than one grid, need to re-order them according to [Dataset].[telescope label].GridOrder
+      if (GetListOfIDGrids()->GetEntries() > 1 && gDataSet) {
+         KVString grid_list = gDataSet->GetDataSetEnv(Form("%s.GridOrder", GetLabel()));
+         ok = kFALSE;
+         if (grid_list == "")
+            Warning("Initialize", "ID telescope %s has %d grids but no %s variable defined",
+                    GetName(), GetListOfIDGrids()->GetEntries(), Form("%s.GridOrder", GetLabel()));
+         else if (grid_list.GetNValues(",") != GetListOfIDGrids()->GetEntries())
+            Warning("Initialize", "ID telescope %s has %d grids but %d grids appear in variable %s",
+                    GetName(), GetListOfIDGrids()->GetEntries(), grid_list.GetNValues(","), Form("%s.GridOrder", GetLabel()));
+         else {
+            fIDGrids.Clear();
+            grid_list.Begin(",");
+            while (!grid_list.End()) fIDGrids.Add(tmp_list.FindObject(grid_list.Next()));
+            ok = kTRUE;
          }
       }
       if (ok) SetBit(kReadyForID);
@@ -357,30 +383,40 @@ Bool_t KVIDTelescope::Identify(KVIdentificationResult* idr, Double_t x, Double_t
 {
    //Default identification method.
    //
-   //Works for ID telescopes for which a single identification grid is defined,
+   //Works for ID telescopes for which one or more identification grids are defined, each
    //with VARX/VARY parameters corresponding to a KVDetectorSignal or KVDetectorSignalExpression
    //associated with one or other of the detectors constituting the telescope.
    //
-   //For identifications using more than one grid, this method needs to be overridden.
+   //For identifications using more than one grid, the default behaviour is to try identification
+   //with each grid in turn until a successful identification is obtained. The order in which
+   //the grids should be tried should be specified by a variable with the following format:
+   //
+   //~~~~~~~~~~~~~~~~
+   //[Dataset].[Array Name].[ID type].GridOrder:  [Grid1],[Grid2],...
+   //~~~~~~~~~~~~~~~~
+   //
+   //where the name of each grid is given as "VARY_VARX". If no variable defining the order is found,
+   //the grids will be tried in the order they were found in the file containing the grids for this
+   //telescope.
 
    idr->SetIDType(GetType());
    idr->IDattempted = kTRUE;
 
-   KVIDGraph* grid = GetIDGrid();
-
-   Double_t de, e;
-   GetIDGridCoords(e, de, grid, x, y);
-
-   idr->SetGridName(grid->GetName());
-
-   if (grid->IsIdentifiable(e, de)) {
-      grid->Identify(e, de, idr);
+   KVIDGraph* grid;
+   TIter it(GetListOfIDGrids());
+   while ((grid = (KVIDGraph*)it())) { //loop over grids in order given by [Dataset].[Array Name].[ID type].GridOrder:
+      Double_t de, e;
+      GetIDGridCoords(e, de, grid, x, y);
+      idr->SetGridName(grid->GetName());
+      if (grid->IsIdentifiable(e, de)) {
+         grid->Identify(e, de, idr);
+         if (idr->IDOK) break; // stop on first successful identification
+      }
+      else {
+         idr->IDOK = kFALSE;
+         idr->IDquality = KVIDZAGrid::kICODE8;
+      }
    }
-   else {
-      idr->IDOK = kFALSE;
-      idr->IDquality = KVIDZAGrid::kICODE8;
-   }
-
    idr->IDcode = GetIDCode();
 
    return kTRUE;

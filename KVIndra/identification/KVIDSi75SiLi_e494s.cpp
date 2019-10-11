@@ -130,7 +130,7 @@ Bool_t KVIDSi75SiLi_e494s::Identify(KVIdentificationResult* IDR, Double_t x, Dou
    IDR->IDquality   = 15;
 
    // set general ID code
-   IDR->IDcode = fIDCode;
+   IDR->IDcode = GetIDCode();
 
    KVACQParam* pmt = (KVACQParam*)fSiLi->GetACQParam("T");  // MFR
    Short_t MTSiLi = pmt->GetCoderData();                    // MFR

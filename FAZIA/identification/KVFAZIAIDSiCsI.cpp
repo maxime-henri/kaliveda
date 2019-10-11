@@ -19,6 +19,7 @@ KVFAZIAIDSiCsI::KVFAZIAIDSiCsI()
 {
    // Default constructor
    SetType("Si-CsI");
+   set_id_code(kSi2CsI);
    fBelowProton = 0;
    fSiThreshold = 0;
 

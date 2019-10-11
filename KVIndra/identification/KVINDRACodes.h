@@ -6,28 +6,18 @@
 
 #include "TObject.h"
 #include "KVINDRACodeMask.h"
-#include "KVIDSubCodeManager.h"
 
 class KVINDRACodes: public KVINDRACodeMask {
 
    friend class KVINDRAReconNuc;
 
 private:
-   void SetIsotopeResolve(Bool_t stat = kTRUE);   //obsolete
-   Bool_t GetIsotopeResolve();   //obsolete
-
    static Char_t fCodeGenIdent[14][120];
    static Char_t fCodeGenCalib[8][120];
    static UChar_t fIDCodes[14];
    static UChar_t fECodes[8];
    static UShort_t fIDBits[16];
    static UChar_t fEBits[16];
-
-   KVIDSubCode fIDSubCodes;     //obsolete
-   inline KVIDSubCode& GetSubCodes()    //obsolete
-   {
-      return fIDSubCodes;
-   };
 
 public:
 
@@ -36,10 +26,7 @@ public:
    };
 
    KVINDRACodes();
-   virtual ~ KVINDRACodes()
-   {
-      fIDSubCodes = fIDSubCodes.Max();
-   };
+   virtual ~ KVINDRACodes() {}
    const Char_t* GetIDStatus();
    const Char_t* GetEStatus();
 

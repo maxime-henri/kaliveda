@@ -204,14 +204,14 @@ Int_t KVMultiDetArray::GetIDTelescopes(KVDetector* de, KVDetector* e, TCollectio
    // # The KVMultiDetArray::GetIDTelescopes(KVDetector*de, KVDetector*e) method uses these plugins to
    // # create KVIDTelescope instances adapted to the specific array geometry and detector types.
    // # For each pair of detectors we look for a plugin with one of the following names:
-   // #    [name_of_dataset].de_detector_type[de detector thickness]-e_detector_type[de detector thickness]
+   // #    [name_of_dataset].array_name.de_detector_type[de detector thickness]-e_detector_type[de detector thickness]
    // # Each characteristic in [] brackets may or may not be present in the name; first we test for names
    // # with these characteristics, then all combinations where one or other of the characteristics is not present.
    // # In addition, we first test all combinations which begin with [name_of_dataset].
    // # The first plugin found in this order will be used.
    // # In addition, if for one of the two detectors there is a plugin called
-   // #    [name_of_dataset].de_detector_type[de detector thickness]
-   // #    [name_of_dataset].e_detector_type[e detector thickness]
+   // #    [name_of_dataset].array_name.de_detector_type[de detector thickness]
+   // #    [name_of_dataset].array_name.e_detector_type[e detector thickness]
    // # then we add also an instance of this 1-detector identification telescope.
    //
    // This method is called by DeduceIdentificationTelescopesFromGeometry
@@ -241,20 +241,20 @@ Int_t KVMultiDetArray::try_all_singleID_telescopes(KVDetector* d, TCollection* l
    // ID telescope from detector *d
    // We look for plugins with the following signatures (uri):
    //
-   //       [type]
-   //       [type][thickness]
+   //       [array name].[type]
+   //       [array_name].[type][thickness]
    //
    // where 'type' is the type of the detector in UPPER or lowercase letters
    // 'thickness' is the nearest-integer thickness of the detector as returned by d->GetThickness()
    // In addition, if a dataset is set (gDataSet!=nullptr) we try also for dataset-specific
    // plugins:
    //
-   //       [dataset].[type]
-   //       [dataset].[type][thickness]
+   //       [dataset].[array name].[type]
+   //       [dataset].[array name].[type][thickness]
    //
    // Returns number of generated telescopes
 
-   TString uri = d->GetType();
+   TString uri = Form("%s.%s", GetName(), d->GetType());
    Int_t ntels = 0;
    if (!(ntels += try_upper_and_lower_singleIDtelescope(uri, d, l))) {
       Int_t d_thick = TMath::Nint(d->GetThickness());
@@ -270,20 +270,20 @@ Int_t KVMultiDetArray::try_all_doubleID_telescopes(KVDetector* de, KVDetector* e
    // Attempt to find a plugin KVIDTelescope class for making an ID telescope from detectors de & e.
    // We look for plugins with the following signatures (uri):
    //
-   //       [de-type]-[e-type]
-   //       [de-type][thickness]-[e-type]
-   //       [de-type]-[e-type][thickness]
-   //       [de-type][thickness]-[e-type][thickness]
+   //       [array name].[de-type]-[e-type]
+   //       [array name].[de-type][thickness]-[e-type]
+   //       [array name].[de-type]-[e-type][thickness]
+   //       [array name].[de-type][thickness]-[e-type][thickness]
    //
    // where 'type' is the type of the detector in UPPER or lowercase letters
    // 'thickness' is the nearest-integer thickness of the detector.
    // In addition, if a dataset is set (gDataSet!=nullptr) we try also for dataset-specific
    // plugins:
    //
-   //       [dataset].[de-type][thickness]-[e-type][thickness]
-   //       [dataset].[de-type][thickness]-[e-type]
-   //       [dataset].[de-type]-[e-type][thickness]
-   //       [dataset].[de-type]-[e-type]
+   //       [dataset].[array name].[de-type][thickness]-[e-type][thickness]
+   //       [dataset].[array name].[de-type][thickness]-[e-type]
+   //       [dataset].[array name].[de-type]-[e-type][thickness]
+   //       [dataset].[array name].[de-type]-[e-type]
    //
    // if no plugin is found, we return a KVIDTelescope base class object
    //
@@ -295,15 +295,19 @@ Int_t KVMultiDetArray::try_all_doubleID_telescopes(KVDetector* de, KVDetector* e
    TString e_thick = Form("%d", TMath::Nint(e->GetThickness()));
 
    TString uri = de_type + de_thick + "-" + e_type + e_thick;
+   uri.Prepend(Form("%s.", GetName()));
    if (try_upper_and_lower_doubleIDtelescope(uri, de, e, l)) return 1;
 
    uri = de_type + de_thick + "-" + e_type;
+   uri.Prepend(Form("%s.", GetName()));
    if (try_upper_and_lower_doubleIDtelescope(uri, de, e, l)) return 1;
 
    uri = de_type + "-" + e_type + e_thick;
+   uri.Prepend(Form("%s.", GetName()));
    if (try_upper_and_lower_doubleIDtelescope(uri, de, e, l)) return 1;
 
    uri = de_type + "-" + e_type;
+   uri.Prepend(Form("%s.", GetName()));
    if (try_upper_and_lower_doubleIDtelescope(uri, de, e, l)) return 1;
 
    // default id telescope object
@@ -2078,7 +2082,7 @@ TList* KVMultiDetArray::GetStatusOfIDTelescopes()
 KVUniqueNameList* KVMultiDetArray::GetIDTelescopeTypes()
 {
    // Create, fill and return pointer to a list of TObjString containing the name of each type
-   // of ID telescope in the array.
+   // of ID telescope (actually the label) in the array.
    //
    // Delete the list after use (it owns the TObjString objects)
 
@@ -2098,7 +2102,7 @@ KVUniqueNameList* KVMultiDetArray::GetIDTelescopeTypes()
 KVSeqCollection* KVMultiDetArray::GetIDTelescopesWithType(const Char_t* type)
 {
    // Create, fill and return pointer to a list of KVIDTelescopes with
-   // the given type in the array.
+   // the given type (label) in the array.
    // WARNING! - check pointer is not zero (we return NULL if ID telescopes
    // list is not defined or empty)
    //

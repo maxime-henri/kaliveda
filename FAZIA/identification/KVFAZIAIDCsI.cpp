@@ -22,6 +22,7 @@ KVFAZIAIDCsI::KVFAZIAIDCsI()
 {
    // Default constructor
    SetType("CsI");
+   set_id_code(kCsI);
    CsIGrid = 0;
    fCsI = 0;
    /* in principle all CsI R-L telescopes can identify mass & charge */

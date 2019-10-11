@@ -123,7 +123,7 @@ Bool_t KVIDSiCorrCsI::Identify(KVIdentificationResult* IDR, Double_t x, Double_t
    IDR->IDquality = 15;
 
    // set general ID code
-   IDR->IDcode = fIDCode;
+   IDR->IDcode = GetIDCode();
 
    Double_t Z = -1.;
 

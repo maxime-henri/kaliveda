@@ -20,10 +20,6 @@ private:
 public:
    KVFAZIAIDSiSi_FAZIACOR();
    virtual ~KVFAZIAIDSiSi_FAZIACOR();
-   virtual UShort_t GetIDCode()
-   {
-      return kSi1Si2;
-   };
    virtual void   Initialize();
    Bool_t Identify(KVIdentificationResult*, Double_t x = -1., Double_t y = -1.);
 

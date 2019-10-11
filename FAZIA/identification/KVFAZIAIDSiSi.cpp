@@ -21,6 +21,7 @@ KVFAZIAIDSiSi::KVFAZIAIDSiSi()
 {
    // Default constructor
    SetType("Si-Si");
+   set_id_code(kSi1Si2);
    SetHasMassID(kTRUE);
 }
 
