@@ -1181,12 +1181,12 @@ void KVIDGraph::SetEditable(Bool_t editable)
 
 //___________________________________________________________________________________
 
-TString KVIDGraph::GetNamesOfIDTelescopes()
+const Char_t* KVIDGraph::GetNamesOfIDTelescopes() const
 {
    // Returns a comma-separated list of the names of all ID telescopes for which
    // this grid is valid.
 
-   TString tel_list;
+   static TString tel_list;
    if (!fTelescopes.GetEntries()) {
       // case of grid with "unknown" ID telescopes
       // we return the value of the IDTelescopes parameter (if defined)
