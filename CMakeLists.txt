@@ -126,7 +126,7 @@ endif()
 #---sources available from: https://gitlab.in2p3.fr/jdfcode/mfmlib.git
 option(USE_MFM
                 "Enable support for reading GANIL MFM format data"
-		OFF)
+                ON)
 add_feature_info(mfm USE_MFM "Enable support for reading GANIL MFM format data")
 if(USE_MFM)
     find_package(mfmlib QUIET)
