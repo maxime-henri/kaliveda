@@ -3180,7 +3180,7 @@ unique_ptr<KVFileReader> KVMultiDetArray::GetKVFileReader(KVExpDB* db, const Cha
 
    TString fp = GetFileName(db, meth, keyw);
    if (fp == "")
-      return nullptr;
+      return unique_ptr<KVFileReader>();
 
    unique_ptr<KVFileReader> fr(new KVFileReader());
    if (!fr->OpenFileToRead(fp.Data())) {
