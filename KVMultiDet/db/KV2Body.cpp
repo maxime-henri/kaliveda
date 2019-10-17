@@ -183,28 +183,22 @@ KV2Body::KV2Body(const Char_t* systemname) : fNuclei(5), fEDiss(0)
    fNuclei[2] = KVNucleus(scouple.Next());
 }
 
-KV2Body::KV2Body(KVNucleus* proj, KVNucleus* cib, KVNucleus* proj_out, Double_t Ediss): fNuclei(5), fEDiss(0)
+KV2Body::KV2Body(KVNucleus*, KVNucleus* cib, KVNucleus* proj_out, Double_t): fNuclei(5), fEDiss(0)
 {
    // Deprecated. Do not use.
 
    Obsolete("KV2Body(KVNucleus*, KVNucleus*, KVNucleus*, Double_t)", "1.11", "1.12");
-   Warning("KV2Body(KVNucleus*, KVNucleus*, KVNucleus*, Double_t)",
-           "User's responsibility to delete any KVNucleus object given as argument");
 
-   init();
-   fNuclei[1] = *proj;
-   fNuclei[2] = *cib;
-   fEDiss = Ediss;
    if (!cib) {
-      // break-up kinematics
-      if (Ediss == 0.0) {
-         fEDiss = -proj->GetExcitEnergy();
-      }
+      Info("KV2Body", "Use constructor KV2Body(const KVNucleus& compound) to simulate binary decay of compound");
    }
-
-   if (proj_out) {
-      SetOutgoing(*proj_out);
+   else if (!proj_out) {
+      Info("KV2Body", "Use constructor KV2Body(const KVNucleus& proj, const KVNucleus& targ) to define entrance channel");
    }
+   else {
+      Info("KV2Body", "Use constructor KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& outgoing) to define entrance & exit channels");
+   }
+   init();
 }
 
 KV2Body::KV2Body(const KVNucleus& compound, double Exx)

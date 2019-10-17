@@ -77,7 +77,7 @@ public:
    KV2Body(const KVNucleus& compound, double Exx = 0.0);
    KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss = 0.0);
    KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& proj_out, double Ediss = 0.0);
-   KV2Body(KVNucleus* proj, KVNucleus* cib = nullptr, KVNucleus* proj_out = nullptr, Double_t Ediss = 0.0);
+   KV2Body(KVNucleus*, KVNucleus* = nullptr, KVNucleus* = nullptr, Double_t = 0.0);
    virtual ~ KV2Body();
 
    void CalculateKinematics();
