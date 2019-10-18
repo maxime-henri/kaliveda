@@ -42,20 +42,30 @@ It allows to calculate:
 
 The values are calculated using relativistic kinematics.
 
+## Setting up the calculation
+There are 3 ways in which KV2Body can be used.
 
-## Defining the entrance channel.
+### a. Binary reaction kinematics
 
-Either use the constructor with arguments to specify projectile and target:
+Calculate kinematics for either elastic or inelastic `A + B -> A + B` collisions.
+Either use the constructor with arguments to specify projectile and target,
+and optionally the dissipated/excitation energy:
 
 ~~~~~~~~~~~~~{.cpp}
-      KV2Body kin( proj, targ );//'proj' and 'targ' are pointers to KVNucleus objects
+      KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss = 0);
 ~~~~~~~~~~~~~
 
-or declare them afterwards:
+or use specific methods to define the entrance channel after using the default
+constructor (without arguments):
 
 ~~~~~~~~~~~~~{.cpp}
-      KV2Body kin;
-      kin.SetProjectile( proj ); kin.SetTarget( targ );
+      KV2Body::SetProjectile(const KVNucleus&);
+      KV2Body::SetProjectile(int Z, int A = 0);
+      KV2Body::SetTarget(const KVNucleus&);
+      KV2Body::SetTarget(int Z, int A = 0);
+
+      KV2Body::SetEDiss(double);         // dissipated/excitation energy
+      KV2Body::SetExcitEnergy(double);   // same as SetEDiss
 ~~~~~~~~~~~~~
 
 One can also specify the projectile & target using their Z and A:
@@ -219,6 +229,7 @@ KV2Body::KV2Body(const KVNucleus& compound, double Exx)
    //   CNdecay.SetOutgoing(alpha);
    //~~~~~~~~~~
 
+   init();
    fNuclei[1] = compound;
    if (Exx == 0.0) fEDiss = -compound.GetExcitEnergy();
 }
@@ -339,7 +350,7 @@ void KV2Body::Set4thNucleus()
    // see GetExcitEnergy() method
 
    KVNucleus sum;
-   if (GetNucleus(2)->IsDefined()) sum = *GetNucleus(1) + *GetNucleus(2);
+   if (GetNucleus(2)) sum = *GetNucleus(1) + *GetNucleus(2);
    else sum = *GetNucleus(1);
    KVNucleus tmp4 = sum - *GetNucleus(3);
    if (!tmp4.IsDefined()) {
@@ -363,6 +374,7 @@ KVNucleus* KV2Body::GetNucleus(Int_t i) const
 
    if (i > 0 && i < 5) {
       if (fNuclei[i].IsDefined()) return (KVNucleus*) &fNuclei[i];
+      return nullptr;
    }
    Warning("GetNucleus(Int_t i)", "Index i out of bounds, i=%d", i);
    return nullptr;
@@ -526,12 +538,21 @@ void KV2Body::CalculateKinematics()
 {
    // Called to make kinematics calculation for all nuclei, use once properties of
    // entrance-channel (and, if necessary, exit-channel) nuclei have been defined.
-   // If no exit-channel nuclei are defined, we assume elastic scattering (i.e. identical
-   // outgoing nuclei)
+   //
+   // If a compound decay is to be calculated (only 1 nucleus in entrance channel),
+   // outgoing (decay) product must be defined before calling this method.
+   //
+   // For a 2-body entrance channel, if no exit-channel nuclei are defined,
+   // we assume elastic scattering (i.e. identical outgoing nuclei)
 
    KVNucleus* Nuc1 = GetNucleus(1);
    KVNucleus* Nuc2 = GetNucleus(2);
 
+   // compound decay ?
+   if (!Nuc2 && !fSetOutgoing) {
+      Error("CalculateKinematics", "Set outgoing (decay) product first");
+      return;
+   }
    // make sure E* of nuclei is zero
    // this is because the E*/Ediss is handled separately here
    Nuc1->SetExcitEnergy(0.);
