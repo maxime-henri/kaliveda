@@ -45,62 +45,99 @@ The values are calculated using relativistic kinematics.
 ## Setting up the calculation
 There are 3 ways in which KV2Body can be used.
 
-### a. Binary reaction kinematics
+> Note on use of KV2Body constructors.
+>
+> The arguments used to define the different nuclei are of type `(const KVNucleus&)`. This means
+> that you can use either
+>
+> (1) a normal KVNucleus object instantiated before calling the constructor:
+>
+>             KVNucleus xe("129Xe", 50.); // 129Xe nucleus with 50MeV/A kinetic energy
+>             KVNucleus sn(50,119);       // 119Sn nucleus at rest
+>
+>             KV2Body kin(xe, sn);        // define kinematics of 129Xe+119Sn@50AMeV collision
+>
+> (2) a temporary KVNucleus object instantiated in the argument list:
+>
+>             KV2Body kin(KVNucleus("129Xe", 50.), KVNucleus(50,119));        // define kinematics of 129Xe+119Sn@50AMeV collision
+>
+> (3) a string giving the symbol and mass of the nucleus.
+>
+>             KV2Body kin(KVNucleus("129Xe", 50.), "119Sn");        // define kinematics of 129Xe+119Sn@50AMeV collision
+>
+> (4) [ONLY WITH C++11/ROOT6]: any KVNucleus constructor through uniform initialization:
+>
+>             KV2Body kin({"129Xe", 50.}, {50,119});        // define kinematics of 129Xe+119Sn@50AMeV collision
+>
+
+### a. Collision kinematics
 
 Calculate kinematics for either elastic or inelastic `A + B -> A + B` collisions.
+
 Either use the constructor with arguments to specify projectile and target,
-and optionally the dissipated/excitation energy:
+and optionally the dissipated/excitation energy, or the constructor which takes as single
+argument a formatted name for the colliding system defining projectile, target and beam
+energy:
 
 ~~~~~~~~~~~~~{.cpp}
-      KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss = 0);
+      KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss = 0);
+
+      // format systemname like: "129Xe+119Sn@50.0MeV/A"
+      KV2Body(const Char_t* systemname);
 ~~~~~~~~~~~~~
 
 or use specific methods to define the entrance channel after using the default
 constructor (without arguments):
 
 ~~~~~~~~~~~~~{.cpp}
-      KV2Body::SetProjectile(const KVNucleus&);
-      KV2Body::SetProjectile(int Z, int A = 0);
-      KV2Body::SetTarget(const KVNucleus&);
-      KV2Body::SetTarget(int Z, int A = 0);
+      SetProjectile(const KVNucleus&);
+      SetProjectile(int Z, int A = 0);
+      SetTarget(const KVNucleus&);
+      SetTarget(int Z, int A = 0);
 
-      KV2Body::SetEDiss(double);         // dissipated/excitation energy
-      KV2Body::SetExcitEnergy(double);   // same as SetEDiss
+      SetEDiss(double);         // dissipated/excitation energy
+      SetExcitEnergy(double);   // same as SetEDiss
 ~~~~~~~~~~~~~
 
-One can also specify the projectile & target using their Z and A:
+### b. Binary reaction kinematics
+
+Calculate kinematics for `A + B -> C + D` reactions.
+
+Either use one of the constructors shown above to define the entrance channel then use the method
+below to define the outgoing fragment,
+or use the specific constructor with arguments to specify projectile, target,
+outgoing fragment, and optionally the dissipated/excitation energy:
 
 ~~~~~~~~~~~~~{.cpp}
-      kin.SetProjectile( z1, a1 );
-      kin.SetTarget( z2, a2 );
+      KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& outgoing, double Ediss = 0);
 ~~~~~~~~~~~~~
 
-If you need to further define/examine the properties of these nuclei, you can get a pointer to
-them using GetNucleus(int i):
+or use specific methods as above to define the entrance channel after using the default
+constructor (without arguments):
 
 ~~~~~~~~~~~~~{.cpp}
-      kin.GetNucleus(1)->SetMomentum(...);//set momentum of projectile
+      // see above for projectile, target etc.
+      SetOutgoing(const KVNucleus&);
 ~~~~~~~~~~~~~
 
+Note that the partner of the outgoing fragment in the exit channel is deduced from conservation laws.
 
-## Defining the exit channel
+### c. Binary decay kinematics
 
-If no exit channel is defined, it is assumed to be identical to the entrance channel,
-i.e. elastic scattering.
-You can define a different exit channel, either using one of the constructors:
+Calculate kinematics for `A -> C + D` decays.
+
+Define the compound nucleus and its excitation energy with the constructor
 
 ~~~~~~~~~~~~~{.cpp}
-      KV2Body kin( proj, targ, QP );// QP is a KVNucleus
-      KV2Body kin( proj, targ, QP, Ediss );// Ediss = energy dissipated in inelastic reaction
+      KV2Body(const KVNucleus& compound, double Exx = 0);
 ~~~~~~~~~~~~~
 
-or using the methods:
+(if `Exx` is not given, the excitation energy of `compound` is used) and then define
+the decay channel with
 
 ~~~~~~~~~~~~~{.cpp}
-      kin.SetOutgoing( QP );
-      kin.SetEDiss( Ediss );  OR  kin.SetExcitEnergy( Ediss );
+      SetOutgoing(const KVNucleus&);
 ~~~~~~~~~~~~~
-
 
 ## Calculating and obtaining reaction information
 
@@ -108,27 +145,16 @@ Once the entrance channel (and, if necessary, the exit channel) is(are) defined,
 the kinematical calculation is carried out by:
 
 ~~~~~~~~~~~~~{.cpp}
-      kin.CalculateKinematics();
+      CalculateKinematics();
 ~~~~~~~~~~~~~
 
 For a general print-out of the reaction characteristics:
 
 ~~~~~~~~~~~~~{.cpp}
-      kin.Print();
-      kin.Print("lab");//laboratory scattering angles and energies
-      kin.Print("ruth");//Rutherford scattering angles, energies and cross-sections
+      Print();
+      Print("lab");//laboratory scattering angles and energies
+      Print("ruth");//Rutherford scattering angles, energies and cross-sections
 ~~~~~~~~~~~~~
-
-
-## Extracting information on Quasi-Projectile and/or target
-
-Several methods are defined and calculate energy/velocity/angle in CM or lab frame
-for projectile (3) and/or target (4)
-The two arguments are : the angle and the angular range of which nucleus you are interested in
-
-For example : the Double_t GetThetaCMTarget(Double_t ThetaLab,Int_t OfNucleus=3)
-give the polar angle in the CM of reaction of the target
-    depending on the polar angle in the lab of the projectile (OfNucleus=3) or of the target (OfNucleus=4)
 
 */
 
