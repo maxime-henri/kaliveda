@@ -1,21 +1,3 @@
-/***************************************************************************
-                          KVVoltEnergy.cpp  -  description
-                             -------------------
-    begin                : jeu oct 17 2002
-    copyright            : (C) 2002 by Alexis Mignon
-    email                : mignon@ganil.fr
-
-$Id: KVVoltEnergy.cpp,v 1.2 2006/10/19 14:32:43 franklan Exp $
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 #include "Riostream.h"
 #include "KVVoltEnergy.h"
 #include "TMath.h"
@@ -47,7 +29,7 @@ KVVoltEnergy::KVVoltEnergy(KVDetector* kvd): KVCalibrator(2)
 }
 
 //___________________________________________________________________________
-Double_t KVVoltEnergy::Compute(Double_t volts) const
+Double_t KVVoltEnergy::Compute(Double_t volts, const KVNameValueList&) const
 {
    //Calculate the calibrated energy in Mev for the given voltage
    if (GetStatus()) {
@@ -60,24 +42,8 @@ Double_t KVVoltEnergy::Compute(Double_t volts) const
       */ return 0.;
    }
 }
-
 //___________________________________________________________________________
-Double_t KVVoltEnergy::operator()(Double_t volts)
-{
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVVoltEnergy calibrator;
-   //           ....
-   //        Double_t energy = calibrator(volts);
-   //
-   //equivalently to:
-   //
-   //        Double_t energy = calibrator.Compute(volts);
-   return Compute(volts);
-}
-
-//___________________________________________________________________________
-Double_t KVVoltEnergy::Invert(Double_t energy)
+Double_t KVVoltEnergy::Invert(Double_t energy, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) energy in MeV,
    //calculate the corresponding voltage according to the

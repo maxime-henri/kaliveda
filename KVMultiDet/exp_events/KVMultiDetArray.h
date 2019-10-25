@@ -116,8 +116,6 @@ protected:
    virtual void set_up_telescope(KVDetector* de, KVDetector* e, KVIDTelescope* idt, TCollection* l);
    virtual void set_up_single_stage_telescope(KVDetector* det, KVIDTelescope* idt, TCollection* l);
 
-   virtual void SetCalibrators();
-
    virtual void GetAlignedIDTelescopesForDetector(KVDetector* det, TCollection* list);
    virtual void GetIDTelescopesForGroup(KVGroup* grp, TCollection* tel_list);
    virtual void PrepareModifGroup(KVGroup* grp, KVDetector* dd);

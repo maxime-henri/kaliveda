@@ -29,9 +29,8 @@ public:
    }
    virtual void SetParameter(UShort_t i, Float_t par_val);
 
-   virtual Double_t Compute(Double_t) const;
-   virtual Double_t operator()(Double_t);
-   virtual Double_t Invert(Double_t);
+   virtual Double_t Compute(Double_t, const KVNameValueList& = "") const;
+   virtual Double_t Invert(Double_t, const KVNameValueList& = "") const;
    virtual void   Print(Option_t* opt = "") const;
 
    ClassDef(KVFAZIACalibrator, 1) //Basic class for FAZIA calibrators

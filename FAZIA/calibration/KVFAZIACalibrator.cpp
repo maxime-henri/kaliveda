@@ -74,7 +74,7 @@ void KVFAZIACalibrator::ChangeParameters(Double_t* val)
 
 }
 //___________________________________________________________________________
-Double_t KVFAZIACalibrator::Compute(Double_t chan) const
+Double_t KVFAZIACalibrator::Compute(Double_t chan, const KVNameValueList&) const
 {
    //Calculate the calibrated energy.
    //Returns 0 if calibrator is not ready (parameters not set)
@@ -85,24 +85,8 @@ Double_t KVFAZIACalibrator::Compute(Double_t chan) const
    return 0;
 }
 
-
 //___________________________________________________________________________
-Double_t KVFAZIACalibrator::operator()(Double_t chan)
-{
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVFAZIACalibrator calibrator;
-   //           ....
-   //        Float_t calibrated_energy = calibrator(channel);
-   //
-   //equivalently to:
-   //
-   //        Float_t calibrated_energy = calibrator.Compute(channel);
-   return Compute(chan);
-}
-
-//___________________________________________________________________________
-Double_t KVFAZIACalibrator::Invert(Double_t energy)
+Double_t KVFAZIACalibrator::Invert(Double_t energy, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) energy in MeV,
    //calculate the corresponding channel number according to the

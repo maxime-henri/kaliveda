@@ -22,7 +22,6 @@ class KVFunctionCal : public KVCalibrator {
    TF1*     fcalibfunction;    //calibration function
    Bool_t      fPedCorr;       //true if pedestal correction is required
    KVACQParam*  fACQpar;       //! corresponding ACQ parameter
-   Bool_t   fUseInverseFunction;//true if inverse i.e. TF1::GetX should be used for Compute()
 protected:
 
    void SetParametersWithFunction();
@@ -42,16 +41,11 @@ public:
    {
       if (fcalibfunction) delete fcalibfunction;
       fcalibfunction = 0;
-   };
+   }
 
    void  ChangeCalibParameters(KVDBParameterSet* kvdbps);
    void  SetConversionType(TString from, TString to, TString signal);
    void     SetExpFormula(const Char_t* formula, Double_t xmin = 0, Double_t xmax = 0);
-   void     SetParameter(UShort_t i, Float_t par_val)
-   {
-      KVCalibrator::SetParameter(i, par_val);
-      if (fcalibfunction) fcalibfunction->SetParameter(i, par_val);
-   }
 
    void  WithPedestalCorrection(Bool_t yes)
    {
@@ -62,10 +56,16 @@ public:
       return fcalibfunction;
    }
 
+   /*
+    * Under the terms of the Geneva convention on C++, it is of course illegal to provide
+    * several versions of the same polymorphic method with different arguments.
+    * In any case, the aim seems to have been to achieve something like what is now
+    * possible with KVDetectorSignal, so this is obsolete
+    *
    virtual Double_t Compute(Option_t* opt = "") const;
-   virtual Double_t Compute(Double_t) const;
-   virtual Double_t Invert(Double_t e);
-   virtual Double_t operator()(Double_t);
+   */
+   virtual Double_t Compute(Double_t, const KVNameValueList& = "") const;
+   virtual Double_t Invert(Double_t e, const KVNameValueList& = "") const;
 
    inline KVACQParam* GetACQParam() const
    {
@@ -74,12 +74,6 @@ public:
    inline void SetACQParam(KVACQParam* par)
    {
       fACQpar = par;
-   }
-   void SetOptions(const KVNameValueList& opt);
-
-   void SetUseInverseFunction(Bool_t yes = kTRUE)
-   {
-      fUseInverseFunction = yes;
    }
 
    ClassDef(KVFunctionCal, 1) //analytic function calibration E = f(channel)

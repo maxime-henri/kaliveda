@@ -38,7 +38,7 @@ ClassImp(KVLinCal);
 //
 //By default, no pedestal correction is performed.
 
-KVLinCal::KVLinCal(): KVCalibrator(2)
+KVLinCal::KVLinCal(): KVCalibrator()
 {
    SetType("Linear calibration");
    fPedCorr = kFALSE;
@@ -46,7 +46,7 @@ KVLinCal::KVLinCal(): KVCalibrator(2)
 }
 
 //___________________________________________________________________________
-KVLinCal::KVLinCal(KVDetector* kvd): KVCalibrator(2)
+KVLinCal::KVLinCal(KVDetector* kvd): KVCalibrator()
 {
    //Create a calibration object for a specific detector (*kvd)
    SetType("Linear calibration");
@@ -66,7 +66,7 @@ void KVLinCal::SetChannelParameter(const Char_t* type)
 }
 
 //___________________________________________________________________________
-Double_t KVLinCal::Compute(Double_t chan) const
+Double_t KVLinCal::Compute(Double_t chan, const KVNameValueList&) const
 {
    //Calculate the calibrated energy.
    //if chan<0 channel number is taken directly from the chosen acquisition parameter of the associated detector
@@ -90,24 +90,8 @@ Double_t KVLinCal::Compute(Double_t chan) const
    return -99.;
 }
 
-
 //___________________________________________________________________________
-Double_t KVLinCal::operator()(Double_t chan)
-{
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVLinCal calibrator;
-   //           ....
-   //        Float_t calibrated_volts = calibrator(channel);
-   //
-   //equivalently to:
-   //
-   //        Float_t calibrated_volts = calibrator.Compute(channel);
-   return Compute(chan);
-}
-
-//___________________________________________________________________________
-Double_t KVLinCal::Invert(Double_t energy)
+Double_t KVLinCal::Invert(Double_t energy, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) energy in MeV,
    //calculate the corresponding channel number according to the

@@ -396,16 +396,17 @@ Double_t KVLightEnergyCsIFull::GetLightApproxSilicon(double* x, double* par)
 }
 
 //________________________________________________________________
-KVLightEnergyCsIFull::KVLightEnergyCsIFull(): KVCalibrator(5)
+KVLightEnergyCsIFull::KVLightEnergyCsIFull(): KVCalibrator()
 {
    // Default constructor
-   fDetector = 0;
    //    init();
 }
 
 //________________________________________________________________
-KVLightEnergyCsIFull::KVLightEnergyCsIFull(const Char_t* name, const Char_t* type, KVDetector* kvd, Int_t lightFormula): KVCalibrator(name, type, 5) // : KVCalibrator(kvd)
+KVLightEnergyCsIFull::KVLightEnergyCsIFull(const Char_t* name, const Char_t* type, KVDetector* kvd, Int_t lightFormula): KVCalibrator() // : KVCalibrator(kvd)
 {
+   SetName(name);
+   SetType(type);
    SetDetector(kvd);
    SetLightFormula(lightFormula);
    init();
@@ -480,7 +481,7 @@ void KVLightEnergyCsIFull::Copy(TObject& obj) const
 }
 
 //___________________________________________________________________________
-Double_t KVLightEnergyCsIFull::Compute(Double_t light) const
+Double_t KVLightEnergyCsIFull::Compute(Double_t light, const KVNameValueList&) const
 {
    // Calculate the calibrated energy (in MeV) for a given total light output.
    // The Z and A of the particle should be given first using SetZ, SetA.
@@ -504,17 +505,8 @@ Double_t KVLightEnergyCsIFull::Compute(Double_t light) const
    return energy;
 }
 
-
 //___________________________________________________________________________
-Double_t KVLightEnergyCsIFull::operator()(Double_t light)
-{
-   //Same as Compute()
-
-   return Compute(light);
-}
-
-//___________________________________________________________________________
-Double_t KVLightEnergyCsIFull::Invert(Double_t energy)
+Double_t KVLightEnergyCsIFull::Invert(Double_t energy, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) energy in MeV,
    //calculate the corresponding total light output according to the

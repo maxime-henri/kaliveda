@@ -1,20 +1,3 @@
-/***************************************************************************
-$Id: KVCsI.cpp,v 1.38 2009/04/09 09:25:43 ebonnet Exp $
-                          kvcsi.cpp  -  description
-                             -------------------
-    begin                : Thu May 16 2002
-    copyright            : (C) 2002 by J.D. Frankland
-    email                : frankland@ganil.fr
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 #include "Riostream.h"
 #include "KVCsI.h"
 #include "KVGroup.h"
@@ -22,7 +5,6 @@ $Id: KVCsI.cpp,v 1.38 2009/04/09 09:25:43 ebonnet Exp $
 #include "KVTelescope.h"
 #include "KVACQParam.h"
 #include "KVMaterial.h"
-#include "KVLightEnergyCsI.h"
 #include "KVIDZAGrid.h"
 #include "KVIDZALine.h"
 #include "KVIDCutLine.h"
@@ -34,7 +16,7 @@ $Id: KVCsI.cpp,v 1.38 2009/04/09 09:25:43 ebonnet Exp $
 
 using namespace std;
 
-ClassImp(KVCsI);
+ClassImp(KVCsI)
 //_______________________________________________________________________________________
 //
 //Child class of KVINDRADetector, specifically describing the
@@ -53,7 +35,6 @@ void KVCsI::init()
    fSegment = 2;
    fLumiereTotale = 0.0;
    fLumTotStatus = NOT_CALCULATED;
-   fCal = fCalZ1 = 0;
    fPinLaser = 0;
    fGainCorrection = 1;
    fACQ_R = 0;
@@ -391,57 +372,6 @@ void KVCsI::SetACQParams()
    AddDetectorSignal(new KVCsITotLightSignal(this));
 }
 
-void KVCsI::SetCalibrators()
-{
-   //Set up calibrators for this detector. Call once name has been set.
-   //Two KVLightEnergyCsI calibrators are used, one for Z=1, the other for Z>1
-   fCalZ1 = new KVLightEnergyCsI(this);
-   fCalZ1->SetType("Light-Energy CsI Z=1");
-   AddCalibrator(fCalZ1);
-   fCal = new KVLightEnergyCsI(this);
-   fCal->SetType("Light-Energy CsI Z>1");
-   AddCalibrator(fCal);
-}
-
-//______________________________________________________________________________
-
-void KVCsI::Streamer(TBuffer& R__b)
-{
-   // Stream an object of class KVCsI.
-   // We set the pointers to the calibrator objects
-
-   if (R__b.IsReading()) {
-      UInt_t R__s, R__c;
-      Version_t R__v = R__b.ReadVersion(&R__s, &R__c);
-      KVCsI::Class()->ReadBuffer(R__b, this, R__v, R__s, R__c);
-      fCalZ1 = (KVLightEnergyCsI*) GetCalibrator("Light-Energy CsI Z=1");
-      fCal = (KVLightEnergyCsI*) GetCalibrator("Light-Energy CsI Z>1");
-      // backwards compatibility for CsI with only one calibrator
-      if (!fCal)  fCal = (KVLightEnergyCsI*) GetCalibrator("Light-Energy CsI");
-      if (R__v < 4) {
-         // backwards compatibility: persistent member pointers to acquisition
-         // parameters fACQ_R & fACQ_L introduced in class version 4 (10 june 2009)
-         // As the detector name is not always available at this point
-         // (KVDetector::GetName generates dynamically the name from the
-         // module & ring numbers, no persistent name stored in TNamed::fName)
-         // we have to loop over the list of acquisition parameters (if it exists)
-         // and look for parameters which end with "R" or "L"
-         if (fACQParams) {
-            TIter next(fACQParams);
-            KVACQParam* par = 0;
-            while ((par = (KVACQParam*)next())) {
-               TString name(par->GetName());
-               if (name.EndsWith("R")) fACQ_R = par;
-               else if (name.EndsWith("L")) fACQ_L = par;
-            }
-         }
-      }
-   }
-   else {
-      KVCsI::Class()->WriteBuffer(R__b, this);
-   }
-}
-
 //______________________________________________________________________________
 
 Double_t KVCsI::GetCorrectedEnergy(KVNucleus* nuc, Double_t lum, Bool_t)
@@ -461,39 +391,40 @@ Double_t KVCsI::GetCorrectedEnergy(KVNucleus* nuc, Double_t lum, Bool_t)
    // deposited in the CsI to calculate the light; then we use the Z & A of 'nuc' (not necessarily
    // the same) to calculate the calibrated energy from the light.
 
-   Int_t Z = nuc->GetZ();
-   Int_t A = nuc->GetA();
+   AbstractMethod("GetCorrectedEnergy");
+//   Int_t Z = nuc->GetZ();
+//   Int_t A = nuc->GetA();
 
-   KVLightEnergyCsI* calib = 0;
+//   KVLightEnergyCsI* calib = 0;
 
-   if (Z == 1 && fCalZ1) calib = fCalZ1;
-   else calib = fCal;
+//   if (Z == 1 && fCalZ1) calib = fCalZ1;
+//   else calib = fCal;
 
-   if (calib && calib->GetStatus()) {
-      if (IsSimMode()) {
-         lum = GetLumiereTotale();
-         if (lum < 0.) return -1.;
-         //force "OK" status for light
-         fLumTotStatus = NO_GAIN_CORRECTION;
-      }
-      else if (lum < 0.) {
-         //light not given - calculate from R and L components
-         lum = GetCorrectedLumiereTotale(); // include gain correction
-      }
-      else {
-         //light given as argument - force "OK" status for light
-         fLumTotStatus = NO_GAIN_CORRECTION;
-      }
+//   if (calib && calib->GetStatus()) {
+//      if (IsSimMode()) {
+//         lum = GetLumiereTotale();
+//         if (lum < 0.) return -1.;
+//         //force "OK" status for light
+//         fLumTotStatus = NO_GAIN_CORRECTION;
+//      }
+//      else if (lum < 0.) {
+//         //light not given - calculate from R and L components
+//         lum = GetCorrectedLumiereTotale(); // include gain correction
+//      }
+//      else {
+//         //light given as argument - force "OK" status for light
+//         fLumTotStatus = NO_GAIN_CORRECTION;
+//      }
 
-      //check light calculation status
-      if (LightIsGood()) {
-         calib->SetZ(Z);
-         calib->SetA(A);
-         Double_t eloss = calib->Compute(lum);
-         SetEnergy(eloss);
-         return eloss;
-      }
-   }
+//      //check light calculation status
+//      if (LightIsGood()) {
+//         calib->SetZ(Z);
+//         calib->SetA(A);
+//         Double_t eloss = calib->Compute(lum);
+//         SetEnergy(eloss);
+//         return eloss;
+//      }
+//   }
    return -1.;
 }
 
@@ -505,19 +436,20 @@ Double_t KVCsI::GetLightFromEnergy(Int_t Z, Int_t A, Double_t E) const
    //in the detector. If E is not given, the current value of GetEnergy() is used.
    //Returns -1 in case of problems (no calibration available)
 
-   KVLightEnergyCsI* calib = 0;
+   AbstractMethod("GetLightFromEnergy");
+//   KVLightEnergyCsI* calib = 0;
 
-   if (Z == 1 && fCalZ1) calib = fCalZ1;
-   else calib = fCal;
+//   if (Z == 1 && fCalZ1) calib = fCalZ1;
+//   else calib = fCal;
 
-   if (calib && calib->GetStatus()) {
-      E = (E < 0. ? GetEnergy() : E);
-      calib->SetZ(Z);
-      calib->SetA(A);
-      Double_t lum = calib->Invert(E);
+//   if (calib && calib->GetStatus()) {
+//      E = (E < 0. ? GetEnergy() : E);
+//      calib->SetZ(Z);
+//      calib->SetA(A);
+//      Double_t lum = calib->Invert(E);
 
-      return lum;
-   }
+//      return lum;
+//   }
    return -1.;
 }
 
@@ -529,17 +461,18 @@ Double_t KVCsI::GetEnergyFromLight(Int_t Z, Int_t A, Double_t lum) const
    //Returns -1 in case of problems (no calibration available)
    //This method assumes that the particle is stopped in CsI
 
-   KVLightEnergyCsI* calib = 0;
+   AbstractMethod("GetEnergyFromLight");
+//   KVLightEnergyCsI* calib = 0;
 
-   if (Z == 1 && fCalZ1) calib = fCalZ1;
-   else calib = fCal;
+//   if (Z == 1 && fCalZ1) calib = fCalZ1;
+//   else calib = fCal;
 
-   if (calib && calib->GetStatus()) {
-      calib->SetZ(Z);
-      calib->SetA(A);
-      Double_t E = calib->Compute(lum);
-      return E;
-   }
+//   if (calib && calib->GetStatus()) {
+//      calib->SetZ(Z);
+//      calib->SetA(A);
+//      Double_t E = calib->Compute(lum);
+//      return E;
+//   }
    return -1.;
 }
 
@@ -729,10 +662,4 @@ void KVCsI::DeduceACQParameters(KVEvent* e, KVNumberList& index)
    GetACQParam("L")->SetData((UShort_t)Xlen_sum);
    GetACQParam("T")->SetData(Mt);
 
-}
-
-void KVCsI::RefreshCalibratorPointers()
-{
-   fCalZ1 = (KVLightEnergyCsI*)GetCalibrator("Light-Energy CsI Z=1");
-   fCal = (KVLightEnergyCsI*)GetCalibrator("Light-Energy CsI Z>1");
 }

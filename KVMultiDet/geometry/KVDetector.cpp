@@ -23,6 +23,7 @@
 #include "KVDetectorSignalExpression.h"
 
 #include <TGeoPhysicalNode.h>
+#include <TGraph.h>
 //#include <KVGeoDNTrajectory.h>
 
 using namespace std;
@@ -466,15 +467,18 @@ const Char_t* KVDetector::GetArrayName()
 //_____________________________________________________________________________________
 Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
 {
-   // Associate a calibration with this detector.
+   // Associate a calibration with this detector (the object will be deleted by the detector)
+   //
    // This will add a new signal to the list of the detector's signals
+   //
+   // Also sets calibrator's name to [detname]_[caltype]
 
    if (!cal) return kFALSE;
    if (!fCalibrators)
       fCalibrators = new KVList();
 
    fCalibrators->Add(cal);
-   cal->SetDetector(this);
+   cal->SetName(Form("%s_%s", GetName(), cal->GetType()));
 
    // add new signal
    KVDetectorSignal* in  = GetDetectorSignal(cal->GetInputSignalType());
@@ -491,7 +495,6 @@ Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
          fDetSignals.Add(new KVCalibratedSignal(in, cal));
    }
 
-   RefreshCalibratorPointers();
    return kTRUE;
 }
 
@@ -648,14 +651,6 @@ KVMaterial* KVDetector::GetAbsorber(Int_t i) const
 void KVDetector::SetACQParams()
 {
    //Attribute acquisition parameters to this detector.
-   //This method does nothing; it should be overridden in child classes to attribute
-   //parameters specific to each detector.
-   ;
-}
-
-void KVDetector::SetCalibrators()
-{
-   //Attribute calibrators to this detector.
    //This method does nothing; it should be overridden in child classes to attribute
    //parameters specific to each detector.
    ;

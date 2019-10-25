@@ -16,7 +16,7 @@ public:
    virtual ~KVCsITotLightSignal()
    {}
 
-   Double_t GetValue() const
+   Double_t GetValue(const KVNameValueList& = "") const
    {
       return ((KVCsI*)GetDetector())->GetLumiereTotale();
    }

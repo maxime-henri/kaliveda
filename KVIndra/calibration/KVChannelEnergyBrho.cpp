@@ -1,20 +1,3 @@
-/***************************************************************************
-$Id: KVChannelEnergyBrho.cpp,v 1.7 2007/02/27 11:56:33 franklan Exp $
-                          KVChannelEnergyBrho.cpp  -  description
-                             -------------------
-    begin                :  Feb 7th 2004
-    copyright            : (C) 2004 by J.D. Frankland
-    email                : frankland@ganil.fr
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 #include "KVChannelEnergyBrho.h"
 #include "TMath.h"
 #include "KVSilicon.h"
@@ -42,7 +25,7 @@ KVChannelEnergyBrho::KVChannelEnergyBrho(KVDetector* kvd): KVCalibrator(3)
 }
 
 //___________________________________________________________________________
-Double_t KVChannelEnergyBrho::Compute(Double_t chan) const
+Double_t KVChannelEnergyBrho::Compute(Double_t chan, const KVNameValueList&) const
 {
    //Calculate the calibrated energy (in MeV) for a given GG channel number.
    //
@@ -60,24 +43,8 @@ Double_t KVChannelEnergyBrho::Compute(Double_t chan) const
    return 0.;
 }
 
-
 //___________________________________________________________________________
-Double_t KVChannelEnergyBrho::operator()(Double_t chan)
-{
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVChannelEnergyBrho calibrator;
-   //           ....
-   //        Float_t calibrated_volts = calibrator(channel);
-   //
-   //equivalently to:
-   //
-   //        Float_t calibrated_volts = calibrator.Compute(channel);
-   return Compute(chan);
-}
-
-//___________________________________________________________________________
-Double_t KVChannelEnergyBrho::Invert(Double_t energy)
+Double_t KVChannelEnergyBrho::Invert(Double_t energy, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) energy in MeV,
    //calculate the corresponding channel number according to the

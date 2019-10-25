@@ -28,14 +28,12 @@ protected:
 
    KVIonRangeTableMaterial* fMaterialTable; //! range table for CsI
 
-public:
    TF1* fLight;           //function parameterising light output as function of (energy, Z, A) with the full expression
    TF1* fDlight;          //function to integrate to get fLight
 
 public:
-   virtual Double_t Compute(Double_t chan) const;
-   virtual Double_t operator()(Double_t chan);
-   virtual Double_t Invert(Double_t);
+   virtual Double_t Compute(Double_t chan, const KVNameValueList& = "") const;
+   virtual Double_t Invert(Double_t, const KVNameValueList& = "") const;
 
    TF1* GetDLight()
    {

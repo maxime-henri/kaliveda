@@ -1,20 +1,3 @@
-/***************************************************************************
-$Id: KVChannelVolt.cpp,v 1.17 2008/12/08 14:07:37 franklan Exp $
-                          KVChannelVolt.cpp  -  description
-                             -------------------
-    begin                : mer sep 18 2002
-    copyright            : (C) 2002 by Alexis Mignon
-    email                : mignon@ganil.fr
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 #include "KVChannelVolt.h"
 #include "TMath.h"
 
@@ -60,7 +43,7 @@ KVChannelVolt::KVChannelVolt(const Char_t* signal, KVDetector* kvd): KVCalibrato
 }
 
 //___________________________________________________________________________
-Double_t KVChannelVolt::Compute(Double_t chan) const
+Double_t KVChannelVolt::Compute(Double_t chan, const KVNameValueList&) const
 {
    Double_t gain = 1.;
    KVDetector* det = GetDetector();
@@ -75,22 +58,6 @@ Double_t KVChannelVolt::Compute(Double_t chan) const
    }
 }
 
-
-//___________________________________________________________________________
-Double_t KVChannelVolt::operator()(Double_t chan)
-{
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVChannelVolt calibrator;
-   //           ....
-   //        Double_t calibrated_volts = calibrator(channel);
-   //
-   //equivalently to:
-   //
-   //        Double_t calibrated_volts = calibrator.Compute(channel);
-   return Compute(chan);
-}
-
 //___________________________________________________________________________
 void KVChannelVolt::SetSignal(const Char_t* signal)
 {
@@ -103,7 +70,7 @@ void KVChannelVolt::SetSignal(const Char_t* signal)
 }
 
 //___________________________________________________________________________
-Double_t KVChannelVolt::Invert(Double_t volts)
+Double_t KVChannelVolt::Invert(Double_t volts, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) signal amplitude in volts,
    //calculate the corresponding channel number according to the
@@ -132,40 +99,6 @@ Double_t KVChannelVolt::Invert(Double_t volts)
       else {
          // linear transfer function
          channel = (Int_t)(0.5 + (gain / gain_ref * volts - fPar[0]) / fPar[1]);
-      }
-   }
-   else {
-      Warning("Compute", "Parameters not correctly initialized");
-   }
-   return (Double_t) channel;
-}
-
-//___________________________________________________________________________
-Double_t KVChannelVolt::InvertDouble(Double_t volts)
-{
-   Double_t gain = 1.;
-   KVDetector* det = GetDetector();
-   if (det)
-      gain = det->GetGain();
-   Double_t channel = 0;
-
-   if (fReady) {
-      if (fPar[2]) {
-         // quadratic transfer function
-         Double_t c;
-         c = fPar[1] * fPar[1] - 4. * fPar[2] * (fPar[0] - gain / gain_ref * volts);
-         if (c < 0.0)
-            return -1;
-         c = (-fPar[1] + TMath::Sqrt(c)) / (2.0 * fPar[2]);
-         if (c < 0.0
-               && ((-fPar[1] - TMath::Sqrt(c)) / (2.0 * fPar[2])) > 0.0) {
-            c = (-fPar[1] - TMath::Sqrt(c)) / (2.0 * fPar[2]);
-         }
-         channel = c;
-      }
-      else {
-         // linear transfer function
-         channel = (gain / gain_ref * volts - fPar[0]) / fPar[1];
       }
    }
    else {

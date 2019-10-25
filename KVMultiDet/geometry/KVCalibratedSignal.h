@@ -23,8 +23,8 @@ public:
    virtual ~KVCalibratedSignal()
    {}
 
-   Double_t GetValue() const;
-   Double_t GetInverseValue(Double_t out_val, const TString& in_sig) const;
+   Double_t GetValue(const KVNameValueList& params = "") const;
+   Double_t GetInverseValue(Double_t out_val, const TString& in_sig, const KVNameValueList& params = "") const;
 
    KVCalibrator* GetCalibrator() const
    {

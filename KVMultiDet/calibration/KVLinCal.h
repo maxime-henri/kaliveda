@@ -1,20 +1,3 @@
-/***************************************************************************
-$Id: KVLinCal.h,v 1.3 2007/03/05 14:09:03 franklan Exp $
-                          KVChannelEnergyChIo.h  -  description
-                             -------------------
-    begin                : May 12th 2004
-    copyright            : (C) 2004 by J.D. Frankland
-    email                : frankland@ganil.fr
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 #ifndef KV_LINCAL_H
 #define KV_LINCAL_H
 
@@ -38,11 +21,10 @@ public:
    KVLinCal(KVDetector* kvd);
    virtual ~ KVLinCal()
    {
-   };
+   }
 
-   virtual Double_t Compute(Double_t) const;
-   virtual Double_t operator()(Double_t);
-   virtual Double_t Invert(Double_t e);
+   virtual Double_t Compute(Double_t, const KVNameValueList& = "") const;
+   virtual Double_t Invert(Double_t e, const KVNameValueList& = "") const;
 
    void WithPedestalCorrection(Bool_t yes)
    {

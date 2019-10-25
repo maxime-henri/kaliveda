@@ -59,7 +59,6 @@ void KVFunctionCal::init()
    fPedCorr = kTRUE;
    fReady = kTRUE;
    fACQpar = 0;
-   fUseInverseFunction = false;
 }
 
 //------------------------------
@@ -146,24 +145,24 @@ void KVFunctionCal::SetExpFormula(const Char_t* formula, Double_t xmin, Double_t
    SetNumberParams(fcalibfunction->GetNpar());
 }
 
-//------------------------------
-Double_t KVFunctionCal::Compute(Option_t* opt) const
-//------------------------------
-{
-   // Give the calibration result for the ACQ parameter corresponding to
-   // this calibrator.
-   // If opt = "P" then the currently set pedestal is removed from the
-   // value of the acquisition parameter before the calculation.
-   if (!fACQpar) {
-      Error("Compute", "No ACQ parameter corresponds to the calibrator %s", GetName());
-      return -666;
-   }
-   Double_t ped = (opt[0] ? fACQpar->GetPedestal() : 0.);
-   return fcalibfunction->Eval(fACQpar->GetData() - ped);
-}
+////------------------------------
+//Double_t KVFunctionCal::Compute(Option_t* opt) const
+////------------------------------
+//{
+//   // Give the calibration result for the ACQ parameter corresponding to
+//   // this calibrator.
+//   // If opt = "P" then the currently set pedestal is removed from the
+//   // value of the acquisition parameter before the calculation.
+//   if (!fACQpar) {
+//      Error("Compute", "No ACQ parameter corresponds to the calibrator %s", GetName());
+//      return -666;
+//   }
+//   Double_t ped = (opt[0] ? fACQpar->GetPedestal() : 0.);
+//   return fcalibfunction->Eval(fACQpar->GetData() - ped);
+//}
 
 //------------------------------
-Double_t KVFunctionCal::Compute(Double_t from) const
+Double_t KVFunctionCal::Compute(Double_t from, const KVNameValueList&) const
 //------------------------------
 {
    // Give the calibration result for a given value
@@ -180,7 +179,7 @@ Double_t KVFunctionCal::Compute(Double_t from) const
 }
 
 //------------------------------
-Double_t KVFunctionCal::Invert(Double_t to)
+Double_t KVFunctionCal::Invert(Double_t to, const KVNameValueList&) const
 //------------------------------
 {
    // Give the original value from a calibrated value
@@ -196,33 +195,4 @@ Double_t KVFunctionCal::Invert(Double_t to)
    else return -666;
 
 }
-//------------------------------
-Double_t KVFunctionCal::operator()(Double_t chan)
-{
-//------------------------------
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVLinCal calibrator;
-   //           ....
-   //        Float_t calibrated_volts = calibrator(channel);
-   //
-   //equivalently to:
-   //
-   //        Float_t calibrated_volts = calibrator.Compute(channel);
-   return Compute(chan);
-}
 
-void KVFunctionCal::SetOptions(const KVNameValueList& opt)
-{
-   // Used to set up a function calibrator from infos in a calibration parameter file.
-   // Use an option string like this:
-   //
-   //~~~~~~~~~~~~~~
-   // CalibOptions:   func=[function],min=[minimum of X],max=[maximum of X]
-   //~~~~~~~~~~~~~~
-   //
-   // An optional option is `inverse=true` which will call KVFunctionCal::SetUseInverseFunction(true)
-
-   SetExpFormula(opt.GetStringValue("func"), opt.GetTStringValue("min").Atof(), opt.GetTStringValue("max").Atof());
-   SetUseInverseFunction(opt.IsValue("inverse", "true"));
-}

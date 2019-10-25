@@ -1416,19 +1416,6 @@ void KVMultiDetArray::SetArrayACQParams()
    // This implementation does nothing: override it in derived classes if needed.
 }
 
-//_________________________________________________________________________________
-
-void KVMultiDetArray::SetCalibrators()
-{
-   //Set up calibrators in all detectors of the array
-   //Note that this only initialises the calibrator objects associated to each
-   //detector (defined in each detector class's SetCalibrators method),
-   //it does not set the parameters of the calibrations: this is done by
-   //SetParameters or SetRunCalibrationParameters
-
-   const_cast<KVSeqCollection*>(GetDetectors())->R__FOR_EACH(KVDetector, SetCalibrators)();
-}
-
 void KVMultiDetArray::SetCalibratorParameters(KVDBRun* r, const TString& myname)
 {
    // Sets up calibrators for all detectors with a defined calibration for run

@@ -283,7 +283,6 @@ public:
    {
       return fCalibrators;
    }
-   virtual void RefreshCalibratorPointers() {}
    virtual Bool_t IsCalibrated() const
    {
       // A detector is considered to be calibrated if it has
@@ -340,7 +339,6 @@ public:
    inline virtual Bool_t FiredP(Option_t* opt = "any") const;
 
    virtual void SetACQParams();
-   virtual void SetCalibrators();
    virtual void RemoveCalibrators();
 
    Double_t GetDetectorSignalValue(const TString& type) const

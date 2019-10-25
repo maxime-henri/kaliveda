@@ -6,4 +6,6 @@
 #pragma link C++ class KVChannelEnergyAlpha+;
 #pragma link C++ class KVFunctionCal+;
 #pragma link C++ class KVVoltEnergy+;
+#pragma link C++ class KVChannelEnergyChIo+;
+#pragma link C++ class KVChannelEnergyBrho+;
 #endif

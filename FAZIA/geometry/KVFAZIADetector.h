@@ -71,7 +71,6 @@ public:
    KVSignal* GetSignal(Int_t idx) const;
    Int_t GetNumberOfSignals() const;
    const KVSeqCollection* GetListOfSignals() const;
-   virtual void SetCalibrators();
    void ComputePSA();
 
    void SetFPGAEnergy(int sigid, Int_t idx /* Si: alway 0, CsI: 0=max 1=fast */, Double_t energy);
@@ -113,8 +112,6 @@ public:
    }
 
    Double_t GetSetupParameter(const Char_t* parname);
-
-   void RefreshCalibratorPointers();
 
    __KVFAZIADETECTOR_GETSIGNAL(I1, Amplitude)
    __KVFAZIADETECTOR_GETSIGNAL(I1, BaseLine)

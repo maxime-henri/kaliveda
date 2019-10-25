@@ -1,20 +1,3 @@
-/***************************************************************************
-$Id: KVChannelEnergyAlpha.cpp,v 1.5 2007/02/27 11:56:33 franklan Exp $
-                          KVChannelEnergyAlpha.cpp  -  description
-                             -------------------
-    begin                : ven mai 30 2003
-    copyright            : (C) 2003 by J.D. Frankland
-    email                : frankland@ganil.fr
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 #include "KVChannelEnergyAlpha.h"
 #include "TMath.h"
 
@@ -43,7 +26,7 @@ KVChannelEnergyAlpha::KVChannelEnergyAlpha(const Char_t* signal, KVDetector* kvd
 }
 
 //___________________________________________________________________________
-Double_t KVChannelEnergyAlpha::Compute(Double_t chan) const
+Double_t KVChannelEnergyAlpha::Compute(Double_t chan, const KVNameValueList&) const
 {
    Double_t gain = 1.;
    KVDetector* det = GetDetector();
@@ -58,22 +41,6 @@ Double_t KVChannelEnergyAlpha::Compute(Double_t chan) const
    }
 }
 
-
-//___________________________________________________________________________
-Double_t KVChannelEnergyAlpha::operator()(Double_t chan)
-{
-   //Overloading of "()" to allow syntax such as:
-   //
-   //        KVChannelEnergyAlpha calibrator;
-   //           ....
-   //        Double_t calibrated_volts = calibrator(channel);
-   //
-   //equivalently to:
-   //
-   //        Double_t calibrated_volts = calibrator.Compute(channel);
-   return Compute(chan);
-}
-
 //___________________________________________________________________________
 void KVChannelEnergyAlpha::SetSignal(const Char_t* signal)
 {
@@ -86,7 +53,7 @@ void KVChannelEnergyAlpha::SetSignal(const Char_t* signal)
 }
 
 //___________________________________________________________________________
-Double_t KVChannelEnergyAlpha::Invert(Double_t volts)
+Double_t KVChannelEnergyAlpha::Invert(Double_t volts, const KVNameValueList&) const
 {
    //Given the calibrated (or simulated) signal amplitude in volts,
    //calculate the corresponding channel number according to the

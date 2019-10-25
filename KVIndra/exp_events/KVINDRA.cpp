@@ -467,7 +467,6 @@ void KVINDRA::UpdateArray()
    MakeListOfDetectors();
    SetGroupsAndIDTelescopes();
    SetACQParams();
-   SetCalibrators();
    SetIdentifications();
    SetDetectorThicknesses();
 }

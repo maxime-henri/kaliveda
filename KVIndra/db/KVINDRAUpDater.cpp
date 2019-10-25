@@ -486,7 +486,7 @@ void KVINDRAUpDater::SetLitEnergyCsIParameters(KVDBRun* kvrun)
                Warning("SetLitEnergyCsIParameters(UInt_t)",
                        "Calibrator %s %s not found ! - it will be created",
                        kvps->GetName(), kvps->GetTitle());
-               kvd->SetCalibrators();
+               //kvd->SetCalibrators();
                kvc = kvd->GetCalibrator(kvps->GetTitle());
             }
             for (Int_t i = 0; i < kvc->GetNumberParams(); i++) {
@@ -521,7 +521,7 @@ void KVINDRAUpDater::SetLitEnergyCsIParameters(KVDBRun* kvrun)
             Warning("SetLitEnergyCsIParameters(UInt_t)",
                     "Calibrator %s %s not found ! - it will be created",
                     kvps->GetName(), kvps->GetTitle());
-            kvd->SetCalibrators();
+            //kvd->SetCalibrators();
             kvc = kvd->GetCalibrator(kvps->GetTitle());
          }
          for (Int_t i = 0; i < kvc->GetNumberParams(); i++) {

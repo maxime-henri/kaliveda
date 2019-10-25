@@ -6,15 +6,6 @@
 
 ClassImp(KVDetectorSignal)
 
-////////////////////////////////////////////////////////////////////////////////
-// BEGIN_HTML <!--
-/* -->
-<h2>KVDetectorSignal</h2>
-<h4>Signal associated with detector</h4>
-<!-- */
-// --> END_HTML
-////////////////////////////////////////////////////////////////////////////////
-
 KVDetectorSignal::KVDetectorSignal(const Char_t* type, KVDetector* det)
    : KVBase(type), fDetector(det), fValue(0)
 {
@@ -24,6 +15,6 @@ KVDetectorSignal::KVDetectorSignal(const Char_t* type, KVDetector* det)
 
 void KVDetectorSignal::ls(Option_t*) const
 {
-   printf(" %s 	%s	  %s   [%lf]\n", ClassName(), GetName(), GetType(), GetValue());
+   printf(" %s \t\t %s \t\t %s \t\t [%lf]\n", ClassName(), GetName(), GetType(), GetValue());
 }
 
