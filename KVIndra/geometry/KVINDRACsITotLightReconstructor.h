@@ -45,8 +45,8 @@ class KVINDRACsITotLightReconstructor : public KVDetectorSignal {
 
    void Calculate() const;
 
-   UInt_t GetStatusLumiere();
-   Bool_t LightIsGood();
+   UInt_t GetStatusLumiere() const;
+   Bool_t LightIsGood() const;
 
 public:
    KVINDRACsITotLightReconstructor()
@@ -116,6 +116,7 @@ public:
       KVDetectorSignal::Reset();
       fLumTotStatus = NOT_CALCULATED;
    }
+   Int_t GetStatus(const TString&) const;
 
    ClassDef(KVINDRACsITotLightReconstructor, 1) //Calculation of light output from fast and slow components for INDRA CsI detectors
 };

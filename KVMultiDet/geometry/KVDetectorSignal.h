@@ -85,6 +85,8 @@ public:
 
    void ls(Option_t* = "") const;
 
+   virtual Int_t GetStatus(const TString&) const;
+
    ClassDef(KVDetectorSignal, 1) //Data produced by a detector
 };
 

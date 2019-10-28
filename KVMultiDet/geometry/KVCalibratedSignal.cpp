@@ -17,11 +17,15 @@ ClassImp(KVCalibratedSignal)
 Double_t KVCalibratedSignal::GetValue(const KVNameValueList& params) const
 {
    // Returns the value of the calibrated signal using the current value of the input
-   // signal and the current parameters of the calibration
+   // signal* and the current parameters of the calibration
    //
    // Any additional parameters required by the calibration can be passed as a
-   // comma-separated list of 'parameter=value' pairs
+   // comma-separated list of `parameter=value` pairs
+   //
+   // *if a parameter `INPUT` is given, its value is used instead of the input signal.
 
+   if (params.HasParameter("INPUT"))
+      return fCalibrator->Compute(params.GetDoubleValue("INPUT"), params);
    return fCalibrator->Compute(fInputSignal->GetValue(), params);
 }
 

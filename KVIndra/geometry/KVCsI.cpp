@@ -109,54 +109,19 @@ void KVCsI::SetACQParams()
 Double_t KVCsI::GetCorrectedEnergy(KVNucleus* nuc, Double_t lum, Bool_t)
 {
    // Calculate calibrated energy loss for a nucleus (Z,A) giving total light output "lum".
-   // If "lum" is not given, the total light of the detector
-   // calculated from the current values of the "R" and "L" acquisition
-   // parameters will be used (taking into account an eventual correction for gain variations,
-   // see GetCorrectedLumiereTotale()).
-   //
-   //Two KVLightEnergyCsI calibrators are used, one for Z=1, the other for Z>1
-   // Returns -1 in case of problems (no calibration available or light calculation not valid).
-   //
-   // NOTE: Simulations
-   // If detector is in 'SimMode', then we look for a KVSimNucleus in the list of particles
-   // which hit the detector in the event, and use the Z & A of this nucleus and the energy
-   // deposited in the CsI to calculate the light; then we use the Z & A of 'nuc' (not necessarily
-   // the same) to calculate the calibrated energy from the light.
+   // By default we use the current value of the detector's `TotLight` signal.
 
-   AbstractMethod("GetCorrectedEnergy");
-//   Int_t Z = nuc->GetZ();
-//   Int_t A = nuc->GetA();
+   Int_t Z = nuc->GetZ();
+   Int_t A = nuc->GetA();
 
-//   KVLightEnergyCsI* calib = 0;
+   Double_t eloss;
+   if (lum > -1) eloss = GetDetectorSignalValue("Energy", Form("Z=%d,A=%d", Z, A));
+   else eloss = GetDetectorSignalValue("Energy", Form("INPUT=%g,Z=%d,A=%d", lum, Z, A));
 
-//   if (Z == 1 && fCalZ1) calib = fCalZ1;
-//   else calib = fCal;
-
-//   if (calib && calib->GetStatus()) {
-//      if (IsSimMode()) {
-//         lum = GetLumiereTotale();
-//         if (lum < 0.) return -1.;
-//         //force "OK" status for light
-//         fLumTotStatus = NO_GAIN_CORRECTION;
-//      }
-//      else if (lum < 0.) {
-//         //light not given - calculate from R and L components
-//         lum = GetCorrectedLumiereTotale(); // include gain correction
-//      }
-//      else {
-//         //light given as argument - force "OK" status for light
-//         fLumTotStatus = NO_GAIN_CORRECTION;
-//      }
-
-//      //check light calculation status
-//      if (LightIsGood()) {
-//         calib->SetZ(Z);
-//         calib->SetA(A);
-//         Double_t eloss = calib->Compute(lum);
-//         SetEnergy(eloss);
-//         return eloss;
-//      }
-//   }
+   if (GetDetectorSignal("TotLight")->GetStatus("LightIsGood")) {
+      SetEnergy(eloss);
+      return eloss;
+   }
    return -1.;
 }
 

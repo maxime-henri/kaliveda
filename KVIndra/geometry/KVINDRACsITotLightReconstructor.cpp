@@ -78,23 +78,26 @@ void KVINDRACsITotLightReconstructor::Calculate() const
 
 //_______________________________________________________________________________________________
 
-UInt_t KVINDRACsITotLightReconstructor::GetStatusLumiere()
+UInt_t KVINDRACsITotLightReconstructor::GetStatusLumiere() const
 {
    //Status concerning the calculation of the total light output for
-   //this CsI detector. The possible values have been defined in the KVCsI.h
-   //header file (you can use the named constants for comparisons):
+   //this CsI detector. The possible values are
+   //(you can use the named constants for comparisons):
+   //
+   //~~~~~~~~~~~~~~~~~~~~~~~~~
    // NOT_CALCULATED                    = 0
    // CALCULATED_WITH_GAIN_CORRECTION   = 1
    // NO_GAIN_CORRECTION                = 4
    // NEGATIVE_PEDESTAL_CORRECTED_VALUE = 15
    // CALCULATION_NOT_CONVERGED         = 12
+   //~~~~~~~~~~~~~~~~~~~~~~~~~
 
    return fLumTotStatus;
 }
 
 //_______________________________________________________________________________________________
 
-Bool_t KVINDRACsITotLightReconstructor::LightIsGood()
+Bool_t KVINDRACsITotLightReconstructor::LightIsGood() const
 {
    //Returns kTRUE if total light output has been successfully calculated
    //for the CsI, either with (GetStatusLumiere()=CALCULATED_WITH_GAIN_CORRECTION)
@@ -105,4 +108,19 @@ Bool_t KVINDRACsITotLightReconstructor::LightIsGood()
       return kTRUE;
 
    return kFALSE;
+}
+
+Int_t KVINDRACsITotLightReconstructor::GetStatus(const TString& what) const
+{
+   // Get status of last calculation of total light:
+   //
+   //~~~~~~~~~~~{.cpp}
+   //what = "LightIsGood"   :  returns either 1 (true) or 0 (false), as given by LightIsGood()
+   //
+   //what = "StatusLumiere" :  returns value of GetStatusLumiere()
+   //~~~~~~~~~~~
+
+   if (what == "LightIsGood") return LightIsGood();
+   else if (what == "StatusLumiere") return GetStatusLumiere();
+   return -1;
 }
