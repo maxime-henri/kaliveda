@@ -253,16 +253,6 @@ void KVExpSetUp::SetCalibratorParameters(KVDBRun* r, const TString&)
    }
 }
 
-void KVExpSetUp::SetPedestalParameters(KVDBRun* r, const TString&)
-{
-   // Set pedestals for all detectors for the run
-   TIter next_array(&fMDAList);
-   KVMultiDetArray* mda;
-   while ((mda = (KVMultiDetArray*)next_array())) {
-      mda->SetPedestalParameters(r, mda->GetName());
-   }
-}
-
 #ifdef WITH_MFM
 Bool_t KVExpSetUp::handle_raw_data_event_mfmframe(const MFMCommonFrame& mfmframe)
 {

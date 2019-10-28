@@ -114,12 +114,11 @@ public:
    virtual Bool_t ArePHDSet() const
    {
       return fPHDSet;
-   };
+   }
    virtual void PHDSet(Bool_t yes = kTRUE)
    {
       fPHDSet = yes;
-   };
-   virtual void UpdateArray();
+   }
 
    KVLayer* GetChIoLayer();
    inline KVHashList* GetListOfChIo() const

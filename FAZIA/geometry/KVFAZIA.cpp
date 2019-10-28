@@ -159,21 +159,16 @@ void KVFAZIA::PerformClosedROOTGeometryOperations(Int_t run)
    // make sure that the expected number of detectors get imported!
    imp.ImportGeometry(fImport_dTheta, fImport_dPhi, fImport_ThetaMin, fImport_PhiMin, fImport_ThetaMax, fImport_PhiMax);
 
-   //SetCalibrators();
-   SetIdentifications();
-
    SetDetectorThicknesses();
-   SetBit(kIsBuilt);
 
-   if (run != -1) {
-      SetParameters(run);
-   }
+   SetIdentifications();
+   SetBit(kIsBuilt);
 }
 
 void KVFAZIA::GetGeometryParameters()
 {
    //Called by the Build method
-   Info("GetGeometryParameters", "to be defined in child class ...");
+   AbstractMethod("GetGeometryParameters");
 }
 
 void KVFAZIA::BuildFAZIA()

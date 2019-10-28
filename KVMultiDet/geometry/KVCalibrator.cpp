@@ -24,11 +24,12 @@ void KVCalibrator::Print(Option_t*) const
 KVCalibrator* KVCalibrator::MakeCalibrator(const Char_t* type)
 {
    // Create a new KVCalibrator object with class given by the plugin of given type
+   //
+   // If type=="" or type is unknown, returns a new base calibrator KVCalibrator
 
    TPluginHandler* ph = LoadPlugin("KVCalibrator", type);
    if (!ph) {
-      ::Error("KVCalibrator::MakeCalibrator", "No plugin for KVCalibrator with type %s", type);
-      return nullptr;
+      return new KVCalibrator;
    }
    // execute default constructor
    KVCalibrator* c = (KVCalibrator*)ph->ExecPlugin(0);

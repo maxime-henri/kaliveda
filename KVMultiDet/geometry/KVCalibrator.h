@@ -83,6 +83,8 @@ class KVCalibrator: public KVBase {
 protected:
    void SetCalibFunction(TF1* f)
    {
+      // Set function for calibration. Delete any previous function.
+      SafeDelete(fCalibFunc);
       fCalibFunc = f;
    }
    TF1* GetCalibFunction() const
@@ -138,13 +140,13 @@ public:
       }
       SetStatus(kFALSE);
    }
-   Double_t Compute(Double_t x, const KVNameValueList&) const
+   virtual Double_t Compute(Double_t x, const KVNameValueList&) const
    {
       // Compute calibrated value from input x
 
       return (fUseInverseFunction ? do_inversion(x) : fCalibFunc->Eval(x));
    }
-   Double_t Invert(Double_t x, const KVNameValueList&) const
+   virtual Double_t Invert(Double_t x, const KVNameValueList&) const
    {
       // Compute value of input for given output value (inverted calibration)
 

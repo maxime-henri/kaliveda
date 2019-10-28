@@ -472,28 +472,31 @@ Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
    // This will add a new signal to the list of the detector's signals
    //
    // Also sets calibrator's name to [detname]_[caltype]
+   //
+   // If the input signal required by the calibrator is not defined for the detector,
+   // this method returns kFALSE and the calibrator will be deleted.
 
    if (!cal) return kFALSE;
+   // check for input signal
+   KVDetectorSignal* in  = GetDetectorSignal(cal->GetInputSignalType());
+   if (!in) {
+      Warning("AddCalibrator", "%s : input signal %s not found for calibrator %s. No output signal created.",
+              GetName(), cal->GetInputSignalType().Data(), cal->GetType());
+      delete cal;
+      return kFALSE;
+   }
    if (!fCalibrators)
       fCalibrators = new KVList();
 
    fCalibrators->Add(cal);
    cal->SetName(Form("%s_%s", GetName(), cal->GetType()));
 
-   // add new signal
-   KVDetectorSignal* in  = GetDetectorSignal(cal->GetInputSignalType());
-   if (!in) {
-      Warning("AddCalibrator", "%s : input signal %s not found for calibrator %s. No output signal created.",
-              GetName(), cal->GetInputSignalType().Data(), cal->GetType());
+   if (cal->GetOutputSignalType() == "") {
+      Warning("AddCalibrator", "%s : output signal not defined for calibrator %s. No output signal created.",
+              GetName(), cal->GetType());
    }
-   else {
-      if (cal->GetOutputSignalType() == "") {
-         Warning("AddCalibrator", "%s : output signal not defined for calibrator %s. No output signal created.",
-                 GetName(), cal->GetType());
-      }
-      else
-         fDetSignals.Add(new KVCalibratedSignal(in, cal));
-   }
+   else
+      fDetSignals.Add(new KVCalibratedSignal(in, cal));
 
    return kTRUE;
 }

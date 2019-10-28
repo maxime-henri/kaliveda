@@ -19,14 +19,14 @@ class KVDetector;
 
 class KVDetectorSignal : public KVBase {
 
-   KVDetector* fDetector;//! associated detector
+   const KVDetector* fDetector;//! associated detector
    Double_t    fValue;// signal value
 
 public:
    KVDetectorSignal()
       : KVBase(), fDetector(nullptr), fValue(0)
    {}
-   KVDetectorSignal(const Char_t* type, KVDetector* det = nullptr);
+   KVDetectorSignal(const Char_t* type, const KVDetector* det = nullptr);
 
    virtual ~KVDetectorSignal()
    {}
@@ -55,12 +55,12 @@ public:
       return 0.;
    }
 
-   void SetDetector(KVDetector* d)
+   void SetDetector(const KVDetector* d)
    {
       fDetector = d;
    }
 
-   KVDetector* GetDetector() const
+   const KVDetector* GetDetector() const
    {
       return fDetector;
    }

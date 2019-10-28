@@ -341,14 +341,19 @@ public:
    virtual void SetACQParams();
    virtual void RemoveCalibrators();
 
-   Double_t GetDetectorSignalValue(const TString& type) const
+   Double_t GetDetectorSignalValue(const TString& type, const KVNameValueList& params = "") const
    {
       // Return value of signal of given type associated with detector
+      //
       // Some signals require the necessary calibrators to be present & initialised
+      //
+      // Any additional parameters which are required can be passed as a string of
+      // "param1=value,param2=value,..." parameter/value pairs.
+      //
       // If the signal is not available, returns 0.
 
       KVDetectorSignal* s = GetDetectorSignal(type);
-      return (s ? s->GetValue() : 0);
+      return (s ? s->GetValue(params) : 0);
    }
    void SetDetectorSignalValue(const TString& type, Double_t val) const
    {
@@ -358,17 +363,22 @@ public:
       KVDetectorSignal* s = GetDetectorSignal(type);
       if (s) s->SetValue(val);
    }
-   Double_t GetInverseDetectorSignalValue(const TString& output, Double_t value, const TString& input) const
+   Double_t GetInverseDetectorSignalValue(const TString& output, Double_t value, const TString& input, const KVNameValueList& params = "") const
    {
       // Calculate the value of the input signal for a given value of the output signal.
+      //
       // This uses the inverse calibrations of all intermediate calibrators.
+      //
+      // Any additional parameters which are required can be passed as a string of
+      // "param1=value,param2=value,..." parameter/value pairs.
+      //
       // If the output signal is not defined, or if input & output are not related,
       // this returns 0.
 
       KVDetectorSignal* s = GetDetectorSignal(output);
-      return (s ? s->GetInverseValue(value, input) : 0);
+      return (s ? s->GetInverseValue(value, input, params) : 0);
    }
-   KVDetectorSignal* GetDetectorSignal(const TString& type) const
+   virtual KVDetectorSignal* GetDetectorSignal(const TString& type) const
    {
       // Return the signal with given type, if defined for this detector
       // If signal not defined, returns nullptr.

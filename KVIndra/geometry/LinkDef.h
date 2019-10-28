@@ -9,6 +9,6 @@
 #pragma link C++ class KVSiLi+;
 #pragma link C++ class KVChIo+;
 #pragma link C++ class KVCsI+;
-#pragma link C++ class KVCsITotLightSignal+;
 #pragma link C++ class KVPhoswich+;
+#pragma link C++ class KVINDRACsITotLightReconstructor+;
 #endif

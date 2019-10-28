@@ -421,11 +421,13 @@ void KVINDRAUpDater::SetCsIGainCorrectionParameters(KVDBRun* kvrun)
    // We set all detectors' correction to 1, then set the corrections defined for this
    // run, if any.
 
+   AbstractMethod("SetCsIGainCorrectionParameters");
+
    TIter next_csi(GetINDRA()->GetListOfCsI());
    KVCsI* csi;
-   while ((csi = (KVCsI*)next_csi())) {
-      csi->SetTotalLightGainCorrection(1.0);
-   }
+//   while ((csi = (KVCsI*)next_csi())) {
+//      csi->SetTotalLightGainCorrection(1.0);
+//   }
 
    KVRList* param_list = kvrun->GetLinks("CsIGainCorr");
    if (!param_list) {
@@ -453,8 +455,8 @@ void KVINDRAUpDater::SetCsIGainCorrectionParameters(KVDBRun* kvrun)
             continue;
          }
       }
-      csi->SetTotalLightGainCorrection(dbps->GetParameter());
-      Info("SetCsIGainCorrectionParameters", "%s gain correction = %f", csi->GetName(), csi->GetTotalLightGainCorrection());
+//      csi->SetTotalLightGainCorrection(dbps->GetParameter());
+//      Info("SetCsIGainCorrectionParameters", "%s gain correction = %f", csi->GetName(), csi->GetTotalLightGainCorrection());
    }
 }
 
