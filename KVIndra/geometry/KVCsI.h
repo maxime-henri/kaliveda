@@ -22,11 +22,11 @@ public:
 
    void SetACQParams();
 
-   Double_t GetLumiereTotale() const
-   {
-      Obsolete("GetLumiereTotale", "1.11", "1.12");
-      return GetDetectorSignalValue("TotLight");
-   }
+//   Double_t GetLumiereTotale() const
+//   {
+//      Obsolete("GetLumiereTotale", "1.11", "1.12");
+//      return GetDetectorSignalValue("TotLight");
+//   }
    Double_t GetCorrectedEnergy(KVNucleus*, Double_t lum = -1., Bool_t transmission = kTRUE);
 
    void SetPinLaser(Int_t n)

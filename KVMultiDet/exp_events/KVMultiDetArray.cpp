@@ -1939,7 +1939,11 @@ void KVMultiDetArray::PrintStatusOfIDTelescopes()
          cout << "    " << ok_list->GetEntries() << " telescopes are OK, "
               << notok_list->GetEntries() << " telescopes are NOT OK" << endl;
          cout << "    " << print_list->GetName() << " :" << endl;
-         print_list->ls();
+         TIter it(print_list);
+         TObject* ob = it();
+         cout << ob->GetName();
+         while ((ob = it())) cout << "," << ob->GetName();
+         cout << endl;
       }
       cout << endl;
 
@@ -2105,7 +2109,11 @@ void KVMultiDetArray::PrintCalibStatusOfDetectors()
          cout << "    " << ok_list->GetEntries() << " calibrations are OK, "
               << notok_list->GetEntries() << " calibrations are NOT OK" << endl;
          cout << "    " << print_list->GetName() << " :" << endl;
-         print_list->ls();
+         TIter it(print_list);
+         TObject* ob = it();
+         cout << ob->GetName();
+         while ((ob = it())) cout << "," << ob->GetName();
+         cout << endl;
       }
       cout << endl;
 

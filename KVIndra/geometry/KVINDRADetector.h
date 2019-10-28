@@ -109,7 +109,6 @@ public:
    Int_t GetNumeroCodeur();
 
    void SetThickness(Double_t thick);
-   Double_t GetCalibratedEnergy() const;
 
    ClassDef(KVINDRADetector, 2) //Detectors of INDRA array
 };

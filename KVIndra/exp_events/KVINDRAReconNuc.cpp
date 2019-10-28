@@ -1094,7 +1094,7 @@ void KVINDRAReconNuc::DoBeryllium8Calibration()
    // We halve the total light output of the CsI to calculate the energy of 1 alpha
    // Then multiply resulting energy by 2
    // Note: fECsI is -ve, because energy is calculated not measured
-   Double_t half_light = GetCsI()->GetLumiereTotale() * 0.5;
+   Double_t half_light = GetCsI()->GetDetectorSignalValue("TotLight") * 0.5;
    KVNucleus tmp(2, 4);
    fECsI = -2.*GetCsI()->GetCorrectedEnergy(&tmp, half_light, kFALSE);
    SetECode(kECode2);

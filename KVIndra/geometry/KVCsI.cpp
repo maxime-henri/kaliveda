@@ -76,7 +76,7 @@ void KVCsI::Print(Option_t* option) const
 
    if (!strcmp(option, "data")) {
       cout << ((KVCsI*) this)->GetName() << " -- H=" << ((KVCsI*) this)->
-           GetLumiereTotale() << " -- E=" << ((KVCsI*) this)->
+           GetDetectorSignalValue("TotLight") << " -- E=" << ((KVCsI*) this)->
            GetEnergy() << "  ";
       TIter next(fACQParams);
       KVACQParam* acq;
@@ -115,8 +115,8 @@ Double_t KVCsI::GetCorrectedEnergy(KVNucleus* nuc, Double_t lum, Bool_t)
    Int_t A = nuc->GetA();
 
    Double_t eloss;
-   if (lum > -1) eloss = GetDetectorSignalValue("Energy", Form("Z=%d,A=%d", Z, A));
-   else eloss = GetDetectorSignalValue("Energy", Form("INPUT=%g,Z=%d,A=%d", lum, Z, A));
+   if (lum > -1) eloss = GetDetectorSignalValue("Energy", Form("INPUT=%g,Z=%d,A=%d", lum, Z, A));
+   else eloss = GetDetectorSignalValue("Energy", Form("Z=%d,A=%d", Z, A));
 
    if (GetDetectorSignal("TotLight")->GetStatus("LightIsGood")) {
       SetEnergy(eloss);

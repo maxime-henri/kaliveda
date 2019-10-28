@@ -88,20 +88,18 @@ void KVIdentificationResult::Print(Option_t*) const
    if (Aident) printf("    A identified = %d", A);
    else printf("  A returned = %d", A);
    if (Zident || Aident) printf("    PID = %f\n", PID);
-   printf("  delta-E pedestal : ");
    switch (deltaEpedestal) {
 
       case deltaEpedestal_NO:
-         printf("NO\n");
+         printf("  delta-E pedestal : NO\n");
          break;
 
       case deltaEpedestal_YES:
-         printf("YES\n");
+         printf("  delta-E pedestal : YES\n");
          break;
 
       default:
       case deltaEpedestal_UNKNOWN:
-         printf("UNKNOWN\n");
          break;
    }
 }
