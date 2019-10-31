@@ -23,12 +23,6 @@ protected:
    Double_t fAmed;                //!A of detector material (CsI)
    Double_t u;
 
-   UInt_t fZ;                   //!Z of nucleus to be calibrated
-   UInt_t fA;                   //!A of nucleus to be calibrated
-
-   KVIonRangeTableMaterial* fMaterialTable; //! range table for CsI
-
-   TF1* fLight;           //function parameterising light output as function of (energy, Z, A) with the full expression
    TF1* fDlight;          //function to integrate to get fLight
 
 public:
@@ -63,23 +57,6 @@ public:
    Double_t GetLight(double* x, double* par);
    Double_t GetLightApprox(double* x, double* par);
    Double_t GetLightApproxSilicon(double* x, double* par);
-
-   void SetZ(UInt_t z)
-   {
-      fZ = z;
-   }
-   void SetA(UInt_t a)
-   {
-      fA = a;
-   }
-   UInt_t GetZ() const
-   {
-      return fZ;
-   }
-   UInt_t GetA() const
-   {
-      return fA;
-   }
 
    virtual void Print(Option_t* opt = "") const;
 

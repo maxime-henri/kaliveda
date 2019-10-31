@@ -419,13 +419,12 @@ void KVLightEnergyCsIFull::init()
 //   SetType("Light-Energy CsI");
 //   if(fDetector&&(fLightFormula==kExact)) fMaterialTable = fDetector->GetRangeTable()->GetMaterial(fDetector->GetMaterialName());
 //   else Error("init", "No detector provided !");
-   SetA(1);
-   SetZ(1);
    fZmed = 54;//fDetector->GetZ();
    fAmed = 130;//fDetector->GetMass();
 
    u = 931.5;
-   fDlight = 0;
+   fDlight = nullptr;
+   TF1* fLight;
 
    switch (fLightFormula) {
       case kExact :
@@ -450,6 +449,7 @@ void KVLightEnergyCsIFull::init()
          fLight  = new TF1("fLight_CsI", this, &KVLightEnergyCsIFull::GetLightApprox, 0., 10000., 7, "KVLightEnergyCsIFull", "GetLightApprox");
          break;
    }
+   SetCalibFunction(fLight);
 }
 
 void KVLightEnergyCsIFull::Print(Option_t* opt) const
@@ -462,7 +462,6 @@ KVLightEnergyCsIFull::~KVLightEnergyCsIFull()
 {
    // Destructor
    SafeDelete(fDlight);
-   SafeDelete(fLight);
 }
 
 //________________________________________________________________
@@ -481,20 +480,17 @@ void KVLightEnergyCsIFull::Copy(TObject& obj) const
 }
 
 //___________________________________________________________________________
-Double_t KVLightEnergyCsIFull::Compute(Double_t light, const KVNameValueList&) const
+Double_t KVLightEnergyCsIFull::Compute(Double_t light, const KVNameValueList& z_and_a) const
 {
    // Calculate the calibrated energy (in MeV) for a given total light output.
-   // The Z and A of the particle should be given first using SetZ, SetA.
-   // By default, Z=A=1 (proton).
-   //
-   // This is done by inversion of the light-energy function using TF1::GetX.
+   // The Z and A of the particle should be given in the parameter list : "Z=3,A=7"
 
    //set parameters of light-energy function
    Double_t par[7];
    for (int i = 0; i < 5; i++)
       par[i + 2] = GetParameter(i);
-   par[0] = (Double_t) fZ;
-   par[1] = (Double_t) fA;
+   par[0] = z_and_a.GetDoubleValue("Z");
+   par[1] = z_and_a.GetDoubleValue("A");
    fLight->SetParameters(par);
 //for(int i=0; i<7; i++)printf("P2  [%d]=%f  ", i, fLight->GetParameter(i)); printf("Z=%d  A=%d \n",fZ, fA);
    //invert light vs. energy function to find energy
