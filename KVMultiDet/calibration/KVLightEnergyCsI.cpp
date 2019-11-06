@@ -2,7 +2,7 @@
 #include "TMath.h"
 //#include "KVCsI.h"
 
-ClassImp(KVLightEnergyCsI);
+ClassImp(KVLightEnergyCsI)
 
 ////////////////////////////////////////////////////////////////////////////
 //Light-energy calibration for INDRA CsI detectors.
@@ -22,7 +22,7 @@ ClassImp(KVLightEnergyCsI);
 
 //___________________________________________________________________________
 
-Double_t CalculLumiere(Double_t* x, Double_t* par)
+Double_t KVLightEnergyCsI::CalculLumiere(Double_t* x, Double_t* par)
 {
    //Calcul de la lumiere totale a partir de Z, A d'une particule et son energie
    //
@@ -32,13 +32,8 @@ Double_t CalculLumiere(Double_t* x, Double_t* par)
    // par[1] = a2 : nuclear & recombination quenching term
    // par[2] = a3 : threshold (MeV/u) for delta-ray production
    // par[3] = a4 : fractional energy loss removed by delta rays
-   // par[4] = Z
-   // par[5] = A
    //~~~~~~~~~~~~~~~~~~
    //
-
-   Double_t Z = par[4];
-   Double_t A = par[5];
 
    Double_t energie = x[0];
    Double_t c1 = par[0];
@@ -62,7 +57,7 @@ KVLightEnergyCsI::KVLightEnergyCsI(): KVCalibrator()
 {
    //default initialisations
    SetType("LightEnergyCsI");
-   SetCalibFunction(new TF1("fLight_CsI", CalculLumiere, 0., 10000., 6));
+   SetCalibFunction(new TF1("fLight_CsI", this, &KVLightEnergyCsI::CalculLumiere, 0., 10000., 4));
    SetUseInverseFunction();
 }
 
@@ -78,8 +73,8 @@ Double_t KVLightEnergyCsI::Compute(Double_t light, const KVNameValueList& z_and_
    //~~~~~~~~~~~~~~~
    //
 
-   SetParameter(4, z_and_a.GetIntValue("Z"));
-   SetParameter(5, z_and_a.GetIntValue("A"));
+   Z = z_and_a.GetIntValue("Z");
+   A = z_and_a.GetIntValue("A");
    return KVCalibrator::Compute(light, z_and_a);
 }
 
@@ -96,7 +91,7 @@ Double_t KVLightEnergyCsI::Invert(Double_t energy, const KVNameValueList& z_and_
    //~~~~~~~~~~~~~~~
    //
 
-   SetParameter(4, z_and_a.GetIntValue("Z"));
-   SetParameter(5, z_and_a.GetIntValue("A"));
+   Z = z_and_a.GetIntValue("Z");
+   A = z_and_a.GetIntValue("A");
    return KVCalibrator::Invert(energy, z_and_a);
 }

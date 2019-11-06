@@ -5,6 +5,12 @@
 
 class KVLightEnergyCsI: public KVCalibrator {
 
+   Double_t CalculLumiere(Double_t*, Double_t*);
+
+protected:
+   mutable Double_t Z;
+   mutable Double_t A;
+
 public:
    KVLightEnergyCsI();
    virtual ~ KVLightEnergyCsI() {}
