@@ -16,6 +16,7 @@
 #include "KVNameValueList.h"
 
 class KVDetector;
+class KVNumberList;
 
 class KVDetectorSignal : public KVBase {
 

@@ -274,8 +274,8 @@ public:
    virtual Float_t GetPedestal(const Char_t* /*name*/) const;
    virtual void SetPedestal(const Char_t* /*name*/, Float_t);
 
-   Bool_t AddCalibrator(KVCalibrator* cal);
-   Bool_t ReplaceCalibrator(const Char_t* type, KVCalibrator* cal);
+   Bool_t AddCalibrator(KVCalibrator* cal, const KVNameValueList& opts = "");
+   Bool_t ReplaceCalibrator(const Char_t* type, KVCalibrator* cal, const KVNameValueList& opts = "");
    KVCalibrator* GetCalibrator(const Char_t* name,
                                const Char_t* type) const;
    KVCalibrator* GetCalibrator(const Char_t* type) const;

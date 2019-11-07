@@ -1463,7 +1463,7 @@ void KVMultiDetArray::SetCalibratorParameters(KVDBRun* r, const TString& myname)
       if (clop != "") cal->SetOptions(class_options);
       cal->SetInputSignalType(dbps->GetStringParameter("SignalIn"));
       cal->SetOutputSignalType(dbps->GetStringParameter("SignalOut"));
-      if (!det->AddCalibrator(cal)) {
+      if (!det->AddCalibrator(cal, dbps->GetParameters())) {
          // Calibrator invalid - probably input signal is not defined for detector
          // N.B. 'cal' deleted by KVDetector::AddCalibrator
          continue;
@@ -3126,11 +3126,12 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
    // Read a calibration file with the format
    //
    //~~~~~~~~~~~~~
-   // RunList:                                 0-999999
+   // RunList:                                 1546-7485
    // SignalIn:                                PG
    // SignalOut:                               Volts
-   // CalibType:                               Channel-Volt PG
+   // CalibType:                               ChannelVolt
    // CalibOptions:                            func=pol3,min=0,max=1
+   // ZRange:                                  2-92
    // [detector1]: 0.0,0.261829,0.0
    // [detector2]: 0.1,0.539535,1.2
    //~~~~~~~~~~~~~
@@ -3158,6 +3159,9 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
    //
    //`[CalibOptions]` should hold a comma-separated list of `parameter=value` pairs which will be used
    //to fill a KVNameValueList for the method call. See the KVCalibrator::SetOptions() method.
+   //
+   //`[ZRange]` is an option if several calibrations need to be used to provide the same signal
+   //for certain detectors depending on the atomic number Z of the particle detected.
 
 
    TString fullpath = "";
@@ -3172,7 +3176,7 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
 
    // read options from file
    KVNameValueList options;
-   KVString opt_list = "RunList SignalIn SignalOut CalibType CalibClass CalibOptions";
+   KVString opt_list = "RunList SignalIn SignalOut CalibType CalibClass CalibOptions ZRange";
    opt_list.Begin(" ");
    while (!opt_list.End()) {
       KVString opt = opt_list.Next();
@@ -3205,6 +3209,9 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
    KVString clop;
    if (options.HasParameter("CalibOptions")) clop = options.GetStringValue("CalibOptions");
 
+   KVString zrange;
+   if (options.HasParameter("ZRange")) zrange = options.GetStringValue("ZRange");
+
    KVNumberList run_list = db->GetRunList();
    if (options.GetTStringValue("RunList") != "")
       run_list.Set(options.GetTStringValue("RunList"));
@@ -3226,7 +3233,8 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
       // put infos on required calibrator class into database so that it can be replaced
       // as needed in SetCalibratorParameters
       par->SetParameter("CalibClass", options.GetStringValue("CalibClass"));
-      if (clop != "") par->SetParameter("CalibOptions", options.GetStringValue("CalibOptions"));
+      if (clop != "") par->SetParameter("CalibOptions", clop);
+      if (zrange != "") par->SetParameter("ZRange", zrange);
       Int_t np = 0;
       lval.Begin(",");
       while (!lval.End()) {

@@ -21,6 +21,7 @@
 #include "KVACQParamSignal.h"
 #include "KVCalibratedSignal.h"
 #include "KVDetectorSignalExpression.h"
+#include "KVZDependentCalibratedSignal.h"
 
 #include <TGeoPhysicalNode.h>
 #include <TGraph.h>
@@ -465,7 +466,7 @@ const Char_t* KVDetector::GetArrayName()
 }
 
 //_____________________________________________________________________________________
-Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
+Bool_t KVDetector::AddCalibrator(KVCalibrator* cal, const KVNameValueList& opts)
 {
    // Associate a calibration with this detector (the object will be deleted by the detector)
    //
@@ -475,6 +476,17 @@ Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
    //
    // If the input signal required by the calibrator is not defined for the detector,
    // this method returns kFALSE and the calibrator will be deleted.
+   //
+   // The (optional) KVNameValueList argument can be used to pass any extra parameters/options.
+   // For example, if it contains a parameter `ZRange`:
+   //
+   //~~~~~~~~~~~~~~~
+   // ZRange=1-10
+   //~~~~~~~~~~~~~~~
+   //
+   // then the calibrator will be handled by a KVZDependentCalibratedSignal (handles several
+   // calibrators which provide the same output signal, each one is used for a specific range
+   // of atomic numbers)
 
    if (!cal) return kFALSE;
    // check for input signal
@@ -495,13 +507,26 @@ Bool_t KVDetector::AddCalibrator(KVCalibrator* cal)
       Warning("AddCalibrator", "%s : output signal not defined for calibrator %s. No output signal created.",
               GetName(), cal->GetType());
    }
-   else
-      fDetSignals.Add(new KVCalibratedSignal(in, cal));
-
+   else {
+      KVDetectorSignal* new_cal_sig(nullptr);
+      if (opts.HasParameter("ZRange")) {
+         // If 'ZRange' parameter is given we need to find the KVZDependentCalibratedSignal
+         // and add a new signal to it.
+         KVDetectorSignal* sig = GetDetectorSignal(cal->GetOutputSignalType());
+         if (!sig) sig = new_cal_sig = new KVZDependentCalibratedSignal(in, cal->GetOutputSignalType());
+         dynamic_cast<KVZDependentCalibratedSignal*>(sig)->AddSignal(
+            new KVCalibratedSignal(in, cal), opts.GetStringValue("ZRange")
+         );
+      }
+      else {
+         new_cal_sig = new KVCalibratedSignal(in, cal);
+      }
+      if (new_cal_sig) fDetSignals.Add(new_cal_sig);
+   }
    return kTRUE;
 }
 
-Bool_t KVDetector::ReplaceCalibrator(const Char_t* type, KVCalibrator* cal)
+Bool_t KVDetector::ReplaceCalibrator(const Char_t* type, KVCalibrator* cal, const KVNameValueList& opts)
 {
    // Replace calibrator of given type with the given calibrator object
    // The calibrator object should not be shared with any other detectors: it now belongs
@@ -510,6 +535,8 @@ Bool_t KVDetector::ReplaceCalibrator(const Char_t* type, KVCalibrator* cal)
    // deleted and removed from the detector's calibrator list
    //
    // Returns kFALSE in case of problems.
+   //
+   // The (optional) KVNameValueList argument can be used to pass any extra parameters/options.
 
    KVCalibrator* old_cal = GetCalibrator(type);
    if (old_cal) {
@@ -517,7 +544,7 @@ Bool_t KVDetector::ReplaceCalibrator(const Char_t* type, KVCalibrator* cal)
       remove_signal_for_calibrator(old_cal);
       delete old_cal;
    }
-   return AddCalibrator(cal);
+   return AddCalibrator(cal, opts);
 }
 
 //_______________________________________________________________________________

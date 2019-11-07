@@ -8,9 +8,17 @@
 #include "KVCalibrator.h"
 
 class KVCalibratedSignal : public KVDetectorSignal {
+
    KVDetectorSignal* fInputSignal;// signal which is used as input to generate calibrated signal
    KVCalibrator*     fCalibrator;// calibrator used to transform input signal
 
+protected:
+   KVCalibratedSignal(KVDetectorSignal* input, const KVString& output)
+      : KVDetectorSignal(output, input->GetDetector()), fInputSignal(input), fCalibrator(nullptr)
+   {
+      // Constructor used by KVZDependentCalibratedSignal
+      SetTitle(Form("Signal %s calculated from signal %s of detector %s", GetName(), input->GetName(), GetDetector()->GetName()));
+   }
 public:
    KVCalibratedSignal()
       : KVDetectorSignal(), fInputSignal(nullptr), fCalibrator(nullptr)

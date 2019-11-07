@@ -12,6 +12,7 @@
 #pragma link C++ class KVDetectorSignal+;
 #pragma link C++ class KVDetectorSignalExpression+;
 #pragma link C++ class KVCalibratedSignal+;
+#pragma link C++ class KVZDependentCalibratedSignal+;
 #pragma link C++ class KVTelescope+;
 #pragma link C++ class KVGroup+;
 #pragma link C++ class KVASGroup+;
