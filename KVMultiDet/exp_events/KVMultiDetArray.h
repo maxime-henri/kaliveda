@@ -55,6 +55,7 @@ protected:
 
    static Bool_t fCloseGeometryNow;
    static Bool_t fBuildTarget;
+   static Bool_t fMakeMultiDetectorSetParameters;
 
    KVTarget* fTarget;          //target used in experiment
    enum {
@@ -143,7 +144,7 @@ protected:
    virtual Bool_t handle_raw_data_event_ebyedat(KVGANILDataReader&);
    virtual void prepare_to_handle_new_raw_data();
 
-   virtual void PerformClosedROOTGeometryOperations(Int_t run = -1);
+   virtual void PerformClosedROOTGeometryOperations();
 
    virtual void copy_fired_parameters_to_recon_param_list();
 

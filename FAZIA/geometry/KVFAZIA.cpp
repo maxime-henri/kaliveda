@@ -139,7 +139,7 @@ void KVFAZIA::SetNameOfDetectors(KVEnv& env)
    }
 }
 
-void KVFAZIA::PerformClosedROOTGeometryOperations(Int_t run)
+void KVFAZIA::PerformClosedROOTGeometryOperations()
 {
    // Finalise description of array performing all operations which require ROOT
    // geometry to be closed
@@ -196,7 +196,7 @@ void KVFAZIA::BuildTarget()
    }
 }
 
-void KVFAZIA::Build(Int_t run)
+void KVFAZIA::Build(Int_t)
 {
    // Build the FAZIA array
    GetGeometryParameters();
@@ -212,7 +212,7 @@ void KVFAZIA::Build(Int_t run)
    if (fCloseGeometryNow) {
       gGeoManager->DefaultColors();
       gGeoManager->CloseGeometry();
-      PerformClosedROOTGeometryOperations(run);
+      PerformClosedROOTGeometryOperations();
    }
 }
 

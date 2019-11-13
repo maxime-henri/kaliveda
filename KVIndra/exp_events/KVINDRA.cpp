@@ -580,7 +580,7 @@ Int_t KVINDRA::GetIDTelescopes(KVDetector* de, KVDetector* e, TCollection* idtel
    return n;
 }
 
-void KVINDRA::PerformClosedROOTGeometryOperations(Int_t)
+void KVINDRA::PerformClosedROOTGeometryOperations()
 {
    // Finalise the ROOT geometry description by performing operations which can
    // only be done once the geometry is closed

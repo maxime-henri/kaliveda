@@ -58,6 +58,7 @@ KVMultiDetArray* gMultiDetArray = 0x0;
 
 Bool_t KVMultiDetArray::fCloseGeometryNow = kTRUE;
 Bool_t KVMultiDetArray::fBuildTarget = kFALSE;
+Bool_t KVMultiDetArray::fMakeMultiDetectorSetParameters = kTRUE;
 
 ClassImp(KVMultiDetArray)
 ////////////////////////////////////////////////////////////////////////////////
@@ -1718,9 +1719,9 @@ KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, 
    }
    else {
       mda = gMultiDetArray;
-      // database creation may not have set the right run
-      if (run > -1) mda->SetParameters(run);
    }
+   // set parameters if required & allowed & not done yet
+   if (fMakeMultiDetectorSetParameters && (run > -1)) mda->SetParameters(run);
    return mda;
 }
 
@@ -2960,7 +2961,7 @@ void KVMultiDetArray::prepare_to_handle_new_raw_data()
    fHandledRawData = false;
 }
 
-void KVMultiDetArray::PerformClosedROOTGeometryOperations(Int_t)
+void KVMultiDetArray::PerformClosedROOTGeometryOperations()
 {
    // Perform any operations to finalise the description of the multidetector
    // which can only be done once the geometry is closed, e.g. use KVGeoImport
