@@ -57,17 +57,21 @@ protected:
    void SetLabelFromURI(const Char_t* uri);
    KVParticleCondition* fMassIDValidity;//! may be used to limit mass identification to certain Z and/or A range
    KVDetectorSignal* GetSignalFromGridVar(const KVString& var, const KVString& axe);
-#if !defined(__MAKECINT__) && !defined(__ROOTCLING__)
+#if defined(USING_ROOT5) && defined(__MAKECINT__)
+   // struct GraphCoords; hidden from rootcint with ROOT5
+   // std::map/unordered_map<KVIDGraph*,GraphCoords> also hidden
+#else
    struct GraphCoords {
-      KVDetectorSignal* fVarX;
-      KVDetectorSignal* fVarY;
+      KVDetectorSignal* fVarX;//!
+      KVDetectorSignal* fVarY;//!
    };
 #ifdef WITH_CPP11
-   mutable std::unordered_map<KVIDGraph*, GraphCoords> fGraphCoords; // X/Y coordinates from detector signals for ID maps
+   mutable std::unordered_map<KVIDGraph*, GraphCoords> fGraphCoords;//! X/Y coordinates from detector signals for ID maps
 #else
-   mutable std::map<KVIDGraph*, GraphCoords> fGraphCoords; // X/Y coordinates from detector signals for ID maps
+   mutable std::map<KVIDGraph*, GraphCoords> fGraphCoords;//! X/Y coordinates from detector signals for ID maps
 #endif
 #endif
+
    void set_id_code(UShort_t c)
    {
       // used by child class constructors to set the id code for their type of identification

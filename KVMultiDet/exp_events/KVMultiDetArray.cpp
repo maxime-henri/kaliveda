@@ -1834,6 +1834,7 @@ void KVMultiDetArray::SetIdentifications()
    }
    //split list of labels
    id_labels.Begin(" ");
+   int ok(0);
    //loop over labels/identification 'types'
    while (!id_labels.End()) {
 
@@ -1844,8 +1845,14 @@ void KVMultiDetArray::SetIdentifications()
          Info("SetIdentifications", "Initialising %s identifications...", idt->GetLabel());
          if (idt->SetIdentificationParameters(this))
             Info("SetIdentifications", "OK");
+         ++ok;
       }
 
+   }
+   if (!ok) {
+      // None of the labels in the list correspond to telescopes in the array
+      Warning("SetIdentfications", "No telescopes found with labels given in %s.ActiveIdentifications list: %s",
+              gDataSet->GetName(), id_labels.Data());
    }
 }
 
