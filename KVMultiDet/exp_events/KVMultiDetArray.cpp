@@ -416,8 +416,7 @@ void KVMultiDetArray::set_up_telescope(KVDetector* de, KVDetector* e, KVIDTelesc
    idt->AddDetector(e);
    if (de->GetGroup()) {
       idt->SetGroup(de->GetGroup());
-   }
-   else {
+   } else {
       idt->SetGroup(e->GetGroup());
    }
    // if telescope already exists, we delete this new version and add a reference to
@@ -426,8 +425,7 @@ void KVMultiDetArray::set_up_telescope(KVDetector* de, KVDetector* e, KVIDTelesc
    if (p) {
       l->Add(p);
       delete idt;
-   }
-   else {
+   } else {
       fIDTelescopes->Add(idt);
       l->Add(idt);
    }
@@ -445,8 +443,7 @@ void KVMultiDetArray::set_up_single_stage_telescope(KVDetector* det, KVIDTelesco
    if (p) {
       l->Add(p);
       delete idt;
-   }
-   else {
+   } else {
       fIDTelescopes->Add(idt);
       l->Add(idt);
    }
@@ -509,20 +506,17 @@ Int_t KVMultiDetArray::FilteredEventCoherencyAnalysis(Int_t round, KVReconstruct
             recon_nuc->SetIsIdentified();//to stop looking anymore & to allow identification of other particles in same group
             if (idtelstop) idtelstop->SetIDCode(recon_nuc, idtelstop->GetBadIDCode());
             else recon_nuc->SetIsOK(kFALSE);
-         }
-         else if (recon_nuc->GetStatus() == 3) {
+         } else if (recon_nuc->GetStatus() == 3) {
             //stopped in first member
             recon_nuc->SetIsIdentified();
             nchanged++;
-         }
-         else if (recon_nuc->GetStatus() == 2) {
+         } else if (recon_nuc->GetStatus() == 2) {
             // pile-up in first stage of telescopes
             recon_nuc->SetIsIdentified();
             if (idtelstop && idtelstop->IsReadyForID()) idtelstop->SetIDCode(recon_nuc, idtelstop->GetMultiHitFirstStageIDCode());
             else recon_nuc->SetIsOK(kFALSE);
             nchanged++;
-         }
-         else if (recon_nuc->GetStatus() == 0) {
+         } else if (recon_nuc->GetStatus() == 0) {
             // try to "identify" the particle
             TIter nxtidt(recon_nuc->GetStoppingDetector()->GetTelescopesForIdentification());
             idtelstop = (KVIDTelescope*)nxtidt();
@@ -537,8 +531,7 @@ Int_t KVMultiDetArray::FilteredEventCoherencyAnalysis(Int_t round, KVReconstruct
                   recon_nuc->SetIsCalibrated();
                   idtelstop->SetIdentificationStatus(recon_nuc);
                   break;
-               }
-               else {
+               } else {
                   Int_t nseg = recon_nuc->GetNSegDet();
                   recon_nuc->SetNSegDet(TMath::Max(nseg - 1, 0));
                   //if there are other unidentified particles in the group and NSegDet is < 2
@@ -682,8 +675,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
       //Create the list where fired groups will be stored
       //for reconstruction
       fHitGroups = new KVDetectorEvent;
-   }
-   else {
+   } else {
       //Clear the multidetector before a new filter process
       fHitGroups->Clear();
    }
@@ -716,22 +708,19 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
 
          part->AddGroup("UNDETECTED");
          part->AddGroup("SUPERHEAVY");
-      }
-      else if (!fNavigator->IsTracking() && (part->GetZ() == 0)) {
+      } else if (!fNavigator->IsTracking() && (part->GetZ() == 0)) {
          // when tracking is activated, we follow neutron trajectories
          // if not, we don't even bother trying
          det_stat.SetValue("UNDETECTED", "NEUTRON");
 
          part->AddGroup("UNDETECTED");
          part->AddGroup("NEUTRON");
-      }
-      else if (_part->GetKE() < 1.e-3) {
+      } else if (_part->GetKE() < 1.e-3) {
          det_stat.SetValue("UNDETECTED", "NO ENERGY");
 
          part->AddGroup("UNDETECTED");
          part->AddGroup("NO ENERGY");
-      }
-      else {
+      } else {
 
          //Double_t eLostInTarget=0;
          if (fTarget && part->GetZ()) {
@@ -752,8 +741,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
          if ((fFilterType != kFilterType_Geo) && _part->GetKE() < 1.e-3) {
             // unless we are doing a simple geometric filter, particles which
             // do not have the energy to leave the target are not detected
-         }
-         else {
+         } else {
             if (!(nvl = DetectParticle(_part))) {
                if (part->GetZ() == 0) {
                   // tracking
@@ -761,16 +749,14 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
 
                   part->AddGroup("UNDETECTED");
                   part->AddGroup("NEUTRON");
-               }
-               else {
+               } else {
                   det_stat.SetValue("UNDETECTED", "NO HIT");
 
                   part->AddGroup("UNDETECTED");
                   part->AddGroup("NO HIT");
                }
 
-            }
-            else if (nvl->GetNpar() == 0) {
+            } else if (nvl->GetNpar() == 0) {
 
                if (part->GetZ() == 0) {
                   // tracking
@@ -778,8 +764,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
 
                   part->AddGroup("UNDETECTED");
                   part->AddGroup("NEUTRON");
-               }
-               else {
+               } else {
                   part->AddGroup("UNDETECTED");
                   part->AddGroup("DEAD ZONE");
 
@@ -787,8 +772,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
                }
                delete nvl;
                nvl = 0;
-            }
-            else {
+            } else {
                Int_t nbre_nvl = nvl->GetNpar();
                KVString LastDet(nvl->GetNameAt(nbre_nvl - 1));
                last_det = GetDetector(LastDet.Data());
@@ -805,14 +789,12 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
                            ntrav += 1;
                         else if (dd->IsSmallerThan(last_det))
                            ntrav += 1;
-                     }
-                     else {
+                     } else {
                         if (dd->IsSmallerThan(last_det))
                            ntrav += 1;
                      }
                   }
-               }
-               else {
+               } else {
                   ntrav = ldet->GetEntries();
                }
 
@@ -847,8 +829,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
 
                   part->AddGroup("UNDETECTED");
                   part->AddGroup("GEOMETRY INCOHERENCY");
-               }
-               else {
+               } else {
 
                   //On recupere les telescopes d identification
                   //associe au dernier detecteur touche
@@ -864,22 +845,19 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
                      //
                      last_det->GetHits()->Remove(_part);
                      //Warning("DetectEvent","threshold ...");
-                  }
-                  else {
+                  } else {
                      part->AddGroup("DETECTED");
                      det_stat.SetValue("DETECTED", "OK");
                      fHitGroups->AddGroup(last_det->GetGroup());
 
                      if (lidtel->GetEntries() > 0) {
                         //Il y a possibilite d identification
-                     }
-                     else if (last_det->GetEnergy() > 0) {
+                     } else if (last_det->GetEnergy() > 0) {
                         //Il n'y a pas de possibilite d'identification
                         //arret dans le premier etage de detection
                         det_stat.SetValue("DETECTED", "INCOMPLETE");
                         part->AddGroup("INCOMPLETE");
-                     }
-                     else {
+                     } else {
                         Warning("DetectEvent", "Cas non prevu ....");
                         printf("last_det->GetName()=%s, lidtel->GetEntries()=%d, last_det->GetEnergy()=%lf\n",
                                last_det->GetName(),
@@ -907,8 +885,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
                            part->AddGroup("UNDETECTED");
                            part->AddGroup("GEOMETRY INCOHERENCY");
                            //Warning("DetectEvent","Fuite ......");
-                        }
-                        else if (nbre_nvl) {
+                        } else if (nbre_nvl) {
                            //----
                            // Punch Through,
                            // La particule est trop energetique, elle a traversee
@@ -973,8 +950,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
                   KVNumberList ppp(un.GetStringValue(detname));
                   ppp.Add(part_index);
                   un.SetValue(detname, ppp.AsString());
-               }
-               else {
+               } else {
                   un.SetValue(detname, Form("%d", part_index));
                }
             }
@@ -1104,16 +1080,14 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
                   if (!part->BelongsToGroup("INCOMPLETE")) {
                      idt->SetIDCode(recon_nuc, idt->GetIDCode());
                      idt->SetIdentificationStatus(recon_nuc);
-                  }
-                  else {
+                  } else {
                      idt->SetIDCode(recon_nuc, idt->GetZminCode());
                   }
                   recon_nuc->SetECode(idt->GetECode());
                   //recon_nuc->SetIsIdentified();
                   //recon_nuc->SetIsCalibrated();
                }
-            }
-            else {   /*if(part->BelongsToGroup("INCOMPLETE"))*/
+            } else { /*if(part->BelongsToGroup("INCOMPLETE"))*/
                // for particles stopping in 1st member of a telescope, there is no "identifying telescope"
                KVIDTelescope* idt = (KVIDTelescope*)last_det->GetIDTelescopes()->First();
                if (idt) idt->SetIDCode(recon_nuc, idt->GetZminCode());
@@ -1139,8 +1113,7 @@ void KVMultiDetArray::DetectEvent(KVEvent* event, KVReconstructedEvent* rec_even
             KVReconstructedNucleus::AnalyseParticlesInGroup(grp_tch);
          }
          //for(int i=1;i<=rec_event->GetMult();i++) cout << i << " Z=" << rec_event->GetParticle(i)->GetZ()<<" status="<<rec_event->GetParticle(i)->GetStatus() <<endl;
-      }
-      while (nchanged);
+      } while (nchanged);
 
       return;
    }
@@ -1223,8 +1196,7 @@ KVNameValueList* KVMultiDetArray::DetectParticle_TGEO(KVNucleus* part)
                   Error("DetectParticle_TGEO",
                         "Cannot find detector %s corresponding to particle energy loss %s",
                         det_name.Data(), pname.Data());
-               }
-               else {
+               } else {
                   Double_t de = param->GetDouble();
                   if (!NVL) NVL = new KVNameValueList;
                   NVL->SetValue(curDet->GetName(), de);
@@ -1344,8 +1316,7 @@ void KVMultiDetArray::AddACQParam(KVACQParam* par)
    }
    if (par) {
       fACQParams->Add(par);
-   }
-   else
+   } else
       Warning("AddACQParam", "Null pointer passed as argument");
 }
 
@@ -1516,8 +1487,7 @@ void KVMultiDetArray::GetDetectorEvent(KVDetectorEvent* detev, const TSeqCollect
             if ((grp = det->GetGroup()) && grp->GetParents()->Contains(this)) detev->AddGroup(grp);
          }
       }
-   }
-   else {
+   } else {
       //loop over groups
       unique_ptr<KVSeqCollection> fGroups(GetStructures()->GetSubListWithType("GROUP"));
 
@@ -1660,8 +1630,7 @@ void KVMultiDetArray::DetectParticleIn(const Char_t* detname,
       KVNameValueList* nvl = 0;
       kvp->SetMomentum(kvp->GetEnergy(), kvd->GetRandomDirection("random"));
       if ((nvl = DetectParticle(kvp))) delete nvl;
-   }
-   else {
+   } else {
       Error("DetectParticleIn", "Detector %s not found", detname);
    }
 }
@@ -1716,8 +1685,7 @@ KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, 
       if (codes != "") mda->fAcceptECodes.Set(codes);
       // set dataset-dependent condition for seeding reconstructed nuclei
       mda->SetPartSeedCond(KVBase::GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.ParticleSeedCond", mda->GetName()), ""));
-   }
-   else {
+   } else {
       mda = gMultiDetArray;
    }
    // set parameters if required & allowed & not done yet
@@ -1972,8 +1940,7 @@ TList* KVMultiDetArray::GetStatusOfIDTelescopes()
    if (!fStatusIDTelescopes) {
       fStatusIDTelescopes = new TList;
       fStatusIDTelescopes->SetOwner(kTRUE);
-   }
-   else {
+   } else {
       fStatusIDTelescopes->Delete();
    }
    if (!fIDTelescopes || !fIDTelescopes->GetEntries()) return fStatusIDTelescopes;
@@ -2050,8 +2017,7 @@ TList* KVMultiDetArray::GetCalibrationStatusOfDetectors()
    if (!fCalibStatusDets) {
       fCalibStatusDets = new TList;
       fCalibStatusDets->SetOwner(kTRUE);
-   }
-   else {
+   } else {
       fCalibStatusDets->Delete();
    }
    if (!GetDetectors()->GetEntries()) return fCalibStatusDets;
@@ -2215,8 +2181,7 @@ void KVMultiDetArray::SetDetectorThicknesses()
          Double_t thick = thickdat.GetValue(det->GetName(), 0.0);
          det->SetThickness(thick);
          //Info("SetDetectorThicknesses", "Set thickness of %s to %f", det->GetName(), thick);
-      }
-      else {
+      } else {
          Char_t i = 0;
          TString absname;
          absname.Form("%s.Abs%d", det->GetName(), (Int_t)i);
@@ -2394,8 +2359,7 @@ void KVMultiDetArray::GetAlignedIDTelescopesForDetector(KVDetector* det, TCollec
 
          GetIDTelescopes(det1, det2, list);
       }
-   }
-   else {
+   } else {
       //The following line is in case there are no detectors aligned
       //with 'det', but 'det' acts as an IDTelescope all by itself.
       //In this case we expect KVMultiDetArray::GetIDTelescopes
@@ -2540,8 +2504,7 @@ void KVMultiDetArray::SetPresent(KVDetector* det, Bool_t present)
          gr->Remove(det);
          GetIDTelescopesForGroup(gr, GetListOfIDTelescopes());
 
-      }
-      else {
+      } else {
          Warning("SetPresent", "Method implemented only in case detector is alone in telescope");
       }
    }
@@ -2587,8 +2550,7 @@ void KVMultiDetArray::SetDetecting(KVDetector* det, Bool_t detecting)
       KVGroup* gr = det->GetGroup();
       PrepareModifGroup(gr, det);
       GetIDTelescopesForGroup(gr, GetListOfIDTelescopes());
-   }
-   else {
+   } else {
       KVGroup* gr = GetGroupWithAngles(det->GetTheta(), det->GetPhi());
       PrepareModifGroup(gr, det);
       GetIDTelescopesForGroup(gr, GetListOfIDTelescopes());
@@ -2648,8 +2610,7 @@ void KVMultiDetArray::Draw(Option_t* option)
          if (!opt.End()) {
             KVNumberList zlist(opt.Next());
             GetNavigator()->DrawTracks(&zlist);
-         }
-         else
+         } else
             GetNavigator()->DrawTracks();
       }
 #ifdef WITH_OPENGL
@@ -2659,8 +2620,7 @@ void KVMultiDetArray::Draw(Option_t* option)
       view->SetSmoothLines(kTRUE);
       view->SetSmoothPoints(kTRUE);
 #endif
-   }
-   else Error("Draw", "Only ROOT geometries can be viewed");
+   } else Error("Draw", "Only ROOT geometries can be viewed");
 
 }
 
@@ -2820,8 +2780,7 @@ void KVMultiDetArray::RecursiveTrajectoryClustering(KVGeoDetectorNode* N, KVUniq
             }
          }
       }
-   }
-   else if (N->GetNTraj() == 1) {
+   } else if (N->GetNTraj() == 1) {
       // single-trajectory node.
       // work along trajectory adding nodes to group
       KVGeoDNTrajectory* traj = (KVGeoDNTrajectory*)N->GetTrajectories()->First();
@@ -2833,8 +2792,7 @@ void KVMultiDetArray::RecursiveTrajectoryClustering(KVGeoDetectorNode* N, KVUniq
          detectors_of_group.Add(node);
          RecursiveTrajectoryClustering(node, tried_trajectories, multitraj_nodes, detectors_of_group);
       }
-   }
-   else {
+   } else {
       // orphan node? single-detector array?
       detectors_of_group.Add(N);
    }
@@ -3010,13 +2968,11 @@ Bool_t KVMultiDetArray::HandleRawDataEvent(KVRawDataReader* rawdata)
 #ifdef WITH_MFM
       fHandledRawData = handle_raw_data_event_mfmfile((KVMFMDataFileReader&)(*rawdata));
 #endif
-   }
-   else if (rawdata->GetDataFormat() == "PROTOBUF") {
+   } else if (rawdata->GetDataFormat() == "PROTOBUF") {
 #ifdef WITH_PROTOBUF
       fHandledRawData = handle_raw_data_event_protobuf((KVProtobufDataReader&)(*rawdata));
 #endif
-   }
-   else if (rawdata->GetDataFormat() == "EBYEDAT") {
+   } else if (rawdata->GetDataFormat() == "EBYEDAT") {
       fHandledRawData = handle_raw_data_event_ebyedat((KVGANILDataReader&)(*rawdata));
    }
    if (fHandledRawData) {
@@ -3105,8 +3061,7 @@ unique_ptr<KVFileReader> KVMultiDetArray::GetKVFileReader(KVExpDB* db, const Cha
    if (!fr->OpenFileToRead(fp.Data())) {
       Error(meth, "Error in opening file %s", fp.Data());
       fr.reset(nullptr);
-   }
-   else
+   } else
       Info(meth, "Reading %s file", fp.Data());
    return fr;
 }
@@ -3188,7 +3143,9 @@ void KVMultiDetArray::ReadCalibFile(const Char_t* filename, KVExpDB* db, KVDBTab
    opt_list.Begin(" ");
    while (!opt_list.End()) {
       KVString opt = opt_list.Next();
-      options.SetValue(opt, env.GetValue(opt, ""));
+      KVString opt_val = env.GetValue(opt, "");
+      opt_val.Remove(TString::kBoth, ' ');
+      options.SetValue(opt, opt_val.Data());
    }
 
    if (options.GetTStringValue("SignalIn") == "") {
@@ -3264,8 +3221,7 @@ Bool_t KVMultiDetArray::handle_raw_data_event_mfmfile(MFMBufferReader& mfmreader
 
    if (mfmreader.IsFrameReadMerge()) {
       return handle_raw_data_event_mfmmergeframe(mfmreader.GetMergeManager());
-   }
-   else {
+   } else {
       return handle_raw_data_event_mfmframe(mfmreader.GetFrameRead());
    }
    return kFALSE;
@@ -3325,8 +3281,7 @@ Bool_t KVMultiDetArray::handle_raw_data_event_mfmframe_ebyedat(const MFMEbyedatF
          acqpar->SetData(val);
          fFiredACQParams.Add(acqpar);
          ok = kTRUE;
-      }
-      else
+      } else
          fReconParameters.SetValue(Form("ACQPAR.%s.%s", GetName(), lab.c_str()), val);
    }
 
