@@ -46,7 +46,7 @@ public:
 
    void Clear(Option_t* opt = "");
 
-   ClassDef(KVINDRACodes, 2)    //Particle identification and calibration status (Veda6)
+   ClassDef(KVINDRACodes, 3)    //Particle identification and calibration status (Veda6)
 };
 
 #endif
