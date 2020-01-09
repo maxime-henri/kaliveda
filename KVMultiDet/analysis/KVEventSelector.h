@@ -103,11 +103,11 @@ public:
       ltree->Clear();
       delete ltree;
       ltree = 0;
-   };
+   }
    void SetEventsReadInterval(Long64_t N)
    {
       fEventsReadInterval = N;
-   };
+   }
    virtual Int_t   Version() const
    {
       return 3;
@@ -167,24 +167,24 @@ public:
    virtual void InitAnalysis()
    {
       AbstractMethod("InitAnalysis");
-   };
+   }
    virtual void InitRun()
    {
       AbstractMethod("InitRun");
-   };
+   }
    virtual Bool_t Analysis()
    {
       //AbstractMethod("Analysis");
       return kTRUE;
-   };
+   }
    virtual void EndRun()
    {
       AbstractMethod("EndRun");
-   };
+   }
    virtual void EndAnalysis()
    {
       AbstractMethod("EndAnalysis");
-   };
+   }
    //handling global variables for analysis
    virtual void SetGVList(KVGVList* list)
    {
@@ -192,7 +192,7 @@ public:
       //In this case it is the user's responsibility to delete the list
       //at the end of the analysis.
       gvlist = list;
-   };
+   }
    virtual KVGVList* GetGVList(void) const
    {
       //Access to the internal list of global variables
@@ -203,7 +203,7 @@ public:
          const_cast < KVEventSelector*>(this)->SetBit(kDeleteGVList);
       }
       return gvlist;
-   };
+   }
    virtual void AddGV(KVVarGlob* vg)
    {
       //Add the global variable "vg" to the list of variables for the analysis.
@@ -212,7 +212,7 @@ public:
          Error("AddGV(KVVarGlob*)", "KVVarGlob pointer is null");
       else
          GetGVList()->Add(vg);
-   };
+   }
    virtual KVVarGlob* AddGV(const Char_t* class_name, const Char_t* name);
    virtual KVVarGlob* GetGV(const Char_t* name) const
    {
@@ -221,15 +221,15 @@ public:
       //This is equivalent to GetGVList()->GetGV( name ).
 
       return GetGVList()->GetGV(name);
-   };
+   }
    virtual void RecalculateGlobalVariables();
    Bool_t AtEndOfRun(void)
    {
       // Check whether the end of run is reached for the current tree
       return (fTreeEntry + 1 == fChain->GetTree()->GetEntries());
-   };
+   }
 
-   virtual void SetParticleConditions(const KVParticleCondition&, const KVString& = "");
+   void SetParticleConditions(const KVParticleCondition&, const KVString& = "");
    void SetParticleConditionsParticleClassName(const KVString& t)
    {
       fPartName = t;
