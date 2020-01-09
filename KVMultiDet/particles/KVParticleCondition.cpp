@@ -185,6 +185,9 @@ void KVParticleCondition::Copy(TObject& obj) const
    KVBase::Copy(obj);
    ((KVParticleCondition&) obj).Set(fCondition.Data());
    ((KVParticleCondition&) obj).fOptOK = fOptOK;
+   // force first call to Test to try optimization
+   // if existing optimized version exists in static list, pointer will be reset
+   ((KVParticleCondition&) obj).fOptimal = nullptr;
    if (fClassName != "")((KVParticleCondition&) obj).SetParticleClassName(fClassName.Data());
    if (cf) {
       ((KVParticleCondition&) obj).SetClassFactory(cf);
@@ -336,7 +339,7 @@ void KVParticleCondition::Optimize()
    /* check that the same condition has not already been optimized */
    fOptimal = (KVParticleCondition*)fgOptimized.FindObject(GetName());
    if (fOptimal) {
-      //Info("Optimize", "Using existing optimized condition %p", fOptimal);
+      Info("Optimize", "Using existing optimized condition %p", fOptimal);
       fOptimal->fNUsing++;
       fOptOK = kTRUE;
       return;

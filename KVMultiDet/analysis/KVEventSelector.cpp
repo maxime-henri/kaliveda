@@ -561,7 +561,7 @@ void KVEventSelector::SetParticleConditions(const KVParticleCondition& cond, con
    if (!fPartCond) fPartCond = new KVParticleCondition(cond);
    else *fPartCond = cond;
    if (upcast_class != "") fPartCond->SetParticleClassName(upcast_class);
-   else if (fPartName) fPartCond->SetParticleClassName(fPartName);
+   else if (fPartName != "") fPartCond->SetParticleClassName(fPartName);
 }
 
 //____________________________________________________________________________
