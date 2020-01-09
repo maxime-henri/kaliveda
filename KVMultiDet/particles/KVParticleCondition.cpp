@@ -145,8 +145,13 @@ Bool_t KVParticleCondition::Test(KVNucleus* nuc)
 {
    //Evaluates the condition for the particle in question
    //
+   //If no condition has been set (object created with default ctor) this returns
+   //kTRUE for all nuclei.
+   //
    //If optimisation fails (see method Optimize()), the condition will always
    //be evaluated as 'kFALSE' for all particles
+
+   if (fCondition == "") return kTRUE;
 
    if (!fOptimal) Optimize();
 
