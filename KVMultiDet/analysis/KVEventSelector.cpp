@@ -340,11 +340,11 @@ Bool_t KVEventSelector::Process(Long64_t entry)
    if (GetEvent()) {
       KVNucleus* part = 0;
       //apply particle selection criteria
-      if (fPartCond) {
+      if (fPartCond.IsSet()) {
          part = 0;
          GetEvent()->ResetGetNextParticle();
          while ((part = GetEvent()->GetNextParticle("ok"))) {
-            part->SetIsOK(fPartCond->Test(part));
+            part->SetIsOK(fPartCond.Test(part));
          }
       }
       GetEvent()->ResetGetNextParticle();
@@ -558,10 +558,9 @@ void KVEventSelector::SetParticleConditions(const KVParticleCondition& cond, con
    //name of the class to which the methods refer (upcast_class), or you can set it before
    //hand (SetParticleConditionsParticleClassName)
 
-   if (!fPartCond) fPartCond = new KVParticleCondition(cond);
-   else *fPartCond = cond;
-   if (upcast_class != "") fPartCond->SetParticleClassName(upcast_class);
-   else if (fPartName != "") fPartCond->SetParticleClassName(fPartName);
+   fPartCond = cond;
+   if (upcast_class != "") fPartCond.SetParticleClassName(upcast_class);
+   else if (fPartName != "") fPartCond.SetParticleClassName(fPartName);
 }
 
 //____________________________________________________________________________

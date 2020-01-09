@@ -47,7 +47,7 @@ protected :
 
    KVString fBranchName; //name of branch which contains events to analyse
 
-   KVParticleCondition* fPartCond;//(optional) conditions for selecting particles
+   KVParticleCondition fPartCond;//(optional) conditions for selecting particles
    KVString fPartName;//(optional) classname for upcasting in KVParticleCondition::Optimize
 
    Bool_t fFirstEvent;//set to kFALSE after first event is read
@@ -82,7 +82,7 @@ public:
 
    virtual void ParseOptions();
 
-   KVEventSelector(TTree* /*tree*/ = 0) : fChain(0), fAuxChain(0), gvlist(0), fBranchName("data"), fPartCond(0), fFirstEvent(kTRUE),
+   KVEventSelector(TTree* /*tree*/ = 0) : fChain(0), fAuxChain(0), gvlist(0), fBranchName("data"), fFirstEvent(kTRUE),
       fEventsRead(0), fEventsReadInterval(100), fNotifyCalled(kFALSE), fDisableCreateTreeFile(kFALSE)
    {
       lhisto = new KVHashList();
@@ -96,7 +96,6 @@ public:
          gvlist = 0;
          ResetBit(kDeleteGVList);
       }
-      SafeDelete(fPartCond);
       lhisto->Clear();
       delete lhisto;
       lhisto = 0;

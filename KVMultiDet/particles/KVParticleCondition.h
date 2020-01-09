@@ -62,6 +62,11 @@ public:
    {
       fgOptimized.Print();
    }
+   Bool_t IsSet() const
+   {
+      // Return kTRUE if a condition/selection has been defined
+      return fCondition != "";
+   }
 
    ClassDef(KVParticleCondition, 1) //Implements parser of particle selection criteria
 };
