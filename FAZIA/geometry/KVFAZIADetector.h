@@ -5,7 +5,6 @@
 #define __KVFAZIADETECTOR_H
 
 #include "KVDetector.h"
-class KVFAZIACalibrator;
 class KVSignal;
 
 #define __KVFD_methname(X, Y)  Get ## X ## Y
