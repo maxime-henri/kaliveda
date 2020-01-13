@@ -25,6 +25,7 @@ protected:
    TH1F* h1;
    Double_t fPhiPlan;
    TRotation rr;
+   virtual void define_output_filename();
 
 public:
 
@@ -36,8 +37,9 @@ public:
    virtual Bool_t ReadEvent();
    virtual Bool_t ReadNucleus();
 
-   ClassDef(KVSimReader_HIPSE_asym, 1) //Read ascii file for asymptotic events of the HIPSE code after SIMON deexcitation
+   void ConvertEventsInFile(KVString filename);
 
+   ClassDef(KVSimReader_HIPSE_asym, 1) //Read ascii file for asymptotic events of the HIPSE code after SIMON deexcitation
 };
 
 #endif

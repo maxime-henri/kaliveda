@@ -158,3 +158,24 @@ Bool_t KVSimReader_HIPSE_asym::ReadNucleus()
 
 
 }
+
+void KVSimReader_HIPSE_asym::define_output_filename()
+{
+   // ROOT file called: HIPSE_[PROJ]_[TARG]_[EBEAM]AMeV_ASYM.root
+   // Call after reading file header
+
+   SetROOTFileName(Form("HIPSE_%s_%s_%.1fAMeV_ASYM.root",
+                        proj.GetSymbol(), targ.GetSymbol(), ebeam));
+}
+
+
+void KVSimReader_HIPSE_asym::ConvertEventsInFile(KVString filename)
+{
+   if (!OpenFileToRead(filename)) return;
+   if (!ReadHeader()) return;
+   define_output_filename();
+   tree_title.Form("HIPSE secondary events %s + %s %.1f MeV/nuc.",
+                   proj.GetSymbol(), targ.GetSymbol(), ebeam);
+   Run();
+   CloseFile();
+}
