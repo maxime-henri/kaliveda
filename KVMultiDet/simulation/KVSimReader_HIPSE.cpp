@@ -36,9 +36,9 @@ KVSimReader_HIPSE::~KVSimReader_HIPSE()
 
 void KVSimReader_HIPSE::ReadFile()
 {
-
-   AddObject(new TH1F("impact_parameter", "distri", 200, 0, 20));
-   h1 = (TH1F*)GetLinkedObjects()->Last();
+   h1 = new TH1F("impact_parameter", "distri", 200, 0, 20);
+   AddObject(h1);
+   h1->SetDirectory(nullptr);//avoid double deletion on ROOT file close
 
    while (IsOK()) {
       while (ReadEvent()) {
