@@ -36,8 +36,6 @@ void KVSimReader_HIPSE::ReadFile()
 
    AddObject(h1 = new TH1F("impact_parameter", "distri", 200, 0, 20));
 
-   if (!ReadHeader()) return;
-
    while (IsOK()) {
       while (ReadEvent()) {
          if (nevt % 1000 == 0) Info("ReadFile", "%d evts lus", nevt);
@@ -46,12 +44,6 @@ void KVSimReader_HIPSE::ReadFile()
       }
    }
 
-   //AddObject(h1);
-   /*
-   Int_t netot = nv->GetEntries();
-   for (Int_t ne=0; ne<netot; ne+=1)
-      AddObjectToBeWrittenWithTree(nv->RemoveAt(0));
-   */
 }
 
 Bool_t KVSimReader_HIPSE::ReadHeader()
@@ -64,6 +56,7 @@ Bool_t KVSimReader_HIPSE::ReadHeader()
       case 1:
          AddInfo("Aproj", GetReadPar(0).Data());
          AddInfo("Zproj", GetReadPar(1).Data());
+         proj.SetZandA(GetReadPar(1).Atoi(), GetReadPar(0).Atoi());
          break;
       default:
          return kFALSE;
@@ -76,6 +69,7 @@ Bool_t KVSimReader_HIPSE::ReadHeader()
       case 1:
          AddInfo("Atarg", GetReadPar(0).Data());
          AddInfo("Ztarg", GetReadPar(1).Data());
+         targ.SetZandA(GetReadPar(1).Atoi(), GetReadPar(0).Atoi());
 
          break;
       default:
@@ -89,6 +83,7 @@ Bool_t KVSimReader_HIPSE::ReadHeader()
          return kFALSE;
       case 1:
          AddInfo("Ebeam", GetReadPar(0).Data());
+         ebeam = GetReadPar(0).Atof();
          return kTRUE;
 
 
@@ -275,4 +270,24 @@ Bool_t KVSimReader_HIPSE::ReadNucleus()
 
 
 
+}
+void KVSimReader_HIPSE::define_output_filename()
+{
+   // ROOT file called: HIPSE_[PROJ]_[TARG]_[EBEAM]AMeV.root
+   // Call after reading file header
+
+   SetROOTFileName(Form("HIPSE_%s_%s_%.1fAMeV.root",
+                        proj.GetSymbol(), targ.GetSymbol(), ebeam));
+}
+
+
+void KVSimReader_HIPSE::ConvertEventsInFile(KVString filename)
+{
+   if (!OpenFileToRead(filename)) return;
+   if (!ReadHeader()) return;
+   define_output_filename();
+   tree_title.Form("HIPSE primary events %s + %s %.1f MeV/nuc.",
+                   proj.GetSymbol(), targ.GetSymbol(), ebeam);
+   Run();
+   CloseFile();
 }

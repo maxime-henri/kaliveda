@@ -18,6 +18,9 @@ class KVSimReader_HIPSE : public KVSimReader {
 
 protected:
    TH1F* h1;
+   KVNucleus proj, targ;
+   Double_t ebeam;
+   virtual void define_output_filename();
 
 public:
    KVSimReader_HIPSE();
@@ -48,6 +51,7 @@ public:
       sval.Form("%lf", val);
       AddInfo("Percentage of N-N collisions", sval.Data());
    }
+   void ConvertEventsInFile(KVString filename);
 
    ClassDef(KVSimReader_HIPSE, 1) //Read ascii file for events of the HIPSE code after clusterization
 };
