@@ -121,3 +121,10 @@ KVFrameTransform::KVFrameTransform(const TRotation& r, const TVector3& boost, Bo
             boost.Z() / KVParticle::C());
    }
 }
+
+KVFrameTransform& KVFrameTransform::operator=(const KVFrameTransform& p)
+{
+   // assignment by copy
+
+   return dynamic_cast<KVFrameTransform&>(TLorentzRotation::operator=(p));
+}

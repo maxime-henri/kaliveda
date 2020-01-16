@@ -18,6 +18,8 @@ public:
 
    virtual ~KVFrameTransform() {}
 
+   KVFrameTransform& operator=(const KVFrameTransform&);
+
    ClassDef(KVFrameTransform, 1) //Utility class for kinematical transformations of KVParticle class
 };
 

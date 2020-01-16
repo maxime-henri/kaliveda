@@ -17,13 +17,13 @@ protected:
    Double_t fDensity;   //density of the nucleus in nuc.fm-3
 public:
 
-   KVSimNucleus() : KVNucleus() {}
-   KVSimNucleus(Int_t z, Int_t a = 0, Double_t ekin = 0) : KVNucleus(z, a, ekin) {}
-   KVSimNucleus(Int_t z, Double_t t, TVector3& p) : KVNucleus(z, t, p) {}
-   KVSimNucleus(Int_t z, Int_t a, TVector3 p) : KVNucleus(z, a, p) {}
-   KVSimNucleus(const Char_t* sym, Double_t EperA = 0) : KVNucleus(sym, EperA) {}
+   KVSimNucleus() : KVNucleus(), fDensity(0.0) {}
+   KVSimNucleus(Int_t z, Int_t a = 0, Double_t ekin = 0) : KVNucleus(z, a, ekin), fDensity(0.0) {}
+   KVSimNucleus(Int_t z, Double_t t, TVector3& p) : KVNucleus(z, t, p), fDensity(0.0) {}
+   KVSimNucleus(Int_t z, Int_t a, TVector3 p) : KVNucleus(z, a, p), fDensity(0.0) {}
+   KVSimNucleus(const Char_t* sym, Double_t EperA = 0) : KVNucleus(sym, EperA), fDensity(0.0) {}
    KVSimNucleus(const KVSimNucleus&);
-   KVSimNucleus(const KVNucleus& n) : KVNucleus(n) {}
+   KVSimNucleus(const KVNucleus& n) : KVNucleus(n), fDensity(0.0) {}
 
    virtual ~KVSimNucleus() {}
 
@@ -118,6 +118,7 @@ public:
 
    KVSimNucleus operator+(const KVSimNucleus& rhs) const;
    KVSimNucleus& operator+=(const KVSimNucleus& rhs);
+   KVSimNucleus& operator=(const KVSimNucleus&);
 
    ClassDef(KVSimNucleus, 4) //Nuclear particle in a simulated event
 

@@ -38,28 +38,29 @@ public:
       : TDatime((const TDatime&)d)
    {
       init();
-   };
+   }
+   KVDatime& operator=(const KVDatime&);
    KVDatime(const TDatime& d)
       : TDatime(d)
    {
       init();
-   };
+   }
    KVDatime(UInt_t tloc, Bool_t dosDate = kFALSE)
       : TDatime(tloc, dosDate)
    {
       init();
-   };
+   }
    KVDatime(Int_t date, Int_t time)
       : TDatime(date, time)
    {
       init();
-   };
+   }
    KVDatime(Int_t year, Int_t month, Int_t day,
             Int_t hour, Int_t min, Int_t sec)
       : TDatime(year, month, day, hour, min, sec)
    {
       init();
-   };
+   }
    virtual ~ KVDatime();
 
    void SetGanacqDate(const Char_t* GanacqDateString);

@@ -111,6 +111,11 @@ KVDatime::KVDatime(const Char_t* DateString, EKVDateFormat f)
    }
 }
 
+KVDatime& KVDatime::operator=(const KVDatime& d)
+{
+   // copy assignment operator
+   return dynamic_cast<KVDatime&>(TDatime::operator=(d));
+}
 
 KVDatime::~KVDatime()
 {

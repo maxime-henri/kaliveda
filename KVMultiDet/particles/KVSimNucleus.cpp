@@ -35,7 +35,7 @@ void KVSimNucleus::Copy(TObject& obj) const
    KVNucleus::Copy(obj);
    ((KVSimNucleus&)obj).position = position;
    ((KVSimNucleus&)obj).angmom = angmom;
-
+   ((KVSimNucleus&)obj).fDensity = fDensity;
 }
 
 //___________________________
@@ -111,6 +111,14 @@ KVSimNucleus& KVSimNucleus::operator+=(const KVSimNucleus& rhs)
    KVSimNucleus temp = (*this) + rhs;
    (*this) = temp;
    return *this;
+}
+
+KVSimNucleus& KVSimNucleus::operator=(const KVSimNucleus& p)
+{
+   // copy assignment operator
+   if (&p != this)
+      p.Copy(*this);
+   return (*this);
 }
 
 Double_t KVSimNucleus::GetEnergyLoss(const TString& detname) const
