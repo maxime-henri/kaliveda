@@ -124,6 +124,8 @@ void KVQ3::UpdatePSAParameter(KVDBParameterList* par)
 
 void KVQ3::TreateSignal()
 {
+   if (PSAHasBeenComputed()) return;
+
    if (!IsLongEnough()) return;
    if (!TestWidth())
       ChangeChannelWidth(GetChannelWidth());
@@ -133,6 +135,8 @@ void KVQ3::TreateSignal()
    FIR_ApplyTrapezoidal(fFastTrapRiseTime, fFastTrapFlatTop);
    ComputeAmplitude();
    fFastAmplitude = GetAmplitude();
+
+
 
    SetADCData();
 

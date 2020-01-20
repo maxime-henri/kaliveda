@@ -287,8 +287,10 @@ Bool_t KVFAZIADetector::Fired(Option_t*) const
          if (sig->IsOK()) {
             if (sig->IsCharge()) {
                //pre process to use the test method KVSignal::IsFired()
-               sig->ComputeEndLine();
-               sig->TreateSignal();
+               if (!sig->PSAHasBeenComputed()) {
+                  sig->ComputeEndLine();
+                  sig->TreateSignal();
+               }
                if (sig->IsFired()) {
                   return kTRUE;
                }

@@ -105,6 +105,8 @@ Double_t KVI2::ComputeBaseLine()
 
 void KVI2::TreateSignal()
 {
+   if (PSAHasBeenComputed()) return;
+
    if (!IsLongEnough()) return;
    if (!TestWidth())
       ChangeChannelWidth(GetChannelWidth());
