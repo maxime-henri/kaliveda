@@ -31,10 +31,25 @@ protected:
    Float_t fECSI;//csi contribution to energy
    Float_t fESI1;//si1 contribution to energy
    Float_t fESI2;//si2 contribution to energy
+   Float_t fECSIPIETRO; //ECSI obtained from Si1 Si2
+
+   Int_t fEpattern;
 
    Bool_t fCoherent;
    Bool_t fPileup;
+private:
+   void CalibrateSi1();
+   void CalibrateSi2();
+   void CalibrateCsI(Bool_t override_light = false);
+   void CalibrateCsI_Heavy();
+   void CalibrateCsI_Light();
 
+   void CheckEnergyConsistencySi1();
+   void CheckEnergyConsistencySi2();
+   void CheckEnergyConsistencyCsI();
+
+   int ECodeRefinementZ1_Sandro(int idtype, double error_si1, double error_si2);
+   int ECodeRefinementZ1_Pietro(int idtype, double error_si1, double error_si2);
 public:
 
    KVFAZIAReconNuc();
@@ -48,11 +63,55 @@ public:
    void Print(Option_t* option = "") const;
    virtual void Identify();
 
+   Float_t eECSI;// scarto rispetto all'energia rilasciata in csi
+   Float_t eESI1;// scarto rispetto all'energia rilasciata in si1
+   Float_t eESI2;// scarto rispetto all'energia rilasciata in si2
+
+   Float_t aESI1;
+   Float_t aESI2;
+   Float_t aECSI;
+
+   Int_t GetEpattern()
+   {
+      return fEpattern;
+   }
+
+   Float_t GetAvatarEnergySI1()
+   {
+      return aESI1;
+   };
+
+   Float_t GetAvatarEnergySI2()
+   {
+      return aESI2;
+   };
+
+   Float_t GetAvatarEnergyCSI()
+   {
+      return aECSI;
+   };
+
+   Float_t GetErrorEnergySI1()
+   {
+      return eESI1;
+   };
+
+   Float_t GetErrorEnergySI2()
+   {
+      return eESI2;
+   };
+
+   Float_t GetErrorEnergyCSI()
+   {
+      return eECSI;
+   };
+
    virtual Bool_t CoherencySi(KVIdentificationResult& theID);
    virtual Bool_t CoherencySiSi(KVIdentificationResult& theID);
    virtual Bool_t CoherencySiCsI(KVIdentificationResult& theID);
 
    virtual void Calibrate();
+   virtual void Calibrate_Modular(Bool_t override_light = false);
 
    Float_t GetEnergySI1()
    {
@@ -79,6 +138,11 @@ public:
    {
       // Return the calculated CsI contribution to the particle's energy
       return fECSI;
+   };
+
+   Float_t GetEnergyCSISYM()
+   {
+      return fECSIPIETRO;
    };
 
    KVFAZIADetector* Get(const Char_t* label) const;
