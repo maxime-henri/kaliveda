@@ -105,7 +105,7 @@ void KVFAZIAGroupReconstructor::CalibrateParticle(KVReconstructedNucleus* PART)
       Double_t E_tot = PART->GetEnergy() + E_targ;
       PART->SetEnergy(E_tot);
       // set particle momentum from telescope dimensions (random)
-      PART->GetAnglesFromStoppingDetector();
+      PART->GetAnglesFromReconstructionTrajectory();
       PART->SetECode(0);
       if (punch_through)   PART->SetECode(2);
       if (incoherency)     PART->SetECode(3);
@@ -136,7 +136,7 @@ void KVFAZIAGroupReconstructor::CalibrateParticle(KVReconstructedNucleus* PART)
             PART->SetECode(1);
             PART->SetIsCalibrated();
             PART->SetEnergy(E_tot);
-            PART->GetAnglesFromStoppingDetector();
+            PART->GetAnglesFromReconstructionTrajectory();
          }
       }
    }

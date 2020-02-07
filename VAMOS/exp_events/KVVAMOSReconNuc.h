@@ -138,7 +138,7 @@ public:
    virtual void     Calibrate();
    virtual Bool_t   CheckTrackingCoherence();
    virtual void     Clear(Option_t* t = "");
-   virtual void     GetAnglesFromStoppingDetector(Option_t* opt = "random");
+   virtual void     GetAnglesFromReconstructionTrajectory(Option_t* opt = "random");
    using     KVReconstructedNucleus::GetEnergy;
    Int_t     GetDetectorIndex(const Char_t* det_label) const;
    Double_t  GetEnergy(const Char_t* det_label)        const;

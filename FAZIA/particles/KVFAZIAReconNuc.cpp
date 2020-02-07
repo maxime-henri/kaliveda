@@ -588,7 +588,7 @@ void KVFAZIAReconNuc::CalibrateSi1()
       Double_t E_tot = GetEnergy() + E_targ;
       SetEnergy(E_tot);
       // set particle momentum from telescope dimensions (random)
-      GetAnglesFromStoppingDetector();
+      GetAnglesFromReconstructionTrajectory();
       SetECode(0);
       if (punch_through)   SetECode(2);
       if (incoherency)     SetECode(3);
@@ -697,7 +697,7 @@ void KVFAZIAReconNuc::CalibrateSi2()
       Double_t E_tot = GetEnergy() + E_targ;
       SetEnergy(E_tot);
       // set particle momentum from telescope dimensions (random)
-      GetAnglesFromStoppingDetector();
+      GetAnglesFromReconstructionTrajectory();
       SetECode(0);
       if (punch_through)   SetECode(2);
       if (incoherency)     SetECode(3);
@@ -726,7 +726,7 @@ void KVFAZIAReconNuc::CalibrateSi2()
          SetECode(1);
          SetIsCalibrated();
          SetEnergy(E_tot);
-         GetAnglesFromStoppingDetector();
+         GetAnglesFromReconstructionTrajectory();
       }
       else {
          if (!IsAMeasured()) {
@@ -745,7 +745,7 @@ void KVFAZIAReconNuc::CalibrateSi2()
          SetECode(1);
          SetIsCalibrated();
          SetEnergy(E_tot);
-         GetAnglesFromStoppingDetector();
+         GetAnglesFromReconstructionTrajectory();
       }
    }
    delete [] eloss;
@@ -862,7 +862,7 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
       Double_t E_tot = GetEnergy() + E_targ;
       SetEnergy(E_tot);
       // set particle momentum from telescope dimensions (random)
-      GetAnglesFromStoppingDetector();
+      GetAnglesFromReconstructionTrajectory();
       SetECode(0);
       if (punch_through)   SetECode(2);
       if (incoherency)     SetECode(3);
@@ -892,7 +892,7 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
       SetECode(1);
       SetIsCalibrated();
       SetEnergy(E_tot);
-      GetAnglesFromStoppingDetector();
+      GetAnglesFromReconstructionTrajectory();
    }
    else if (ndet_calib == 1) {
       if (Si2Calib) { //recover Esi1 and EcsI from Esi2
@@ -916,7 +916,7 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
          SetECode(1);
          SetIsCalibrated();
          SetEnergy(E_tot);
-         GetAnglesFromStoppingDetector();
+         GetAnglesFromReconstructionTrajectory();
       }
       else { //recover Esi2 and ECSI from ESi1
          if (!IsAMeasured()) {
@@ -939,7 +939,7 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
          SetECode(6);
          SetIsCalibrated();
          SetEnergy(E_tot);
-         GetAnglesFromStoppingDetector();
+         GetAnglesFromReconstructionTrajectory();
       }
    }
    delete [] eloss;

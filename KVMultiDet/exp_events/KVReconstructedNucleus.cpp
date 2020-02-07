@@ -525,33 +525,35 @@ void KVReconstructedNucleus::AnalyseParticlesInGroup(KVGroup* grp)
 
 //___________________________________________________________________________
 
-void KVReconstructedNucleus::GetAnglesFromStoppingDetector(Option_t* opt)
+void KVReconstructedNucleus::GetAnglesFromReconstructionTrajectory(Option_t* opt)
 {
-   // Calculate angles theta and phi for reconstructed nucleus based
-   // on detector in which it stopped*. The nucleus'
-   // momentum is set using these angles, its mass and its kinetic energy.
-   // The (optional) option string can be "random" or "mean".
-   // If "random" (default) the angles are drawn at random between the
-   // over the surface of the detector.
-   // If "mean" the (theta,phi) position of the centre of the detector
-   // is used to fix the nucleus' direction.
+   // Calculate angles theta and phi for nucleus based on the detectors on its reconstruction trajectory.
+   // The momentum is set using these angles, its mass and its kinetic energy.
    //
-   // *unless the detector directly in front of the stopping detector has
-   //  a smaller solid angle, in which case we use that one (because the
-   //  particle had to pass through the smaller angular range defined by
-   //  the DE-detector)
+   // The detector with the smallest solid angle along the trajectory is the one which defines the
+   // angles for the reconstructed particle.
+   //
+   // The (optional) option string can be "random" or "mean":
+   //
+   // If "random" (default) the angles are drawn at random between the over the surface of the detector.
+   //
+   // If "mean" the (theta,phi) position of the centre of the detector is used to fix the nucleus' direction.
 
-   //don't try if particle has no correctly defined energy
-   if (GetEnergy() <= 0.0)
+
+   if (GetEnergy() <= 0.0)//don't try if particle has no correctly defined energy
       return;
-   if (!GetStoppingDetector())
+   if (!GetReconstructionTrajectory())
       return;
 
-   KVDetector* angle_det = GetStoppingDetector();
-   if (angle_det->GetNode()->GetNDetsInFront()) {
-      KVDetector* d = (KVDetector*)angle_det->GetNode()->GetDetectorsInFront()->First();
-      if (d->GetSolidAngle() < angle_det->GetSolidAngle())
-         angle_det = d;
+   KVDetector* angle_det = nullptr;
+   double small_solid = 1.e+09;
+   GetReconstructionTrajectory()->IterateFrom();
+   KVGeoDetectorNode* n;
+   while ((n = GetReconstructionTrajectory()->GetNextNode())) {
+      if (n->GetDetector()->GetSolidAngle() < small_solid) {
+         angle_det = n->GetDetector();
+         small_solid = n->GetDetector()->GetSolidAngle();
+      }
    }
    if (!strcmp(opt, "random")) {
       //random angles
@@ -596,7 +598,7 @@ void KVReconstructedNucleus::Calibrate()
       Double_t E_tot = GetEnergy() + E_targ;
       SetEnergy(E_tot);
       // set particle momentum from telescope dimensions (random)
-      GetAnglesFromStoppingDetector();
+      GetAnglesFromReconstructionTrajectory();
    }
 }
 

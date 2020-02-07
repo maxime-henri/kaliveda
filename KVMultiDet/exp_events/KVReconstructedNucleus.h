@@ -174,7 +174,7 @@ public:
       fAnalStatus = a;
    }
 
-   virtual void GetAnglesFromStoppingDetector(Option_t* opt = "random");
+   virtual void GetAnglesFromReconstructionTrajectory(Option_t* opt = "random");
    KVGroup* GetGroup() const
    {
       //Return pointer to group in which the particle is detected

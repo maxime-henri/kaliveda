@@ -179,7 +179,7 @@ void KVINDRAGroupReconstructor::CalibrateParticle(KVReconstructedNucleus* PART)
    Double_t E_tot = PART->GetEnergy() + E_targ;
    PART->SetEnergy(E_tot);
    // set particle momentum from telescope dimensions (random)
-   PART->GetAnglesFromStoppingDetector();
+   PART->GetAnglesFromReconstructionTrajectory();
    CheckCsIEnergy(PART);
 }
 

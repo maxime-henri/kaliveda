@@ -92,9 +92,9 @@ void KVReconstructedEvent::Streamer(TBuffer& R__b)
          for (KVEvent::Iterator it = begin(); it != end(); ++it) {
             par = it.pointer<KVReconstructedNucleus>();
             if (HasMeanAngles())
-               par->GetAnglesFromStoppingDetector("mean");
+               par->GetAnglesFromReconstructionTrajectory("mean");
             else
-               par->GetAnglesFromStoppingDetector("random");
+               par->GetAnglesFromReconstructionTrajectory("random");
             //reconstruct fAnalStatus information for unidentified KVReconstructedNucleus
             if (!par->IsIdentified() && par->GetStatus() == 99)        //AnalStatus has not been set for particles in group
                if (par->GetGroup())

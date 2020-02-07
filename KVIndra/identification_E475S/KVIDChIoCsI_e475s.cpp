@@ -154,6 +154,6 @@ void KVIDChIoCsI_e475s::CalculateParticleEnergy(KVReconstructedNucleus* nuc)
    //la particule identifiee / calibree
    nuc->SetEnergy(Einc);
    //set angles from the dimensions of the telescope in which particle detected
-   nuc->GetAnglesFromStoppingDetector();
+   nuc->GetAnglesFromReconstructionTrajectory();
 
 }

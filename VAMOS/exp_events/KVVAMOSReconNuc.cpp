@@ -427,7 +427,7 @@ Bool_t KVVAMOSReconNuc::StoppedInCsI()
 }
 //________________________________________________________________
 
-void KVVAMOSReconNuc::GetAnglesFromStoppingDetector(Option_t*)
+void KVVAMOSReconNuc::GetAnglesFromReconstructionTrajectory(Option_t*)
 {
    // Overwrites the same method of the mother class. This method is obsolete
    // for a nucleus reconstructed in VAMOS because angles are set by the
