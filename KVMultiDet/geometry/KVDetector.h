@@ -309,6 +309,14 @@ public:
       SetAnalysed();
    }
 
+   void RemoveHit(KVNucleus* part)
+   {
+      // Remove from list of particles hitting this detector in an event
+
+      fParticles->Remove(part);
+      if (!fParticles->GetEntries()) SetAnalysed(kFALSE);
+   }
+
    // Return the list of particles hitting this detector in an event
    KVList* GetHits() const
    {

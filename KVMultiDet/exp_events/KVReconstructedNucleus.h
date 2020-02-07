@@ -40,6 +40,7 @@ protected:
    void MakeDetectorList();
    void RebuildReconTraj();
 public:
+   void ReplaceReconTraj(const TString& traj_name);
 
    // status codes given to reconstructed particles by KVGroupReconstructor::AnalyseParticles
    enum {

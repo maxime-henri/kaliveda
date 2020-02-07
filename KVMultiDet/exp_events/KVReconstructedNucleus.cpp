@@ -641,6 +641,36 @@ void KVReconstructedNucleus::RebuildReconTraj()
    }
 }
 
+void KVReconstructedNucleus::ReplaceReconTraj(const TString& traj_name)
+{
+   // Change the particle's reconstruction trajectory to a different one starting from the
+   // same stopping detector (and therefore in the same group).
+   //
+   // trajectory paths are written as "DET_1/DET_2/..."
+
+   KVReconNucTrajectory* new_traj = (KVReconNucTrajectory*)GetGroup()->FindReconTraj(traj_name);
+   if (!new_traj) {
+      Error("ReplaceReconTraj", "Trajectory %s not found - meant to replace %s", traj_name.Data(), fReconTraj->GetTitle());
+      return;
+   }
+   // first iterate over existing trajectory and reset detectors
+   fReconTraj->IterateFrom();
+   KVGeoDetectorNode* n;
+   while ((n = fReconTraj->GetNextNode())) {
+      n->GetDetector()->RemoveHit(this);
+      if (IsIdentified()) n->GetDetector()->IncrementIdentifiedParticles(-1);
+      else n->GetDetector()->IncrementUnidentifiedParticles(-1);
+   }
+   // set new trajectory
+   fReconTraj = new_traj;
+   fReconTraj->IterateFrom();
+   while ((n = fReconTraj->GetNextNode())) {
+      n->GetDetector()->AddHit(this);
+      if (IsIdentified()) n->GetDetector()->IncrementIdentifiedParticles();
+      else n->GetDetector()->IncrementUnidentifiedParticles();
+   }
+}
+
 void KVReconstructedNucleus::SetIdentification(KVIdentificationResult* idr, KVIDTelescope* idt)
 {
    // Set identification of nucleus from informations in identification result object
