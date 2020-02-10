@@ -153,5 +153,5 @@ void KVEventReconstructor::MergeGroupEventFragments()
       int i = fHitGroups[k];
       to_merge.Add(((KVGroupReconstructor*)fGroupReconstructor[i])->GetEventFragment());
    }
-   GetEvent()->MergeEventFragments(&to_merge);// "N" = no group reset
+   GetEvent()->MergeEventFragments(&to_merge, "N");// "N" = no group reset
 }

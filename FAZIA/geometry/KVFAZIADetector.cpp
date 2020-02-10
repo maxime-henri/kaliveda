@@ -90,12 +90,12 @@ void KVFAZIADetector::Copy(TObject& obj) const
 }
 
 //________________________________________________________________
-void  KVFAZIADetector::Clear(Option_t*)
+void  KVFAZIADetector::Clear(Option_t* opt)
 {
+   //If opt="N" we do not reset any raw data, signals, etc
 
-   KVDetector::Clear("");
-   fSignals.Execute("Set", "0");
-
+   KVDetector::Clear(opt);
+   if (strncmp(opt, "N", 1)) fSignals.Execute("Set", "0");
 }
 
 //________________________________________________________________

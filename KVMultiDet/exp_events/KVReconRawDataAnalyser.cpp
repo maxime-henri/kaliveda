@@ -27,6 +27,11 @@ void KVReconRawDataAnalyser::preAnalysis()
    }
 }
 
+void KVReconRawDataAnalyser::postAnalysis()
+{
+   if (gMultiDetArray->HandledRawData()) fEvRecon->GetEvent()->Clear();
+}
+
 void KVReconRawDataAnalyser::postEndRun()
 {
    // the multidetector will be deleted and rebuilt at the beginning of the next run

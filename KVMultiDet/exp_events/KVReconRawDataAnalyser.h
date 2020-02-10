@@ -16,6 +16,7 @@ public:
    void preInitAnalysis();
    void preInitRun();
    void preAnalysis();
+   void postAnalysis();
    void postEndRun();
 
    KVReconstructedEvent* GetReconstructedEvent() const
