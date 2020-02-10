@@ -184,13 +184,20 @@ Bool_t KVSimReader_ELIE::ReadHeader()
 
 Bool_t KVSimReader_ELIE::ReadEvent()
 {
-   // Event structure: (primary events)
+   // Event structure: (primary events) -> OLD WAY, see bellow for recent ELIE calculations
    //   nevt multiplicite b reduit
    //   0 2 0.998654688551
    //   particules dans l'evt
    //   indice_particule  charge_particule masse_particule teta_particule(degres) phi_particule(degres) indice_particule energie d'excitation totale (MeV)
    //   0 27 57 3.27897003986 230.52425244 1109.37002505 0 0.00499304975261
    //   1 80 198 176.726338776 129.481056376 319.364098122 1 0.017344278088
+
+   //   nevt multiplicite b reduit
+   //1 11 0.665404278608
+   //   indice_particule  charge_particule masse_particule teta_particule(degres) phi_particule(degres) E(MeV) E*(MeV) L(hbar)
+   //0 21 45 2.49354294869 78.2453656442 2180.55536792 91.0936851491 1.0
+   //1 20 46 5.25547324063 79.8035650615 7.5872385507 93.1179892635 1.0
+
 
    evt->Clear();
 
@@ -225,13 +232,21 @@ Bool_t KVSimReader_ELIE::ReadEvent()
 
 Bool_t KVSimReader_ELIE::ReadNucleus()
 {
-   // Event structure: (primary events)
+   // Event structure: (primary events) -> OLD WAY, see bellow for recent ELIE calculations
    //   nevt multiplicite b reduit
    //   0 2 0.998654688551
    //   particules dans l'evt
    //   indice_particule  charge_particule masse_particule teta_particule(degres) phi_particule(degres) indice_particule energie d'excitation totale (MeV)
    //   0 27 57 3.27897003986 230.52425244 1109.37002505 0 0.00499304975261
    //   1 80 198 176.726338776 129.481056376 319.364098122 1 0.017344278088
+
+   //   nevt multiplicite b reduit
+   //1 11 0.665404278608
+   //   indice_particule  charge_particule masse_particule teta_particule(degres) phi_particule(degres) E(MeV) E*(MeV) L(hbar)
+   //0 21 45 2.49354294869 78.2453656442 2180.55536792 91.0936851491 1.0
+   //1 20 46 5.25547324063 79.8035650615 7.5872385507 93.1179892635 1.0
+
+
 
    Int_t res = ReadLineAndCheck(8, " ");
    switch (res) {
@@ -242,10 +257,12 @@ Bool_t KVSimReader_ELIE::ReadNucleus()
       case 1:
          nuc->SetZ(GetIntReadPar(1));
          nuc->SetA(GetIntReadPar(2));
-         nuc->SetExcitEnergy(GetDoubleReadPar(7));
+         if (GetDoubleReadPar(6) >= 0.) nuc->SetExcitEnergy(GetDoubleReadPar(6));
          nuc->SetEnergy(GetDoubleReadPar(5));
          nuc->SetTheta(GetDoubleReadPar(3));
          nuc->SetPhi(GetDoubleReadPar(4));
+         if (nuc->GetExcitEnergy() > 0.) nuc->SetAngMom(GetDoubleReadPar(7), 0, 0);
+
          return kTRUE;
          break;
 
