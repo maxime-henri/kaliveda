@@ -316,10 +316,12 @@ KVSimDirGUI::KVSimDirGUI()
    TGButtonGroup* bgroup = new TGButtonGroup(hf, "Filter type");
    TGRadioButton* radiob = new TGRadioButton(bgroup, "Geometric");
    radiob = new TGRadioButton(bgroup, "Geometry+Thresholds");
-   radiob->SetState(kButtonDown);
+//   radiob->SetState(kButtonDown);
    radiob = new TGRadioButton(bgroup, "Full");
+   radiob->SetState(kButtonDown);
    bgroup->Connect("Clicked(Int_t)", "KVSimDirGUI", this, "FilterType(Int_t)");
-   fFilterType = kFTSeuils;
+   fFilterType = kFTFull;
+//   fFilterType = kFTSeuils;
    hf->AddFrame(bgroup, new TGLayoutHints(kLHintsTop | kLHintsLeft | kLHintsExpandY, 2, 2, 2, 2));
 
    TGVerticalFrame* vf1 = new TGVerticalFrame(hf, 20, 20);

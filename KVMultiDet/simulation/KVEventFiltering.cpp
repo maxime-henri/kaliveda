@@ -320,12 +320,15 @@ void KVEventFiltering::InitAnalysis()
       Info("InitAnalysis", "Geometric filter");
    }
    else if (filt == "GeoThresh") {
+      gEnv->SetValue(Form("%s.HasCalibIdentInfos", dataset.Data()), "no");
       gMultiDetArray->SetFilterType(KVMultiDetArray::kFilterType_GeoThresh);
       Info("InitAnalysis", "Geometry + thresholds filter");
    }
    else if (filt == "Full") {
-      gMultiDetArray->SetFilterType(KVMultiDetArray::kFilterType_Full);
-      Info("InitAnalysis", "Full simulation of detector response & calibration");
+      gMultiDetArray->SetFilterType(KVMultiDetArray::kFilterType_GeoThresh);
+      Info("InitAnalysis", "Geometry + thresholds filter + implemented identifications and calibrations.");
+//      gMultiDetArray->SetFilterType(KVMultiDetArray::kFilterType_Full);
+//      Info("InitAnalysis", "Full simulation of detector response & calibration");
    }
    TString kine = GetOpt("Kinematics").Data();
    if (kine == "lab") {
