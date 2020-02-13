@@ -1681,7 +1681,12 @@ KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, 
    //
    //Dataset name is stored in fDataSet
 
-   if (gMultiDetArray) {
+   if (!gDataSet || gDataSet != gDataSetManager->GetDataSet(dataset_name)) {
+      printf("Info in <KVMultiDetArray::MakeMultiDetector>: Changing dataset\n");
+      gDataSetManager->GetDataSet(dataset_name)->cd();
+   }
+
+   if (gMultiDetArray && gMultiDetArray->GetDataSet() != gDataSet->GetName()) {
       printf("Info in <KVMultiDetArray::MakeMultiDetector>: Deleting existing array %s\n", gMultiDetArray->GetName());
       if (gIDGridManager) {
          delete gIDGridManager;
@@ -1690,8 +1695,7 @@ KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, 
       delete gMultiDetArray;
       gMultiDetArray = nullptr;
    }
-   if (!gDataSet || gDataSet != gDataSetManager->GetDataSet(dataset_name))
-      gDataSetManager->GetDataSet(dataset_name)->cd();
+
 
    // Creation of database when dataset is selected for first time may
    // include creation of multidetector array (by calling this method)
