@@ -230,6 +230,7 @@ Bool_t KVEventFiltering::Analysis()
 
 void KVEventFiltering::EndAnalysis()
 {
+   gEnv->SetValue(Form("%s.HasCalibIdentInfos", GetOpt("Dataset").Data()), fIdCalMode);
 }
 
 void KVEventFiltering::EndRun()
@@ -302,6 +303,8 @@ void KVEventFiltering::InitAnalysis()
    KVMultiDetArray::MakeMultiDetector(dataset, run);
    if (run == -1) gMultiDetArray->InitializeIDTelescopes();
    gMultiDetArray->SetSimMode();
+
+   fIdCalMode = gEnv->GetValue(Form("%s.HasCalibIdentInfos", dataset.Data()), "no");
 
    TString geo = GetOpt("Geometry").Data();
    if (geo == "ROOT") {
