@@ -17,6 +17,7 @@ ClassImp(KVLevelScheme)
 /* -->
 <h2>KVLevelScheme</h2>
 <h4>tool to simulate nucleus multi-particle decay</h4>
+Important note: the default energy unit here is keV and not MeV
 <!-- */
 // --> END_HTML
 ////////////////////////////////////////////////////////////////////////////////
@@ -450,10 +451,22 @@ void KVLevelScheme::DrawThreshold(const char* symb, Option_t* option, double ex)
       tte->SetTextSize(txs);
       tte->Draw();
    }
-
-
-
-
    cc->SetWindowSize((ncol) * (dx) * 0.35 * 400, 800);
    hh->GetXaxis()->SetLimits(0, dx * (ncol + 0.5));
+}
+
+double KVLevelScheme::GetThreshold(const char* outnuc)
+{
+   if (!strcmp(outnuc, "")) outnuc = "1H";
+   KVNucleus a(outnuc);
+   KVNucleus tmp = *fCompNuc - a;
+   return tmp.GetExcitEnergy() * -1000.; //returns the threshold in keV
+}
+
+void KVLevelScheme::SetDecayProduct(KVNucleus* nuc, double excit_energy)
+{
+   fDecayProd = nuc;
+   fDecayProd->SetExcitEnergy(excit_energy * 0.001);
+   KVNucleus tmp = *fCompNuc - *fDecayProd;
+   fQvalue = tmp.GetExcitEnergy() * -1.;
 }

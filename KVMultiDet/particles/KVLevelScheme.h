@@ -14,7 +14,7 @@
 
 class KVLevelScheme {
 public:
-   KVNucleus* fNuc1, *fNuc2, *fCompNuc;
+   KVNucleus* fDecayProd, *fCompNuc;
    Double_t fQvalue;
 
    KVList fLevels;
@@ -31,8 +31,8 @@ public:
 protected:
    double func(double xx, double tt);
    double getWidth(double gam, TString unit);
-   int getPI(TString jpi);
-   int getJ(TString jpi);
+   int    getPI(TString jpi);
+   int    getJ(TString jpi);
 
 public:
 
@@ -89,6 +89,9 @@ public:
    void SetDrawStyle(double deMin = 300., double fullWidth = 1.3, double lineWidth = 0.6, int textSize = 22);
    void Draw(Option_t* option = "");
    void DrawThreshold(const char* symb, Option_t* option = "", double ex = 0. /*in keV*/);
+   double GetThreshold(const char* outnuc = "");
+
+   void SetDecayProduct(KVNucleus* nuc, double excit_energy = 0/*keV*/);
 
    ClassDef(KVLevelScheme, 1) //tool to simulate nucleus multi-particle decay
 };
