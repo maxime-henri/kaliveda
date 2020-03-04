@@ -5,8 +5,9 @@ KaliVeda is an object-oriented toolkit based on ROOT for the analysis of heavy-i
 ## Build & Install
 
 See INSTALL file for details.
-ROOT v5.34 is recommended.
-There are runtime problems with ROOT6 - see https://github.com/kaliveda-dev/kaliveda/wiki/ROOT-compatibility-status
+We recommend a recent version of ROOT, either v6.14 or later or the latest release of v5.34.
+Some problems may be encountered with ROOT6 depending on the version,
+see https://github.com/kaliveda-dev/kaliveda/wiki/ROOT-compatibility-status
 CMake (v2.8.11 or greater) is required.
 
 ## Use in ROOT interactive session
@@ -54,7 +55,7 @@ You can compile and link this executable with the following CMakeLists.txt file:
     find_package(KaliVeda REQUIRED)
     include(${KALIVEDA_USE_FILE})
     find_package(ROOT REQUIRED)
-    include(${ROOT_USE_FILE})
+    include(SetUpROOTBuild)
     add_executable(toto toto.cpp)
     target_link_libraries(toto ${KALIVEDA_LIBRARIES})
 

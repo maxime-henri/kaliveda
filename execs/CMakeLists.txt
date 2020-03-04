@@ -55,7 +55,7 @@ set(irods_uploader_SRC irods_uploader.cpp)
 
 foreach(t ${build_targets})
 	add_executable(${t} ${${t}_SRC})
-	target_link_libraries(${t} ${KVMultiDet_LIB_LIST} ${${t}_LIB})
+        target_link_libraries(${t} ${KVMultiDet_LIB_LIST} ${${t}_LIB})
 endforeach()
 
 #---install built executables

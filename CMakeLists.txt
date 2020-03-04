@@ -3,18 +3,30 @@ cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
 
 project(KaliVeda)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}  ${PROJECT_SOURCE_DIR}/cmake)
-
 #-- Fixing warning on Mac OSX due to CMake version
 if(CMAKE_MAJOR_VERSION GREATER 2)
    set(CMAKE_MACOSX_RPATH 1)
 endif()
 
+#- set path to our cmake modules
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+
 #--look for ROOT & all essential libraries
-find_package(ROOT
-   REQUIRED Rint Graf Geom Spectrum Proof ProofPlayer Physics Hist
+find_package(ROOT QUIET
+   COMPONENTS Rint Graf Geom Spectrum Proof ProofPlayer Physics Hist
    RIO Tree MathCore Matrix Gpad Gui Net Graf3d Thread
    OPTIONAL_COMPONENTS RGL RooFit RooFitCore Minuit RSQLite SQLite)
+
+if(NOT ROOT_FOUND)
+   message(STATUS "Looking for ROOT built without cmake...")
+#- may have ROOT built without cmake support
+#- try again with included FindROOT.cmake
+   set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake/ROOT)
+   find_package(ROOT REQUIRED
+      Rint Graf Geom Spectrum Proof ProofPlayer Physics Hist
+      RIO Tree MathCore Matrix Gpad Gui Net Graf3d Thread
+      OPTIONAL_COMPONENTS RGL RooFit RooFitCore Minuit RSQLite SQLite)
+endif(NOT ROOT_FOUND)
 
 #--optional support for OpenGL
 if(ROOT_opengl_FOUND)
@@ -24,7 +36,7 @@ else()
 	message(STATUS "ROOT with no OpenGL support: KVEventViewer disabled")
 endif()
 
-include(${ROOT_USE_FILE})
+include(SetUpROOTBuild)
 
 #--check for BOOST - minimum version corresponds progress_display
 set(WITH_BOOST)
@@ -390,17 +402,8 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/KaliVedaConfig.cmake ${CMAKE_CURRENT_B
 
 #---in order to be able to reuse cmake macros for building ROOT libraries with either ROOT5 or ROOT6
 install(FILES 
-   ${CMAKE_SOURCE_DIR}/cmake/FindROOT.cmake ${CMAKE_SOURCE_DIR}/cmake/ROOTUseFile.cmake 
-   ${CMAKE_SOURCE_DIR}/cmake/GenerateRootLibrary.cmake
+   ${CMAKE_SOURCE_DIR}/cmake/GenerateRootLibrary.cmake ${CMAKE_SOURCE_DIR}/cmake/SetUpROOTBuild.cmake
     DESTINATION ${CMAKE_INSTALL_CMAKEPKGDIR}
-   )
-install(DIRECTORY 
-   ${CMAKE_SOURCE_DIR}/cmake/root5
-   DESTINATION ${CMAKE_INSTALL_CMAKEPKGDIR}
-   )
-install(DIRECTORY 
-   ${CMAKE_SOURCE_DIR}/cmake/root6
-   DESTINATION ${CMAKE_INSTALL_CMAKEPKGDIR}
    )
    
 #---add a 'make dist' target

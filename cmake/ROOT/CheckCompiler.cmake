@@ -19,7 +19,6 @@ if("$ENV{PATH}" MATCHES ${_compiler_path})
 else()
   set(CXX ${CMAKE_CXX_COMPILER})
 endif()
-string(TOUPPER "${CMAKE_BUILD_TYPE}" uppercase_CMAKE_BUILD_TYPE)
 
 #----Test if clang setup works----------------------------------------------------------------------
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -57,15 +56,24 @@ else()
 endif()
 
 #---Set a default build type for single-configuration CMake generators if no build type is set------
-set(CMAKE_CONFIGURATION_TYPES Release MinSizeRel Debug RelWithDebInfo)
+set(CMAKE_CONFIGURATION_TYPES Release MinSizeRel Debug RelWithDebInfo DebugFull Profile)
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build, options are: Release, MinSizeRel, Debug, RelWithDebInfo." FORCE)
+  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build, options are: Release, MinSizeRel, Debug, RelWithDebInfo, DebugFull, Profile." FORCE)
+endif()
+string(TOUPPER "${CMAKE_BUILD_TYPE}" uppercase_CMAKE_BUILD_TYPE)
+string(TOUPPER "${CMAKE_CONFIGURATION_TYPES}" uppercase_CMAKE_CONFIGURATION_TYPES)
+if(NOT "${uppercase_CMAKE_CONFIGURATION_TYPES}" MATCHES "${uppercase_CMAKE_BUILD_TYPE}")
+  message(FATAL_ERROR "CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} needs to be one of known build types: ${CMAKE_CONFIGURATION_TYPES}")
 endif()
 message(STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
 include(CheckCXXCompilerFlag)
 include(CheckCCompilerFlag)
 #---Check for cxx11 option------------------------------------------------------------
+if(cxx11 AND cxx14)
+  message(STATUS "c++11 mode requested but superseded by request for c++14 mode")
+  set(cxx11 OFF CACHE BOOL "" FORCE)
+endif()
 if(cxx11)
   CHECK_CXX_COMPILER_FLAG("-std=c++11" HAS_CXX11)
   if(NOT HAS_CXX11)
@@ -73,9 +81,17 @@ if(cxx11)
     set(cxx11 OFF CACHE BOOL "" FORCE)
   endif()
 endif()
+if(cxx14)
+  CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CXX14)
+  if(NOT HAS_CXX14)
+    message(STATUS "Current compiler does not suppport -std=c++14 option. Switching OFF cxx14 option")
+    set(cxx14 OFF CACHE BOOL "" FORCE)
+  endif()
+endif()
 
 #---Check for other compiler flags-------------------------------------------------------------------
 CHECK_CXX_COMPILER_FLAG("-Wno-array-bounds" CXX_HAS_Wno-array-bounds)
+CHECK_CXX_COMPILER_FLAG("-Wno-strict-aliasing" CXX_HAS_Wno-strict-aliasing)
 
 #---Need to locate thead libraries and options to set properly some compilation flags---------------- 
 find_package(Threads)
@@ -97,25 +113,15 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_THREAD_FLAG}")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_THREAD_FLAG}")
 
-if(GCC_MAJOR GREATER 5)
-   # gcc6+ : turn off -Wmisleading-indentation: too many warnings due to ROOT headers
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-misleading-indentation -Wno-deprecated-declarations")
-   message(STATUS "Compiler warning (gcc6+): -Wmisleading-indentation disabled.")
-endif(GCC_MAJOR GREATER 5)
-
-if(GCC_MAJOR GREATER 6)
-    # gcc7+ : turn off -Wimplicit-fallthrough: too many warnings due to code copied from ROOT
-    # gcc7+ : turn off -Wformat-truncation
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-implicit-fallthrough -Wformat-truncation=0")
-   message(STATUS "Compiler warning (gcc7+): -Wimplicit-fallthrough disabled.")
-endif(GCC_MAJOR GREATER 6)
-
 if(cxx11)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-  if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
-  endif()
 endif()
+
+if(cxx14)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+endif()
+
+ROOT_ADD_CXX_FLAG(CMAKE_CXX_FLAGS -Wno-deprecated-declarations)
 
 if(libcxx)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
