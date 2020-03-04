@@ -55,6 +55,7 @@ if (CMAKE_SYSTEM_NAME MATCHES Darwin)
   if(MACOSX_VERSION VERSION_GREATER 10.8)
     set(MACOSX_GLU_DEPRECATED ON)
     set(MACOSX_KRB5_DEPRECATED ON)
+    set(MACOSX_TMPNAM_DEPRECATED ON)
   endif()
   if(MACOSX_VERSION VERSION_GREATER 10.9)
     set(MACOSX_LDAP_DEPRECATED ON)
@@ -94,7 +95,7 @@ if (CMAKE_SYSTEM_NAME MATCHES Darwin)
      set(SOEXT "so")
 
   elseif(${CMAKE_CXX_COMPILER_ID} MATCHES Clang)
-     # Change on 15/04/2018 STREQUAL in MATCHES to take into account that on MacOSX CMAKE_CXX_COMPILER_ID is now AppleClang and no more Clang
+
      message(STATUS "Found LLVM compiler collection")
 
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -W -Wall -Woverloaded-virtual -fsigned-char -fno-common -Qunused-arguments")
@@ -127,7 +128,7 @@ if (CMAKE_SYSTEM_NAME MATCHES Darwin)
      set(EXEEXT "")
      set(SOEXT "so")
   else()
-    MESSAGE(FATAL_ERROR "There is no setup for this compiler up to now. Don't know waht to do. Stop cmake at this point.")
+    MESSAGE(FATAL_ERROR "There is no setup for this compiler with ID=${CMAKE_CXX_COMPILER_ID} up to now. Don't know what to do. Stop cmake at this point.")
   endif()
 
   #---Set Linker flags----------------------------------------------------------------------

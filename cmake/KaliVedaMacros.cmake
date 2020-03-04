@@ -208,7 +208,7 @@ function(BUILD_KALIVEDA_MODULE kvmod)
 
   #---generate library & rootmap
   GENERATE_ROOT_LIBRARY(${libName} LIB_EXCLUDE ${ARG_LIB_EXCLUDE} DICT_EXCLUDE ${ARG_DICT_EXCLUDE}
-						DEPENDENCIES ${ROOT_CORE_LIBRARIES} ${kvdeps} ${ARG_EXTRA_LIBS})
+                                                DEPENDENCIES ${ROOT_CORE_LIBRARIES} ${kvdeps} ${ARG_EXTRA_LIBS})
   
   set_property(GLOBAL APPEND PROPERTY ${ARG_PARENT}_LIB_LIST ${libName})
   set_property(GLOBAL APPEND PROPERTY KALIVEDA_LIB_LIST ${libName})
