@@ -253,7 +253,7 @@ void KVAlphaCalibration::FitInit(bool debug_)
    //and ThresholdOfTSpectrum
 
    if (debug_) std::cerr << "DEBUG IN FitInit : Searching for peaks in histogram" << std::endl;
-   spec->Search(Histo, SigmaOfTSpectrum, "", ThresholdOfTSpectrum);
+   unsigned int npeaks = spec->Search(Histo, SigmaOfTSpectrum, "", ThresholdOfTSpectrum);
 
 #if ROOT_VERSION_CODE > ROOT_VERSION(5,99,01)
    Double_t* xpos = spec->GetPositionX();
@@ -262,7 +262,7 @@ void KVAlphaCalibration::FitInit(bool debug_)
 #endif
 
    InitializationPeak.clear();
-   for (unsigned int i = 0; i <= sizeof(xpos) / sizeof(xpos[0]); i++) {
+   for (unsigned int i = 0; i <= npeaks; i++) {
 
       InitializationPeak.push_back(xpos[i]);
    }
