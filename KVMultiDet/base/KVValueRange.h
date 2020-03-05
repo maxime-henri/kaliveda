@@ -17,8 +17,19 @@ public:
       : fMin(min), fMax(max), fSize(fMax - fMin)
    {}
    KVValueRange(const KVValueRange& r)
-      : KVBase(), fMin(r.fMin), fMax(r.fMax), fSize(fMax - fMin)
-   {}
+      : KVBase()
+   {
+      r.Copy(*this);
+   }
+   void Copy(TObject& o) const
+   {
+      KVBase::Copy(o);
+      KVValueRange& vr = static_cast<KVValueRange&>(o);
+      vr.fMin = fMin;
+      vr.fMax = fMax;
+      vr.fSize = fSize;
+   }
+   ROOT_COPY_ASSIGN_OP(KVValueRange)
    ValueType Min() const
    {
       return fMin;

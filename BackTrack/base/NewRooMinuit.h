@@ -4,6 +4,7 @@
 #ifndef __NEWROOMINUIT_H
 #define __NEWROOMINUIT_H
 
+#include "KVConfig.h"
 #include "TObject.h"
 #include "TStopwatch.h"
 #include <fstream>
@@ -177,10 +178,8 @@ private:
 
    std::vector<std::pair<std::string, int> > _statusHistory ;
 
-   NewRooMinuit(const NewRooMinuit&) ;
-
-
-
+   NewRooMinuit(const NewRooMinuit&): TObject() {}
+   ROOT_COPY_ASSIGN_OP(NewRooMinuit)
 
    ClassDef(NewRooMinuit, 1) //Modified Roofit class NewRooMinuit in order to use it with NewRooAddPdf
 };

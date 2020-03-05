@@ -19,6 +19,7 @@ public:
 
    KVGaus2D(Bool_t batch = kFALSE);
    KVGaus2D(const KVGaus2D&) ;
+   ROOT_COPY_ASSIGN_OP(KVGaus2D)
    virtual ~KVGaus2D();
 
    ClassDef(KVGaus2D, 1) //Fit gaussien a deux dimensions

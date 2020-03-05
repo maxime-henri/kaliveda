@@ -14,6 +14,7 @@ protected:
 public:
    KVGaus1D(Bool_t batch = kFALSE);
    KVGaus1D(const KVGaus1D&) ;
+   ROOT_COPY_ASSIGN_OP(KVGaus1D)
    virtual ~KVGaus1D();
 
    void Gather();

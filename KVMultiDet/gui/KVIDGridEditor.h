@@ -196,6 +196,7 @@ public:
 
    KVIDGridEditor();
    KVIDGridEditor(const KVIDGridEditor&) ;
+   ROOT_COPY_ASSIGN_OP(KVIDGridEditor)
    virtual ~KVIDGridEditor();
    void Copy(TObject&) const;
 

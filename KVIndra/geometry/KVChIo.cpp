@@ -105,7 +105,7 @@ Double_t KVChIo::GetELossMylar(UInt_t z, UInt_t a, Double_t egas, Bool_t stopped
 
 //______________________________________________________________________________
 
-Short_t KVChIo::GetCalcACQParam(KVACQParam* ACQ, Double_t ECalc) const
+Short_t KVChIo::GetCalcACQParam(KVACQParam*, Double_t) const
 {
    // Calculates & returns value of given acquisition parameter corresponding to
    // given calculated energy loss in the detector

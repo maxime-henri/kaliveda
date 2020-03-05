@@ -38,6 +38,7 @@ public:
 
    KVTarget();
    KVTarget(const KVTarget&);
+   ROOT_COPY_ASSIGN_OP(KVTarget)
    KVTarget(const Char_t* material, Double_t thick = 0.0);
    virtual ~ KVTarget();
 

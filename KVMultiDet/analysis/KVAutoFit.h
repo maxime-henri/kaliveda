@@ -70,6 +70,7 @@ public:
    KVAutoFit();
    KVAutoFit(Bool_t batch);
    KVAutoFit(const KVAutoFit&) ;
+   ROOT_COPY_ASSIGN_OP(KVAutoFit)
    virtual ~KVAutoFit();
    void Copy(TObject&) const;
 

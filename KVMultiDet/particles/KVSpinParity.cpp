@@ -22,19 +22,6 @@ KVSpinParity::KVSpinParity(const Char_t* name): KVNuclData(name, "s")
 
 }
 
-KVSpinParity::KVSpinParity(const KVSpinParity& o) : KVNuclData()
-{
-   // Copy ctor
-   o.Copy(*this);
-}
-
-void KVSpinParity::Copy(TObject& object) const
-{
-   KVNuclData::Copy(object);
-   KVSpinParity& lt = (KVSpinParity&)object;
-   lt.SetMultiple(IsMultiple());
-}
-
 //_________________________________
 KVSpinParity::KVSpinParity(): KVNuclData()
 {

@@ -21,6 +21,7 @@ public:
 
    KVRangeYanez();
    KVRangeYanez(const KVRangeYanez&) ;
+   ROOT_COPY_ASSIGN_OP(KVRangeYanez)
    virtual ~KVRangeYanez();
    void Copy(TObject&) const;
 

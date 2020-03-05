@@ -29,6 +29,7 @@ public:
 
    KVDataAnalysisTask();
    KVDataAnalysisTask(const KVDataAnalysisTask&);
+   ROOT_COPY_ASSIGN_OP(KVDataAnalysisTask)
    virtual ~ KVDataAnalysisTask();
 
 #if ROOT_VERSION_CODE >= ROOT_VERSION(3,4,0)

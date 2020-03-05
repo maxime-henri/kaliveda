@@ -6,6 +6,7 @@
 
 #include "TObject.h"
 #include "TString.h"
+#include "KVConfig.h"
 
 class KVNuclData : public TObject {
 protected:
@@ -27,6 +28,7 @@ public:
    KVNuclData();
    KVNuclData(const Char_t* name, const Char_t* units = "NONE");
    KVNuclData(const KVNuclData&);
+   ROOT_COPY_ASSIGN_OP(KVNuclData)
    virtual ~KVNuclData();
    void Copy(TObject& object) const;
 

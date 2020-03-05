@@ -7,6 +7,7 @@
 #ifndef __NEWROOMINIMIZER_H
 #define __NEWROOMINIMIZER_H
 
+#include "KVConfig.h"
 #include "TObject.h"
 #include "TStopwatch.h"
 #include <fstream>
@@ -155,7 +156,8 @@ protected:
 
    std::vector<std::pair<std::string, int> > _statusHistory ;
 
-   NewRooMinimizer(const NewRooMinimizer&) ;
+   NewRooMinimizer(const NewRooMinimizer&) : TObject() {}
+   ROOT_COPY_ASSIGN_OP(NewRooMinimizer)
 
 
    ClassDef(NewRooMinimizer, 1) //Modified Roofit class RooMinimizer in order to use it in NewRooAddPdf

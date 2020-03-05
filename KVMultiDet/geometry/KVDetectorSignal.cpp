@@ -18,7 +18,7 @@ void KVDetectorSignal::ls(Option_t*) const
    printf(" %s \t\t %s \t\t %s \t\t [%lf]\n", ClassName(), GetName(), GetType(), GetValue());
 }
 
-Int_t KVDetectorSignal::GetStatus(const TString& what) const
+Int_t KVDetectorSignal::GetStatus(const TString&) const
 {
    // Override in child classes to report on the 'status' of the signal.
    return -1;

@@ -16,6 +16,7 @@ public:
    KVElementDensity();
    KVElementDensity(const Char_t* name);
    KVElementDensity(const KVElementDensity&) ;
+   ROOT_COPY_ASSIGN_OP(KVElementDensity)
    virtual ~KVElementDensity();
    void Copy(TObject&) const;
 

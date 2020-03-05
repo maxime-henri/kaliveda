@@ -50,6 +50,19 @@
 #endif
 using std::unique_ptr;
 
+// macro which expands to standard ROOT assignment by copy operator definition
+// using object's Copy(TObject&) const method
+// place in header file as needed
+#define ROOT_COPY_ASSIGN_OP(name) \
+   name& operator=(const name& other) \
+  { \
+     if(this != &other) \
+     { \
+       other.Copy(*this); \
+     } \
+     return (*this); \
+   }
+
 //-----------------------------------ROOT-version dependent compiler flags
 //-----------------------------------to handle backwards compatibility
 //

@@ -24,8 +24,6 @@ protected:
 public:
    KVLifeTime();
    KVLifeTime(const Char_t* name);
-   KVLifeTime(const KVLifeTime&);
-   void Copy(TObject& object) const;
    virtual ~KVLifeTime();
 
    void SetResonance(Bool_t resonnance)

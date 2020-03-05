@@ -22,18 +22,6 @@ KVLifeTime::KVLifeTime(const Char_t* name): KVNuclData(name, "s")
 
 }
 
-KVLifeTime::KVLifeTime(const KVLifeTime& o) : KVNuclData()
-{
-   // Copy ctor
-   o.Copy(*this);
-}
-
-void KVLifeTime::Copy(TObject& object) const
-{
-   KVNuclData::Copy(object);
-   KVLifeTime& lt = (KVLifeTime&)object;
-   lt.SetResonance(IsAResonance());
-}
 
 //_________________________________
 KVLifeTime::KVLifeTime(): KVNuclData()

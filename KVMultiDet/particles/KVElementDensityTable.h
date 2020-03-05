@@ -14,9 +14,7 @@ class KVElementDensityTable : public KVNuclDataTable {
 
 public:
    KVElementDensityTable();
-   KVElementDensityTable(const KVElementDensityTable&) ;
    virtual ~KVElementDensityTable();
-   void Copy(TObject&) const;
 
    virtual void GiveIndexToNucleus(Int_t zz, Int_t aa, Int_t ntot);
 

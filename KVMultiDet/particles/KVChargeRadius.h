@@ -16,6 +16,7 @@ public:
    KVChargeRadius();
    KVChargeRadius(const Char_t* name);
    KVChargeRadius(const KVChargeRadius&);
+   ROOT_COPY_ASSIGN_OP(KVChargeRadius)
    void Copy(TObject& object) const;
    virtual ~KVChargeRadius();
 

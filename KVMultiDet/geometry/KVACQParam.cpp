@@ -105,6 +105,9 @@ void KVACQParam::Copy(TObject& obj)
    if (GetDetector())
       ((KVACQParam&) obj).SetDetector(GetDetector());
    ((KVACQParam&) obj).SetNbBits(GetNbBits());
+   ((KVACQParam&)obj).SetPedestal(GetPedestal());
+   ((KVACQParam&)obj).SetDeltaPedestal(GetDeltaPedestal());
+   ((KVACQParam&)obj).SetWorking(IsWorking());
 }
 
 void KVACQParam::Print(Option_t*) const

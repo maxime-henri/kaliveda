@@ -59,6 +59,7 @@ public:
    KVMaterial(const Char_t* gas, const Double_t thick, const Double_t pressure, const Double_t temperature = 19.0);
    KVMaterial(Double_t area_density, const Char_t* type);
    KVMaterial(const KVMaterial&);
+   ROOT_COPY_ASSIGN_OP(KVMaterial)
 
    static KVIonRangeTable* GetRangeTable();
    static KVIonRangeTable* ChangeRangeTable(const Char_t* name);

@@ -33,7 +33,7 @@ $Id: KVFAZIAReconNuc.cpp,v 1.61 2009/04/03 14:28:37 franklan Exp $
 
 using namespace std;
 
-ClassImp(KVFAZIAReconNuc);
+ClassImp(KVFAZIAReconNuc)
 
 ////////////////////////////////////////////////////////////////////////////
 //KVFAZIAReconNuc
@@ -523,7 +523,6 @@ void KVFAZIAReconNuc::CalibrateSi1()
    Bool_t incoherency = kFALSE;
    Bool_t pileup = kFALSE;
    Bool_t check_error = kFALSE;
-   Bool_t Si1Calib = false;
 
 
    // printf("Init variables, stopped in %s\n", ((KVFAZIADetector*)GetStoppingDetector())->GetType());
@@ -532,7 +531,6 @@ void KVFAZIAReconNuc::CalibrateSi1()
    for (Int_t ii = 0; ii < ntot; ii += 1) eloss[ii] = 0;
    //TIter next(GetDetectorList());
    KVFAZIADetector* det = 0;
-   Int_t idet = 0;
    Int_t ndet = 1;
    Int_t ndet_calib = 0;
    Double_t etot = 0;
@@ -618,8 +616,6 @@ void KVFAZIAReconNuc::CalibrateSi2()
    Bool_t pileup = kFALSE;
    Bool_t check_error = kFALSE;
    Bool_t Si1Calib = false;
-   Bool_t Si2Calib = false;
-   Bool_t CsICalib = false;
 
    // printf("Init variables, stopped in %s\n", ((KVFAZIADetector*)GetStoppingDetector())->GetType());
    double error_si1 = 0, error_si2 = 0; // error_csi=0;
@@ -634,7 +630,7 @@ void KVFAZIAReconNuc::CalibrateSi2()
 
    fESI1 = fESI2 = fECSI = 0;
 
-   while (det = (KVFAZIADetector*)GetDetector(idet)) {
+   while ((det = (KVFAZIADetector*)GetDetector(idet))) {
       // printf("Det %d of %d (%s)\n",idet,ntot,det->GetType());
       if (det->IsCalibrated()) {
          eloss[ntot - ndet - 1] = det->GetEnergy();
@@ -644,7 +640,6 @@ void KVFAZIAReconNuc::CalibrateSi2()
          }
          else if (det->GetIdentifier() == KVFAZIADetector::kSI2) {
             fESI2 = eloss[ntot - ndet - 1];
-            Si2Calib = true;
          }
          etot += eloss[ntot - ndet - 1];
          ndet_calib += 1;
@@ -777,9 +772,7 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
    Bool_t incoherency = kFALSE;
    Bool_t pileup = kFALSE;
    Bool_t check_error = kFALSE;
-   Bool_t Si1Calib = false;
    Bool_t Si2Calib = false;
-   Bool_t CsICalib = false;
 
    // printf("Init variables, stopped in %s\n", ((KVFAZIADetector*)GetStoppingDetector())->GetType());
    double error_si1 = 0, error_si2 = 0; // error_csi=0;
@@ -794,7 +787,7 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
 
    fESI1 = fESI2 = fECSI = 0;
 
-   while (det = (KVFAZIADetector*)GetDetector(idet)) {
+   while ((det = (KVFAZIADetector*)GetDetector(idet))) {
       // printf("Det %d of %d (%s)\n",idet,ntot,det->GetType());
       if (det->IsCalibrated()) {
          //Csi calibration will always be ignored
@@ -802,7 +795,6 @@ void KVFAZIAReconNuc::CalibrateCsI_Heavy()
             eloss[ntot - ndet - 1] = det->GetEnergy();
             if (det->GetIdentifier() == KVFAZIADetector::kSI1) {
                fESI1 = eloss[ntot - ndet - 1];
-               Si1Calib = true;
             }
             else if (det->GetIdentifier() == KVFAZIADetector::kSI2) {
                fESI2 = eloss[ntot - ndet - 1];

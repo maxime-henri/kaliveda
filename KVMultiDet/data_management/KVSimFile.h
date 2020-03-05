@@ -31,6 +31,7 @@ public:
    KVSimFile(KVSimDir* parent, const Char_t* filename, const Char_t* treeinfo, Long64_t treeEntries, const Char_t* treename, const Char_t* branchname,
              const Char_t* dataset, const Char_t* system, Int_t run_number, const Char_t* geo_type, const Char_t* orig_file, const Char_t* filt_type);
    KVSimFile(const KVSimFile&) ;
+   ROOT_COPY_ASSIGN_OP(KVSimFile)
    virtual ~KVSimFile();
    void Copy(TObject&) const;
 

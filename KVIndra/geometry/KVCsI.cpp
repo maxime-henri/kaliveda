@@ -125,7 +125,7 @@ Double_t KVCsI::GetCorrectedEnergy(KVNucleus* nuc, Double_t lum, Bool_t)
    return -1.;
 }
 
-void KVCsI::DeduceACQParameters(KVEvent* e, KVNumberList& index)
+void KVCsI::DeduceACQParameters(KVEvent*, KVNumberList&)
 {
    AbstractMethod("DeduceACQParameters");
 

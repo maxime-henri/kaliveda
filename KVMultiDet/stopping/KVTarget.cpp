@@ -159,6 +159,7 @@ KVTarget::KVTarget(const KVTarget& obj) : KVMaterial()
    ((KVTarget&) obj).Copy(*this);
 #endif
 }
+
 //________________________________________________________________________
 
 #if ROOT_VERSION_CODE >= ROOT_VERSION(3,4,0)
@@ -168,7 +169,9 @@ void KVTarget::Copy(TObject& obj)
 #endif
 {
    //Copy this to obj
-   //((KVTarget &) obj).init();
+   ((KVTarget&)obj).fTargets->Clear();// delete any existing layers
+   ((KVTarget&) obj).fNLayers = 0;
+   KVMaterial::Copy(obj);
    ((KVTarget&) obj).SetRandomized(IsRandomized());
    ((KVTarget&) obj).SetIncoming(IsIncoming());
    ((KVTarget&) obj).SetOutgoing(IsOutgoing());
@@ -176,7 +179,7 @@ void KVTarget::Copy(TObject& obj)
    ((KVTarget&) obj).fNormal = fNormal;
 
    TIter next(GetLayers());
-   KVMaterial* mat = 0;
+   KVMaterial* mat;
    while ((mat = (KVMaterial*) next())) {
       ((KVTarget&) obj).AddLayer(mat->GetName(), mat->GetAreaDensity() / KVUnits::mg);
    }

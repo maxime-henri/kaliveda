@@ -76,7 +76,7 @@ void KVSilicon::SetACQParams()
 
 //__________________________________________________________________________________________
 
-Double_t KVSilicon::GetPHD(Double_t dE, UInt_t Z)
+Double_t KVSilicon::GetPHD(Double_t, UInt_t)
 {
    //Calculate Pulse Height Defect in MeV for a given energy loss dE(MeV) and Z.
    //The formula of Moulton is used (see class KVPulseHeightDefect).
@@ -88,7 +88,7 @@ Double_t KVSilicon::GetPHD(Double_t dE, UInt_t Z)
 }
 
 
-void KVSilicon::SetMoultonPHDParameters(Double_t a_1, Double_t a_2, Double_t b_1, Double_t b_2)
+void KVSilicon::SetMoultonPHDParameters(Double_t, Double_t, Double_t, Double_t)
 {
    //Sets parameters of Moulton formula used to calculate PHD for particles
    //stopping in this detector. The parameters are as in the following:
@@ -106,7 +106,7 @@ void KVSilicon::SetMoultonPHDParameters(Double_t a_1, Double_t a_2, Double_t b_1
 
 //______________________________________________________________________________
 
-Short_t KVSilicon::GetCalcACQParam(KVACQParam* ACQ, Double_t ECalc) const
+Short_t KVSilicon::GetCalcACQParam(KVACQParam*, Double_t) const
 {
    // Calculates & returns value of given acquisition parameter corresponding to
    // given calculated energy loss in the detector

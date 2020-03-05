@@ -98,7 +98,9 @@ void KVRangeYanez::Copy(TObject& obj) const
    //    CastedObj.SetToto( GetToto() );
 
    KVIonRangeTable::Copy(obj);
-   //KVRangeYanez& CastedObj = (KVRangeYanez&)obj;
+   KVRangeYanez& CastedObj = (KVRangeYanez&)obj;
+   CastedObj.fLocalMaterialsDirectory = fLocalMaterialsDirectory;
+   CastedObj.fDoNotSaveMaterials = fDoNotSaveMaterials;
 }
 
 KVIonRangeTableMaterial* KVRangeYanez::GetMaterialWithNameOrType(const Char_t* material) const

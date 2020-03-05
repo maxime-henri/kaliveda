@@ -77,7 +77,7 @@ void KVFAZIACOR::RutherfordTelescope()
 void KVFAZIACOR::BuildFAZIA()
 {
    //Build geometry of FAZIASYM
-   //All telescopes are : Si(300µm)-Si(500µm)-CsI(10cm)
+   //All telescopes are : Si(300Âµm)-Si(500Âµm)-CsI(10cm)
    //No attempt has been made to implement real thicknesses
    //
    Info("BuildFAZIA", "Compact geometry, %f cm from target",
@@ -95,12 +95,6 @@ void KVFAZIACOR::BuildFAZIA()
    TGeoRotation rot1, rot2;
    TGeoHMatrix h;
    TGeoHMatrix* ph = 0;
-   Double_t theta = 0;
-   Double_t phi = 0;
-
-   Double_t theta_min = fFThetaMin;//smallest lab polar angle in degrees
-   Double_t centre_hole = 2.*tan(theta_min * TMath::DegToRad()) * distance_block_cible;
-   Double_t dx = (block->GetTotalSideWithBlindage()) / 2.;
 
    TVector3 centre;
 //   for (Int_t bb = 0; bb < fNblocks; bb += 1) {

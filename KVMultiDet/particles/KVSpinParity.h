@@ -24,15 +24,10 @@ protected:
 public:
    KVSpinParity();
    KVSpinParity(const Char_t* name);
-   KVSpinParity(const KVSpinParity&);
-   void Copy(TObject& object) const;
    virtual ~KVSpinParity();
 
    void SetMultiple(Bool_t multiple)
    {
-      // Changes units according to "resonnance":
-      // For resonances, unit is "MeV"
-      // For all other lifetimes, unit is "s"
       SetBit(kMultiple, multiple);
    }
    Bool_t IsMultiple() const

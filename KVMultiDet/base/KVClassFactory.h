@@ -28,6 +28,7 @@ public:
    }
    KVClassMember(const Char_t*, const Char_t*, const Char_t*, const Char_t* = "protected");
    KVClassMember(const KVClassMember&);
+   ROOT_COPY_ASSIGN_OP(KVClassMember)
    virtual ~KVClassMember() {}
    void Copy(TObject& obj) const;
 

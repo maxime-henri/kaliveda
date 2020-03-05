@@ -41,6 +41,7 @@ public:
    KVACQParam();
    KVACQParam(const TString& name, const TString& type = "");
    KVACQParam(const KVACQParam&);
+   ROOT_COPY_ASSIGN_OP(KVACQParam)
    virtual ~ KVACQParam() {}
 
    void SetDetector(KVDetector* kd)

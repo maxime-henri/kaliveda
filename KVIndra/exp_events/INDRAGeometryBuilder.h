@@ -46,6 +46,7 @@ class INDRAGeometryBuilder : public KVBase {
 public:
    INDRAGeometryBuilder();
    INDRAGeometryBuilder(const INDRAGeometryBuilder&) ;
+   ROOT_COPY_ASSIGN_OP(INDRAGeometryBuilder)
    virtual ~INDRAGeometryBuilder();
    void Copy(TObject&) const;
 

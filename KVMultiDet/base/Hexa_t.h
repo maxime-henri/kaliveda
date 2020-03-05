@@ -16,6 +16,7 @@ public:
    Hexa_t();
    Hexa_t(const Long64_t);
    Hexa_t(const Char_t*);
+   Hexa_t(const Hexa_t& other) : fVal(other.fVal) {}
    virtual ~ Hexa_t()
    {
    };
