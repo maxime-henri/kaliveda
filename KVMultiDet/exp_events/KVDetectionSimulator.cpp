@@ -60,7 +60,6 @@ void KVDetectionSimulator::DetectEvent(KVEvent* event, const Char_t* detection_f
    //         overlap between defined telescope,
    //         "INCOMPLETE"  corresponds to particles which stopped in the first detection stage of the multidetector
    //         in a detector which can not give alone a clear identification,
-   //         this correponds to status=3 or idcode=5 in INDRA data
    //
 
    // Reset detectors in array hit by any previous events
@@ -120,7 +119,6 @@ void KVDetectionSimulator::DetectEvent(KVEvent* event, const Char_t* detection_f
             }
             else {
                part->AddGroup("DETECTED");
-               det_stat.SetValue("DETECTED", "OK");
             }
          }
       }
@@ -129,7 +127,13 @@ void KVDetectionSimulator::DetectEvent(KVEvent* event, const Char_t* detection_f
       if (!nvl.IsEmpty()) {
          Int_t nbre_nvl = nvl.GetNpar();
          KVString LastDet(nvl.GetNameAt(nbre_nvl - 1));
-         part->SetParameter("STOPPING DETECTOR", LastDet.Data());
+         if (part->GetE() < GetMinKECutOff() || part->GetParameters()->HasParameter("DEADZONE")) {
+            part->SetParameter("STOPPING DETECTOR", LastDet.Data());
+            det_stat.SetValue("DETECTED", "OK");
+         }
+         else {
+            det_stat.SetValue("DETECTED", "PUNCHED THROUGH");
+         }
          for (Int_t ii = 0; ii < nvl.GetNpar(); ++ii) {
             part->SetParameter(nvl.GetNameAt(ii), nvl.GetDoubleValue(ii));
          }
