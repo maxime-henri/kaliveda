@@ -42,14 +42,14 @@ KVFAZIABlock::KVFAZIABlock() : TGeoVolumeAssembly("STRUCT_BLOCK")
    TGeoVolume* si = 0;
    TGeoVolume* csi = 0;
 
-   Double_t distance_si2_si1 = 0.220;
+   Double_t distance_si2_si1 = 0.273;
    Double_t distance_csi_si2 = 0.434;
 
-   Double_t side_si = 2;
+   Double_t side_si = 2.1;
    Double_t side_csi_front = 2.050;
    Double_t side_csi_back = 2.272;
 
-   Double_t inter_si = 0.24;
+   Double_t inter_si = 0.12;
 
    Double_t thick_si1 = 300 * KVUnits::um;
    Double_t thick_si2 = 500 * KVUnits::um;
@@ -89,6 +89,9 @@ KVFAZIABlock::KVFAZIABlock() : TGeoVolumeAssembly("STRUCT_BLOCK")
       ((TGeoNodeMatrix*)quartet->GetNodes()->Last())->SetName(Form("DET_CSI-T%d", nt));
 
    }
+//         csi = gGeoManager->MakeTrd2("STRUCT_CSI", CesiumIodide, side_csi_front, side_csi_back, side_csi_front, side_csi_back, thick_csi / 2.);
+//         tr = new TGeoTranslation(0,0, thick_csi / 2. + distance_csi_si2);
+//         quartet->AddNode(csi, ndet++, tr);
 
    Int_t nbl = 1;
    TGeoVolume* blindage = 0;
