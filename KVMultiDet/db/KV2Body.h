@@ -76,7 +76,7 @@ public:
    KV2Body(const Char_t* systemname);
    KV2Body(const KVNucleus& compound, double Exx = 0.0);
    KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss = 0.0);
-   KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& proj_out, double Ediss = 0.0);
+   KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& outgoing, double Ediss = 0.0);
    KV2Body(KVNucleus*, KVNucleus* = nullptr, KVNucleus* = nullptr, Double_t = 0.0);
    virtual ~ KV2Body();
 
@@ -90,18 +90,27 @@ public:
    void SetTarget(Int_t z, Int_t a = 0);
    void SetOutgoing(const KVNucleus& proj_out);
 
+   /// Set excitation energy of exit channel [MeV]
+   /// i.e. this corresponds to the energy dissipated in the reaction
+   ///
+   /// To set E* of compound nucleus in entrance channel for binary break-up
+   /// calculations, give negative value (or see relevant constructor)
    void SetExcitEnergy(Double_t ex)
    {
       fEDiss = ex;
-   };
+   }
+   /// Returns the excitation energy of the exit channel [MeV]
+   /// i.e. this corresponds to the energy dissipated in the reaction
    Double_t GetExcitEnergy() const
    {
       return fEDiss;
    }
+   /// Set energy dissipated in the reaction [MeV]
    void SetEDiss(Double_t ex)
    {
       SetExcitEnergy(ex);
    }
+   /// Returns energy dissipated in the reaction [MeV]
    Double_t GetEDiss() const
    {
       return GetExcitEnergy();
@@ -131,7 +140,7 @@ public:
          gamma = 0.0;
       }
       return gamma;
-   };
+   }
 
    TF1* GetThetaLabVsThetaCMFunc(Int_t OfNucleus) const;
    TF1* GetELabVsThetaCMFunc(Int_t OfNucleus) const;
@@ -141,19 +150,19 @@ public:
    {
       // Calculate lab angle of nucleus OfNucleus (=1,2,3,4) as a function of CM angle
       return const_cast<KV2Body*>(this)->GetThetaLabVsThetaCMFunc(OfNucleus)->Eval(ThetaCM);
-   };
+   }
    Double_t GetELab(Double_t ThetaCM, Int_t OfNucleus) const
    {
       // Calculate lab energy of nucleus OfNucleus (=1,2,3,4) as a function of CM angle
       return const_cast<KV2Body*>(this)->GetELabVsThetaCMFunc(OfNucleus)->Eval(ThetaCM);
-   };
+   }
    Int_t GetThetaCM(Double_t ThetaLab, Int_t OfNucleus, Double_t& t1, Double_t& t2) const;
    Double_t GetThetaCM(Int_t OfNucleus, Double_t theta, Int_t OtherNucleus) const
    {
       // Calculate projectile CM angle from target CM angle and vice versa
       if (TMath::Abs(OfNucleus - OtherNucleus) % 2) return 180. - theta;
       return theta;
-   };
+   }
    Double_t GetMinThetaCMFromThetaLab(Int_t OfNucleus, Double_t theta, Int_t OtherNucleus) const;
 
    Int_t GetELab(Int_t OfNucleus, Double_t ThetaLab, Int_t AngleNucleus, Double_t& e1, Double_t& e2) const;

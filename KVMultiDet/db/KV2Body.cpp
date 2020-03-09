@@ -170,14 +170,14 @@ void KV2Body::init()
       K[i] = 0.;
       TETAMAX[i] = 0.;
       TETAMIN[i] = 0.;
-      fThetaLabVsThetaCM[i] = 0;
-      fELabVsThetaCM[i] = 0;
-      fELabVsThetaLab[i] = 0;
+      fThetaLabVsThetaCM[i] = nullptr;
+      fELabVsThetaCM[i] = nullptr;
+      fELabVsThetaLab[i] = nullptr;
    }
-   fKoxReactionXSec = 0;
-   fEqbmChargeState = 0;
-   fEqbmChargeStateShSol = 0;
-   fEqbmChargeStateShGas = 0;
+   fKoxReactionXSec = nullptr;
+   fEqbmChargeState = nullptr;
+   fEqbmChargeStateShSol = nullptr;
+   fEqbmChargeStateShGas = nullptr;
    fSetOutgoing = kFALSE;
 
    SetIntegralPrecision(1e-10);
@@ -238,17 +238,25 @@ KV2Body::KV2Body(KVNucleus*, KVNucleus* cib, KVNucleus* proj_out, Double_t): fNu
 }
 
 KV2Body::KV2Body(const KVNucleus& compound, double Exx)
-   : fNuclei(5), fEDiss(0)
+   : fNuclei(5), fEDiss(-Exx)
 {
-   // Set up kinematics of binary decay of compound.
+   // Set up kinematics of binary decay of compound nucleus.
    //
-   // By default (Exx=0) we use the excitation energy of compound as `-Ediss`
+   // The excitation energy of the CN (in MeV) is either given:
+   //
+   //   - in the KVNucleus object itself (i.e. compound.GetExcitEnergy() gives the E* of CN)
+   //   - or in the variable Exx: in this case any E* in the KVNucleus will be ignored
+   //   - or by calling SetExcitEnergy or SetDissipatedEnergy after this constructor with the NEGATIVE E*
    //
    //Usage:
    //~~~~~~~~~~{.cpp}
    //   KVNucleus CN("204Pb");
    //   CN.SetExcitEnergy(1.5*CN.GetA());
    //   KV2Body CNdecay(CN);
+   //
+   //   /* or: KV2Body CNdecay("204Pb", 1.5*204);
+   //    * or: KV2Body CNdecay("204Pb");
+   //    *     CNdecay.SetExcitEnergy(-1.5*204); */
    //
    //   // calculate decay
    //   KVNucleus alpha("4He", 67.351/4.);
@@ -257,15 +265,15 @@ KV2Body::KV2Body(const KVNucleus& compound, double Exx)
 
    init();
    fNuclei[1] = compound;
-   if (Exx == 0.0) fEDiss = -compound.GetExcitEnergy();
+   if (fEDiss == 0) fEDiss = compound.GetExcitEnergy();
 }
 
 KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss):
-   fNuclei(5), fEDiss(0)
+   fNuclei(5), fEDiss(Ediss)
 {
    //Set up calculation of basic binary reaction for given projectile and target.
    //
-   //By default the dissipated energy is zero (elastic reaction).
+   //By default the dissipated energy Ediss is zero (elastic reaction).
    //
    //Usage:
    //~~~~~~~~~~{.cpp}
@@ -278,16 +286,18 @@ KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, double Ediss):
    init();
    fNuclei[1] = proj;
    fNuclei[2] = targ;
-   fEDiss = Ediss;
 }
 
-KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& proj_out, double Ediss):
+KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& outgoing, double Ediss):
    fNuclei(5), fEDiss(Ediss)
 {
    //Set up calculation of basic binary reaction for given projectile and target with definition
-   //of exit channel (outgoing projectile fragment).
+   //of exit channel (outgoing projectile- or target-like fragment).
    //
    //By default the dissipated energy is zero (elastic reaction).
+   //
+   //Any excitation energy of the outgoing fragment will be taken into account, e.g.
+   //for quasi-elastic scattering leaving the target in an excited state.
    //
    //Usage:
    //~~~~~~~~~~{.cpp}
@@ -300,13 +310,15 @@ KV2Body::KV2Body(const KVNucleus& proj, const KVNucleus& targ, const KVNucleus& 
    init();
    fNuclei[1] = proj;
    fNuclei[2] = targ;
-   SetOutgoing(proj_out);
+   if (outgoing.GetExcitEnergy() > 0) fEDiss += outgoing.GetExcitEnergy();
+   SetOutgoing(outgoing);
 }
 
 void KV2Body::SetTarget(const KVNucleus& targ)
 {
    //Set target for reaction.
    fNuclei[2] = targ;
+   fSetOutgoing = kFALSE;
 }
 
 void KV2Body::SetTarget(Int_t z, Int_t a)
@@ -314,18 +326,21 @@ void KV2Body::SetTarget(Int_t z, Int_t a)
    //Set target for reaction
 
    fNuclei[2].SetZandA(z, a);
+   fSetOutgoing = kFALSE;
 }
 
 void KV2Body::SetProjectile(const KVNucleus& proj)
 {
    //Set projectile for reaction.
    fNuclei[1] = proj;
+   fSetOutgoing = kFALSE;
 }
 
 void KV2Body::SetProjectile(Int_t z, Int_t a)
 {
    //Set projectile for reaction
    fNuclei[1].SetZandA(z, a);
+   fSetOutgoing = kFALSE;
 }
 
 KV2Body::~KV2Body()
@@ -361,7 +376,8 @@ void KV2Body::SetOutgoing(const KVNucleus& proj_out)
    fSetOutgoing = kTRUE;
    fNuclei[3] = proj_out;
    Set4thNucleus();
-   GetNucleus(3)->SetExcitEnergy(0.);// no mass modification due to E*
+   // all nuclei should now have E* set to zero in order to use ground state masses in kinematics
+   for (unsigned i = 1; i <= 4; ++i) if (fNuclei[i].IsDefined()) fNuclei[i].SetExcitEnergy(0);
 }
 
 //_____________________________________________________________________________
@@ -371,19 +387,21 @@ void KV2Body::Set4thNucleus()
    // Private method, used to deduce 4th nucleus (target-like) from projectile, target
    // and outgoing projectile using conservation of mass, momentum and energy.
    //
-   // if the exit channel is a the compund nucleus, there is no 4th nucleus defined
-   // and the excitation energy of the fusion reaction is set in the fEdiss variable
-   // see GetExcitEnergy() method
+   // if the outgoing nucleus set by the user is equal to the compound nucleus
+   // formed by projectile and target, but the excitation energy of the CN
+   // was not set by the user, we calculate it here.
 
    KVNucleus sum;
-   if (GetNucleus(2)) sum = *GetNucleus(1) + *GetNucleus(2);
+   if (GetNucleus(2))
+      sum = *GetNucleus(1) + *GetNucleus(2);
    else sum = *GetNucleus(1);
    KVNucleus tmp4 = sum - *GetNucleus(3);
    if (!tmp4.IsDefined()) {
-      SetExcitEnergy(sum.GetExcitEnergy());
+      // nucleus 3 is the CN proj+targ
+      // has E* been defined ?
+      if (fEDiss == 0) fEDiss = sum.GetExcitEnergy();
    }
    fNuclei[4] = tmp4;
-   if (tmp4.IsDefined()) tmp4.SetExcitEnergy(0.); // no mass modification due to E*
 }
 
 //_____________________________________________________________________________
@@ -579,14 +597,9 @@ void KV2Body::CalculateKinematics()
       Error("CalculateKinematics", "Set outgoing (decay) product first");
       return;
    }
-   // make sure E* of nuclei is zero
-   // this is because the E*/Ediss is handled separately here
-   Nuc1->SetExcitEnergy(0.);
-   if (Nuc2) Nuc2->SetExcitEnergy(0.);
 
    // call SetOutgoing if not already done
    if (!fSetOutgoing) SetOutgoing(*Nuc1);
-   //fSetOutgoing = kFALSE;
 
    // set everything to zero
    WLT = WCT = BCM = 0.;
