@@ -12,7 +12,7 @@ dotgit="$dir/.git"
 OUT=gitinfo.tmp
 
 $git --git-dir=$dotgit describe --all > $OUT
-$git --git-dir=$dotgit describe --always >> $OUT
+$git --git-dir=$dotgit describe --tags >> $OUT
 
 echo '#define KV_GIT_BRANCH "'`head -n 1 $OUT | tail -n1`'"' > $3
 echo '#define KV_GIT_COMMIT "'`head -n 2 $OUT | tail -n1`'"' >> $3
