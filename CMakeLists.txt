@@ -186,16 +186,22 @@ if(USE_FITLTG)
 	set(FITLTG_LIB fitltg)
 endif()
 
-#--- BackTrack package for model parameter optimisation
-option(USE_BACKTRACK "Build BackTrack backtracing statistical analysis package" OFF)
-if(USE_BACKTRACK)
-	#---check if roofit is available
-	if(NOT ROOT_roofit_FOUND)
-      message(STATUS "You need to enable the RooFit package in ROOT to use BackTrack")
-      set(USE_BACKTRACK OFF CACHE BOOL "" FORCE)
+# no more support for BackTrack after 6.18
+if(ROOT_VERSION VERSION_LESS 6.20.00)
+   #--- BackTrack package for model parameter optimisation
+   option(USE_BACKTRACK "Build BackTrack backtracing statistical analysis package" OFF)
+   if(USE_BACKTRACK)
+	   #---check if roofit is available
+	   if(NOT ROOT_roofit_FOUND)
+         message(STATUS "You need to enable the RooFit package in ROOT to use BackTrack")
+         set(USE_BACKTRACK OFF CACHE BOOL "" FORCE)
+      endif()
    endif()
-endif()
-add_feature_info(backtrack USE_BACKTRACK "Build BackTrack backtracing statistical analysis package")
+   add_feature_info(backtrack USE_BACKTRACK "Build BackTrack backtracing statistical analysis package")
+else(ROOT_VERSION VERSION_LESS 6.20.00)
+   message(STATUS "BackTrack package not available from ROOT v6.20 onwards")
+   set(USE_BACKTRACK OFF CACHE BOOL "" FORCE)
+endif(ROOT_VERSION VERSION_LESS 6.20.00)
 
 #--- MicroStat package for calculating event statistical weights
 option(USE_MICROSTAT "Build MicroStat package for event generation using statistical weights" OFF)
