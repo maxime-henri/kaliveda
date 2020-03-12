@@ -47,14 +47,9 @@ void KVISOFAZIA::BuildFAZIA()
 
    Double_t distance_block_cible = fFDist * KVUnits::cm;
    Double_t thick_si1 = 300 * KVUnits::um;
-   TGeoTranslation trans;
-   trans.SetDz(distance_block_cible + thick_si1 / 2.);
 
    KVFAZIABlock* block = new KVFAZIABlock;
 
-   TGeoRotation rot1, rot2;
-   TGeoHMatrix h;
-   TGeoHMatrix* ph = 0;
    Double_t theta = 0;
    Double_t phi = 0;
 
@@ -72,20 +67,16 @@ void KVISOFAZIA::BuildFAZIA()
          theta = 2.3 + arc;
       }
       else if (bb == 1) {
-         phi = 360 - 90;
+         phi = -90;
          theta = 2.3 + arc;
       }
       else if (bb == 0) {
-         phi = 360 - 90;
+         phi = -90;
          theta = 11.8 + arc;
       }
-
-      rot2.SetAngles(phi + 90., theta, 0.);
-      rot1.SetAngles(-1.*phi, 0., 0.);
-      h = rot2 * trans * rot1;
-      ph = new TGeoHMatrix(h);
-      top->AddNode(block, bb, ph);
-
+      top->AddNode(block, bb,
+                   KVMultiDetArray::GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(distance_block_cible),
+                         theta, phi));
    }
 
 }

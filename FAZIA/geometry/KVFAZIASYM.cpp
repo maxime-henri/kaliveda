@@ -49,7 +49,7 @@ void KVFAZIASYM::RutherfordTelescope()
 
    KVMaterial silicon("Si");
 
-   const double radius = 5 * KVUnits::mm / 2.;
+   const double radius = 10 * KVUnits::cm / 2.;
 
    const double thick = 525 * KVUnits::um;
    const double centre_dist = 1 * KVUnits::mm;
@@ -63,16 +63,12 @@ void KVFAZIASYM::RutherfordTelescope()
    ruth_tel->AddNode(si_det, 2, new TGeoTranslation(0, 0, centre_dist / 2));
 
    // front entrance of first detector at 2 metres from target
-   const double distance = 2.20 * KVUnits::m + 0.5 * total_thickness;
+   const double distance = 2.20 * KVUnits::cm + 0.5 * total_thickness;
    const double theta = 1.84;
    const double phi = -90;
 
-   TGeoRotation rot1, rot2;
-   rot2.SetAngles(phi + 90, theta, 0);
-   rot1.SetAngles(-90, 0., 0.);
-   TGeoTranslation trans(0, 0, distance);
-   TGeoHMatrix h = rot2 * trans * rot1;
-   gGeoManager->GetTopVolume()->AddNode(ruth_tel, 1, new TGeoHMatrix(h));
+   gGeoManager->GetTopVolume()->AddNode(ruth_tel, 1,
+                                        KVMultiDetArray::GetVolumePositioningMatrix(distance, theta, phi));
 }
 
 
@@ -88,15 +84,9 @@ void KVFAZIASYM::BuildFAZIA()
    TGeoVolume* top = gGeoManager->GetTopVolume();
 
    Double_t distance_block_cible = fFDist * KVUnits::cm;
-   Double_t thick_si1 = 300 * KVUnits::um;
-   TGeoTranslation trans;
-   trans.SetDz(distance_block_cible + thick_si1 / 2.);
 
    KVFAZIABlock* block = new KVFAZIABlock;
 
-   TGeoRotation rot1, rot2;
-   TGeoHMatrix h;
-   TGeoHMatrix* ph = 0;
    Double_t theta = 0;
    Double_t phi = 0;
 
@@ -118,15 +108,15 @@ void KVFAZIASYM::BuildFAZIA()
       phi = centre.Phi() * TMath::RadToDeg();
       printf("BLK #%d => theta=%1.2lf - phi=%1.2lf\n", bb, theta, phi);
 
-      rot2.SetAngles(phi + 90., theta, 0.);
-      rot1.SetAngles(-1.*phi, 0., 0.);
-      h = rot2 * trans * rot1;
-      ph = new TGeoHMatrix(h);
-      top->AddNode(block, bb, ph);
+      top->AddNode(block, bb,
+                   KVMultiDetArray::GetVolumePositioningMatrix(
+                      block->GetNominalDistanceTargetBlockCentre(distance_block_cible),
+                      theta, phi));
    }
 
    // add telescope for elastic scattering monitoring
    RutherfordTelescope();
+
    // Change default geometry import angular range for rutherford telescope
    SetGeometryImportParameters(.25, 1., 1.84);
 }

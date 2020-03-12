@@ -64,13 +64,10 @@ void KVFAZIACOR::RutherfordTelescope()
    const double distance = 2.27 * KVUnits::m + 0.5 * total_thickness;
    const double theta = 0.99;
    const double phi = -54.07;
-
-   TGeoRotation rot1, rot2;
-   rot2.SetAngles(phi + 90, theta, 0);
-   rot1.SetAngles(-90, 0., 0.);
-   TGeoTranslation trans(0, 0, distance);
-   TGeoHMatrix h = rot2 * trans * rot1;
-   gGeoManager->GetTopVolume()->AddNode(ruth_tel, 1, new TGeoHMatrix(h));
+   gGeoManager->GetTopVolume()->AddNode(ruth_tel, 1,
+                                        KVMultiDetArray::GetVolumePositioningMatrix(distance,
+                                              theta,
+                                              phi));
 }
 
 
@@ -87,42 +84,13 @@ void KVFAZIACOR::BuildFAZIA()
 
    Double_t distance_block_cible = fFDist * KVUnits::cm;
    Double_t thick_si1 = 300 * KVUnits::um;
-   TGeoTranslation trans;
-   trans.SetDz(distance_block_cible + thick_si1 / 2.);
 
    KVFAZIABlock* block = new KVFAZIABlock;
-
-   TGeoRotation rot1, rot2;
-   TGeoHMatrix h;
-   TGeoHMatrix* ph = 0;
-
-   TVector3 centre;
-//   for (Int_t bb = 0; bb < fNblocks; bb += 1) {
-
-//      if (bb == 1)        centre.SetXYZ(-1 * (dx - centre_hole / 2), -dx - centre_hole / 2, distance_block_cible);
-//      else if (bb == 2)   centre.SetXYZ(-1 * (dx + centre_hole / 2), dx - centre_hole / 2, distance_block_cible);
-//      else if (bb == 3)   centre.SetXYZ(-1 * (-dx + centre_hole / 2), dx + centre_hole / 2, distance_block_cible);
-//      else if (bb == 0)   centre.SetXYZ(-1 * (-dx - centre_hole / 2), -dx + centre_hole / 2, distance_block_cible);
-//      else {
-//         Warning("BuildFAZIA", "Block position definition is done only for %d blocks", fNblocks);
-//      }
-//      theta = centre.Theta() * TMath::RadToDeg();
-//      phi = centre.Phi() * TMath::RadToDeg();
-//      printf("BLK #%d => theta=%1.2lf - phi=%1.2lf\n", bb, theta, phi);
-
-//      rot2.SetAngles(phi + 90., theta, 0.);
-//      rot1.SetAngles(-1.*phi, 0., 0.);
-//      h = rot2 * trans * rot1;
-//      ph = new TGeoHMatrix(h);
-//      top->AddNode(block, bb, ph);
-//   }
-   //
-   //
    // "Real" geometry of the FAZIA setup - from the various measurements done with the goniometer
-   Double_t dist_target_block0 = 80.0 * KVUnits::cm ;
-   Double_t dist_target_block1 = 80.3 * KVUnits::cm ;
-   Double_t dist_target_block2 = 80.0 * KVUnits::cm ;
-   Double_t dist_target_block3 = 80.3 * KVUnits::cm ;
+   Double_t dist_target_block0 = (80.0 + block->GetBrassCollimatorDepth()) * KVUnits::cm ;
+   Double_t dist_target_block1 = (80.3 + block->GetBrassCollimatorDepth()) * KVUnits::cm ;
+   Double_t dist_target_block2 = (80.0 + block->GetBrassCollimatorDepth()) * KVUnits::cm ;
+   Double_t dist_target_block3 = (80.3 + block->GetBrassCollimatorDepth()) * KVUnits::cm ;
    //
    // Theta and Phi angles of the blocks are deduced from the measurements of the angles of each telescopes
    Double_t theta_block0 = 5.41 ;  // in degrees
@@ -136,46 +104,30 @@ void KVFAZIACOR::BuildFAZIA()
    Double_t phi_block3 = 74.93   ;  // in degrees
    //
    // Block 0
-   rot1.SetAngles((-1. * phi_block0), 0., 0.) ;
-   rot2.SetAngles((phi_block0 + 90.), theta_block0, 0.) ;
-   trans.SetDz(dist_target_block0 + (thick_si1 / 2.)) ;
-   h = rot2 * trans * rot1 ;
-
-   ph = new TGeoHMatrix(h) ;
-   top->AddNode(block, 0, ph) ;
+   top->AddNode(block, 0,
+                KVMultiDetArray::GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(dist_target_block0),
+                      theta_block0, phi_block0));
 
    printf("BLK #%d => theta=%1.2lf - phi=%1.2lf - DistToTarget=%1.2lf\n", 0, theta_block0, phi_block0, dist_target_block0) ;
    //
    // Block 1
-   rot1.SetAngles((-1. * phi_block1), 0., 0.) ;
-   rot2.SetAngles((phi_block1 + 90.), theta_block1, 0.) ;
-   trans.SetDz(dist_target_block1 + (thick_si1 / 2.)) ;
-   h = rot2 * trans * rot1 ;
-
-   ph = new TGeoHMatrix(h) ;
-   top->AddNode(block, 1, ph) ;
+   top->AddNode(block, 1,
+                KVMultiDetArray::GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(dist_target_block1),
+                      theta_block1, phi_block1));
 
    printf("BLK #%d => theta=%1.2lf - phi=%1.2lf - DistToTarget=%1.2lf\n", 1, theta_block1, phi_block1, dist_target_block1) ;
    //
    // Block 2
-   rot1.SetAngles((-1. * phi_block2), 0., 0.) ;
-   rot2.SetAngles((phi_block2 + 90.), theta_block2, 0.) ;
-   trans.SetDz(dist_target_block2 + (thick_si1 / 2.)) ;
-   h = rot2 * trans * rot1 ;
-
-   ph = new TGeoHMatrix(h) ;
-   top->AddNode(block, 2, ph) ;
+   top->AddNode(block, 2,
+                KVMultiDetArray::GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(dist_target_block2),
+                      theta_block2, phi_block2));
 
    printf("BLK #%d => theta=%1.2lf - phi=%1.2lf - DistToTarget=%1.2lf\n", 2, theta_block2, phi_block2, dist_target_block2) ;
    //
    // Block 3
-   rot1.SetAngles((-1. * phi_block3), 0., 0.) ;
-   rot2.SetAngles((phi_block3 + 90.), theta_block3, 0.) ;
-   trans.SetDz(dist_target_block3 + (thick_si1 / 2.)) ;
-   h = rot2 * trans * rot1 ;
-
-   ph = new TGeoHMatrix(h) ;
-   top->AddNode(block, 3, ph) ;
+   top->AddNode(block, 3,
+                KVMultiDetArray::GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(dist_target_block3),
+                      theta_block3, phi_block3));
 
    printf("BLK #%d => theta=%1.2lf - phi=%1.2lf - DistToTarget=%1.2lf\n", 3, theta_block3, phi_block3, dist_target_block3) ;
    //

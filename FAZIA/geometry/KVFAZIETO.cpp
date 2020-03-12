@@ -81,19 +81,13 @@ void KVFAZIETO::BuildFAZIA()
 
    Double_t distance_block_cible = fFDist * KVUnits::cm;
    Double_t nominal_distance_block_cible = 100.0 * KVUnits::cm;
-   Double_t thick_si1 = 300 * KVUnits::um;
-   TGeoTranslation trans;
-   trans.SetDz(nominal_distance_block_cible + thick_si1 / 2.);
 
    KVFAZIABlock* block = new KVFAZIABlock;
 
-   TGeoRotation rot1, rot2;
    TGeoTranslation final_trans;
    final_trans.SetDz(distance_block_cible - nominal_distance_block_cible);
    if (KVBase::GetDataSetEnv(fDataSet, "FAZIETO.DistanceX", 0.0) != 0.) final_trans.SetDx(KVBase::GetDataSetEnv(fDataSet, "FAZIETO.DistanceX", 0.0));
    if (KVBase::GetDataSetEnv(fDataSet, "FAZIETO.DistanceY", 0.0) != 0.) final_trans.SetDy(KVBase::GetDataSetEnv(fDataSet, "FAZIETO.DistanceY", 0.0));
-   TGeoHMatrix h;
-   TGeoHMatrix* ph = 0;
    Double_t theta = 0;
    Double_t phi = 0;
 
@@ -140,14 +134,9 @@ void KVFAZIETO::BuildFAZIA()
       TVector3 real_centre = offset + centre;
       fBlocCentreTheta[block_number] = real_centre.Theta() * TMath::RadToDeg();
       fBlocCentrePhi[block_number] = real_centre.Phi() * TMath::RadToDeg();
-      rot2.SetAngles(phi + 90., theta, 0.);
-      rot1.SetAngles(-1.*phi, 0., 0.);
-      if (!final_trans.IsIdentity())
-         h = final_trans * rot2 * trans * rot1;
-      else
-         h = rot2 * trans * rot1;
-      ph = new TGeoHMatrix(h);
-      top->AddNode(block, block_number, ph);
+      top->AddNode(block, block_number,
+                   KVMultiDetArray::GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(),
+                         theta, phi, &final_trans));
    }
 
 }

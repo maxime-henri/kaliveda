@@ -373,6 +373,8 @@ public:
       KVDetector* d = dynamic_cast<KVDetector*>(GetDetectors()->First());
       return d->ROOTGeo();
    }
+   static TGeoHMatrix* GetVolumePositioningMatrix(Double_t distance, Double_t theta, Double_t phi,
+         TGeoTranslation* postTrans = nullptr);
    void CalculateDetectorSegmentationIndex();
    virtual void AnalyseGroupAndReconstructEvent(KVReconstructedEvent* recev, KVGroup* grp);
    virtual void SetGridsInTelescopes(UInt_t run);

@@ -70,11 +70,29 @@ KVGeoImport::KVGeoImport(TGeoManager* g, KVIonRangeTable* r, KVMultiDetArray* m,
    // Import geometry described by TGeoManager into KVMultiDetArray object
    // if create=kFALSE, we do not create any detectors etc., but just set up
    // the required links between the geometry and the existing array detectors
+   //
+   // We change the colours of volumes depending on their material
+
    fArray = m;
    fRangeTable = r;
    fCurrentTrajectory.SetAddToNodes(kFALSE);
    fCurrentTrajectory.SetPathInTitle(kFALSE);
    fCheckDetVolNames = kFALSE;
+
+   std::map<std::string, EColor> colors;
+   colors["Si"] = EColor(kGray + 1);
+   colors["CsI"] = EColor(kBlue - 8);
+   colors["Al"] = EColor(kGray);
+   colors["Cu"] = EColor(kOrange + 2);
+   TGeoVolume* vol;
+   TIter next(g->GetListOfVolumes());
+   while ((vol = (TGeoVolume*)next())) {
+      TGeoMedium* med = vol->GetMedium();
+      if (!med) continue;
+      TGeoMaterial* mat = med->GetMaterial();
+      if (colors.find(mat->GetName()) != colors.end()) vol->SetLineColor(colors[mat->GetName()]);
+      if (mat->GetDensity() < 0.1) vol->SetTransparency(60);
+   }
 }
 
 KVGeoImport::~KVGeoImport()

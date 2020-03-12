@@ -96,7 +96,6 @@ void KVExpSetUp::Build(Int_t run)
    // to the MakeMultiDetector method which called us
    fMakeMultiDetectorSetParameters = kTRUE;
 
-   gGeoManager->DefaultColors();
    gGeoManager->CloseGeometry();
 
    TIter nxt_mda(&fMDAList);

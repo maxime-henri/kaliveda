@@ -210,7 +210,6 @@ void KVFAZIA::Build(Int_t)
       BuildTarget();
 
    if (fCloseGeometryNow) {
-      gGeoManager->DefaultColors();
       gGeoManager->CloseGeometry();
       PerformClosedROOTGeometryOperations();
    }

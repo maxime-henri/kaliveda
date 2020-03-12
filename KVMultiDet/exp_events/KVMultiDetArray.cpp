@@ -2349,6 +2349,49 @@ void KVMultiDetArray::SetROOTGeometry(Bool_t on)
    else if (!on) SafeDelete(fNavigator);
 }
 
+TGeoHMatrix* KVMultiDetArray::GetVolumePositioningMatrix(Double_t distance, Double_t theta, Double_t phi, TGeoTranslation* postTrans)
+{
+   // Method for positioning volumes in detector geometries
+   //
+   // Given:
+   //
+   //    distance [cm] = distance from target (origin) to the CENTRE of the volume in position
+   //    theta   [deg] = polar angle of vector from target to centre of volume in position
+   //    phi     [deg] = azimuthal angle of vector
+   //
+   // this method generates the matrix which is required to position the volume as required
+   // while also turning the volume so that the side nearest the target (i.e. the entrance
+   // window of the detector) remains perpendicular to the vector joining the origin and
+   // the centre of the volume.
+   //
+   // If required, a further translation can be given which will be applied to the volume after
+   // it has been placed with the required orientation at the nominal distance. This can be used
+   // e.g. for detector misalignment, when detectors are in a structure which guarantees their line
+   // of sight to be orthogonal to their surface at a nominal distance, but the nominal distance
+   // is not respected.
+   //
+   // Example of use:
+   //
+   //~~~~~~~~~~~~
+   //  TGeoVolume* vol;// volume to be positioned
+   //  double depth = vol->GetShape()->GetDZ(); // half-width of volume in direction of target
+   //  // place front of volume at 100cm, with theta=45 deg. and phi=60 deg.
+   //  gGeoManager->GetTopVolume()->AddNode(vol, 1, KVMultiDetArray::GetVolumePositioningMatrix(100+depth,45,60));
+   //~~~~~~~~~~~~
+
+   TGeoRotation rot1, rot2;
+   TGeoTranslation trans;
+   phi += 90;
+   rot1.SetAngles(-phi, 0, 0) ;
+   rot2.SetAngles(phi, theta, 0) ;
+   trans.SetDz(distance) ;
+   TGeoHMatrix h;
+   if (postTrans) h = (*postTrans) * rot2 * trans * rot1 ;
+   else h = rot2 * trans * rot1;
+   TGeoHMatrix* ph = new TGeoHMatrix(h);
+   return ph;
+}
+
 void KVMultiDetArray::CalculateDetectorSegmentationIndex()
 {
    // *** Set 'segmentation' index of detectors ***
