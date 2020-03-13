@@ -61,29 +61,6 @@ KVIDINDRACsI::KVIDINDRACsI()
 
 //________________________________________________________________________________________//
 
-const Char_t* KVIDINDRACsI::GetArrayName()
-{
-   // Name of telescope given in the form CSI_R_L_Ring-numberTelescope-number
-   // where ring and telescope numbers are those of the smallest (in angular terms)
-   // detector of the telescope (if both are the same size, either one will do).
-   // The detectors are signified by their TYPE names i.e. KVDetector::GetType
-
-   //in order to access angular dimensions of detectors, we need their KVTelescopes
-   KVINDRADetector* de_det = dynamic_cast<KVINDRADetector*>(GetDetector(1));
-   UInt_t ring, mod;
-   ring = de_det->GetRingNumber();
-   mod = de_det->GetModuleNumber();
-   TString dummy;
-   dummy.Form("%s_R_L", GetDetector(1)->GetType());
-   SetType(dummy.Data());
-   dummy.Form("%s_%02d%02d", GetType(), ring, mod);
-   SetName(dummy.Data());
-
-   return fName.Data();
-}
-
-//________________________________________________________________________________________//
-
 Bool_t KVIDINDRACsI::Identify(KVIdentificationResult* IDR, Double_t x, Double_t y)
 {
    //Particle identification and code setting using identification grid KVIDGCsI* fGrid.

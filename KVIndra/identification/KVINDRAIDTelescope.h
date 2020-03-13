@@ -15,9 +15,6 @@ public:
    virtual ~ KVINDRAIDTelescope();
    void init();
 
-   const Char_t* GetName() const;
-   virtual const Char_t* GetArrayName();
-
    UShort_t GetZminCode()
    {
       return fZminCode;

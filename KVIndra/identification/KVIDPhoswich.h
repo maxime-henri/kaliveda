@@ -28,8 +28,6 @@ public:
    KVIDPhoswich();
    virtual ~ KVIDPhoswich();
 
-   const Char_t* GetArrayName();
-
    ClassDef(KVIDPhoswich, 1)   //INDRA identification using Phoswich R-L matrices
 };
 

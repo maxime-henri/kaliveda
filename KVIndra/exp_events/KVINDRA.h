@@ -101,6 +101,7 @@ protected:
    KVINDRATelescope* BuildTelescope(const Char_t* prefix, Int_t mod);
    void FillTrajectoryIDTelescopeLists();
    Int_t GetIDTelescopes(KVDetector*, KVDetector*, TCollection*);
+   void SetNamesOfIDTelescopes() const;
 
    void PerformClosedROOTGeometryOperations();
 #ifdef WITH_MFM

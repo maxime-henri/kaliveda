@@ -333,6 +333,8 @@ void KVINDRA::Build(Int_t run)
 
    SetGroupsAndIDTelescopes();
 
+   SetNamesOfIDTelescopes();
+
    SetACQParams();
 
    SetDetectorThicknesses();
@@ -578,6 +580,32 @@ Int_t KVINDRA::GetIDTelescopes(KVDetector* de, KVDetector* e, TCollection* idtel
       }
    }
    return n;
+}
+
+void KVINDRA::SetNamesOfIDTelescopes() const
+{
+   // Change default names of ID telescopes to INDRA standard
+
+   TIter it(GetListOfIDTelescopes());
+   KVIDTelescope* idt;
+   while ((idt = (KVIDTelescope*)it())) {
+      KVString N = idt->GetDetector(1)->GetName();
+      N.Begin("_");
+      KVString de_type = N.Next();
+      KVString de_number = N.Next();
+      if (idt->GetSize() == 1) {
+         // PHOS_R_L_MM or CSI_R_L_RRMM
+         idt->SetName(Form("%s_R_L_%s", de_type.Data(), de_number.Data()));
+      }
+      else {
+         N = idt->GetDetector(2)->GetName();
+         N.Begin("_");
+         KVString e_type = N.Next();
+         KVString e_number = N.Next();
+         if (de_type == "SILI") idt->SetName(Form("%s_%s_%s", de_type.Data(), e_type.Data(), de_number.Data()));
+         else idt->SetName(Form("%s_%s_%s", de_type.Data(), e_type.Data(), e_number.Data()));
+      }
+   }
 }
 
 void KVINDRA::PerformClosedROOTGeometryOperations()

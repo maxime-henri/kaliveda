@@ -36,8 +36,6 @@ public:
    KVIDINDRACsI();
    virtual ~ KVIDINDRACsI() {}
 
-   const Char_t* GetArrayName();
-
    void Initialize()
    {
       KVINDRAIDTelescope::Initialize();
