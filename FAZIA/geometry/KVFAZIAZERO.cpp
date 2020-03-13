@@ -67,7 +67,7 @@ void KVFAZIAZERO::PlasticDetectors()
 void KVFAZIAZERO::BuildFAZIA()
 {
    //Build geometry of FAZIASYM
-   //All telescopes are : Si(300µm)-Si(500µm)-CsI(10cm)
+   //All telescopes are : Si(300Âµm)-Si(500Âµm)-CsI(10cm)
    //No attempt has been made to implement real thicknesses
    //
    Info("BuildFAZIA", "Compact geometry, %f cm from target + 2BLK around 20 degrees",
@@ -76,15 +76,9 @@ void KVFAZIAZERO::BuildFAZIA()
    TGeoVolume* top = gGeoManager->GetTopVolume();
 
    Double_t distance_block_cible = fFDist * KVUnits::cm;
-   Double_t thick_si1 = 300 * KVUnits::um;
-   TGeoTranslation trans;
-   trans.SetDz(distance_block_cible + thick_si1 / 2.);
 
    KVFAZIABlock* block = new KVFAZIABlock;
 
-   TGeoRotation rot1, rot2;
-   TGeoHMatrix h;
-   TGeoHMatrix* ph = 0;
    Double_t theta = 0;
    Double_t phi = 0;
 
@@ -108,11 +102,13 @@ void KVFAZIAZERO::BuildFAZIA()
       phi = centre.Phi() * TMath::RadToDeg();
       printf("BLK #%d => theta=%1.2lf - phi=%1.2lf\n", bb, theta, phi);
 
-      rot2.SetAngles(phi + 90., theta, 0.);
-      rot1.SetAngles(-1.*phi, 0., 0.);
-      h = rot2 * trans * rot1;
-      ph = new TGeoHMatrix(h);
-      top->AddNode(block, bb, ph);
+      top->AddNode(block, bb,
+                   KVMultiDetArray::GetVolumePositioningMatrix(
+                      block->GetNominalDistanceTargetBlockCentre(distance_block_cible),
+                      theta,
+                      phi
+                   )
+                  );
    }
 
 //   trans.SetDz(250* KVUnits::cm + thick_si1 / 2.);
