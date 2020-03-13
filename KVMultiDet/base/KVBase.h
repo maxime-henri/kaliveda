@@ -52,7 +52,7 @@ public:
    KVBase& operator=(const KVBase&);
    virtual ~ KVBase();
 
-   inline void SetType(const Char_t* str)
+   virtual void SetType(const Char_t* str)
    {
       SetTitle(str);
    }

@@ -46,6 +46,14 @@ public:
       // detector classes
    }
 
+   void SetType(const Char_t* t)
+   {
+      // Detector types for INDRA are uppercase
+      TString T(t);
+      T.ToUpper();
+      KVDetector::SetType(T);
+   }
+
    const Char_t* GetArrayName();
    UInt_t GetRingNumber() const
    {
