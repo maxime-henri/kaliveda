@@ -44,7 +44,7 @@ KVFAZIABlock::KVFAZIABlock() : TGeoVolumeAssembly("STRUCT_BLOCK")
    full_length_quartet = full_width + dist_si2_csi + csi_depth;
    thick_si1 = 300 * KVUnits::um;
    thick_si2 = 500 * KVUnits::um;
-   dist_csi_sarco = 3.86;
+   dist_csi_sarco = 4.25;
    sarco_length = 49.7;
    sarco_width = 9.6;
    sarco_height = 10.4;
