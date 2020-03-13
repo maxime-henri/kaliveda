@@ -49,11 +49,25 @@ public:
    const Char_t* GetArrayName();
    UInt_t GetRingNumber() const
    {
-      return (GetTelescope() ? GetTelescope()->GetRingNumber() : 0);
+      if (GetTelescope()) return GetTelescope()->GetRingNumber();
+      // if no telescope, deduce from name
+      KVString name(GetName());
+      name.Begin("_");
+      KVString type = name.Next(kTRUE);
+      KVString index = name.Next(kTRUE);
+      if (type == "SILI" || type == "SI75") return index.Atoi();
+      return index.Atoi() / 100;
    }
    UInt_t GetModuleNumber() const
    {
-      return (GetTelescope() ? GetTelescope()->GetNumber() : 0);
+      if (GetTelescope()) return GetTelescope()->GetNumber();
+      // if no telescope, deduce from name
+      KVString name(GetName());
+      name.Begin("_");
+      KVString type = name.Next(kTRUE);
+      KVString index = name.Next(kTRUE);
+      if (type == "SILI" || type == "SI75") return 0; //no idea
+      return index.Atoi() % 100;
    }
 
    void AddACQParamType(const Char_t* type);
