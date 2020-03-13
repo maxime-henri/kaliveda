@@ -57,7 +57,7 @@ void KVFAZIAZERO::PlasticDetectors()
    TGeoVolumeAssembly* telpl1 = gGeoManager->MakeVolumeAssembly("STRUCT_PL");
    telpl1->AddNode(pl1, 1, new TGeoTranslation(0, 0, -centre_dist / 2));
    telpl1->AddNode(pl2, 2, new TGeoTranslation(0, 0, centre_dist / 2));
-   gGeoManager->GetTopVolume()->AddNode(telpl1, 998, new TGeoTranslation(0, 0, 0));
+   gGeoManager->GetTopVolume()->AddNode(telpl1, 998);
 
 //   TGeoVolume* pl2 = gGeoManager->MakeTube("PL2", silicon.GetGeoMedium(), 0., radius, thick / 2);
 //   gGeoManager->GetTopVolume()->AddNode(pl2, 999, new TGeoTranslation(0,0,-centre_dist / 2));

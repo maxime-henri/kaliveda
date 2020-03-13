@@ -64,13 +64,9 @@ void KVFAZIALNS17::RutherfordTelescope()
    const double distance = 2.27 * KVUnits::m + 0.5 * total_thickness;
    const double theta = 0.99;
    const double phi = -54.07;
-
-   TGeoRotation rot1, rot2;
-   rot2.SetAngles(phi + 90, theta, 0);
-   rot1.SetAngles(-90, 0., 0.);
-   TGeoTranslation trans(0, 0, distance);
-   TGeoHMatrix h = rot2 * trans * rot1;
-   gGeoManager->GetTopVolume()->AddNode(ruth_tel, 1, new TGeoHMatrix(h));
+   gGeoManager->GetTopVolume()->AddNode(ruth_tel, 1,
+                                        GetVolumePositioningMatrix(distance, theta, phi)
+                                       );
 }
 
 
@@ -86,15 +82,9 @@ void KVFAZIALNS17::BuildFAZIA()
    TGeoVolume* top = gGeoManager->GetTopVolume();
 
    Double_t distance_block_cible = fFDist * KVUnits::cm;
-   Double_t thick_si1 = 300 * KVUnits::um;
-   TGeoTranslation trans;
-   trans.SetDz(distance_block_cible + thick_si1 / 2.);
 
    KVFAZIABlock* block = new KVFAZIABlock;
 
-   TGeoRotation rot1, rot2;
-   TGeoHMatrix h;
-   TGeoHMatrix* ph = 0;
    Double_t theta = 0;
    Double_t phi = 0;
 
@@ -117,12 +107,10 @@ void KVFAZIALNS17::BuildFAZIA()
       theta = centre.Theta() * TMath::RadToDeg();
       phi = centre.Phi() * TMath::RadToDeg();
       printf("BLK #%d => theta=%1.2lf - phi=%1.2lf\n", bb, theta, phi);
-
-      rot2.SetAngles(phi + 90., theta, 0.);
-      rot1.SetAngles(-1.*phi, 0., 0.);
-      h = rot2 * trans * rot1;
-      ph = new TGeoHMatrix(h);
-      top->AddNode(block, bb, ph);
+      top->AddNode(block, bb,
+                   GetVolumePositioningMatrix(block->GetNominalDistanceTargetBlockCentre(distance_block_cible),
+                                              theta, phi)
+                  );
    }
 
    // add telescope for elastic scattering monitoring
