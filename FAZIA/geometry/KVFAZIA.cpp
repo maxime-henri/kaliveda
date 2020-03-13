@@ -146,7 +146,7 @@ void KVFAZIA::PerformClosedROOTGeometryOperations()
 
    KVGeoImport imp(gGeoManager, KVMaterial::GetRangeTable(), this, kTRUE);
    if (fImport_Xorg != 0 || fImport_Yorg != 0 || fImport_Zorg != 0) imp.SetOrigin(fImport_Xorg, fImport_Yorg, fImport_Zorg);
-   imp.SetDetectorPlugin(ClassName());
+   imp.SetDetectorPlugin(GetDataSetEnv(GetDataSet(), "FAZIADetectorPlugin", "FAZIADetector"));
    imp.SetNameCorrespondanceList(fCorrespondanceFile.Data());
    // any additional structure name formatting definitions
    DefineStructureFormats(imp);
