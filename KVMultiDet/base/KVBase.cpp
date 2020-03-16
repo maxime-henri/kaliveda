@@ -29,9 +29,6 @@ $Id: KVBase.cpp,v 1.57 2009/04/22 09:38:39 franklan Exp $
 #include "KVNameValueList.h"
 #include "TSystemDirectory.h"
 #include "KVVersion.h"
-#ifdef WITH_BZR_INFOS
-#include "KVBzrInfo.h"
-#endif
 #ifdef WITH_GIT_INFOS
 #include "KVGitInfo.h"
 #endif
@@ -44,9 +41,6 @@ $Id: KVBase.cpp,v 1.57 2009/04/22 09:38:39 franklan Exp $
 #include "TContextMenu.h"
 #include <TKey.h>
 #include "TTree.h"
-#ifdef WITH_GRULIB
-#include "GNetClientRoot.h"
-#endif
 
 using namespace std;
 
@@ -775,51 +769,6 @@ const Char_t* KVBase::gitCommit()
 }
 #endif
 //__________________________________________________________________________________________________________________
-#ifdef WITH_BZR_INFOS
-const Char_t* KVBase::bzrRevisionId()
-{
-   // Returns Bazaar branch revision-id of sources
-   static TString tmp(BZR_REVISION_ID);
-   return tmp.Data();
-}
-
-//__________________________________________________________________________________________________________________
-
-const Char_t* KVBase::bzrRevisionDate()
-{
-   // Returns date of Bazaar branch revision of sources
-   static TString tmp(BZR_REVISION_DATE);
-   return tmp.Data();
-}
-
-//__________________________________________________________________________________________________________________
-
-const Char_t* KVBase::bzrBranchNick()
-{
-   // Returns nickname of Bazaar branch of sources
-   static TString tmp(BZR_BRANCH_NICK);
-   return tmp.Data();
-}
-
-//__________________________________________________________________________________________________________________
-
-Int_t KVBase::bzrIsBranchClean()
-{
-   // Returns 1 if Bazaar branch of sources contained uncommitted
-   // changes at time of building; 0 if all changes had been committed.
-   // WARNING: this doesn't really work (ignore)
-   return BZR_BRANCH_IS_CLEAN;
-}
-
-//__________________________________________________________________________________________________________________
-
-Int_t KVBase::bzrRevisionNumber()
-{
-   // Returns Bazaar branch revision number of sources
-   return BZR_REVISION_NUMBER;
-}
-#endif
-//__________________________________________________________________________________________________________________
 
 Bool_t KVBase::FindExecutable(TString& exec, const Char_t* path)
 {
@@ -1158,30 +1107,6 @@ void KVBase::ReadGUIMimeTypes()
    }
 }
 
-//__________________________________________________________________________________________________________________
-#ifdef WITH_GRULIB
-Int_t KVBase::TestPorts(Int_t port)
-{
-   // Test ports for availability. Start from 'port' and go up to port+2000 at most.
-   // Returns -1 if no ports available.
-
-   GNetClientRoot testnet((char*) "localhost");
-   Int_t ret;
-   ret = port;
-
-   for (int i = 0; i < 2000; i++) {
-      ret = testnet.TestPortFree(port, (char*) "localhost");
-      if (ret > 0)
-         break;
-      if ((ret <= 0))
-         port++;
-   }
-
-   return ret;
-
-}
-#endif
-
 Bool_t KVBase::AreEqual(Double_t A, Double_t B, Long64_t maxdif)
 {
    // \brief Comparison between two 64-bit floating-point values
@@ -1311,7 +1236,7 @@ TObject* KVBase::GetObject() const
    // GetLabel() should return the real class of the object,
    // and this method should return its address.
    // Then call KVListView::SetUseObjLabelAsRealClass(kTRUE).
-   return NULL;
+   return nullptr;
 }
 
 
@@ -1341,11 +1266,6 @@ void KVBase::PrintSplashScreen()
    cout << "*                                                         *" <<
         endl;
    printf("* Version: %-10s                   Built: %-10s *\n", KVBase::GetKVVersion(), KVBase::GetKVBuildDate());
-#ifdef WITH_BZR_INFOS
-   TString bzrinfo;
-   bzrinfo.Form("%s@%d", bzrBranchNick(), bzrRevisionNumber());
-   printf("* bzr: %50s *\n", bzrinfo.Data());
-#endif
 #ifdef WITH_GIT_INFOS
    TString gitinfo;
    gitinfo.Form("%s@%s", gitBranch(), gitCommit());

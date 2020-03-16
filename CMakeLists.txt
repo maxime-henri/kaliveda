@@ -62,7 +62,6 @@ set(ADD_DYN_PATH)
 
 #---Version control informations
 set(WITH_GIT_INFOS)
-set(WITH_BZR_INFOS)
 if(EXISTS ${PROJECT_SOURCE_DIR}/.git OR EXISTS ${PROJECT_SOURCE_DIR}/KVGitInfo.h)
    set(WITH_GIT_INFOS yes)
    #-enforce coding style
@@ -75,8 +74,6 @@ if(EXISTS ${PROJECT_SOURCE_DIR}/.git OR EXISTS ${PROJECT_SOURCE_DIR}/KVGitInfo.h
    if(GIT_FOUND)
      execute_process(COMMAND ${GIT_EXECUTABLE} config pull.rebase true WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
    endif(GIT_FOUND)
-elseif(EXISTS ${PROJECT_SOURCE_DIR}/.bzr OR EXISTS ${PROJECT_SOURCE_DIR}/KVBzrInfo.h)
-   set(WITH_BZR_INFOS yes)
 endif()
 #----------------------------------------------------------
 #----------------------BUILD OPTIONS-----------------------
@@ -418,13 +415,6 @@ set(tarball "${tarprefix}.tar.gz")
 if(WITH_GIT_INFOS)
    add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/${tarball}
       COMMAND git archive --prefix=${tarprefix}/ -o ${CMAKE_CURRENT_BINARY_DIR}/${tarball} HEAD
-      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-      )
-   add_custom_target(dist DEPENDS ${CMAKE_BINARY_DIR}/${tarball})
-endif()
-if(WITH_BZR_INFOS)
-   add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/${tarball}
-      COMMAND bzr export --root=${tarprefix}/ ${CMAKE_CURRENT_BINARY_DIR}/${tarball}
       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       )
    add_custom_target(dist DEPENDS ${CMAKE_BINARY_DIR}/${tarball})

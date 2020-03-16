@@ -55,11 +55,11 @@ public:
    inline void SetType(const Char_t* str)
    {
       SetTitle(str);
-   };
+   }
    const Char_t* GetType() const
    {
       return GetTitle();
-   };
+   }
    static const Char_t* WorkingDirectory()
    {
       return fWorkingDirectory.Data();
@@ -68,7 +68,7 @@ public:
    {
       // Returns true if GetType() returns the given type name
       return (fTitle == typ);
-   };
+   }
    virtual Bool_t IsCalled(const Char_t* name) const
    {
       // Returns true if object has given name (test value returned by GetName())
@@ -137,13 +137,6 @@ public:
    static const Char_t* GetKVSourceDir();
    static const Char_t* GetKVBuildDir();
 
-#ifdef WITH_BZR_INFOS
-   static const Char_t* bzrRevisionId();
-   static const Char_t* bzrRevisionDate();
-   static const Char_t* bzrBranchNick();
-   static Int_t bzrIsBranchClean();
-   static Int_t bzrRevisionNumber();
-#endif
 #ifdef WITH_GIT_INFOS
    static const Char_t* gitBranch();
    static const Char_t* gitCommit();
@@ -176,9 +169,6 @@ public:
    static const Char_t* FindFile(const Char_t* search, TString& wfil);
    static Bool_t FindClassSourceFiles(const Char_t* class_name, KVString& imp_file,
                                       KVString& dec_file, const Char_t* dir_name = ".");
-#ifdef WITH_GRULIB
-   Int_t TestPorts(Int_t port);
-#endif
 
    static Bool_t AreEqual(Double_t x, Double_t y, Long64_t maxdif = 1);
 

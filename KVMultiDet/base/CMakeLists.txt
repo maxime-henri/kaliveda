@@ -9,7 +9,7 @@ BUILD_KALIVEDA_MODULE(base
         EXTRA_LIBS ${extra_libs}
 )
 
-#--- generation of KVBzrInfo.h or KVGitInfo.h
+#--- generation of KVGitInfo.h
 include(CreateVersionControlHeader)
 create_version_control_header()
 
