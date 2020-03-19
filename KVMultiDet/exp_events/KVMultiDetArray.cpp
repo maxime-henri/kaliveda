@@ -1833,8 +1833,8 @@ void KVMultiDetArray::SetIdentifications()
    //Note that, in general, the parameters of the identifications for a given run are not
    //set until SetParameters or SetRunIdentificationParameters is called.
 
-   KVString id_labels = gDataSet->GetDataSetEnv("ActiveIdentifications");
-   if (id_labels == "" || !gDataSet->HasCalibIdentInfos()) {
+   KVString id_labels = GetDataSetEnv(fDataSet, "ActiveIdentifications", "");
+   if (id_labels == "" || (gDataSet && !gDataSet->HasCalibIdentInfos())) {
       Info("SetIdentifications", "No active identifications");
       return;
    }
@@ -2196,14 +2196,14 @@ void KVMultiDetArray::SetDetectorThicknesses()
    // Multi-layer: Each layer is a KVMaterial object. The thickness MUST be given in centimetres
    //         (default thickness unit for KVMaterial).
 
-   TString filename = gDataSet->GetDataSetEnv("KVMultiDetArray.DetectorThicknesses", "");
+   TString filename = GetDataSetEnv(fDataSet, "KVMultiDetArray.DetectorThicknesses", "");
    if (filename == "") {
       Error("SetDetectorThicknesses", "*.KVMultiDetArray.DetectorThicknesses not defined in .kvrootrc");
       return;
    }
    TString fullpath;
-   if ((fullpath = gDataSet->GetFullPathToDataSetFile(filename)) == "") {
-//   if (!SearchKVFile(filename.Data(), fullpath, gDataSet->GetName())) {
+   if (gDataSet) fullpath = gDataSet->GetFullPathToDataSetFile(filename);
+   if (fullpath == "") {
       Info("SetDetectorThicknesses", "File %s not found", filename.Data());
       return;
    }

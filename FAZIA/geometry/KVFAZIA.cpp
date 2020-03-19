@@ -92,7 +92,8 @@ void KVFAZIA::GenerateCorrespondanceFile()
    // Look for the geometry object <-> detector name correspondance file in the dataset directory
    //  If not found, we create it
 
-   fCorrespondanceFile = gDataSet->GetFullPathToDataSetFile(Form("%s.names", ClassName()));
+   fCorrespondanceFile = "";
+   if (gDataSet) fCorrespondanceFile = gDataSet->GetFullPathToDataSetFile(Form("%s.names", ClassName()));
    if (fCorrespondanceFile != "") return;
 
 #ifdef WITH_GNU_INSTALL

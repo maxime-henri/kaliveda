@@ -10,9 +10,11 @@
 #pragma link C++ class KVFAZIACOR+;
 #pragma link C++ class KVISOFAZIA+;
 #pragma link C++ class KVFAZIETO+;
+#pragma link C++ class KVFAZIABeltConfig3x2+;
 #pragma link C++ class KVFAZIADetector+;
 #pragma link C++ class KVFAZIANFS+;
 #pragma link C++ class KVFAZIALNS2016+;
 #pragma link C++ class KVFAZIALNS17+;
 #pragma link C++ class KVFAZIAZERO+;
+#pragma link C++ class KVFAZIAMidRapExplorer+;
 #endif

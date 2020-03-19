@@ -383,7 +383,6 @@ TGeoVolume* KVFAZIABlock::MakeQuartet()
    si500frame->AddNode(si500vol, 4, new TGeoTranslation(-si_centre, -si_centre, si500_position));
    dynamic_cast<TNamed*>(si500frame->GetNodes()->Last())->SetName("DET_SI2-T4");
 
-   TGeoVolumeAssembly* full_silicons = new TGeoVolumeAssembly("FULL_SILICONS");
    // make front cache
    TGeoVolume* ergal_frame_front = MakeErgalFrame(front_frame_depth, front_frame_depth);
 

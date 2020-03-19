@@ -7,17 +7,16 @@
 #include "TGeoVolume.h"
 
 class KVFAZIABeltConfig3x2 : public TGeoVolumeAssembly {
-   Double_t fTheta; // polar angle of centre of belt
-   Double_t fPhi;   // azimuthal angle of centre of belt
+
    Double_t fDist;  // distance of centre of belt from target
    Double_t fInterBlock; //spacing between blocks
 
    void BuildBelt();
 
 public:
-   KVFAZIABeltConfig3x2(Double_t theta, Double_t phi, Double_t dist = 100.0)
-      : TGeoVolumeAssembly(),
-        fTheta(theta), fPhi(phi), fDist(dist)
+   KVFAZIABeltConfig3x2(Double_t dist = 100.0, Double_t inter_block = 0.5)
+      : TGeoVolumeAssembly("STRUCT_BELT"),
+        fDist(dist), fInterBlock(inter_block)
    {
       // Create a belt at the given position
       BuildBelt();
