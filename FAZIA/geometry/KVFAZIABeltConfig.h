@@ -6,24 +6,24 @@
 
 #include "TGeoVolume.h"
 
-class KVFAZIABeltConfig3x2 : public TGeoVolumeAssembly {
+class KVFAZIABeltConfig : public TGeoVolumeAssembly {
 
    Double_t fDist;  // distance of centre of belt from target
    Double_t fInterBlock; //spacing between blocks
 
-   void BuildBelt();
+   void BuildBelt(int nblocsX, int nblocsY, Double_t distance_correction);
 
 public:
-   KVFAZIABeltConfig3x2(Double_t dist = 100.0, Double_t inter_block = 0.5)
+   KVFAZIABeltConfig(int nblocsX, int nblocsY, Double_t dist = 100.0, Double_t inter_block = 0.5, double distance_correction = 5)
       : TGeoVolumeAssembly("STRUCT_BELT"),
         fDist(dist), fInterBlock(inter_block)
    {
       // Create a belt at the given position
-      BuildBelt();
+      BuildBelt(nblocsX, nblocsY, distance_correction);
    }
-   virtual ~KVFAZIABeltConfig3x2() {}
+   virtual ~KVFAZIABeltConfig() {}
 
-   ClassDef(KVFAZIABeltConfig3x2, 1) //6 blocks of FAZIA in a belt of 3x2 blocks
+   ClassDef(KVFAZIABeltConfig, 1) //blocks of FAZIA in a belt of NxM blocks
 };
 
 #endif

@@ -70,8 +70,7 @@ void KVExpSetUp::Build(Int_t run)
 
    KVMultiDetArray* tmp(nullptr);
    Int_t group_offset = 0;// for renumbering groups
-   lmultidetarrayclasses =
-      gDataSetManager->GetDataSet(fDataSet)->GetDataSetEnv("DataSet.ExpSetUp.ClassList", IsA()->GetName());
+   lmultidetarrayclasses = GetDataSetEnv(fDataSet, "DataSet.ExpSetUp.ClassList", IsA()->GetName());
    lmultidetarrayclasses.Begin(" ");
 
    // VERY IMPORTANT: deactivate 'SetParameters(run)' being called by MakeMultiDetector for sub-arrays!
@@ -79,9 +78,9 @@ void KVExpSetUp::Build(Int_t run)
 
    while (!lmultidetarrayclasses.End()) {
       KVString sname = lmultidetarrayclasses.Next();
-      Info("Build", "Build %s %s\n", gDataSet->GetName(), sname.Data());
+      Info("Build", "Build %s %s\n", fDataSet.Data(), sname.Data());
       gMultiDetArray = nullptr; //otherwise MakeMultiDetector will delete any previously built array
-      tmp = MakeMultiDetector(gDataSet->GetName(), run, sname.Data());
+      tmp = MakeMultiDetector(fDataSet, run, sname.Data());
       if (tmp) {
          fMDAList.Add(tmp);
          if (myname != "") myname += "-";

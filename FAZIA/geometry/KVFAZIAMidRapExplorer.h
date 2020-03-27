@@ -7,6 +7,17 @@
 #include "KVFAZIA.h"
 
 class KVFAZIAMidRapExplorer : public KVFAZIA {
+
+   struct {
+      Int_t fNblocsX; // number of blocks in X (vertical) axis
+      Int_t fNblocsY; // number of blocks in Y (horizontal) axis
+      Double_t fBeltDistanceTarget; // nominal distance belt-target (cm)
+      Double_t fThetaBelt; // polar angle of centre belt
+      Double_t fPhiBelt; // polar angle of centre belt
+      Double_t fInterBlockSpacing; // spacing between blocks in belt
+      Double_t fDistanceOffset; // distance offset as function of theta to keep same phi coverage
+   } fBlockParams[2];
+
    void BuildFAZIA();
    void GetGeometryParameters();
 

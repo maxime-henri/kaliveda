@@ -140,17 +140,26 @@ KVINDRA::~KVINDRA()
 void KVINDRA::BuildGeometry()
 {
    // Construction of INDRA detector array.
-   // Uses infos in file $KVROOT/KVFiles/data/indra_struct.[dataset].env
-   //                 or $KVROOT/KVFiles/data/indra_struct.env
+   //
+   // Uses infos in file
+   //        $KVROOT/KVFiles/data/indra_struct.[dataset].env
+   // or
+   //        $KVROOT/KVFiles/data/indra_struct.env
+   //
    // if no dataset-specific file found
+   //
+   // Alternatively, by defining the variable
+   //
+   //   [dataset].INDRA.StructureFile: [path to file]
 
 
    TString path = Form("indra-struct.%s.env", fDataSet.Data());
-   TString path2;
-   SearchKVFile(path.Data(), path2, "data");
+   TString path2 = GetDataSetEnv(fDataSet, "INDRA.StructureFile", "");
    if (path2 == "") {
-      path = "indra-struct.env";
-      SearchKVFile(path.Data(), path2, "data");
+      if (!SearchKVFile(path.Data(), path2, "data")) {
+         path = "indra-struct.env";
+         SearchKVFile(path.Data(), path2, "data");
+      }
    }
    fStrucInfos.ReadFile(path2, kEnvAll);
 

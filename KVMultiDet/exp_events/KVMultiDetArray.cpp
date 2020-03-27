@@ -1222,9 +1222,9 @@ KVNameValueList* KVMultiDetArray::DetectParticle_TGEO(KVNucleus* part)
                // energy loss in active layer of detector
                KVDetector* curDet = GetDetector(det_name);
                if (!curDet) {
-                  Error("DetectParticle_TGEO",
-                        "Cannot find detector %s corresponding to particle energy loss %s",
-                        det_name.Data(), pname.Data());
+//                  Error("DetectParticle_TGEO",
+//                        "Cannot find detector %s corresponding to particle energy loss %s",
+//                        det_name.Data(), pname.Data());
                }
                else {
                   Double_t de = param->GetDouble();
@@ -1683,12 +1683,12 @@ KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, 
    //
    //Dataset name is stored in fDataSet
 
-   if (!gDataSet || gDataSet != gDataSetManager->GetDataSet(dataset_name)) {
+   if (gDataSetManager && (!gDataSet || (gDataSet != gDataSetManager->GetDataSet(dataset_name)))) {
       printf("Info in <KVMultiDetArray::MakeMultiDetector>: Changing dataset\n");
       gDataSetManager->GetDataSet(dataset_name)->cd();
    }
 
-   if (gMultiDetArray && gMultiDetArray->GetDataSet() != gDataSet->GetName()) {
+   if (gMultiDetArray && gMultiDetArray->GetDataSet() != dataset_name) {
       printf("Info in <KVMultiDetArray::MakeMultiDetector>: Deleting existing array %s\n", gMultiDetArray->GetName());
       if (gIDGridManager) {
          delete gIDGridManager;
@@ -1713,15 +1713,15 @@ KVMultiDetArray* KVMultiDetArray::MakeMultiDetector(const Char_t* dataset_name, 
       mda->Build(run);
       // if ROOT geometry is not allowed ([dataset_name].KVMultiDetArray.ROOTGeometry = no
       // or KVMultiDetArray.ROOTGeometry = no), disable it
-      mda->fROOTGeometry = KVBase::GetDataSetEnv(dataset_name, "KVMultiDetArray.ROOTGeometry", kTRUE);
+      mda->fROOTGeometry = GetDataSetEnv(dataset_name, "KVMultiDetArray.ROOTGeometry", kTRUE);
       if (mda->fROOTGeometry) mda->CheckROOTGeometry();
       // set dataset-dependent lists of acceptable ID/E codes for reconstructed nuclei
-      KVString codes = KVBase::GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.AcceptIDCodes", mda->GetName()), "");
+      KVString codes = GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.AcceptIDCodes", mda->GetName()), "");
       if (codes != "") mda->fAcceptIDCodes.Set(codes);
-      codes = KVBase::GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.AcceptECodes", mda->GetName()), "");
+      codes = GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.AcceptECodes", mda->GetName()), "");
       if (codes != "") mda->fAcceptECodes.Set(codes);
       // set dataset-dependent condition for seeding reconstructed nuclei
-      mda->SetPartSeedCond(KVBase::GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.ParticleSeedCond", mda->GetName()), ""));
+      mda->SetPartSeedCond(GetDataSetEnv(dataset_name, Form("%s.ReconstructedNuclei.ParticleSeedCond", mda->GetName()), ""));
    }
    else {
       mda = gMultiDetArray;

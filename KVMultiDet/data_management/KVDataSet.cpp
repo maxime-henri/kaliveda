@@ -1597,11 +1597,13 @@ TString KVDataSet::GetFullPathToDataSetFile(const TString& dataset, const Char_t
       abspath.Form("%s/%s", datasetdir.Data(), filename);
       if (!SearchKVFile(abspath, fullpath)) {
          ::Warning("KVDataSet::GetFullPathToDataSetFile", "File %s not found in dataset subdirectory %s", filename, datasetdir.Data());
+         fullpath = "";
       }
       return fullpath;
    }
    if (!SearchKVFile(filename, fullpath, datasetdir)) {
       ::Warning("KVDataSet::GetFullPathToDataSetFile", "File %s not found in dataset subdirectory %s", filename, datasetdir.Data());
+      fullpath = "";
    }
    return fullpath;
 }
