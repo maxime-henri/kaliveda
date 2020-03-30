@@ -191,13 +191,23 @@ KV2Body::KV2Body(): fNuclei(5), fEDiss(0)
 
 KV2Body::KV2Body(const Char_t* systemname) : fNuclei(5), fEDiss(0)
 {
-   //Set up calculation defining entrance channel following
-   //this prescription  :
-   //[Projectile_Symbol]+[Target_Symbol]@[Incident_Energy]MeV/A
-   // Example :
-   // 129Xe+119Sn@50.0MeV/A
-   // U+U@5MeV/A
-   // Ta+Zn
+   //Set up calculation defining entrance channel following this prescription:
+   //
+   //     [Projectile_Symbol]+[Target_Symbol]@[Incident_Energy]MeV/A
+   //     [Projectile_Symbol]+[Target_Symbol]@[Incident_Energy]MeV/u
+   //     [Projectile_Symbol]+[Target_Symbol]
+   //
+   //Any spaces will be ignored.
+   //
+   //Valid examples:
+   //
+   //     129Xe+119Sn@50.0MeV/A
+   //     58Ni + 64Ni @ 32 MeV/u
+   //     U+U@5MeV/A
+   //     Ta+Zn
+   //
+   //If the format is not respected, this object will be a zombie (IsZombie() returns kTRUE)
+
    init();
    KVString sener = "";
    Double_t  ee = 0;
@@ -211,12 +221,29 @@ KV2Body::KV2Body(const Char_t* systemname) : fNuclei(5), fEDiss(0)
       sener = syst.Next();
    }
    if (sener != "") {
-      sener.ReplaceAll("MeV/A", "");
-      ee = sener.Atof();
+      if (sener.Contains("MeV/A")) {
+         sener.ReplaceAll("MeV/A", "");
+         ee = sener.Atof();
+      }
+      else if (sener.Contains("MeV/u")) {
+         sener.ReplaceAll("MeV/u", "");
+         ee = sener.Atof();
+      }
+      else {
+         MakeZombie();
+      }
    }
    scouple.Begin("+");
-   fNuclei[1] = KVNucleus(scouple.Next(), ee);
-   fNuclei[2] = KVNucleus(scouple.Next());
+   KVNucleus nnuc1(scouple.Next(), ee);
+   if (nnuc1.IsZombie()) MakeZombie();
+   else {
+      fNuclei[1] = nnuc1;
+      KVNucleus nnuc2(scouple.Next());
+      if (nnuc2.IsZombie()) MakeZombie();
+      else {
+         fNuclei[2] = nnuc2;
+      }
+   }
 }
 
 KV2Body::KV2Body(KVNucleus*, KVNucleus* cib, KVNucleus* proj_out, Double_t): fNuclei(5), fEDiss(0)
