@@ -1221,12 +1221,7 @@ KVNameValueList* KVMultiDetArray::DetectParticle_TGEO(KVNucleus* part)
             if (pn3.End() || pn3.Next().BeginsWith("ACTIVE")) {
                // energy loss in active layer of detector
                KVDetector* curDet = GetDetector(det_name);
-               if (!curDet) {
-//                  Error("DetectParticle_TGEO",
-//                        "Cannot find detector %s corresponding to particle energy loss %s",
-//                        det_name.Data(), pname.Data());
-               }
-               else {
+               if (curDet) {
                   Double_t de = param->GetDouble();
                   if (!NVL) NVL = new KVNameValueList;
                   NVL->SetValue(curDet->GetName(), de);
