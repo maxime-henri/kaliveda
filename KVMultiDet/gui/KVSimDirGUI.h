@@ -93,6 +93,7 @@ class KVSimDirGUI : public KVBase {
    KVSQLite::database fConfigDB;
 #endif
    Bool_t fWithPROOF;//=kTRUE when running with PROOF-lite
+   Bool_t fCancelJob;// if job parameters are not valid
 protected:
    void SetFilterOptions();
 #ifdef WITH_RSQLITE

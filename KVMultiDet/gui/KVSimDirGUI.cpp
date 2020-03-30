@@ -883,8 +883,9 @@ void KVSimDirGUI::RunAnalysis(const TString& type)
          gDataAnalyser->SetBatchSystem(gBatchSystem);
       }
    }
+   fCancelJob = kFALSE;
    if (type == "filter") SetFilterOptions();
-   if (!cancel_batch_job) gDataAnalyser->Run();
+   if (!cancel_batch_job && !fCancelJob) gDataAnalyser->Run();
    selected_filt_runs.reset(nullptr);
    selected_sim_runs.reset(nullptr);
    RefreshSimDir();
@@ -915,6 +916,13 @@ void KVSimDirGUI::SetFilterOptions()
    KVDBSystem* sys = (gExpDB ? gExpDB->GetSystem(fSystem) : nullptr);
    if (!sys) {
       KV2Body cd(fSystem.Data());
+      // check valid ad hoc system given by user
+      if (cd.IsZombie()) {
+         Error("SetFilterOptions", "Please check the format of the ad hoc system name you gave");
+         WarningBox("Bad System", "Please check the format of the ad hoc system name you gave", kFALSE);
+         fCancelJob = kTRUE;
+         return;
+      }
       cd.CalculateKinematics();
       cd.Print();
    }
