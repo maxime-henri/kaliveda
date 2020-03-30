@@ -228,20 +228,24 @@ Int_t KVNucleus::IsMassGiven(const Char_t* isotope)
 
 void KVNucleus::Set(const Char_t* isotope)
 {
-   //Set nucleus' Z & A using chemical symbol e.g. Set("12C") or Set("233U") etc.
+   // Set nucleus' Z & A using chemical symbol e.g. Set("12C") or Set("233U") etc.
+   //
+   // Any failure to deduce Z from the symbol will result in this object being made
+   // a zombie i.e. IsZombie() will return kTRUE
+
    Int_t A;
-   Char_t name[5];
+   Char_t name[255];
    TString tmp(isotope);
    if (tmp.BeginsWith("nat"))
       tmp.Remove(0, 3);
    if (sscanf(tmp.Data(), "%d%s", &A, name) == 2) {
       //name given in form "208Pb"
-      SetZFromSymbol(name);
-      SetA(A);
+      if (SetZFromSymbol(name) > -1) SetA(A);
+      else MakeZombie();
    }
    else if (sscanf(tmp.Data(), "%s", name) == 1) {
       //name given in form "Pb"
-      SetZFromSymbol(name);
+      if (SetZFromSymbol(name) == -1) MakeZombie();
    }
 }
 
@@ -257,13 +261,16 @@ Int_t KVNucleus::GetZFromSymbol(const Char_t* sym)
    return -1;
 }
 
-void KVNucleus::SetZFromSymbol(const Char_t* sym)
+int KVNucleus::SetZFromSymbol(const Char_t* sym)
 {
-   //Set Z of nucleus with given symbol i.e. "C" => Z=6, "U" => Z=92
+   // Set Z of nucleus with given symbol i.e. "C" => Z=6, "U" => Z=92
+   //
+   // Returns Z found, or -1 if symbol is unknown
 
    Int_t z = GetZFromSymbol(sym);
    if (z > -1) SetZ(z);
    else Error("SetZFromSymbol", "%s is unknown", sym);
+   return z;
 }
 
 //_________________________________________________________________________________
@@ -336,12 +343,15 @@ KVNucleus::KVNucleus(Int_t z, Int_t a, Double_t ekin)
 //___________________________________________________________________________________________
 KVNucleus::KVNucleus(const Char_t* symbol, Double_t EperA)
 {
-   //Create a nucleus defined by symbol e.g. "12C", "34Mg", "42Si" etc. etc.
-   //the second argument is the kinetic energy per nucleon (E/A) in MeV/A unit
+   // Create a nucleus defined by symbol e.g. "12C", "34Mg", "42Si" etc. etc.
+   //
+   // If symbol is not valid, will be made a zombie (IsZombie() returns kTRUE)
+   //
+   // The second argument is the kinetic energy per nucleon (E/A) in MeV/A unit
 
    init();
    Set(symbol);
-   SetKE(EperA * GetA());
+   if (!IsZombie()) SetKE(EperA * GetA());
 }
 
 //___________________________________________________________________________________________

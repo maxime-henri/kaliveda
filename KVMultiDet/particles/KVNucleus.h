@@ -122,7 +122,7 @@ public:
    const Char_t* GetLatexSymbol(Option_t* opt = "") const;
 
    static Int_t GetZFromSymbol(const Char_t*);
-   void SetZFromSymbol(const Char_t*);
+   int SetZFromSymbol(const Char_t*);
    void Set(const Char_t*);
    static Int_t IsMassGiven(const Char_t*);
 
