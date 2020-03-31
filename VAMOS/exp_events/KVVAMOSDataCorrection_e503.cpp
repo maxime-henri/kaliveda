@@ -1495,8 +1495,8 @@ void KVVAMOSDataCorrection_e503::CalibrateFromDetList(KVVAMOSReconNuc* nuc, Doub
          // not possible.
 
          // silicon detector incident energy
-         assert((detector->GetCalibE() >= 0.) &&
-                (detector->GetCalibE() < 3000.));
+         assert((det->GetCalibE() >= 0.) &&
+                (det->GetCalibE() < 3000.));
 
          Double_t incident_energy = det->GetEResFromDeltaE(sim_nucleus.GetZ(), sim_nucleus.GetA(), det->GetCalibE());
 
