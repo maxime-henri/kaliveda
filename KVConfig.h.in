@@ -62,6 +62,14 @@ using std::unique_ptr;
      return (*this); \
    }
 
+// avoid warnings from clang static analyzer
+#ifdef WITH_CPP11
+#define AUTO_NEW_CTOR(classname,ptr) \
+   auto ptr = new classname
+#else
+#define AUTO_NEW_CTOR(classname,ptr) \
+   classname* ptr = new classname
+#endif
 //-----------------------------------ROOT-version dependent compiler flags
 //-----------------------------------to handle backwards compatibility
 //

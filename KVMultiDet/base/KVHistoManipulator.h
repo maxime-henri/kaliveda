@@ -72,7 +72,7 @@ public:
    TH2*  RenormaliseHisto(TH2* hh, Double_t valmin, Double_t valmax, TString axis = "X", Double_t valref = 1);
 
    TH1*  CumulatedHisto(TH1* hh, TString direction = "C", Int_t bmin = -1, Int_t bmax = -1, Option_t* norm = "surf");
-   TH1*  CumulatedHisto(TH1* hh, Double_t xmin, Double_t xmax, TString direction = "C", Option_t* norm = "surf");
+   TH1*  CumulatedHisto(TH1* hh, Double_t xmin, Double_t xmax, const TString& direction = "C", Option_t* norm = "surf");
    TH1*  GetDerivative(TH1* hh, Int_t order);
 
    TGraphErrors* GetMomentEvolution(TH2* hh, TString momentx, TString momenty, TString axis = "Y", Double_t stat_min = 0);
@@ -120,15 +120,15 @@ public:
                           Double_t xmin = -1, Double_t xmax = -1, Double_t qmin = 0.05, Double_t qmax = 0.95,
                           Double_t eps = 1.e-07);
 
-   Double_t GetChisquare(TH1* h1, TF1* f1, Bool_t norm = kTRUE, Bool_t err = kTRUE, Double_t* para = 0);
-   Double_t GetLikelihood(TH1* h1, TF1* f1, Bool_t norm = kTRUE, Double_t* para = 0);
+   Double_t GetChisquare(TH1* h1, TF1* f1, Bool_t norm = kTRUE, Bool_t err = kTRUE, Double_t* para = nullptr);
+   Double_t GetLikelihood(TH1* h1, TF1* f1, Bool_t norm = kTRUE, Double_t* para = nullptr);
 
    TGraph* DivideGraphs(TGraph* G1, TGraph* G2);
-   TGraph* ComputeNewGraphFrom(TGraph* g0, TGraph* g1, TString formula);
-   Double_t* GetLimits(TGraph* G1);
-   Double_t* GetLimits(TProfile* G1);
-   Double_t* GetLimits(TMultiGraph* mgr);
-   Double_t* GetLimits(TSeqCollection* mgr);
+   TGraph* ComputeNewGraphFrom(TGraph* g0, TGraph* g1, const TString& formula);
+   std::vector<Double_t> GetLimits(TGraph* G1);
+   std::vector<Double_t> GetLimits(TProfile* G1);
+   std::vector<Double_t> GetLimits(TMultiGraph* mgr);
+   std::vector<Double_t> GetLimits(TSeqCollection* mgr);
    void ApplyCurrentLimitsToAllCanvas(Bool_t AlsoLog = kFALSE);
 
    ClassDef(KVHistoManipulator, 1) //Propose differentes operations sur les histo

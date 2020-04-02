@@ -1588,7 +1588,7 @@ TH1* KVHistoManipulator::MakeHistoRescaleX(TH1* hist1, TH1* hist2, TF1* scale_fu
    return scalehisto;
 }
 //-------------------------------------------------
-TH1* KVHistoManipulator::CumulatedHisto(TH1* hh, Double_t xmin, Double_t xmax, TString direction, Option_t* norm)
+TH1* KVHistoManipulator::CumulatedHisto(TH1* hh, Double_t xmin, Double_t xmax, const TString& direction, Option_t* norm)
 {
    // Cumule le contenu de l histo hh entre xmin et xmax et retourne l histo correspondant
    // Voir CumulatedHisto(TH1* ,TString ,Int_t ,Int_t , Option_t*).
@@ -1727,10 +1727,10 @@ TGraph* KVHistoManipulator::DivideGraphs(TGraph* G1, TGraph* G2)
    Int_t npoints = G1->GetN();
    if (G2->GetN() != npoints) {
       Error("DivideGraphs", "Graphs must have same number of points");
-      return 0;
+      return nullptr;
    }
    // make copy of G1
-   TGraph* Gdiv = new TGraph(*G1);
+   AUTO_NEW_CTOR(TGraph, Gdiv)(*G1);
    Gdiv->SetName(Form("%s_divided_by_%s", G1->GetName(), G2->GetName()));
    Gdiv->SetTitle(Form("%s divided by %s", G1->GetTitle(), G2->GetTitle()));
    Double_t* X = G1->GetX();
@@ -1744,21 +1744,21 @@ TGraph* KVHistoManipulator::DivideGraphs(TGraph* G1, TGraph* G2)
 }
 
 //______________________________________________________________________________________________
-TGraph* KVHistoManipulator::ComputeNewGraphFrom(TGraph* g0, TGraph* g1, TString formula)
+TGraph* KVHistoManipulator::ComputeNewGraphFrom(TGraph* g0, TGraph* g1, const TString& formula)
 {
    Int_t npoints = g0->GetN();
    if (g1->GetN() != npoints) {
       Error("ComputeNewGraphFrom", "Graphs must have same number of points %d != %d", npoints, g1->GetN());
-      return 0;
+      return nullptr;
    }
 
-   TF1* f1 = new TF1("func_ComputeNewGraphFrom", formula, 0, 1);
-   if (f1->IsZombie() || f1->GetNpar() != 2) {
+   TF1 f1("func_ComputeNewGraphFrom", formula, 0, 1);
+   if (f1.IsZombie() || f1.GetNpar() != 2) {
       Error("ComputeNewGraphFrom", "formula %s for the operation is not valid or has not 2 parameters", formula.Data());
-      return 0;
+      return nullptr;
    }
 
-   TGraph* gfinal = new TGraph();
+   AUTO_NEW_CTOR(TGraph, gfinal)();
    gfinal->SetName(Form("from_%s_%s", g0->GetName(), g1->GetName()));
    Double_t* x0 = g0->GetX();
    Double_t* y0 = g0->GetY();
@@ -1767,19 +1767,17 @@ TGraph* KVHistoManipulator::ComputeNewGraphFrom(TGraph* g0, TGraph* g1, TString 
    Double_t* y1 = g1->GetY();
 
    for (Int_t ii = 0; ii < npoints; ii++) {
-      f1->SetParameters(y0[ii], y1[ii]);
+      f1.SetParameters(y0[ii], y1[ii]);
       if (x1[ii] != x0[ii])
          Warning("ComputeNewGraphFrom", "X values are different for the same point %d : %lf %lf", ii, x0[ii], x1[ii]);
-      Double_t result = f1->Eval(x0[ii]);
+      Double_t result = f1.Eval(x0[ii]);
       gfinal->SetPoint(ii, x0[ii], result);
    }
-
-   delete f1;
    return gfinal;
 }
 
 //______________________________________________________________________________________________
-Double_t* KVHistoManipulator::GetLimits(TGraph* G1)
+std::vector<Double_t> KVHistoManipulator::GetLimits(TGraph* G1)
 {
    /*
    xmin -> limits[0];
@@ -1787,7 +1785,7 @@ Double_t* KVHistoManipulator::GetLimits(TGraph* G1)
    xmax -> limits[2];
    ymax -> limits[3];
    */
-   Double_t* limits = new Double_t[4];
+   std::vector<Double_t> limits(4);
    Double_t xx, yy;
    for (Int_t ii = 0; ii < G1->GetN(); ii += 1) {
       G1->GetPoint(ii, xx, yy);
@@ -1804,11 +1802,10 @@ Double_t* KVHistoManipulator::GetLimits(TGraph* G1)
    }
 
    return limits;
-
 }
 
 //______________________________________________________________________________________________
-Double_t* KVHistoManipulator::GetLimits(TMultiGraph* mgr)
+std::vector<Double_t> KVHistoManipulator::GetLimits(TMultiGraph* mgr)
 {
 
    /*
@@ -1817,13 +1814,12 @@ Double_t* KVHistoManipulator::GetLimits(TMultiGraph* mgr)
    xmax -> limits[2];
    ymax -> limits[3];
    */
-   Double_t* limits = 0;
-   Double_t* temp = 0;
+   std::vector<Double_t> limits, temp;
 
    TList* lg = mgr->GetListOfGraphs();
-   TGraph* gr = 0;
+   TGraph* gr = nullptr;
    for (Int_t ii = 0; ii < lg->GetEntries(); ii += 1) {
-      gr = (TGraph*)lg->At(ii);
+      gr = dynamic_cast<TGraph*>(lg->At(ii));
       if (ii == 0) {
          limits = GetLimits(gr);
       }
@@ -1841,7 +1837,7 @@ Double_t* KVHistoManipulator::GetLimits(TMultiGraph* mgr)
 }
 
 //______________________________________________________________________________________________
-Double_t* KVHistoManipulator::GetLimits(TProfile* G1)
+std::vector<Double_t> KVHistoManipulator::GetLimits(TProfile* G1)
 {
    /*
    xmin -> limits[0];
@@ -1849,7 +1845,7 @@ Double_t* KVHistoManipulator::GetLimits(TProfile* G1)
    xmax -> limits[2];
    ymax -> limits[3];
    */
-   Double_t* limits = new Double_t[4];
+   std::vector<Double_t> limits(4);
    Double_t xx, yy;
    Bool_t first = kTRUE;
    for (Int_t ii = 1; ii <= G1->GetNbinsX(); ii += 1) {
@@ -1876,7 +1872,7 @@ Double_t* KVHistoManipulator::GetLimits(TProfile* G1)
 }
 
 //______________________________________________________________________________________________
-Double_t* KVHistoManipulator::GetLimits(TSeqCollection* mgr)
+std::vector<Double_t> KVHistoManipulator::GetLimits(TSeqCollection* mgr)
 {
 
    /*
@@ -1885,12 +1881,11 @@ Double_t* KVHistoManipulator::GetLimits(TSeqCollection* mgr)
    xmax -> limits[2];
    ymax -> limits[3];
    */
-   Double_t* limits = 0;
-   Double_t* temp = 0;
+   std::vector<Double_t> temp, limits;
 
-   TProfile* gr = 0;
+   TProfile* gr = nullptr;
    for (Int_t ii = 0; ii < mgr->GetEntries(); ii += 1) {
-      gr = (TProfile*)mgr->At(ii);
+      gr = dynamic_cast<TProfile*>(mgr->At(ii));
       if (ii == 0) {
          limits = GetLimits(gr);
       }
@@ -1915,18 +1910,18 @@ void KVHistoManipulator::ApplyCurrentLimitsToAllCanvas(Bool_t AlsoLog)
    //and apply them to the others histogram drawn on the others pads
 
    if (!gPad) return;
-   TObject* obj = 0;
+   TObject* obj = nullptr;
    TVirtualPad* tmp = gPad;
    TIter nextp(gPad->GetListOfPrimitives());
-   TH1* h1 = 0;
+   TH1* h1 = nullptr;
    while ((obj = nextp())) {
       if (obj->InheritsFrom("TH1")) {
-         h1 = (TH1F*)obj;
+         h1 = dynamic_cast<TH1*>(obj);
       }
    }
    if (h1) {
-      Double_t x1 = h1->GetXaxis()->GetFirst();
-      Double_t x2 = h1->GetXaxis()->GetLast();
+      Int_t x1 = h1->GetXaxis()->GetFirst();
+      Int_t x2 = h1->GetXaxis()->GetLast();
       Double_t y1, y2;
       Double_t z1, z2;
 
@@ -1948,11 +1943,11 @@ void KVHistoManipulator::ApplyCurrentLimitsToAllCanvas(Bool_t AlsoLog)
          z2 = h1->GetZaxis()->GetLast();
       }
 
-      printf("%lf %lf - %lf %lf - %lf %lf\n", x1, x2, y1, y2, z1, z2);
+      std::cout << x1 << " " << x2 << " - " << y1 << " " << y2 << " - " << z1 << " " << z2 << std::endl;
 
       Int_t nc = 1;
       TCanvas* cc = gPad->GetCanvas();
-      TVirtualPad* pad = 0;
+      TVirtualPad* pad = nullptr;
       while ((pad = cc->GetPad(nc))) {
          if (tmp != pad) {
             pad->cd();
@@ -1962,10 +1957,10 @@ void KVHistoManipulator::ApplyCurrentLimitsToAllCanvas(Bool_t AlsoLog)
                gPad->SetLogz(tmp->GetLogz());
             }
             TIter nextq(gPad->GetListOfPrimitives());
-            TH1* h1 = 0;
+            TH1* h1 = nullptr;
             while ((obj = nextq())) {
                if (obj->InheritsFrom("TH1")) {
-                  h1 = (TH1F*)obj;
+                  h1 = dynamic_cast<TH1*>(obj);
 
                   h1->GetXaxis()->SetRange(x1, x2);
                   if (h1->GetDimension() == 1) {
