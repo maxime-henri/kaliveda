@@ -12,23 +12,12 @@ set(build_targets
         KaliVedaGUI
 )
 if(USE_INDRA)
-    list(APPEND build_targets KVDataBaseGUI test_reconstruction)
+    list(APPEND build_targets KVDataBaseGUI)
 endif()
 if(USE_INDRAFAZIA AND WITH_MFM)
-    list(APPEND build_targets test_indrafazia indrafazia_reconstruction indrafazia_idmaps irods_uploader)
+    list(APPEND build_targets irods_uploader)
     KALIVEDA_SET_INCLUDE_DIRS(FAZIA MODULES ${FAZIA_MOD_LIST})
 endif()
-
-set(test_reconstruction_SRC test_reconstruction.C)
-set(test_reconstruction_LIB ${KVIndra_LIB_LIST})
-
-set(test_indrafazia_SRC test_indrafazia.C)
-set(test_indrafazia_LIB  ${KVIndra_LIB_LIST} ${FAZIA_LIB_LIST})
-
-set(indrafazia_reconstruction_SRC indrafazia_reconstruction.cpp)
-set(indrafazia_reconstruction_LIB  ${KVIndra_LIB_LIST} ${FAZIA_LIB_LIST})
-set(indrafazia_idmaps_SRC indrafazia_idmaps.cpp)
-set(indrafazia_idmaps_LIB  ${KVIndra_LIB_LIST} ${FAZIA_LIB_LIST})
 
 set(kaliveda_SRC kaliveda.cpp)
 
@@ -61,10 +50,6 @@ endforeach()
 #---install built executables
 install(TARGETS ${build_targets} EXPORT ${CMAKE_PROJECT_NAME}Exports RUNTIME DESTINATION bin) 
 
-#---install shell scripts
-if(APPLE)
-    message(STATUS "You're on a MAC? - Skipping install shell scripts... sorry !")
-else()
-    set(scripts KVA KaliVeda)
-    install(PROGRAMS ${scripts} DESTINATION bin)
-endif()
+#---install shell script for batch
+set(scripts KVA)
+install(PROGRAMS ${scripts} DESTINATION bin)
