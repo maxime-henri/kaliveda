@@ -31,17 +31,11 @@
 #pragma link C++ class KVRTGIDManager+;
 #endif
 #pragma link C++ class KVUpDater;
-#ifdef WITH_BUILTIN_GRU
 #pragma link C++ class KVRawDataAnalyser+;
-#endif
 #pragma link C++ class KVSimDirFilterAnalyser+;
 #pragma link C++ class KVExpSetUp+;
 #pragma link C++ class KVExpSetUpDB+;
 #pragma link C++ class KVMultiDetArray+;
 #pragma link C++ class KVASMultiDetArray+;
 #pragma link C++ class KVGeoImport+;
-#ifdef WITH_GRULIB
-//#pragma link C++ class KVGRUNetClientGanilReader+;
-#pragma link C++ class KVGRUTapeGanilReader+;
-#endif
 #endif

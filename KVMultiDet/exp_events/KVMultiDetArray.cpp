@@ -44,7 +44,9 @@
 #include <TGLViewer.h>
 #include <TVirtualPad.h>
 #endif
+#ifdef WITH_BUILTIN_GRU
 #include "KVGANILDataReader.h"
+#endif
 #ifdef WITH_MFM
 #include "KVMFMDataFileReader.h"
 #include "MFMEbyedatFrame.h"
@@ -54,7 +56,7 @@
 #endif
 using namespace std;
 
-KVMultiDetArray* gMultiDetArray = 0x0;
+KVMultiDetArray* gMultiDetArray = nullptr;
 
 Bool_t KVMultiDetArray::fCloseGeometryNow = kTRUE;
 Bool_t KVMultiDetArray::fBuildTarget = kFALSE;
@@ -2866,7 +2868,9 @@ void KVMultiDetArray::InitialiseRawDataReading(KVRawDataReader* r)
    // Call this method just after opening a raw data file in order to perform any
    // necessary initialisations, depending on the type of data
 
-   if (r->GetDataFormat() == "EBYEDAT")((KVGANILDataReader*)r)->ConnectRawDataParameters(GetACQParams());
+#ifdef WITH_BUILTIN_GRU
+   if (r->GetDataFormat() == "EBYEDAT") dynamic_cast<KVGANILDataReader*>(r)->ConnectRawDataParameters(GetACQParams());
+#endif
 }
 
 void KVMultiDetArray::DeduceGroupsFromTrajectories()
@@ -2953,6 +2957,7 @@ void KVMultiDetArray::SetMinimumOKMultiplicity(KVEvent* e) const
    e->SetMinimumOKMultiplicity(1);
 }
 
+#ifdef WITH_BUILTIN_GRU
 Bool_t KVMultiDetArray::handle_raw_data_event_ebyedat(KVGANILDataReader&)
 {
    // General method for reading raw data in old GANIL ebyedat format
@@ -2960,6 +2965,7 @@ Bool_t KVMultiDetArray::handle_raw_data_event_ebyedat(KVGANILDataReader&)
    AbstractMethod("handle_raw_data_event_ebyedat");
    return kFALSE;
 }
+#endif
 
 void KVMultiDetArray::prepare_to_handle_new_raw_data()
 {
@@ -3012,16 +3018,18 @@ Bool_t KVMultiDetArray::HandleRawDataEvent(KVRawDataReader* rawdata)
    prepare_to_handle_new_raw_data();
    if (rawdata->GetDataFormat() == "MFM") {
 #ifdef WITH_MFM
-      fHandledRawData = handle_raw_data_event_mfmfile((KVMFMDataFileReader&)(*rawdata));
+      fHandledRawData = handle_raw_data_event_mfmfile(dynamic_cast<KVMFMDataFileReader&>(*rawdata));
 #endif
    }
    else if (rawdata->GetDataFormat() == "PROTOBUF") {
 #ifdef WITH_PROTOBUF
-      fHandledRawData = handle_raw_data_event_protobuf((KVProtobufDataReader&)(*rawdata));
+      fHandledRawData = handle_raw_data_event_protobuf(dynamic_cast<KVProtobufDataReader&>(*rawdata));
 #endif
    }
    else if (rawdata->GetDataFormat() == "EBYEDAT") {
-      fHandledRawData = handle_raw_data_event_ebyedat((KVGANILDataReader&)(*rawdata));
+#ifdef WITH_BUILTIN_GRU
+      fHandledRawData = handle_raw_data_event_ebyedat(dynamic_cast<KVGANILDataReader&>(*rawdata));
+#endif
    }
    if (fHandledRawData) {
       copy_fired_parameters_to_recon_param_list();

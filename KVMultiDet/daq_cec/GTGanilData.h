@@ -25,6 +25,7 @@
 
 #ifndef GT_GTGanilData_H
 #define GT_GTGanilData_H
+
 // ROOT headers
 #include "Rtypes.h"
 #include <TFile.h>

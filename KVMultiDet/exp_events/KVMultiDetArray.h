@@ -30,7 +30,9 @@ class KVGeoNavigator;
 class KVRangeTableGeoNavigator;
 class KVUpDater;
 class KVRawDataReader;
+#ifdef WITH_BUILTIN_GRU
 class KVGANILDataReader;
+#endif
 #ifdef WITH_MFM
 class MFMCommonFrame;
 class MFMMergeFrameManager;
@@ -141,7 +143,9 @@ protected:
 #ifdef WITH_PROTOBUF
    virtual Bool_t handle_raw_data_event_protobuf(KVProtobufDataReader&);
 #endif
+#ifdef WITH_BUILTIN_GRU
    virtual Bool_t handle_raw_data_event_ebyedat(KVGANILDataReader&);
+#endif
    virtual void prepare_to_handle_new_raw_data();
 
    virtual void PerformClosedROOTGeometryOperations();
@@ -366,7 +370,7 @@ public:
       // (we only test the first detector)
 
       if (!GetDetectors()->GetEntries()) return kFALSE;
-      KVDetector* d = (KVDetector*)GetDetectors()->First();
+      KVDetector* d = dynamic_cast<KVDetector*>(GetDetectors()->First());
       return d->ROOTGeo();
    }
    void CalculateDetectorSegmentationIndex();
