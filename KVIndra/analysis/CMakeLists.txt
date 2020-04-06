@@ -1,6 +1,7 @@
-set(excluded_classes KVINDRAOnlineDataAnalyser)
+set(excluded_classes KVReconIdent_e475s)
+
 if(NOT WITH_BUILTIN_GRU)
-        set(excluded_classes ${excluded_classes} KVINDRARawDataAnalyser KVINDRARawDataReconstructor KVINDRARawIdent KVINDRADstToRootTransfert)
+        set(excluded_classes ${excluded_classes} KVINDRADstToRootTransfert)
 endif()
 
 BUILD_KALIVEDA_MODULE(analysis
