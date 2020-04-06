@@ -96,7 +96,7 @@ public:
    {
       return (fRunFile->GetUnknownParameters()->GetSize() > 0);
    }
-   virtual void SubmitTask();
+   void SubmitTask();
    static void Make(const Char_t* kvsname = "MyOwnRawDataAnalyser");
 
    void CalculateTotalEventsToRead();
