@@ -809,19 +809,22 @@ void KVEvent::FillIntegerList(KVIntegerList* IL, Option_t* opt)
    IL->CheckForUpdate();
 }
 
-void KVEvent::GetMasses(Double_t* mass)
+void KVEvent::GetMasses(std::vector<Double_t>& mass)
 {
-   // Fill array with mass of each nucleus of event (in MeV).
-   // [note: this is the mass including any excitation energy, not ground state]
-   // Make sure array is dimensioned to size GetMult()!
+   // Fill vector with mass of each nucleus of event (in MeV) [note: this is the mass including any excitation energy, not ground state]
+
+   mass.clear();
+   mass.reserve(GetMult());
    int i = 0;
    for (Iterator it = begin(); it != end(); ++it) mass[i++] = (*it).GetMass();
 }
 
-void KVEvent::GetGSMasses(Double_t* mass)
+void KVEvent::GetGSMasses(std::vector<Double_t>& mass)
 {
-   // Fill array with ground state mass of each nucleus of event (in MeV).
-   // Make sure array is dimensioned to size GetMult()!
+   // Fill vector with ground state mass of each nucleus of event (in MeV).
+
+   mass.clear();
+   mass.reserve(GetMult());
    int i = 0;
    for (Iterator it = begin(); it != end(); ++it) mass[i++] = (*it).GetMassGS();
 }
@@ -845,7 +848,7 @@ Double_t KVEvent::GetChannelQValue() const
 
    Double_t sumM = 0;
    KVNucleus CN;
-   Int_t M = const_cast<KVEvent*>(this)->GetMult();
+   Int_t M = GetMult();
    for (int i = 1; i <= M; i++) {
       sumM += GetParticle(i)->GetMass();
       CN += *(GetParticle(i));
@@ -870,7 +873,7 @@ Double_t KVEvent::GetGSChannelQValue() const
 
    Double_t sumM = 0;
    KVNucleus CN;
-   Int_t M = const_cast<KVEvent*>(this)->GetMult();
+   Int_t M = GetMult();
    for (int i = 1; i <= M; i++) {
       sumM += GetParticle(i)->GetMassGS();
       CN += *(GetParticle(i));

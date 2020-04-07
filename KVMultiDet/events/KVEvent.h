@@ -321,8 +321,8 @@ public:
 
    virtual void FillIntegerList(KVIntegerList*, Option_t* opt);
 
-   virtual void GetMasses(Double_t*);
-   virtual void GetGSMasses(Double_t*);
+   virtual void GetMasses(std::vector<Double_t>&);
+   virtual void GetGSMasses(std::vector<Double_t>&);
    Double_t GetChannelQValue() const;
    Double_t GetGSChannelQValue() const;
    const Char_t* GetPartitionName();
@@ -330,6 +330,7 @@ public:
    static void MakeEventBranch(TTree* tree, const TString& branchname, const TString& classname, void* event, Int_t bufsize = 10000000)
    {
       // Use this method when adding a branch to a TTree to store KVEvent-derived objects.
+      //
       // If (*e) points to a valid KVEvent-derived object, we use the name of the class of the object.
       // Otherwise we use the value of classname (default = "KVEvent")
 

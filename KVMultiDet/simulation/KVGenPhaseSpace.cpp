@@ -62,7 +62,6 @@ void KVGenPhaseSpace::init()
    // default initialisations
 
    fMCSampler = 0;
-   fMasses = 0;
    fEvent = 0;
    fOK = kFALSE;
 }
@@ -75,7 +74,7 @@ void KVGenPhaseSpace::InitialiseMCSampler()
    //       fEvent->GetParameters()->SetValue("PHASESPACE_GENERATOR","TGenPhaseSpace");
 
    if (!fMCSampler) fMCSampler = new TGenPhaseSpace;
-   ((TGenPhaseSpace*)fMCSampler)->SetDecay(fCompound, fEvent->GetMult(), fMasses);
+   ((TGenPhaseSpace*)fMCSampler)->SetDecay(fCompound, fEvent->GetMult(), &fMasses[0]);
    fEvent->GetParameters()->SetValue("PHASESPACE_GENERATOR", "TGenPhaseSpace");
 }
 
@@ -97,7 +96,6 @@ KVGenPhaseSpace::~KVGenPhaseSpace()
 {
    // Destructor
    SafeDelete(fMCSampler);
-   if (fMasses) delete [] fMasses;
 }
 
 //________________________________________________________________
@@ -130,8 +128,8 @@ Bool_t KVGenPhaseSpace::SetBreakUpChannel(const KVNucleus& CN, KVEvent* e)
    fOK = CheckBreakUpChannel();
    if (!fOK) return fOK;
 
-   if (fMasses) delete [] fMasses;
-   fMasses = new Double_t[fMult];
+   fMasses.clear();
+   fMasses.reserve(fMult);
    fEvent->GetMasses(fMasses);
 
    InitialiseMCSampler();

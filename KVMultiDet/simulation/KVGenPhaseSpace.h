@@ -17,7 +17,7 @@ protected:
    KVNucleus fCompound;//initial nucleus which undergoes break-up
    KVEvent* fEvent;//! break-up channel
    Int_t fMult;// multiplicity of channel
-   Double_t* fMasses;//! array of masses of nuclei in break-up channel
+   std::vector<Double_t> fMasses;//! masses of nuclei in break-up channel
    Bool_t fOK;// ready to calculate or not
    Double_t fEtot;// available kinetic energy for decay
 
