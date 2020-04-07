@@ -51,14 +51,25 @@ IsEmpty() returns kTRUE if the list is empty ;-p
 
 Initialise first by calling Begin(), then loop until End() returns kTRUE:
 
+~~~~~~~~~~{.cpp}
     KVNumberList r("1-10");
     r.Begin();
     while( !r.End() ){
        Int_t next_val = r.Next();
        ...
     }
+~~~~~~~~~~
 
 If list is empty, End() always returns kTRUE and Next() returns -1.
+
+Methods begin() and end() return a std:iterator for the underlying std::vector<int>.
+This means (from C++11 onwards), range-based for loops can be used:
+
+~~~~~~~~~~{.cpp}
+   KVNumberList pl("1-3,6");
+   for(auto i : pl) cout << i << " ";
+~~~~~~~~~~
+
 */
 //////////////////////////////////////////////////////////////////////////////
 
@@ -69,8 +80,8 @@ void KVNumberList::init_numberlist()
    //Default initialisation used by ctors
    fMaxNLimits = 0;
    fNLimits = 0;
-   fLowerBounds = new TArrayI();
-   fUpperBounds = new TArrayI();
+   fLowerBounds = new TArrayI;
+   fUpperBounds = new TArrayI;
    fFirstValue = 99999999;
    fLastValue = -99999999;
    fNValues = 0;
@@ -122,14 +133,15 @@ KVNumberList::KVNumberList(Int_t deb, Int_t fin, Int_t pas): fString()
    SetMinMax(deb, fin, pas);
 }
 
-//____________________________________________________________________________________________//
-
-KVNumberList::~KVNumberList()
+#ifdef WITH_CPP11
+KVNumberList::KVNumberList(std::initializer_list<int> L)
 {
-   //delete arrays
-   delete fLowerBounds;
-   delete fUpperBounds;
+   // Use an initializer list of integers to set up number list
+
+   init_numberlist();
+   for (auto i : L) Add(i);
 }
+#endif
 
 //____________________________________________________________________________________________//
 
@@ -183,7 +195,7 @@ void KVNumberList::ParseAndFindLimits(const TString& string, const Char_t delim)
    //Takes a string and breaks it up into its constituent parts,
    //which were initially separated by white space or a comma.
    //Any part which contains "-" will be sent to AddLimits().
-   TObjArray* toks1 = string.Tokenize(delim);
+   unique_ptr<TObjArray> toks1(string.Tokenize(delim));
    Int_t n_toks = toks1->GetEntries();
    for (int i = 0; i < n_toks; i++) {
       TString tok = ((TObjString*)(*toks1)[i])->GetString();
@@ -200,7 +212,6 @@ void KVNumberList::ParseAndFindLimits(const TString& string, const Char_t delim)
          AddLimits(val, val);
       }
    }
-   delete toks1;
 }
 
 //____________________________________________________________________________________________//
@@ -210,15 +221,11 @@ void KVNumberList::AddLimits(TString& string) const
    //'string' should contain something like "34-59" i.e. two integers separated by a '-'.
    //these two numbers are taken for new lower and upper limits, fNLimits is increased by one,
    //if necessary the arrays' size is increased.
-   TObjArray* toks1 = string.Tokenize('-');
+   unique_ptr<TObjArray> toks1(string.Tokenize('-'));
    Int_t n_toks = toks1->GetEntries();
-   if (n_toks != 2) {
-      delete toks1;
-      return;
-   }
+   if (n_toks != 2) return;
    KVString lower(((TObjString*)(*toks1)[0])->GetString());
    KVString upper(((TObjString*)(*toks1)[1])->GetString());
-   delete toks1;
    Int_t ilow = lower.Atoi();
    Int_t iupp = upper.Atoi();
    AddLimits(ilow, iupp);
@@ -616,7 +623,7 @@ TString KVNumberList::GetLogical(const Char_t* observable) const
    GetList();
    TString tmp = fString;
    tmp.ReplaceAll(" ", "||");
-   TObjArray* toks = tmp.Tokenize("||");
+   unique_ptr<TObjArray> toks(tmp.Tokenize("||"));
    static TString cond;
    cond = "( ";
    Int_t nt = toks->GetEntries();
@@ -632,7 +639,6 @@ TString KVNumberList::GetLogical(const Char_t* observable) const
       if (ii != nt - 1) cond += "||";
    }
    cond += " )";
-   delete toks;
    return cond;
 }
 
@@ -735,6 +741,34 @@ void KVNumberList::Begin() const
    fValues = GetArray();
    fIterIndex = fValues.begin();
    fEndList = fValues.end();
+}
+
+IntArrayIter KVNumberList::begin()
+{
+   // Returns a std::iterator over all unique values in the list, ordered from smallest to largest.
+   // Allows use in range-based for loops:
+   //
+   //~~~~~~~~~{.cpp}
+   //  KVNumberList pl("1-3,6");
+   //  for(auto i : pl) cout << i << " ";
+   //
+   // //output:
+   // //1 2 3 6
+   //~~~~~~~~~
+
+   fValues = GetArray();
+   fIterIndex = fValues.begin();
+   fEndList = fValues.end();
+   return fIterIndex;
+}
+
+IntArrayIter KVNumberList::end()
+{
+   // Returns a std::iterator to element after end of list.
+   // Allows use in range-based for loops.
+   //
+   // \sa begin()
+   return fEndList;
 }
 
 //____________________________________________________________________________________________//

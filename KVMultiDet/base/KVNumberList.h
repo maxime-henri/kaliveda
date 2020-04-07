@@ -13,6 +13,7 @@ $Author: franklan $
 #include <TArrayI.h>
 #include <TObject.h>
 #include <TList.h>
+#include "KVConfig.h"
 
 typedef std::vector<Int_t> IntArray;
 typedef std::vector<Int_t>::iterator IntArrayIter;
@@ -21,8 +22,8 @@ typedef std::vector<Int_t>::const_iterator IntArrayCIter;
 class KVNumberList : public TObject {
 
    mutable TString fString;
-   TArrayI* fLowerBounds;       //->
-   TArrayI* fUpperBounds;       //->
+   TArrayI* fLowerBounds; //->
+   TArrayI* fUpperBounds; //->
    mutable Int_t fNLimits;              //number of limits in arrays
    mutable Int_t fMaxNLimits;           //size of arrays
    mutable Int_t fFirstValue;           //smallest value included in list
@@ -52,7 +53,14 @@ public:
    KVNumberList(const Char_t*);
    KVNumberList(Int_t);
    KVNumberList(Int_t deb, Int_t fin, Int_t pas);
-   virtual ~ KVNumberList();
+#ifdef WITH_CPP11
+   KVNumberList(std::initializer_list<int> L);
+#endif
+   virtual ~ KVNumberList()
+   {
+      delete fUpperBounds;
+      delete fLowerBounds;
+   }
 
    virtual void     SetName(const char* name);
    virtual const char* GetName() const
@@ -127,6 +135,8 @@ public:
    {
       return (fIterIndex == fEndList);
    }
+   IntArrayIter begin();
+   IntArrayIter end();
 
    /* LIST ARITHMETIC OPERATIONS */
    KVNumberList operator+(const KVNumberList&);

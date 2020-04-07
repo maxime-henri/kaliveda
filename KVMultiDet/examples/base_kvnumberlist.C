@@ -1,6 +1,7 @@
 #include "TStopwatch.h"
 #include "KVNumberList.h"
 #include "Riostream.h"
+#include "KVConfig.h"
 using namespace std;
 
 void test_kvnumberlist()
@@ -23,13 +24,28 @@ void test_kvnumberlist()
    e.SetName("e");
    e.Print();
 
+#ifdef WITH_CPP11
+   /* initializer list constructor */
+   KVNumberList f{1, 3, 4, 7, 8, 9};
+   f.SetName("f");
+   f.Print();
+#endif
+
    /* Test iteration over list */
    cout << endl << "TEST ITERATION" << endl << endl;
+   cout << "Begin()/Next()/End():" << endl << endl;
    e.Begin();
    while (! e.End()) {
       cout << "next e value = " << e.Next() << endl;
    }
 
+   /* Range-based for loop (>=C++11) */
+#ifdef WITH_CPP11
+   cout << "Range-based for loop:" << endl << endl;
+   for (auto val : e) {
+      cout << "next e value = " << val << endl;
+   }
+#endif
 
    // Test modifiers
    cout << endl << "TEST MODIFIERS" << endl;
