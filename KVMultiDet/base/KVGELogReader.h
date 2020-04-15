@@ -7,24 +7,28 @@
 #include "KVLogReader.h"
 
 class KVGELogReader : public KVLogReader {
-   virtual Int_t GetByteMultiplier(TString& unit);
-   virtual void ReadLine(TString& line, Bool_t&);
-   virtual void ReadCPULimit(TString& line);
-   virtual void ReadScratchUsed(TString& line);
-   virtual void ReadMemUsed(TString& line);
-   virtual void ReadStatus(TString& line);
-   virtual Double_t ReadStorage(KVString& stor);
-   virtual void ReadKVCPU(TString& line);
-   Bool_t fileCopiedtoSRB;
+   virtual Int_t GetByteMultiplier(const KVString& unit);
+   virtual void ReadLine(const KVString& line, Bool_t&);
+   virtual void ReadCPU(const KVString& line);
+   virtual void ReadScratchUsed(const KVString& line);
+   virtual void ReadMemUsed(const KVString& line);
+   virtual void ReadStatus(const KVString& line);
+   virtual Double_t ReadStorage(const KVString& stor);
+   virtual void ReadKVCPU(const KVString& line);
+
+   Bool_t fInRequested;
+   Bool_t fInConsumed;
 
 public:
-   KVGELogReader();
-   virtual ~KVGELogReader();
+   KVGELogReader()
+      : fInRequested(kFALSE), fInConsumed(kFALSE)
+   {}
+   virtual ~KVGELogReader() {}
    virtual void Reset()
    {
       KVLogReader::Reset();
-      fileCopiedtoSRB = kFALSE;
-   };
+      fInRequested = fInConsumed = kFALSE;
+   }
 
    virtual Bool_t Incomplete() const
    {
@@ -38,7 +42,7 @@ public:
               )
              );
 
-   };
+   }
 
    ClassDef(KVGELogReader, 1) //Read GE (Grid Engine) log files
 };

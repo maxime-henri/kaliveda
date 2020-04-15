@@ -5,6 +5,7 @@ $Id: KVLogReader.cpp,v 1.13 2008/12/08 14:07:37 franklan Exp $
 #include "Riostream.h"
 #include "TObjArray.h"
 #include "TObjString.h"
+#include "KVConfig.h"
 
 using namespace std;
 
@@ -40,7 +41,7 @@ void KVLogReader::ReadFile(const Char_t* fname)
            << endl;
       return;
    }
-   TString line;
+   KVString line;
    line.ReadLine(filestream);
    Bool_t ok = kTRUE;
    while (filestream.good() && ok) {
@@ -50,11 +51,14 @@ void KVLogReader::ReadFile(const Char_t* fname)
    filestream.close();
 }
 
-void KVLogReader::ReadLine(TString& line, Bool_t& ok)
+void KVLogReader::ReadLine(const KVString& line, Bool_t& ok)
 {
    //analyse contents of line read from log file
+   //
    //if line contains "segmentation" then we put ok=kFALSE to stop reading file
+   //
    //status will equal the contents of the current line
+
    ok = kTRUE;
    if (line.Contains("egmentation")) {
       ok = kFALSE;
@@ -84,14 +88,15 @@ Double_t KVLogReader::GetCPUratio() const
    return (fCPUreq ? fCPUused / fCPUreq : 0.);
 }
 
-void KVLogReader::ReadStorageReq(TString& line)
+void KVLogReader::ReadStorageReq(const KVString& line)
 {
    //Read lines "DISK_REQ:                 3GB" and "MEM_REQ:         150MB"
    //and fill corresponding variable with appropriate value
-   TObjArray* toks = line.Tokenize("*: ");
-   TString type = ((TObjString*) toks->At(0))->GetString();
-   KVString stor = ((TObjString*) toks->At(1))->GetString();
-   Int_t size = ReadStorage(stor);
+
+   line.Begin("*:");
+   KVString type = line.Next(kTRUE);
+   KVString stor = line.Next(kTRUE);
+   Double_t size = ReadStorage(stor);
    if (type == "DISK_REQ")
       fSCRreq = size;
    else if (type == "MEM_REQ")
@@ -99,16 +104,14 @@ void KVLogReader::ReadStorageReq(TString& line)
    // both requests must be present in the logfile otherwise
    // something very wrong has happened
    if (fSCRreq && fMEMreq) fGotRequests = kTRUE;
-   delete toks;
 }
 
-void KVLogReader::ReadJobname(TString& line)
+void KVLogReader::ReadJobname(const KVString& line)
 {
    //read line of type "* Jobname:                 run4049                            *"
    //with name of job.
-   TObjArray* toks = line.Tokenize("*: ");
+   unique_ptr<TObjArray> toks(line.Tokenize("*: "));
    fJobname = ((TObjString*) toks->At(1))->GetString();
-   delete toks;
 }
 
 Int_t KVLogReader::GetRunNumber() const

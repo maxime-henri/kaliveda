@@ -13,39 +13,44 @@ ClassImp(KVGELogReader)
 /* -->
 <h2>KVGELogReader</h2>
 <h4>Read GE (Grid Engine) log files</h4>
+
+Updated to handle correctly new format of end-of-job informations:
+
+~~~~~~~~
+**********************************************************************
+* Submitted on:                   Tue Apr 14 11:27:31 CEST 2020      *
+* Started on:                     Tue Apr 14 11:27:42 CEST 2020      *
+* Ended on:                       Tue Apr 14 12:02:19 CEST 2020      *
+* Exit status:                    0                                  *
+**********************************************************************
+* Requested                                                          *
+*   CPU cores:                    1 core(s)                          *
+*   CPU time:                     00:33:20 (2000 seconds)            *
+**********************************************************************
+* Consumed                                                           *
+*   wallclock:                    00:34:37 (2077 seconds)            *
+*   CPU time:                     00:32:14 (1934 seconds)            *
+*   CPU scaling factor:           10.430000                          *
+*   normalized CPU time:          05:36:18 (20178 HS06 seconds)      *
+*   CPU efficiency:               93 % (1)                           *
+*   vmem:                         1.284 GB (2)                       *
+*   maxvmem:                      1.284 GB (2)                       *
+*   maxrss:                       407.348 MB (2)                     *
+**********************************************************************
+~~~~~~~~
 <!-- */
 // --> END_HTML
 ////////////////////////////////////////////////////////////////////////////////
 
-KVGELogReader::KVGELogReader()
-{
-   // Default constructor
-   fileCopiedtoSRB = kFALSE;
-}
-
-KVGELogReader::~KVGELogReader()
-{
-   // Destructor
-}
-
-
-void KVGELogReader::ReadLine(TString& line, Bool_t& ok)
+void KVGELogReader::ReadLine(const KVString& line, Bool_t& ok)
 {
    //analyse contents of line read from log file
 
    KVLogReader::ReadLine(line, ok);
-   //if we find a seg fault after having copied a file to SRB (raw->recon, recon->ident, ident->root tasks)
-   //then we ignore it: the job is good!
-   if (!ok && fileCopiedtoSRB) {
-      ok = kTRUE;
-      fOK = kTRUE;
-   }
+
    if (!ok) return;
 
-   if (line.Contains("LOCAL:") && line.Contains("->SRB:")) {
-      fileCopiedtoSRB = kTRUE;
-   }
-   else if (line.Contains("Cputime limit exceeded")) {
+   if (line.Contains("Cputime limit exceeded")) {
       ok = kFALSE;
       fStatus = line;
       fOK = kFALSE;
@@ -64,18 +69,25 @@ void KVGELogReader::ReadLine(TString& line, Bool_t& ok)
       return;
    }
    else if (line.Contains("Job received KILL signal")) {
-      ok = kFALSE;
       fStatus = "KILLED";
       fOK = kFALSE;
-      return;
    }
-   else if (line.Contains("cpu time:"))
-      ReadCPULimit(line);
+   else if (line.BeginsWith("* Requested")) {
+      fInRequested = kTRUE;
+      fInConsumed = kFALSE;
+   }
+   else if (line.BeginsWith("* Consumed")) {
+      fInRequested = kFALSE;
+      fInConsumed = kTRUE;
+   }
+   else if (line.BeginsWith("*   CPU time:")) {
+      ReadCPU(line);
+   }
    else if (line.Contains("CpuUser ="))
       ReadKVCPU(line);
-   else if (line.Contains(" vmem:"))
+   else if (fInConsumed && line.BeginsWith("*   vmem:"))
       ReadMemUsed(line);
-   else if (line.Contains("Exit status:"))
+   else if (fStatus != "KILLED" && line.BeginsWith("* Exit status:"))
       ReadStatus(line);
    else if (line.Contains("Jobname:"))
       ReadJobname(line);
@@ -83,72 +95,72 @@ void KVGELogReader::ReadLine(TString& line, Bool_t& ok)
       ReadStorageReq(line);
 }
 
-void KVGELogReader::ReadKVCPU(TString& line)
+void KVGELogReader::ReadKVCPU(const KVString& line)
 {
    // update infos on CPU time, memoire & disk from lines such as
-   // CpuUser = 137.8598 s.     VirtMem = 250.32647 MB      DiskUsed = 356M
+   // "CpuSys = 7.044505  s.    CpuUser = 846.259888 s.    ResMem = 338.109375 MB   VirtMem = 1039.921875 MB      DiskUsed = 5678742 KB"
 
-   TObjArray* toks = line.Tokenize("= ");
-   Int_t ntoks = toks->GetEntries();
-   for (int i = 0; i < ntoks; i++) {
-      KVString token = ((TObjString*)toks->At(i))->String();
+   line.Begin("= ");
+   while (!line.End()) {
+      KVString token = line.Next();
       if (token == "CpuUser") {
-         fCPUused = ((TObjString*)toks->At(i + 1))->String().Atof();
+         fCPUused = line.Next().Atof();
       }
       else if (token == "VirtMem") {
-         fMemKB = ((TObjString*)toks->At(i + 1))->String().Atof();
-         fMemKB *= GetByteMultiplier(((TObjString*)toks->At(i + 2))->String());
+         fMemKB = line.Next().Atof();
+         fMemKB *= GetByteMultiplier(line.Next());
       }
       else if (token == "DiskUsed") {
-         token = ((TObjString*)toks->At(i + 1))->String();
-         fScratchKB = ReadStorage(token);
+         fScratchKB = ReadStorage(line.Next());
       }
    }
 }
 
-void KVGELogReader::ReadCPULimit(TString& line)
+void KVGELogReader::ReadCPU(const KVString& line)
 {
-   //read line of type "*   cpu time:              693 / 15000                        *"
-   //which contains total normalized used CPU time and the time limit from the job request
+   //read line of type "*   CPU time:                     00:32:14 (1934 seconds)            *"
+   //which is either the requested CPU time or the consumed CPU time, depending on
+   //where we are in the file
 
-   TObjArray* toks = line.Tokenize("*:/ ");
-   //get used CPU time (in seconds)
-   KV__TOBJSTRING_TO_INT(toks, 2, sec)
-   if (sec) fCPUused = sec; //if there is a GE problem, could be "0 / 3000"
-   //in this case we use values printed at end of job by KV
-   //get requested CPU time (in seconds)
-   KV__TOBJSTRING_TO_INT(toks, 3, sec_)
-   fCPUreq = sec_;
-   delete toks;
+   line.Begin("()");
+   line.Next();
+   // at this point, myline.Next() will give "1934 seconds"
+   // we can directly call TString::Atoi() as it ignores any non-numeric stuff
+   if (fInRequested) fCPUreq = line.Next().Atoi();
+   else if (fInConsumed) fCPUused = line.Next().Atoi();
 }
 
-void KVGELogReader::ReadScratchUsed(TString&)
+void KVGELogReader::ReadScratchUsed(const KVString&)
 {
    // this just sets fScratcKB=0 because there is no information on
    // scratch disk usage in the GE logfiles
    fScratchKB = 0;
 }
 
-void KVGELogReader::ReadMemUsed(TString& line)
+void KVGELogReader::ReadMemUsed(const KVString& line)
 {
-   //read line of type "*   vmem:                  406.879M                           *"
+   //read line of type "*   vmem:                         1.284 GB (2)                       *"
    //corresponding to memory used by job
 
-   TObjArray* toks = line.Tokenize("*: ");
-   if (toks->GetEntries() < 2) {
+   if (line.GetNValues(":(") < 3) {
       //in case Grid Engine goes west & doesn't write vmem in log
-      delete toks;
       return;
    }
+   line.Begin(":(");
+   line.Next();
+   // at this point line.Next(kTRUE) will give "1.284 GB"
+   KVString vmem = line.Next(kTRUE);
+   if (vmem.GetNValues(" ") < 2) {
+      //something wrong here
+      return;
+   }
+   vmem.Begin(" ");
+   Double_t mem_use = vmem.Next().Atof();
    //value read is converted to KB, depending on units
-   TString vmem = ((TObjString*)toks->At(1))->String();
-   TString units = vmem[vmem.Length() - 1];
-   vmem.Remove(vmem.Length() - 1);
-   fMemKB = vmem.Atof() * GetByteMultiplier(units);
-   delete toks;
+   fMemKB = mem_use * GetByteMultiplier(vmem.Next());
 }
 
-Int_t KVGELogReader::GetByteMultiplier(TString& unit)
+Int_t KVGELogReader::GetByteMultiplier(const KVString& unit)
 {
    //unit = "K", "M" or "G"
    //value returned is 1, 2**10 or 2**20, respectively
@@ -158,38 +170,42 @@ Int_t KVGELogReader::GetByteMultiplier(TString& unit)
    return (unit.BeginsWith("K") ? KB : (unit.BeginsWith("M") ? MB : GB));
 }
 
-void KVGELogReader::ReadStatus(TString& line)
+void KVGELogReader::ReadStatus(const KVString& line)
 {
-   //read line of type "* Exit status:             0                                  *"
+   //read line of type
+   //
+   //    "* Exit status:             0                                  *"
+   //
    //with final status of job.
+   //
    //if status = "0" then JobOK() will return kTRUE
-   //otherwise, JobOK() will be kFALSE
+   //otherwise, JobOK() will be kFALSE.
 
    fGotStatus = kTRUE;
-   TObjArray* toks = line.Tokenize("*: ");
-   fStatus = ((TObjString*) toks->At(2))->String();
+   line.Begin("*:");
+   line.Next();
+   fStatus = line.Next(kTRUE);
    fOK = (fStatus == "0");
-   delete toks;
 }
 
-Double_t KVGELogReader::ReadStorage(KVString& stor)
+Double_t KVGELogReader::ReadStorage(const KVString& stor)
 {
-   //'stor' is a string such as "200M", "3G" etc.
+   //'stor' is a string such as "200MB", "3GB" etc.
    //value returned is corresponding storage space in KB
-   //if no units symbol found, we assume MB (as output of 'du -h')
+   //if no units symbol found, we assume MB
 
-   static const Char_t* units[] = { "K", "M", "G" };
+   static KVString units[] = { "K", "M", "G" };
    Int_t i = 0, index = -1;
    while ((index = stor.Index(units[i])) < 0 && i < 2)
       i++;
-   TString u;
+   KVString u, STOR(stor);
    if (index >= 0) {
-      stor.Remove(index);
+      STOR.Remove(index);
       u = units[i];
    }
    else {
       u = "M";
    }
-   return (stor.Atof() * GetByteMultiplier(u));
+   return (STOR.Atof() * GetByteMultiplier(u));
 }
 

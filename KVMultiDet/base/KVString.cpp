@@ -576,10 +576,12 @@ Int_t KVString::GetNValues(TString delim)
    // e.g. given a string "one | two | three", GetNValues("|") returns 3
    // Note that if the 'delim' character is not contained in the string,
    // GetNValues() will return 1 (not 0) - see Begin().
+
+   KVString copy(*this);
    Int_t nn = 0;
-   Begin(delim);
-   while (!End()) {
-      Next();
+   copy.Begin(delim);
+   while (!copy.End()) {
+      copy.Next();
       nn += 1;
    }
    return nn;
