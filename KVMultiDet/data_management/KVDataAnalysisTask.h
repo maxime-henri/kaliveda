@@ -23,7 +23,7 @@ class KVDataAnalysisTask: public KVBase {
    KVString fPluginURI;        //uri of the plugin library containing user base class
    KVString fPluginBase;       //known base class extended by plugin library
    KVString fExtraAClicIncludes;  //to be added to AClic include paths before compilation
-   Int_t    fStatusUpdateInterval;//interval (number of events) after which batch job progress and status are updated
+   Long64_t    fStatusUpdateInterval;//interval (number of events) after which batch job progress and status are updated
 
 public:
 
@@ -73,11 +73,11 @@ public:
    {
       return fUserClass;
    };
-   virtual void SetStatusUpdateInterval(Int_t n)
+   virtual void SetStatusUpdateInterval(Long64_t n)
    {
       fStatusUpdateInterval = n;
    }
-   virtual Int_t GetStatusUpdateInterval() const
+   virtual Long64_t GetStatusUpdateInterval() const
    {
       return fStatusUpdateInterval;
    }

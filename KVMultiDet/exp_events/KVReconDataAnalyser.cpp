@@ -114,7 +114,7 @@ void KVReconDataAnalyser::SubmitTask()
       }
    }
    TotalEntriesToRead = theChain->GetEntries();
-   TString option = Form("EventsReadInterval=%d,", GetAnalysisTask()->GetStatusUpdateInterval());
+   TString option = Form("EventsReadInterval=%lld,", GetAnalysisTask()->GetStatusUpdateInterval());
    option += Form("FullRunList=%s", GetFullRunList().GetList());
 
    // Add any user-defined options

@@ -935,31 +935,27 @@ void KVDataAnalyser::DeleteBatchStatusFile() const
    gSystem->Unlink(stats);
 }
 
-Bool_t KVDataAnalyser::CheckStatusUpdateInterval(Int_t nevents) const
+Bool_t KVDataAnalyser::CheckStatusUpdateInterval(Long64_t nevents) const
 {
    // Returns kTRUE if the number of events coincides with the interval
    // set for status updates for the current data analysis task
    return (!(nevents % fTask->GetStatusUpdateInterval()) && nevents);
 }
 
-void KVDataAnalyser::DoStatusUpdate(Int_t nevents) const
+void KVDataAnalyser::DoStatusUpdate(Long64_t nevents) const
 {
    // Print infos on events treated, disk usage, memory usage
-   // DEACTIVATED ==> Update status file for batch jobs <==
 
    cout << " +++ " << nevents << " events processed +++ " << endl;
    ProcInfo_t pid;
    if (gSystem->GetProcInfo(&pid) == 0) {
-      TString du = gSystem->GetFromPipe("du -hs");
-      TObjArray* toks = du.Tokenize("\t");
-      TString disk = ((TObjString*)toks->At(0))->String();
-      delete toks;
+      KVString du = gSystem->GetFromPipe("du -sh");
+      du.Begin("\t");
+      KVString disk = du.Next();
       cout << "     ------------- Process infos -------------" << endl;
-      printf(" CpuUser = %f s.     VirtMem = %f MB      DiskUsed = %s\n",
-             pid.fCpuUser, pid.fMemVirtual / 1024., disk.Data());
-      // update batch status file with
-      // the number of events to read, number of events read, and disk used
-      //UpdateBatchStatusFile((Int_t)GetTotalEntriesToRead(),nevents,disk);
+      printf(" CpuSys = %f  s.    CpuUser = %f s.    ResMem = %f MB     VirtMem = %f MB      DiskUsed = %s\n",
+             pid.fCpuSys,  pid.fCpuUser, pid.fMemResident / 1024.,
+             pid.fMemVirtual / 1024., disk.Data());
    }
 }
 

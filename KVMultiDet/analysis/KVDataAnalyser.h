@@ -177,7 +177,7 @@ public:
    {
       return 0;
    }
-   virtual Bool_t CheckStatusUpdateInterval(Int_t nevents) const;
+   virtual Bool_t CheckStatusUpdateInterval(Long64_t nevents) const;
    void SetStatusUpdateInterval(double t)
    {
       fStatusUpdateInterval = t;
@@ -187,7 +187,7 @@ public:
       return fStatusUpdateInterval;
    }
 
-   void DoStatusUpdate(Int_t nevents) const;
+   void DoStatusUpdate(Long64_t nevents) const;
 
    KVDataAnalysisTask* GetAnalysisTask() const
    {
