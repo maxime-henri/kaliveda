@@ -35,7 +35,6 @@
 #pragma link C++ class KVLockfile+;
 #pragma link C++ class KVNamedParameter+;
 #pragma link C++ class KVLogReader+;
-#pragma link C++ class KVBQSLogReader+;
 #pragma link C++ class KVGELogReader+;
 #pragma link C++ class KVMemoryChunk+;
 #pragma link C++ class KVMemoryPool+;

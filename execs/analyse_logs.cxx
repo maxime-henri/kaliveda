@@ -1,8 +1,4 @@
-#ifdef BQS_LOG_READER
-#include "KVBQSLogReader.h"
-#else
 #include "KVGELogReader.h"
-#endif
 #include "KVNumberList.h"
 #include "KVNameValueList.h"
 #include "Riostream.h"
@@ -67,11 +63,7 @@ int main(int argc, char** argv)
 {
    if (argc < 2) {
       cout << "\t\tAnalysis of ";
-#ifdef BQS_LOG_READER
-      cout << "BQS";
-#else
       cout << "Grid Engine";
-#endif
       cout << " (CCIN2P3) batch log files" << endl << endl;
       cout << "\tanalyse_logs [jobname]" << endl << endl;
       cout << "\targuments are:" << endl;
@@ -83,11 +75,7 @@ int main(int argc, char** argv)
       cout << "\t\t      etc. in the current directory" << endl;
       return 0;
    }
-#ifdef BQS_LOG_READER
-   KVBQSLogReader log_reader;
-#else
    KVGELogReader log_reader;
-#endif
 
    // take root of job name and add suffix "_R"
    KVString nameForm(argv[1]);
@@ -158,11 +146,7 @@ int main(int argc, char** argv)
       }
    }
 
-#ifdef BQS_LOG_READER
-   cout << "BQS log analysis==============>" << endl;
-#else
    cout << "GridEngine log analysis==============>" << endl;
-#endif
    cout << "Analysed " << nfile << " jobs" << endl;
    cout << endl;
    cout << "      ";
@@ -171,12 +155,12 @@ int main(int argc, char** argv)
       PrintStatistics(MEMreq_ok, OKavg, OKlimits, SCRreq_ok, CPUreq_ok, ok);
    }
    cout << "      ";
-   cout << kill.GetNValues() << " jobs were KILLED :\n\n" << kill.GetList() << endl;
+   cout << kill.GetNValues() << " jobs were KILLED BEFORE END (not enough resources) :\n\n" << kill.GetList() << endl;
    if (kill.GetNValues()) {
       PrintStatistics(MEMreq_kill, KILLavg, KILLlimits, SCRreq_kill, CPUreq_kill, kill);
    }
    cout << "      ";
-   cout << oot.GetNValues() << " jobs were INCOMPLETE :\n\n" << oot.GetList() << endl << endl;
+   cout << oot.GetNValues() << " jobs have INCOMPLETE LOGS :\n\n" << oot.GetList() << endl << endl;
    if (oot.GetNValues()) {
       PrintStatistics(MEMreq_incomp, INCOMPavg, INCOMPlimits, SCRreq_incomp, CPUreq_incomp, oot);
       incompleteStatus.Print();
