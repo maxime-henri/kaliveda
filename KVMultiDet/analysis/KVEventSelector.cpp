@@ -1,9 +1,9 @@
 #define KVEventSelector_cxx
 #include "KVEventSelector.h"
+#include <KVClassMonitor.h>
 #include <TStyle.h>
 #include "TPluginManager.h"
 #include "TSystem.h"
-#include "KVDataAnalyser.h"
 #include "KVDataRepositoryManager.h"
 #include "KVDataRepository.h"
 #include "KVDataSetManager.h"
@@ -272,6 +272,7 @@ Bool_t KVEventSelector::CreateTreeFile(const Char_t* filename)
 
    if (fDisableCreateTreeFile) return kTRUE;
 
+   TString tree_file_name;
    if (!strcmp(filename, ""))
       tree_file_name.Form("TreeFileFrom%s.root", ClassName());
    else
@@ -323,15 +324,9 @@ Bool_t KVEventSelector::Process(Long64_t entry)
 
    fTreeEntry = entry;
 
-   if (!(fEventsRead % fEventsReadInterval) && fEventsRead) {
-      Info("Process", " +++ %lld events processed +++ ", fEventsRead);
-      ProcInfo_t pid;
-      if (gSystem->GetProcInfo(&pid) == 0) {
-         cout << "     ------------- Process infos -------------" << endl;
-         printf(" CpuSys = %f  s.    CpuUser = %f s.    ResMem = %f MB   VirtMem = %f MB\n",
-                pid.fCpuSys, pid.fCpuUser, pid.fMemResident / 1024., pid.fMemVirtual / 1024.);
-      }
-   }
+   if (gDataAnalyser && gDataAnalyser->CheckStatusUpdateInterval(fEventsRead))
+      gDataAnalyser->DoStatusUpdate(fEventsRead);
+
    GetEntry(entry);
    if (gDataAnalyser) gDataAnalyser->preAnalysis();
    fEventsRead++;
@@ -563,7 +558,7 @@ void KVEventSelector::SetParticleConditions(const KVParticleCondition& cond, con
 
 //____________________________________________________________________________
 
-KVHashList* KVEventSelector::GetHistoList() const
+const KVHashList* KVEventSelector::GetHistoList() const
 {
 
    //return the list of created trees
@@ -775,7 +770,7 @@ void KVEventSelector::SaveHistos(const Char_t* filename, Option_t* option, Bool_
 
 //____________________________________________________________________________
 
-KVHashList* KVEventSelector::GetTreeList() const
+const KVHashList* KVEventSelector::GetTreeList() const
 {
    //return the list of created trees
    return ltree;
@@ -954,6 +949,9 @@ Bool_t KVEventSelector::Notify()
    if (gDataAnalyser) gDataAnalyser->preInitRun();
    InitRun();                   //user initialisations for run
    if (gDataAnalyser) gDataAnalyser->postInitRun();
+
+   KVClassMonitor::GetInstance()->SetInitStatistics();
+
    return kTRUE;
 }
 
@@ -971,7 +969,7 @@ A simple example of analysis of simulated data, for use with kaliveda-sim
 
 A simple example of analysis of filtered simulated data, for use with kaliveda-sim.
 Note that this class was written specially for filtering simulations with the
-future coupling of INDRA and FAZIA.
+coupled INDRA and FAZIA arrays.
 
 \include ExampleFilteredSimDataAnalysis.h
 */
