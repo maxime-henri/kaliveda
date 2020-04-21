@@ -133,7 +133,7 @@ TGeoVolume* KVFAZIABlock::MakeCrossPieceCSI(double front_side, double separation
 #endif
    }
    KVMaterial alu("Al");
-   return gGeoManager->MakeArb8("CROSS_CSI", alu.GetGeoMedium(), depth / 2,
+   return gGeoManager->MakeArb8("DEADZONE_CROSS_CSI", alu.GetGeoMedium(), depth / 2,
 #ifdef WITH_CPP11
                                 coords.data()
 #else
@@ -173,7 +173,7 @@ TGeoVolume* KVFAZIABlock::MakeLeftCrossPieceCSI(double front_side, double separa
 #endif
    }
    KVMaterial alu("Al");
-   return gGeoManager->MakeArb8("CROSS_CSI_LEFT", alu.GetGeoMedium(), depth / 2,
+   return gGeoManager->MakeArb8("DEADZONE_CROSS_CSI_LEFT", alu.GetGeoMedium(), depth / 2,
 #ifdef WITH_CPP11
                                 coords.data()
 #else
@@ -213,7 +213,7 @@ TGeoVolume* KVFAZIABlock::MakeRightCrossPieceCSI(double front_side, double separ
 #endif
    }
    KVMaterial alu("Al");
-   return gGeoManager->MakeArb8("CROSS_CSI_RIGHT", alu.GetGeoMedium(), depth / 2,
+   return gGeoManager->MakeArb8("DEADZONE_CROSS_CSI_RIGHT", alu.GetGeoMedium(), depth / 2,
 #ifdef WITH_CPP11
                                 coords.data()
 #else
@@ -317,7 +317,7 @@ TGeoVolume* KVFAZIABlock::MakeErgalFrame(double frame_depth, double ergal_edge_d
                            0.5 * (frame_side - 2 * side_thick - centre_cross_thick) / 2.,
                            0.5 * frame_depth);
    TGeoVolumeAssembly* ergal_frame
-      = new TGeoVolumeAssembly("ergal_frame");
+      = new TGeoVolumeAssembly("DEADZONE_ERGAL");
    ergal_frame->AddNode(erg_a, 1, new TGeoTranslation(0, frame_side / 2. - side_thick / 2., -0.5 * frame_depth + 0.5 * ergal_edge_depth));
    ergal_frame->AddNode(erg_a, 2, new TGeoTranslation(0, -(frame_side / 2. - side_thick / 2.), -0.5 * frame_depth + 0.5 * ergal_edge_depth));
    ergal_frame->AddNode(erg_b, 1);
@@ -418,13 +418,13 @@ TGeoVolume* KVFAZIABlock::MakeSarco()
 {
    KVMaterial al("Al"), cu("Cu");
 
-   TGeoVolume* side = gGeoManager->MakeBox("SARCO_SIDE", al.GetGeoMedium(), .5 * sarco_height, .5 * sarco_epaisseur, .5 * sarco_length);
-   TGeoVolume* top = gGeoManager->MakeBox("SARCO_TOP", al.GetGeoMedium(), .5 * sarco_epaisseur, .5 * (sarco_width - 2 * sarco_epaisseur), .5 * sarco_length);
-   TGeoVolume* bottom = gGeoManager->MakeBox("SARCO_BOT", cu.GetGeoMedium(), sarco_epaisseur, .5 * (sarco_width - 2 * sarco_epaisseur), .5 * sarco_length);
-   TGeoVolume* back = gGeoManager->MakeBox("SARCO_BACK", al.GetGeoMedium(), 0.5 * (sarco_height - 3 * sarco_epaisseur - sarco_uplift),
+   TGeoVolume* side = gGeoManager->MakeBox("DEADZONE_SARCO_SIDE", al.GetGeoMedium(), .5 * sarco_height, .5 * sarco_epaisseur, .5 * sarco_length);
+   TGeoVolume* top = gGeoManager->MakeBox("DEADZONE_SARCO_TOP", al.GetGeoMedium(), .5 * sarco_epaisseur, .5 * (sarco_width - 2 * sarco_epaisseur), .5 * sarco_length);
+   TGeoVolume* bottom = gGeoManager->MakeBox("DEADZONE_SARCO_BOT", cu.GetGeoMedium(), sarco_epaisseur, .5 * (sarco_width - 2 * sarco_epaisseur), .5 * sarco_length);
+   TGeoVolume* back = gGeoManager->MakeBox("DEADZONE_SARCO_BACK", al.GetGeoMedium(), 0.5 * (sarco_height - 3 * sarco_epaisseur - sarco_uplift),
                                            0.5 * (sarco_width - 2 * sarco_epaisseur), 0.5 * sarco_epaisseur);
 
-   TGeoVolumeAssembly* sarco = new TGeoVolumeAssembly("ASCO_SARCO");
+   TGeoVolumeAssembly* sarco = new TGeoVolumeAssembly("DEADZONE_ASCO_SARCO");
    sarco->AddNode(side, 1, new TGeoTranslation(0, -0.5 * sarco_width + 0.5 * sarco_epaisseur, 0));
    sarco->AddNode(side, 2, new TGeoTranslation(0, 0.5 * sarco_width - 0.5 * sarco_epaisseur, 0));
    sarco->AddNode(top, 1, new TGeoTranslation(0.5 * sarco_height - 0.5 * sarco_epaisseur, 0, 0));
