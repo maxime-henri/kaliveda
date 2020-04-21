@@ -52,11 +52,12 @@ void KVFAZIAMidRapExplorer::SetNameOfDetectors(KVEnv& env)
 {
    //define the format of detectors name
    // label-index
-   // where index = belt*1000+block*100+quartet*10+telescope
+   // where index = block*100+quartet*10+telescope
    // example :
    // SI1-123 is the Silicon 1 of the block 1, the quartet 2 and the telescope 3
-   //
+   // block number increases continuously from 1st block of belt 0 to last block of belt 1
 
+   int block_offset = 0;
    for (int belt = 0; belt <= 1; ++belt) {
       for (Int_t bb = 0; bb < fBlockParams[belt].fNblocsX * fBlockParams[belt].fNblocsY; bb += 1) {
          for (Int_t qq = 1; qq <= 4; qq += 1) {
@@ -66,12 +67,13 @@ void KVFAZIAMidRapExplorer::SetNameOfDetectors(KVEnv& env)
                   KVString sdet = fDetectorLabels.Next();
                   env.SetValue(
                      Form("BELT_%d_BLOCK_%d_QUARTET_%d_%s-T%d", belt, bb, qq, sdet.Data(), tt),
-                     Form("%s-%1d%1d%1d%1d", sdet.Data(), belt, bb, qq, tt)
+                     Form("%s-%d", sdet.Data(), (bb + block_offset) * 100 + 10 * qq + tt)
                   );
                }
             }
          }
       }
+      block_offset += fBlockParams[belt].fNblocsX * fBlockParams[belt].fNblocsY;
    }
 }
 
