@@ -379,6 +379,7 @@ public:
    Int_t GetNumberOfIdentificationResults() const
    {
       // Returns the number of KVIdentificationResult objects in the TClonesArray fIDresults.
+      //
       // Do not assume that all of these correspond to attempted identifications
       // (see comments in GetIdentificationResult(Int_t))
       return fIDResults.GetEntries();
@@ -387,9 +388,12 @@ public:
    KVIdentificationResult* GetIdentificationResult(const Char_t* idtype)
    {
       // Return pointer to result of attempted identification of given type.
+      //
       // This type is the type of the KVIDTelescope which was used
       // (i.e. the string returned by KVIDTelescope::GetType()).
-      // Returns nullptr if no identification of given type found/attempted
+      //
+      // Returns nullptr if no identification of given type found, but even if a valid pointer is returned
+      // the identification may still not have been attemted (see comments in GetIdentificationResult(Int_t)).
 
       Int_t n = GetNumberOfIdentificationResults();
       for (int i = 1; i <= n; i++) {
@@ -403,9 +407,13 @@ public:
 
    KVIdentificationResult* GetIdentificationResult(KVIDTelescope* idt)
    {
-      // Return pointer to result of identification attempted with a
-      // KVIdentificationTelescope of the given type.
-      // Returns nullptr if no identification of given type found.
+      // Return pointer to result of identification attempted with a KVIdentificationTelescope of the given type.
+      //
+      // This type is the type of the KVIDTelescope which was used
+      // (i.e. the string returned by KVIDTelescope::GetType()).
+      //
+      // Returns nullptr if no identification of given type found, but even if a valid pointer is returned
+      // the identification may still not have been attemted (see comments in GetIdentificationResult(Int_t)).
 
       if (!idt) return nullptr;
       return GetIdentificationResult(idt->GetType());
