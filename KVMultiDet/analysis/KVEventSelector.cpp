@@ -782,8 +782,9 @@ const KVHashList* KVEventSelector::GetTreeList() const
 TTree* KVEventSelector::GetTree(const Char_t* tree_name) const
 {
    //return the tree named tree_name
-   return ltree->get_object<TTree>(tree_name);
-
+   TTree* t = ltree->get_object<TTree>(tree_name);
+   if (!t) Fatal("GetTree", "Tree %s not found: is this the right name?", tree_name);
+   return t;
 }
 
 //____________________________________________________________________________
