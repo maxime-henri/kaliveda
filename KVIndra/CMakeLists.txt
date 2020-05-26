@@ -13,3 +13,8 @@ KALIVEDA_SET_INCLUDE_DIRS(KVMultiDet MODULES ${KVMultiDet_MOD_LIST})
 BUILD_KALIVEDA_SUBPROJECT(DATASETS ${datasets}
                         IGNORE_DIRS ${ignore_dirs} ${ignore_geo_dirs} ${ignore_id_dirs} ${ignore_datasets}
 )
+
+if(CCIN2P3_BUILD)
+#---conversion of old INDRA data
+   add_subdirectory(INDRA2ROOT)
+endif(CCIN2P3_BUILD)
