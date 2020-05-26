@@ -444,19 +444,28 @@ double interval_set::eval(KVIdentificationResult* idr)
          //   Z- and A-identified with a slight ambiguity of A
          // * if it is in between two non-consecutive masses i.e. A and A+2 then it
          //   is not identified (e.g. 5He, 8Be, 9B)
-         int dA = right_int->GetA() - left_int->GetA();
-         if (dA == 1) {
-            // OK, slight ambiguity of A
-            ares = TMath::Nint(res);
-            idr->A = ares;
-            idr->PID = res;
-            idr->IDquality = KVIDZAGrid::kICODE3;
-         }
-         else {
-            // in a hole where no isotopes should be (e.g. 5He, 8Be, 9B)
+         if (!right_int || !left_int) {
+            // case where no left or right interval were found
+            // to prevent from crashes but should not appen
             idr->A = ares;
             idr->PID = res;
             idr->IDquality = KVIDZAGrid::kICODE5;
+         }
+         else {
+            int dA = right_int->GetA() - left_int->GetA();
+            if (dA == 1) {
+               // OK, slight ambiguity of A
+               ares = TMath::Nint(res);
+               idr->A = ares;
+               idr->PID = res;
+               idr->IDquality = KVIDZAGrid::kICODE3;
+            }
+            else {
+               // in a hole where no isotopes should be (e.g. 5He, 8Be, 9B)
+               idr->A = ares;
+               idr->PID = res;
+               idr->IDquality = KVIDZAGrid::kICODE5;
+            }
          }
       }
    }
