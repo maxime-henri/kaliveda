@@ -4,6 +4,7 @@
 #pragma link off all classes;
 #pragma link off all functions;
 #ifdef WITH_BUILTIN_GRU
+#pragma link C++ class KVINDRADSTReader;
 #pragma link C++ class KVINDRADstToRootTransfert;
 #endif
 #pragma link C++ class KVINDRAReconDataAnalyser;

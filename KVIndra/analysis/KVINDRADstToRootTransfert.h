@@ -14,7 +14,7 @@ $Date: 2007/05/31 09:59:22 $
 #include "KVNumberList.h"
 #include "KVIntegerList.h"
 #include "KVDataSet.h"
-#include "KVDataSetAnalyser.h"
+#include "KVINDRADSTReader.h"
 #include "TString.h"
 
 class KVINDRAReconEvent;
@@ -22,7 +22,7 @@ class KVIDTelescope;
 class KVDetector;
 class TTree;
 
-class KVINDRADstToRootTransfert : public KVDataSetAnalyser {
+class KVINDRADstToRootTransfert : public KVINDRADSTReader {
 
 protected:
    Int_t fEventNumber;//!
@@ -47,12 +47,6 @@ protected:
    Int_t code_idf[4];
    KVIDTelescope* identifying_telescope;
 
-   Bool_t camp1;
-
-   Bool_t camp2;//set to kTRUE when reading 2nd campaign: => phoswich code is 4, not 2
-
-   Bool_t camp4;//set to kTRUE when reading 4th campaign: => ring1 is Si-CsI
-
    Int_t events_in_file;//total number of events read from each file - for tests
 
    Int_t events_good, events_read;//totals of events read and trees filled
@@ -66,21 +60,6 @@ protected:
    TString req_time, req_mem, req_scratch;
    TString cur_time, cur_mem, cur_scratch;
 
-   void SetCampagneNumber()
-   {
-      fCampNumber = -1;
-      KVString snom = gDataSet->GetName();
-      KVNumberList nl = "1 2 4";
-      nl.Begin();
-      while (!nl.End()) {
-         Int_t cc = nl.Next();
-         if (snom.EndsWith(Form("%d", cc))) {
-            fCampNumber = cc;
-            break;
-         }
-      }
-      Info("SetCampagneNumber", "%s -> Campagne numero %d", gDataSet->GetName(), fCampNumber);
-   }
 
    virtual void ProcessRun();
 
