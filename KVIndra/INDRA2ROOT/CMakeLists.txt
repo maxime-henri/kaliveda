@@ -1,6 +1,5 @@
 #---build fortran for old veda programmes
 message(STATUS "   ...module INDRA2ROOT")
-
 # the following compiler options are valid for gfortran/f95 i.e. gcc-4.8.5
 # at CCIN2P3 under CentOS7. JDF#28/5/2020
 add_definitions(-ffixed-line-length-none -fno-range-check)

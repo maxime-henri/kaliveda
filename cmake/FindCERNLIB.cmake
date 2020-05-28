@@ -13,7 +13,10 @@ if(CERNLIB_EXEC)
       COMMAND ${CERNLIB_EXEC}
       OUTPUT_VARIABLE CERN_LIBS
       OUTPUT_STRIP_TRAILING_WHITESPACE
-   )   
+   )
+   #- convert output to LIST (i.e. separate components with ';')
+   #- otherwise it wont work with target_link_libraries()
+   separate_arguments(CERN_LIBS) 
    
 endif(CERNLIB_EXEC)
 
