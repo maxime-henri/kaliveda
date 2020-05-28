@@ -122,12 +122,7 @@ c
       
 c ---- PATH des fichiers data de VEDA ----------------------------------         
       
-      linux=.false.
-      call GETENVF ('SYSTEM',op_system)
-      write(*,'(/,'' Operating system = '',a)')op_system
-      if(op_system(1:5).eq.'Linux')then
-         linux=.true.
-      endif	 
+      linux=.true.
       call VAR_ENVIRONNEMENT  
 
       namefil=nomjob(1:long_job)//'.sortie'
