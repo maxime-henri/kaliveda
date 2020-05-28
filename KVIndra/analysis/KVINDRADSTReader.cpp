@@ -33,7 +33,7 @@ void KVINDRADSTReader::InitRun()
 
 void KVINDRADSTReader::ProcessRun()
 {
-   gSystem->Exec(Form("faire_arbre_camp%d", fCampNumber));
+   gSystem->Exec(Form("faire_arbre_c%d", fCampNumber));
 }
 
 void KVINDRADSTReader::EndRun()
@@ -87,16 +87,14 @@ void KVINDRADSTReader::DefineSHELLVariables()
 
       camp1 = kTRUE;
 
-   }
-   else if (fCampNumber == 2) {
+   } else if (fCampNumber == 2) {
 
       shell_var.Form("%s/veda%d/data/", gSystem->ExpandPathName("$THRONG_DIR"), fCampNumber);
       gSystem->Setenv("VEDA_DATA", shell_var.Data());
 
       camp2 = kTRUE;
 
-   }
-   else if (fCampNumber == 4) {
+   } else if (fCampNumber == 4) {
 
       shell_var.Form("%s/veda%d/data/", gSystem->ExpandPathName("$THRONG_DIR"), fCampNumber);
       gSystem->Setenv("VEDA_DATA", shell_var.Data());

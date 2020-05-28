@@ -5136,11 +5136,12 @@ c      Ouverture du fichier
 c-------------------------------------------------------------------    
       write(num_write,'(/,'' Lecture du fichier : '',a20)')nomfich      
  
-      nomfil='/afs/in2p3.fr/home/throng/indra/veda2/gene/'//nomfich
+c      nomfil='/afs/in2p3.fr/home/throng/indra/veda2/gene/'//nomfich
+      nomfil=vedadata(1:long_data)//'../gene/'//nomfich
       open (unit=60,file=nomfil,status='OLD',iostat=icode)
 
       if(icode.ne.0) then
-         Print *,'fichier ',nomfich,' inexistant ...'
+         Print *,'fichier ',nomfil,' inexistant ...'
          trouve=.False.
          go to 11
       endif         
