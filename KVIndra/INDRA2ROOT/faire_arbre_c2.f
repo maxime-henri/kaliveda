@@ -72,6 +72,9 @@ c      call initevt()
       pi=3.1415927                                                      
       
       if(npart_traite.gt.0) then
+      
+         call new_event(npart_traite)
+         
        	necrit=necrit+1
 
       	do j=1,npart_traite
@@ -157,8 +160,12 @@ c      call initevt()
 						nrustines=nrustines+1
 	  				endif
 				endif
+            
+            call new_particle(code(j),icou(j),imod(j),z(j),a(j))
 				
-			enddo                                                             
+			enddo
+         
+         call fill_tree()                                                            
 		                                                                        
       endif !if(imult > 0) then
 
@@ -183,7 +190,10 @@ c      include 'anin_1.incl'
                                                                         
 c --- Faites ici les initialisations de runs                            
       print *,'Debut du traitement du run ',numerun,'...'               
-      	   
+      
+c -- initialize ROOT TTree interface	   
+      call init_rfi(numerun)
+      
 		call pic_de_bragg
       
 		necrit=0
@@ -239,6 +249,9 @@ c-------------------------------------------------------------------
       print *,'Number of files written :', nfiles                                                       
       print *,' '                                                       
 
+c -- close ROOT file
+      call close_rfi()
+      
       return                                                            
       end                                                               
 
