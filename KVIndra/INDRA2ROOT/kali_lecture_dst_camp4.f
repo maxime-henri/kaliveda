@@ -64,12 +64,7 @@ c
 
       call INITC 
       
-      linux=.false.  ! AIX by default
-      call GETENVF ('SYSTEM',op_system)
-      write(*,'(/,'' Operating system = '',a)')op_system
-      if(op_system(1:5).eq.'Linux')then
-         linux=.true.
-      endif
+      linux=.true.
       call VAR_ENVIRONNEMENT  
              
       namefil=nomjob(1:long_job)//'.sortie'
@@ -474,14 +469,14 @@ c --- Decodage caracteristiques des particules...
            		canal(i,7)=0
          		canal(i,8)=0
  
-					ilongevt=ibuff(ipt)                                      
-       			module=ibuff(ipt+1)                                      
+					ilongevt=ibuff(ipt)
+       			module=ibuff(ipt+1)
         			icou(i)=module/100                                       
-          		imod(i)=mod(module,100)                                  
+          		imod(i)=mod(module,100)
 
           		a_sec(i) = 0.
           		z_sec(i) = 0.
-                                                                        
+
 c --- Si Gamma ( Code = 0 )                                             
                                                                         
     				if(ilongevt.eq.i_long1) then                             

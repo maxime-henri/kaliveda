@@ -89,7 +89,8 @@ c      call initevt()
 		  		write(88,*) z_indra(j)
 		  		write(88,*) a_indra(j)
 		  		
-				if (code(j).ge.2.and.code(j).le.11.and.ecode(j).ge.1.and.ecode(j).le.2) then
+				if (code(j).ge.2.and.code(j).le.11.and.
+     1             ecode(j).ge.1.and.ecode(j).le.2) then
 					if (z(j).eq.0) then
 						code(j)=15
 						nrustines=nrustines+1

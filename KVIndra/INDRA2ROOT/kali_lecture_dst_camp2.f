@@ -3668,15 +3668,15 @@ C
 100	continue
 c      write (6, 234 ) nurun,lourds,nini,niau
  234	format ( 1h ,' n0run      Lourds?     Ni+Ni?     Ni+Au?  '/
-     2	 1h ,i7,3l10 )
+     2  1h ,i7,3l10 )
 c     	print * ,' fichier fit ' , fich_fit 
 c     	print * , ' fichier runs_add ' , file_add	 	 	
   	close(20)
 C  ET les ZZmax
 c	write (6 ,619) nurun,(zzmax(nc) , nc = 10,17 )
   619	format(1h , ' ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZmax   ' /
-     q	 1h , ' num run    Zmax  cour  10  a  17 ...........  '/
-     w	 1h , i6 ,3x, 8f8.1 //) 
+     q  1h , ' num run    Zmax  cour  10  a  17 ...........  '/
+     w  1h , i6 ,3x, 8f8.1 //) 
 C
 c-----------------------------------------------------------------------
 * lecture du fichier resultat de fit                                    

@@ -14,7 +14,7 @@ BUILD_KALIVEDA_SUBPROJECT(DATASETS ${datasets}
                         IGNORE_DIRS ${ignore_dirs} ${ignore_geo_dirs} ${ignore_id_dirs} ${ignore_datasets}
 )
 
-if(CCIN2P3_BUILD)
+if(USE_INDRA2ROOT)
 #---conversion of old INDRA data
    add_subdirectory(INDRA2ROOT)
-endif(CCIN2P3_BUILD)
+endif(USE_INDRA2ROOT)
