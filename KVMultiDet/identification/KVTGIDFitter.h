@@ -40,7 +40,7 @@ public:
    void FitPanel(Int_t functional_type = 1, Bool_t with_csi_light_energy = kTRUE,
                  Int_t first_Z = -1, Int_t last_Z = -1, Double_t xmin = 0.0, Double_t xmax = 0.0); //  *MENU*
 
-   void SetType(Int_t t)
+   void SetFunctionalType(Int_t t)
    {
       // Set type of functional to use:
       // t=0->basic functional       t<>0->extended functional
@@ -51,7 +51,7 @@ public:
       //            xi*A**mu*(g*E)**nu)**(1/(mu+mu+1))-g*E + pdy
       fType = t;
    };
-   Int_t GetType() const
+   Int_t GetFunctionalType() const
    {
       return fType;
    };

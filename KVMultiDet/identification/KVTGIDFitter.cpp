@@ -270,7 +270,7 @@ void KVTGIDFitter::FitPanel(Int_t functional_type, Bool_t with_csi_light_energy,
       Error("FitPanel", "Set grid to fit with SetGrid(KVIDGraph*)");
       return;
    }
-   SetType(functional_type);
+   SetFunctionalType(functional_type);
    SetLight((Int_t)with_csi_light_energy);
    fXmin = xmin;
    fXmax = xmax;
