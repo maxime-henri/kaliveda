@@ -6,6 +6,7 @@
 
 #include "TGeoVolume.h"
 #include <TVector3.h>
+#include "KVConfig.h"
 
 class KVFAZIABlock : public TGeoVolumeAssembly {
 
@@ -43,11 +44,15 @@ class KVFAZIABlock : public TGeoVolumeAssembly {
    TGeoVolume* MakeSarco();
    struct Projector {
       double rap, depth;
-      Projector(double D, double d) : rap{(D + d) / D}, depth{d} {}
+      Projector(double D, double d) : rap((D + d) / D), depth(d) {}
 
       TVector3 operator()(const TVector3& v)
       {
+#ifdef WITH_CPP11
          return {rap * v.X(), rap * v.Y(), v.Z() + depth};
+#else
+         return TVector3(rap * v.X(), rap * v.Y(), v.Z() + depth);
+#endif
       }
    };
 
