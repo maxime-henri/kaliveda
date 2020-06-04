@@ -165,23 +165,23 @@ if(USE_MFM)
 endif()
 
 #---Google Protobuffers for reading FAZIA data
-# check for C++11 compatibility - can only compile protobuf in mode C++11
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-if(COMPILER_SUPPORTS_CXX11)
+find_package(Protobuf)
+if(PROTOBUF_FOUND)
+    # check for C++11 compatibility - can only compile protobuf in mode C++11
+    include(CheckCXXCompilerFlag)
+    CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+    if(COMPILER_SUPPORTS_CXX11)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-        find_package(Protobuf)
-        if(PROTOBUF_FOUND)
-           set(WITH_PROTOBUF yes)
-           include_directories(${PROTOBUF_INCLUDE_DIRS})
-           if(${ROOT_VERSION} VERSION_LESS 6)
+        set(WITH_PROTOBUF yes)
+        include_directories(${PROTOBUF_INCLUDE_DIRS})
+        if(${ROOT_VERSION} VERSION_LESS 6)
                # kludge to fix bug with ROOT5/CINT when protobuf installed in system directories
                # in this case rootmap autoloading fails if libprotobuf directory not in LD_LIBRARY_PATH
                get_filename_component(ADD_PROTOBUF_DYN_PATH ${PROTOBUF_LIBRARY} PATH)
                list(APPEND ADD_DYN_PATH ${ADD_PROTOBUF_DYN_PATH})
-           endif()
-        endif(PROTOBUF_FOUND)
-endif()
+        endif()
+    endif(COMPILER_SUPPORTS_CXX11)
+endif(PROTOBUF_FOUND)
 
 #---optional support for zeroMQ sockets
 find_package(ZMQ)
