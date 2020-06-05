@@ -1,6 +1,3 @@
-//Created by KVClassFactory on Tue Apr 23 10:27:56 2013
-//Author: John Frankland,,,
-
 #ifndef __KVRANGETABLEGEONAVIGATOR_H
 #define __KVRANGETABLEGEONAVIGATOR_H
 

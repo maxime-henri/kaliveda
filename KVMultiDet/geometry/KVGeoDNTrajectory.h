@@ -1,6 +1,3 @@
-//Created by KVClassFactory on Tue Feb 25 16:31:36 2014
-//Author: John Frankland,,,
-
 #ifndef __KVGEODNTRAJECTORY_H
 #define __KVGEODNTRAJECTORY_H
 

@@ -1,6 +1,3 @@
-//Created by KVClassFactory on Thu Oct  8 10:52:39 2015
-//Author: John Frankland,,,
-
 #ifndef __KVRECONNUCTRAJECTORY_H
 #define __KVRECONNUCTRAJECTORY_H
 
@@ -11,6 +8,24 @@
 #include <map>
 #endif
 
+/**
+  \class KVReconNucTrajectory
+  \ingroup Exp_Events
+  \brief Path through detector array used to reconstruct detected particle
+
+  This class handles trajectories for reconstructed nuclei (see KVReconstructedNucleus).
+  Each detected particle is reconstructed from a trajectory through the array corresponding
+  to the detectors hit by the particle. When dealing with reconstructed particles, the trajectory
+  of each can be accessed like so:
+
+~~~~~~{.cpp}
+KVReconstructedNucleus* rnuc_p; // some pointer to reconstructed nucleus
+KVReconNucTrajectory* rnt = rnuc_p->GetReconstructionTrajectory();
+~~~~~~
+
+  For looping over all detectors on the trajectory, see KVGeoDNTrajectory class reference
+  (section Iterate Over Trajectory).
+ */
 class KVReconNucTrajectory : public KVGeoDNTrajectory {
 
    Int_t fIndependentIdentifications;//number of independent ID telescopes on trajectory

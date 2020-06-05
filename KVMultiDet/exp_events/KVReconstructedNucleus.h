@@ -453,7 +453,7 @@ public:
       //number of unidentified particles reconstructed in group
       //
       // this method is kept only for backwards compatibility. it is used by
-      // AnalyseParticlesInGroup which is called by KVReconstructedEvent::Streamer
+      // AnalyseParticlesInGroup() which is called by KVReconstructedEvent::Streamer()
       // when reading old data
       return (grp->GetHits() - GetNIdentifiedInGroup(grp));
    }
@@ -461,6 +461,8 @@ public:
 
    const KVReconNucTrajectory* GetReconstructionTrajectory() const
    {
+      // Return pointer to path through detectors of array used to reconstruct this particle.
+      // \sa KVReconNucTrajectory
       return fReconTraj;
    }
    void SetReconstructionTrajectory(const KVReconNucTrajectory* t);

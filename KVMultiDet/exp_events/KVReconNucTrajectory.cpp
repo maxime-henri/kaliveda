@@ -1,19 +1,7 @@
-//Created by KVClassFactory on Thu Oct  8 10:52:39 2015
-//Author: John Frankland,,,
-
 #include "KVReconNucTrajectory.h"
 #include "KVIDTelescope.h"
 
 ClassImp(KVReconNucTrajectory)
-
-////////////////////////////////////////////////////////////////////////////////
-// BEGIN_HTML <!--
-/* -->
-<h2>KVReconNucTrajectory</h2>
-<h4>Reconstructed trajectory of nucleus detected by array</h4>
-<!-- */
-// --> END_HTML
-////////////////////////////////////////////////////////////////////////////////
 
 KVReconNucTrajectory::KVReconNucTrajectory(const KVReconNucTrajectory& o) :
    KVGeoDNTrajectory(), fIndependentIdentifications(0)
@@ -88,9 +76,20 @@ void KVReconNucTrajectory::ls(Option_t*) const
 
 KVDetector* KVReconNucTrajectory::GetDetector(const TString& label) const
 {
-   // Returns detector with given label (NOT type: several detectors of same type may occur on
-   // trajectory, geometry should be defined so that labels are unique on all trajectories)
-   // on this trajectory
+   // Returns detector with given *label* on this trajectory.
+   //
+   // **N.B.** *label*, not *type*: several detectors of same *type* may occur on
+   // trajectory. The geometry should be defined so that labels are unique on all trajectories.
+   //
+   // For example, given a reconstructed nucleus whose trajectory includes silicon detectors (same type)
+   // with labels "SI1" and "SI2", here is how to access the "SI2" detector through which it passed:
+   //
+   //~~~~~~~{.cpp}
+   //KVReconstructedNucleus* rnuc_p; /* pointer to reconstructed nucleus */
+   //KVDetector* si2_det = rnuc_p->GetReconstructionTrajectory()->GetDetector("SI2");
+   //~~~~~~~
+   //
+   // If no such detector exists, returns nullptr.
 
 #ifdef WITH_CPP11
    auto it

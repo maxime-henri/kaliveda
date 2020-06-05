@@ -25,16 +25,18 @@ ClassImp(KVGeoImport)
 // --> END_HTML
 //
 // To use:
-//      KVGeoImport geo(gGeoManager, new KVedaLoss, new KVMultiDetArray);
-//      gImp.ImportGeometry();
+//~~~~~~~~{.cpp}
+// KVGeoImport geo(gGeoManager, KVMaterial::GetRangeTable(), new KVMultiDetArray);
+// gImp.ImportGeometry();
+//~~~~~~~~
 //
-// RULES FOR VALID DETECTOR GEOMETRY
+// ### RULES FOR VALID DETECTOR GEOMETRY ###
 //
-// 1.) All detector volumes & nodes must have names which begin with "DET_"
+// 1.) All detector volumes & nodes must have names which begin with **DET_**
 //
 // 2.) They must be made of materials which are known by the range table fRangeTable.
 //
-// 3.) For multi-layer detectors, the "active" layer volume/node must have a name beginning with "ACTIVE_"
+// 3.) For multi-layer detectors, the *active* layer volume/node must have a name beginning with **ACTIVE_**
 //
 // 4.) The "thickness" of the detector or any layer inside a multilayer detector
 //     will be taken as the size of the volume's shape along its Z-axis
@@ -44,30 +46,35 @@ ClassImp(KVGeoImport)
 //
 // 6.) The name of the KVDetector object created and added to the array will be taken
 //     from the unique full path of the node corresponding to the geometrical positioning
-//     of the detector, see KVGeoNavigator::ExtractDetectorNameFromPath
+//     of the detector, see KVGeoNavigator::ExtractDetectorNameFromPath()
 //
-// STRUCTURE ELEMENTS
+//  ### STRUCTURE ELEMENTS ###
 // A structure element  is any association of detectors which may occur several times
 // in a geometry in different places, with the same internal structure.
-// For example: a wall of detectors in a rectangular array.
+//
+// #### Example: a wall of detectors in a rectangular array. ####
+//
 // The detectors in the wall may all be represented by a single volume (if they
-// are identical) called "DET_SI", for example, which is placed N times in N
-// different positions on nodes called, by default, "DET_SI_1", "DET_SI_2", etc.
-// Once you have defined the wall volume, call it "STRUCT_SIWALL" (or whatever you
-// want: only the "STRUCT_" part is mandatory).
+// are identical) called **DET_SI**, for example, which is placed *N* times in *N*
+// different positions on nodes called, by default, **DET_SI_1**, **DET_SI_2**, etc.
+//
+// Once you have defined the wall volume, call it **STRUCT_SIWALL** (or whatever you
+// want: only the **STRUCT_** part is mandatory).
 // Now you can place the same wall structure in different positions of your
-// geometry on nodes called "STRUCT_SIWALL_1", "STRUCT_SIWALL_2", etc.
-// This will give a full path to the node of DET_SI_1 in SIWALL_2 like this:
-//    "/TOP_1/STRUCT_SIWALL_2/DET_SI_1"
-// which will be interpreted by KVGeoNavigator::ExtractDetectorNameFromPath as a
-// detector with unique name:
-//   "SIWALL_2_SI_1"
-// (the "STRUCT_" and "DET_" parts are stripped off).
+// geometry on nodes called **STRUCT_SIWALL_1**, **STRUCT_SIWALL_2**, etc.
+//
+// This will give a full path to the node of **DET_SI_1** in **SIWALL_2** like this:
+//~~~~~~
+//    /TOP_1/STRUCT_SIWALL_2/DET_SI_1
+//~~~~~~
+// which will be interpreted by KVGeoNavigator::ExtractDetectorNameFromPath() as a
+// detector with unique name: **SIWALL_2_SI_1** (the **STRUCT_** and **DET_** parts are stripped off).
 ////////////////////////////////////////////////////////////////////////////////
 
 KVGeoImport::KVGeoImport(TGeoManager* g, KVIonRangeTable* r, KVMultiDetArray* m, Bool_t create) : KVGeoNavigator(g), fCreateArray(create), fOrigin(nullptr)
 {
    // Import geometry described by TGeoManager into KVMultiDetArray object
+   //
    // if create=kFALSE, we do not create any detectors etc., but just set up
    // the required links between the geometry and the existing array detectors
    //
@@ -346,33 +353,29 @@ KVDetector* KVGeoImport::BuildDetector(TString det_name, TGeoVolume* det_vol)
 {
    // Create a KVDetector with given name for the given volume
    //
-   // Detector definition in geometry
-   // ===============================
-   // 1.) All detector volumes & nodes must have names which begin with "DET_"
+   // #### Detector definition in geometry ####
+   //  1. All detector volumes & nodes must have names which begin with **DET_**
    //
-   // 2.) They must be made of materials which are known by the range table fRangeTable.
+   //  2. They must be made of materials which are known by the range table fRangeTable.
    //
-   // 3.) For multi-layer detectors, the "active" layer volume/node must have a name beginning with "ACTIVE_"
+   //  3. For multi-layer detectors, the "active" layer volume/node must have a name beginning with **ACTIVE_**
    //
-   // 4.) The "thickness" of the detector or any layer inside a multilayer detector
-   //     will be taken as the size of the volume's shape along its Z-axis
-   //     (so make sure that you define your detector volumes in this way).
+   //  4. The "thickness" of the detector or any layer inside a multilayer detector will be taken as the size of the volume's
+   //     shape along its Z-axis (so make sure that you define your detector volumes in this way).
    //
-   // 5.) It is assumed that the natural length units of the geometry are centimetres.
+   //  5. It is assumed that the natural length units of the geometry are centimetres.
    //
-   // 6.) The name of the KVDetector object created and added to the array will be taken
+   //  6. The name of the KVDetector object created and added to the array will be taken
    //     from the unique full path of the node corresponding to the geometrical positioning
-   //     of the detector, see KVGeoNavigator::ExtractDetectorNameFromPath
+   //     of the detector, see KVGeoNavigator::ExtractDetectorNameFromPath()
    //
-   // 7.) The 'type' of the detector will be set to the name of the material
+   //  7. The 'type' of the detector will be set to the name of the material
    //     in the detector's active layer i.e. if active layer material name is "Si",
    //     detector type will be 'Si'
    //
-   // 8.) Default class for all detectors is KVDetector
-   //     if you want to use an other class
-   //     you need to defined it using SetDetectorPlugin method and put the
-   //     associated line in your .kvrootrc configuration file. This plugin
-   //     has to be loaded by your KVMultiDetArray object
+   //  8. Default class for all detectors is KVDetector. If you want to use another class
+   //     you need to define it using SetDetectorPlugin() method and put the
+   //     associated line in your .kvrootrc configuration file.
 
 
    KVDetector* d = 0;
@@ -402,9 +405,10 @@ KVDetector* KVGeoImport::BuildDetector(TString det_name, TGeoVolume* det_vol)
 
 void KVGeoImport::AddLayer(KVDetector* det, TGeoVolume* vol)
 {
-   // Add an absorber layer to the detector
+   // Add an absorber layer to the detector.
+   //
    // Volumes representing 'active' layers in detectors must have names
-   // which begin with "ACTIVE_"
+   // which begin with **ACTIVE_**.
 
    TString vnom = vol->GetName();
    // exclude dead zone layers

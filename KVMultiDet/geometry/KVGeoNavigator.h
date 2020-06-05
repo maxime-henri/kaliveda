@@ -42,6 +42,9 @@ protected:
    void FormatDetectorName(const Char_t* basename, KVString& name);
 
 public:
+   /** \class KVGeoDetectorPath
+      \brief Link physical path to node in geometry with detector
+      */
    class KVGeoDetectorPath : public TNamed {
       KVDetector* fDetector;
    public:
@@ -93,6 +96,25 @@ public:
    void SetStructureNameFormat(const Char_t* type, const Char_t* fmt);
    void SetDetectorNameFormat(const Char_t* fmt)
    {
+      // The default base names for detectors are taken from the node name by stripping off
+      // the **DET_** prefix. In order to ensure that all detectors have unique names,
+      // by default we prefix the names of the parent structures to the basename in
+      // order to generate the full name of the detector:
+      //~~~~~~~
+      //    [struc1-name]_[struc2-name]_..._[detector-basename]
+      //~~~~~~~
+      // However, this format can be changed by calling method
+      //~~~~~{.cpp}
+      //    SetDetectorNameFormat("[format]")
+      //~~~~~
+      // where format can contain any of the following tokens:
+      //~~~~~~
+      //    $det:name$             - will be replaced by the detector basename
+      //    $struc:[type]:name$    - will be replaced by the name of the parent structure of given type
+      //    $struc:[type]:type$    - will be replaced by the type of the parent structure of given type
+      //    $struc:[type]:number$  - will be replaced by the number of the parent structure of given type
+      //~~~~~~
+      // plus additional formatting information as for SetStructureNameFormat()
       fDetNameFmt = fmt;
    }
    const Char_t* GetDetectorNameFormat() const
@@ -158,7 +180,8 @@ public:
 
    void AbsorbDetectorPaths(KVGeoNavigator* GN)
    {
-      // Add all contents of GN->fDetectorPaths to our list
+      // Add all contents of GN->fDetectorPaths to our list.
+      //
       // Remove ownership of these paths from GN - our dtor will delete them
 
       fDetectorPaths.AddAll(&GN->fDetectorPaths);

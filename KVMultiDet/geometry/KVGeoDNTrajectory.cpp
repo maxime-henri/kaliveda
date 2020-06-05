@@ -1,6 +1,3 @@
-//Created by KVClassFactory on Tue Feb 25 16:31:36 2014
-//Author: John Frankland,,,
-
 #include "KVGeoDNTrajectory.h"
 #include "KVDetector.h"
 
