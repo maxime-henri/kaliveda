@@ -48,6 +48,7 @@ void KVDataPatch_INDRA_SanityChecks::ApplyToParticle(KVNucleus* N)
             n->SetIDCode(kIDCode5);
          else
             n->SetIDCode(kIDCode14);
+
          gIndra->AcceptParticleForAnalysis(n);
       }
       else if (n->IsZMeasured()) {

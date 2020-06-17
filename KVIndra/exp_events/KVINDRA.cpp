@@ -597,6 +597,7 @@ void KVINDRA::SetNamesOfIDTelescopes() const
 
    TIter it(GetListOfIDTelescopes());
    KVIDTelescope* idt;
+   const TString etalon_numbers[] = {"1002", "1102", "1202", "1304", "1403", "1503", "1602", "1702"};
    while ((idt = (KVIDTelescope*)it())) {
       KVString N = idt->GetDetector(1)->GetName();
       N.Begin("_");
@@ -611,10 +612,14 @@ void KVINDRA::SetNamesOfIDTelescopes() const
          N.Begin("_");
          KVString e_type = N.Next();
          KVString e_number = N.Next();
-         if (de_type == "SILI") idt->SetName(Form("%s_%s_%s", de_type.Data(), e_type.Data(), de_number.Data()));
-         else idt->SetName(Form("%s_%s_%s", de_type.Data(), e_type.Data(), e_number.Data()));
+         if (e_type == "SILI" || e_type == "SI75") {
+            e_number = etalon_numbers[dynamic_cast<KVINDRADetector*>(idt->GetDetector(2))->GetRingNumber() - 10];
+         }
+         idt->SetName(Form("%s_%s_%s", de_type.Data(), e_type.Data(), e_number.Data()));
       }
    }
+   // changed names of all id telescope objects in hashlist: must rehash
+   dynamic_cast<KVHashList*>(GetListOfIDTelescopes())->Rehash();
 }
 
 void KVINDRA::PerformClosedROOTGeometryOperations()
