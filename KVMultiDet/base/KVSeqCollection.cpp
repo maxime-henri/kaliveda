@@ -10,6 +10,7 @@
 #include "TKey.h"
 
 #include <THashList.h>
+#include <TObjString.h>
 
 using namespace std;
 

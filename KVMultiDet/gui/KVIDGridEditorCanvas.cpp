@@ -10,6 +10,7 @@
 #include "TRootCanvas.h"
 #include "TGWindow.h"
 #include <KeySymbols.h>
+#include "TVirtualX.h"
 
 ClassImp(KVIDGridEditorCanvas)
 

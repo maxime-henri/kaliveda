@@ -27,6 +27,7 @@
 #include "TCanvas.h"
 #include "TMultiGraph.h"
 
+#include <TObjString.h>
 
 using namespace std;
 

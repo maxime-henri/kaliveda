@@ -15,7 +15,7 @@
 #include "TProfile.h"
 #include "TF1.h"
 #include "TGMsgBox.h"
-
+#include "TVirtualX.h"
 #include <Riostream.h>
 
 ClassImp(KVCanvas)

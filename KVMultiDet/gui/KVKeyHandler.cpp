@@ -6,7 +6,7 @@
 #include "TRootCanvas.h"
 #include "TGWindow.h"
 #include <KeySymbols.h>
-
+#include "TVirtualX.h"
 #include <Riostream.h>
 
 using namespace std;
