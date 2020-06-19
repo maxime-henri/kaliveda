@@ -247,6 +247,7 @@ Bool_t KVSimReader_HIPSE::ReadNucleus()
 
       case 1:
          nuc->GetParameters()->SetValue("exci", GetDoubleReadPar(0));
+         nuc->SetExcitEnergy(GetDoubleReadPar(0));
          nuc->GetParameters()->SetValue("ether", GetDoubleReadPar(1));
          break;
 
