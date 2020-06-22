@@ -286,7 +286,7 @@ TH1* KVTreeAnalyzer::MakeHisto(const Char_t* expr, const Char_t* selection, Int_
       if (fNormHisto || fNormHistoEvents) {
          h->Sumw2();
          if (fNormHisto) {
-            h->Scale(1. / h->Integral());
+            h->Scale(1. / h->Integral("width"));
          }
          else {
             h->Scale(1. / GetEntriesInCurrentSelection());
@@ -345,7 +345,7 @@ TH1* KVTreeAnalyzer::MakeIntHisto(const Char_t* expr, const Char_t* selection, I
    if (fNormHisto || fNormHistoEvents) {
       h->Sumw2();
       if (fNormHisto) {
-         h->Scale(1. / h->Integral());
+         h->Scale(1. / h->Integral("width"));
       }
       else {
          h->Scale(1. / GetEntriesInCurrentSelection());
