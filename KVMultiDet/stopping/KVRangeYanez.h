@@ -22,7 +22,7 @@ public:
    KVRangeYanez();
    KVRangeYanez(const KVRangeYanez&) ;
    ROOT_COPY_ASSIGN_OP(KVRangeYanez)
-   virtual ~KVRangeYanez();
+   virtual ~KVRangeYanez() {}
    void Copy(TObject&) const;
 
    virtual KVIonRangeTableMaterial* AddElementalMaterial(Int_t z, Int_t a = 0) const;

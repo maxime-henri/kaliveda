@@ -33,15 +33,22 @@ KVRangeYanez::KVRangeYanez()
                      "Interface to Range dE/dx and range library (Ricardo Yanez)")
 {
    // Default constructor
+   //
    // Predefined materials are created based on the contents of the file(s) whose
-   // names are given as values of the variable KVRangeYanez.PredefMaterials.
-   // A default file is specified in the main .kvrootrc file.
-   // If you want to add your own definitions, just put in your .kvrootrc:
+   // names are given as values of the variable `RANGE.PredefMaterials`
+   //
+   // A default file is specified in the main `.kvrootrc` file.
+   //
+   // If you want to add your own definitions, just put in your `.kvrootrc` file:
+   //~~~~~~~~~~~
    //+RANGE.PredefMaterials: myfile1.dat
    //+RANGE.PredefMaterials: myfile2.dat
+   //~~~~~~~~~~~
    // If you want to override the default definitions:
+   //~~~~~~~~~~~
    //RANGE.PredefMaterials: myfile1.dat
    //+RANGE.PredefMaterials: myfile2.dat
+   //~~~~~~~~~~~
 
    KVString DataFilePaths = gEnv->GetValue("RANGE.PredefMaterials", "");
    DataFilePaths.Begin(" ");
@@ -72,31 +79,13 @@ KVRangeYanez::KVRangeYanez()
 
 KVRangeYanez::KVRangeYanez(const KVRangeYanez& obj)  : KVIonRangeTable()
 {
-   // Copy constructor
-   // This ctor is used to make a copy of an existing object (for example
-   // when a method returns an object), and it is always a good idea to
-   // implement it.
-   // If your class allocates memory in its constructor(s) then it is ESSENTIAL :-)
-
    obj.Copy(*this);
-}
-
-KVRangeYanez::~KVRangeYanez()
-{
-   // Destructor
 }
 
 //________________________________________________________________
 
 void KVRangeYanez::Copy(TObject& obj) const
 {
-   // This method copies the current state of 'this' object into 'obj'
-   // You should add here any member variables, for example:
-   //    (supposing a member variable KVRangeYanez::fToto)
-   //    CastedObj.fToto = fToto;
-   // or
-   //    CastedObj.SetToto( GetToto() );
-
    KVIonRangeTable::Copy(obj);
    KVRangeYanez& CastedObj = (KVRangeYanez&)obj;
    CastedObj.fLocalMaterialsDirectory = fLocalMaterialsDirectory;
@@ -106,6 +95,8 @@ void KVRangeYanez::Copy(TObject& obj) const
 KVIonRangeTableMaterial* KVRangeYanez::GetMaterialWithNameOrType(const Char_t* material) const
 {
    // Returns pointer to material of given name or type if it has been defined.
+   //
+   // \param[in] material name or type of material to retrieve
 
    CheckMaterialsList();
    KVIonRangeTableMaterial* M = (KVIonRangeTableMaterial*)fMaterials->FindObject(material);
@@ -130,7 +121,9 @@ void KVRangeYanez::Print(Option_t*) const
 TObjArray* KVRangeYanez::GetListOfMaterials()
 {
    // Create and fill a list of all materials for which range tables exist.
+   //
    // Each entry is a TNamed with the name and type (title) of the material.
+   //
    // User's responsibility to delete list after use (it owns its objects).
 
    TObjArray* list = new TObjArray(fMaterials->GetEntries());
@@ -153,14 +146,20 @@ void KVRangeYanez::CheckMaterialsList() const
 KVIonRangeTableMaterial* KVRangeYanez::AddElementalMaterial(Int_t z, Int_t a) const
 {
    // Adds a material composed of a single isotope of a chemical element.
-   // If the isotope (a) is not specified, we create a material containing the naturally
-   // occuring isotopes of the given element, weighted according to their abundance.
-   // If the mass is given, the material symbol will be "AX" where X is the symbol for the element
-   //    e.g. "48Ca",  "124Sn", etc.
-   // and the material name will be "Xxx-A" where Xxx is the name of the element
-   //    e.g. "Calcium-48", "Tin-124", etc.
+   //
+   // \param[in] z atomic number of element
+   // \param[in] a mass number of element
+   //
+   // If the mass number of the isotope \f$A\f$ is not specified, we create a material containing the naturally
+   // occuring isotopes of the given element, weighted according to natural abundance.
+   //
+   // If the mass is given, the material symbol will be `"AX"` where `X` is the symbol for the element
+   //     e.g. `"48Ca"`,  `"124Sn"`, etc.
+   // and the material name will be `"Xxx-A"` where `Xxx` is the name of the element
+   //     e.g. `"Calcium-48"`, `"Tin-124"`, etc.
+   //
    // Otherwise, we just use the element symbol and name for naturally-occurring
-   // mixtures of atomic elements ("Ca", "Calcium", etc.).
+   // mixtures of atomic elements (`"Ca"`, `"Calcium"`, etc.).
 
    KVIonRangeTableMaterial* mat;
    if (!a) mat = MakeNaturallyOccuringElementMixture(z, a); // this may set a!=0 if only one isotope exists in nature
@@ -194,7 +193,14 @@ KVIonRangeTableMaterial* KVRangeYanez::AddCompoundMaterial(
    Int_t nelem, Int_t* z, Int_t* a, Int_t* natoms, Double_t density) const
 {
    // Adds a compound material with a simple formula composed of different elements
-   // For solids, give the density (in g/cm**3)
+   //
+   // \param[in] name name for the new compound (no spaces)
+   // \param[in] symbol chemical symbol for compound
+   // \param[in] nelem number of elements in compound
+   // \param[in] z[nelem] atomic numbers of elements
+   // \param[in] a[nelem] mass numbers of elements
+   // \param[in] natoms[nelem] number of atoms of each element
+   // \param[in] density in \f$g/cm^{3}\f$, if compound is a solid
 
    TString state = "gas";
    if (density > 0) state = "solid";
@@ -215,10 +221,16 @@ KVIonRangeTableMaterial* KVRangeYanez::AddMixedMaterial(
    Int_t nelem, Int_t* z, Int_t* a, Int_t* natoms, Double_t* proportion, Double_t density) const
 {
    // Adds a material which is a mixture of either elements or compounds:
-   //   nelem = number of elements in mixture
-   //   z[],a[],natoms[],proportion[]: arrays with atomic number, mass, number of atoms
-   //            and proportion of each element
-   //   if mixture is a solid, give density in g/cm**3
+   //
+   // \param[in] name name for the new mixture (no spaces)
+   // \param[in] symbol chemical symbol for mixture
+   // \param[in] nelem number of elements in mixture
+   // \param[in] z[nelem] atomic numbers of elements
+   // \param[in] a[nelem] mass numbers of elements
+   // \param[in] natoms[nelem] number of atoms of each element
+   // \param[in] proportion[nelem] proportion by mass in mixture of element
+   // \param[in] density in \f$g/cm^{3}\f$, if mixture is a solid
+
    TString state = "gas";
    if (density > 0) state = "solid";
    KVRangeYanezMaterial* mat =
@@ -235,22 +247,25 @@ KVIonRangeTableMaterial* KVRangeYanez::AddMixedMaterial(
 
 KVIonRangeTableMaterial* KVRangeYanez::MakeNaturallyOccuringElementMixture(Int_t z, Int_t& a) const
 {
-   // create a material containing the naturally occuring isotopes of the given element,
+   // Create a material containing the naturally occuring isotopes of the given element,
    // weighted according to their abundance.
    //
-   // if there is only one naturally occurring isotope of the element we set 'a' to this isotope
+   // \param[in] z atomic number of element
+   // \param[out] a mass number of unique isotope, if 100% abundance
+   //
+   // if there is only one naturally occurring isotope of the element we set `a` to this isotope
    // and don't create any material
 
    if (!gNDTManager) {
       Error("MakeNaturallyOccuringElementMixture",
             "Nuclear data tables have not been initialised");
-      return NULL;
+      return nullptr;
    }
    KVElementDensity* ed = (KVElementDensity*)gNDTManager->GetData(z, z, "ElementDensity");
    if (!ed) {
       Error("AddElementalMaterial",
             "No element found in ElementDensity NDT-table with Z=%d", z);
-      return 0x0;
+      return nullptr;
    }
 
    KVNucleus nuc(z);
