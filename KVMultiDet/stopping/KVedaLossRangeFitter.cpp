@@ -48,11 +48,11 @@ void KVedaLossRangeFitter::SetMaterial(KVIonRangeTableMaterial* m)
    // Sets range table to fit. Also finds material with closest Z in VEDALOSS library.
    fMaterial = m;
    Double_t zmat = fMaterial->GetZ();
-   TObjArray* mats = VEDALOSS.GetListOfMaterials();
+   unique_ptr<TObjArray> mats(VEDALOSS.GetListOfMaterials());
    TString closest;
    Double_t closestZ = 100;
    TNamed* mat;
-   TIter next(mats);
+   TIter next(mats.get());
    while ((mat = (TNamed*)next())) {
       KVIonRangeTableMaterial* y = VEDALOSS.GetMaterial(mat->GetName());
       Double_t yZ = y->GetZ();
@@ -64,7 +64,6 @@ void KVedaLossRangeFitter::SetMaterial(KVIonRangeTableMaterial* m)
    fClosestVedaMat = (KVedaLossMaterial*)VEDALOSS.GetMaterial(closest);
    Info("SetMaterial", "Initial fit parameters will be taken from:");
    fClosestVedaMat->Print();
-   delete mats;
 }
 
 void KVedaLossRangeFitter::SetInitialParameters(Int_t Z)

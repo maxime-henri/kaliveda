@@ -145,7 +145,6 @@ KVDBSystemDialog::~KVDBSystemDialog()
       delete fMainFrame1475;
       fMainFrame1475 = 0;
    }
-   if (fMaterialsList)delete fMaterialsList;
    delete fUndo;
 }
 
@@ -817,8 +816,8 @@ void KVDBSystemDialog::CreateMainWindow(const TGWindow* p, const TGWindow* main,
    fComboBox1542->Resize(80, 22);
    //fill list of all available materials
    KVMaterial bidon;
-   fMaterialsList = bidon.GetRangeTable()->GetListOfMaterials();
-   TIter it_mat(fMaterialsList);
+   fMaterialsList.reset(bidon.GetRangeTable()->GetListOfMaterials());
+   TIter it_mat(fMaterialsList.get());
    TObject* obj;
    Int_t ind = 0;
    while ((obj = it_mat())) {
