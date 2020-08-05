@@ -947,7 +947,7 @@ const Char_t* KVIDTelescope::GetDefaultIDGridClass()
 }
 
 //_____________________________________________________________________________________________________//
-KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange, Int_t deltaA, Int_t npoints, Double_t lifetime, UChar_t massformula, Double_t xfactor)
+KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const KVNumberList& Zrange, Int_t deltaA, Int_t npoints, Double_t lifetime, UChar_t massformula, Double_t xfactor)
 {
    //Genere une grille dE-E (perte d'energie - energie residuelle) pour une gamme en Z donnee
    // - Zrange definit l'ensemble des charges pour lequel les lignes vont etre calculees
@@ -962,8 +962,6 @@ KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange, Int_t delta
    //un noyau de A et Z donne n'est considere que s'il retourne KVNucleus::IsKnown() = kTRUE
    //
    if (GetSize() <= 1) return 0;
-
-   KVNumberList nlz(Zrange);
 
    TClass* cl = TClass::GetClass(GetDefaultIDGridClass());
    if (!cl || !cl->InheritsFrom("KVIDZAGrid")) cl = TClass::GetClass("KVIDZAGrid");
@@ -989,9 +987,9 @@ KVIDGrid* KVIDTelescope::CalculateDeltaE_EGrid(const Char_t* Zrange, Int_t delta
 
    Double_t SeuilE = 0.1;
 
-   nlz.Begin();
-   while (!nlz.End()) {
-      Int_t zz = nlz.Next();
+   Zrange.Begin();
+   while (!Zrange.End()) {
+      Int_t zz = Zrange.Next();
       part.SetZ(zz, massformula);
       Int_t aref = part.GetA();
 //        printf("%d\n",zz);
