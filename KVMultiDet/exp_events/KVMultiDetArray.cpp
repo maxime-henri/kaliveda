@@ -46,6 +46,8 @@
 #endif
 #ifdef WITH_BUILTIN_GRU
 #include "KVGANILDataReader.h"
+#else
+#include "KVRawDataReader.h"
 #endif
 #ifdef WITH_MFM
 #include "KVMFMDataFileReader.h"
