@@ -117,7 +117,7 @@ Bool_t ExampleReconAnalysis::Analysis(void)
    /*** LOOP OVER PARTICLES OF EVENT ***/
    for (KVEvent::Iterator it = OKEventIterator(*GetEvent()).begin(); it != GetEvent()->end(); ++it) {
       // "OK" => using selection criteria of InitRun()
-      KVReconstructedNucleus& n = it.reference<KVReconstructedNucleus>();
+      KVReconstructedNucleus& n = it.get_reference<KVReconstructedNucleus>();
       // fill Z distribution
       FillHisto("zdist", n.GetZ());
       // fill Z-Vpar(cm)

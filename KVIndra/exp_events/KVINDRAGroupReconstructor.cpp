@@ -52,7 +52,7 @@ void KVINDRAGroupReconstructor::Identify()
 {
    KVGroupReconstructor::Identify();
    for (KVEvent::Iterator it = GetEventFragment()->begin(); it != GetEventFragment()->end(); ++it) {
-      KVReconstructedNucleus* d = it.pointer<KVReconstructedNucleus>();
+      KVReconstructedNucleus* d = it.get_pointer<KVReconstructedNucleus>();
       if (d->IsIdentified() && d->GetStatus() == KVReconstructedNucleus::kStatusStopFirstStage) {
          if (d->GetIdentifyingTelescope()) {
             d->GetIdentifyingTelescope()->SetIDCode(d, kIDCode5);

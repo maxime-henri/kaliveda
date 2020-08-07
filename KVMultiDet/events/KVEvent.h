@@ -51,8 +51,14 @@ protected:
 #endif
 public:
 
-   class Iterator : public std::iterator<std::forward_iterator_tag, KVNucleus> {
+   class Iterator {
    public:
+      typedef std::forward_iterator_tag iterator_category;
+      typedef KVNucleus value_type;
+      typedef std::ptrdiff_t difference_type;
+      typedef KVNucleus* pointer;
+      typedef KVNucleus& reference;
+
       enum Type {    // type of iterator
          Null,      // null value
          All,       // include all particles
@@ -156,12 +162,12 @@ public:
          return *(current());
       }
       template<typename PointerType>
-      PointerType* pointer() const
+      PointerType* get_pointer() const
       {
          return dynamic_cast<PointerType*>(current());
       }
       template<typename ReferenceType>
-      ReferenceType& reference() const
+      ReferenceType& get_reference() const
       {
          return dynamic_cast<ReferenceType&>(*current());
       }

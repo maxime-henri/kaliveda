@@ -90,7 +90,7 @@ void KVReconstructedEvent::Streamer(TBuffer& R__b)
          //set angles
          KVReconstructedNucleus* par;
          for (KVEvent::Iterator it = begin(); it != end(); ++it) {
-            par = it.pointer<KVReconstructedNucleus>();
+            par = it.get_pointer<KVReconstructedNucleus>();
             if (HasMeanAngles())
                par->GetAnglesFromReconstructionTrajectory("mean");
             else
@@ -179,7 +179,7 @@ void KVReconstructedEvent::ls(Option_t*) const
    GetParameters()->Print();
    int i(0);
    for (KVEvent::Iterator it = begin(); it != end(); ++it) {
-      KVReconstructedNucleus& nuc = it.reference<KVReconstructedNucleus>();
+      KVReconstructedNucleus& nuc = it.get_reference<KVReconstructedNucleus>();
       printf(" %3d", i);
       printf(" A:%6s", nuc.GetParameters()->GetStringValue("ARRAY"));
       printf("  D:%10s", nuc.GetStoppingDetector()->GetName());

@@ -151,7 +151,7 @@ void KVFAZIAGroupReconstructor::PostReconstructionProcessing()
    // Set values in detectors for identification/calibration procedures
 
    for (KVEvent::Iterator it = GetEventFragment()->begin(); it != GetEventFragment()->end(); ++it) {
-      KVReconstructedNucleus* rnuc = it.pointer<KVReconstructedNucleus>();
+      KVReconstructedNucleus* rnuc = it.get_pointer<KVReconstructedNucleus>();
 
       rnuc->GetReconstructionTrajectory()->IterateFrom();
 

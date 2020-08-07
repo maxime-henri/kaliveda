@@ -228,7 +228,7 @@ KVNucleus* KVEvent::GetParticle(const Char_t* group_name) const
    // Find first particle in event belonging to group with name "group_name"
 
    Iterator it = GetNextParticleIterator(group_name);
-   KVNucleus* tmp = it.pointer<KVNucleus>();
+   KVNucleus* tmp = it.get_pointer<KVNucleus>();
    if (!tmp) Warning("GetParticle", "Particle not found: %s", group_name);
    return tmp;
 }
@@ -276,7 +276,7 @@ Double_t KVEvent::GetSum(const Char_t* KVNucleus_method, Option_t* opt)
       if (mt.ReturnType() == TMethodCall::kLong) {
          Long_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, "", ret);
             fSum += ret;
          }
@@ -284,7 +284,7 @@ Double_t KVEvent::GetSum(const Char_t* KVNucleus_method, Option_t* opt)
       else if (mt.ReturnType() == TMethodCall::kDouble) {
          Double_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, "", ret);
             fSum += ret;
          }
@@ -312,7 +312,7 @@ Double_t KVEvent::GetSum(const Char_t* KVNucleus_method, const Char_t* method_pr
       if (mt.ReturnType() == TMethodCall::kLong) {
          Long_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, args, ret);
             fSum += ret;
          }
@@ -320,7 +320,7 @@ Double_t KVEvent::GetSum(const Char_t* KVNucleus_method, const Char_t* method_pr
       else if (mt.ReturnType() == TMethodCall::kDouble) {
          Double_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, args, ret);
             fSum += ret;
          }
@@ -347,7 +347,7 @@ void KVEvent::FillHisto(TH1* h, const Char_t* KVNucleus_method, Option_t* opt)
       if (mt.ReturnType() == TMethodCall::kLong) {
          Long_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, "", ret);
             h->Fill((Double_t)ret);
          }
@@ -355,7 +355,7 @@ void KVEvent::FillHisto(TH1* h, const Char_t* KVNucleus_method, Option_t* opt)
       else if (mt.ReturnType() == TMethodCall::kDouble) {
          Double_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, "", ret);
             h->Fill(ret);
          }
@@ -379,7 +379,7 @@ void KVEvent::FillHisto(TH1* h, const Char_t* KVNucleus_method, const Char_t* me
       if (mt.ReturnType() == TMethodCall::kLong) {
          Long_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, args, ret);
             h->Fill((Double_t)ret);
          }
@@ -387,7 +387,7 @@ void KVEvent::FillHisto(TH1* h, const Char_t* KVNucleus_method, const Char_t* me
       else if (mt.ReturnType() == TMethodCall::kDouble) {
          Double_t ret;
          for (; it != end(); ++it) {
-            KVNucleus* tmp = it.pointer<KVNucleus>();
+            KVNucleus* tmp = it.get_pointer<KVNucleus>();
             mt.Execute(tmp, args, ret);
             h->Fill(ret);
          }
