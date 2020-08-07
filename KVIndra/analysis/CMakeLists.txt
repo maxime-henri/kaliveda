@@ -1,7 +1,7 @@
 set(excluded_classes KVReconIdent_e475s)
 
 if(NOT WITH_BUILTIN_GRU)
-        set(excluded_classes ${excluded_classes} KVINDRADstToRootTransfert)
+        set(excluded_classes ${excluded_classes} KVINDRADstToRootTransfert KVINDRADSTReader)
 endif()
 
 BUILD_KALIVEDA_MODULE(analysis
