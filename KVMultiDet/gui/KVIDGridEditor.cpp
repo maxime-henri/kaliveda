@@ -2372,10 +2372,6 @@ Bool_t KVIDGridEditor::HandleKey(Int_t, Int_t py)
          UpdateViewer();
          break;
 
-      case kKey_j:
-         fJoelMode = !fJoelMode;
-         break;
-
       case kKey_d:
          label = (TPaveLabel*)lplabel4->FindObject("Delete");
          DispatchOrder(label);
