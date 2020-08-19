@@ -172,6 +172,23 @@ endif()
 
 #---Google Protobuffers for reading FAZIA data
 find_package(Protobuf)
+if(NOT PROTOBUF_FOUND)
+   # we may need pkg-config to find installation
+   find_package(PkgConfig QUIET)
+   
+   if(PkgConfig_FOUND)
+      message(STATUS "Looking for protobuf with pkg-config")
+      ## use pkg-config to get hints for protobuf locations
+      pkg_check_modules(PROTOBUF QUIET protobuf)
+      if(PROTOBUF_FOUND)
+         set(CMAKE_LIBRARY_PATH ${PROTOBUF_LIBRARY_DIRS} ${CMAKE_LIBRARY_PATH})
+         set(PROTOBUF_INCLUDE_DIR ${PROTOBUF_INCLUDE_DIRS})
+         set(Protobuf_INCLUDE_DIR ${PROTOBUF_INCLUDE_DIRS})
+         find_package(Protobuf)
+      endif(PROTOBUF_FOUND)
+   endif(PkgConfig_FOUND)
+
+endif(NOT PROTOBUF_FOUND)
 if(PROTOBUF_FOUND)
     # check for C++11 compatibility - can only compile protobuf in mode C++11
     include(CheckCXXCompilerFlag)
@@ -183,7 +200,7 @@ if(PROTOBUF_FOUND)
         if(${ROOT_VERSION} VERSION_LESS 6)
                # kludge to fix bug with ROOT5/CINT when protobuf installed in system directories
                # in this case rootmap autoloading fails if libprotobuf directory not in LD_LIBRARY_PATH
-               get_filename_component(ADD_PROTOBUF_DYN_PATH ${PROTOBUF_LIBRARY} PATH)
+               get_filename_component(ADD_PROTOBUF_DYN_PATH ${PROTOBUF_LIBRARIES} PATH)
                list(APPEND ADD_DYN_PATH ${ADD_PROTOBUF_DYN_PATH})
         endif()
     endif(COMPILER_SUPPORTS_CXX11)
