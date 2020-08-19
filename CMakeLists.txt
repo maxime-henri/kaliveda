@@ -200,7 +200,7 @@ if(PROTOBUF_FOUND)
         if(${ROOT_VERSION} VERSION_LESS 6)
                # kludge to fix bug with ROOT5/CINT when protobuf installed in system directories
                # in this case rootmap autoloading fails if libprotobuf directory not in LD_LIBRARY_PATH
-               get_filename_component(ADD_PROTOBUF_DYN_PATH ${PROTOBUF_LIBRARIES} PATH)
+               get_filename_component(ADD_PROTOBUF_DYN_PATH ${PROTOBUF_LIBRARY} PATH)
                list(APPEND ADD_DYN_PATH ${ADD_PROTOBUF_DYN_PATH})
         endif()
     endif(COMPILER_SUPPORTS_CXX11)
@@ -438,9 +438,13 @@ write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/KaliVedaConfigVersi
                                     VERSION ${KV_VERSION}
                                     COMPATIBILITY SameMajorVersion
                                     )
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/KaliVedaConfig.cmake ${CMAKE_CURRENT_BINARY_DIR}/KaliVedaConfigVersion.cmake
-          ${CMAKE_SOURCE_DIR}/cmake/KaliVedaUseFile.cmake DESTINATION ${CMAKE_INSTALL_CMAKEPKGDIR}
-           )
+install(FILES
+         ${CMAKE_CURRENT_BINARY_DIR}/KaliVedaConfig.cmake
+         ${CMAKE_CURRENT_BINARY_DIR}/KaliVedaConfigVersion.cmake
+         ${CMAKE_SOURCE_DIR}/cmake/KaliVedaUseFile.cmake
+         ${CMAKE_SOURCE_DIR}/cmake/FindZMQ.cmake
+         DESTINATION ${CMAKE_INSTALL_CMAKEPKGDIR}
+        )
 
 #---in order to be able to reuse cmake macros for building ROOT libraries with either ROOT5 or ROOT6
 install(FILES 
