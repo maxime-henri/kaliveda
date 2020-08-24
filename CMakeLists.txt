@@ -258,8 +258,8 @@ if(USE_FITLTG)
 	set(FITLTG_LIB fitltg)
 endif()
 
-# no more support for BackTrack after 6.18
-if(ROOT_VERSION VERSION_LESS 6.20.00)
+# no more support for BackTrack from 6.18
+if(ROOT_VERSION VERSION_LESS 6.18.00)
    #--- BackTrack package for model parameter optimisation
    option(USE_BACKTRACK "Build BackTrack backtracing statistical analysis package" OFF)
    if(USE_BACKTRACK)
@@ -270,10 +270,10 @@ if(ROOT_VERSION VERSION_LESS 6.20.00)
       endif()
    endif()
    add_feature_info(backtrack USE_BACKTRACK "Build BackTrack backtracing statistical analysis package")
-else(ROOT_VERSION VERSION_LESS 6.20.00)
-   message(STATUS "BackTrack package not available from ROOT v6.20 onwards")
+else(ROOT_VERSION VERSION_LESS 6.18.00)
+   message(STATUS "BackTrack package not available from ROOT v6.18 onwards")
    set(USE_BACKTRACK OFF CACHE BOOL "" FORCE)
-endif(ROOT_VERSION VERSION_LESS 6.20.00)
+endif(ROOT_VERSION VERSION_LESS 6.18.00)
 
 #--- MicroStat package for calculating event statistical weights
 option(USE_MICROSTAT "Build MicroStat package for event generation using statistical weights" OFF)
