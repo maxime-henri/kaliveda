@@ -191,6 +191,12 @@ void KVIDZAFromZGrid::LoadPIDRanges()
    //    PrintPIDLimits();
 }
 
+void KVIDZAFromZGrid::ResetPIDRanges()
+{
+   fTables.Clear("all");
+   fPIDRange = kFALSE;
+}
+
 void KVIDZAFromZGrid::ReloadPIDRanges()
 {
    fTables.Clear("all");

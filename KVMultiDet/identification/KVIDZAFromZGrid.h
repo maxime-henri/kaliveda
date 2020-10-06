@@ -44,6 +44,7 @@ public:
    virtual void Identify(Double_t x, Double_t y, KVIdentificationResult*) const;
    virtual double DeduceAfromPID(KVIdentificationResult* idr) const;
    void LoadPIDRanges();
+   void ResetPIDRanges();
    void ReloadPIDRanges();
    interval_set* GetIntervalSet(int zint) const;
    KVList* GetIntervalSets()
