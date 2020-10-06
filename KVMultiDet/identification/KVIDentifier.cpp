@@ -377,6 +377,11 @@ void KVIDentifier::CloneScaleStore(Int_t newzt, Int_t newar, Double_t dy, Double
    // and horizontal sx (optional) factor
    // you need to undraw and draw the grid to see its implementation
 
+   if (!gPad) {
+      Error("CloneScaleStore", "This method should be called using the interactive menu.");
+      return;
+   }
+
    TClass* cl = new TClass(this->IsA()->GetName());
    KVIDentifier* idbis = (KVIDentifier*)cl->New();
    Double_t xx, yy;
@@ -406,32 +411,36 @@ Int_t KVIDentifier::InsertPoint()
 {
    // Insert a new point at the mouse position
    if (!GetEditable()) return -2;
+   if (!gPad) {
+      Error("InsertPoint", "This method should be called using the interactive menu.");
+      return -1;
+   }
 
    Int_t px = gPad->GetEventX();
    Int_t py = gPad->GetEventY();
 
-   Info("InsertPoint", "x=%d y=%d", px, py);
+//   Info("InsertPoint", "x=%d y=%d", px, py);
    Int_t ifound = -1;
    //while ( gPad->XtoAbsPixel(gPad->XtoPad(fX[ii]))>px && ii<fNpoints-1) ii+=1;
    //Recherche en pixel absolu
    //pour trouver le point a partir duquel le TGraph
    //doit bouger
-   Print("");
+//   Print("");
    for (Int_t ii = 0; ii < fNpoints; ii += 1) {
-      Info("InsertPoint", "np=%d ii=%d %lf %lf %d\n",
-           fNpoints,
-           ii,
-           fX[ii],
-           gPad->XtoPad(fX[ii]),
-           gPad->XtoAbsPixel(gPad->XtoPad(fX[ii]))
-          );
+//      Info("InsertPoint", "np=%d ii=%d %lf %lf %d\n",
+//           fNpoints,
+//           ii,
+//           fX[ii],
+//           gPad->XtoPad(fX[ii]),
+//           gPad->XtoAbsPixel(gPad->XtoPad(fX[ii]))
+//          );
       if (gPad->XtoAbsPixel(gPad->XtoPad(fX[ii])) > px) {
          ifound = ii;
          break;
       }
    }
 
-   Info("InsertPoint", "point ifound=%d", ifound);
+//   Info("InsertPoint", "point ifound=%d", ifound);
 
    Double_t deltaX = fX[ifound] - fX[ifound - 1];
    Double_t aa = (fY[ifound] - fY[ifound - 1]) / (deltaX);
@@ -439,7 +448,7 @@ Int_t KVIDentifier::InsertPoint()
    //Conversion du px pour le TGraph et extrapole le new Y
    Double_t newX = gPad->PadtoX(gPad->AbsPixeltoX(px));
    Double_t newY = aa * newX + bb;
-   Info("InsertPoint", "nouveau point %lf %lf", newX, newY);
+//   Info("InsertPoint", "nouveau point %lf %lf", newX, newY);
 
    //Dernier point du graph
    Double_t lastX = fX[fNpoints - 1];
@@ -460,11 +469,48 @@ Int_t KVIDentifier::InsertPoint()
    return ifound;
 }
 
+Int_t KVIDentifier::InsertSmoothPoint()
+{
+   // Insert a new point at the mouse X position using a smooth evaluation of the Y
+   if (!GetEditable()) return -2;
+   if (!gPad) {
+      Error("InsertSmoothPoint", "This method should be called using the interactive menu.");
+      return -1;
+   }
+
+   Int_t px = gPad->GetEventX();
+
+   Int_t ifound = -1;
+   for (Int_t ii = 0; ii < fNpoints; ii += 1) {
+      if (gPad->XtoAbsPixel(gPad->XtoPad(fX[ii])) > px) {
+         ifound = ii;
+         break;
+      }
+   }
+
+   Double_t newX = gPad->PadtoX(gPad->AbsPixeltoX(px));
+   Double_t newY = Eval(newX, 0, "S");
+
+   Double_t lastX = fX[fNpoints - 1];
+   Double_t lastY = fY[fNpoints - 1];
+   SetPoint(fNpoints, lastX, lastY);
+   for (Int_t ii = fNpoints - 2; ii >= ifound; ii -= 1) SetPoint(ii, fX[ii - 1], fY[ii - 1]);
+
+   SetPoint(ifound, newX, newY);
+   if (gPad) gPad->Modified();
+
+   return ifound;
+}
+
 //______________________________________________________________________________
 Int_t KVIDentifier::ContinueDrawing()
 {
    // Continue to draw an existing the line
    if (!GetEditable()) return -2;
+   if (!gPad) {
+      Error("ContinueDrawing", "This method should be called using the interactive menu.");
+      return -1;
+   }
 
    KVIDentifier* gr = (KVIDentifier*)this->IsA()->New();
    gr->WaitForPrimitive();
@@ -559,7 +605,7 @@ Int_t KVIDentifier::AddPointAtTheEnd()
    Double_t newX = fX[np - 1] + deltaX;
    Double_t newY = aa * newX + bb;
    SetPoint(np, newX, newY);
-   gPad->Modified();
+   if (gPad) gPad->Modified();
    return np + 1;
 
 }
@@ -572,7 +618,7 @@ Int_t KVIDentifier::RemoveFirstPoint()
    if (fNpoints < 2) return -3;
 
    RemovePoint(0);
-   gPad->Modified();
+   if (gPad) gPad->Modified();
    return fNpoints - 1;
 
 }
@@ -586,7 +632,7 @@ Int_t KVIDentifier::RemoveLastPoint()
    if (fNpoints < 2) return -3;
 
    RemovePoint(GetN() - 1);
-   gPad->Modified();
+   if (gPad) gPad->Modified();
    return fNpoints - 1;
 }
 
@@ -655,6 +701,7 @@ Int_t KVIDentifier::DecreaseNumberOfPoints()
 Int_t KVIDentifier::SortPoints(Bool_t ascending)
 {
    Sort(&TGraph::CompareX, ascending);
+   if (gPad) gPad->Modified();
    return 0;
 }
 

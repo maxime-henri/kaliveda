@@ -242,6 +242,9 @@ public:
       return TCutG::RemovePoint(i);
    };
 
+   virtual Int_t         InsertSmoothPoint(); // *MENU*
+
+
    virtual Double_t GetPID() const;
 
    ClassDef(KVIDentifier, 2) //Base class for graphical cuts used in particle identification
