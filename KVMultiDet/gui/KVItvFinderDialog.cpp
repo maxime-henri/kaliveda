@@ -718,10 +718,10 @@ void KVItvFinderDialog::FindPIDIntervals(Int_t zz)
    int nfound = fSpectrum.Search(fLinearHisto, fSig, "goff", ((zz == 2) ? 0.1 * fRat : fRat));
 #if ROOT_VERSION_CODE > ROOT_VERSION(5,99,01)
    Double_t* xpeaks = fSpectrum.GetPositionX();
-   Double_t* ypeaks = fSpectrum.GetPositionY();
+//   Double_t* ypeaks = fSpectrum.GetPositionY();
 #else
    Float_t* xpeaks = fSpectrum.GetPositionX();
-   Float_t* ypeaks = fSpectrum.GetPositionY();
+//   Float_t* ypeaks = fSpectrum.GetPositionY();
 #endif
 
    nfound = TMath::Min(fNpeaks[zz - 1], nfound);
@@ -729,39 +729,40 @@ void KVItvFinderDialog::FindPIDIntervals(Int_t zz)
    int idx[nfound];
    TMath::Sort(nfound, xpeaks, idx, 0);
 
-   int np = 0; //int npm=0; double ym=0;
+//   int np = 0; //int npm=0; double ym=0;
+
    for (int p = 0; p < nfound; p++) {
-      if (ypeaks[idx[p]] < 10) continue;
-      fPoints->SetPoint(fPoints->GetN(), xpeaks[idx[p]], ypeaks[idx[p]]);
-      np++;
+      double pid = xpeaks[idx[p]];//ff->GetParameter(3 * ii + 1);
+      itvs->add(2 * zz + p, pid, pid - 0.05, pid + 0.05);
    }
 
-   TF1* ff = 0; //(TF1*)fFunc.FindObject(Form("funcZ%d",zz));
-   if (!(ff = (TF1*)fFunc.FindObject(Form("funcZ%d", zz)))) {
-      ff = new TF1(Form("funcZ%d", zz), this, &KVItvFinderDialog::fpeaks, zz - 0.5, zz + 0.5, 3 * np + 1);
-      fFunc.AddLast(ff);
-   }
-   ff->SetParameter(0, np);
-   ff->FixParameter(0, np);
 
-
-
-   for (int ii = 0; ii < np; ii++) {
-      ff->SetParameter(3 * ii + 1, fPoints->GetX()[fPoints->GetN() - np + ii]);
-      ff->SetParameter(3 * ii + 2, 0.02);
-      ff->SetParameter(3 * ii + 3, fPoints->GetY()[fPoints->GetN() - np + ii]);
-   }
-
-//   ff->SetNpx(2000);
-//   fLinearHisto->Fit(ff, "QN", "", zz - 0.5, zz + 0.5);
-//   fLinearHisto->Fit(ff, "QN", "", zz - 0.5, zz + 0.5);
-//   ff->Draw("same");
-
-   for (int ii = 0; ii < np; ii++) {
-      double pid = ff->GetParameter(3 * ii + 1);
-      itvs->add(2 * zz + ii, pid, pid - 0.05, pid + 0.05);
-//        Info("FindPIDIntervals","%d %d %d", ii, idx[ii], 2*zz+idx[ii]);
-   }
+//   for (int p = 0; p < nfound; p++) {
+//      if (ypeaks[idx[p]] < 10) continue;
+//      fPoints->SetPoint(fPoints->GetN(), xpeaks[idx[p]], ypeaks[idx[p]]);
+//      np++;
+//   }
+//   TF1* ff = 0; //(TF1*)fFunc.FindObject(Form("funcZ%d",zz));
+//   if (!(ff = (TF1*)fFunc.FindObject(Form("funcZ%d", zz)))) {
+//      ff = new TF1(Form("funcZ%d", zz), this, &KVItvFinderDialog::fpeaks, zz - 0.5, zz + 0.5, 3 * np + 1);
+//      fFunc.AddLast(ff);
+//   }
+//   ff->SetParameter(0, np);
+//   ff->FixParameter(0, np);
+//   for (int ii = 0; ii < np; ii++) {
+//      ff->SetParameter(3 * ii + 1, fPoints->GetX()[fPoints->GetN() - np + ii]);
+//      ff->SetParameter(3 * ii + 2, 0.02);
+//      ff->SetParameter(3 * ii + 3, fPoints->GetY()[fPoints->GetN() - np + ii]);
+//   }
+////   ff->SetNpx(2000);
+////   fLinearHisto->Fit(ff, "QN", "", zz - 0.5, zz + 0.5);
+////   fLinearHisto->Fit(ff, "QN", "", zz - 0.5, zz + 0.5);
+////   ff->Draw("same");
+//   for (int ii = 0; ii < np; ii++) {
+//      double pid = ff->GetParameter(3 * ii + 1);
+//      itvs->add(2 * zz + ii, pid, pid - 0.05, pid + 0.05);
+////        Info("FindPIDIntervals","%d %d %d", ii, idx[ii], 2*zz+idx[ii]);
+//   }
 
 }
 
