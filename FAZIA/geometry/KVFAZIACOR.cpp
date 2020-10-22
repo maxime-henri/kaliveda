@@ -135,7 +135,7 @@ void KVFAZIACOR::BuildFAZIA()
    // add telescope for elastic scattering monitoring
    RutherfordTelescope();
    // Change default geometry import angular range for rutherford telescope
-   SetGeometryImportParameters(.25, 1., 1.84);
+   SetGeometryImportParameters(.25, 1., .1);
 }
 
 void KVFAZIACOR::SetNameOfDetectors(KVEnv& env)
