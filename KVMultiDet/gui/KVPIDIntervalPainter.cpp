@@ -25,6 +25,7 @@ KVPIDIntervalPainter::KVPIDIntervalPainter(interval* itv, TH1* hh): TNamed(Form(
    pid = fInterval->GetPID();
    min = fInterval->GetPIDmin();
    max = fInterval->GetPIDmax();
+   fHighlight = false;
 
    fZ = fInterval->GetZ();
    fA = fInterval->GetA();
@@ -93,6 +94,7 @@ void KVPIDIntervalPainter::Draw(Option_t*)
 
 void KVPIDIntervalPainter::HighLight(bool hi)
 {
+   fHighlight = hi;
    if (hi) {
       fMarker->SetMarkerSize(1);
       fMarker->SetMarkerColor(kRed + 1);
@@ -134,6 +136,16 @@ void KVPIDIntervalPainter::Paint(Option_t*)
 {
    double ym = fCanvas->GetFrame()->GetY2();
    if (fCanvas->GetLogy()) ym = TMath::Exp(ym * TMath::Log(10));
+
+   Color_t col = kBlack;
+   if (!(fInterval->GetA() % 2)) col = kBlue;
+
+   if (!fHighlight) {
+      fLine1->SetLineColor(col);
+      fLine2->SetLineColor(col);
+      fMarker->SetMarkerColor(col);
+      fLabel->SetTextColor(col);
+   }
 
    double mi = fXaxis->GetBinCenter(fXaxis->GetFirst());
    double ma = fXaxis->GetBinCenter(fXaxis->GetLast());

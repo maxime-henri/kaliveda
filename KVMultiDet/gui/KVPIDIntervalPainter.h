@@ -29,6 +29,7 @@ public:
    TH1* fLinearHisto;
    interval* fInterval;
    TAxis* fXaxis, *fYaxis;
+   Bool_t fHighlight;
 
    double pid, min, max;
    Int_t fA, fZ;
