@@ -193,20 +193,28 @@ if(NOT PROTOBUF_FOUND)
 
 endif(NOT PROTOBUF_FOUND)
 if(PROTOBUF_FOUND)
-    # check for C++11 compatibility - can only compile protobuf in mode C++11
-    include(CheckCXXCompilerFlag)
-    CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-    if(COMPILER_SUPPORTS_CXX11)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-        set(WITH_PROTOBUF yes)
-        include_directories(${PROTOBUF_INCLUDE_DIRS})
-        if(${ROOT_VERSION} VERSION_LESS 6)
+    # protobuf requires C++11 or higher
+    # check if -std=c++11/4/7 flag already in cxx flags
+    string(FIND ${CMAKE_CXX_FLAGS} "-std=c++11" CPP11_FLAGS)
+    string(FIND ${CMAKE_CXX_FLAGS} "-std=c++14" CPP14_FLAGS)
+    string(FIND ${CMAKE_CXX_FLAGS} "-std=c++17" CPP17_FLAGS)
+    if((CPP11_FLAGS GREATER 0) OR (CPP14_FLAGS GREATER 0) OR (CPP17_FLAGS GREATER 0))
+        # nothing to do, one of flags is already present
+    else()
+       include(CheckCXXCompilerFlag)
+       CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+       if(COMPILER_SUPPORTS_CXX11)
+           set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+       endif()
+    endif()
+    set(WITH_PROTOBUF yes)
+    include_directories(${PROTOBUF_INCLUDE_DIRS})
+    if(${ROOT_VERSION} VERSION_LESS 6)
                # kludge to fix bug with ROOT5/CINT when protobuf installed in system directories
                # in this case rootmap autoloading fails if libprotobuf directory not in LD_LIBRARY_PATH
                get_filename_component(ADD_PROTOBUF_DYN_PATH ${PROTOBUF_LIBRARY} PATH)
                list(APPEND ADD_DYN_PATH ${ADD_PROTOBUF_DYN_PATH})
-        endif()
-    endif(COMPILER_SUPPORTS_CXX11)
+    endif()
 endif(PROTOBUF_FOUND)
 endif(USE_PROTOBUF)
 
