@@ -108,52 +108,51 @@ namespace BackTrack {
       //-----------GEMINI event-----------
       //Init
       KVGemini gem;
-      KVSimEvent*   hot  = new KVSimEvent();
-      KVSimEvent*   cold = new KVSimEvent();
+      KVSimEvent   hot;
+      KVSimEvent   cold;
       //Declare particle to decay
-      KVSimNucleus* nuc  = (KVSimNucleus*) hot->AddParticle();
+      KVSimNucleus* nuc  = (KVSimNucleus*) hot.AddParticle();
       nuc->SetZandA(fZpr, aa);
       nuc->SetVelocity(fVpr);
       nuc->SetExcitEnergy(ee * aa);
       nuc->SetAngMom(fJpr_x, fJpr_y, fJpr_z);
       //Decay
-      gem.DecayEvent(hot, cold);
+      gem.DecayEvent(&hot, &cold, true);
 
       //---------------Compute the chosen observables [Apr-n, (E*-En)/(Apr-n)] with a KVCalorimetry-------------
       //Init
-      KVCalorimetry* fcal = new KVCalorimetry();
+      KVCalorimetry fcal;
       Int_t    obs1        = 0;  //Apr-n
       Double_t obs2        = 0.; //(E*-En)/(Apr-n)
       //For the boost
       Double_t etot = 0.;
       TVector3 ptot(0., 0., 0.);
-      KVSimNucleus* part = new KVSimNucleus();
 
       //Compute the boost in order to apply calorimetry on the fragments
-      for (Int_t hh = 1; hh <= cold->GetMult(); hh++) {
-         part = (KVSimNucleus*) cold->GetParticle(hh);
+      for (Int_t hh = 1; hh <= cold.GetMult(); hh++) {
+         KVSimNucleus* part = (KVSimNucleus*) cold.GetParticle(hh);
          etot += part->E();
          ptot += part->GetMomentum();
       }
       //Define center of mass frame
       ptot *= 1. / etot;
-      cold->SetFrame("CM", KVFrameTransform(ptot, kTRUE));
-      fcal->SetFrame("CM");
+      cold.SetFrame("CM", KVFrameTransform(ptot, kTRUE));
+      fcal.SetFrame("CM");
 
 
       //Calorimetry
-      for (Int_t hh = 1; hh <= cold->GetMult(); hh++) {
-         part = (KVSimNucleus*) cold->GetParticle(hh);
-         fcal->Fill(part);
+      for (Int_t hh = 1; hh <= cold.GetMult(); hh++) {
+         KVSimNucleus* part = (KVSimNucleus*) cold.GetParticle(hh);
+         fcal.Fill(part);
       }
-      fcal->Calculate();
+      fcal.Calculate();
 
       //APrimaryWoN
-      obs1 = fcal->GetValue("Asum");
+      obs1 = fcal.GetValue("Asum");
       GetObservable("APrimaryWoN")->setVal(obs1);
 
       //EStarPrimaryWoN
-      obs2 = fcal->GetValue("Exci");
+      obs2 = fcal.GetValue("Exci");
       GetObservable("EStarPrimaryWoN")->setVal(obs2);
 
       //Fill the RooDataSet "data"
