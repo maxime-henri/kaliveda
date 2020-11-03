@@ -312,7 +312,7 @@ TString KVFAZIA::GetSignalName(Int_t bb, Int_t qq, Int_t tt, Int_t idsig)
 
    TString sname;
    if (bb == 4) {
-      if (fDataSet == "FAZIASYM" || fDataSet == "FAZIACOR") {
+      if (fDataSet == "FAZIASYM") {
          sname.Form("%s-RUTH", FzDataType_str[idsig]);
       }
       else {
@@ -443,7 +443,7 @@ Bool_t KVFAZIA::treat_event(const DAQ::FzEvent& e)
 
                KVFAZIADetector* det = (KVFAZIADetector*)GetDetector(Form("%s-%d", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope));
                if (!det) {
-//                  Error("treat_event", "No detector %s-%d found in FAZIA geometry...", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope);
+                  Error("treat_event", "No detector %s-%d found in FAZIA geometry...", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope);
                   continue;
                }
                det->SetDetTag(DetTag);
