@@ -443,7 +443,7 @@ Bool_t KVFAZIA::treat_event(const DAQ::FzEvent& e)
 
                KVFAZIADetector* det = (KVFAZIADetector*)GetDetector(Form("%s-%d", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope));
                if (!det) {
-                  Error("treat_event", "No detector %s-%d found in FAZIA geometry...", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope);
+//                  Error("treat_event", "No detector %s-%d found in FAZIA geometry...", FzDetector_str[fIdSignal], 100 * fIdBlk + 10 * fIdQuartet + fIdTelescope);
                   continue;
                }
                det->SetDetTag(DetTag);
