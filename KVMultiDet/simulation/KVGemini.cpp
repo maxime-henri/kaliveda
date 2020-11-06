@@ -26,7 +26,7 @@ ClassImp(KVGemini)
 //     KVGemini gem;
 //     KVSimEvent *hot, *cold;
 //     try {
-//        gem.DecayEvent(hot,cold);
+//        gem.DecayEvent(hot,cold,add_rot);
 //     }
 //     catch (gemini_bad_decay& e) {
 //        // bad event, could not calculate all decays
@@ -138,12 +138,14 @@ void KVGemini::DecayEvent(const KVSimEvent* hot, KVSimEvent* cold, bool addRotat
 {
    // Perform statistical decay of all nuclei in 'hot' event
    // Takes into account Z, A, E*, v and spin of nuclei.
-   // Adds all decay products to 'cold' output event
+   // Adds all decay products to 'cold' output event (the event is first reset, i.e. KVEvent::Clear()
+   // method is called, removing all particles AND parameters from the event).
    //
    // If there is a problem with the decay of any of the nuclei in the event,
    // we throw an exception of type gemini_bad_decay
    //
    // \param[in] addRotationalEnergy defines whether or not to add Yrast rotational energy to E* of each nucleus (\sa DecaySingleNucleus() )
+   // \note Do not set any parameters for the `cold` event before calling this method, they will be cleared before decay
 
    cold->Clear();
    KVSimNucleus* hotnuc;
