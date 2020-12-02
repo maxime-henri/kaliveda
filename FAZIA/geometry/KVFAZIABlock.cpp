@@ -291,7 +291,7 @@ std::vector<double> KVFAZIABlock::GetCoordsCSI(int tel_num, double front_side, d
       coords.push_back(vec.X());
       coords.push_back(vec.Y());
 #else
-   for (std::vector<TVector3>::iterator vec; vec != coins.end(); ++vec) {
+   for (std::vector<TVector3>::iterator vec = coins.begin(); vec != coins.end(); ++vec) {
       coords.push_back(vec->X());
       coords.push_back(vec->Y());
 #endif
