@@ -127,7 +127,7 @@ TGeoVolume* KVFAZIABlock::MakeCrossPieceCSI(double front_side, double separation
       coords.push_back(vec.X());
       coords.push_back(vec.Y());
 #else
-   for (std::vector<TVector3>::iterator vec; vec != coins.end(); ++vec) {
+   for (std::vector<TVector3>::iterator vec = coins.begin(); vec != coins.end(); ++vec) {
       coords.push_back(vec->X());
       coords.push_back(vec->Y());
 #endif
@@ -167,7 +167,7 @@ TGeoVolume* KVFAZIABlock::MakeLeftCrossPieceCSI(double front_side, double separa
       coords.push_back(vec.X());
       coords.push_back(vec.Y());
 #else
-   for (std::vector<TVector3>::iterator vec; vec != coins.end(); ++vec) {
+   for (std::vector<TVector3>::iterator vec = coins.begin(); vec != coins.end(); ++vec) {
       coords.push_back(vec->X());
       coords.push_back(vec->Y());
 #endif
@@ -207,7 +207,7 @@ TGeoVolume* KVFAZIABlock::MakeRightCrossPieceCSI(double front_side, double separ
       coords.push_back(vec.X());
       coords.push_back(vec.Y());
 #else
-   for (std::vector<TVector3>::iterator vec; vec != coins.end(); ++vec) {
+   for (std::vector<TVector3>::iterator vec = coins.begin(); vec != coins.end(); ++vec) {
       coords.push_back(vec->X());
       coords.push_back(vec->Y());
 #endif
