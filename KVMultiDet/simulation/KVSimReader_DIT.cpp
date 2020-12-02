@@ -121,7 +121,7 @@ void KVSimReader_DIT::FillEvent()
    nuc->SetE(energy_proj_like);
    nuc->SetTheta(TMath::Abs(theta_proj_like));
 
-   if (itype == DITCollType::DITCollOk) {
+   if (itype == DITCollOk) {
       if (theta_proj_like < 0.) {
          nuc->SetPhi(270.);
       }
@@ -137,7 +137,7 @@ void KVSimReader_DIT::FillEvent()
    nuc->SetSpin(spin_proj_like, 0., 0.); // Spin component given by the model is normal to the reaction plane, this last being (YZ), thus the spin is on the X-axis
    //
    // Fill target-like nucleus if it exists (meaning he itype code is 0, a DIC event and not a fusion
-   if (itype == DITCollType::DITCollOk) {
+   if (itype == DITCollOk) {
       nuc = static_cast<KVSimNucleus*>(evt->AddParticle());
 
       nuc->SetZandA(z_targ_like, a_targ_like);
