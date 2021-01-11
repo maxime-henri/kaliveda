@@ -115,6 +115,8 @@ void KVFAZIAGroupReconstructor::CalibrateParticle(KVReconstructedNucleus* PART)
       PART->SetIsCalibrated();
    }
    else {
+      // this case is stupid : fESI1 is never calculated (=0) so fECSI is also always 0
+      // to be rewritten when INDRAFAZIA.E789 calibration will be available !
       if (((KVFAZIADetector*)PART->GetStoppingDetector())->GetIdentifier() == KVFAZIADetector::kCSI
             && !(PART->GetStoppingDetector()->IsCalibrated()) && ndet_calib == 2) {
          if (PART->GetZ() > 0) {

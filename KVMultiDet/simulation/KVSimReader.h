@@ -146,6 +146,11 @@ public:
       branch_name = n;
    }
 
+   const char* GetROOTFileName()
+   {
+      return root_file_name.Data();
+   }
+
    virtual void ConvertAndSaveEventsInFile(KVString filename);
 
    static KVSimReader* MakeSimReader(const char* model_uri);
