@@ -1380,10 +1380,10 @@ void KVIDGridEditor::NewCut()
    resname.Form("%s.DefaultCutClass", TheGrid->ClassName());
    TString cut_default = gEnv->GetValue(resname.Data(), "");
    cut_default.ReplaceAll(" ", "");
-   cut_default.ReplaceAll("KVIDCut", "");
+   cut_default.ReplaceAll("KVID", "");
    TString cut_class;
    KVString cut_types = cut_choices;
-   cut_types.ReplaceAll("KVIDCut", "");
+   cut_types.ReplaceAll("KVID", "");
    Bool_t okpressed;
 
    if (cut_choices.Contains(" ")) {
@@ -1406,7 +1406,7 @@ void KVIDGridEditor::NewCut()
    }
    else cut_class = cut_types;
 
-   cut_class.Prepend("KVIDCut");
+   cut_class.Prepend("KVID");
    TheGrid->DrawAndAdd("CUT", cut_class.Data());
 
    label->SetFillColor(fBlackMode ? kBlack : kWhite);
