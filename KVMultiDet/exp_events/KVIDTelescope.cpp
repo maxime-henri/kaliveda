@@ -711,7 +711,6 @@ Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray* multide
 
    if (filename != "") {
       ReadIdentificationParameterFiles(filename.Data(), multidet);
-      return kTRUE;
    }
    else {
       filename = gDataSet->GetDataSetEnv(Form("IdentificationParameterFile.%s", GetLabel()));
@@ -725,6 +724,7 @@ Bool_t KVIDTelescope::SetIdentificationParameters(const KVMultiDetArray* multide
 
       LoadIdentificationParameters(filename, multidet);
    }
+   return kTRUE;
 }
 
 //____________________________________________________________________________________
