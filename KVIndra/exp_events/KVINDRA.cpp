@@ -594,6 +594,8 @@ Int_t KVINDRA::GetIDTelescopes(KVDetector* de, KVDetector* e, TCollection* idtel
 void KVINDRA::SetNamesOfIDTelescopes() const
 {
    // Change default names of ID telescopes to INDRA standard
+   //
+   // This method also sets the types of the ID telescopes
 
    TIter it(GetListOfIDTelescopes());
    KVIDTelescope* idt;
@@ -606,6 +608,7 @@ void KVINDRA::SetNamesOfIDTelescopes() const
       if (idt->GetSize() == 1) {
          // PHOS_R_L_MM or CSI_R_L_RRMM
          idt->SetName(Form("%s_R_L_%s", de_type.Data(), de_number.Data()));
+         idt->SetType(Form("%s_R_L", de_type.Data()));
       }
       else {
          N = idt->GetDetector(2)->GetName();
@@ -616,6 +619,7 @@ void KVINDRA::SetNamesOfIDTelescopes() const
             e_number = etalon_numbers[dynamic_cast<KVINDRADetector*>(idt->GetDetector(2))->GetRingNumber() - 10];
          }
          idt->SetName(Form("%s_%s_%s", de_type.Data(), e_type.Data(), e_number.Data()));
+         idt->SetType(Form("%s_%s", de_type.Data(), e_type.Data()));
       }
    }
    // changed names of all id telescope objects in hashlist: must rehash
